@@ -1,0 +1,1 @@
+66690f4c15bb93cdbfb3839b88403b86  ./01.the_basics/05.expressions_statements_operators/04.sign-operator.c

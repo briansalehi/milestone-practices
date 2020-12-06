@@ -1,0 +1,1 @@
+ffb4cf0069323c512a7f8c464a878f88  ./04.more_stl/02.lambda/02.unary_predicate.cxx

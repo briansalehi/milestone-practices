@@ -1,0 +1,8 @@
+# [book name/reference number]: [page numbers e.g. single page 1 / two concurrent pages 1,2 / range of pages 1-5]
+# e.g. book title: 45 # only page 45
+# e.g. book title: 45,46 # pages 45 and 46, pages must be separated by , to be meaningful to script
+# e.g. book title: 45-47 # pages 45 through 47, pages must be separated by - to be meaningful to script
+# e.g. 1: 45-47 # spaces between are ignored
+# [link]
+# e.g. https://example.com
+6: 55-57

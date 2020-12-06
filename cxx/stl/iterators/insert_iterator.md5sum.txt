@@ -1,0 +1,1 @@
+7f290c675a75610e8edc09a1497efbf9  ./04.more_stl/04.iterators/05.insert_iterator.cxx

@@ -1,0 +1,5 @@
+**this practice needs to be fixed**  
+
+First introduced in the 2017 standard, the scoped lock is a mutex wrapper which obtains access to (locks) the provided mutex,
+and ensures it is unlocked when the scoped lock goes out of scope.
+It differs from a lock guard in that it is a wrapper for not one, but multiple mutexes.

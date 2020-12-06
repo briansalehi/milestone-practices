@@ -1,0 +1,1 @@
+8dd35fc6547f4497d35dc5d352897645  ./02.object_oriented/01.classes&objects/12.singleton.cxx

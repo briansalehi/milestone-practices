@@ -1,0 +1,1 @@
+8fab842045c90b333dfa712136981b1f  ./02.object_oriented/02.inheritance/03.base_initialization.cxx

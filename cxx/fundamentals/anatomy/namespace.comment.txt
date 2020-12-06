@@ -1,0 +1,17 @@
+Global variables present many problems in large software systems because they
+can be accessed and possibly modified anywhere in the program.
+They also can lead to programming errors, since an important global variable
+may be hidden by a local variable of the same name.
+As a result, it is best to avoid global variables.
+We may not be able to avoid globals entirely, however.
+
+A namespace is a mechanism that allows a group of related names to be defined
+in one place.
+This helps organize global objects into natural groups and minimizes the
+problems of globals.
+
+I believe namespaces are better mentioned than being used. that is, don't use
+<b>using namespace std</b>, instead, mention them like <b>std::cout</b>.
+In large code bases, namespaces can colide and make great confusion.  
+Though, this is totally optional for you and it's my personal approach in
+coding not a best practice.

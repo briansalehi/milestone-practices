@@ -1,0 +1,1 @@
+c94c0591e7ab4c6c96563503d10f68c1  ./05.advanced/02.streams/16.random-access.cxx

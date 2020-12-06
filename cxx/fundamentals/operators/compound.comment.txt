@@ -1,0 +1,1 @@
+When arithmetic operators are used with assignment, they can be shortened by compound operators.

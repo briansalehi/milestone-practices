@@ -1,0 +1,1 @@
+761bedee9da02cf36f0bd052dc9638a1  ./02.object_oriented/04.operators/03.stream.cxx

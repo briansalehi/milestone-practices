@@ -1,0 +1,1 @@
+b5d92da57770783aaa4f279d949ad85f  ./05.advanced/01.smart/02.ownership.cxx

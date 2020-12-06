@@ -1,0 +1,3 @@
+guest the number: your guess is too low!
+guest the number: your guess is too high!
+guest the number: you found the number in 3 shot(s)!

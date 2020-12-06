@@ -1,0 +1,1 @@
+**Templates** can also be used on classes.

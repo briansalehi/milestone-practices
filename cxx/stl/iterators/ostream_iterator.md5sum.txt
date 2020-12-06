@@ -1,0 +1,1 @@
+366659b5e5ef466ef9ec5f6c80362e3f  ./04.more_stl/04.iterators/01.ostream_iterator.cxx

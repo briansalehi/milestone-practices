@@ -1,0 +1,1 @@
+**showpoint** flag will set set trailing zeros in floating point numbers on output streams.

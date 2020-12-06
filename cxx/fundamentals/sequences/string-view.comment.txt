@@ -1,0 +1,35 @@
+begin[5]
+A **string_view** supports an interface similar to **std::string .
+One exception is the absence of **c_str()** , but **data()** is available.
+On the other hand, **string_view** does add the methods
+**remove_prefix(size_t)** and **remove_suffix(size_t)** , which
+shrink the string by advancing the starting pointer by a given offset, or by moving the end pointer
+backward by a given offset.
+
+Note that you cannot concatenate a **string** and a **string_view** .
+
+```cxx
+string str = "Hello";
+string_view sv = " world";
+auto result = str + sv;
+```
+
+To make it compile, you need to replace the last line with:
+
+```cxx
+auto result = str + sv.data();
+```
+
+Use an **std::string_view** instead of **const std::string&** or **const
+char\*** whenever a function or method requires a read-only string as one of its
+parameters.
+
+You can use the standard user-defined literal “ sv ” to interpret a string
+literal as an **std::string_view** . For example:
+
+```cxx
+auto sv = "My string_view"sv;
+```
+
+The standard user-defined literal “ sv ” requires a **using namespace std::string_view_literals;** or **using namespace std;** .
+end[5]

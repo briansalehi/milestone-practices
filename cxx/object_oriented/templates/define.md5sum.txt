@@ -1,0 +1,1 @@
+35ac214e4cfca397fad88a901405575a  ./02.object_oriented/06.templates/01.define.cxx

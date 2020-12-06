@@ -1,0 +1,13 @@
+```cxx
+bool cv::clipLine(
+    cv::Rect    imgRect,
+    cv::Point&  pt1,
+    cv::Point&  pt2
+);
+
+bool cv::clipLine(
+    cv::Size    imgSize,
+    cv::Point&  pt1,
+    cv::Point&  pt2
+);
+```

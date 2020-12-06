@@ -1,0 +1,3 @@
+**cv::CV_Assert()** is a macro that will test the expression passed to it and, if that expression evaluates to False or 0, it will throw an exception.
+The **cv::CV_Assert()** macro is always tested.
+Alternatively, you can use **cv::CV_DbgAssert()** which will be tested only in debug build mode.

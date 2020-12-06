@@ -1,0 +1,9 @@
+Of OpenCV basic types, point classes are the simplest template classes.  
+There are two and three dimensional point templates.  
+Point classes are instantiated with aliases of having specific types and dimensions.  
+Such aliases are: **cv::Point{2,3}{b,w,s,i,d,f}**  
+Samples:
+
+* cv::Point2i
+* cv::Point2f
+* cv::Point3d

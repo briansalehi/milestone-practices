@@ -1,0 +1,1 @@
+At any time, you can check the optimization flag.

@@ -1,0 +1,3 @@
+pi number equals to 3.14159
+tau number equals to 2 pi: 6.28319
+pi constant is also presumed in most C++ compilers: 3.14159

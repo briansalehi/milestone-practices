@@ -1,0 +1,1 @@
+5375038ece465d04e94abbc7821f96b2  ./01.the_basics/02.variables_constants/06.sizeof.c

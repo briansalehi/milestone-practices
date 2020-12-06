@@ -1,0 +1,10 @@
+circle.cxx
+clipline.cxx
+ellipse.cxx
+ellipse2poly.cxx
+fillconvexpoly.cxx
+line.cxx
+rectangle.cxx
+lineiterator.cxx
+puttext.cxx
+gettextsize.cxx

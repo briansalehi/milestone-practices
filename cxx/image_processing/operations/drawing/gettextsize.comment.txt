@@ -1,0 +1,13 @@
+The **cv::getTextSize()** function evaluates how big some text would be if you were to draw it without actually drawing it on an image.  
+*baseLine* is an output parameter which represents the y-coordinate of the text baseline relative to the bottom-most point in the text.
+
+```cxx
+cv::getTextSize(
+    const std::string& text,
+    cv::Point   origin,
+    int     fontFace,
+    double  fontScale,
+    int     thickness,
+    int*    baseLine
+);
+```

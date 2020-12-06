@@ -1,0 +1,3 @@
+be generious at using **const** whenever it's possible.  
+**const** keyword after pointer type makes restriction in changing the pointing address.  
+using **const** keyword before pointer type makes restriction in changing the pointing value.

@@ -1,0 +1,1 @@
+**reverse** is a function to reverse the order of elements in a container existing in **algorithm** header file.

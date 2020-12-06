@@ -1,0 +1,1 @@
+939c6479701bbc212086df8c6c57a185  ./05.advanced/02.streams/17.temporary-files.cxx

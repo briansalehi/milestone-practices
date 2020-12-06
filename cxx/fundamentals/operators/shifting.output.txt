@@ -1,0 +1,3 @@
+number: 4
+right shift: 2
+two left shifts: 8

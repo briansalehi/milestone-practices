@@ -1,0 +1,4 @@
+It is best practice not to use more than one return statement in the
+execution flow, and only insert one at the bottom of functions.
+Generally, more than one return statement will cause confusion while reading
+your code.

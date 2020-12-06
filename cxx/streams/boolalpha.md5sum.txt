@@ -1,0 +1,1 @@
+ad2f89c5bb4a364b901938e3f7f8bd55  ./05.advanced/02.streams/11.boolalpha.cxx

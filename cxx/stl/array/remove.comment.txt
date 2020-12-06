@@ -1,0 +1,1 @@
+To remove an element from a vector use **pop_back()**.

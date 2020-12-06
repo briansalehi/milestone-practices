@@ -1,0 +1,11 @@
+to declare a pointer to function, all you need to do is to write down the function prototype like this:
+
+```cpp
+void function(int);
+```
+
+then wrap the function name like this (*function).
+
+```cpp
+void (*function)(int);
+```

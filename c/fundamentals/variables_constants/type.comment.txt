@@ -1,0 +1,15 @@
+The type int means that the variables listed are integers, by contrast with  
+float, which means floating point, i.e., numbers that may have a fractional  
+part. The range of both int and float depends on the machine you are  
+using; 16-bit ints, which lie between -32768 and +32767, are common, as are  
+32-bit ints. A float number is typically a 32-bit quantity, with at least six  
+significant digits and magnitude generally between about 10- 38 and 10+ 38.
+
+C provides several other basic data types besides int and float, including:
+
+* char	character-a single byte
+* short	short integer
+* long	long integer
+* double	double-precision floating point
+
+The sizes of these objects are also machine-dependent.

@@ -1,0 +1,30 @@
+```cxx
+// overload I
+void cv::ellipse(
+    cv::Mat&        img,
+    cv::Point       center,
+    cv::Size        axes,
+    double          angle,
+    double          startAngle,
+    double          endAngle,
+    cv::Scalar&     color,
+    int             thickness = 1,
+    int             lineType = 8,
+    int             shift = 0
+);
+
+cv::RotatedRect(
+    cv::Point       center,
+    cv::Size        size,
+    douoble         angle
+);
+
+// overload II
+void cv::ellipse(
+    cv::Mat&            img,
+    cv::RotatedRect&    box,
+    cv::Scalar&         color,
+    int                 thickness = 1,
+    int                 lineType = 8,
+);
+```

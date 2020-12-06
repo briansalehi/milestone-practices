@@ -1,0 +1,1 @@
+ff451d21f2f8556cc95367bfadbdb967  ./04.more_stl/02.lambda/05.binary_predicate.cxx

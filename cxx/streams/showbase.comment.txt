@@ -1,0 +1,2 @@
+Number bases (binary, octal, decimal and hexadecimal) will not be show in output streams by default.  
+This behaviour can be changed by setting the **showbase** flag in stream object.

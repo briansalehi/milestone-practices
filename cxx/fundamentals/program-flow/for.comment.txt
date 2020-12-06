@@ -1,0 +1,2 @@
+When you know exactly how many times your program should  
+iterate over a task, you use **for** statement.

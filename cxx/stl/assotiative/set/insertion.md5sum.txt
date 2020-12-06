@@ -1,0 +1,1 @@
+28b504c10e62c88646e08680627c5611  ./03.stl/05.set/02.insertion.cxx

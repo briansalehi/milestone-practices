@@ -1,0 +1,6 @@
+lambda.cxx
+unary_function.cxx
+unary_predicate.cxx
+capture_list.cxx
+binary_function.cxx
+binary_predicate.cxx

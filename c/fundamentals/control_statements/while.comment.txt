@@ -1,0 +1,13 @@
+**while** loop iterates over its scope just like the way **for** loop does but with difference in loop condition.  
+Let's put it that way, you use **for** loop when you know exactly how many times the iteration goes.  
+And you use **while** loop when you don't know how many times the loop will be iterated but you know when to stop it!  
+That is, while loop condition is more used to be a state not a counter.  
+This is super important, because you will be facing a lot of conditions where you need to iterate like forever! until something happens.
+Servers work just this way.
+
+ref[2]
+The choice between **while** and **for** is arbitrary, based on which seems clearer.  
+The **for** is usually appropriate for loops in which the initialization and  
+increment are single statements and logically related, since it is more compact  
+than **while** and it keeps the loop control statements together in one place.
+end[2]

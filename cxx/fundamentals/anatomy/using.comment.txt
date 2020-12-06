@@ -1,0 +1,10 @@
+<b>using</b> keyword can be used to skip mentioning the namespace before each
+object belonging to that namespace.
+
+<b>using</b> keyword can be used in two different forms:
+<ul>
+<li><b>using namespace std</b>: this statement will define the entier <i>std
+namespace</i> in a scope
+<li><b>using std::cout</b>: this restrict namespace will define only the
+<i>cout</i> object belonging to <i>std namespace</i> and not the entire
+namespace

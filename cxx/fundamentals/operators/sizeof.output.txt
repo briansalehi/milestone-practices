@@ -1,0 +1,3 @@
+sizeof array: 400
+sizeof first element: 4
+sizeof array is also equal to sizeof first element by length of array: 400

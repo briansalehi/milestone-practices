@@ -1,0 +1,38 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath}
+
+\begin{document}
+\thispagestyle{empty}
+
+\subsection*{Definitions}
+\noindent
+We find the derivative of $f{^{-1} (x)} = \sin^{-1}{x}$ by applying the Theorm of derivation of inverse functions.
+\newline
+
+\begin{align*}
+    \left(f{^{-1}}\right)^{\prime}(x) =& \frac{1}{f{^{\prime} \left(f{^{-1}}(x)\right)}} \\
+    =& \frac{1}{\cos{\left(\sin{^{-1}}{x}\right)}} \qquad\qquad\qquad f{^{\prime} (u)} = \cos{u} \\
+    =& \frac{1}{\sqrt{1 - \sin{^{2} \left(\sin{^{-1} x}\right)}}} \qquad \cos{u} = \sqrt{1 - \sin{^2 u}} \\
+    =& \frac{1}{\sqrt{1 - x{^2}}} \qquad\qquad\qquad\qquad  \sin{\left(\sin{^{-1} x}\right)} = x
+\end{align*}
+
+\noindent
+So, the general rule for derivative of $\sin{^{-1} u}$ is:
+\newline
+
+\begin{align*}
+    \frac{d}{dx}\left(\sin{^{-1} u}\right) = \frac{1}{\sqrt{1 - u^2}}\frac{du}{dx},\quad\mid{u}\mid < 1
+\end{align*}
+
+\subsection*{Excerises}
+\noindent
+Find the derivatives of the following exercises:
+\newline
+
+\begin{align*}
+1.\;&\sin{^{-1} \left(1-t\right)} \\
+2.\;&\sin{^{-1} \sqrt{2}t} \\
+3.\;&\sin{^{-1} \frac{3}{t^2}}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,2 @@
+There is a substitution for C array in C++ 11 and that is **array<type, length>** template class in **array** header file.  
+C++ array class has consistency and is more secure over C array and should be used when C arrays are needed.

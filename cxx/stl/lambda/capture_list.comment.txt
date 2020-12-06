@@ -1,0 +1,2 @@
+The pair of square brackets in lambda functions are not for decorating code!
+We can pass the variables from outside of lambda scope, inside its scope by writing them inside those pair of square brackets.

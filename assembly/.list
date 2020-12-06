@@ -1,0 +1,6 @@
+x86
+x86_64
+x86_simd
+x86_64_simd
+arm
+arm_simd

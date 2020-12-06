@@ -1,0 +1,16 @@
+# Brief Table of Content
+
+* [01. the basics](./01.the_basics/00.README.md)
+  * [01.01. introduction](./01.the_basics/01.introduction/00.README.md)
+  * [01.02. variables and constants](./01.the_basics/02.variables_constants/00.README.md)
+  * [01.03. arrays and strings](./01.the_basics/03.arrays_strings/00.README.md)
+  * [01.04. input/output (I/O)](./01.the_basics/04.input_output/00.README.md)
+  * [01.05. expressions, statements and operators](./01.the_basics/05.expressions_statements_operators/00.README.md)
+  * [01.06. control statements](./01.the_basics/06.control_statements/00.README.md)
+* [02. multi-threading](./02.multithreading/00.README.md)
+  * [02.01. threads](./02.multithreading/01.threads/00.README.md)
+  * [02.02. mutex](./02.multithreading/02.mutex/00.README.md)
+  * [02.03. atomic](./02.multithreading/03.atomic/00.README.md)
+* [03. network programming](./03.network_programming/00.README.md)
+  * [03.01. cencepts](./03.network_programming/01.concepts/00.README.md)
+  * [03.02. network layer](./03.network_programming/02.network_layer/00.README.md)

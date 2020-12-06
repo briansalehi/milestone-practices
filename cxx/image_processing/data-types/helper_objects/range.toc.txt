@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [02.02.02. cv::TermCriteria](./../../02.data_types/02.helper_objects/02.termcriteria.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [02.02.04. cv::Exception](./../../02.data_types/02.helper_objects/04.exception.md)
+
+</div>

@@ -1,0 +1,5 @@
+Unions too, are classes in C++ and their members are public by default unless otherwise is specified.  
+Unions can be used in complex types as we did here in this practice.  
+They have the same concept as they have in C. Only one member of a union can be occupied at a time.
+
+**note**: coding style is a matter of your taste, you can specify your variables and names in camelCase format, PasCal format or not to use capital letters at all, eg. ComplexType, complexType, complex_type.

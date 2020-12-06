@@ -1,0 +1,9 @@
+There are 4 types of constants in C:
+
+* => literal constants
+*    define preprocessor
+*    const keyword
+*    enumeration
+
+Literal constants such as strings surrounded in double quotes, are declared in
+memory, which is a place to store predefined values in a program.

@@ -1,0 +1,7 @@
+The **cv::llpise2Poly()** function is used internally by **cv::ellipse()** to compute elliptical arcs,
+but you can call it yourself as well.
+
+Parameter delta specifies the angle between subsequent points you want to sample.
+The computed points are returned in the **std::vector<> pts**.
+
+**NOTE: Always use \#include <vector> header when using std::vector, altough, OpenCV headers seem to have included it already.**

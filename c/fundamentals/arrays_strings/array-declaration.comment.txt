@@ -1,0 +1,2 @@
+**arrays** are a list of values held in a line of memory together.  
+To declare an array, you must use either a star character or define the length of that array in square brackets.

@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [04.01.08. cv::VideoCapture::get&lpar;&rpar; and cv::VideoCapture::set&lpar;&rpar;](./../../04.functions/01.data_files/08.get-set.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [04.01.10. cv::FileStorage](./../../04.functions/01.data_files/10.file-storage.md)
+
+</div>

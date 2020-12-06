@@ -1,0 +1,1 @@
+Use **std::insert\_iterator** to convert an algorithm that copies data into one that inserts data.

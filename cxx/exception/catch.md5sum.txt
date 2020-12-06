@@ -1,0 +1,1 @@
+09ac2d9d88e09da4c9aeea89d76901d4  ./05.advanced/03.exception/01.catch.cxx

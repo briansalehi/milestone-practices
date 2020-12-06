@@ -1,0 +1,18 @@
+
+<style>.pagination {position: relative; float: left !important; width: 21%; margin-right: 1%;}</style>
+### Quick Access
+
+<div class="previous_page pagination">
+
+#### &#8592; Previous Page
+
+* [02.06.07. template classes](./../../02.object_oriented/06.templates/07.class.md)
+
+</div>
+<div class="next_page pagination">
+
+#### &#8594; Next Page
+
+* [02.06.09. template default parameter](./../../02.object_oriented/06.templates/09.default.md)
+
+</div>

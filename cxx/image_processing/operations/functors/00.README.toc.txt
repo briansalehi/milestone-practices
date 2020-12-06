@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [03.02.10. cv::getTextSize](./../../03.operations/02.drawing/10.gettextsize.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [03.03.01. cv::PCA](./../../03.operations/03.functors/01.pca-construct.md)
+
+</div>

@@ -1,0 +1,50 @@
+\documentclass[fleqn]{article}
+\pagenumbering{gobble}
+\usepackage{amsmath}
+
+\begin{document}
+
+\subsection*{Defintions}
+\noindent
+To find the derivative of $f{^{-1} (u)} = \sec{^{-1} x}$,
+instead of using the theorem used for $\tan{^{-1} x}$ and ${\sin{^{-1} x}}$,
+we find the derivative of $y = \sec{^{-1} x}, \mid{x}\mid > 1$,
+using implicit differentiation and the Chain Rule as follows:
+\newline
+
+\begin{align*}
+    y &= \sec{^{-1} x} \\
+    \sec{y} &= x \qquad\qquad\qquad \text{Inverse function relationship} \\
+    \frac{d}{dx}\left(\sec{y}\right) &= \frac{d}{dx}x \qquad\qquad\;\; \text{Differentiate both sides} \\
+    \sec{y}\tan{y}\frac{dy}{dx} &= 1 \qquad\qquad\qquad \text{Chain rule} \\
+    \frac{dy}{dx} &= \frac{1}{\sec{y}\tan{y}} \\
+    \frac{dy}{dx} &= \pm \frac{1}{x \sqrt{x^2 - 1}} \quad \sec{y}
+    = x \quad\text{and}\quad \tan{y} = \pm \sqrt{\sec{^2 y} - 1} = \pm \sqrt{x^2 - 1} \\
+\end{align*}
+
+\noindent
+Finally we use absolue value sign to eliminate the "$\pm$" ambiguity:
+\newline
+\begin{equation*}
+    \frac{d}{dx}\sec{^{-1} x} = \frac{1}{\mid{x}\mid \sqrt{x^2 - 1}}
+\end{equation*}
+
+\noindent
+So, as a general rule for $f{^{-1} x} = \sec{^{-1} x}$, we have:
+\newline
+\begin{equation*}
+    \frac{d}{dx}\left(\sec{^{-1} x}\right) = \frac{1}{\mid{u}\mid \sqrt{u^2 - 1}}\frac{du}{dx},\qquad\mid{u}\mid > 1
+\end{equation*}
+
+\subsection*{Exercises}
+\noindent
+Find the derivative of following excercises:
+\newline
+
+\begin{align*}
+1.\;&\sec{^{-1} \left(2s+1\right)} \\
+2.\;&\sec{^{-1} 5s} \\
+3.\;&\sec{^{-1} \frac{1}{t}},\qquad{0<t<1}
+\end{align*}
+
+\end{document}

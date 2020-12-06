@@ -1,0 +1,16 @@
+We will now use a function that uses Gaussian filtering to **downsapmle**
+an image by a factor of 2.
+That is, we are creating an image where was sampling every other pixel of the source image.
+
+If we downsample the image several times, we form a **scale space**,
+also known as an **image pyramid**, that is commonly used in computer
+vision to handle the changing scales in which a scene or object is observed.
+
+**Downsampling** is a common process used in signal processing,
+specifically known as **Nyquist-Shannon** sampling theorm.  
+Such sampling introduces high frequencies into the resulting signal, in this case an image.  
+To avoid this, we want to first run a high-pass filter over the signal to
+*band-limit* its frequencies so that they are all below the sampling frequency.
+
+In opencv, this **Gaussian blurring** and **downsampling** is accomplished
+by the function **cv::pryDown()**, which we implemented in this code.

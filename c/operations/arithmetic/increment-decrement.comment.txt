@@ -1,0 +1,12 @@
+ref[2]
+C provides two unusual operators for incrementing and decrementing variables.  
+The increment operator ++ adds 1 to its operand, while the decrement  
+operator -- subtracts 1.
+
+The unusual aspect is that ++ and -- may be used either as prefix operators  
+(before the variable, as in ++n), or postfix (after the variable: n++). In both  
+cases, the effect is to increment n. But the expression ++n increments n before  
+its value is used, while n++ increments n after its value has been used. This  
+means that in a context where the value is being used, not just the effect, ++n  
+and n++ are different.
+end[2]

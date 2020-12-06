@@ -1,0 +1,1 @@
+d2648db0eea8d108bf6cf2fd15e63117  ./01.the_basics/04.input_output/08.sizeof.c

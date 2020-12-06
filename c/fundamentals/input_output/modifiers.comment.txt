@@ -1,0 +1,1 @@
+Further power of output string manipulation is given to programmers by modifiers.

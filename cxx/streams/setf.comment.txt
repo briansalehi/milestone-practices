@@ -1,0 +1,1 @@
+**setf** is a function in **cout** namespace that manipulates stream functionality using flags, e.g. *ios_base::boolalpha*.  

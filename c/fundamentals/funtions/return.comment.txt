@@ -1,0 +1,15 @@
+ref[2]
+A function need not return a value; a return statement with no expression  
+causes control, but no useful value, to be returned to the caller, as does "falling  
+off the end" of a function by reaching the terminating right brace. And the calling  
+function can ignore a value returned by a function.
+
+You may have noticed that there is a return statement at the end of main.  
+Since main is a function like any other, it may return a value to its caller,  
+which is in effect the environment in which the program was executed. Typically,  
+a return value of zero implies normal termination; non-zero values signal  
+unusual or erroneous termination conditions. In the interests of simplicity, we  
+have omitted return statements from our main functions up to this point, but  
+we will include them hereafter, as a reminder that programs should return  
+status to their environment.
+end[2]

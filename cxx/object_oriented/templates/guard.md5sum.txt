@@ -1,0 +1,1 @@
+aac709bf429a588263258a3e67eb1ed8  ./02.object_oriented/06.templates/02.guard.cxx

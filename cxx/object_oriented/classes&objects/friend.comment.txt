@@ -1,0 +1,7 @@
+To access private memebers of a class, you either can declare a method inside that class to return the value of that private member,
+or you make a foreign function friends with that class to give it access to private member of the class.  
+Either way, you need the declaration of those methods inside the class.  
+To specify a foreign function as a friend, you need to write the declaration of that function with keyword **friend** in the head of declaration.  
+You only have to specify **friend** keyword before function declaration inside the class not in definition of that function outside the class.  
+This practice only shows you how to define a friend class, it will not tell you where you can use it.
+friend functions will be discussed more in operator overloadings.

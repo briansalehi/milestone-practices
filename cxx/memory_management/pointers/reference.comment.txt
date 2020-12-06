@@ -1,0 +1,38 @@
+Pointers are variables holding an address value. pointers can point to an invalid memory address or not to point to anywhere at all (nullptr).  
+References work similiarly but they are not variables of holding memory address. that is, they do not hold memory addresses, they directly point to them.  
+That's the big difference you need to keep in mind when working with pointers and references.
+
+Imagine you want to pass a variable not by value but its address:
+
+```cxx
+void function(int* number) { ... }
+
+int main()
+{
+    int number = 2;
+    int* pointer = &number;
+    function(pointer);
+}
+```
+
+What we did here was to send **pointer** as an argument. Remember that *pointer* could also point to an invalid location:
+
+```cxx
+int* pointer = nullptr;
+```
+
+But by using references, addresses cannot be invalid.
+
+```cxx
+void function(int& number) { ... }
+
+int main()
+{
+    int number = 2;
+    int& reference = number;
+    function(reference);
+}
+```
+
+This is because references do not hold addresses like pointers do.  
+So, not only using references make your program as fast as using pointers, but they also are safer than pointers!

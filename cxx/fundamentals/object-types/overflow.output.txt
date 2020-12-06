@@ -1,0 +1,2 @@
+unsigned short 0xffff + 1 equals: 0x0
+signed short 0x7fff + 1 equals: 0x8000

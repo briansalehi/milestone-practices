@@ -1,0 +1,20 @@
+The Bash we use is a shell and is just a program that provies us an environment
+to execute commands on a system. Some commands are built-in and they come
+with the shell program itself, which are internal commands. <i>cd</i> and
+<i>pwd</i> are two best known internal commands.
+
+Other commands are said to be external commands. That is, they are programs
+sitting somewhere and as we type their name on the shell and then hit enter the
+shell executes them and they can run separately from the shell itself.
+
+So, mkdir is a program separate from the shell sitting in the <b>/usr/bin/</b>
+(pronounced slash USR slash BIN) directory. As we type mkdir on the shell,
+shell will find this command in its corresponding directory and execute it.
+
+How does shell know where to find external programs like <i>mkdir</i> to
+execute them?
+We will see later that Bash holds a few environment variables which hold
+values to manage programs with.
+PATH variables is one of the environment variables which contains a list of
+directories separated by colon, each represent a directory which contains
+executable files, runnable as commands.

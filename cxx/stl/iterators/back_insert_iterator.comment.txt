@@ -1,0 +1,3 @@
+**std::back\_insert\_iterator** assumes that the input container has **push\_back()** function within.
+
+this iterator only works with containers that allow **rapid insertion complexity**, like vectors.

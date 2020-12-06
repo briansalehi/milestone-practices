@@ -1,0 +1,6 @@
+Python's core objects set includes the usual suspects: <i>integers</i> that
+have no fractional part, <i>floating-point</i> numbers that do, and more
+exotic types, <i>complex</i> numbers with imaginary parts, <i>decimals</i>
+with fixed precision, <i>radionals</i> with numerator and denominator are
+available as numeric values in Python, also more types are available as
+third-party add-ones.

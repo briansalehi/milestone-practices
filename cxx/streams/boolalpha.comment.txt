@@ -1,0 +1,2 @@
+Boolean values are printed 0 as false and 1 as true in output streams.  
+This behaviour can be easily changed by setting **boolalpha** flag in output stream.

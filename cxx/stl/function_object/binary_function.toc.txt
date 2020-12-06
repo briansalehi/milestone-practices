@@ -1,0 +1,18 @@
+
+<style>.pagination {position: relative; float: left !important; width: 21%; margin-right: 1%;}</style>
+### Quick Access
+
+<div class="previous_page pagination">
+
+#### &#8592; Previous Page
+
+* [04.01.02. unary predicate](./../../04.more_stl/01.function_object/02.unary_predicate.md)
+
+</div>
+<div class="next_page pagination">
+
+#### &#8594; Next Page
+
+* [04.01.04. binary predicate](./../../04.more_stl/01.function_object/04.binary_predicate.md)
+
+</div>

@@ -1,0 +1,1 @@
+b2748a1cbfe49f32a28cf30087fa9800  ./06.multithreading/01.threads/03.move-thread.cxx

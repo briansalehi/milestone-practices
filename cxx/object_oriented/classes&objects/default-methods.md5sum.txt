@@ -1,0 +1,1 @@
+e4d794d70a95d325d0a73ee7573c4f03  ./02.object_oriented/01.classes&objects/21.default-methods.cxx

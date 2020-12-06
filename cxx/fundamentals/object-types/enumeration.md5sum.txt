@@ -1,0 +1,1 @@
+2f7c6f47fa9174904bb4a589256046ce  ./01.the_basics/03.variables&constants/14.enumeration.cxx

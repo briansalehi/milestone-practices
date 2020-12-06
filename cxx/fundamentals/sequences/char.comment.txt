@@ -1,0 +1,2 @@
+**Array** size will never change in run-time, even if you put a null character in the middle of it.
+But its content can be truncated by one.

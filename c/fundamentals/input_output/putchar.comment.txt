@@ -1,0 +1,1 @@
+If you need to print a character, **putchar** can be a substitution of printf as it only works with a single character.

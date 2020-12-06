@@ -1,0 +1,1 @@
+1afefc96aa7ef18d867bed3a00610f5f  ./01.the_basics/08.pointers&references/01.memory.cxx

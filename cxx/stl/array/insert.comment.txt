@@ -1,0 +1,1 @@
+**std::vector** container has few overloaded methods called **insert()** to insert elements anywhere into a vector.

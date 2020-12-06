@@ -1,0 +1,1 @@
+inheriting from std::exception class

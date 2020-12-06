@@ -1,0 +1,10 @@
+Operators have precedence over each other, meaning that when we use
+multiple operators in one statement, compiler will evaluate the
+statement in precedence order.
+
+The highest precedence in mathematial expressions is parenthesis,
+so (1 + 4) would be evaluated first, then multiplication and division
+operators have higher precedene over the others but both are on the same
+priority.  
+So 6 / 2 * 3 will be 1 and finally addition and multiplications are evaluated.  
+Finally we will have 1 in result.

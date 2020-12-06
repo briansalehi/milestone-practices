@@ -1,0 +1,1 @@
+6147b51f04a741e0db8af3039add98f7  ./04.more_stl/03.algorithms/08.copy.cxx

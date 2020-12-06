@@ -1,0 +1,3 @@
+Consider **std::set** containers just like **std::list** except that they have a longer write time due to the sorting process right after inserting each element in that container.  
+That is, each time you push an element back into this container, the element will not be put in the top position, but it will be put to the proper position to keep the container sorted.  
+The predicate function should be defined by you if elements are of type objects, you can also use predefined predicates like **std::less**, etc.

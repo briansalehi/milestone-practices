@@ -1,0 +1,4 @@
+You have seen these lines dozen times in previous chapters of multi-threading.  
+What you need to know is that some operations like writing to output stream is not thread-safe, either in C or C++ style.  
+To make a thread write in *stdout* or any other streams, output source needs to be locked for the writing thread to prevent simultaneous write operations of other threads.  
+By not doing this lock actually the program will not crash but the output string will be a jumble.

@@ -1,0 +1,1 @@
+e2770e3367cf8a1e1253d31095977ff0  ./02.object_oriented/04.operators/02.friend.cxx

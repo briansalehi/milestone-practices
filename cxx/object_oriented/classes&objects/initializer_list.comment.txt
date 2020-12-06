@@ -1,0 +1,3 @@
+Initializer lists that you have been using so far, are themselves containers.
+they can be iterated and passed to function paramters.  
+Containers and initializer lists will be discussed more later.

@@ -1,0 +1,3 @@
+Making a lambda do a binary predicate task is easy but we need to behave lambda functions carefully,
+they may have overhead when they grow in size.  
+Notice how we clarified the return type of lambda function, using -\> operator, we can restrict the return type of a lambda function.

@@ -1,0 +1,3 @@
+**std::string** is a string container, specifically designed to hold string values.  
+The length of strings are no longer a concern with string container as they manage
+memory on their own.

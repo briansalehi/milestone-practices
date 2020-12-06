@@ -1,0 +1,1 @@
+b00a5926a44fd79f00aaebccddab9285  ./02.object_oriented/01.classes&objects/03.constructor.cxx

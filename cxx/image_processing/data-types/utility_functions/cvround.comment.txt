@@ -1,0 +1,1 @@
+Given a floating-point number x, **cvRound()** computes the integer closest to x.

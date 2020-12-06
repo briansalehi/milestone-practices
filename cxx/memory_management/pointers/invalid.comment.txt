@@ -1,0 +1,5 @@
+In this practice there are comments representing the regular mistakes programmers do.  
+
+* allocate pointers with new and set them to **nullptr** if not initialized with a valid address.
+* in conditional statements, don't miss possible values of pointers, don't leave them pointing to invalid address.
+* before deleting a block of memory created by new, first check if they have allocated first.

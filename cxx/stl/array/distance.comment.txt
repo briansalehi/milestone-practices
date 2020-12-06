@@ -1,0 +1,1 @@
+To evaluate the distance of two distinct elements in a container, **distance()** function can be used.

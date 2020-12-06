@@ -1,0 +1,16 @@
+In a simple language, this program will write something on your screen.
+But this sentence does not seem to represent the goal of this program
+professionally!  
+We are better to say:
+
+> This program will write a string to the output buffer,
+> and then it flushes the buffer contents into the screen!
+
+That's it, what will actually happen when you want to print something on
+your screen, is that you write a string surrounded by double quotes (")
+into to a memory somewhere called the *output buffer* by **printf** function.
+Then a special character like "\n" which represents the **newline character**
+in the string, will flush that string from output buffer into the screen.
+
+Flushing the buffer can also be done by **fflush** function, which will
+be discussed further later on.

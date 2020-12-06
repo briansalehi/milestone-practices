@@ -1,0 +1,4 @@
+To access array elements, you can use index number in square bracket like array[0].  
+Array indexes start with 0 and if they are declared with length of N,
+there is no N'th element in an array, as that index holds '\n' which is a
+array terminator and it's always found at the end of arrays representing end of arrays.

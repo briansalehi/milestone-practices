@@ -1,0 +1,6 @@
+<b>main</b> function, is the main function that always exists in all C and
+C++ programs.
+
+All other functions must be defined before <i>main function</i>, either they
+can only be declared before main and implemented after main, or they can be
+implemented in one step before main function.

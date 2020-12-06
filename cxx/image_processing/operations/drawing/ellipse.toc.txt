@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [03.02.02. cv::clipLine](./../../03.operations/02.drawing/02.clipline.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [03.02.04. cv::ellipse2Poly](./../../03.operations/02.drawing/04.ellipse2poly.md)
+
+</div>

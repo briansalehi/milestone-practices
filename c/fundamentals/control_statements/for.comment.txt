@@ -1,0 +1,9 @@
+ref[2]
+The for statement is a loop, a generalization of the while.  
+Within the parentheses, there are three parts, separated by semicolons.  
+The first part, the initialization is done once, before the loop proper  
+is entered. The second part is the test or condition that controls the loop.  
+This condition is evaluated; if it is true, the body of the loop is executed.  
+Then the increment step is executed, and the condition re-evaluated.  
+The loop termhates if the condition has become false.
+end[2]

@@ -1,0 +1,3 @@
+**containers** such as **vector** will be discussed in detail later in next chapters.  
+What you need to know for now, is that vectors are a subsitution of arrays.  
+Unlike arrays, vectors can hold dynamic amount of elements in runtime.

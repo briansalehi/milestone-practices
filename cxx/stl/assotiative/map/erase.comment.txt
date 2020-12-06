@@ -1,0 +1,4 @@
+Erasing an element in a map container takes as much effort as it takes to erase an element from other containers.  
+Here two new methods we used, **lower_bound()** and **upper_bound()**.
+What makes them useful is that there might be multiple instances of a key in **std::multimap** container,
+we can access to the position of first and last instances of that key using these two methods.

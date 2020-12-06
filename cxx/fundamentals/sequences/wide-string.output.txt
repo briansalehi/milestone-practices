@@ -1,0 +1,2 @@
+this is a wchar_t type string
+this is a wstring type string

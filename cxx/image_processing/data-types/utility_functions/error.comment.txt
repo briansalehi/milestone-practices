@@ -1,0 +1,2 @@
+Normally the constructor is not called explicitly.
+Instead, the macros **CV_Error()**, **CV_Error_()** and **CV_Assert()** are used.

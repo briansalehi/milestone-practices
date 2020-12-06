@@ -1,0 +1,8 @@
+Given a number *n* (typically a return value from *sizeof()*), and a size for a buffer,
+**cv::alignSize()** computes the size that this buffer should be in order to contain an integer number of objects of size *n*.
+That is, the minimum number that is greater or equal to buffer size yet divisable by *n*.
+The following formula is used:
+
+```cxx
+(bs + n-1) & -n
+```

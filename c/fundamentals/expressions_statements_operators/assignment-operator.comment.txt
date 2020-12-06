@@ -1,0 +1,18 @@
+Back to the simplest C program ever! what do we have here is an assignment operator
+surrounded by two operands, which the left one is an lvalue and the right operand is
+called an rvalue.
+
+What matters here is how the phrases lvalue and rvalue are defined.  
+There is a phrase called *data object* or simply an object that is a
+block of space on memory, accessible to the program.  
+We can define lvalue as whatever operator that is an object is called lvalue.
+
+An rvalue in return, is whatever operator which is not an lvalue! that is,
+there's no finite definition of an rvalue, it's definition is relative and
+we call an operator if it's not a lvalue.
+
+Here, 3 is an rvalue because it's not an object and is just a constant literal,
+in a different meaning, it's not an lvalue. So, the right operand will be assigned
+to the lvalue which is capable of holding that number on memory.
+
+Do not mistakenly interpret = operator as equality, the way it makes sense in Mathematics.

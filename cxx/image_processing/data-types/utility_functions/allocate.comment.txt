@@ -1,0 +1,1 @@
+This function seem not to exist in opencv2, in that case it will be removed soon.

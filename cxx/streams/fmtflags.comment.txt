@@ -1,0 +1,2 @@
+You can store ios_base flags in a variable of type **std::ios_base::fmtflags** for future use.  
+Also, precision value can be stored in variable of type **std::ios_base::streamsize**.

@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [01.01.01. image viewer](./../../01.the_basics/01.tools/01.image.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [01.01.03. video trackbar slider](./../../01.the_basics/01.tools/03.trackbar.md)
+
+</div>

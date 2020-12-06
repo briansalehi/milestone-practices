@@ -1,0 +1,11 @@
+**cv::imencode()** compresses an image into supported file formats specified in
+file extension.
+
+```cxx
+void cv::imencode(
+	const string&	ext,	// extension specified codec
+	cv::InputArray	img,	// image to be encoded
+	std::vector<uchar>&	buf,	// encoded file bytes go here
+	const std::vector<int>&	params = std::vector<int>()	// (optional) for parametrized formats
+);
+```

@@ -1,0 +1,1 @@
+To use booleans, instead of using **_Bool** type, you can include **stdbool.h** header file to substitute **_Bool** with **bool** and also use **true** and **false** instead of using 1 and 0.

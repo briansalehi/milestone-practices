@@ -1,0 +1,63 @@
+begin[5]
+For converting integers to characters, the following set of functions is available:
+
+```cxx
+to_chars_result to_chars(char* first, char* last, IntegerT value, int base = 10);
+```
+
+Here, *IntegerT* can be any signed or unsigned integer type or char .
+The result is of type **to_chars_result** , a type defined as follows:
+
+```cxx
+struct to_chars_result {
+	char* ptr;
+	std::errc ec;
+};
+```
+
+The *ptr* member is either equal to the one-past-the-end pointer of the written characters if the
+conversion was successful, or it is equal to last if the conversion failed (in which case, ec ==
+errc::value_too_large ).
+
+Similarly, the following set of conversion functions is available for floating point types:
+
+```cxx
+to_chars_result to_chars(char* first, char* last, FloatT value);
+to_chars_result to_chars(char* first, char* last, FloatT value, chars_format format);
+to_chars_result to_chars(char* first, char* last, FloatT value, chars_format format, int precision);
+```
+
+Here, FloatT can be float , double , or long double . Formatting can be specified with a combination of chars_format flags:
+
+```cxx
+enum class chars_format {
+	scientific,
+	fixed,
+	hex,
+	general = fixed | scientific
+};
+```
+
+For the opposite conversion—that is, converting character sequences into numerical values—the
+following set of functions is available:
+
+```cxx
+from_chars_result from_chars(const char* first, const char* last, IntegerT& value, int base = 10);
+from_chars_result from_chars(const char* first, const char* last, FloatT& value, chars_format format = chars_format::general);
+```
+
+Here, from_chars_result is a type defined as follows:
+
+```cxx
+struct from_chars_result {
+	const char* ptr;
+	std::errc ec;
+};
+```
+
+The ptr member of the result type is a pointer to the first character that was not converted, or it
+equals last if all characters were successfully converted. If none of the characters could be con-
+verted, ptr equals first , and the value of the error code will be errc::invalid_argument . If the
+parsed value is too large to be representable by the given type, the value of the error code will be
+errc::result_out_of_range . Note that from_chars() does not skip any leading whitespace.
+end[5]

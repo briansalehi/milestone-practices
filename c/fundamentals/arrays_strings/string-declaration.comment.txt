@@ -1,0 +1,15 @@
+Strings are nothing but an array of type char, that is **char star** type.
+
+Notice that there is a difference between:
+
+```c
+char letter = 'A';
+```
+
+and
+
+```c
+char* letter = "A";
+```
+
+The former is just a character but the latter is not just one character, but it's an array of two characters: 'A' and '\n'.

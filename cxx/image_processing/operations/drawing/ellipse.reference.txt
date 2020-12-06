@@ -1,0 +1,7 @@
+# [book name]: [page numbers e.g. 1 or 1,2 or 1-5]
+# e.g. book title: 45
+# e.g. book title: 45,46
+# e.g. book title: 45-47
+# [link]
+# https://example.com
+1: 160,161

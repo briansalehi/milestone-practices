@@ -1,0 +1,1 @@
+344c272bf6a7bae5a58d72cffcf4d356  ./02.object_oriented/01.classes&objects/17.friend.cxx

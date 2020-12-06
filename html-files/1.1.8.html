@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>Shell Shortcuts</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<div class="container" >
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="1.0.html">Linux Administration</a></li>
+<li class="breadcrumb-item"><a href="1.1.0.html">Shell Basics</a></li>
+<li class="breadcrumb-item active" >Shell Shortcuts</li>
+</ol>
+<h2>Shell Shortcuts</h2>
+<div class="comment-style" >
+   It would be the best experience if you can touch type on your keyboard and use
+   your 10 fingers typing anything with least effort.<br />
+   <br />
+   There are dozens of touch typing tutorial apps out there, just use one if you
+   don’t already know how to do it.<br />
+   <br />
+   Usually programmers and admins prefer not to raise their hands for frequent
+   tasks.<br />
+   <br />
+   So, for example you can reach to your previous commands you typed on shell
+   by hitting up and down arrow keys, which requires you to raise your hands and
+   move them to the top of arrow keys which seems to be a very long distance!<br />
+   Instead, we can get used to using the shortcuts doing exact same thing without
+   raising our hands, as for up arrow key we use <b>Ctrl+P</b> and down arrow key
+   we use <b>Ctrl+N</b>.<br />
+   <br />
+   * before you use <b>Ctrl+S</b> you need to know that it causes your terminal to
+   hang, to make your terminal continue running hit <b>Ctrl+Q</b> afterwards.<br />
+   Type <b>”stty -xion”</b> to make your terminal interpreting <b>Ctrl+S</b> as
+   search shortcut instead.<br />
+   <br />
+   There’s a list of shell shortcuts that saves us time and energy:<br />
+   <br />
+   <ol>
+   <li> Ctrl+P: Previous command</li>
+   <li> Ctrl+N: Next command</li>
+   <li> Ctrl+R: Search backward (Reverse)</li>
+   <li> Ctrl+S: *Search forward</li>
+   <li> Ctrl+G: Cancel search</li>
+   <li> Ctrl+A: Move cursor to the start</li>
+   <li> Ctrl+E: Move cursor to the end</li>
+   <li> Ctrl+B: Move backward within a line</li>
+   <li> Ctrl+F: Move cursor forward within a line</li>
+   <li> Esc then Ctrl+B: Move cursor backward a word at a time, right arrow key</li>
+   <li> Esc then Ctrl+F: Move cursor forward a word at a time, left arrow key</li>
+   <li> Ctrl+D: Delete character under the cursor, delete key</li>
+   <li> Ctrl+K: Delete all text from the cursor to the end of the line</li>
+   <li> Ctrl+X then Backspace: Delete all text from the cursor to the beginning of the life</li>
+   <li> Ctrl+T: Immediately transposes the two words before and under the cursor</li>
+   <li> Esc then Ctrl+U: Converts text from the cursor to the end of line the word to uppercase</li>
+   <li> Esc then Ctrl+L: Converts text from the cursor to the end of line the word to lowercase</li>
+   <li> Esc then Ctrl+C: Capitalizes text from the cursor to the end of line the word</li>
+   <li> Ctrl+X then Ctrl+E: Launch default editor</li>
+   </ol>
+</div>
+<ul class="pager">
+<li class="previous"><a href="1.1.7.html">previous page</a></li>
+<li class="top"><a href="index.html">top page</a></li>
+<li class="next"><a href="1.2.0.html">next page</a></li>
+</ul>
+</div>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-asm6502.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+</body>
+</html>

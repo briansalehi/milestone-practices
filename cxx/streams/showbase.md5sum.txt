@@ -1,0 +1,1 @@
+f91524af14fe31f492281e351d59bd86  ./05.advanced/02.streams/09.showbase.cxx

@@ -1,0 +1,1 @@
+4e69e85d46d27fa516d98ea0dddebd7b  ./01.the_basics/02.variables_constants/07.bool.c

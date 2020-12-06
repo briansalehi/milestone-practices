@@ -1,0 +1,4 @@
+Declaring **default constructor**, **copy constructor** and **assignment operator** as private methods of a class, which prevent an object to be created, assigned or be copied.  
+You might wonder why such an object should ever exist. But truth is, sometimes you might need an object to be one and only! That is, only one instance of an object suffices and no other similar objects should ever exist with it.  
+This kind of object is called **singleton object**.  
+Don't forget that due to not having access to create a singleton object, you must declare a **static** method in the class to create one object for you.

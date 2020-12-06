@@ -1,0 +1,1 @@
+**static assert** works just like **assert** function that we previously practiced. But it evaluate the expression in compile-time and compiler will give an error when the expression does not meet the requirements.

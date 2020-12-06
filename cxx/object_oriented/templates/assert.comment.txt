@@ -1,0 +1,1 @@
+Assertion function is defined in **assert.h** header file which evaluates the expression in its parameters then asserts if the expression is true else it will fail.

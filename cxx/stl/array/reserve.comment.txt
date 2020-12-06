@@ -1,0 +1,1 @@
+Element orders of a vector container can be reversed by **reverse()** method existing in **std::vector** class.

@@ -1,0 +1,1 @@
+6d6763112b60bd554b138cf578d6a853  ./01.the_basics/02.variables_constants/04.const.c

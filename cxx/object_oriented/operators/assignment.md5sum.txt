@@ -1,0 +1,1 @@
+567456fa845a75607ff7efa08d0d1617  ./02.object_oriented/04.operators/04.assignment.cxx

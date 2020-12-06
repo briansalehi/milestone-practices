@@ -1,0 +1,1 @@
+9f09f4a888f8fe9ff3fc8487aa5bacd2  ./01.the_basics/03.variables&constants/06.no_linkage.cxx

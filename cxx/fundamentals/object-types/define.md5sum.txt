@@ -1,0 +1,1 @@
+c9d5b98fb87050a89587c4dc396c131f  ./01.the_basics/03.variables&constants/17.define.cxx

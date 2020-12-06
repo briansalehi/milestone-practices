@@ -1,0 +1,4 @@
+To find an element in a container, first a variable of type **constant iterator**
+needs to be declared and the return value of function **find()** be assigned to it.
+If you need to find more than one instance of an element, you can make the iterator non-constant
+and increment it in a loop until you hit the botton of the container.

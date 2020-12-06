@@ -1,0 +1,1 @@
+This function returns an optimal size of the array that should be passed to **cv::dft()** function as it is sensitive to array sizes.

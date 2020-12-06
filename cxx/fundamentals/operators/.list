@@ -1,0 +1,8 @@
+arithmetic.cxx
+increment&decrement.cxx
+equality.cxx
+logical.cxx
+bitwise.cxx
+shifting.cxx
+compound.cxx
+sizeof.cxx

@@ -1,0 +1,9 @@
+After we have a **cv::VideoCapture** object ready to be used, we can start
+reading frames by calling **cv::VideoCapture::read()** function.
+If the read was not successful, then it returns false.
+
+```cxx
+bool cv::VideoCapture::read(
+	cv::OutputArray image	// image into which to read data
+);
+```

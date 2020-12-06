@@ -1,0 +1,4 @@
+**Constant expressions** are special functions evaluated in compile time.
+They can boost your programs when used.  
+Fortunately, we can take advantage of them in classes too. We can make constant expression constructors and methods to have them evaluated in compile time. Also, object creations can be specified as constant expressions too.  
+Here in this practice, we will have our number variable evaluated in compile time!

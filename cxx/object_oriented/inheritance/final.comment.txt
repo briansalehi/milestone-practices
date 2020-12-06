@@ -1,0 +1,1 @@
+Using **final** keyword, we can prevent a class from being derived again.

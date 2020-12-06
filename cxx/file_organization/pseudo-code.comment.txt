@@ -1,0 +1,16 @@
+ref[6]
+Programmers are often asked to describe algorithms in a way that is intended for
+human eyes only, prior to writing actual code. Such descriptions are called pseudo-code.
+Pseudo-code is not a computer program, but is more structured than usual
+prose. Pseudo-code is a mixture of natural language and high-level programming
+constructs that describe the main ideas behind a generic implementation of a data
+structure or algorithm. There really is no precise definition of the pseudo-code
+language, however, because of its reliance on natural language. At the same time, to
+help achieve clarity, pseudo-code mixes natural language with standard programming language constructs.
+
+When we write pseudo-code, we must keep in mind that we are writing for a
+human reader, not a computer. Thus, we should strive to communicate high-level
+ideas, not low-level implementation details. At the same time, we should not gloss
+over important steps. Like many forms of human communication, finding the right
+balance is an important skill that is refined through practice.
+end[6]

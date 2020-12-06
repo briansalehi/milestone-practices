@@ -1,0 +1,3 @@
+**do while** statement works just the way **while** does.  
+But it will at least do the job once before checking the  
+conditional statement.

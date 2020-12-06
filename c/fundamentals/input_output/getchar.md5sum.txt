@@ -1,0 +1,1 @@
+e167b4981ef4214158ce5d07ed34ebbf  ./01.the_basics/04.input_output/07.getchar.c

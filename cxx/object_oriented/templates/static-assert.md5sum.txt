@@ -1,0 +1,1 @@
+32c9a20bc7d1a28db8920ddbfc885861  ./02.object_oriented/06.templates/13.static-assert.cxx

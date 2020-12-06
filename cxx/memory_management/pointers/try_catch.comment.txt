@@ -1,0 +1,3 @@
+**new** will throw an exception if the requested amount of memory is invalid.  
+You can use **try...catch** statements to catch such exceptions.  
+Exceptions will be discussed more later.

@@ -1,0 +1,3 @@
+Related to **cv::InputArray** is the special function **cv::noArray()** that returns a cv::InputArray**.
+The returned object can be passed to any input requiring **cv::InputArray** to indicate that this input is not being used.
+Certain functions also have optional output arrays, where you may pass **cv::noArray()** when you do not need the corresponding output.

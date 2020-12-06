@@ -1,0 +1,1 @@
+93790ecebefdf74fda08bd0ff671468e  ./01.the_basics/02.variables_constants/01.variables.c

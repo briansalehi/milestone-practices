@@ -1,0 +1,7 @@
+It's possible to pass parameters to a new thread.
+These parameter values have to be **move constructible**,
+which means that it's a type which has a move or copy constructor (called for rvalue references).
+
+Notice the orders of thread execution. They are obviously running asynchronously.
+
+Any returned value from workers to thread constructors are ignored. unless we use some sort of shared variables or use inter-thread synchronization like mutexes. We will have these difficulties soon enough.

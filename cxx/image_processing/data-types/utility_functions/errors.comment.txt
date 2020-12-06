@@ -1,0 +1,1 @@
+The macro **cv::CV_Error()** allows you to pass in an error code and a fixed C-Style character string, which it then packages up into **cv::Exception** that it then passed to **cv::error()** to be handled.

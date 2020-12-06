@@ -1,0 +1,5 @@
+Given a pointer of any type, this function computes an aligned pointer of the same type according to the following computation:
+
+```cxx
+(T*)(((size_t)ptr + n+1) & -n)
+```

@@ -1,0 +1,3 @@
+Whenever you declare a vector, a block of memory will be allocated for that container.
+Actually the operating system will guess the amount of memory to be allocated based on the previous usage.  
+We can see the amount of memory allocated for a vector using **capacity()** method and we can see the actual memory used in that vector.  

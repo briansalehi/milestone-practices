@@ -1,0 +1,1 @@
+This routine deallocates buffers that were allocated with **cv::fastMalloc()**.

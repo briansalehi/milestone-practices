@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [02.03.08. cv::CV_Assert](./../../02.data_types/03.utility_functions/08.assertions.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [02.03.10. cv::error](./../../02.data_types/03.utility_functions/10.error.md)
+
+</div>

@@ -1,0 +1,42 @@
+Member functions of a **cv::FileNode**
+
+```cxx
+cv::FileNode fn
+cv::FileNode fn1(fn0);
+cv::FileNode(fs, node);
+fn[(std::string)key];
+fn[(const char*)key];
+fn[(int)id];
+fn.type();
+fn.empty();
+fn.isNone();
+fn.isSeq();
+fn.isMap();
+fn.isInt();
+fn.isReal();
+fn.isSrting();
+fn.name();
+size_t sz = fn.size();
+(int)fn;
+(float)fn;
+(double)fn;
+(std::string)fn;
+```
+
+Possible return values for **cv::FileNode::type()**
+
+```cxx
+cv::FileNode::NODE = 0
+cv::FileNode::INT = 1
+cv::FileNode::REAL = 2
+cv::FileNode::FLOAT = 2
+cv::FileNode::STR = 3
+cv::FileNode::STRING = 3
+cv::FileNode::REF = 4
+cv::FileNode::SEQ = 5
+cv::FileNode::MAP = 6
+cv::FileNode::FLOW = 8
+cv::FileNode::USER = 16
+cv::FileNode::EMPTY = 32
+cv::FileNode::NAMED = 64
+```

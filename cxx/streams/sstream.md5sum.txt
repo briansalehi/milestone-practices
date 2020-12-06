@@ -1,0 +1,1 @@
+70e066bc43a491982938536330f0077f  ./05.advanced/02.streams/07.sstream.cxx

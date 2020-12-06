@@ -1,0 +1,1 @@
+12021496cb75d33e1e237875c59373b3  ./03.stl/03.array/03.insert.cxx

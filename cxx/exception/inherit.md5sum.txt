@@ -1,0 +1,1 @@
+be321dbd15e48a0bfc5ae20dfceff8c0  ./05.advanced/03.exception/06.inherit.cxx

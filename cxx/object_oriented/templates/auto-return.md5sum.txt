@@ -1,0 +1,1 @@
+2757e69b1c1c3e49e418332cd13e4613  ./02.object_oriented/06.templates/06.auto-return.cxx

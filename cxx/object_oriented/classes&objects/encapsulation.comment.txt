@@ -1,0 +1,1 @@
+In simple words, encapsulation means putting all sorts of data and types together to make a meaningful block of bigger data.  

@@ -1,0 +1,20 @@
+ref[2]
+C provides six operators for bit manipulation; these may only be applied to  
+integral operands, that is, char, short, int, and long, whether signed or  
+unsigned.
+
+* & bitwise AND
+* | bitwise inclusive OR
+* ^ bitwise exclusive OR
+* << left shift
+* >> right shift
+* ~ one's complement (unary)
+
+The bitwise AND operator & is often used to mask off some set of bits;  
+The bitwise exclusive OR operator " sets a one in each bit position where its  
+operands have different bits, and zero where they are the same.
+
+One must distinguish the bitwise operators &. and from the logical operators  
+&& and ||, which imply left-to-right evaluation of a truth value. For  
+example, if xis 1 and y is 2, then x &. y is zero while x &.&. y is one.
+end[2]

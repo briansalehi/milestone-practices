@@ -1,0 +1,7 @@
+as discussed in **std::set_union** practice page, intersections.begin() iterator
+cannot be used as an output iterator for two reasons:
+
+* begin() returns a constant key but **std::set_intersection** needs to change container values
+* std::set_intersection like **std::copy** does not allocate new space in an empty container,
+but **std::insert_iterator** solves this problem.
+iterators are discussed later in iterators chapter.

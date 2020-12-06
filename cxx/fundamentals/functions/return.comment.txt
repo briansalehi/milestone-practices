@@ -1,0 +1,3 @@
+As we discussed earlier, multiple return statements can be confusing as all programs are expected
+to be ended in their last line.  
+Avoid multiple return statements, there is always a better way to do what you are going to do with multiple return statements.

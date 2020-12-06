@@ -1,0 +1,1 @@
+6b66a1049b56a87d83c6c9e6494ed4c7  ./01.the_basics/08.pointers&references/08.invalid.cxx

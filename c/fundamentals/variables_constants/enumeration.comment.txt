@@ -1,0 +1,11 @@
+There are 4 types of constants in C:
+
+*    literal constants
+*    define preprocessor
+*    const keyword
+* => enumeration
+
+Enumerations are declared as of type int but their elements are not of type int.  
+This means you cannot compare them with integers or even assign them to any of them.  
+To assign an enum element into a variable of type int, you must convert it to type int first.
+conversions are discussed in later chapters.

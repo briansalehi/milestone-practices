@@ -1,0 +1,1 @@
+This is a sample of specializing algorithm functions like **sort()** to sort a container of objects.

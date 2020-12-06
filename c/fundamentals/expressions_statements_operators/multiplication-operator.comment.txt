@@ -1,0 +1,2 @@
+To multiply two operands, use * operator.  
+Don't misinterpret multiplication operator with pointers which we will discuss later.

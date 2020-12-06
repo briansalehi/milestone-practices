@@ -1,0 +1,6 @@
+ostream_iterator.cxx
+istream_iterator.cxx
+back_insert_iterator.cxx
+front_insert_iterator.cxx
+insert_iterator.cxx
+reverse_iterator.cxx

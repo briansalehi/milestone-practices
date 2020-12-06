@@ -1,0 +1,1 @@
+cv::VideoCapture::grab() and cv::VideoCapture::retrieve()

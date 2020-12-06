@@ -1,0 +1,7 @@
+Destructors are invoked just before the object is completely destroyed.  
+Constructors and destructors are great places to allocate memory right after object creation and delete just before object destruction.
+
+ref[6]
+A constructor is called when a class object comes into existence. A destructor is  
+a member function that is automatically called when a class object ceases to exist.
+end[6]

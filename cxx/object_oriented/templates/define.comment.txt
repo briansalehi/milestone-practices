@@ -1,0 +1,5 @@
+**Macro** is a kind of variable having no type, where its value
+will be substituted anywhere it is specified in **compile time**.  
+That is, macros are just a simple string substitution approach,
+mostly useful in embedded development where there is a limited
+amount of memory to hold all of the variables.

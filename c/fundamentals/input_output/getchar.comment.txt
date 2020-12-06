@@ -1,0 +1,1 @@
+When you need to get a character, **getchar** can be a substitution of scanf as it only works with a single character.

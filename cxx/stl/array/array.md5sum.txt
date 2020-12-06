@@ -1,0 +1,1 @@
+d991ffd61f2e1ec39e9de21dbdcfa748  ./03.stl/03.array/12.array.cxx

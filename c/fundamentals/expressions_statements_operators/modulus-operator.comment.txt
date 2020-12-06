@@ -1,0 +1,2 @@
+**Modulus** operator is indicated by % sign and is a binary operator.  
+In standard, modulus operator a % b, is evaluated by ** a - (a/b)*b **.

@@ -1,0 +1,2 @@
+You were previously introduced to overriding functions.  
+We can use **override** keyword on overriding methods to be 100 percent sure they will be overriden.

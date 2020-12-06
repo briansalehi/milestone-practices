@@ -1,0 +1,1 @@
+412d2c9fb2b588a5066fb90265ed96ad  ./01.the_basics/05.expressions_statements_operators/05.multiplication-operator.c

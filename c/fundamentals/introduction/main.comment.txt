@@ -1,0 +1,10 @@
+ref[1]
+Normally you are at liberty to give functions whatever names you like,  
+but "main" is special. Your program begins executing at the beginning of main.  
+This means that every program must have a main somewhere.
+
+The lines between /* */ are comment, which in this case explains briefly what  
+the program does. Any characters between /* and */ are ignored by the compiler;  
+they may be used freely to make a program easier to understand. Comments may  
+appear anywhere a blank or tab or newline can.
+end[2]

@@ -1,0 +1,6 @@
+flags are useful when you want to manipulate the signs and notations of printing numbers.  
+
+* if **-** is used, item is left-justified, meaning it is printed in the left most side of the field.
+* if **+** is used, number signs are shown, whether negative or positive.
+* if space is used, if number is positive, it will be printed with a leading space without a sign, if negative, just - sign is shown. will be ignored by + flag.
+* if 0 is used, numbers will be printed with a leading zero, and will be ignored by - flag or precisions for floating points

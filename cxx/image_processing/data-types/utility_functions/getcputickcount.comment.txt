@@ -1,0 +1,1 @@
+This function reports the number of CPU ticks on those architectures that have such a construct.

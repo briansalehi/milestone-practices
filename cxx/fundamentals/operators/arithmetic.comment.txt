@@ -1,0 +1,9 @@
+Arithmatic operations are as follows:
+
+* Multiplication: \*
+* Division: \\
+* Subtraction: -
+* Addition: +
+* Modulus: %
+
+More operations are discussed later.

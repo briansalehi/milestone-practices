@@ -1,0 +1,1 @@
+accessing character contents of a string

@@ -1,0 +1,1 @@
+681b2122b5fa0bce9f840e1f5ea85747  ./02.object_oriented/06.templates/05.function.cxx

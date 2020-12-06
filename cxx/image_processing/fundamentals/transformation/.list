@@ -1,0 +1,4 @@
+gaussian-blur.cxx
+down-sampling.cxx
+bgr2gray.cxx
+edge-detection.cxx

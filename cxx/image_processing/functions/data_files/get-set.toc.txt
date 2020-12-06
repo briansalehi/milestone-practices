@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [04.01.07. cv::VideoCapture::grab&lpar;&rpar; and cv::VideoCapture::retrieve&lpar;&rpar;](./../../04.functions/01.data_files/07.grab-retrieve.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [04.01.09. cv::VideoWriter](./../../04.functions/01.data_files/09.video-writer.md)
+
+</div>

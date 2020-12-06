@@ -1,0 +1,26 @@
+Considering the design of a clean code, a function should not have more than
+two arguments, at most three.  
+What you usually try to give to a function can be put in a larger structure.  
+Say, you want to give a function three variables: book_title, book_pages, book_price  
+
+```cxx
+void function(const char* book_title, int book_pages, int book_price);
+```
+
+Instead, you can create a structure named **book** containing:  
+
+```cxx
+struct class Book {
+    char* title;
+    int pages;
+    int price;
+} book;
+```
+
+And call the function with one argument:
+
+```cxx
+void function(const Book book) {
+    // do something with book.title, book.pages, book.price
+}
+```

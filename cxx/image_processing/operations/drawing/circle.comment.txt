@@ -1,0 +1,11 @@
+```cxx
+void cv::circle(
+    cv::Mat&            img,
+    cv::Point           center,
+    int                 radius,
+    const cv::Scalar&   color,
+    int                 thikness = 1,
+    int                 lineType = 8,
+    int                 shift = 0
+);
+```

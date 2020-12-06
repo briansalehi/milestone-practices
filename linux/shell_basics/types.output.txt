@@ -1,0 +1,3 @@
+cd is a shell builtin
+pwd is a shell builtin
+mkdir is /usr/bin/mkdir

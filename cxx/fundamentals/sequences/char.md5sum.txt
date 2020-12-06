@@ -1,0 +1,1 @@
+31f08ba7edb4ea4c47b704f5c617c0aa  ./01.the_basics/04.arrays&strings/05.char.cxx

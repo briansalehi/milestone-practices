@@ -1,0 +1,1 @@
+5f696ac1bd769ec9f5cdd59df756a99a  ./02.object_oriented/06.templates/04.assert.cxx

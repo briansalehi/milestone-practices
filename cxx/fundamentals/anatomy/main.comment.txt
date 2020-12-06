@@ -1,0 +1,6 @@
+Comments are used in source files to clear things out.  
+Compilers will ignore comments.
+
+C++ is a <i>Case Sensitive</i> language.
+
+<b>cout</b> is pronounced ("see-out").

@@ -1,0 +1,4 @@
+You already know that array names point to the address of their first element in memory.  
+So we can make an advantage of using this behaviour of arrays to pass an
+array to a function by only giving the array name to the function's argument.  
+Also note how did we write the function's declaration to accept an argument of type array.

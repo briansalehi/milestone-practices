@@ -1,0 +1,1 @@
+9a4de8d3962cbab25a27fb8fdc538f82  ./02.object_oriented/02.inheritance/06.private.cxx

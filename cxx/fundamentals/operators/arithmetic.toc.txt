@@ -1,0 +1,18 @@
+
+<style>.pagination {position: relative; float: left !important; width: 21%; margin-right: 1%;}</style>
+### Quick Access
+
+<div class="previous_page pagination">
+
+#### &#8592; Previous Page
+
+* [01.05. Expressions, Statements and Arithmetic Operators](./../../01.the_basics/05.expressions&statements&operators/00.README.md)
+
+</div>
+<div class="next_page pagination">
+
+#### &#8594; Next Page
+
+* [01.05.02. increment & decrement](./../../01.the_basics/05.expressions&statements&operators/02.increment&decrement.md)
+
+</div>

@@ -1,0 +1,6 @@
+ref[2]
+In C, all variables must be declared before they are used, usually at the  
+beginning of the function before any executable statements. A declaration  
+announces the properties of variables; it consists of a type name and a list of  
+variables. variables can be initialized right after their declaration.
+end[2]

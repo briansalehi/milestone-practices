@@ -1,0 +1,6 @@
+Input iterator **std::istream\_iterator**, gets two type declaration,
+first indicates the type to be inserted into container,
+second indicates the input type from stream object.  
+As parameter only gets stream object.
+
+istream\_iterator then gets input from stream object and will terminate input stream when reaches to end of file or an error.

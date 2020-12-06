@@ -1,0 +1,37 @@
+ref[2]
+Expressions such as
+
+i = i + 2
+
+in which the variable on the left hand side is repeated immediately on the right,  
+can be written in the compressed form  
+
+i += 2
+
+The operator += is called an assignment operator.
+
+Most binary operators (operators like + that have a left and right operand)  
+have a corresponding assignment operator op =, where op is one of  
+
++ \- \* \/ %  << >> & ^ |
+
+If expr1 and expr2 are expressions, then
+
+epxr1 op= expr2
+
+is equivalent to
+
+expr1 = (expr1 ) op (expr2 )
+
+except that expr 1 is computed only once. Notice the parentheses around expr2:  
+
+X \*= y + 1
+
+means
+
+X= X \* (y + 1)
+
+rather than
+
+x = x \* y + 1
+end[2]

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>Essential Commands</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<div class="container" >
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="1.0.html">Linux Administration</a></li>
+<li class="breadcrumb-item"><a href="1.1.0.html">Shell Basics</a></li>
+<li class="breadcrumb-item active" >Essential Commands</li>
+</ol>
+<h2>Essential Commands</h2>
+<div class="comment-style" >
+   We need a few basic commands before we can further understand shell features.<br />
+   <br />
+   <h5>Print Working Directory</h5>
+   As the name suggests, <i>pwd</i> tells you where you are in the Linux directory
+   hierarchy.<br />
+   When you log into a shell, you directly jump into your home directory.<br />
+   Home directory is also known as  ̃ character, normally set to /home/user
+   directory where user is the name of the user you are logged in to.<br />
+   dot . indicates current directory and .. indicates parent directory.<br />
+   <br />
+   <h5>List Files and Directories</h5>
+   <i>ls</i> command lists the entry of current working directory if no paramters are
+   given, otherwise it will print the entry of the path you gave it to.<br />
+   <br />
+   <h5>Change Directory</h5>
+   <i>cd</i> command is straightforward, it will change your directory to whatever
+   path you give it to as its paramter.<br />
+   Of course, the directory must exists or it will complain that no such file or
+   directory exists.<br />
+   <br />
+   <h5>Create File</h5>
+   <i>touch</i> is used to create files.<br />
+   You can give it multiple file names as paramters and it will create all of
+   those files.<br />
+   <br />
+   <h5>Make Directory</h5>
+   <i>mkdir</i> command makes one or as many directories as you specify in front
+   of it as parameters.<br />
+   <br />
+   <h5>Removing File and Directories</h5>
+   <i>rm</i> command removes files.<br />
+   To remove directories, <i>rmdir</i> command might be used only if the
+   directory is empty, otherwise, <i>rm -r</i> command with its option must be
+   specified.<br />
+   <i>-r</i> option indicates <i>--recursive</i> which basically means <i>rm</i>
+   cannot remove many files in one time, but it recursively searches for files in
+   given directory and remove them one by one.<br />
+   <br />
+   <h5>Echo Back Something</h5>
+   <i>echo</i> command might sound irrational at first sight, but it will echo
+   back whatever you give it to as parameters.<br />
+   Soon in later chapters we will see that in Bash we can create variables.<br />
+   To print the value within a variables, we shall use <i>echo</i> as it echoes
+   back what that variable holds.<br />
+   <br />
+   <h5>Display File Content</h5>
+   <i>cat</i> command prints the contents of one or as many files as we specify
+   as its paramters.<br />
+   Printing all of the contents of a big text file might not be a good idea.<br />
+   Later, we will practice commands which gives of enough control to print just a
+   part of a file which we are looking for.<br />
+   Of course, printing the contents of a non-printable file, e.g. binary files,<br />
+   will result in dumping garbage characters on the terminal's output.<br />
+   <br />
+   <h5>Copy File or Directory</h5>
+   <i>cp</i> requires source files and the destination path in order to perform a
+   copy of source files into destination.<br />
+   To copy directories, -r option must be given in order to recursively copy all
+   the files within a directory.<br />
+   <br />
+   <h5>Move File or Directory</h5>
+   <i>mv</i> command moves files or directories as source into destinaion.<br />
+   Move command will copy files then eliminates source files.<br />
+   <br />
+   <h5>Rename File or Directory</h5>
+   On Linux, we don't have a rename command. Instead, what we do here is to move
+   files in source path, e.g. current directory, using <i>mv</i> command, and move
+   them into destination path, e.g. also current directory, with a new name.<br />
+</div>
+<hr />
+<h3>Source</h3>
+  <cite>essentials.sh</cite>
+<pre class="line-numbers" >
+<code class="language-bash">
+    #!/usr/bin/env bash
+    
+    # print working directory
+    pwd
+    
+    # list entry
+    ls /usr/local/
+    
+    # change directory
+    cd .
+    
+    # make directory
+    mkdir /tmp/directory
+    
+    # create file
+    touch /tmp/file
+    
+    # remove file or directory
+    rm /tmp/file
+    rm --recursive /tmp/directory
+    
+    # echo back and write to file
+    echo &quot;message&quot; &gt; /tmp/sample
+    
+    # print contents of a file
+    cat /tmp/sample
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>run</h4>
+<pre class="command-line" data-user="bash" data-host="milestone">
+<code class="language-bash">
+bash essentials.sh
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="1.1.2.html">previous page</a></li>
+<li class="top"><a href="index.html">top page</a></li>
+<li class="next"><a href="1.1.4.html">next page</a></li>
+</ul>
+</div>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-asm6502.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+</body>
+</html>

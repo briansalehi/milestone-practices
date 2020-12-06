@@ -1,0 +1,26 @@
+Enumerations are one of the constant types in C++.  
+Though, enumerations can only be defined by integer types, enumeration members are not of type int.
+Therefore, they cannot be assigned to integers, unless you convert them explicitely (discussed later).
+
+By default, enum class has only following predefined operatrs:
+
+* assignment operator
+* initialization operator
+* and comparison operators
+
+But more operators can be implemented on enum classes too.  
+For example, we can make an enumeration object increment by one using ++ operator (will be discussed later).
+
+```cpp
+// prefix increment operator++ (operator overloading is discussed later)
+TrafficLight& operator++ (TrafficLight& light) {
+    switch (light) {
+        case TrafficLight::red : light = TrafficLight::yellow;
+        case TrafficLight::yellow : light = TrafficLight::green;
+        case TrafficLight::green : light = TrafficLight::red;
+    }
+    return light;
+}
+
+++light; // using operator++ , now light is yellow
+```

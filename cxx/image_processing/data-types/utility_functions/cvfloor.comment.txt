@@ -1,0 +1,2 @@
+Given a floating-point number x, **cv::Floor()** computes the largest integer not larger than x.
+If the input value is outside of the range representable by a 32-bit integer, the result is undefined.

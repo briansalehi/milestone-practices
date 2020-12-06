@@ -1,0 +1,7 @@
+You have two approaches to iterate over a container in reverse order.  
+One to use **rbegin()** iterator which points to **end()**,
+and **rend()** which points to **begin()** which is first member. 
+One problem using this method is that rend points to nothing! that is,
+it points to the last member of container but that member does not hold
+any value.  
+Second approach is to use **std::reverse\_iterator** that does it for you.

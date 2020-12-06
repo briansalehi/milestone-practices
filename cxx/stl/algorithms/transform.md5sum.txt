@@ -1,0 +1,1 @@
+75b26bd5be786d3dbbfd0f38044faf37  ./04.more_stl/03.algorithms/07.transform.cxx

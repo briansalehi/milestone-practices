@@ -1,0 +1,6 @@
+**default** keyword can be used to let the compiler generate
+specified methods automatically just the way it creates a
+default constructor when you don't declare one.
+
+**Note** that some methods cannot be defaulted, such as overloaded copy constructors,
+overloaded + operator and etc.

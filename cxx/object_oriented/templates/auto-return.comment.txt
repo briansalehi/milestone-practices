@@ -1,0 +1,2 @@
+You can't use auto-deduction on a function's return type while you're returning an unpredicted type using a template.  
+To predict a function's returning type, use **decltype** function to get the type of function parameters.

@@ -1,0 +1,41 @@
+ref[2]
+The declaration just before main says that multiply is a function that expects  
+two int arguments and returns an int. This declaration, which is called a  
+function prototype, has to agree with the definition and uses of **multiply**.  
+It is an error if the definition of a function or any uses of it do not agree  
+with its prototype.
+
+Parameter names need not agree. Indeed, parameter names are optional in a
+function prototype.
+
+*A note of history*: The biggest change between ANSI C and earlier versions  
+is how functions are declared and defined. In the original definition of C, the  
+multiply function would have been written like this:
+
+```cxx
+multiply(left, right)
+int left, right;
+{
+	return left * right;
+}
+```
+
+The parameters are named between the parentheses, and their types are
+declared before the opening left brace; undeclared parameters are taken as int.
+(The body of the function is the same as before.)
+The declaration of **multiply** at the beginning of the program would have
+looked like this:
+
+	int multiply();
+
+No parameter list was permitted, so the compiler could not readily check that  
+power was being called correctly. Indeed, since by default power would have  
+been assumed to return an int, the entire declaration might well have been  
+omitted.
+
+The new syntax of function prototypes makes it much easier for a compiler  
+to detect errors in the number of arguments or their types. The old style of  
+declaration and definition still works in ANSI C, at least for a transition period,  
+but we strongly recommend that you use the new form when you have a compiler that  
+supports it.
+end[2]

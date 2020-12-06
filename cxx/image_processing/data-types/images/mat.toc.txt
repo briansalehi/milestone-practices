@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [02.04. Images and Large Array Types](./../../02.data_types/04.images/00.README.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [02.04.02. creating an array](./../../02.data_types/04.images/02.create_mat.md)
+
+</div>

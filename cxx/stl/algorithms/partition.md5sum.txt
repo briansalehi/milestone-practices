@@ -1,0 +1,1 @@
+8fca5dcbd19bfa6618420581d628b694  ./04.more_stl/03.algorithms/15.partition.cxx

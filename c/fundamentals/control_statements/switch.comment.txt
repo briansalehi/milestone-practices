@@ -1,0 +1,5 @@
+When you need to compare a value into multiple possible values, instead of using multiple **if** and **else if** statements,
+use **switch** statement.
+
+Notice that between each block we specified **break** which terminates comparison after a match.  
+If not specified, all of non-terminated blocks will be compared too.

@@ -1,0 +1,1 @@
+db1e41606d9cbecf20bfef0ec79d257c  ./04.more_stl/03.algorithms/17.pair.cxx

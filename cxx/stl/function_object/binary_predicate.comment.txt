@@ -1,0 +1,2 @@
+Binary function objects that return **bool** are called **binary predicates**.  
+Binary predicates are useful in comparison operations.

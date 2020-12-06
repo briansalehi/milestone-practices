@@ -1,0 +1,4 @@
+**conversion specifiers** are percent notations used in printf string to let
+the compiler know in what type a variable should be converted before printing.
+
+Don't forget to write as many conversion specifiers as there is variables being printed.

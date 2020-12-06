@@ -1,0 +1,1 @@
+ce3816b6e89103ca25a3ac55cfdc17d5  ./02.object_oriented/06.templates/10.special.cxx

@@ -1,0 +1,11 @@
+wide characters, 16 bit and 32 bit characters can be used in programs which may use non-English characters like Japanese.
+
+raw strings can be used for ease of writing escape characters in strings by starting strings by 'R' character like:
+
+    R"(string with escape characters like \n)"
+
+or use custom delimiters:
+
+    R"+*(string with escape characters)+*"
+
+other ways, you should escape each special character in string (don't!)

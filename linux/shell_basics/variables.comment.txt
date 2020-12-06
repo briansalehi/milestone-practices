@@ -1,0 +1,44 @@
+Variables are quantities on memory that can store values so that
+we can refer to them later by the name of that variable.
+
+On a shell, to create a variable, a variable name must be specified followed
+by an equals sign <b>without any space in the middle</b>.
+Variables might be set empty or the equals sign is followed by a value.
+
+Note that there are no spaces between variable name, equals operator, and
+value.
+Values can be double-quoted to represent a string which might contain a space.
+Beware that by eliminating double-quotes, spaces will cut value in pieces and
+nothing after first space will be stored in that variable.
+
+To access the value stored in a variable use $ before variable’s name without
+any space in the middle.
+
+Here we use <i>echo</i> command to print the value stored in variables.
+Environment variables are heavily used in shell configuration. For example
+<b>PATH</b> variable is used to tell the shell where it can find the external
+commands like <i>mkdir</i>, which we discussed before.
+
+PATH holds a list of all directories which the shell will seek for the commands
+you type, delimited by colon (:).
+That is, when you type a command like <i>mkdir</i> on your shell and hit enter,
+shell will look for a program named mkdir in specified directories
+respectively.
+
+As the <i>type</i> command indicated, shell will find the <i>mkdir</i> program
+in <b>/usr/bin</b> directory, so it will stop searching after the first match.
+
+A list of environment variables used by shell can be found by <b>env</b>
+command.
+Don’t fool around with these variables, <b>DO NOT change any of them</b>.
+
+Two or more commands might have the same name on a system, or one com-
+mand might be stored in more than one directory, then shell will execute the
+first matched directory in the PATH environment variable.
+
+Finally, <i>which</i> command, tells you where external commands are and by
+giving <i>-a</i> option it indicates how many instances of a command exists in
+PATH directories.
+In an example, the instance of <i>mkdir</i> in /usr/bin will be executed
+because the <b>/usr/bin</b> directory preceeds the <b>/bin</b> directory,
+though they both contain the <i>mkdir</i> command.

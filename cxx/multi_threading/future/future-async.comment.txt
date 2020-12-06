@@ -1,0 +1,2 @@
+The code asynchronously calls a function, passing it a parameter.
+Once the future finishes, it obtains the resulting value and stores it in a variable.

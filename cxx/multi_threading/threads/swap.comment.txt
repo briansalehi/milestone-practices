@@ -1,0 +1,1 @@
+We can take advantage of **std::swap()** function in standard library and swap two thread objects.

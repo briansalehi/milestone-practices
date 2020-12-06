@@ -1,0 +1,2 @@
+By default enabled.  
+This function enables or disables the multithreading performance optimization.

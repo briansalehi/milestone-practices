@@ -1,0 +1,6 @@
+main()
+{
+	/*
+	* do something here
+	*/
+}

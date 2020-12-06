@@ -1,0 +1,2 @@
+you can see the limits of all types on your system by using **limits.h** header file.  
+**NOTE:** you might get different results on your system.

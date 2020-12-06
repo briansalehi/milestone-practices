@@ -1,0 +1,82 @@
+# 03.02.05 cv::fillConvexPoly
+
+```cxx
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+int main()
+{
+    cv::Mat image = cv::imread("../../samples/snowflake.jpg");
+    if (image.empty()) {
+        std::cerr << "failed to open image" << std::endl;
+        return 1;
+    }
+
+    std::vector<cv::Point2i> polygon;
+
+    cv::ellipse2Poly(
+        cv::Point2i(100, 50), // center
+        cv::Size2i(100, 50), // axes
+        0, // angel
+        0, // start angel
+        360, // end angel
+        10, // delta
+        polygon
+    );
+
+    cv::Point2i pts[polygon.size()] = {};
+    int npts = 0;
+    for_each(polygon.cbegin(), polygon.cend(), [&pts, &npts](const cv::Point2i& point) {
+        pts[npts] = point;
+        ++npts;
+    });
+
+    cv::fillConvexPoly(
+        image, // image to draw on
+        pts, // array of C-style points
+        npts, // size of pts elements
+        cv::Scalar(255,255,255), // color scalar
+        8, // line type 4 or 8
+        0 //shift
+    );
+
+    cv::namedWindow("preview", cv::WINDOW_AUTOSIZE);
+    cv::moveWindow("preview", 0,0);
+    cv::imshow("preview", image);
+
+    while (true) {
+        if (cv::waitKey(0) == 27) {
+            break;
+        }
+    }
+
+    cv::destroyWindow("preview");
+    return 0;
+}
+
+```
+
+## <span title="References: Learning OpenCV 3 - page 162">Comments</span>
+
+This function draws a filled polygon. It is much faster than **cv::fillPoly()** because it uses a much simpler algorithm.  
+It will correctly draw any polygon whose contour intersects every horizontal line at most twice.
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [03.02.04. cv::ellipse2Poly](./../../03.operations/02.drawing/04.ellipse2poly.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [03.02.06. cv::line](./../../03.operations/02.drawing/06.line.md)
+
+</div>

@@ -1,0 +1,1 @@
+f04f4096614c7f9a4f91afb06b9ce18a  ./03.stl/03.array/05.semantics.cxx

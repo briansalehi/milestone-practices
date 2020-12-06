@@ -1,0 +1,1 @@
+bcb4b066fe4a7996f9217f5e265aea9d  ./04.more_stl/03.algorithms/18.tuple.cxx

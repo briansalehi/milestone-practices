@@ -1,0 +1,1 @@
+81c037ff4133e6fbd7f280f379744c4b  ./02.object_oriented/01.classes&objects/16.struct.cxx

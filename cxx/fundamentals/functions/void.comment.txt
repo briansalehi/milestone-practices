@@ -1,0 +1,1 @@
+Functions do not necessarily return a value, in that case set your function's return type to **void**.

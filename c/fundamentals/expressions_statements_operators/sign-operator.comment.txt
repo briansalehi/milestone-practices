@@ -1,0 +1,7 @@
+Don't misinterpret the subtraction and addition operator with sign operator as they are overloaded and look just alike.  
+Minus sign can change the algebraic sign of an operand.
+
+Sign operators are held behind an operand, not between operands.  
+Therefore, *number* is holding -3 in this example.  
+When minus operator is used as subtraction operator, it's said to be a binary operator.  
+In turn, when it's used solely behind a operator it's called an unary operator.

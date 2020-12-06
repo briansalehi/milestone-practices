@@ -1,0 +1,12 @@
+Imagine the hierarchy of inheriting classes look like a diamond.  
+
+```txt
+    Top  
+Middle1 Middle2 Middle3  
+    Bottom
+```
+
+When we create this structure and inherit those classes as usual,
+We will see that for each Middle class there will be an invokation of Top class.
+That is, Top class's constructor will be called 3 times here.  
+This is called the **Diamond Problem** and we fix this problem by virtually inheriting Top class.

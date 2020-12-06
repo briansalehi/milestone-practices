@@ -1,0 +1,1 @@
+9f47d0e82681a7908d40e47535a2bcfd  ./01.the_basics/02.variables_constants/02.literal.c

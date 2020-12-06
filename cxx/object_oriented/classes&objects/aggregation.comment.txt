@@ -1,0 +1,17 @@
+You were shortly introduced to **initializer lists** previously.  
+The thing is, objects can be initialized by initializer lists.  
+We could initialize objects in multiple forms:  
+
+```cxx
+Aggregate1 agg1("Cxx", 11);
+```
+
+or
+
+```cxx
+Aggregate1 agg1;
+agg1.name = "Cxx";
+agg1.number = 11;
+```
+
+But using **initializer lists** we simply put all of the values of different types in one box and set them to an object.

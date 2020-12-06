@@ -1,0 +1,5 @@
+Any function in program must be declared before the main function.  
+This can be done in two ways:
+
+* write function declaration before **main** and then write function definition after it
+* write function definition before **main** once.

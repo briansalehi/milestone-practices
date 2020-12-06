@@ -1,0 +1,1 @@
+Inheritance moves all public methods and members of *Base* class into *Derived* class.

@@ -1,0 +1,2 @@
+**if**, **else if** and **else** are the most fundamental control statement of C programming language.  
+Add only as few **else if** statements as possible, because there is a better alternative for **if** when there are many options available to check, called **switch case** statement, which we will discuss later.

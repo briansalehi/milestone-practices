@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [04.01.03. cv::imencode](./../../04.functions/01.data_files/03.imencode.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [04.01.05. cv::VideoCapture](./../../04.functions/01.data_files/05.video-capture.md)
+
+</div>

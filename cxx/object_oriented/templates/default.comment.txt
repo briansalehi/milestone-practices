@@ -1,0 +1,1 @@
+Use default values on template types just the same way you do for function parameter's default value.

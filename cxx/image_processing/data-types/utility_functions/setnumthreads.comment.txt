@@ -1,0 +1,1 @@
+When OpenCV is compiled with OpenMP support, this function sets the number of threads that OpenCV will use in parallel OpenMP regions.

@@ -1,0 +1,11 @@
+assignment-operator.c
+addition-operator.c
+subtraction-operator.c
+sign-operator.c
+multiplication-operator.c
+division-operator.c
+modulus-operator.c
+increment-operator.c
+decrement-operator.c
+operator-precedence.c
+type-cast.c

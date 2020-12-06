@@ -1,0 +1,29 @@
+As previously discussed, functions have the concept of **signature** which makes them distinguishable even if they have the same name!  
+Consider following functions, all are of the same name but with different signatures:  
+
+```cxx
+void function(int x);
+void function(double x);
+int function(int x);
+```
+
+Don't forget that following two functions are identical when you use default argument values:
+
+```cxx
+void function();
+void function(int x = 1);
+```
+
+Function overloading has its own price too.  
+For each function, there will be memory occupation, make function overloads as few as possible.  
+Also, consider using default arguments for functions having same signature type but with different argument numbers.
+
+ref[2]
+Overloading means defining two or more functions or operators that have the same  
+name, but whose effect depends on the types of their actual arguments.
+
+Function overloading occurs when two or more functions are defined with the  
+same name but with different argument lists. Such definitions are useful in  
+situations where we desire two functions that achieve essentially the same  
+purpose, but do it with different types of arguments.
+end[2]

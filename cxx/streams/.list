@@ -1,0 +1,19 @@
+	ios.cxx
+	width.cxx
+cout.cxx
+cin.cxx
+fstream.cxx
+append.cxx
+binary.cxx
+sstream.cxx
+	fmtflags.cxx
+	showbase.cxx
+	showpoint.cxx
+	boolalpha.cxx
+	hex.cxx
+	precision.cxx
+	setf.cxx
+	fill.cxx
+random-access.cxx
+temporary-files.cxx
+output-manipulators.cxx

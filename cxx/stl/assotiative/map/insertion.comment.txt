@@ -1,0 +1,8 @@
+Inserting elements into **std::map** container differs from previous containers we have practiced so far.  
+To do so, we can use one of the following approaches:
+
+* using **.value_type(key, value)** method
+* using **make_pair(key, value)** function
+* using **pair<key type, value type>(key, value)** class
+
+Each one is self-explanatory in practice.

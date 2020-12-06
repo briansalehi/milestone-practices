@@ -1,0 +1,8 @@
+We can combine what we have learned so far to do a better edge detection.  
+Here we first gray-sampled the image, then used **cv::pyrDown()** function twice
+to downscale the image by the factor of 4. And finally used **cv::Canny()** function
+over it to make an edge detection.
+
+We used Canny over gray-scaled only image and down-sampled image to make a visual comparison
+of edge detection approaches.  
+If you can compile and see it by yourself, you will see that definitely using down-sampling before Canny helps for better edge detection.

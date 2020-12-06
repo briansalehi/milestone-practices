@@ -1,0 +1,4 @@
+An Iterator can be either input itererator or output iterator.  
+Output iterators do not allow write access to container's data.  
+Input iterators do not allow read access to container's data!
+that is, you can only write to container.

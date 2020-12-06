@@ -1,0 +1,7 @@
+Decrement operators are written by -- sign before or after an operand.  
+
+This operator can be used before an operand, as prefix operator. or
+it can be used after an operand, as postfix operator.  
+
+Prefix operator decrements then assigns the value,  
+Postfix operator will assign the value and then decrements it.

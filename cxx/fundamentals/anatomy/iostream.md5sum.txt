@@ -1,0 +1,1 @@
+6f19c0d23a075a96aeb56c6150f5c0e9  ./01.the_basics/02.the_anatomy/06.iostream.cxx

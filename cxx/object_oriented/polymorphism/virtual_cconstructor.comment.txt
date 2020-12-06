@@ -1,0 +1,2 @@
+Virtual constructors cannot be implemented by using **virtual** keyword.  
+But we can simulate it.

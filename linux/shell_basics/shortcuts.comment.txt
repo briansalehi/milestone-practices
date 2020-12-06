@@ -1,0 +1,44 @@
+It would be the best experience if you can touch type on your keyboard and use
+your 10 fingers typing anything with least effort.
+
+There are dozens of touch typing tutorial apps out there, just use one if you
+don’t already know how to do it.
+
+Usually programmers and admins prefer not to raise their hands for frequent
+tasks.
+
+So, for example you can reach to your previous commands you typed on shell
+by hitting up and down arrow keys, which requires you to raise your hands and
+move them to the top of arrow keys which seems to be a very long distance!
+Instead, we can get used to using the shortcuts doing exact same thing without
+raising our hands, as for up arrow key we use <b>Ctrl+P</b> and down arrow key
+we use <b>Ctrl+N</b>.
+
+* before you use <b>Ctrl+S</b> you need to know that it causes your terminal to
+hang, to make your terminal continue running hit <b>Ctrl+Q</b> afterwards.
+Type <b>”stty -xion”</b> to make your terminal interpreting <b>Ctrl+S</b> as
+search shortcut instead.
+
+There’s a list of shell shortcuts that saves us time and energy:
+
+<ol>
+<li> Ctrl+P: Previous command</li>
+<li> Ctrl+N: Next command</li>
+<li> Ctrl+R: Search backward (Reverse)</li>
+<li> Ctrl+S: *Search forward</li>
+<li> Ctrl+G: Cancel search</li>
+<li> Ctrl+A: Move cursor to the start</li>
+<li> Ctrl+E: Move cursor to the end</li>
+<li> Ctrl+B: Move backward within a line</li>
+<li> Ctrl+F: Move cursor forward within a line</li>
+<li> Esc then Ctrl+B: Move cursor backward a word at a time, right arrow key</li>
+<li> Esc then Ctrl+F: Move cursor forward a word at a time, left arrow key</li>
+<li> Ctrl+D: Delete character under the cursor, delete key</li>
+<li> Ctrl+K: Delete all text from the cursor to the end of the line</li>
+<li> Ctrl+X then Backspace: Delete all text from the cursor to the beginning of the life</li>
+<li> Ctrl+T: Immediately transposes the two words before and under the cursor</li>
+<li> Esc then Ctrl+U: Converts text from the cursor to the end of line the word to uppercase</li>
+<li> Esc then Ctrl+L: Converts text from the cursor to the end of line the word to lowercase</li>
+<li> Esc then Ctrl+C: Capitalizes text from the cursor to the end of line the word</li>
+<li> Ctrl+X then Ctrl+E: Launch default editor</li>
+</ol>

@@ -1,0 +1,1 @@
+The return value of **cvIsInf()** is 1 if x is plus or minus infinity and 0 otherwise. The infinity test is the test implied by the IEEE754 standard.

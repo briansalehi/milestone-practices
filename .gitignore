@@ -1,0 +1,8 @@
+*~
+*.swp
+*.o
+*.object
+*.bin
+*.binary
+a.out
+markdown-files/

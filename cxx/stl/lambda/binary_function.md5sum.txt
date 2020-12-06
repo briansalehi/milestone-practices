@@ -1,0 +1,1 @@
+8a07abc4d2cbf6ea7d946c7e11321511  ./04.more_stl/02.lambda/04.binary_function.cxx

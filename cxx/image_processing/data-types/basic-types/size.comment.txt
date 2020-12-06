@@ -1,0 +1,3 @@
+**cv::Size** template class has following aliases: **cv::Size2i** and **cv::Size2f**
+which the former are **cv::Size** are the same, that is, default type of size class is of type int.
+And another alias is a floating-point precision size class.

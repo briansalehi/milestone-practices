@@ -1,0 +1,1 @@
+957045608aa9d94bb1d5700c730917fd  ./01.the_basics/03.variables&constants/05.internal_linkage.cxx

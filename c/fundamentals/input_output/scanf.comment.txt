@@ -1,0 +1,25 @@
+To read data from input buffer we can use **scanf**.
+
+You might have already asked yourself that why the **printf**
+function carries a string with no newline character, and
+still the output buffer is flushed before the **scanf**
+function prompts the user for input. the reason is simply because
+the **scanf** function will flush output buffer before
+it starts reading any data from input buffer.
+
+Notice that **scanf** and **printf** functions have one thing
+in common. They take a string to represent the number of
+inputs and outputs in their first paramter.  
+As you probably noticed, for each integer to print into the
+output buffer, your must use a special operator "%d" in the
+first parameter of the **printf** function, and to put a value
+from input buffer into a variable you must use "%d" in the
+first parameter of the **scanf** function.  
+What is really happening is that by using these special operators
+you tell these functions how many additional parameters they
+need to read.  
+This much ability and liberty in writing C can sometimes go so wrong!  
+You must pay enough attention to use as much parameters as these
+functions need in the first parameter. Do not miss one and do not
+give more! unless you want to see how your program misbehaves
+on your system :)

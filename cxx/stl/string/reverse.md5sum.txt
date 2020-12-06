@@ -1,0 +1,1 @@
+6794999fa95ec3b80b46fa967f96930a  ./03.stl/02.string/05.reverse.cxx

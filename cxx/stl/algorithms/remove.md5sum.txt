@@ -1,0 +1,1 @@
+553b31547466b7b48129c17b7636df3a  ./04.more_stl/03.algorithms/09.remove.cxx

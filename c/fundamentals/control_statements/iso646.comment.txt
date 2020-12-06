@@ -1,0 +1,2 @@
+Some keyboards may not have characters like & or | . If you ever face these kind of keyboards, you are no longer able to fully work with control statements like *if (statement && statement)*.  
+In this case, C has a special header file for you named **iso646.h** to include it and use **and**, **or** and **not** instead of **&&**, **||** and **!** respectively.  

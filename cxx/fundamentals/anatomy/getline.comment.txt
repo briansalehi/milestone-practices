@@ -1,0 +1,3 @@
+Notice that this function does exactly what was <b>get()</b> function
+doing, except that it will not break the input stream after a space and will
+read a complete line until it reaches the newline character '\n'.

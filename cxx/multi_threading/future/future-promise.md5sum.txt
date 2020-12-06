@@ -1,0 +1,1 @@
+7b467abe3e3d6efa3ca7da611774c3e8  ./06.multithreading/03.future/02.future-promise.cxx

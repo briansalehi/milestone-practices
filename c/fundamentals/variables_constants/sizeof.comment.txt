@@ -1,0 +1,2 @@
+**sizeof** is an operator, not a function, which evaluates the amount of memory being used by a variable.  
+It can be used on variables, arrays and structures (which will be discussed later).

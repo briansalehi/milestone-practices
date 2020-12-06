@@ -1,0 +1,1 @@
+3f9d61e3606ed39c948fc1fdf8d03d0c  ./02.object_oriented/02.inheritance/02.protected_access.cxx

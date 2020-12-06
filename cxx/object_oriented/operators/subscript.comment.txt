@@ -1,0 +1,1 @@
+Index operator can be overloaded in every class you want, but you should be thinking if it's logical to use them or not.

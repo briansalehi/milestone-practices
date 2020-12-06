@@ -1,0 +1,1 @@
+To clear out elements of a container **clear()** method can be used. To check if a container is empty we use **empty()** method, boolean values will be returned, true if container is empty and false otherwise.

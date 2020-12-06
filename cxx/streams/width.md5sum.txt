@@ -1,0 +1,1 @@
+dd879d7f19dc603fee7ced98aee4fa1d  ./05.advanced/02.streams/02.width.cxx

@@ -1,0 +1,29 @@
+ref[6]
+There are two common file types, source files and header files. Source files typi-
+cally contain most of the executable statements and data definitions. This includes
+the bodies of functions and definitions of any global variables.
+
+Each nonconstant global variable and function may be defined only once. Other
+source files may share such a global variable or function provided they have a
+matching declaration. To indicate that a global variable is defined in another file,
+the type specifier “extern” is added. This keyword is not needed for functions.
+
+For example, consider the declarations extracted from two files below. The file
+Source1.cpp defines a global variable cat and function foo. The file Source2.cpp
+can access these objects by including the appropriate matching declarations and
+adding “extern” for variables.
+
+File: Source1.cpp
+
+```cxx
+int cat = 1;
+int foo(int x) { return x+1; }
+```
+
+File: Source2.cpp
+
+```cxx
+extern int cat;
+int foo(int x);
+```
+end[6]

@@ -1,0 +1,1 @@
+6d2f937c307e859484b20d55f0c84c66  ./04.more_stl/03.algorithms/22.set_difference.cxx

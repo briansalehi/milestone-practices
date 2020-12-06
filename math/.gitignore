@@ -1,0 +1,10 @@
+*.dvi
+*.jpg
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.toc
+*.html

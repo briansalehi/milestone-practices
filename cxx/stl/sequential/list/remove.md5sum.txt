@@ -1,0 +1,1 @@
+2418e5963fb39f28c96454917c2acf7c  ./03.stl/04.list/04.remove.cxx

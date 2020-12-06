@@ -1,0 +1,3 @@
+two numbers are not equal!
+bigger number is 95
+smaller number is 30

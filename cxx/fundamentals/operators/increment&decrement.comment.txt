@@ -1,0 +1,13 @@
+Notice the expression **rvalue** and **lvalue**.  
+When we refer to **rvalue**, we generally are talking about the right operand of equation.  
+And otherwise, when we refer to **lvalue**, we are talking about the left operand of the equation.  
+The difference between rvalue and lvalue is that an lvalue is an object reference and a rvalue is a value.  
+An lvalue always has a defined region of storage, so you can take its address.  
+An rvalue is an expression that is not an lvalue.  
+Examples of rvalues include literals,
+the results of most operators, and function calls that return nonreferences.  
+An rvalue does not necessarily have any storage associated with it.
+
+So, ++rvalue, increments the rvalue and then assigns to the lvalue if there's any.  
+rvalue++, assigns rvalue to the lvalue if there's any and then increments it.  
+Some might argue that prefix ++ operator is faster, we will discuss it in classes and objects chapters.

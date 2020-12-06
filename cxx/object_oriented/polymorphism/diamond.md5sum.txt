@@ -1,0 +1,1 @@
+ec7c841333ec7868119cd1ab0f8fea53  ./02.object_oriented/03.polymorphism/04.diamond.cxx

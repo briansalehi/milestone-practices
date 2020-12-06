@@ -1,0 +1,3 @@
+**std::map** is a container like set, elements will be sorted when inserted into it.
+But it contains a pair of (key, value) instead of ony an element.  
+**std::map** is a template container, to initialize one, we need to specify key and value types.

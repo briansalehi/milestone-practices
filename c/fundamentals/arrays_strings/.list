@@ -1,0 +1,5 @@
+array-declaration.c
+array-usage.c
+string-declaration.c
+strlen.c
+eof.c

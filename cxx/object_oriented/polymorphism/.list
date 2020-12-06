@@ -1,0 +1,7 @@
+virtual.cxx
+virtual_destructor.cxx
+pure.cxx
+diamond.cxx
+override.cxx
+final.cxx
+virtual_cconstructor.cxx

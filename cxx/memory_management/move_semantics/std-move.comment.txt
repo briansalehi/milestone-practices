@@ -1,0 +1,1 @@
+smart pointers cannot be used in lambda functions unless you move them by **std::move** function.

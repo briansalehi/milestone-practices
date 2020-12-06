@@ -1,0 +1,14 @@
+The **cv::FileStorage** object is a representation of an XML or YAML data file.
+You can create it and pass a filename to the constructor, or you can just create
+an unopened storage object with the default constructor and open the file later
+with **cv::FileStorage::open()**, where the flag argument should be either
+**cv::FileStorage::WRITE** or **cv::FileStorage::APPEND**.
+
+```cxx
+cv::FileStorage::FileStorage();
+cv::FileStorage::FileStorage(std::string filename, int flags);
+```
+
+If you would like to create a new mapping or sequence you can do so with the
+special characters { (for a mapping) or [ (for a sequence). To create a single
+line mapping or sequence use \"{:\" and \"[:\" characters.

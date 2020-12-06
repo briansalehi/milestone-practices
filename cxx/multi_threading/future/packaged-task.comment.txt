@@ -1,0 +1,3 @@
+**std::packaged_task** is a wrapper for any callable target.
+It allows for asynchronous execution with the result available in a **std::future** object.
+It is similar to **std::function**, except that it transfers its results to a **std::future** object.

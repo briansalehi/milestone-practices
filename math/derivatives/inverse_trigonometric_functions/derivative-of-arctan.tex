@@ -1,0 +1,37 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath}
+
+\begin{document}
+\thispagestyle{empty}
+
+\subsection*{Definitions}
+\noindent
+We find the derivative of $f{^{-1} (x)} = \tan^{-1}{x}$ by applying the Theorm of derivation of inverse functions.
+\newline
+
+\begin{align*}
+    \left(f{^{-1}}\right){^{\prime}}(x) =& \frac{1}{f{^{\prime} \left(f{^{-1}}(x)\right)}} \\
+    =& \frac{1}{\sec{^2 \left(\tan{^{-1}}{x}\right)}} \qquad\qquad f{^{\prime} (u)} = \sec{^2 u} \\
+    =& \frac{1}{1 + \tan{^{2} \left(\tan{^{-1} x}\right)}} \qquad \sec{^2 u} = 1 + \tan{^2 u} \\
+    =& \frac{1}{1 + x{^2}} \qquad\qquad\qquad\quad  \tan{\left(\tan{^{-1} x}\right)} = x
+\end{align*}
+
+\noindent
+So, the general rule for derivative of $\tan{^{-1} u}$ is:
+\newline
+
+\begin{align*}
+    \frac{d}{dx}\left(\tan{^{-1} u}\right) = \frac{1}{1 + u^2}\frac{du}{dx}
+\end{align*}
+
+\subsection*{Excerises}
+\noindent
+Find the derivatives of the following exercises:
+\newline
+
+\begin{align*}
+1.\;&\ln{\left(\tan{^{-1} x}\right)} \\
+2.\;&\tan{^{-1} \left(\ln{x}\right)}
+\end{align*}
+
+\end{document}

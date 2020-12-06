@@ -1,0 +1,13 @@
+One of the most frequently used functions in the I/O service
+object is the run() function. It is used to run the io_service
+object's event processing loop. It will block the next
+statement program until all the work in the io_service object
+is completed and there are no more handlers to be dispatched.
+If we stop the io_service object, it will no longer block the program.
+
+We still obtain the line of text in the console even though
+previously we knew that the run() function blocks the next
+function after it is invoked. This is because we have not
+given any work to the io_service object. Since there is no
+work for io_service to do, the io_service object should not
+block the program.

@@ -1,0 +1,1 @@
+**std::deque** container is similiar to **std::vector** except that it is also possible to push elements in front of deque container using **push_front()** method.

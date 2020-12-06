@@ -1,0 +1,17 @@
+
+### Quick Access
+
+<div class="previous_page" style="float:left;margin-left:20px;margin-right:20px">
+
+#### &#8592; Previous Page
+
+* [01.03. Using Devices](./../../01.the_basics/03.devices/00.README.md)
+
+</div>
+<div class="next_page" style="float:right;margin-left:20px;margin-right:20px">
+
+#### &#8594; Next Page
+
+* [01.03.02. write to output video file](./../../01.the_basics/03.devices/02.writer.md)
+
+</div>

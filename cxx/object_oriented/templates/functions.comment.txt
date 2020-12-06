@@ -1,0 +1,10 @@
+Be careful using macro functions, you might easily make mistakes.  
+Keep in mind that macros are only compile-time string substitutions in your code.  
+Let's say we have this function:
+
+```cxx
+#define SQUARED(x) (x * x)
+```
+
+If you set x as 3+2, compiler will see this as (3+2 * 3+2). considering mathematical precedence, 2*3 will be first evaluated.  
+So to make sure your macro functions work as they supposed to, surround them with parenthesis.

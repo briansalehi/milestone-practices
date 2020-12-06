@@ -1,0 +1,26 @@
+**BUGGY**: needs to be fixed, cv::VideoCapture::retrieve() won't retrieve next
+frame as loop iterates.
+
+The **cv::VideoCapture::grab()** function copies the currently available image
+to an internal buffer that is invisible to the user.
+
+```cxx
+bool cv::VideoCapture::grab();
+```
+
+As was the case with **cv::VideoCapture::read()**, **cv::VideoCapture::grab()**
+returns true only if the grab was successful.
+
+**cv::VideoCapture::retrieve()** functions analogously to
+**cv::VideoCapture::read()** except that it operates from the internal buffer to
+which **cv::VideoCapture::grab()** copies frames.
+
+```cxx
+bool cv::VideoCapture::retrieve(
+	cv::OutputArray image,	// image into which to read data
+	int channel = 0	// used for multihead devices like Kinect and Videre
+);
+```
+
+Another difference is the additional argument **channel**. The channel argument
+is used when the device being accessed natively has multiple heads.

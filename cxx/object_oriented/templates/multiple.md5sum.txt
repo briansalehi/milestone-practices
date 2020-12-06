@@ -1,0 +1,1 @@
+bb06deb5fb0768c34c3ab6f954efd7db  ./02.object_oriented/06.templates/08.multiple.cxx

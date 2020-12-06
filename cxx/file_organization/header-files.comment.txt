@@ -1,0 +1,25 @@
+ref[6]
+Since source files using shared objects must provide identical declarations,
+we commonly store these shared declarations in a header file, which is then
+read into each such source file using an #include statement. Statements
+beginning with # are handled by a special program, called the preprocessor,
+which is invoked automatically by the compiler. A header file typically
+contains many declarations, including classes, structures, constants,
+enumerations, and typedefs. Header files generally do not contain the
+definition (body) of a function. In-line functions are an exception, however,
+as their bodies are given in a header file.
+
+Except for some standard library headers, the convention is that header file
+names end with a “.h” suffix. Standard library header files are indicated with angle
+brackets, as in <iostream>, while other local header files are indicated using
+quotes, as in ”myIncludes.h”.
+
+```cxx
+#include <iostream>		// system include file
+#include "myIncludes.h"		// user-defined include file
+```
+
+As a general rule, we should avoid including namespace using directives in
+header files, because any source file that includes such a header file has its
+namespace expanded as a result.
+end[6]

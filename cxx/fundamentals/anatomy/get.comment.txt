@@ -1,0 +1,7 @@
+To get input from user, you need to get data from input stream using **get()** function
+or other ones discussing later.
+
+Notice that input message is not completely received over input buffer.  
+This is because of space character which is interpreted as the end of the input data.  
+To fix this kind of issue, we need to use another function which gets a complete line.  
+We will be using this kind of function in excersises ahead.

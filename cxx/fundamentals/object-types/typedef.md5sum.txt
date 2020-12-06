@@ -1,0 +1,1 @@
+1537df78c34783c37cc7e50202836fd5  ./01.the_basics/03.variables&constants/11.typedef.cxx

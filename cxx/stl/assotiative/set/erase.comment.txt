@@ -1,0 +1,1 @@
+Similar to other containers we have worked so far, we can remove an element of a container by **erase()** method.

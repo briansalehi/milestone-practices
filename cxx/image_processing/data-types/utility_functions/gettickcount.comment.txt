@@ -1,0 +1,1 @@
+This function returns a tick count relative to some architecture-dependent time.

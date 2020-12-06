@@ -1,0 +1,1 @@
+f48810f364fab1955891d8990c59ef0a  ./04.more_stl/03.algorithms/01.find.cxx

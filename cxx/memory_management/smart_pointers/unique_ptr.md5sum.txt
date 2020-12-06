@@ -1,0 +1,1 @@
+a60a3ed4b7267fe943eea88bac73b410  ./05.advanced/01.smart/01.unique_ptr.cxx

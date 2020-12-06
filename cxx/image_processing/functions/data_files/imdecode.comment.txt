@@ -1,0 +1,9 @@
+**cv::imdecode()** decompresses the image data and returns the results in
+cv::Mat;
+
+```cxx
+cv::Mat cv::imdecode(
+	cv::InputArra buf,	// encoded file bytes are here
+	int	flags = cv::IMREAD_COLOR	// flags set how to interpret file
+);
+```

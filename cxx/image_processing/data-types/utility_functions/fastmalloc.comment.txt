@@ -1,0 +1,2 @@
+**cv::fastMalloc()** works just like the *malloc()* you are familiar with, except that it is often faster, and it does buffer alignment for you.
+ This means that if the buffer size passed more than 16 bytes, the returned buffer will be aligned to a 16-byte boundary.

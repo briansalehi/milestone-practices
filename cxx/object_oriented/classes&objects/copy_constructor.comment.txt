@@ -1,0 +1,53 @@
+When you pass a variable by value to a function, that function will copy that value and assigns that to its parameter.  
+That is, after invoking that function, you will have two of those values on memory.  
+This also happens when you pass an object to a function by values.  
+Classes do not have any idea how to copy their members into new location by themselves. So that's out job to make sure an object will be copied properly when it's passed to a function.
+
+Copy constructors are declared just like default constructors except that they have a reference of the object as their parameters with no return value.
+
+ref[6]
+When a class performs memory allocation using new, care must be taken to avoid  
+a number of common programming errors.  
+A somewhat more insidious problem occurs when classes that allocate memory fail  
+to provide a copy constructor or an assignment operator.  
+Consider the following example, using our Vect class:
+
+```cxx
+Vect a(100);
+Vect b = a;
+Vect c;
+c = a;
+```
+
+It would seem that we have just created three separate vectors, all of size 100,  
+but have we?  
+In reality all three of these vectors share the same 100-element array.  
+Let us see why this has occurred.  
+
+The declaration of object a invokes the vector constructor, which allocates an  
+array of 100 integers and a.data points to this array. The declaration “Vect b=a”  
+initializes b from a. Since we provided no copy constructor in Vect, the system  
+uses its default, which simply copies each member of a to b. In particular it sets  
+“b.data=a.data.” Notice that this does not copy the contents of the array; rather it  
+copies the pointer to the array’s initial element. This default action is sometimes  
+called a shallow copy.
+
+The declaration of c invokes the constructor with a default argument value of  
+10, and hence allocates an array of 10 elements in the free store. Because we have  
+not provided an assignment operator, the statement “c=a,” also does a shallow copy  
+of a to c. Only pointers are copied, not array contents. Worse yet, we have lost the  
+pointer to c’s original 10-element array, thus creating a memory leak.
+
+Now, a, b, and c all have members that point to the same array in the free store.  
+If the contents of the arrays of one of the three were to change, the other two would  
+mysteriously change as well. Worse yet, if one of the three were to be deleted  
+before the others (for example, if this variable was declared in a nested block), the  
+destructor would delete the shared array. When either of the other two attempts to  
+access the now deleted array, the results would be disastrous. In short, there are  
+many problems here.
+
+Fortunately, there is a simple fix for all of these problems. The problems arose  
+because we allocated memory and we used the system’s default copy constructor  
+and assignment operator. If a class allocates memory, you should provide a copy  
+constructor and assignment operator to allocate new memory for making copies.
+end[6]
