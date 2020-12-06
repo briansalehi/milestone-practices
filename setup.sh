@@ -3,7 +3,7 @@
 root_directory=milextone
 service=server.js
 logfile=/tmp/$root_directory.log
-port=21000
+port=10000
 # color codes
 GREEN="\e[32m"
 BLUE="\e[34m"

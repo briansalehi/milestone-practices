@@ -27,4 +27,4 @@ app.get("*", function(req, res) {
 	res.status(404).sendFile(path.join(__dirname, 'no-practice.html'));
 });
 
-app.listen(21000);
+app.listen(10000);
