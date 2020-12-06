@@ -5,4 +5,5 @@
 *.bin
 *.binary
 a.out
+package-lock.json
 markdown-files/
