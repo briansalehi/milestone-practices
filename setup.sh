@@ -34,7 +34,7 @@ else
 fi
 
 echo -e "${BLUE}installing node packages, this might take a few seconds...${DEFAULT}"
-if sudo npm install &>"$logfile"
+if npm install express path fs &>"$logfile"
 then
     echo -e "${BOLD}something went wrong while installing npm packages, cannot ignore it${DEFAULT}"
     echo "log -> $logfile"
