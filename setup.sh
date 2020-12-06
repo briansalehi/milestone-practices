@@ -36,11 +36,11 @@ fi
 echo -e "${BLUE}installing node packages, this might take a few seconds...${DEFAULT}"
 if npm install express path fs &>"$logfile"
 then
+    echo -e "${GREEN}npm packages installed${DEFAULT}"
+else
     echo -e "${BOLD}something went wrong while installing npm packages, cannot ignore it${DEFAULT}"
     echo "log -> $logfile"
     exit 5
-else
-    echo -e "${GREEN}npm packages installed${DEFAULT}"
 fi
 
 if node "$service" &
