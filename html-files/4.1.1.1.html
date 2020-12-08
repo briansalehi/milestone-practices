@@ -162,6 +162,27 @@ pre {
   <cite>preprocessing.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
+    #include &lt;iostream&gt;
+    
+    #define SAMPLE_H
+    
+    #ifdef SAMPLE_H
+    void function()
+    {
+    	std::cout &lt;&lt; &quot;defined&quot; &lt;&lt; std::endl;
+    }
+    #else
+    void function()
+    {
+    	std::cout &lt;&lt; &quot;undefined&quot; &lt;&lt; std::endl;
+    }
+    #endif
+    
+    int main()
+    {
+    	function();
+    	return 0;
+    }
 </code>
 </pre>
 <h3>Execution</h3>
@@ -181,6 +202,12 @@ g++ -o preprocessing.bin preprocessing.o
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
 ./preprocessing.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" ./cxx/fundamentals/anatomy/preprocessing.cxx begin language-bash>
+<code>
+defined
 </code>
 </pre>
 <ul class="pager">
