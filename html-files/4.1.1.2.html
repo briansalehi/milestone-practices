@@ -132,6 +132,17 @@ pre {
    In large code bases, namespaces can colide and make great confusion.<br />
    Though, this is totally optional for you and it's my personal approach in
    coding not a best practice.<br />
+   <br />
+   <cite>Professional C++</cite>
+   Namespaces address the problem of naming conflicts between different pieces of
+   code. For example, you might be writing some code that has a function called
+   foo() . One day, you decide to start using a third-party library, which also
+   has a foo() function. The compiler has no way of knowing which version of foo()
+   you are referring to within your code. You can’t change the library’s function
+   name, and it would be a big pain to change your own.<br />
+   Namespaces come to the rescue in such scenarios because you can define the
+   context in which names are defined. To place code in a namespace, enclose it
+   within a namespace block.<br />
 </div>
 <hr />
 <h3>Source</h3>
@@ -140,23 +151,43 @@ pre {
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    namespace myspace {
-        int number = 2; // namespace can hold class and functions like cout
-        char character = &apos;A&apos;; // declaring number and character in namespace are substitution of global variables
+    // nested namespaces
+    namespace os
+    {
+    	namespace network
+    	{
+    		namespace tcp { }
+    	}
+    }
+    
+    // c++17 alternative
+    namespace os::network::udp { }
+    
+    namespace os
+    {
+    	// function implementation inside namespace
+    	void run()
+    	{
+    		using namespace std;
+    		cout &lt;&lt; &quot;running&quot; &lt;&lt; endl;
+    	}
+    
+    	// function declaration inside namespace
+    	void shutdown();
+    }
+    
+    // function implementation outside namespace
+    void os::shutdown()
+    {
+    	std::cout &lt;&lt; &quot;shutting down&quot; &lt;&lt; std::endl;
     }
     
     int main()
     {
-        // default namespace (Standard Template Library)
-        using namespace std;
-        cout &lt;&lt; 1 &lt;&lt; endl;
+    	os::run();
     
-        // accessing an element of a namespace
-        cout &lt;&lt; myspace::number &lt;&lt; endl;
-    
-        // using only one member of a namespace, afterwards, there&apos;s no need to mention the namespace
-        using myspace::character;
-        cout &lt;&lt; character &lt;&lt; endl;
+    	using os::shutdown;
+    	shutdown();
     
         return 0;
     }
@@ -166,7 +197,7 @@ pre {
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o namespace.o namespace.cxx
+g++ -std=c++17 -g -Wall -c -o namespace.o namespace.cxx
 </code>
 </pre>
 <h4>link</h4>
@@ -178,15 +209,14 @@ g++ -o namespace.bin namespace.o
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-namespace.bin
+./namespace.bin
 </code>
 </pre>
 <h3>Output</h3>
 <pre class="language-bash" ./cxx/fundamentals/anatomy/namespace.cxx begin language-bash>
 <code>
-1
-2
-A
+running
+shutting down
 </code>
 </pre>
 <ul class="pager">

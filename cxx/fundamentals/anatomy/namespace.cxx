@@ -1,22 +1,42 @@
 #include <iostream>
 
-namespace myspace {
-    int number = 2; // namespace can hold class and functions like cout
-    char character = 'A'; // declaring number and character in namespace are substitution of global variables
+// nested namespaces
+namespace os
+{
+	namespace network
+	{
+		namespace tcp { }
+	}
+}
+
+// c++17 alternative
+namespace os::network::udp { }
+
+namespace os
+{
+	// function implementation inside namespace
+	void run()
+	{
+		using namespace std;
+		cout << "running" << endl;
+	}
+
+	// function declaration inside namespace
+	void shutdown();
+}
+
+// function implementation outside namespace
+void os::shutdown()
+{
+	std::cout << "shutting down" << std::endl;
 }
 
 int main()
 {
-    // default namespace (Standard Template Library)
-    using namespace std;
-    cout << 1 << endl;
+	os::run();
 
-    // accessing an element of a namespace
-    cout << myspace::number << endl;
-
-    // using only one member of a namespace, afterwards, there's no need to mention the namespace
-    using myspace::character;
-    cout << character << endl;
+	using os::shutdown;
+	shutdown();
 
     return 0;
 }
