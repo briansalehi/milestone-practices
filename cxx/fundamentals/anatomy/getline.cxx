@@ -2,11 +2,12 @@
 
 int main()
 {
-    char name[30];
-
     std::cout << "Enter a short message: ";
-    std::cin.getline(name, 30);
-    std::cout << "message: " << name << std::endl;
+
+    char message[30];
+    std::cin.getline(message, 30);
+
+    std::cout << "Message: " << message << std::endl;
 
     return 0;
 }

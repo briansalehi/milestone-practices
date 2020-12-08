@@ -1,6 +1,10 @@
 #include <iostream>
 
-char alphabet();
+// returns a character
+char alphabet()
+{
+    return 'A';
+}
 
 int main()
 {
@@ -8,10 +12,4 @@ int main()
     std::cout << "first letter is: " << alphabet() << std::endl;
 
     return 0;
-}
-
-// return value
-char alphabet()
-{
-    return 'A';
 }

@@ -1,0 +1,6 @@
+As a preview, you’ll find that in recent Pythons, comprehension syntax has
+been generalized for other roles: it’s not just for making lists today.
+For example, enclosing a comprehension in parentheses can also be used to
+create generators that produce results on demand.
+To illustrate, the sum built-in sums items in a sequence—in this
+example, summing all items in our matrix’s rows on request.
