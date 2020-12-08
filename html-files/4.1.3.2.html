@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>low level conversion by charconv header</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<div class="container" >
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="4.0.html">C++ Practices</a></li>
+<li class="breadcrumb-item"><a href="4.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item"><a href="4.1.3.0.html">Sequences</a></li>
+<li class="breadcrumb-item active" >low level conversion by charconv header</li>
+</ol>
+<h2>low level conversion by charconv header</h2>
+<div class="comment-style" >
+   begin[5]
+   For converting integers to characters, the following set of functions is available:<br />
+   <br />
+   ```cxx
+   to_chars_result to_chars(char* first, char* last, IntegerT value, int base = 10);<br />
+   ```
+   <br />
+   Here, *IntegerT* can be any signed or unsigned integer type or char .<br />
+   The result is of type **to_chars_result** , a type defined as follows:<br />
+   <br />
+   ```cxx
+   struct to_chars_result {
+   char* ptr;<br />
+   std::errc ec;<br />
+   };<br />
+   ```
+   <br />
+   The *ptr* member is either equal to the one-past-the-end pointer of the written characters if the
+   conversion was successful, or it is equal to last if the conversion failed (in which case, ec ==
+   errc::value_too_large ).<br />
+   <br />
+   Similarly, the following set of conversion functions is available for floating point types:<br />
+   <br />
+   ```cxx
+   to_chars_result to_chars(char* first, char* last, FloatT value);<br />
+   to_chars_result to_chars(char* first, char* last, FloatT value, chars_format format);<br />
+   to_chars_result to_chars(char* first, char* last, FloatT value, chars_format format, int precision);<br />
+   ```
+   <br />
+   Here, FloatT can be float , double , or long double . Formatting can be specified with a combination of chars_format flags:<br />
+   <br />
+   ```cxx
+   enum class chars_format {
+   scientific,<br />
+   fixed,<br />
+   hex,<br />
+   general = fixed | scientific
+   };<br />
+   ```
+   <br />
+   For the opposite conversion—that is, converting character sequences into numerical values—the
+   following set of functions is available:<br />
+   <br />
+   ```cxx
+   from_chars_result from_chars(const char* first, const char* last, IntegerT& value, int base = 10);<br />
+   from_chars_result from_chars(const char* first, const char* last, FloatT& value, chars_format format = chars_format::general);<br />
+   ```
+   <br />
+   Here, from_chars_result is a type defined as follows:<br />
+   <br />
+   ```cxx
+   struct from_chars_result {
+   const char* ptr;<br />
+   std::errc ec;<br />
+   };<br />
+   ```
+   <br />
+   The ptr member of the result type is a pointer to the first character that was not converted, or it
+   equals last if all characters were successfully converted. If none of the characters could be con-
+   verted, ptr equals first , and the value of the error code will be errc::invalid_argument . If the
+   parsed value is too large to be representable by the given type, the value of the error code will be
+   errc::result_out_of_range . Note that from_chars() does not skip any leading whitespace.<br />
+   end[5]
+</div>
+<hr />
+<h3>Source</h3>
+  <cite>charconv.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    #include &lt;charconv&gt;
+    
+    int main()
+    {
+    	std::string number(10, &apos; &apos;);
+    
+    	/**
+    	 * arguments:
+    	 * to_chars(char* first, char* last, IntegerT value, int base = 10)
+    	 *
+    	 * returns:
+    	 * sturct to_chars_result { char *ptr; errc ec; }
+    	 * see structured bindings for more info
+    	 */
+    	auto [ptr, err] = std::to_chars(number.data(), number.data() + number.size(), 12345);
+    	if (err == std::errc())
+    		std::cout &lt;&lt; number &lt;&lt; std::endl;
+    
+    	/**
+    	 * arguments:
+    	 * to_chars(char* first, char* last, FloatT value, chars_format format, int precision)
+    	 *
+    	 * format:
+    	 * enum class chars_format { scientific, fixed, hex, general = fixed | scientific ) }
+    	 *
+    	 * returns:
+    	 * sturct to_chars_result { char *ptr; errc ec; }
+    	 */
+    	std::string fraction(10, &apos; &apos;);
+    	std::to_chars_result result = std::to_chars(fraction.data(), fraction.data() + fraction.size(), 3141592);
+    	if (result.ec == std::errc())
+    		std::cout &lt;&lt; fraction &lt;&lt; std::endl;
+    
+    	/**
+    	 * arguments:
+    	 * from_chars(const char* first, const char* last, IntegerT&amp; value, int base = 10)
+    	 * 
+    	 * returns:
+    	 * struct from_chars_result { const char* ptr; errc ec; }
+    	 */
+    	int integer;
+    	std::string raw{&quot;12345&quot;};
+    	std::from_chars_result int_result = std::from_chars(raw.data(), raw.data() + raw.size(), integer);
+    	if (int_result.ec == std::errc())
+    		std::cout &lt;&lt; integer &lt;&lt; std::endl;
+    
+    	return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -Wall -Os -std=c++17 charconv.o charconv.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o charconv.bin charconv.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./charconv.bin
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="4.1.3.1.html">previous page</a></li>
+<li class="top"><a href="index.html">top page</a></li>
+<li class="next"><a href="4.1.3.3.html">next page</a></li>
+</ul>
+</div>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-asm6502.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+</body>
+</html>

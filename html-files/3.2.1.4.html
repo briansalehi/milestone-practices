@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>IPv6 client</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<div class="container" >
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="3.0.html">C Practices</a></li>
+<li class="breadcrumb-item"><a href="3.2.0.html">Network Programming</a></li>
+<li class="breadcrumb-item"><a href="3.2.1.0.html">Sockets</a></li>
+<li class="breadcrumb-item active" >IPv6 client</li>
+</ol>
+<h2>IPv6 client</h2>
+<hr />
+<h3>Source</h3>
+  <cite>ipv6-client.c</cite>
+<pre class="line-numbers" >
+<code class="language-c">
+    #include &lt;stdio.h&gt;
+    #include &lt;unistd.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;string.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;sys/socket.h&gt;
+    
+    void throw_exception(const char *msg)
+    {
+    	printf(&quot;%s\n&quot;, msg);
+    	exit(1);
+    }
+    
+    int setup_connection(const char *ip, const in_port_t port)
+    {
+    	struct sockaddr_in6 server_address;
+    	memset(&amp;server_address, 0, sizeof(server_address));
+    	server_address.sin6_family = AF_INET6;
+    	server_address.sin6_port = htons(port);
+    
+    	if (inet_pton(AF_INET6, ip, &amp;server_address.sin6_addr.s6_addr) &lt;= 0)
+    		throw_exception(&quot;address translation failed&quot;);
+    
+    	int server = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP);
+    	if (server &lt; 0)
+    		throw_exception(&quot;failed to create socket&quot;);
+    
+    	if (connect(server, (struct sockaddr *) &amp;server_address, sizeof(server_address)) &lt; 0) {
+    		close(server);
+    		throw_exception(&quot;failed to connect to server&quot;);
+    	} else {
+    		printf(&quot;connected to %s:[%d]\n&quot;, ip, port);
+    	}
+    
+    	return server;
+    }
+    
+    void echo_service(const int server, const char *message)
+    {
+    	ssize_t sent = send(server, message, strlen(message), 0);
+    	if (sent &lt;= 0)
+    		throw_exception(&quot;failed to send data properly&quot;);
+    	else
+    		printf(&quot;sent %ld bytes: %s\n&quot;, sent, message);
+    
+    	char buffer[sent+1];
+    	ssize_t received = recv(server, buffer, sizeof(buffer), 0);
+    	if (received != sent)
+    		throw_exception(&quot;failed to receive data properly&quot;);
+    
+    	buffer[received] = &apos;\0&apos;;
+    	printf(&quot;received %ld bytes: %s\n&quot;, received, buffer);
+    }
+    
+    int main(int argc, char **argv)
+    {
+    	if (argc != 4)
+    		throw_exception(&quot;required parameters: &lt;ip&gt; &lt;port&gt; &lt;message&gt;&quot;);
+    
+    	const char *ip = argv[1];
+    	const in_port_t port = atoi(argv[2]);
+    	const char *message = argv[3];
+    
+    	int server = setup_connection(ip, port);
+    	echo_service(server, message);
+    
+    	close(server);
+    	return 0;
+    }
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="3.2.1.3.html">previous page</a></li>
+<li class="top"><a href="index.html">top page</a></li>
+<li class="next"><a href="3.2.1.5.html">next page</a></li>
+</ul>
+</div>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-asm6502.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+</body>
+</html>

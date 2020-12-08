@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>wide character string</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<div class="container" >
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="4.0.html">C++ Practices</a></li>
+<li class="breadcrumb-item"><a href="4.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item"><a href="4.1.3.0.html">Sequences</a></li>
+<li class="breadcrumb-item active" >wide character string</li>
+</ol>
+<h2>wide character string</h2>
+<div class="comment-style" >
+   wide characters, 16 bit and 32 bit characters can be used in programs which may use non-English characters like Japanese.<br />
+   <br />
+   raw strings can be used for ease of writing escape characters in strings by starting strings by 'R' character like:<br />
+   <br />
+   R"(string with escape characters like 
+)"
+   <br />
+   or use custom delimiters:<br />
+   <br />
+   R"+*(string with escape characters)+*"
+   <br />
+   other ways, you should escape each special character in string (don't!)
+</div>
+<hr />
+<h3>Source</h3>
+  <cite>wide-character-string.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    
+    int main()
+    {
+        // to print wide character strings, you need to iterate over them, loops and iterators are discussed later
+        char16_t char16_string[] = u&quot;this is a char16 type string&quot;;
+        for (char16_t c: char16_string) {
+            std::cout &lt;&lt; std::hex &lt;&lt; std::showbase &lt;&lt; c;
+        }
+        std::cout &lt;&lt; std::endl;
+    
+        char32_t char32_string[] = U&quot;this is a char32 type string&quot;;
+        for (char32_t c: char32_string) {
+            std::cout &lt;&lt; std::hex &lt;&lt; std::showbase &lt;&lt; c;
+        }
+        std::cout &lt;&lt; std::endl;
+    
+        std::u16string u16_string = {u&quot;this is a u16string type string&quot;};
+        for (char16_t c: u16_string) {
+            std::cout &lt;&lt; std::hex &lt;&lt; std::showbase &lt;&lt; c;
+        }
+        std::cout &lt;&lt; std::endl;
+    
+        std::u32string u32_string = {U&quot;this is a u32string type string&quot;};
+        for (char32_t c: u32_string) {
+            std::cout &lt;&lt; std::hex &lt;&lt; std::showbase &lt;&lt; c;
+        }
+        std::cout &lt;&lt; std::endl;
+    
+        // raw string
+        std::string raw_string = R&quot;(this is a &quot;raw string&quot;, escape characters are free to live here \n \b \r \a)&quot;;
+        std::cout &lt;&lt; raw_string &lt;&lt; std::endl;
+    
+        // delimiter used in raw string
+        std::string delimitered_string = R&quot;+*(this one is a custom delimitered &quot;(string)&quot; similar to above)+*&quot;;
+        std::cout &lt;&lt; delimitered_string &lt;&lt; std::endl;
+    
+        return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o wide-character-string.o wide-character-string.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o wide-character-string.bin wide-character-string.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./wide-character-string.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" ./cxx/fundamentals/sequences/wide-character-string.cxx begin language-bash>
+<code>
+0x740x680x690x730x200x690x730x200x610x200x630x680x610x720x310x360x200x740x790x700x650x200x730x740x720x690x6e0x670
+0x740x680x690x730x200x690x730x200x610x200x630x680x610x720x330x320x200x740x790x700x650x200x730x740x720x690x6e0x670
+0x740x680x690x730x200x690x730x200x610x200x750x310x360x730x740x720x690x6e0x670x200x740x790x700x650x200x730x740x720x690x6e0x67
+0x740x680x690x730x200x690x730x200x610x200x750x330x320x730x740x720x690x6e0x670x200x740x790x700x650x200x730x740x720x690x6e0x67
+this is a "raw string", escape characters are free to live here \n \b \r \a
+this one is a custom delimitered "(string)" similar to above
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="4.1.3.9.html">previous page</a></li>
+<li class="top"><a href="index.html">top page</a></li>
+<li class="next"><a href="4.1.3.11.html">next page</a></li>
+</ul>
+</div>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-asm6502.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-#pragram once
+#pragma once
 
 #include <iostream>
 
