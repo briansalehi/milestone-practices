@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Application Object</title>
+<title>Label</title>
 <style>
 a,
 a:hover,
@@ -110,35 +110,38 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="4.0.html">C++ Practices</a></li>
 <li class="breadcrumb-item"><a href="4.2.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a href="4.2.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" >Application Object</li>
+<li class="breadcrumb-item"><a href="4.2.2.0.html">Widgets</a></li>
+<li class="breadcrumb-item active" >Label</li>
 </ol>
-<h2>Application Object</h2>
+<h2>Label</h2>
 <div class="comment-style" >
-   QApplication is the main part of an Qt application which usually is
-   instantiated in main function.<br />
+   Labels are used to embed and string in application window.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>application.cxx</cite>
+  <cite>label.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
+    #include &lt;QString&gt;
     #include &lt;QLabel&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
-    	QLabel label(&quot;Qt Application&quot;);
+    	QString text(&quot;This is a simple Qt application&quot;);
+    	QLabel label(text);
+    	label.setFont(QFont(&quot;Free Sans&quot;, 12));
+    	label.setAlignment(Qt::AlignCenter);
     	label.show();
     	return app.exec();
     }
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="4.2.1.0.html">previous page</a></li>
+<li class="previous"><a href="4.2.2.1.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="4.2.2.0.html">next page</a></li>
+<li class="next"><a href="4.3.0.html">next page</a></li>
 </ul>
 </div>
 <script>

@@ -1,0 +1,2 @@
+QApplication is the main part of an Qt application which usually is
+instantiated in main function.
