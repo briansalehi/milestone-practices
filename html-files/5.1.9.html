@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Dictionary</title>
+<title>File</title>
 <style>
 a,
 a:hover,
@@ -110,86 +110,59 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="5.0.html">Python Practices</a></li>
 <li class="breadcrumb-item"><a href="5.1.0.html">Core Object Types</a></li>
-<li class="breadcrumb-item active" >Dictionary</li>
+<li class="breadcrumb-item active" >File</li>
 </ol>
-<h2>Dictionary</h2>
+<h2>File</h2>
 <div class="comment-style" >
-   Python dictionaries are something completely different, they are not sequences
-   at all, but are instead known as mappings.<br />
-   Mappings are also collections of other objects, but they store objects by
-   key instead of by relative position.<br />
-   In fact, mappings don’t maintain any reliable left-to-right order;<br />
-   they simply map keys to associated values.<br />
-   Dictionaries, the only mapping type in Python’s core objects set, are also
-   mutable: like lists, they may be changed in place and can grow and shrink
-   on demand.<br />
-   Also like lists, they are a flexible tool for representing collections, but
-   their more mnemonic keys are better suited when a collection’s items
-   are named or labeled—fields of a database record, for example.<br />
-   <br />
-   Unlike out-of-bounds assignments in lists, which are forbidden, assignments to
-   new dictionary keys create those keys.<br />
+   Files must be closed once they are opened manually.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>dictionary.py</cite>
+  <cite>file.py</cite>
 <pre class="line-numbers" >
 <code class="language-python">
     #!/usr/bin/env python3
     
-    D = {&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3}
+    # write to file
+    f = open(&apos;data.txt&apos;, &apos;w&apos;)
+    f.write(&apos;Hello\n&apos;)
+    f.write(&apos;world\n&apos;)
+    f.close()
     
-    ## Element retrieval
-    value = D[&apos;x&apos;] if &apos;x&apos; in D else 0
-    # or
-    value = D.get(&apos;x&apos;, 0)
+    # read from file
+    f = open(&apos;data.txt&apos;)
+    text = f.read()
+    print(text)
+    text.split()
     
-    
-    ## Sorting keys
-    D = {&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3}
-    
-    Ks = list(D.keys())
-    Ks.sort()
-    for key in Ks:
-        print(key, &apos;=&gt;&apos;, D[key])
-    
-    # or
-    for key in sorted(D):
-        print(key, &apos;=&gt;&apos;, D[key])
-    
-    
-    ## Iteration
-    squares = []
-    for x in [1, 2, 3, 4, 5]:
-        squares.append(x ** 2)
-    
-    # or
-    squares = [x ** 2 for x in [1, 2, 3, 4, 5]]
-    
+    # compact
+    for line in open(&apos;data.txt&apos;):
+        print(line)
 </code>
 </pre>
 <h3>Execution</h3>
 <h4>run</h4>
 <pre class="command-line" data-user="python" data-host="milestone">
 <code class="language-bash">
-python3 ./dictionary.py
+python3 ./file.py
 </code>
 </pre>
 <h3>Output</h3>
-<pre class="language-bash" ./python/core-object-types/dictionary.py begin language-bash>
+<pre class="language-bash" ./python/core-object-types/file.py begin language-bash>
 <code>
-a => 1
-b => 2
-c => 3
-a => 1
-b => 2
-c => 3
+Hello
+world
+
+Hello
+
+world
+
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="5.1.6.html">previous page</a></li>
+<li class="previous"><a href="5.1.8.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="5.1.8.html">next page</a></li>
+<li class="next"><a href="6.0.html">next page</a></li>
 </ul>
 </div>
 <script>

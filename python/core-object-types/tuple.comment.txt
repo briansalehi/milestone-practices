@@ -1,0 +1,2 @@
+Tuples are immutable like strings.
+At least one comma is required in tuples to implement.

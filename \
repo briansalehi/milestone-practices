@@ -1,9 +1,0 @@
-<b>main</b> function, as the name suggests is the main function that always
-exists in all C and C++ programs.
-
-All other functions must be defined before <i>main function</i>. Either they
-can only be declared before main and implemented after main, or they can be
-implemented in one step before main function.
-
-All functions either return an object type using return statement or not.
-In case of non-returning functions, return type is <b>void</b>.

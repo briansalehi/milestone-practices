@@ -1,16 +1,31 @@
 #!/usr/bin/env python3
 
-# Empty dictionary
-D = {}
+D = {'a': 1, 'b': 2, 'c': 3}
 
-# Initializing dictionary
-D = {'food': 'Spam', 'quantity': 4, 'color': 'pink'}
+## Element retrieval
+value = D['x'] if 'x' in D else 0
+# or
+value = D.get('x', 0)
 
-# Fetch value of key 'food'
-D['food']
 
-# Add 1 to 'quantity' value
-D['quantity'] += 1
+## Sorting keys
+D = {'a': 1, 'b': 2, 'c': 3}
 
-# Assign value to new key
-D['drinks'] = False
+Ks = list(D.keys())
+Ks.sort()
+for key in Ks:
+    print(key, '=>', D[key])
+
+# or
+for key in sorted(D):
+    print(key, '=>', D[key])
+
+
+## Iteration
+squares = []
+for x in [1, 2, 3, 4, 5]:
+    squares.append(x ** 2)
+
+# or
+squares = [x ** 2 for x in [1, 2, 3, 4, 5]]
+

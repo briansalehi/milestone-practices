@@ -113,11 +113,24 @@ pre {
 <li class="breadcrumb-item active" >Tuple</li>
 </ol>
 <h2>Tuple</h2>
+<div class="comment-style" >
+   Tuples are immutable like strings.<br />
+   At least one comma is required in tuples to implement.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>tuple.py</cite>
 <pre class="line-numbers" >
 <code class="language-python">
+    #!/usr/bin/env python3
+    
+    T = (1, 2, 3, 4)
+    
+    T + (5,)
+    
+    T.index(4)
+    
+    T.count(4)
 </code>
 </pre>
 <h3>Execution</h3>
