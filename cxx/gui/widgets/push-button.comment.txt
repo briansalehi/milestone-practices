@@ -1,0 +1,2 @@
+Push button can get optional QIcon object as first parameter, or to use its
+overloaded constructor with only one parameter specifying button text.
