@@ -1,0 +1,1 @@
+Kicad is available in most Linux repositories.
