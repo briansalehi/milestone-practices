@@ -1,1 +1,1 @@
-Mathematics Practices
+Mathematics
