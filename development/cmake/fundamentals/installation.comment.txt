@@ -1,0 +1,5 @@
+CMake installation has a very simple step on Linux, which is just a command in
+shell.
+And an easy installation on Windows by downloading the executable file.
+
+<a href="https://cmake.org/download/">Installation Page</a>

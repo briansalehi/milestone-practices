@@ -1,0 +1,4 @@
+Git is almost ready to be installed on Linux systems with one command and just
+a download step on Windows.
+
+<a href="https://git-scm.com/downloads">Installation Page</a>
