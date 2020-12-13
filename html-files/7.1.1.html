@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Everything is an object - Object creation steps</title>
+<title>Numbers</title>
 <style>
 a,
 a:hover,
@@ -108,88 +108,56 @@ pre {
 <body class="container">
 <div class="container" >
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="7.0.html">Java SE Practices</a></li>
-<li class="breadcrumb-item"><a href="7.1.0.html">Constructors</a></li>
-<li class="breadcrumb-item active" >Everything is an object - Object creation steps</li>
+<li class="breadcrumb-item"><a href="7.0.html">Python</a></li>
+<li class="breadcrumb-item"><a href="7.1.0.html">Core Object Types</a></li>
+<li class="breadcrumb-item active" >Numbers</li>
 </ol>
-<h2>Everything is an object - Object creation steps</h2>
+<h2>Numbers</h2>
 <div class="comment-style" >
-   When we are creating an object using new (e.g. SampleClass sampleClass = new SampleClass(1, 2);),<br />
-   following steps happen step by step consecutively:<br />
-   <b>* so pay attention that constructor is not the first thing that would get called after using  new  keyword,<br />
-   actually it is the last step.</b>
-   <br />
-   1) Static inline initialization
-   2) Static variables (sets them with default value)
-   3) static blocks
-   <br />
-   4) Inline initialization
-   5) variables initialization (non-static variables) (sets them with default value)
-   6) Non-static blocks
-   <br />
-   7) Final initialization (constructor)
+   Python's core objects set includes the usual suspects: <i>integers</i> that
+   have no fractional part, <i>floating-point</i> numbers that do, and more
+   exotic types, <i>complex</i> numbers with imaginary parts, <i>decimals</i>
+   with fixed precision, <i>radionals</i> with numerator and denominator are
+   available as numeric values in Python, also more types are available as
+   third-party add-ones.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>ObjectInit.java</cite>
+  <cite>numbers.py</cite>
 <pre class="line-numbers" >
-<code class="language-java">
-    public class ObjectInit {
-        public static void main(String[] args) {
-            SampleClass sampleClass = new SampleClass(1, 2);
-        }
-    }
-</code>
-</pre>
-  <cite>SampleClass.java</cite>
-<pre class="line-numbers" >
-<code class="language-java">
-    public class SampleClass {
-        int number=3;       // step 4
-        static int number2 = 3;        // step 1
+<code class="language-python">
+    #!/usr/bin/env python3
     
-        int number3;        // step 5
-        static int number4; // step 2
+    # Addition
+    140 + 160
     
-        {   // step 6
-            System.out.println(&quot;Non-static block executing...&quot;);
-        }
+    # Subtraction
+    73 - 18
     
-        static {    // step 3
-            System.out.println(&quot;Static block executing...&quot;);
-        }
+    # Multiplication
+    2.5 * 4
     
-        public SampleClass(int number, int number3) {   // step 7
-            this.number = number;
-            this.number3 = number3;
-        }
-    }
+    # Division
+    17 / 3
+    
+    # Remainder (Modulus)
+    983452 % 10
+    
+    # Exponentation
+    2 ** 100
 </code>
 </pre>
 <h3>Execution</h3>
-<h4>compile</h4>
-<pre class="command-line" data-user="java" data-host="milestone">
-<code class="language-bash">
-javac ObjectInit.java SampleClass.java
-</code>
-</pre>
 <h4>run</h4>
-<pre class="command-line" data-user="java" data-host="milestone">
+<pre class="command-line" data-user="python" data-host="milestone">
 <code class="language-bash">
-java -cp ./java/constructor ObjectInit
-</code>
-</pre>
-<h3>Output</h3>
-<pre class="language-bash" ./java/constructor/ObjectInit.java begin language-bash>
-<code>
-Static block executing...
-Non-static block executing...
+python3 ./numbers.py
 </code>
 </pre>
 <ul class="pager">
 <li class="previous"><a href="7.1.0.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="7.2.0.html">next page</a></li>
+<li class="next"><a href="7.1.2.html">next page</a></li>
 </ul>
 </div>
 <script>

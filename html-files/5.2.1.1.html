@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Application Object</title>
+<title>IPv4 server</title>
 <style>
 a,
 a:hover,
@@ -108,37 +108,127 @@ pre {
 <body class="container">
 <div class="container" >
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="5.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="5.2.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a href="5.2.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" >Application Object</li>
+<li class="breadcrumb-item"><a href="5.0.html">C</a></li>
+<li class="breadcrumb-item"><a href="5.2.0.html">Network Programming</a></li>
+<li class="breadcrumb-item"><a href="5.2.1.0.html">Sockets</a></li>
+<li class="breadcrumb-item active" >IPv4 server</li>
 </ol>
-<h2>Application Object</h2>
-<div class="comment-style" >
-   QApplication is the main part of an Qt application which usually is
-   instantiated in main function.<br />
-</div>
+<h2>IPv4 server</h2>
 <hr />
 <h3>Source</h3>
-  <cite>application.cxx</cite>
+  <cite>ipv4-server.c</cite>
 <pre class="line-numbers" >
-<code class="language-cpp">
-    #include &lt;QApplication&gt;
-    #include &lt;QLabel&gt;
+<code class="language-c">
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;unistd.h&gt;
+    #include &lt;string.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;sys/socket.h&gt;
+    
+    /* exception handler */
+    void throw_exception(const char *msg)
+    {
+    	printf(&quot;%s\n&quot;, msg);
+    	exit(1);
+    }
+    
+    /* connects client to the server */
+    int prepare_connection(const in_port_t port)
+    {
+    	struct sockaddr_in address;
+    	memset(&amp;address, 0, sizeof(address));
+    	address.sin_family = AF_INET;
+    	address.sin_addr.s_addr = htonl(INADDR_ANY);
+    	address.sin_port = htons(port);
+    
+    	int connection = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    	if (connection &lt; 0)
+    		throw_exception(&quot;failed to create socket&quot;);
+    
+    	if (bind(connection, (struct sockaddr *) &amp;address, sizeof(address)) &lt; 0) {
+    		close(connection);
+    		throw_exception(&quot;failed to bind to port&quot;);
+    	}
+    
+    	if (listen(connection, 10) &lt; 0) {
+    		close(connection);
+    		throw_exception(&quot;failed to listen to socket&quot;);
+    	}
+    
+    	printf(&quot;listening: &quot;);
+    
+    	char local_address[INET_ADDRSTRLEN];
+    	if (inet_ntop(AF_INET, &amp;address.sin_addr.s_addr, local_address, sizeof(local_address)) != NULL)
+    		printf(&quot;%s:[%d]\n&quot;, local_address, port);
+    	else
+    		printf(&quot;translation failed\n&quot;);
+    
+    	return connection;
+    }
+    
+    int accept_client(const int connection)
+    {
+    	struct sockaddr_in client_address;
+    	socklen_t client_addrlen = sizeof(client_address);
+    	memset(&amp;client_address, 0, client_addrlen);
+    
+    	int client = accept(connection, (struct sockaddr *) &amp;client_address, &amp;client_addrlen);
+    	if (client &lt; 0)
+    		throw_exception(&quot;failed to accept client&quot;);
+    
+    	printf(&quot;client connected: &quot;);
+    
+    	char client_ip[INET_ADDRSTRLEN];
+    	in_port_t client_port = ntohs(client_address.sin_port);
+    	if (inet_ntop(AF_INET, &amp;client_address.sin_addr, client_ip, sizeof(client_ip)) != NULL)
+    		printf(&quot;%s:[%d]\n&quot;, client_ip, client_port);
+    	else
+    		printf(&quot;translation failed\n&quot;);
+    
+    	return client;
+    }
+    
+    void echo_service(const int client)
+    {
+    	size_t buflen = 1024;
+    	char buffer[buflen+1];
+    	ssize_t received = recv(client, buffer, buflen, 0);
+    	if (received &lt;= 0)
+    		throw_exception(&quot;failed to retrieve data from client&quot;);
+    
+    	buffer[buflen] = &apos;\0&apos;;
+    	printf(&quot;received %ld bytes: %s\n&quot;, received, buffer);
+    
+    	ssize_t sent = send(client, buffer, received, 0);
+    	if (sent != received)
+    		throw_exception(&quot;failed to send data properly&quot;);
+    
+    	printf(&quot;sent %ld bytes back\n&quot;, sent);
+    	close(client);
+    }
     
     int main(int argc, char **argv)
     {
-    	QApplication app(argc, argv);
-    	QLabel label(&quot;Qt Application&quot;);
-    	label.show();
-    	return app.exec();
+    	if (argc != 2)
+    		throw_exception(&quot;required parameters: &lt;port&gt;&quot;);
+    
+    	const in_port_t port = atoi(argv[1]);
+    
+    	int connection = prepare_connection(port);
+    	int client = accept_client(connection);
+    	echo_service(client);
+    
+    	close(connection);
+    	return 0;
     }
 </code>
 </pre>
 <ul class="pager">
 <li class="previous"><a href="5.2.1.0.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="5.2.2.0.html">next page</a></li>
+<li class="next"><a href="5.2.1.2.html">next page</a></li>
 </ul>
 </div>
 <script>
