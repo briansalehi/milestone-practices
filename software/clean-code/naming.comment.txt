@@ -1,48 +1,56 @@
-<b>Use Intention-Revealing Names</b>
-
-The name <i>d</i> reveals nothing for example.
+<h4>Use Intention-Revealing Names</h4>
+For example, the name <i>d</i> reveals nothing.
 It doesn't evoke a sense of elapsed time, nor of days.
 We should choose a name that specifies what is being measured and the unit of
 that measurement:
 
-<pre><code>
-int elapsedTimeInDays
-int daysSinceCreation
-int daysSinceNodification
-int fileAgeInDays
-</pre></code>
+<pre class="language-cpp">
+	<code>
+		int elapsedTimeInDays
+		int daysSinceCreation
+		int daysSinceModification
+		int fileAgeInDays
+	</code>
+</pre>
 
 Sometimes the problem is not the simplicity of the code but the
 <i>implicity</i> of it.
 
-<pre><code>
-int cell[];
-...
-
-if (cell[0] == 4)
-</pre></code>
+<pre class="language-cpp">
+	<code>
+		int cell[];
+		...
+		if (cell[0] == 4)
+		    ...
+	</code>
+</pre>
 
 Here, zeroth subscription does not signify anything, neither does the number
 4.
 By giving concepts names, we make the code readable considerably:
 
-<pre><code>
-int cell[]
-...
-int cell[STATUS_VALUE] = FLAGGED;
-</pre></code>
+<pre class="language-cpp">
+	<code>
+		int cell[]
+		...
+		int cell[STATUS_VALUE] = FLAGGED;
+		...
+	</code>
+</pre>
 
 Further improvements can also be made by object oriented design:
 
-<pre><code>
-Cell cell = new Cell;
-...
-if (cell.isFlagged())
-</pre></code>
+<pre class="language-cpp">
+	<code>
+		Cell cell = new Cell;
+		...
+		if (cell.isFlagged())
+		    ...
+	</code>
+</pre>
 
-<b>Avoid Disinformation</b>
-
-Avoid using obsecure naming like <<i>hp</i> or similarly abbreviated names.
+<h4>Avoid Disinformation</h4>
+Avoid using obsecure naming like <i>hp</i> or similarly abbreviated names.
 
 Don't refer to data structures in names. <i>accountList</i> may lead to false
 conclusions unless it really is a list. So only <i>accounts</i> would be
@@ -55,145 +63,145 @@ combination.
 The problem of course, is that they look almost entirely like the constants
 one and zero, respectively.
 
-<pre><code>
-if ( O == l )
-	O = 0;
-else
-	l = 1;
-</pre></code>
+<pre class="language-cpp">
+	<code>
+		if ( O == l )
+		    O = 0;
+		else
+		    l = 1;
+	</code>
+</pre>
 
-<b>Make Meaningful Distinctions</b>
+<h4>Make Meaningful Distinctions</h4>
+Noise words like <i>a</i>, <i>an</i>, and <i>the</i> are meaningless
+distinction. So do <i>Info</i> and <i>Data</i> in <i>ProductInfo</i> and
+<i>ProductData</i> classes.
 
-Noise words like a, an, the are meaningless distinction. So as Info and Data
-in ProductInffo and ProductData classes.
-
-Noise words are redundant. The word <i>variablee</i> should never appear in a
-variable name. So does <i>table</i> in a table, or string.
+Noise words are redundant. The word <i>variable</i> should never appear in a
+variable name. So does <i>table</i> in a table variable, or string as such.
 How is <i>NameString</i> better than <i>Name</i>?
 
-<pre><code>
-getActiveAccount();
-getActiveAccounts();
-getActiveAccountInfo();
-</pre></code>
+Consider these function names:
+
+<pre class="language-cpp">
+	<code>
+		getActiveAccount();
+		getActiveAccounts();
+		getActiveAccountInfo();
+	</code>
+</pre>
 
 How are the programmers supposed to know which of these fuunctions to call?
-Distinguuish names in such a way the reader knows wwhat the differences offer.
+Distinguish names in such a way the reader knows what the differences offer.
 
-<b>Use Pronounceable Names</b>
+<h4>Use Pronounceable Names</h4>
+Names should be pronouceable in conversations:
 
-Names should be pronouceable in conversaations.
+<pre class="language-cpp">
+	<code>
+		Date genymmdhms;
+	</code>
+</pre>
 
-Hey, Mikey, take a look at this record! The "gen emm dee aichc emm ess" is set
+Hey, Mikey, take a look at "gen emm dee aich emm ess"!
+
+<pre class="language-cpp">
+	<code>
+		Date generationTimestamp;
+	</code>
+</pre>
+
+Hey, Mikey, take a look at this record! The generation timestamp is set
 to tomorrow's date! How can that be?
 
-<pre><code>
-Date genymmdhms;
-</pre></code>
-
-Hey, Mikey, take a look at this record! The "gen emm dee aichc emm ess" is set
-to tomorrow's date! How can that be?
-
-<pre><code>
-Date genymmdhms;
-</pre></code>
-
-<b>Use Searchable Names</b>
-
-One might easily grep for <i>MAX_CLASSES_PERR_STUDENT</i>, but the number 7
+<h4>Use Searchable Names</h4>
+One might easily grep for <i>MAX_CLASSES_PER_STUDENT</i>, but the number 7
 could be more troublesome.
 
-Single-lettere names can ONLY be used as local variables inside methods.
-The lenght of a name shouuld correspond to the size of its scope.
+Single-letter names can ONLY be used as local variables inside small methods.
+The length of a name should correspond to the size of its scope.
 
-<b>Avoid Encodings</b>
-
+<h4>Avoid Encodings</h4>
 We have enough encodings to deal with without adding more to our burden.
 Encoded names are seldom pronounceable and are easy to mis-type.
 
 Do not add m_ prefixes to method names, we are way passed that age!
 
-<b>Avoid Mental Mapping</b>
-
+<h4>Avoid Mental Mapping</h4>
 This is a problem with single letter variable names.
-While using them might noot hurt in small scope iterations like i in for
+While using them might not hurt in small scope iterations like <i>i</i> in for
 loops, however in most other contexts a single-letter name is poor choice.
 It's just a placeholder that the reader must mentally map to the actual
 concept.
 
 In general programmers are pretty smart. Smart people sometimes like to show
-off their smarts by demonstrating their mental juggling aabilities.
+off their smartness by demonstrating their mental juggling abilities.
 
-One difference between a smart programmer and a professional prograammer is
-that the professional understands that clarity is king. Professionals use
-their power for good and write code that others can understand.
+One difference between a smart programmer and a professional programmer is
+that the professional understands that <b>clarity is king</b>. Professionals
+use their power for good and write code that others can understand.
 
-<b>Class Names</b>
+<h4>Class Names</h4>
+Classes and objects should have noun or noun phrase names like
+</i>Customer</i>, </i>WikiPage</i>, <i>Account</i>, and <i>AddressParser</i>.
+Avoid words like <i>Manager</i>, <i>Processor</i>, <i>Data</i>, or
+<i>Info</i> in the name of a class.
+Also a class name should not be a verb.
 
-Classes and objects should have noun or noun phrase names like Cuustomer,
-WikiPage, Account, and AddressParser. Avoid words like Manager, Processor,
-Data, or Info in the name of a class. A class name should not be a verb.
+<h4>Method Names</h4>
+Methods should have a verb or verb phrase names like <i>postsPayment</i>,
+<i>deletePage</i>, or save.
 
-<b>Method Names</b>
-
-Methods should have a vern or verb phrase names like postsPayment,
-deleteePage, or save.
-
-<b>Don't Be Cute</b>
-
+<h4>Don't Be Cute</h4>
 If names are too clever, they will be memorable only to people who share the
 author's sense of humor.
-
-Sure HolyHaandGrenade is cute by but DeleteItems might bee a better name.
-
+<i>HolyHandGrenade</i> is cute for sure but <i>DeleteItems</i> might
+be a better name.
 Say what you mean, mean what you say.
 
-<b>Pick One Word per Concept</b>
-
+<h4>Pick One Word per Concept</h4>
 Pick one word for abstract concept and stick with it.
-For example, it's confusing to have fetch, get, and retrieve as equivalent
-methods of a different classes.
+For example, it's confusing to have <i>fetch</i>, <i>get</i>, and
+<i>retrieve</i> as equivalent methods of a different class.
 
 A consistent lexicon is a great boon to the programmers who must use your
 code.
 
-<b>Don't Pun</b>
-
+<h4>Don't Pun</h4>
 Avoid using the same word for two purposes.
 
-Using insert and append is a better idea than using only add.
+Using <i>insert</i> and <i>append</i> is a better idea than using only
+<i>add</i>.
 
-<b>Use Solution Domain Names</b>
+<h4>Use Solution Domain Names</h4>
+Remember that the people who read your code will be programmers.
+So go ahead and use computer science (CS) terms, algorithms, pattern
+names, math terms and so forth.
 
-RRemember that the people who read your code will be programmers.
-So go ahead and use computer science terms, algorithms, pattern names, math
-terms and so forth.
-
-<b>Use Problem Domain Names</b>
-
-When computer terms are no longer helping, use domain names.
-At least the programmer who maintains your code can ask a domain eexpert what
+<h4>Use Problem Domain Names</h4>
+When programmering terms and solution domain names will no longer come
+in hand, use domain names.
+At least the programmer who maintains your code can ask a domain expert what
 it means.
 
-Separating solution and domain conceptss is part of the job of a good
+Separating solution and domain concepts is part of the job of a good
 programmer and designer.
 The code that has more to do with problem domain concepts should have names
 drawn from the problem domain.
 
-<b>Add Meaningful Context</b>
+<h4>Add Meaningful Context</h4>
+When you have variable names <i>firstName</i>, <i>lastName</i>, <i>street
+</i>, <i>houseNumber</i>, <i>city</i>, <i>state</i>, <i>zipcode</i>, but you
+just saw the <i>state</i> variable is being used stand alone in a method, you
+can add context by using prefixes:
+<i>addrFirstName</i>, <i>addrLastName</i>, <i>addrState</i>, and so on.
+Of course, a better solution is to create a class named <i>Address</i>.
+Then even the compiler knows that the variables belong to a bigger concept.
 
-When you have varianle names firstName, lastName, street, houseNumber, city,
-state, zipcode, but wyou just saw the state variable is being used stand alone
-in a method, you can add context by using prefixes: addrFfirstName,
-addrLastName, addrState, and so on.
-Of course, a better solution is to creatae a class named Address. The, even
-the compiler knows that the variables belong to a bigger concept.
-
-<b>Don't Add Gratuitous Content</b>
-
+<h4>Don't Add Gratuitous Content</h4>
 Shorter names are generally better than long ones, so long as they are clear.
 Add no more context to a name than is necessary.
 
-The names accountAddress and customerAddress are fines names for instances of
-the class Address but could be poor names for classes. Address is a fine name
-for a class.
+The names <i>accountAddress</i> and <i>customerAddress</i> are fine names
+for instances of the class <i>Address</i> but could be poor names for classes.
+<i>Address</i> is a fine name for a class.
