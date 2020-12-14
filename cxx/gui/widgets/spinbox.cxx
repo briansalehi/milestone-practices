@@ -1,12 +1,13 @@
 #include <QApplication>
-#include <QPushButton>
+#include <QSpinBox>
 
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 
-	QPushButton button(QIcon("submit.png"), "Submit");
+	QSpinBox volume;
+	volume.setRange(0, 100);
 
-	button.show();
+	volume.show();
 	return app.exec();
 }

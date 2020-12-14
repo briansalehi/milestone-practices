@@ -1,12 +1,12 @@
 #include <QApplication>
-#include <QPushButton>
+#include <QDateTimeEdit>
 
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 
-	QPushButton button(QIcon("submit.png"), "Submit");
-
-	button.show();
+	QDateTimeEdit birthDate;
+	
+	birthDate.show();
 	return app.exec();
 }
