@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QPushButton</title>
+<title>QSpinBox</title>
 <style>
 a,
 a:hover,
@@ -111,36 +111,33 @@ pre {
 <li class="breadcrumb-item"><a href="6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a href="6.2.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a href="6.2.2.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QPushButton</li>
+<li class="breadcrumb-item active" >QSpinBox</li>
 </ol>
-<h2>QPushButton</h2>
-<div class="comment-style" >
-   Push button can get optional QIcon object as first parameter, or to use its
-   overloaded constructor with only one parameter specifying button text.<br />
-</div>
+<h2>QSpinBox</h2>
 <hr />
 <h3>Source</h3>
-  <cite>push-button.cxx</cite>
+  <cite>spinbox.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
-    #include &lt;QPushButton&gt;
+    #include &lt;QSpinBox&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
     
-    	QPushButton button(QIcon(&quot;submit.png&quot;), &quot;Submit&quot;);
+    	QSpinBox volume;
+    	volume.setRange(0, 100);
     
-    	button.show();
+    	volume.show();
     	return app.exec();
     }
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="6.2.2.1.html">previous page</a></li>
+<li class="previous"><a href="6.2.2.4.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="6.2.2.3.html">next page</a></li>
+<li class="next"><a href="6.2.2.6.html">next page</a></li>
 </ul>
 </div>
 <script>

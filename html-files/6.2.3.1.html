@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QPushButton</title>
+<title>QGridLayout</title>
 <style>
 a,
 a:hover,
@@ -110,37 +110,57 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a href="6.2.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a href="6.2.2.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QPushButton</li>
+<li class="breadcrumb-item"><a href="6.2.3.0.html">Layouts</a></li>
+<li class="breadcrumb-item active" >QGridLayout</li>
 </ol>
-<h2>QPushButton</h2>
-<div class="comment-style" >
-   Push button can get optional QIcon object as first parameter, or to use its
-   overloaded constructor with only one parameter specifying button text.<br />
-</div>
+<h2>QGridLayout</h2>
 <hr />
 <h3>Source</h3>
-  <cite>push-button.cxx</cite>
+  <cite>grid.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
+    #include &lt;QGridLayout&gt;
+    #include &lt;QLabel&gt;
+    #include &lt;QLineEdit&gt;
     #include &lt;QPushButton&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
+    	QWidget *window = new QWidget;
+    	QGridLayout *layout = new QGridLayout;
     
-    	QPushButton button(QIcon(&quot;submit.png&quot;), &quot;Submit&quot;);
+    	QLabel *firstnameLabel = new QLabel(&quot;First Name:&quot;);
+    	QLabel *lastnameLabel = new QLabel(&quot;Last Name:&quot;);
+    	QLabel *emailLabel = new QLabel(&quot;Email:&quot;);
+    	QLineEdit *firstname = new QLineEdit;
+    	QLineEdit *lastname = new QLineEdit;
+    	QLineEdit *email = new QLineEdit;
+    	QPushButton *submit = new QPushButton(&quot;Submit&quot;);
+    	
+    	firstname-&gt;setPlaceholderText(&quot;first name&quot;);
+    	lastname-&gt;setPlaceholderText(&quot;last name&quot;);
+    	email-&gt;setPlaceholderText(&quot;user@example.com&quot;);
     
-    	button.show();
+    	layout-&gt;addWidget(firstnameLabel, 0, 0);
+    	layout-&gt;addWidget(firstname, 0, 1);
+    	layout-&gt;addWidget(lastnameLabel, 1, 0);
+    	layout-&gt;addWidget(lastname, 1, 1);
+    	layout-&gt;addWidget(emailLabel, 2, 0);
+    	layout-&gt;addWidget(email, 2, 1);
+    	layout-&gt;addWidget(submit, 3, 0);
+    
+    	window-&gt;setLayout(layout);
+    	window-&gt;show();
     	return app.exec();
     }
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="6.2.2.1.html">previous page</a></li>
+<li class="previous"><a href="6.2.3.0.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="6.2.2.3.html">next page</a></li>
+<li class="next"><a href="6.2.3.2.html">next page</a></li>
 </ul>
 </div>
 <script>

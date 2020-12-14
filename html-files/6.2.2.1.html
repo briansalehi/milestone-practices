@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Push Button</title>
+<title>QLabel</title>
 <style>
 a,
 a:hover,
@@ -111,26 +111,31 @@ pre {
 <li class="breadcrumb-item"><a href="6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a href="6.2.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a href="6.2.2.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >Push Button</li>
+<li class="breadcrumb-item active" >QLabel</li>
 </ol>
-<h2>Push Button</h2>
+<h2>QLabel</h2>
 <div class="comment-style" >
-   Push button can get optional QIcon object as first parameter, or to use its
-   overloaded constructor with only one parameter specifying button text.<br />
+   Labels are used to embed and string in application window.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>push-button.cxx</cite>
+  <cite>label.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
-    #include &lt;QPushButton&gt;
+    #include &lt;QString&gt;
+    #include &lt;QLabel&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
-    	QPushButton button(QIcon(&quot;submit.png&quot;), &quot;Submit&quot;);
-    	button.show();
+    	QString text(&quot;This is a simple Qt application&quot;);
+    
+    	QLabel label(text);
+    	label.setFont(QFont(&quot;Free Sans&quot;, 12));
+    	label.setAlignment(Qt::AlignCenter);
+    
+    	label.show();
     	return app.exec();
     }
 </code>
