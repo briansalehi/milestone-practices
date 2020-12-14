@@ -33,7 +33,7 @@ By giving concepts names, we make the code readable considerably:
 	<code>
 		int cell[]
 		...
-		int cell[STATUS_VALUE] = FLAGGED;
+		if (cell[STATUS_VALUE] == FLAGGED)
 		...
 	</code>
 </pre>
@@ -162,7 +162,7 @@ Say what you mean, mean what you say.
 <h4>Pick One Word per Concept</h4>
 Pick one word for abstract concept and stick with it.
 For example, it's confusing to have <i>fetch</i>, <i>get</i>, and
-<i>retrieve</i> as equivalent methods of a different class.
+<i>retrieve</i> as equivalent methods of different classes.
 
 A consistent lexicon is a great boon to the programmers who must use your
 code.

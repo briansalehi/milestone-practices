@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Strategy Pattern</title>
+<title>Naming</title>
 <style>
 a,
 a:hover,
@@ -109,50 +109,218 @@ pre {
 <div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="3.0.html">Software Design</a></li>
-<li class="breadcrumb-item"><a href="3.1.0.html">Design Patterns</a></li>
-<li class="breadcrumb-item active" >Strategy Pattern</li>
+<li class="breadcrumb-item"><a href="3.1.0.html">Clean Code</a></li>
+<li class="breadcrumb-item active" >Naming</li>
 </ol>
-<h2>Strategy Pattern</h2>
+<h2>Naming</h2>
 <div class="comment-style" >
-   <b>The Strategy Pattern defines a family of algorithms, encapsulates each
-   one, and makes them interchangeable.</b>
+   <h4>Use Intention-Revealing Names</h4>
+   For example, the name <i>d</i> reveals nothing.<br />
+   It doesn't evoke a sense of elapsed time, nor of days.<br />
+   We should choose a name that specifies what is being measured and the unit of
+   that measurement:<br />
    <br />
-   Identify the aspects of your application that vary and separate them from what
-   stays the same.<br />
+   <pre class="language-cpp">
+   <code>
+   int elapsedTimeInDays
+   int daysSinceCreation
+   int daysSinceModification
+   int fileAgeInDays
+   </code>
+   </pre>
    <br />
-   In other words, if you’ve got some aspect of your code that is changing, say
-   with every new requirement, then you know you’ve got a behavior that needs to
-   be pulled out and separated from all the stuff that doesn’t change.<br />
-   Here’s another way to think about this principle: take the parts that vary and
-   encapsulate them, so that later you can alter or extend the parts that vary
-   without affecting those that don’t.<br />
-   All patterns provide a way to let some part of a system vary independently of
-   all other parts.<br />
+   Sometimes the problem is not the simplicity of the code but the
+   <i>implicity</i> of it.<br />
    <br />
-   When you put two classes together like this you’re using composition.<br />
-   Instead of inheriting from behavior methods directly, they get their behavior
-   by being composed with the right behavior object.<br />
+   <pre class="language-cpp">
+   <code>
+   int cell[];<br />
+   ...<br />
+   if (cell[0] == 4)
+   ...<br />
+   </code>
+   </pre>
    <br />
-   <b>Design Principle</b>
-   Design to an interface, not an implementation.<br />
+   Here, zeroth subscription does not signify anything, neither does the number
+   4.<br />
+   By giving concepts names, we make the code readable considerably:<br />
    <br />
-   Design Patterns give you a shared vocabulary with other developers.<br />
-   Once you’ve got the vocabulary, you can more easily communicate with
-   other developers and inspire those who don’t know patterns to start
-   learning them. It also elevates your thinking about architectures by
-   letting you think at the pattern level, not the nitty-gritty object level.<br />
+   <pre class="language-cpp">
+   <code>
+   int cell[]
+   ...<br />
+   if (cell[STATUS_VALUE] == FLAGGED)
+   ...<br />
+   </code>
+   </pre>
    <br />
-   The power of a shared pattern vocabulary When you communicate using
-   patterns, you are doing more than just sharing LINGO.<br />
-   Shared pattern vocabularies are POWERFUL. When you communicate with another
-   developer or your team using patterns, you are communicating not just a
-   pattern name but a whole set of qualities, characteristics, and constraints
-   that the pattern represents.<br />
+   Further improvements can also be made by object oriented design:<br />
    <br />
-   Talking at the pattern level allows you to stay “in the design” longer.<br />
-   Talking about software systems using patterns allows you to keep the
-   discussion at the design level, without having to dive down to the
-   nitty-gritty details of implementing objects and classes.<br />
+   <pre class="language-cpp">
+   <code>
+   Cell cell = new Cell;<br />
+   ...<br />
+   if (cell.isFlagged())
+   ...<br />
+   </code>
+   </pre>
+   <br />
+   <h4>Avoid Disinformation</h4>
+   Avoid using obsecure naming like <i>hp</i> or similarly abbreviated names.<br />
+   <br />
+   Don't refer to data structures in names. <i>accountList</i> may lead to false
+   conclusions unless it really is a list. So only <i>accounts</i> would be
+   better.<br />
+   <br />
+   Using inconsistent spellings is disinformation.<br />
+   A truly aweful example of disinformative names would be the use of
+   lower-case <i>L</i> or uppercase <i>O</i> as variable names, specially in
+   combination.<br />
+   The problem of course, is that they look almost entirely like the constants
+   one and zero, respectively.<br />
+   <br />
+   <pre class="language-cpp">
+   <code>
+   if ( O == l )
+   O = 0;<br />
+   else
+   l = 1;<br />
+   </code>
+   </pre>
+   <br />
+   <h4>Make Meaningful Distinctions</h4>
+   Noise words like <i>a</i>, <i>an</i>, and <i>the</i> are meaningless
+   distinction. So do <i>Info</i> and <i>Data</i> in <i>ProductInfo</i> and
+   <i>ProductData</i> classes.<br />
+   <br />
+   Noise words are redundant. The word <i>variable</i> should never appear in a
+   variable name. So does <i>table</i> in a table variable, or string as such.<br />
+   How is <i>NameString</i> better than <i>Name</i>?<br />
+   <br />
+   Consider these function names:<br />
+   <br />
+   <pre class="language-cpp">
+   <code>
+   getActiveAccount();<br />
+   getActiveAccounts();<br />
+   getActiveAccountInfo();<br />
+   </code>
+   </pre>
+   <br />
+   How are the programmers supposed to know which of these fuunctions to call?<br />
+   Distinguish names in such a way the reader knows what the differences offer.<br />
+   <br />
+   <h4>Use Pronounceable Names</h4>
+   Names should be pronouceable in conversations:<br />
+   <br />
+   <pre class="language-cpp">
+   <code>
+   Date genymmdhms;<br />
+   </code>
+   </pre>
+   <br />
+   Hey, Mikey, take a look at "gen emm dee aich emm ess"!<br />
+   <br />
+   <pre class="language-cpp">
+   <code>
+   Date generationTimestamp;<br />
+   </code>
+   </pre>
+   <br />
+   Hey, Mikey, take a look at this record! The generation timestamp is set
+   to tomorrow's date! How can that be?<br />
+   <br />
+   <h4>Use Searchable Names</h4>
+   One might easily grep for <i>MAX_CLASSES_PER_STUDENT</i>, but the number 7
+   could be more troublesome.<br />
+   <br />
+   Single-letter names can ONLY be used as local variables inside small methods.<br />
+   The length of a name should correspond to the size of its scope.<br />
+   <br />
+   <h4>Avoid Encodings</h4>
+   We have enough encodings to deal with without adding more to our burden.<br />
+   Encoded names are seldom pronounceable and are easy to mis-type.<br />
+   <br />
+   Do not add m_ prefixes to method names, we are way passed that age!<br />
+   <br />
+   <h4>Avoid Mental Mapping</h4>
+   This is a problem with single letter variable names.<br />
+   While using them might not hurt in small scope iterations like <i>i</i> in for
+   loops, however in most other contexts a single-letter name is poor choice.<br />
+   It's just a placeholder that the reader must mentally map to the actual
+   concept.<br />
+   <br />
+   In general programmers are pretty smart. Smart people sometimes like to show
+   off their smartness by demonstrating their mental juggling abilities.<br />
+   <br />
+   One difference between a smart programmer and a professional programmer is
+   that the professional understands that <b>clarity is king</b>. Professionals
+   use their power for good and write code that others can understand.<br />
+   <br />
+   <h4>Class Names</h4>
+   Classes and objects should have noun or noun phrase names like
+   </i>Customer</i>, </i>WikiPage</i>, <i>Account</i>, and <i>AddressParser</i>.<br />
+   Avoid words like <i>Manager</i>, <i>Processor</i>, <i>Data</i>, or
+   <i>Info</i> in the name of a class.<br />
+   Also a class name should not be a verb.<br />
+   <br />
+   <h4>Method Names</h4>
+   Methods should have a verb or verb phrase names like <i>postsPayment</i>,<br />
+   <i>deletePage</i>, or save.<br />
+   <br />
+   <h4>Don't Be Cute</h4>
+   If names are too clever, they will be memorable only to people who share the
+   author's sense of humor.<br />
+   <i>HolyHandGrenade</i> is cute for sure but <i>DeleteItems</i> might
+   be a better name.<br />
+   Say what you mean, mean what you say.<br />
+   <br />
+   <h4>Pick One Word per Concept</h4>
+   Pick one word for abstract concept and stick with it.<br />
+   For example, it's confusing to have <i>fetch</i>, <i>get</i>, and
+   <i>retrieve</i> as equivalent methods of different classes.<br />
+   <br />
+   A consistent lexicon is a great boon to the programmers who must use your
+   code.<br />
+   <br />
+   <h4>Don't Pun</h4>
+   Avoid using the same word for two purposes.<br />
+   <br />
+   Using <i>insert</i> and <i>append</i> is a better idea than using only
+   <i>add</i>.<br />
+   <br />
+   <h4>Use Solution Domain Names</h4>
+   Remember that the people who read your code will be programmers.<br />
+   So go ahead and use computer science (CS) terms, algorithms, pattern
+   names, math terms and so forth.<br />
+   <br />
+   <h4>Use Problem Domain Names</h4>
+   When programmering terms and solution domain names will no longer come
+   in hand, use domain names.<br />
+   At least the programmer who maintains your code can ask a domain expert what
+   it means.<br />
+   <br />
+   Separating solution and domain concepts is part of the job of a good
+   programmer and designer.<br />
+   The code that has more to do with problem domain concepts should have names
+   drawn from the problem domain.<br />
+   <br />
+   <h4>Add Meaningful Context</h4>
+   When you have variable names <i>firstName</i>, <i>lastName</i>, <i>street
+   </i>, <i>houseNumber</i>, <i>city</i>, <i>state</i>, <i>zipcode</i>, but you
+   just saw the <i>state</i> variable is being used stand alone in a method, you
+   can add context by using prefixes:<br />
+   <i>addrFirstName</i>, <i>addrLastName</i>, <i>addrState</i>, and so on.<br />
+   Of course, a better solution is to create a class named <i>Address</i>.<br />
+   Then even the compiler knows that the variables belong to a bigger concept.<br />
+   <br />
+   <h4>Don't Add Gratuitous Content</h4>
+   Shorter names are generally better than long ones, so long as they are clear.<br />
+   Add no more context to a name than is necessary.<br />
+   <br />
+   The names <i>accountAddress</i> and <i>customerAddress</i> are fine names
+   for instances of the class <i>Address</i> but could be poor names for classes.<br />
+   <i>Address</i> is a fine name for a class.<br />
 </div>
 <ul class="pager">
 <li class="previous"><a href="3.1.0.html">previous page</a></li>
