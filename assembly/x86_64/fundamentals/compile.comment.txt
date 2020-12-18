@@ -1,0 +1,47 @@
+To compile and run your assembly sources, you are going to need a few tools:
+nasm gcc gdb make build-essential
+
+Install specified packages using your distribution specific package manager.
+
+All of the steps required to compile sample sources are specified in
+<b>Execution</b> section of practice pages.
+You can write your own make files to ease compilation process.
+
+Nasm is a popular assembler available on Linux, Windows and Mac.
+Options given to <b>nasm</b> assembler are as follows:
+
+The -f is followed by the output format, in our case elf64, which means
+<b>E</b>xecutable and <b>L</b>inkable <b>F</b>ormat for <b>64</b>-bit.
+
+The -g means that we want to include debug information in a debug format
+specified after the -F option.
+
+We use the dwarf debug format.
+The software geeks who invented this format seemed to like <i>The
+Hobbit</i> and <i>Lord of the Rings</i> written by J.J.R.
+<b>DWARF</b> stands for <b>D</b>ebug <b>W</b>ith <b>A</b>rbitrary <b>R</b>ecord
+<b>F</b>ormat.
+
+STABS is another debug format, which has nothing to do with all the
+stabbing in Tolkien’s novels; the name comes from <b>S</b>ymbol <b>Tab</b>le
+<b>S</b>trings.
+We will not use STABS here, so you won’t get hurt.
+
+You can also use -l option which tells NASM to generate a .lst file.
+You can use .lst files to examine the result of the assembly.
+
+The recent GCC linker and compiler generate <i>position-independent
+executables</i> (PIEs) by default.
+This is to prevent hackers from investigating how memory is used by a program
+and eventually interfering with program execution.
+At this point, we will not build position-independent executables;
+it would really complicate the analysis of our program (on purpose, for
+security reasons).
+So, we give the parameter -no-pie to linker.
+
+We use GCC because of the ease of accessing C standard library functions
+from within assembler code.
+To make life easy, we will use C language
+functions from time to time to simplify the example assembly code.
+
+Another popular linker on Linux is <i>ld</i>, the GNU linker.

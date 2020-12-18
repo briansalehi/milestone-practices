@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>Assembly Structure</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<div class="container" >
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="4.0.html">Assembly</a></li>
+<li class="breadcrumb-item"><a href="4.2.0.html">x86_64 Practices</a></li>
+<li class="breadcrumb-item"><a href="4.2.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item active" >Assembly Structure</li>
+</ol>
+<h2>Assembly Structure</h2>
+<div class="comment-style" >
+   In section <b>.data</b> , initialized data is declared and defined, in the
+   following format:<br />
+   <br />
+   <b>&lt;variable name&gt; &lt;type&gt; &lt;value&gt;</b>
+   <br />
+   Variable names start with a letter, followed by letters or numbers or
+   special characters.<br />
+   <br />
+   When a variable is included in <i>section .data</i>, memory is allocated
+   for that variable when the source code is assembled and linked to an
+   executable.<br />
+   <br />
+   <i>section .data</i> can also contain constants, which are values that
+   cannot be changed in the program. They are declared in the following format:<br />
+   <br />
+   <b>&lt;constant name&gt; equ &lt;value&gt;</b>
+   <br />
+   <table class="table table-dark">
+   <thead>
+   <tr>
+   <th scope="col">#</th>
+   <th scope="col">Type</th>
+   <th scope="col">Length</th>
+   <th scope="col">Name</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <th scope="row">1</th>
+   <td>db</td>
+   <td>8 bits</td>
+   <td>Byte</td>
+   </tr>
+   <tr>
+   <th scope="row">2</th>
+   <td>dw</td>
+   <td>16 bits</td>
+   <td>Word</td>
+   </tr>
+   <tr>
+   <th scope="row">3</th>
+   <td>dd</td>
+   <td>32 bits</td>
+   <td>Double word</td>
+   </tr>
+   <tr>
+   <th scope="row">3</th>
+   <td>dq</td>
+   <td>64 bits</td>
+   <td>Quadword</td>
+   </tr>
+   </tbody>
+   </table>
+   <br />
+   The acronym bss stands for Block Started by Symbol , and its history goes
+   back to the fifties, when it was part of assembly language developed for the
+   IBM 704. In this section go the uninitialized variables. Space for uninitialized
+   variables is declared in this section, in the following format:<br />
+   <br />
+   <b>&lt;variable name&gt; &lt;type&gt; &lt;number&gt;</b>
+   <br />
+   <table class="table table-dark">
+   <thead>
+   <tr>
+   <th scope="col">#</th>
+   <th scope="col">Type</th>
+   <th scope="col">Length</th>
+   <th scope="col">Name</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <th scope="row">1</th>
+   <td>sesb</td>
+   <td>8 bits</td>
+   <td>Byte</td>
+   </tr>
+   <tr>
+   <th scope="row">2</th>
+   <td>resw</td>
+   <td>16 bits</td>
+   <td>Word</td>
+   </tr>
+   <tr>
+   <th scope="row">3</th>
+   <td>resd</td>
+   <td>32 bits</td>
+   <td>Double word</td>
+   </tr>
+   <tr>
+   <th scope="row">3</th>
+   <td>resq</td>
+   <td>64 bits</td>
+   <td>Quadword</td>
+   </tr>
+   </tbody>
+   </table>
+   <br />
+   The variables in <i>section .bss</i> do not contain any values; the values
+   will be assigned later at execution time.<br />
+   Memory places are not reserved at compile time but at execution time.<br />
+   <br />
+   When your program starts executing, the program asks
+   for the needed memory from the operating system, allocated to variables in
+   section .bss and initialized to zeros.<br />
+   If there is not enough memory
+   available for the .bss variables at execution time, the program will crash.<br />
+   <br />
+   <i>section .txt</i> is where all the action is.<br />
+   This section contains the program code and starts with the following:<br />
+   <br />
+   <pre language=asm>
+   <code>
+   global main
+   main:<br />
+   </code>
+   </pre>
+   <br />
+   The <b>main:</b> part is called a label.<br />
+   Registers such as rdi, rsi, and rax are prepared for outputting a message on
+   the screen.<br />
+   <br />
+   Here, we will display a
+   string on the screen using a system call. That is, we will ask the operating
+   system to do the work for us.<br />
+   <br />
+   System calls are used to ask the operating system to do specific actions.<br />
+   Every operating system has a different list of system call parameters, and the
+   system calls for Linux are different from Windows or macOS.<br />
+   We use the Linux system calls for x64 in these series of practices.<br />
+   <br />
+   Be aware that 32-bit system calls differ from 64-bit system calls.<br />
+   <br />
+</div>
+<hr />
+<h3>Source</h3>
+  <cite>structure.asm</cite>
+<pre class="line-numbers" >
+<code class="language-nasm">
+    section .data
+    	message db &apos;hello, world&apos;, 10, 0
+    	length equ $ - message - 1
+    
+    section .bss
+    	response resb 20
+    
+    section .text
+    	global main
+    
+    main:
+    	mov rax, 1			; write system call
+    	mov rdi, 1			; standard output
+    	mov rsi, message	; message address in memory
+    	mov rdx, length		; length of message
+    	syscall
+    
+    	mov rax, 60			; exit system call
+    	mov rdi, 0			; return 0
+    	syscall
+    
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="nasm" data-host="milestone">
+<code class="language-bash">
+nasm -f elf64 -g -F dwarf structure.asm
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="nasm" data-host="milestone">
+<code class="language-bash">
+gcc -g -Wall -no-pie -o structure.bin structure.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="nasm" data-host="milestone">
+<code class="language-bash">
+./structure.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" ./assembly/x86_64/fundamentals/structure.asm begin language-bash>
+<code>
+hello, world
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="4.2.1.1.html">previous page</a></li>
+<li class="top"><a href="index.html">top page</a></li>
+<li class="next"><a href="5.0.html">next page</a></li>
+</ul>
+</div>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+</body>
+</html>
