@@ -109,10 +109,10 @@ available for the .bss variables at execution time, the program will crash.
 <i>section .txt</i> is where all the action is.
 This section contains the program code and starts with the following:
 
-<pre language="nasm">
-	<code>
+<pre class="line-numbers">
+	<code class="language-nasm">
 		global main
-		main:
+	main:
 	</code>
 </pre>
 
