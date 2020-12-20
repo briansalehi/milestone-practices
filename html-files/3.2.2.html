@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Strategy Pattern</title>
+<title>Observer Pattern</title>
 <style>
 a,
 a:hover,
@@ -110,54 +110,26 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a href="3.2.0.html">Design Patterns</a></li>
-<li class="breadcrumb-item active" >Strategy Pattern</li>
+<li class="breadcrumb-item active" >Observer Pattern</li>
 </ol>
-<h2>Strategy Pattern</h2>
+<h2>Observer Pattern</h2>
 <div class="comment-style" >
-   <b>The Strategy Pattern defines a family of algorithms, encapsulates each
-   one, and makes them interchangeable.</b>
+   The Observer Pattern defines a one-to-many dependency between objects so
+   that when one object changes state, all of its dependents are notified and
+   updated automatically.<br />
    <br />
-   Identify the aspects of your application that vary and separate them from what
-   stays the same.<br />
+   When two objects are loosely coupled, they can interact, but they typically
+   have very little knowledge of each other. Loosely coupled designs often give
+   us a lot of flexibility. And, as it turns out, the Observer Pattern is a great
+   example of loose coupling.<br />
    <br />
-   In other words, if you’ve got some aspect of your code that is changing, say
-   with every new requirement, then you know you’ve got a behavior that needs to
-   be pulled out and separated from all the stuff that doesn’t change.<br />
-   Here’s another way to think about this principle: take the parts that vary and
-   encapsulate them, so that later you can alter or extend the parts that vary
-   without affecting those that don’t.<br />
-   All patterns provide a way to let some part of a system vary independently of
-   all other parts.<br />
-   <br />
-   When you put two classes together like this you’re using composition.<br />
-   Instead of inheriting from behavior methods directly, they get their behavior
-   by being composed with the right behavior object.<br />
-   <br />
-   <b>Design Principle</b>
-   Design to an interface, not an implementation.<br />
-   <br />
-   Design Patterns give you a shared vocabulary with other developers.<br />
-   Once you’ve got the vocabulary, you can more easily communicate with
-   other developers and inspire those who don’t know patterns to start
-   learning them. It also elevates your thinking about architectures by
-   letting you think at the pattern level, not the nitty-gritty object level.<br />
-   <br />
-   The power of a shared pattern vocabulary When you communicate using
-   patterns, you are doing more than just sharing LINGO.<br />
-   Shared pattern vocabularies are POWERFUL. When you communicate with another
-   developer or your team using patterns, you are communicating not just a
-   pattern name but a whole set of qualities, characteristics, and constraints
-   that the pattern represents.<br />
-   <br />
-   Talking at the pattern level allows you to stay “in the design” longer.<br />
-   Talking about software systems using patterns allows you to keep the
-   discussion at the design level, without having to dive down to the
-   nitty-gritty details of implementing objects and classes.<br />
+   Loosely coupled designs allow us to build flexible OO systems that can
+   handle change because they minimize the interdependency between objects.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a href="3.2.0.html">previous page</a></li>
+<li class="previous"><a href="3.2.1.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="3.2.2.html">next page</a></li>
+<li class="next"><a href="4.0.html">next page</a></li>
 </ul>
 </div>
 <script>
