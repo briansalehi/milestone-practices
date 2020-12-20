@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Observer Pattern</title>
+<title>Code Design</title>
 <style>
 a,
 a:hover,
@@ -109,27 +109,30 @@ pre {
 <div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="3.0.html">Software Design</a></li>
-<li class="breadcrumb-item"><a href="3.2.0.html">Design Patterns</a></li>
-<li class="breadcrumb-item active" >Observer Pattern</li>
+<li class="breadcrumb-item"><a href="3.3.0.html">Unit Testing</a></li>
+<li class="breadcrumb-item active" >Code Design</li>
 </ol>
-<h2>Observer Pattern</h2>
+<h2>Code Design</h2>
 <div class="comment-style" >
-   The Observer Pattern defines a one-to-many dependency between objects so
-   that when one object changes state, all of its dependents are notified and
-   updated automatically.<br />
+   <h4>The relationship between unit testing and code design</h4>
+   The ability to unit test a piece of code is a nice litmus test, but it only
+   works in one direction.<br />
+   It’s a good negative indicator — it points out poor-quality code with
+   relatively high accuracy.<br />
+   If you find that code is hard to unit test, it’s a strong sign that the
+   code needs improvement. The poor quality usually manifests itself in tight
+   coupling, which means different pieces of production code are not decoupled
+   from each other enough, and it’s hard to test them separately.<br />
    <br />
-   When two objects are loosely coupled, they can interact, but they typically
-   have very little knowledge of each other. Loosely coupled designs often give
-   us a lot of flexibility. And as it turns out, the Observer Pattern is a great
-   example of loose coupling.<br />
-   <br />
-   Loosely coupled designs allow us to build flexible OO systems that can
-   handle change because they minimize the interdependency between objects.<br />
+   The goal of unit testing is to enable sustainable growth of the software
+   project.<br />
+   The term sustainable is key. It’s quite easy to grow a project, especially
+   when you start from scratch. It’s much harder to sustain this growth over time.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a href="3.2.1.html">previous page</a></li>
+<li class="previous"><a href="3.3.0.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="3.3.0.html">next page</a></li>
+<li class="next"><a href="4.0.html">next page</a></li>
 </ul>
 </div>
 <script>

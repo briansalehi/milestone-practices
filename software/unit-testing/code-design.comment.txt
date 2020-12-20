@@ -1,0 +1,14 @@
+<h4>The relationship between unit testing and code design</h4>
+The ability to unit test a piece of code is a nice litmus test, but it only
+works in one direction.
+It’s a good negative indicator — it points out poor-quality code with
+relatively high accuracy.
+If you find that code is hard to unit test, it’s a strong sign that the
+code needs improvement. The poor quality usually manifests itself in tight
+coupling, which means different pieces of production code are not decoupled
+from each other enough, and it’s hard to test them separately.
+
+The goal of unit testing is to enable sustainable growth of the software
+project.
+The term sustainable is key. It’s quite easy to grow a project, especially
+when you start from scratch. It’s much harder to sustain this growth over time.
