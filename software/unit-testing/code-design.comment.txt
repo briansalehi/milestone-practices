@@ -4,7 +4,8 @@ works in one direction.
 It’s a good negative indicator — it points out poor-quality code with
 relatively high accuracy.
 If you find that code is hard to unit test, it’s a strong sign that the
-code needs improvement. The poor quality usually manifests itself in tight
+code needs improvement.
+The poor quality usually manifests itself in tight
 coupling, which means different pieces of production code are not decoupled
 from each other enough, and it’s hard to test them separately.
 
