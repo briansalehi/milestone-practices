@@ -1,0 +1,24 @@
+Here we’ve got several concrete classes being instantiated, and the decision
+of which to instantiate is made at runtime depending on some set of conditions.
+
+What’s wrong with “new”?
+Technically there’s nothing wrong with the new operator. After all, it’s a
+fundamental part of most modern object-oriented languages.
+The real culprit is our old friend CHANGE and how change impacts our use of
+new.
+
+If your code is written to an interface, then it will work with any new
+classes implementing that interface through polymorphism.
+However, when you have code that makes use of lots of concrete classes, you’re
+looking for trouble because that code may have to be changed as new concrete
+classes are added.
+So, in other words, your code will not be “closed for modification”.
+To extend your code with new concrete types, you’ll have to reopen it.
+
+Factories handle the details of object creation.
+
+The Factory Method Pattern is useful if you’ve only got one concrete creator
+because you are decoupling the implementation of the product from its use.
+If you add additional products or change a product’s implementation, it will
+not affect your Creator (because the Creator is not tightly coupled to any
+ConcreteProduct).
