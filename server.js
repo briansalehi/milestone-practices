@@ -24,11 +24,9 @@ app.get("/*.html", (req, res) => {
 });
 
 app.get("/*", (req, res) => {
-	console.log(`html-files${req.path}`)
 	fs.stat(`html-files${req.path}`, function (err, stat) {
 		if (err == null) {
 			if (stat.isFile()) {
-				console.log("file")
 				fs.readlink(`html-files${req.path}`, function(lerr, filepath) {
 					if (lerr == null) {
 						res.status(200).sendFile(path.join(__dirname, filepath.toString()));
@@ -37,8 +35,7 @@ app.get("/*", (req, res) => {
 					}
 				});
 			} else if (stat.isDirectory()) {
-				console.log("dir")
-				fs.readlink(`html-files${req.path}`, function(lerr, filepath) {
+				fs.readlink(`html-files${req.path}/index`, function(lerr, filepath) {
 					if (lerr == null) {
 						res.status(200).sendFile(path.join(__dirname, filepath.toString()));
 					} else {
