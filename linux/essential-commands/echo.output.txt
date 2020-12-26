@@ -1,0 +1,4 @@
+this is a string
+this is too a string
+/bin/bash
+$SHELL

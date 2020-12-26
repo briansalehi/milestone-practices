@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Package Management</title>
+<title>Make Directory</title>
 <style>
 a,
 a:hover,
@@ -109,19 +109,32 @@ pre {
 <div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="1.0.html">Linux Administration</a></li>
-<li class="breadcrumb-item active" >Package Management</li>
+<li class="breadcrumb-item"><a href="1.2.0.html">Essential Commands</a></li>
+<li class="breadcrumb-item active" >Make Directory</li>
 </ol>
-<h2>Package Management</h2>
+<h2>Make Directory</h2>
 <div class="comment-style" >
-   Managing packages on Linux systems is almost an essential skill in order to
-   make your system survive over time.<br />
-   This chapter covers almost everything you need to know about packages as a
-   Linux user.<br />
+   Creates one or many directories if multiple names are given.<br />
+   Directories can also be created in places other than working directory if
+   directory names contain path.<br />
+   <br />
+   Special characters like / and + should be avoided in directory names.<br />
 </div>
+<hr />
+<h3>Source</h3>
+  <cite>mkdir.sh</cite>
+<pre class="line-numbers" >
+<code class="language-bash">
+    #!/usr/bin/env bash
+    
+    mkdir /tmp/sample-directory
+</code>
+</pre>
+<h3>Execution</h3>
 <ul class="pager">
-<li class="previous"><a href="1.2.0.html">previous page</a></li>
+<li class="previous"><a href="1.2.4.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="2.0.html">next page</a></li>
+<li class="next"><a href="1.2.6.html">next page</a></li>
 </ul>
 </div>
 <script>

@@ -1,0 +1,2 @@
+Prints the entry of given file.
+Multiple files can be given to print subsequently.

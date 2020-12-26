@@ -1,0 +1,9 @@
+<i>echo</i> command might seem nontrivial at first sight but it's usually the
+most used command.
+
+Prints a string or the value of a variable on shell.
+Outputs can be redirected to files or to be piped to another command.
+
+Only strings with duoble quote will expand variables.
+
+Always embrace your variables and strings in quote.

@@ -1,0 +1,5 @@
+Creates one or many directories if multiple names are given.
+Directories can also be created in places other than working directory if
+directory names contain path.
+
+Special characters like / and + should be avoided in directory names.

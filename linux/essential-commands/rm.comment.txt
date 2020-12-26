@@ -1,0 +1,2 @@
+Multiple files can be removed.
+<i>-r</i> option should be given for directories.

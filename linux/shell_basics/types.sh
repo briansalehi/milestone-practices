@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-type cd
-
 type pwd
 
-type mkdir
+type touch
+
+type -a touch

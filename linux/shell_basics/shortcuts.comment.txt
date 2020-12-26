@@ -3,6 +3,8 @@ your 10 fingers typing anything with least effort.
 
 There are dozens of touch typing tutorial apps out there, just use one if you
 don’t already know how to do it.
+One recommended website is
+<a target="_blank" href="https://typingclub.com">Typing Club</a>.
 
 Usually programmers and admins prefer not to raise their hands for frequent
 tasks.
@@ -14,31 +16,98 @@ Instead, we can get used to using the shortcuts doing exact same thing without
 raising our hands, as for up arrow key we use <b>Ctrl+P</b> and down arrow key
 we use <b>Ctrl+N</b>.
 
-* before you use <b>Ctrl+S</b> you need to know that it causes your terminal to
+<b>NOTE:</b>
+<br/>
+Before you use <b>Ctrl+S</b> you need to know that it causes your terminal to
 hang, to make your terminal continue running hit <b>Ctrl+Q</b> afterwards.
 Type <b>”stty -xion”</b> to make your terminal interpreting <b>Ctrl+S</b> as
 search shortcut instead.
 
 There’s a list of shell shortcuts that saves us time and energy:
 
-<ol>
-<li> Ctrl+P: Previous command</li>
-<li> Ctrl+N: Next command</li>
-<li> Ctrl+R: Search backward (Reverse)</li>
-<li> Ctrl+S: *Search forward</li>
-<li> Ctrl+G: Cancel search</li>
-<li> Ctrl+A: Move cursor to the start</li>
-<li> Ctrl+E: Move cursor to the end</li>
-<li> Ctrl+B: Move backward within a line</li>
-<li> Ctrl+F: Move cursor forward within a line</li>
-<li> Esc then Ctrl+B: Move cursor backward a word at a time, right arrow key</li>
-<li> Esc then Ctrl+F: Move cursor forward a word at a time, left arrow key</li>
-<li> Ctrl+D: Delete character under the cursor, delete key</li>
-<li> Ctrl+K: Delete all text from the cursor to the end of the line</li>
-<li> Ctrl+X then Backspace: Delete all text from the cursor to the beginning of the life</li>
-<li> Ctrl+T: Immediately transposes the two words before and under the cursor</li>
-<li> Esc then Ctrl+U: Converts text from the cursor to the end of line the word to uppercase</li>
-<li> Esc then Ctrl+L: Converts text from the cursor to the end of line the word to lowercase</li>
-<li> Esc then Ctrl+C: Capitalizes text from the cursor to the end of line the word</li>
-<li> Ctrl+X then Ctrl+E: Launch default editor</li>
-</ol>
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Key Combination</th>
+			<th scope="col">Definition</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td> Ctrl+P</td>
+			<td>Previous command</td>
+		</td>
+		<tr>
+			<td> Ctrl+N</td>
+			<td>Next command</td>
+		</td>
+		<tr>
+			<td> Ctrl+R</td>
+			<td>Search backward (Reverse)</td>
+		</td>
+		<tr>
+			<td> Ctrl+S</td>
+			<td>*Search forward</td>
+		</td>
+		<tr>
+			<td> Ctrl+G</td>
+			<td>Cancel search</td>
+		</td>
+		<tr>
+			<td> Ctrl+A</td>
+			<td>Move cursor to the start</td>
+		</td>
+		<tr>
+			<td> Ctrl+E</td>
+			<td>Move cursor to the end</td>
+		</td>
+		<tr>
+			<td> Ctrl+B</td>
+			<td>Move backward within a line</td>
+		</td>
+		<tr>
+			<td> Ctrl+F</td>
+			<td>Move cursor forward within a line</td>
+		</td>
+		<tr>
+			<td> Esc then Ctrl+B</td>
+			<td>Move cursor backward a word at a time, right arrow key</td>
+		</td>
+		<tr>
+			<td> Esc then Ctrl+F</td>
+			<td>Move cursor forward a word at a time, left arrow key</td>
+		</td>
+		<tr>
+			<td> Ctrl+D</td>
+			<td>Delete character under the cursor, delete key</td>
+		</td>
+		<tr>
+			<td> Ctrl+K</td>
+			<td>Delete all text from the cursor to the end of the line</td>
+		</td>
+		<tr>
+			<td> Ctrl+X then Backspace</td>
+			<td>Delete all text from the cursor to the beginning of the life</td>
+		</td>
+		<tr>
+			<td> Ctrl+T</td>
+			<td>Immediately transposes the two words before and under the cursor</td>
+		</td>
+		<tr>
+			<td> Esc then Ctrl+U</td>
+			<td>Converts text from the cursor to the end of line the word to uppercase</td>
+		</td>
+		<tr>
+			<td> Esc then Ctrl+L</td>
+			<td>Converts text from the cursor to the end of line the word to lowercase</td>
+		</td>
+		<tr>
+			<td> Esc then Ctrl+C</td>
+			<td>Capitalizes text from the cursor to the end of line the word</td>
+		</td>
+		<tr>
+			<td> Ctrl+X then Ctrl+E</td>
+			<td>Launch default editor</td>
+		</td>
+	</tbody>
+</table>

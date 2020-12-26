@@ -14,6 +14,3 @@ echo "$PATH"
 
 # list of all environment variables
 env
-
-# locate a command
-which mkdir

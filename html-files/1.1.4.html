@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Command Types</title>
+<title>Environment Variables</title>
 <style>
 a,
 a:hover,
@@ -110,58 +110,76 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="1.1.0.html">Shell Basics</a></li>
-<li class="breadcrumb-item active" >Command Types</li>
+<li class="breadcrumb-item active" >Environment Variables</li>
 </ol>
-<h2>Command Types</h2>
+<h2>Environment Variables</h2>
 <div class="comment-style" >
-   The Bash we use is a shell and is just a program that provies us an environment
-   to execute commands on a system. Some commands are built-in and they come
-   with the shell program itself, which are internal commands. <i>cd</i> and
-   <i>pwd</i> are two best known internal commands.<br />
+   Variables are quantities on memory that can store values so that
+   we can refer to them later by the name of that variable.<br />
    <br />
-   Other commands are said to be external commands. That is, they are programs
-   sitting somewhere and as we type their name on the shell and then hit enter the
-   shell executes them and they can run separately from the shell itself.<br />
+   On a shell, to create a variable, a variable name must be specified followed
+   by an equals sign <b>without any space in the middle</b>.<br />
+   Variables might be set empty or the equals sign is followed by a value.<br />
    <br />
-   So, mkdir is a program separate from the shell sitting in the <b>/usr/bin/</b>
-   (pronounced slash USR slash BIN) directory. As we type mkdir on the shell,<br />
-   shell will find this command in its corresponding directory and execute it.<br />
+   Note that there are no spaces between variable name, equals operator, and
+   value.<br />
+   Values can be double-quoted to represent a string which might contain a space.<br />
+   Beware that by eliminating double-quotes, spaces will cut value in pieces and
+   nothing after first space will be stored in that variable.<br />
    <br />
-   How does shell know where to find external programs like <i>mkdir</i> to
-   execute them?<br />
-   We will see later that Bash holds a few environment variables which hold
-   values to manage programs with.<br />
-   PATH variables is one of the environment variables which contains a list of
-   directories separated by colon, each represent a directory which contains
-   executable files, runnable as commands.<br />
+   To access the value stored in a variable use $ before variable’s name without
+   any space in the middle.<br />
+   <br />
+   Here we use <i>echo</i> command to print the value stored in variables.<br />
+   Environment variables are heavily used in shell configuration. For example
+   <b>PATH</b> variable is used to tell the shell where it can find the external
+   commands like <i>mkdir</i>, which we discussed before.<br />
+   <br />
+   PATH holds a list of all directories which the shell will seek for the commands
+   you type, delimited by colon (:).<br />
+   That is, when you type a command like <i>mkdir</i> on your shell and hit enter,<br />
+   shell will look for a program named mkdir in specified directories
+   respectively.<br />
+   <br />
+   As the <i>type</i> command indicated, shell will find the <i>mkdir</i> program
+   in <b>/usr/bin</b> directory, so it will stop searching after the first match.<br />
+   <br />
+   A list of environment variables used by shell can be found by <b>env</b>
+   command.<br />
+   Don’t fool around with these variables, <b>DO NOT change any of them</b>.<br />
+   <br />
+   Two or more commands might have the same name on a system, or one com-
+   mand might be stored in more than one directory, then shell will execute the
+   first matched directory in the PATH environment variable.<br />
+   <br />
+   Finally, <i>which</i> command, tells you where external commands are and by
+   giving <i>-a</i> option it indicates how many instances of a command exists in
+   PATH directories.<br />
+   In an example, the instance of <i>mkdir</i> in /usr/bin will be executed
+   because the <b>/usr/bin</b> directory preceeds the <b>/bin</b> directory,<br />
+   though they both contain the <i>mkdir</i> command.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>types.sh</cite>
+  <cite>variables.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
     #!/usr/bin/env bash
     
-    type cd
+    # store a string
+    project=&quot;Linux Administration&quot;
     
-    type pwd
+    # only Jane will be stored
+    name=Jane Doe
     
-    type mkdir
-</code>
-</pre>
-<h3>Execution</h3>
-<h4>run</h4>
-<pre class="command-line" data-user="bash" data-host="milestone">
-<code class="language-bash">
-bash ./types.sh
-</code>
-</pre>
-<h3>Output</h3>
-<pre class="language-bash" begin language-bash>
-<code>
-cd is a shell builtin
-pwd is a shell builtin
-mkdir is /usr/bin/mkdir
+    # print variable
+    echo &quot;$name&quot;
+    
+    # PATH environment variable
+    echo &quot;$PATH&quot;
+    
+    # list of all environment variables
+    env
 </code>
 </pre>
 <ul class="pager">

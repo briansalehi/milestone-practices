@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Getting Help</title>
+<title>Shell History</title>
 <style>
 a,
 a:hover,
@@ -110,40 +110,42 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="1.1.0.html">Shell Basics</a></li>
-<li class="breadcrumb-item active" >Getting Help</li>
+<li class="breadcrumb-item active" >Shell History</li>
 </ol>
-<h2>Getting Help</h2>
+<h2>Shell History</h2>
 <div class="comment-style" >
-   There are so many commands each having many options in the shell. How can
-   we manage?<br />
-   There are a few ways we can get help when we need to know about a command
-   or we are looking for a command to do what we want.<br />
-   Manual pages are widely used in Linux shells to give you information about the
-   available commands.<br />
-   To get help of manual pages just type <i>man</i> command with the
-   investigating command in front.<br />
+   Normally, your shell keeps a history of the previous commands you executed.<br />
+   You can access to this history by <i>history</i> command.<br />
    <br />
-   Sometimes the command names themselve are forgotten.<br />
-   In this case, description or closes match to what that command is can be
-   queried by man with a <i>-k</i> option.<br />
+   You can run previous command by !! which first indicates the command, then
+   its results.<br />
    <br />
-   We can see that we were looking for a pager and it introduced us the
-   <i>pager</i> command which we call it <i>less</i>.<br />
+   You can also specifically choose a command in history and run again by its ID.<br />
    <br />
-   There is also another tool for reading manuals, <i>info</i>.<br />
-   Though, man pages are mostly used, info command is also pretty popular and
-   there’s a chance you need to work with it later.<br />
+   And finally, you can clear shell history by <b>-c</b> option.<br />
+   <br />
+   For security reasons, you might want to frequently do that.<br />
+   One reason to do this is that you may have typed a passphrase or a sensitive
+   information in command line and now it’s stored in shell history.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>help.sh</cite>
+  <cite>history.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
     #!/usr/bin/env bash
     
-    man ls
+    # list of previous commands
+    history
     
-    man -k &quot;pager&quot;
+    # run previous command
+    !!
+    
+    # run the history id
+    !32
+    
+    # clear history
+    history -c
 </code>
 </pre>
 <ul class="pager">

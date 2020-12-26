@@ -1,0 +1,2 @@
+If path is given, lists files and directories in corresponding path.
+Otherwise, lists entry of your working directory.

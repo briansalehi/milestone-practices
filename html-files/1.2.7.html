@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Shell Shortcuts</title>
+<title>Print String</title>
 <style>
 a,
 a:hover,
@@ -109,129 +109,57 @@ pre {
 <div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="1.0.html">Linux Administration</a></li>
-<li class="breadcrumb-item"><a href="1.1.0.html">Shell Basics</a></li>
-<li class="breadcrumb-item active" >Shell Shortcuts</li>
+<li class="breadcrumb-item"><a href="1.2.0.html">Essential Commands</a></li>
+<li class="breadcrumb-item active" >Print String</li>
 </ol>
-<h2>Shell Shortcuts</h2>
+<h2>Print String</h2>
 <div class="comment-style" >
-   It would be the best experience if you can touch type on your keyboard and use
-   your 10 fingers typing anything with least effort.<br />
+   <i>echo</i> command might seem nontrivial at first sight but it's usually the
+   most used command.<br />
    <br />
-   There are dozens of touch typing tutorial apps out there, just use one if you
-   don’t already know how to do it.<br />
-   One recommended website is
-   <a target="_blank" href="https://typingclub.com">Typing Club</a>.<br />
+   Prints a string or the value of a variable on shell.<br />
+   Outputs can be redirected to files or to be piped to another command.<br />
    <br />
-   Usually programmers and admins prefer not to raise their hands for frequent
-   tasks.<br />
+   Only strings with duoble quote will expand variables.<br />
    <br />
-   So, for example you can reach to your previous commands you typed on shell
-   by hitting up and down arrow keys, which requires you to raise your hands and
-   move them to the top of arrow keys which seems to be a very long distance!<br />
-   Instead, we can get used to using the shortcuts doing exact same thing without
-   raising our hands, as for up arrow key we use <b>Ctrl+P</b> and down arrow key
-   we use <b>Ctrl+N</b>.<br />
-   <br />
-   <b>NOTE:</b>
-   <br/>
-   Before you use <b>Ctrl+S</b> you need to know that it causes your terminal to
-   hang, to make your terminal continue running hit <b>Ctrl+Q</b> afterwards.<br />
-   Type <b>”stty -xion”</b> to make your terminal interpreting <b>Ctrl+S</b> as
-   search shortcut instead.<br />
-   <br />
-   There’s a list of shell shortcuts that saves us time and energy:<br />
-   <br />
-   <table class="table table-dark">
-   <thead>
-   <tr>
-   <th scope="col">Key Combination</th>
-   <th scope="col">Definition</th>
-   </tr>
-   </thead>
-   <tbody>
-   <tr>
-   <td> Ctrl+P</td>
-   <td>Previous command</td>
-   </td>
-   <tr>
-   <td> Ctrl+N</td>
-   <td>Next command</td>
-   </td>
-   <tr>
-   <td> Ctrl+R</td>
-   <td>Search backward (Reverse)</td>
-   </td>
-   <tr>
-   <td> Ctrl+S</td>
-   <td>*Search forward</td>
-   </td>
-   <tr>
-   <td> Ctrl+G</td>
-   <td>Cancel search</td>
-   </td>
-   <tr>
-   <td> Ctrl+A</td>
-   <td>Move cursor to the start</td>
-   </td>
-   <tr>
-   <td> Ctrl+E</td>
-   <td>Move cursor to the end</td>
-   </td>
-   <tr>
-   <td> Ctrl+B</td>
-   <td>Move backward within a line</td>
-   </td>
-   <tr>
-   <td> Ctrl+F</td>
-   <td>Move cursor forward within a line</td>
-   </td>
-   <tr>
-   <td> Esc then Ctrl+B</td>
-   <td>Move cursor backward a word at a time, right arrow key</td>
-   </td>
-   <tr>
-   <td> Esc then Ctrl+F</td>
-   <td>Move cursor forward a word at a time, left arrow key</td>
-   </td>
-   <tr>
-   <td> Ctrl+D</td>
-   <td>Delete character under the cursor, delete key</td>
-   </td>
-   <tr>
-   <td> Ctrl+K</td>
-   <td>Delete all text from the cursor to the end of the line</td>
-   </td>
-   <tr>
-   <td> Ctrl+X then Backspace</td>
-   <td>Delete all text from the cursor to the beginning of the life</td>
-   </td>
-   <tr>
-   <td> Ctrl+T</td>
-   <td>Immediately transposes the two words before and under the cursor</td>
-   </td>
-   <tr>
-   <td> Esc then Ctrl+U</td>
-   <td>Converts text from the cursor to the end of line the word to uppercase</td>
-   </td>
-   <tr>
-   <td> Esc then Ctrl+L</td>
-   <td>Converts text from the cursor to the end of line the word to lowercase</td>
-   </td>
-   <tr>
-   <td> Esc then Ctrl+C</td>
-   <td>Capitalizes text from the cursor to the end of line the word</td>
-   </td>
-   <tr>
-   <td> Ctrl+X then Ctrl+E</td>
-   <td>Launch default editor</td>
-   </td>
-   </tbody>
-   </table>
+   Always embrace your variables and strings in quote.<br />
 </div>
+<hr />
+<h3>Source</h3>
+  <cite>echo.sh</cite>
+<pre class="line-numbers" >
+<code class="language-bash">
+    #!/usr/bin/env bash
+    
+    echo &quot;this is a string&quot;
+    echo &apos;this is too a string&apos;
+    
+    echo &quot;$SHELL&quot;
+    echo &apos;$SHELL&apos;
+    
+    echo &quot;file entry&quot; &gt; /tmp/sample
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>run</h4>
+<pre class="command-line" data-user="bash" data-host="milestone">
+<code class="language-bash">
+bash ./echo.sh
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+this is a string
+this is too a string
+/bin/bash
+$SHELL
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a href="1.1.6.html">previous page</a></li>
+<li class="previous"><a href="1.2.6.html">previous page</a></li>
 <li class="top"><a href="index.html">top page</a></li>
-<li class="next"><a href="1.2.0.html">next page</a></li>
+<li class="next"><a href="1.2.8.html">next page</a></li>
 </ul>
 </div>
 <script>
