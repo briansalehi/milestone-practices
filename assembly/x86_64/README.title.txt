@@ -1,1 +1,1 @@
-x86_64 Practices
+x86_64

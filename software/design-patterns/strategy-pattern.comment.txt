@@ -1,6 +1,5 @@
-<b>The Strategy Pattern defines a family of algorithms, encapsulates each
-one, and makes them interchangeable.</b>
-
+<h4>The Strategy Pattern defines a family of algorithms, encapsulates each
+one, and makes them interchangeable.</h4>
 Identify the aspects of your application that vary and separate them from what
 stays the same.
 
@@ -17,7 +16,7 @@ When you put two classes together like this you’re using composition.
 Instead of inheriting from behavior methods directly, they get their behavior
 by being composed with the right behavior object.
 
-<b>Design Principle</b>
+<h4>Design Principle</h4>
 Design to an interface, not an implementation.
 
 Design Patterns give you a shared vocabulary with other developers.

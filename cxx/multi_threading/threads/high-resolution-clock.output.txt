@@ -1,0 +1,2 @@
+elapsed time for thread 140418668426816: 1000.07
+elapsed time for thread 140418660034112: 1000.09

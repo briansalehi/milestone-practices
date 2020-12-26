@@ -2,7 +2,7 @@ In section <b>.data</b> , initialized data is declared and defined, in the
 following format:
 
 <b>&lt;variable name&gt; &lt;type&gt; &lt;value&gt;</b>
-
+<br>
 Variable names start with a letter, followed by letters or numbers or
 special characters.
 
@@ -14,11 +14,11 @@ executable.
 cannot be changed in the program. They are declared in the following format:
 
 <b>&lt;constant name&gt; equ &lt;value&gt;</b>
+<br>
 
 <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Type</th>
       <th scope="col">Length</th>
       <th scope="col">Name</th>
@@ -26,25 +26,21 @@ cannot be changed in the program. They are declared in the following format:
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
       <td>db</td>
       <td>8 bits</td>
       <td>Byte</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
       <td>dw</td>
       <td>16 bits</td>
       <td>Word</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
       <td>dd</td>
       <td>32 bits</td>
       <td>Double word</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
       <td>dq</td>
       <td>64 bits</td>
       <td>Quadword</td>
@@ -58,11 +54,11 @@ IBM 704. In this section go the uninitialized variables. Space for uninitialized
 variables is declared in this section, in the following format:
 
 <b>&lt;variable name&gt; &lt;type&gt; &lt;number&gt;</b>
+</br>
 
 <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Type</th>
       <th scope="col">Length</th>
       <th scope="col">Name</th>
@@ -70,25 +66,21 @@ variables is declared in this section, in the following format:
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>sesb</td>
+      <td>resb</td>
       <td>8 bits</td>
       <td>Byte</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
       <td>resw</td>
       <td>16 bits</td>
       <td>Word</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
       <td>resd</td>
       <td>32 bits</td>
       <td>Double word</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
       <td>resq</td>
       <td>64 bits</td>
       <td>Quadword</td>

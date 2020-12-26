@@ -109,7 +109,7 @@ pre {
 <div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="4.0.html">Assembly</a></li>
-<li class="breadcrumb-item"><a href="4.2.0.html">x86_64 Practices</a></li>
+<li class="breadcrumb-item"><a href="4.2.0.html">x86_64</a></li>
 <li class="breadcrumb-item"><a href="4.2.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item active" >Assembly Structure</li>
 </ol>
@@ -119,7 +119,7 @@ pre {
    following format:<br />
    <br />
    <b>&lt;variable name&gt; &lt;type&gt; &lt;value&gt;</b>
-   <br />
+   <br>
    Variable names start with a letter, followed by letters or numbers or
    special characters.<br />
    <br />
@@ -131,11 +131,11 @@ pre {
    cannot be changed in the program. They are declared in the following format:<br />
    <br />
    <b>&lt;constant name&gt; equ &lt;value&gt;</b>
+   <br>
    <br />
    <table class="table table-dark">
    <thead>
    <tr>
-   <th scope="col">#</th>
    <th scope="col">Type</th>
    <th scope="col">Length</th>
    <th scope="col">Name</th>
@@ -143,25 +143,21 @@ pre {
    </thead>
    <tbody>
    <tr>
-   <th scope="row">1</th>
    <td>db</td>
    <td>8 bits</td>
    <td>Byte</td>
    </tr>
    <tr>
-   <th scope="row">2</th>
    <td>dw</td>
    <td>16 bits</td>
    <td>Word</td>
    </tr>
    <tr>
-   <th scope="row">3</th>
    <td>dd</td>
    <td>32 bits</td>
    <td>Double word</td>
    </tr>
    <tr>
-   <th scope="row">3</th>
    <td>dq</td>
    <td>64 bits</td>
    <td>Quadword</td>
@@ -175,11 +171,11 @@ pre {
    variables is declared in this section, in the following format:<br />
    <br />
    <b>&lt;variable name&gt; &lt;type&gt; &lt;number&gt;</b>
+   </br>
    <br />
    <table class="table table-dark">
    <thead>
    <tr>
-   <th scope="col">#</th>
    <th scope="col">Type</th>
    <th scope="col">Length</th>
    <th scope="col">Name</th>
@@ -187,25 +183,21 @@ pre {
    </thead>
    <tbody>
    <tr>
-   <th scope="row">1</th>
-   <td>sesb</td>
+   <td>resb</td>
    <td>8 bits</td>
    <td>Byte</td>
    </tr>
    <tr>
-   <th scope="row">2</th>
    <td>resw</td>
    <td>16 bits</td>
    <td>Word</td>
    </tr>
    <tr>
-   <th scope="row">3</th>
    <td>resd</td>
    <td>32 bits</td>
    <td>Double word</td>
    </tr>
    <tr>
-   <th scope="row">3</th>
    <td>resq</td>
    <td>64 bits</td>
    <td>Quadword</td>
@@ -297,7 +289,7 @@ gcc -g -Wall -no-pie -o structure.bin structure.o
 </code>
 </pre>
 <h3>Output</h3>
-<pre class="language-bash" ./assembly/x86_64/fundamentals/structure.asm begin language-bash>
+<pre class="language-bash" begin language-bash>
 <code>
 hello, world
 </code>

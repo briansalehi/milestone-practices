@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QDateTimeEdit</title>
+<title>try_lock</title>
 <style>
 a,
 a:hover,
@@ -109,28 +109,95 @@ pre {
 <div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="6.2.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a href="6.2.2.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QDateTimeEdit</li>
+<li class="breadcrumb-item"><a href="6.2.0.html">Multithreading</a></li>
+<li class="breadcrumb-item"><a href="6.2.2.0.html">Mutex</a></li>
+<li class="breadcrumb-item active" >try_lock</li>
 </ol>
-<h2>QDateTimeEdit</h2>
+<h2>try_lock</h2>
+<div class="comment-style" >
+   Mutexes can also be used in the **non-blocking locking** approach.<br />
+   To do so, we use **try_lock** function.<br />
+</div>
 <hr />
 <h3>Source</h3>
-  <cite>datetime-edit.cxx</cite>
+  <cite>try-lock.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;QApplication&gt;
-    #include &lt;QDateTimeEdit&gt;
+    #include &lt;iostream&gt;
+    #include &lt;thread&gt;
+    #include &lt;mutex&gt;
+    #include &lt;chrono&gt;
     
-    int main(int argc, char **argv)
-    {
-    	QApplication app(argc, argv);
+    std::mutex mutex;
+    std::chrono::milliseconds interval(50);
+    unsigned int shared_lock = 0;
+    unsigned int exclusive_lock = 0;
     
-    	QDateTimeEdit birthDate;
-    	
-    	birthDate.show();
-    	return app.exec();
+    void worker() {
+        std::this_thread::sleep_for(interval);
+        while (true) {
+            if (mutex.try_lock()) {
+                std::cout &lt;&lt; &quot;shared lock try &quot; &lt;&lt; shared_lock &lt;&lt; std::endl;
+                mutex.unlock();
+                return;
+            }
+            else {
+                ++exclusive_lock;
+                std::cout &lt;&lt; &quot;exclusive lock try &quot; &lt;&lt; exclusive_lock &lt;&lt; std::endl;
+                std::this_thread::sleep_for(interval);
+            }
+        }
     }
+    
+    void counter() {
+        mutex.lock();
+        std::this_thread::sleep_for(10*interval);
+        ++shared_lock;
+        mutex.unlock();
+    }
+    
+    int main() {
+        std::thread t1(worker);
+        std::thread t2(counter);
+    
+        t1.join();
+        t2.join();
+        return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o try-lock.o try-lock.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -Wall -g -lpthread -o try-lock.bin try-lock.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./try-lock.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+exclusive lock try 1
+exclusive lock try 2
+exclusive lock try 3
+exclusive lock try 4
+exclusive lock try 5
+exclusive lock try 6
+exclusive lock try 7
+exclusive lock try 8
+exclusive lock try 9
+shared lock try 1
 </code>
 </pre>
 <ul class="pager">

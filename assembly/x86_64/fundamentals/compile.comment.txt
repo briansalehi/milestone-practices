@@ -1,5 +1,11 @@
 To compile and run your assembly sources, you are going to need a few tools:
-nasm gcc gdb make build-essential
+<ul>
+	<li>nasm</li>
+	<li>gcc</li>
+	<li>gdb</li>
+	<li>make</li>
+	<li>build-essential</li>
+</ul>
 
 Install specified packages using your distribution specific package manager.
 
@@ -22,7 +28,7 @@ Hobbit</i> and <i>Lord of the Rings</i> written by J.J.R.
 <b>DWARF</b> stands for <b>D</b>ebug <b>W</b>ith <b>A</b>rbitrary <b>R</b>ecord
 <b>F</b>ormat.
 
-STABS is another debug format, which has nothing to do with all the
+<b>STABS</b> is another debug format, which has nothing to do with all the
 stabbing in Tolkien’s novels; the name comes from <b>S</b>ymbol <b>Tab</b>le
 <b>S</b>trings.
 We will not use STABS here, so you won’t get hurt.

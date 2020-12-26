@@ -1,0 +1,4 @@
+starting thread 1
+starting thread 2
+starting thread 4
+starting thread 3
