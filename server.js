@@ -26,9 +26,21 @@ app.get("/*.html", (req, res) => {
 app.get("/*", (req, res) => {
 	fs.stat(`html-files/${req.path}`, function (err, stat) {
 		if (err == null) {
-			res.status(200).sendFile(path.join(__dirname, `html-files/${req.path}`));
+			fs.readlink(`html-files/${req.path}`, function(lerr, filepath) {
+				if (err == null) {
+					res.status(200).sendFile(path.join(__dirname, filepath));
+				} else {
+					res.status(404).sendFile(path.join(__dirname, 'no-practice.html'));
+				}
+			}
 		} else {
-			res.status(404).sendFile(path.join(__dirname, 'no-practice.html'));
+			fs.stat(`html-files/${req.path}/index`, function (derr, dstat) {
+				if (derr == null) {
+					res.status(200).sendFile(path.join(__dirname, `html-files/${req.path}/index`));
+				} else {
+					res.status(404).sendFile(path.join(__dirname, 'no-practice.html'));
+				}
+			}
 		}
 	});
 });
