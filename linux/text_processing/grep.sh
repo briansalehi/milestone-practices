@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-grep "NAME" /etc/os-release
+grep "PRETTY_NAME" /etc/os-release
 
-cat /etc/os-release | grep "NAME"
+cat /etc/os-release | grep "PRETTY_NAME"

@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Fundamentals</title>
+<title>Print First Lines</title>
 <style>
 a,
 a:hover,
@@ -108,23 +108,42 @@ pre {
 <body class="container">
 <div class="container" >
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="/2.0.html">Development Tools</a></li>
-<li class="breadcrumb-item"><a href="/2.1.0.html">Git</a></li>
-<li class="breadcrumb-item active" >Fundamentals</li>
+<li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
+<li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
+<li class="breadcrumb-item active" >Print First Lines</li>
 </ol>
-<h2>Fundamentals</h2>
+<h2>Print First Lines</h2>
 <div class="comment-style" >
-   This section covers the fundamentals to get you up and running in Git.<br />
-   Installation section will get you through installation in Linux, Windows and
-   Mac.<br />
-   Introduction section will get your hands warm on Git basics then you will go
-   further in next chapters to practice all the essentials of using Git
-   professionally.<br />
+   By default, first 10 lines of text is printed.<br />
+   If option -n <N> is given, first N lines of text is printed.<br />
 </div>
+<hr />
+<h3>Source</h3>
+  <cite>head.sh</cite>
+<pre class="line-numbers" >
+<code class="language-bash">
+    #!/usr/bin/env bash
+    
+    head -n 1 /etc/passwd
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>run</h4>
+<pre class="command-line" data-user="bash" data-host="milestone">
+<code class="language-bash">
+bash ./head.sh
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+root:x:0:0::/root:/bin/bash
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a href="/development-tools/git">previous page</a></li>
+<li class="previous"><a href="/linux/text-processing/grep">previous page</a></li>
 <li class="top"><a href="/index.html">top page</a></li>
-<li class="next"><a href="/2.1.1.1.html">next page</a></li>
+<li class="next"><a href="/linux/text-processing/tail">next page</a></li>
 </ul>
 </div>
 <script>
