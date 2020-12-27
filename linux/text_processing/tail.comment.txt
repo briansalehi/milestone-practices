@@ -1,0 +1,2 @@
+If option -n <N> given, prints last N lines of text.
+N is 10 by default.

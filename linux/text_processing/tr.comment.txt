@@ -1,0 +1,2 @@
+By default, two arguments are given to translate a character.
+If -d 'C' option is given, removes all 'C' characters.

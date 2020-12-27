@@ -1,0 +1,1 @@
+Cuts text delimited by -d 'D' option and -f <N> field of N.
