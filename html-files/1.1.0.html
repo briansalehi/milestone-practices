@@ -6,10 +6,10 @@
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!-- prims plugin styles -->
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
@@ -103,10 +103,55 @@ pre {
 	content: '> ';
 }
 
+.just-padding {
+  padding: 15px;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
 </style>
 </head>
 <body class="container">
-<div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item active" >Shell Basics</li>
@@ -125,6 +170,37 @@ pre {
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/linux/basics/shell">next page</a></li>
 </ul>
+<hr />
+<h3>Table of Content</h3>
+<div class="list-group list-group-root well" >
+<a href="/linux/basics/shell" class="list-group-item">
+	1.1.1. What is a Shell?
+	
+</a>
+<a href="/linux/basics/command" class="list-group-item">
+	1.1.2. What is a Command?
+	
+</a>
+<a href="/linux/basics/type" class="list-group-item">
+	1.1.3. Command Types
+	
+</a>
+<a href="/linux/basics/variables" class="list-group-item">
+	1.1.4. Environment Variables
+	
+</a>
+<a href="/linux/basics/help" class="list-group-item">
+	1.1.5. Getting Help
+	
+</a>
+<a href="/linux/basics/history" class="list-group-item">
+	1.1.6. Shell History
+	
+</a>
+<a href="/linux/basics/shortcuts" class="list-group-item">
+	1.1.7. Shell Shortcuts
+	
+</a>
 </div>
 <script>
 function darkmode(manual) {

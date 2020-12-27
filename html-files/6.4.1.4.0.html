@@ -6,10 +6,10 @@
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!-- prims plugin styles -->
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
@@ -103,10 +103,55 @@ pre {
 	content: '> ';
 }
 
+.just-padding {
+  padding: 15px;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
 </style>
 </head>
 <body class="container">
-<div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a href="/6.4.0.html">Image Processing</a></li>
@@ -119,6 +164,113 @@ pre {
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.4.1.4.1.html">next page</a></li>
 </ul>
+<hr />
+<h3>Table of Content</h3>
+<div class="list-group list-group-root well" >
+<a href="6.4.1.4.1.html" class="list-group-item">
+	6.4.1.4.1. cv::alignPtr
+	
+</a>
+<a href="6.4.1.4.2.html" class="list-group-item">
+	6.4.1.4.2. cv::alignSize
+	
+</a>
+<a href="6.4.1.4.3.html" class="list-group-item">
+	6.4.1.4.3. cv::allocate (will be removed)
+	
+</a>
+<a href="6.4.1.4.4.html" class="list-group-item">
+	6.4.1.4.4. cv::CV_Assert
+	
+</a>
+<a href="6.4.1.4.5.html" class="list-group-item">
+	6.4.1.4.5. cv::cubeRoot
+	
+</a>
+<a href="6.4.1.4.6.html" class="list-group-item">
+	6.4.1.4.6. cvCeil
+	
+</a>
+<a href="6.4.1.4.7.html" class="list-group-item">
+	6.4.1.4.7. cvFloor
+	
+</a>
+<a href="6.4.1.4.8.html" class="list-group-item">
+	6.4.1.4.8. cvIsInf
+	
+</a>
+<a href="6.4.1.4.9.html" class="list-group-item">
+	6.4.1.4.9. cvIsNaN
+	
+</a>
+<a href="6.4.1.4.10.html" class="list-group-item">
+	6.4.1.4.10. cvRound
+	
+</a>
+<a href="6.4.1.4.11.html" class="list-group-item">
+	6.4.1.4.11. cv::deallocate (will be removed)
+	
+</a>
+<a href="6.4.1.4.12.html" class="list-group-item">
+	6.4.1.4.12. cv::error
+	
+</a>
+<a href="6.4.1.4.13.html" class="list-group-item">
+	6.4.1.4.13. cv::CV_Error
+	
+</a>
+<a href="6.4.1.4.14.html" class="list-group-item">
+	6.4.1.4.14. cv::fastatan2
+	
+</a>
+<a href="6.4.1.4.15.html" class="list-group-item">
+	6.4.1.4.15. cv::fastFree()
+	
+</a>
+<a href="6.4.1.4.16.html" class="list-group-item">
+	6.4.1.4.16. cv::fastMalloc()
+	
+</a>
+<a href="6.4.1.4.17.html" class="list-group-item">
+	6.4.1.4.17. cv::format
+	
+</a>
+<a href="6.4.1.4.18.html" class="list-group-item">
+	6.4.1.4.18. cv::getCPUTickCount
+	
+</a>
+<a href="6.4.1.4.19.html" class="list-group-item">
+	6.4.1.4.19. cv::getNumThreads
+	
+</a>
+<a href="6.4.1.4.20.html" class="list-group-item">
+	6.4.1.4.20. cv::getOptimalDFTSize
+	
+</a>
+<a href="6.4.1.4.21.html" class="list-group-item">
+	6.4.1.4.21. cv::getThreadNum
+	
+</a>
+<a href="6.4.1.4.22.html" class="list-group-item">
+	6.4.1.4.22. cv::getTickCount
+	
+</a>
+<a href="6.4.1.4.23.html" class="list-group-item">
+	6.4.1.4.23. cv::getTickFrequency
+	
+</a>
+<a href="6.4.1.4.24.html" class="list-group-item">
+	6.4.1.4.24. cv::setNumThreads
+	
+</a>
+<a href="6.4.1.4.25.html" class="list-group-item">
+	6.4.1.4.25. cv::setUseOptimized
+	
+</a>
+<a href="6.4.1.4.26.html" class="list-group-item">
+	6.4.1.4.26. cv::useOptimized
+	
+</a>
 </div>
 <script>
 function darkmode(manual) {

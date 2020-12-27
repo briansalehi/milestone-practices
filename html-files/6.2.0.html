@@ -6,10 +6,10 @@
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!-- prims plugin styles -->
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
-<Link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
@@ -103,10 +103,55 @@ pre {
 	content: '> ';
 }
 
+.just-padding {
+  padding: 15px;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
 </style>
 </head>
 <body class="container">
-<div class="container" >
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item active" >Multithreading</li>
@@ -117,6 +162,95 @@ pre {
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.2.1.0.html">next page</a></li>
 </ul>
+<hr />
+<h3>Table of Content</h3>
+<div class="list-group list-group-root well" >
+<a href="#6-2-1-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>6.2.1. Threads
+	<span class="badge badge-primary badge-pill">8</span>
+</a>
+<div class="list-group collapse" id="6-2-1-0">
+<a href="6.2.1.1.html" class="list-group-item">
+	6.2.1.1. Creating Threads
+	
+</a>
+<a href="6.2.1.2.html" class="list-group-item">
+	6.2.1.2. Sleeping Thread
+	
+</a>
+<a href="6.2.1.3.html" class="list-group-item">
+	6.2.1.3. Sleep Until
+	
+</a>
+<a href="6.2.1.4.html" class="list-group-item">
+	6.2.1.4. Passing Parameters to Threads
+	
+</a>
+<a href="6.2.1.5.html" class="list-group-item">
+	6.2.1.5. Swapping Threads
+	
+</a>
+<a href="6.2.1.6.html" class="list-group-item">
+	6.2.1.6. Moving a Thread
+	
+</a>
+<a href="6.2.1.7.html" class="list-group-item">
+	6.2.1.7. High Resolution Clock
+	
+</a>
+<a href="6.2.1.8.html" class="list-group-item">
+	6.2.1.8. Detach Threads
+	
+</a>
+</div>
+<a href="#6-2-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>6.2.2. Mutex
+	<span class="badge badge-primary badge-pill">6</span>
+</a>
+<div class="list-group collapse" id="6-2-2-0">
+<a href="6.2.2.1.html" class="list-group-item">
+	6.2.2.1. std::lock_guard
+	
+</a>
+<a href="6.2.2.2.html" class="list-group-item">
+	6.2.2.2. recursive_mutex
+	
+</a>
+<a href="6.2.2.3.html" class="list-group-item">
+	6.2.2.3. std::scoped_lock
+	
+</a>
+<a href="6.2.2.4.html" class="list-group-item">
+	6.2.2.4. try_lock
+	
+</a>
+<a href="6.2.2.5.html" class="list-group-item">
+	6.2.2.5. try_lock_for
+	
+</a>
+<a href="6.2.2.6.html" class="list-group-item">
+	6.2.2.6. std::unique_lock
+	
+</a>
+</div>
+<a href="#6-2-3-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>6.2.3. Future and Promise
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="6-2-3-0">
+<a href="6.2.3.1.html" class="list-group-item">
+	6.2.3.1. std::future - std::async
+	
+</a>
+<a href="6.2.3.2.html" class="list-group-item">
+	6.2.3.2. std::future - std::promise
+	
+</a>
+<a href="6.2.3.3.html" class="list-group-item">
+	6.2.3.3. std::packaged_task
+	
+</a>
+</div>
 </div>
 <script>
 function darkmode(manual) {
