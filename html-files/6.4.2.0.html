@@ -107,9 +107,26 @@ pre {
   padding: 15px;
 }
 
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #eaeaea;
+}
+
+.group-child {
+	background-color: #f0f0f0;
+}
+
 .dark-mode .list-group-item {
 	background-color: #212529;
 	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a;
 }
 
 .dark-mode a.list-group-item:focus,
@@ -167,73 +184,60 @@ pre {
 <h3>Table of Content</h3>
 <div class="list-group list-group-root well" >
 <a href="#6-4-2-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.2.1. Devices
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Devices
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
 <div class="list-group collapse" id="6-4-2-1-0">
-<a href="6.4.2.1.1.html" class="list-group-item">
-	6.4.2.1.1. live camera as input stream
+<a href="6.4.2.1.1.html" class="list-group-item group-child">
+	1. live camera as input stream
 	
 </a>
-<a href="6.4.2.1.2.html" class="list-group-item">
-	6.4.2.1.2. write to output video file
+<a href="6.4.2.1.2.html" class="list-group-item group-child">
+	2. write to output video file
 	
 </a>
 </div>
 <a href="#6-4-2-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.2.2. Tools
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Tools
 	<span class="badge badge-primary badge-pill">3</span>
 </a>
 <div class="list-group collapse" id="6-4-2-2-0">
-<a href="6.4.2.2.1.html" class="list-group-item">
-	6.4.2.2.1. image viewer
+<a href="6.4.2.2.1.html" class="list-group-item group-child">
+	1. image viewer
 	
 </a>
-<a href="6.4.2.2.2.html" class="list-group-item">
-	6.4.2.2.2. video player
+<a href="6.4.2.2.2.html" class="list-group-item group-child">
+	2. video player
 	
 </a>
-<a href="6.4.2.2.3.html" class="list-group-item">
-	6.4.2.2.3. video trackbar slider
+<a href="6.4.2.2.3.html" class="list-group-item group-child">
+	3. video trackbar slider
 	
 </a>
 </div>
 <a href="#6-4-2-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.2.3. Transformation
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Transformation
 	<span class="badge badge-primary badge-pill">4</span>
 </a>
 <div class="list-group collapse" id="6-4-2-3-0">
-<a href="6.4.2.3.1.html" class="list-group-item">
-	6.4.2.3.1. pyramid downsampling
+<a href="6.4.2.3.1.html" class="list-group-item group-child">
+	1. pyramid downsampling
 	
 </a>
-<a href="6.4.2.3.2.html" class="list-group-item">
-	6.4.2.3.2. BGR to gray
+<a href="6.4.2.3.2.html" class="list-group-item group-child">
+	2. BGR to gray
 	
 </a>
-<a href="6.4.2.3.3.html" class="list-group-item">
-	6.4.2.3.3. gaussian blur convolution filter
+<a href="6.4.2.3.3.html" class="list-group-item group-child">
+	3. gaussian blur convolution filter
 	
 </a>
-<a href="6.4.2.3.4.html" class="list-group-item">
-	6.4.2.3.4. edge detection
+<a href="6.4.2.3.4.html" class="list-group-item group-child">
+	4. edge detection
 	
 </a>
 </div>
 </div>
-<script>
-function darkmode(manual) {
-	const hours = new Date().getHours();
-	const isNight = !(hours > 6 && hours < 20);
-	var bodystyle = document.body;
-	if (isNight || manual) {
-		bodystyle.classList.add("dark-mode");
-	} else {
-		bodystyle.classList.remove("dark-mode");
-	}
-}
-darkmode();
-</script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->
@@ -253,5 +257,27 @@ darkmode();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
 </body>
 </html>

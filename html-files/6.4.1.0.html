@@ -107,9 +107,26 @@ pre {
   padding: 15px;
 }
 
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #eaeaea;
+}
+
+.group-child {
+	background-color: #f0f0f0;
+}
+
 .dark-mode .list-group-item {
 	background-color: #212529;
 	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a;
 }
 
 .dark-mode a.list-group-item:focus,
@@ -167,215 +184,202 @@ pre {
 <h3>Table of Content</h3>
 <div class="list-group list-group-root well" >
 <a href="#6-4-1-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.1.1. Basic Types
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Basic Types
 	<span class="badge badge-primary badge-pill">8</span>
 </a>
 <div class="list-group collapse" id="6-4-1-1-0">
-<a href="6.4.1.1.1.html" class="list-group-item">
-	6.4.1.1.1. cv::Point
+<a href="6.4.1.1.1.html" class="list-group-item group-child">
+	1. cv::Point
 	
 </a>
-<a href="6.4.1.1.2.html" class="list-group-item">
-	6.4.1.1.2. cv::Size
+<a href="6.4.1.1.2.html" class="list-group-item group-child">
+	2. cv::Size
 	
 </a>
-<a href="6.4.1.1.3.html" class="list-group-item">
-	6.4.1.1.3. cv::Vec
+<a href="6.4.1.1.3.html" class="list-group-item group-child">
+	3. cv::Vec
 	
 </a>
-<a href="6.4.1.1.4.html" class="list-group-item">
-	6.4.1.1.4. cv::Scalar
+<a href="6.4.1.1.4.html" class="list-group-item group-child">
+	4. cv::Scalar
 	
 </a>
-<a href="6.4.1.1.5.html" class="list-group-item">
-	6.4.1.1.5. cv::Rect
+<a href="6.4.1.1.5.html" class="list-group-item group-child">
+	5. cv::Rect
 	
 </a>
-<a href="6.4.1.1.6.html" class="list-group-item">
-	6.4.1.1.6. cv::RotatedRect
+<a href="6.4.1.1.6.html" class="list-group-item group-child">
+	6. cv::RotatedRect
 	
 </a>
-<a href="6.4.1.1.7.html" class="list-group-item">
-	6.4.1.1.7. cv::Complex
+<a href="6.4.1.1.7.html" class="list-group-item group-child">
+	7. cv::Complex
 	
 </a>
-<a href="6.4.1.1.8.html" class="list-group-item">
-	6.4.1.1.8. cv::Matx
+<a href="6.4.1.1.8.html" class="list-group-item group-child">
+	8. cv::Matx
 	
 </a>
 </div>
 <a href="#6-4-1-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.1.2. Helper Objects
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Helper Objects
 	<span class="badge badge-primary badge-pill">6</span>
 </a>
 <div class="list-group collapse" id="6-4-1-2-0">
-<a href="6.4.1.2.1.html" class="list-group-item">
-	6.4.1.2.1. cv::Range
+<a href="6.4.1.2.1.html" class="list-group-item group-child">
+	1. cv::Range
 	
 </a>
-<a href="6.4.1.2.2.html" class="list-group-item">
-	6.4.1.2.2. cv::Ptr
+<a href="6.4.1.2.2.html" class="list-group-item group-child">
+	2. cv::Ptr
 	
 </a>
-<a href="6.4.1.2.3.html" class="list-group-item">
-	6.4.1.2.3. cv::TermCriteria
+<a href="6.4.1.2.3.html" class="list-group-item group-child">
+	3. cv::TermCriteria
 	
 </a>
-<a href="6.4.1.2.4.html" class="list-group-item">
-	6.4.1.2.4. cv::Exception
+<a href="6.4.1.2.4.html" class="list-group-item group-child">
+	4. cv::Exception
 	
 </a>
-<a href="6.4.1.2.5.html" class="list-group-item">
-	6.4.1.2.5. cv::DataType
+<a href="6.4.1.2.5.html" class="list-group-item group-child">
+	5. cv::DataType
 	
 </a>
-<a href="6.4.1.2.6.html" class="list-group-item">
-	6.4.1.2.6. cv::InputArray, cv::OutputArray, cv::noArray
+<a href="6.4.1.2.6.html" class="list-group-item group-child">
+	6. cv::InputArray, cv::OutputArray, cv::noArray
 	
 </a>
 </div>
 <a href="#6-4-1-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.1.3. Images
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Images
 	<span class="badge badge-primary badge-pill">3</span>
 </a>
 <div class="list-group collapse" id="6-4-1-3-0">
-<a href="6.4.1.3.1.html" class="list-group-item">
-	6.4.1.3.1. cv::Mat members
+<a href="6.4.1.3.1.html" class="list-group-item group-child">
+	1. cv::Mat members
 	
 </a>
-<a href="6.4.1.3.2.html" class="list-group-item">
-	6.4.1.3.2. access array elements indivitually
+<a href="6.4.1.3.2.html" class="list-group-item group-child">
+	2. access array elements indivitually
 	
 </a>
-<a href="6.4.1.3.3.html" class="list-group-item">
-	6.4.1.3.3. creating an array
+<a href="6.4.1.3.3.html" class="list-group-item group-child">
+	3. creating an array
 	
 </a>
 </div>
 <a href="#6-4-1-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6.4.1.4. Utility Functions
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Utility Functions
 	<span class="badge badge-primary badge-pill">26</span>
 </a>
 <div class="list-group collapse" id="6-4-1-4-0">
-<a href="6.4.1.4.1.html" class="list-group-item">
-	6.4.1.4.1. cv::alignPtr
+<a href="6.4.1.4.1.html" class="list-group-item group-child">
+	1. cv::alignPtr
 	
 </a>
-<a href="6.4.1.4.2.html" class="list-group-item">
-	6.4.1.4.2. cv::alignSize
+<a href="6.4.1.4.2.html" class="list-group-item group-child">
+	2. cv::alignSize
 	
 </a>
-<a href="6.4.1.4.3.html" class="list-group-item">
-	6.4.1.4.3. cv::allocate (will be removed)
+<a href="6.4.1.4.3.html" class="list-group-item group-child">
+	3. cv::allocate (will be removed)
 	
 </a>
-<a href="6.4.1.4.4.html" class="list-group-item">
-	6.4.1.4.4. cv::CV_Assert
+<a href="6.4.1.4.4.html" class="list-group-item group-child">
+	4. cv::CV_Assert
 	
 </a>
-<a href="6.4.1.4.5.html" class="list-group-item">
-	6.4.1.4.5. cv::cubeRoot
+<a href="6.4.1.4.5.html" class="list-group-item group-child">
+	5. cv::cubeRoot
 	
 </a>
-<a href="6.4.1.4.6.html" class="list-group-item">
-	6.4.1.4.6. cvCeil
+<a href="6.4.1.4.6.html" class="list-group-item group-child">
+	6. cvCeil
 	
 </a>
-<a href="6.4.1.4.7.html" class="list-group-item">
-	6.4.1.4.7. cvFloor
+<a href="6.4.1.4.7.html" class="list-group-item group-child">
+	7. cvFloor
 	
 </a>
-<a href="6.4.1.4.8.html" class="list-group-item">
-	6.4.1.4.8. cvIsInf
+<a href="6.4.1.4.8.html" class="list-group-item group-child">
+	8. cvIsInf
 	
 </a>
-<a href="6.4.1.4.9.html" class="list-group-item">
-	6.4.1.4.9. cvIsNaN
+<a href="6.4.1.4.9.html" class="list-group-item group-child">
+	9. cvIsNaN
 	
 </a>
-<a href="6.4.1.4.10.html" class="list-group-item">
-	6.4.1.4.10. cvRound
+<a href="6.4.1.4.10.html" class="list-group-item group-child">
+	10. cvRound
 	
 </a>
-<a href="6.4.1.4.11.html" class="list-group-item">
-	6.4.1.4.11. cv::deallocate (will be removed)
+<a href="6.4.1.4.11.html" class="list-group-item group-child">
+	11. cv::deallocate (will be removed)
 	
 </a>
-<a href="6.4.1.4.12.html" class="list-group-item">
-	6.4.1.4.12. cv::error
+<a href="6.4.1.4.12.html" class="list-group-item group-child">
+	12. cv::error
 	
 </a>
-<a href="6.4.1.4.13.html" class="list-group-item">
-	6.4.1.4.13. cv::CV_Error
+<a href="6.4.1.4.13.html" class="list-group-item group-child">
+	13. cv::CV_Error
 	
 </a>
-<a href="6.4.1.4.14.html" class="list-group-item">
-	6.4.1.4.14. cv::fastatan2
+<a href="6.4.1.4.14.html" class="list-group-item group-child">
+	14. cv::fastatan2
 	
 </a>
-<a href="6.4.1.4.15.html" class="list-group-item">
-	6.4.1.4.15. cv::fastFree()
+<a href="6.4.1.4.15.html" class="list-group-item group-child">
+	15. cv::fastFree()
 	
 </a>
-<a href="6.4.1.4.16.html" class="list-group-item">
-	6.4.1.4.16. cv::fastMalloc()
+<a href="6.4.1.4.16.html" class="list-group-item group-child">
+	16. cv::fastMalloc()
 	
 </a>
-<a href="6.4.1.4.17.html" class="list-group-item">
-	6.4.1.4.17. cv::format
+<a href="6.4.1.4.17.html" class="list-group-item group-child">
+	17. cv::format
 	
 </a>
-<a href="6.4.1.4.18.html" class="list-group-item">
-	6.4.1.4.18. cv::getCPUTickCount
+<a href="6.4.1.4.18.html" class="list-group-item group-child">
+	18. cv::getCPUTickCount
 	
 </a>
-<a href="6.4.1.4.19.html" class="list-group-item">
-	6.4.1.4.19. cv::getNumThreads
+<a href="6.4.1.4.19.html" class="list-group-item group-child">
+	19. cv::getNumThreads
 	
 </a>
-<a href="6.4.1.4.20.html" class="list-group-item">
-	6.4.1.4.20. cv::getOptimalDFTSize
+<a href="6.4.1.4.20.html" class="list-group-item group-child">
+	20. cv::getOptimalDFTSize
 	
 </a>
-<a href="6.4.1.4.21.html" class="list-group-item">
-	6.4.1.4.21. cv::getThreadNum
+<a href="6.4.1.4.21.html" class="list-group-item group-child">
+	21. cv::getThreadNum
 	
 </a>
-<a href="6.4.1.4.22.html" class="list-group-item">
-	6.4.1.4.22. cv::getTickCount
+<a href="6.4.1.4.22.html" class="list-group-item group-child">
+	22. cv::getTickCount
 	
 </a>
-<a href="6.4.1.4.23.html" class="list-group-item">
-	6.4.1.4.23. cv::getTickFrequency
+<a href="6.4.1.4.23.html" class="list-group-item group-child">
+	23. cv::getTickFrequency
 	
 </a>
-<a href="6.4.1.4.24.html" class="list-group-item">
-	6.4.1.4.24. cv::setNumThreads
+<a href="6.4.1.4.24.html" class="list-group-item group-child">
+	24. cv::setNumThreads
 	
 </a>
-<a href="6.4.1.4.25.html" class="list-group-item">
-	6.4.1.4.25. cv::setUseOptimized
+<a href="6.4.1.4.25.html" class="list-group-item group-child">
+	25. cv::setUseOptimized
 	
 </a>
-<a href="6.4.1.4.26.html" class="list-group-item">
-	6.4.1.4.26. cv::useOptimized
+<a href="6.4.1.4.26.html" class="list-group-item group-child">
+	26. cv::useOptimized
 	
 </a>
 </div>
 </div>
-<script>
-function darkmode(manual) {
-	const hours = new Date().getHours();
-	const isNight = !(hours > 6 && hours < 20);
-	var bodystyle = document.body;
-	if (isNight || manual) {
-		bodystyle.classList.add("dark-mode");
-	} else {
-		bodystyle.classList.remove("dark-mode");
-	}
-}
-darkmode();
-</script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->
@@ -395,5 +399,27 @@ darkmode();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
 </body>
 </html>

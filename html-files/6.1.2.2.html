@@ -165,19 +165,6 @@ g++ -o auto.bin auto.o
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.1.2.3.html">next page</a></li>
 </ul>
-<script>
-function darkmode(manual) {
-	const hours = new Date().getHours();
-	const isNight = !(hours > 6 && hours < 20);
-	var bodystyle = document.body;
-	if (isNight || manual) {
-		bodystyle.classList.add("dark-mode");
-	} else {
-		bodystyle.classList.remove("dark-mode");
-	}
-}
-darkmode();
-</script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->
@@ -197,5 +184,27 @@ darkmode();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
 </body>
 </html>

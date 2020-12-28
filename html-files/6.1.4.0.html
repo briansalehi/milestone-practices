@@ -107,9 +107,26 @@ pre {
   padding: 15px;
 }
 
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #eaeaea;
+}
+
+.group-child {
+	background-color: #f0f0f0;
+}
+
 .dark-mode .list-group-item {
 	background-color: #212529;
 	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a;
 }
 
 .dark-mode a.list-group-item:focus,
@@ -170,51 +187,38 @@ pre {
 <h3>Table of Content</h3>
 <div class="list-group list-group-root well" >
 <a href="6.1.4.1.html" class="list-group-item">
-	6.1.4.1. arithmetic operations
+	1. arithmetic operations
 	
 </a>
 <a href="6.1.4.2.html" class="list-group-item">
-	6.1.4.2. bitwise operators
+	2. bitwise operators
 	
 </a>
 <a href="6.1.4.3.html" class="list-group-item">
-	6.1.4.3. compound operators
+	3. compound operators
 	
 </a>
 <a href="6.1.4.4.html" class="list-group-item">
-	6.1.4.4. equality operator
+	4. equality operator
 	
 </a>
 <a href="6.1.4.5.html" class="list-group-item">
-	6.1.4.5. increment & decrement
+	5. increment & decrement
 	
 </a>
 <a href="6.1.4.6.html" class="list-group-item">
-	6.1.4.6. logical operators
+	6. logical operators
 	
 </a>
 <a href="6.1.4.7.html" class="list-group-item">
-	6.1.4.7. shifting operators
+	7. shifting operators
 	
 </a>
 <a href="6.1.4.8.html" class="list-group-item">
-	6.1.4.8. sizeof operator
+	8. sizeof operator
 	
 </a>
 </div>
-<script>
-function darkmode(manual) {
-	const hours = new Date().getHours();
-	const isNight = !(hours > 6 && hours < 20);
-	var bodystyle = document.body;
-	if (isNight || manual) {
-		bodystyle.classList.add("dark-mode");
-	} else {
-		bodystyle.classList.remove("dark-mode");
-	}
-}
-darkmode();
-</script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->
@@ -234,5 +238,27 @@ darkmode();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
 </body>
 </html>
