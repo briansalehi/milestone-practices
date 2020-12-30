@@ -1,0 +1,33 @@
+A use case in UML is drawn as an oval with a name that describes the
+interaction that it represents.
+
+A use case is something that provides some measurable result to the user or an
+external system.
+
+A use case is a case (or situation) where your system is used to fulfill one
+or more of your user's requirements; a use case captures a piece of
+functionality that the system provides.
+
+Use cases are an excellent starting point for just about every facet of
+object-oriented system development, design, testing, and documentation.
+They describe a system's requirements strictly from the outside looking in;
+they specify the value that the system delivers to users.
+
+Because use cases are your system's functional requirements, they should be
+the first serious output from your model after a project is started.
+
+Use cases specify only what your system is supposed to do, i.e., the
+system's functional requirements.
+
+The terms <b>shall</b> and <b>should</b> have a special and exact meaning
+when it comes to requirements.
+A <i>shall requirement</i> must be fulfilled; if the feature that implements
+a shall requirement is not in the final system, then the system does not meet
+this requirement.
+A <i>should requirement</i> implies that the requirement is not critical to
+the system working but is still desirable.
+If a system's development is running into problems that will cause delivery
+delays, then it's often the should requirements that are sacrificed first.
+
+If use cases are truly requirements, then they must have very clear
+pass/fail criteria.

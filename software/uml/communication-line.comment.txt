@@ -1,0 +1,19 @@
+A communication line connects an actor and a use case to show the actor
+participating in the use case.
+
+There is no theoretical limit to the number of actors that can participate in
+a use case.
+
+The purpose of a communication line is to show that an actor is simply
+involved in a use case, not to imply an information exchange in any particular
+direction or that the actor starts the use case.
+That type of information is contained within a use case's detailed
+description, therefore it doesn't make sense to apply navigation to
+communication lines.
+
+The purpose of a communication line is to show that an actor is simply
+involved in a use case, not to imply an information exchange in any particular
+direction or that the actor starts the use case.
+That type of information is
+contained within a use case's detailed description, therefore it doesn't make
+sense to apply navigation to communication lines.

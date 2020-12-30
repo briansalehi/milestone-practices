@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Clean Code</title>
+<title>Communication Line</title>
 <style>
 a,
 a:hover,
@@ -103,103 +103,42 @@ pre {
 	content: '> ';
 }
 
-.just-padding {
-  padding: 15px;
-}
-
-a.list-group-item:focus,
-a.list-group-item:hover,
-button.list-group-item:focus,
-button.list-group-item:hover {
-	color: #555;
-	text-decoration: none;
-	background-color: #dfdfdf;
-}
-
-.group-child {
-	background-color: #f0f0f0;
-}
-
-.dark-mode .list-group-item {
-	background-color: #212529;
-	color: #aaaaaa;
-}
-
-.dark-mode .group-child {
-	background-color: #3a3a3a;
-}
-
-.dark-mode a.list-group-item:focus,
-.dark-mode a.list-group-item:hover,
-.dark-mode button.list-group-item:focus,
-.dark-mode button.list-group-item:hover {
-	background-color: #555555;
-	color: #bdc0c4;
-}
-
-.list-group.list-group-root {
-  padding: 0;
-  overflow: hidden;
-}
-
-.list-group.list-group-root .list-group {
-  margin-bottom: 0;
-}
-
-.list-group.list-group-root .list-group-item {
-  border-radius: 0;
-  border-width: 1px 0 0 0;
-}
-
-.list-group.list-group-root > .list-group-item:first-child {
-  border-top-width: 0;
-}
-
-.list-group.list-group-root > .list-group > .list-group-item {
-  padding-left: 30px;
-}
-
-.list-group.list-group-root > .list-group > .list-group > .list-group-item {
-  padding-left: 45px;
-}
-
-.list-group-item .glyphicon {
-  margin-right: 5px;
-}
 </style>
 </head>
 <body class="container">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/3.0.html">Software Design</a></li>
-<li class="breadcrumb-item active" >Clean Code</li>
+<li class="breadcrumb-item"><a href="/3.4.0.html">Unified Modeling Language</a></li>
+<li class="breadcrumb-item active" >Communication Line</li>
 </ol>
-<h2>Clean Code</h2>
+<h2>Communication Line</h2>
 <div class="comment-style" >
-   Being able to write a clean code is an essential!<br />
-   Make sure you read your own specific language clean code section.<br />
+   A communication line connects an actor and a use case to show the actor
+   participating in the use case.<br />
+   <br />
+   There is no theoretical limit to the number of actors that can participate in
+   a use case.<br />
+   <br />
+   The purpose of a communication line is to show that an actor is simply
+   involved in a use case, not to imply an information exchange in any particular
+   direction or that the actor starts the use case.<br />
+   That type of information is contained within a use case's detailed
+   description, therefore it doesn't make sense to apply navigation to
+   communication lines.<br />
+   <br />
+   The purpose of a communication line is to show that an actor is simply
+   involved in a use case, not to imply an information exchange in any particular
+   direction or that the actor starts the use case.<br />
+   That type of information is
+   contained within a use case's detailed description, therefore it doesn't make
+   sense to apply navigation to communication lines.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a href="/software-design">previous page</a></li>
+<li class="previous"><a href="/software-design/uml/use-case">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/software-design/clean-code/naming">next page</a></li>
+<li class="next"><a href="/software-design/uml/system-boundaries">next page</a></li>
 </ul>
-<hr />
-<h3>Table of Content</h3>
-<div class="list-group list-group-root well" >
-<a href="/software-design/clean-code/naming" class="list-group-item">
-	1. Naming
-	
-</a>
-</div>
-<hr />
-<h3>Table of Content</h3>
-<div class="list-group list-group-root well" >
-<a href="/software-design/clean-code/naming" class="list-group-item">
-	1. Naming
-	
-</a>
-</div>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->

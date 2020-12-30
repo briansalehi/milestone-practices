@@ -1,0 +1,6 @@
+the activity is launched by the initial node , which is drawn as a filled
+circle.
+The <b>initial node</b> simply marks the start of the activity.
+At the other
+end of the diagram, the activity <b>final node</b>, drawn as two concentric
+circles with a filled inner circle, marks the end of the activity.
