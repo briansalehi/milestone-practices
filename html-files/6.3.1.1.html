@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Creating Threads</title>
+<title>abstraction</title>
 <style>
 a,
 a:hover,
@@ -109,58 +109,55 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.3.0.html">Multithreading</a></li>
-<li class="breadcrumb-item"><a href="/6.3.1.0.html">Threads</a></li>
-<li class="breadcrumb-item active" >Creating Threads</li>
+<li class="breadcrumb-item"><a href="/6.3.0.html">Object Orientation</a></li>
+<li class="breadcrumb-item"><a href="/6.3.1.0.html">Classes and Objects</a></li>
+<li class="breadcrumb-item active" >abstraction</li>
 </ol>
-<h2>Creating Threads</h2>
+<h2>abstraction</h2>
 <div class="comment-style" >
-   To create threads, you must first include **thread** and **mutex** header files.<br />
+   Abstraction is the access level to object members. Object members can be
+   accessed from different scopes based on their abstraction.<br />
    <br />
-   This program basically does nothing but printing a string into the output stream.<br />
+   ref[6]
+   One important feature of classes is the notion of access control. Members may
+   be declared to be public, which means that they are accessible from outside the
+   class, or private, which means that they are accessible only from within the class.<br />
    <br />
-   To write data in stdout stream, we must use *std::cout* which is not thread-safe, so we need to
-   write a mutex to lock the thread, so that we are sure no other threads are writing to stdout
-   in the same time.<br />
-   To do that, we need to use a global variable named *cout_mtx* or any name of your interest.<br />
-   Then we use it to lock each thread before writing data to the output stream.<br />
+   All external access to class objects takes place through the public members,<br />
+   or the public interface as it is called.<br />
    <br />
-   To create a thread, we define a thread object and pass a pointer to function as its first parameter.<br />
-   We can also pass parameters to the worker by passing them in thread parameters as you will see in next practice.<br />
-   <br />
-   After creating threads, we should use join method to make threads wait for each other after they complete their operations.<br />
-   <br />
-   To compile your code, you must use **-lpthread** linker option to make thread functions to work.<br />
+   Note that if no access specifier is given, the default is private for classes and
+   public for structures.<br />
+   end[6]
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>threads.cxx</cite>
+  <cite>abstraction.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;thread&gt;
-    #include &lt;mutex&gt;
     
-    // global mutual extension variable
-    std::mutex cout_mtx;
+    class Army {
+    private: // abstraction
+        int reinforcement = 150000;
     
-    void worker() {
-        cout_mtx.lock();
-        std::cout &lt;&lt; &quot;starting thread&quot; &lt;&lt; std::endl;
-        cout_mtx.unlock();
-    }
+    public: // abstraction
+        void report() {
+            std::cout &lt;&lt; &quot;there are &quot; &lt;&lt; reinforcement &lt;&lt; &quot; reinforcement in the army&quot; &lt;&lt; std::endl;
+        }
+    
+        void join(int men) {
+            std::cout &lt;&lt; &quot;joining &quot; &lt;&lt; men &lt;&lt; &quot; reinforcement to the army&quot; &lt;&lt; std::endl;
+            reinforcement += men;
+        }
+    };
     
     int main()
     {
-        std::thread t1(worker);
-        std::thread t2(worker);
-        std::thread t3(worker);
-        std::thread t4(worker);
-    
-        t1.join();
-        t2.join();
-        t3.join();
-        t4.join();
+        Army forces;
+        forces.report();
+        forces.join(50000);
+        forces.report();
     
         return 0;
     }
@@ -170,32 +167,31 @@ pre {
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o threads.o threads.cxx
+g++ -g -Wall -Os -c -o abstraction.o abstraction.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -Wall -g -lpthread -o threads.bin threads.o
+g++ -o abstraction.bin abstraction.o
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./threads.bin
+./abstraction.bin
 </code>
 </pre>
 <h3>Output</h3>
 <pre class="language-bash" begin language-bash>
 <code>
-starting thread
-starting thread
-starting thread
-starting thread
+there are 150000 reinforcement in the army
+joining 50000 reinforcement to the army
+there are 200000 reinforcement in the army
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="/6.3.1.0.html">previous page</a></li>
+<li class="previous"><a href="/cpp/object-orientation/classes">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.3.1.2.html">next page</a></li>
 </ul>

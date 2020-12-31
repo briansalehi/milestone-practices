@@ -1,1 +1,1 @@
-General Purpose GPU Programming (GPGPU)
+General Purpose GPU Programming

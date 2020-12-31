@@ -1,0 +1,13 @@
+integer: 255
+octal: 377
+hexadecimal: 0xff
+capital hexadecimal: 0XFF
+ios reset: 255
+
+pi number: 3.14159
+fixed pi: 3.141593
+pi with precision 7: 3.1415927
+fixed pi: 3.1415927
+pi with precision 10: 3.1415926535
+fixed pi: 3.1415926535
+scientific: 3.1415926535e+00

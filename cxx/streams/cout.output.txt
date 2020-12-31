@@ -1,0 +1,7 @@
+first line of stream
+raw method of output stream
+a
+output stream is ready
+output stream not in a bad condition
+no failure in output stream
+stream will throw in failure

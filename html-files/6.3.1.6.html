@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Moving a Thread</title>
+<title>copy constructor</title>
 <style>
 a,
 a:hover,
@@ -109,44 +109,132 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.3.0.html">Multithreading</a></li>
-<li class="breadcrumb-item"><a href="/6.3.1.0.html">Threads</a></li>
-<li class="breadcrumb-item active" >Moving a Thread</li>
+<li class="breadcrumb-item"><a href="/6.3.0.html">Object Orientation</a></li>
+<li class="breadcrumb-item"><a href="/6.3.1.0.html">Classes and Objects</a></li>
+<li class="breadcrumb-item active" >copy constructor</li>
 </ol>
-<h2>Moving a Thread</h2>
+<h2>copy constructor</h2>
 <div class="comment-style" >
-   You can move one thread to another using **std::move()**. notice that we didn't wait for *t1* to join anymore,<br />
-   that's because by using **move semantics** we do not copy an instance of an object but we move it to another block of memory,<br />
-   so in here, *t1* no longer exists after we move it to *t2*.<br />
-   We will only have one thread here because we created *t1* and moved it to *t2*.<br />
+   When you pass a variable by value to a function, that function will copy that value and assigns that to its parameter.<br />
+   That is, after invoking that function, you will have two of those values on memory.<br />
+   This also happens when you pass an object to a function by values.<br />
+   Classes do not have any idea how to copy their members into new location by themselves. So that's out job to make sure an object will be copied properly when it's passed to a function.<br />
    <br />
-   Also notice how we used **std::this_thread::get_id()** function in *worker* function, to get the id of calling thread which has the type **std::thread::id**.<br />
+   Copy constructors are declared just like default constructors except that they have a reference of the object as their parameters with no return value.<br />
+   <br />
+   ref[6]
+   When a class performs memory allocation using new, care must be taken to avoid
+   a number of common programming errors.<br />
+   A somewhat more insidious problem occurs when classes that allocate memory fail
+   to provide a copy constructor or an assignment operator.<br />
+   Consider the following example, using our Vect class:<br />
+   <br />
+   ```cxx
+   Vect a(100);<br />
+   Vect b = a;<br />
+   Vect c;<br />
+   c = a;<br />
+   ```
+   <br />
+   It would seem that we have just created three separate vectors, all of size 100,<br />
+   but have we?<br />
+   In reality all three of these vectors share the same 100-element array.<br />
+   Let us see why this has occurred.<br />
+   <br />
+   The declaration of object a invokes the vector constructor, which allocates an
+   array of 100 integers and a.data points to this array. The declaration “Vect b=a”
+   initializes b from a. Since we provided no copy constructor in Vect, the system
+   uses its default, which simply copies each member of a to b. In particular it sets
+   “b.data=a.data.” Notice that this does not copy the contents of the array; rather it
+   copies the pointer to the array’s initial element. This default action is sometimes
+   called a shallow copy.<br />
+   <br />
+   The declaration of c invokes the constructor with a default argument value of
+   10, and hence allocates an array of 10 elements in the free store. Because we have
+   not provided an assignment operator, the statement “c=a,” also does a shallow copy
+   of a to c. Only pointers are copied, not array contents. Worse yet, we have lost the
+   pointer to c’s original 10-element array, thus creating a memory leak.<br />
+   <br />
+   Now, a, b, and c all have members that point to the same array in the free store.<br />
+   If the contents of the arrays of one of the three were to change, the other two would
+   mysteriously change as well. Worse yet, if one of the three were to be deleted
+   before the others (for example, if this variable was declared in a nested block), the
+   destructor would delete the shared array. When either of the other two attempts to
+   access the now deleted array, the results would be disastrous. In short, there are
+   many problems here.<br />
+   <br />
+   Fortunately, there is a simple fix for all of these problems. The problems arose
+   because we allocated memory and we used the system’s default copy constructor
+   and assignment operator. If a class allocates memory, you should provide a copy
+   constructor and assignment operator to allocate new memory for making copies.<br />
+   end[6]
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>move-thread.cxx</cite>
+  <cite>copy_constructor.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;thread&gt;
-    #include &lt;mutex&gt;
+    #include &lt;string&gt;
+    #include &lt;cstring&gt;
     
-    std::mutex cout_mtx;
+    class Message {
+    private:
+        char* message;
     
-    void worker() {
-        std::thread::id thread_id = std::this_thread::get_id();
+    public:
+        Message(const char* raw) {
+            std::cout &lt;&lt; &quot;constructor invoked&quot; &lt;&lt; std::endl;
+            message = NULL;
     
-        cout_mtx.lock();
-        std::cout &lt;&lt; &quot;running thread &quot; &lt;&lt; thread_id &lt;&lt; std::endl;
-        cout_mtx.unlock();
+            if (raw != NULL) {
+                message = new char[strlen(raw)+1];
+                strcpy(message, raw);
+    
+                std::cout &lt;&lt; &quot;message is at address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;message &lt;&lt; std::endl;
+            }
+        }
+    
+        Message(const Message&amp; cpymsg) {
+            std::cout &lt;&lt; &quot;copy constructor invoked&quot; &lt;&lt; std::endl;
+            message = NULL;
+    
+            if (cpymsg.message != NULL) {
+                message = new char[strlen(cpymsg.message)+1];
+                strcpy(message, cpymsg.message);
+    
+                std::cout &lt;&lt; &quot;copied message is at address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;message &lt;&lt; std::endl;
+            }
+        }
+    
+        void show() {
+            std::cout &lt;&lt; &quot;message text: &quot;;
+            std::cout &lt;&lt; message &lt;&lt; std::endl;
+        }
+    
+        void length() {
+            std::cout &lt;&lt; &quot;message length: &quot;;
+            std::cout &lt;&lt; std::dec &lt;&lt; strlen(message) &lt;&lt; std::endl;
+        }
+    
+        // destructor
+        ~Message() {
+            std::cout &lt;&lt; &quot;destructor invoked&quot; &lt;&lt; std::endl;
+            delete [] message;
+        }
+    };
+    
+    // copy of object pointer
+    void get_info(Message raw) {
+        raw.length();
+        raw.show();
     }
     
     int main()
     {
-        std::thread t1(worker);
-        std::thread t2(std::move(t1));
+        Message msg(&quot;Cxx Programming&quot;);
+        get_info(msg);
     
-        t2.join();
         return 0;
     }
 </code>
@@ -155,25 +243,32 @@ pre {
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o move-thread.o move-thread.cxx
+g++ -g -Wall -Os -c -o copy_constructor.o copy_constructor.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -Wall -g -lpthread -o move-thread.bin move-thread.o
+g++ -o copy_constructor.bin copy_constructor.o
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./move-thread.bin
+./copy_constructor.bin
 </code>
 </pre>
 <h3>Output</h3>
 <pre class="language-bash" begin language-bash>
 <code>
-running thread 140112959690304
+constructor invoked
+message is at address: 0x7ffec53d9598
+copy constructor invoked
+copied message is at address: 0x7ffec53d95a0
+message length: 15
+message text: Cxx Programming
+destructor invoked
+destructor invoked
 </code>
 </pre>
 <ul class="pager">

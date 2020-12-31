@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Detach Threads</title>
+<title>default parameters</title>
 <style>
 a,
 a:hover,
@@ -109,48 +109,52 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.3.0.html">Multithreading</a></li>
-<li class="breadcrumb-item"><a href="/6.3.1.0.html">Threads</a></li>
-<li class="breadcrumb-item active" >Detach Threads</li>
+<li class="breadcrumb-item"><a href="/6.3.0.html">Object Orientation</a></li>
+<li class="breadcrumb-item"><a href="/6.3.1.0.html">Classes and Objects</a></li>
+<li class="breadcrumb-item active" >default parameters</li>
 </ol>
-<h2>Detach Threads</h2>
+<h2>default parameters</h2>
 <div class="comment-style" >
-   Threads can be detached from the main thread, meaning they will keep running even after the calling thread exits.<br />
-   Should this program give any output? no! threads are detached from the main thread and they will no longer have access to the standard output of the running terminal, but they will write those strings in some buffer somewhere. The thing is they do their job detached.<br />
+   Constructors too, can have difault parameter values. But don't forget about the function signatures, as a function with one argument having default value does not differ with the one function having no arguments at all.<br />
+   This might make your compiler complain about ambigious function declaration.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>detach.cxx</cite>
+  <cite>defaults.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;chrono&gt;
-    #include &lt;thread&gt;
-    #include &lt;mutex&gt;
+    class Square {
+    private:
+        int side;
     
-    std::mutex cout_mtx;
+    public:
+        // declaring no default constructor and specifying an overloaded one forces to initialize object with value
     
-    void worker() {
-        std::thread::id thread_id = std::this_thread::get_id();
+        // overloaded constructor
+        Square(int length) {
+            side = length;
+        }
+    };
     
-        cout_mtx.lock();
-        std::cout &lt;&lt; &quot;thread &quot; &lt;&lt; thread_id &lt;&lt; &quot; sleep cycle 1&quot; &lt;&lt; std::endl;
-        cout_mtx.unlock();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    
-        cout_mtx.lock();
-        std::cout &lt;&lt; &quot;thread &quot; &lt;&lt; thread_id &lt;&lt; &quot; sleep cycle 2&quot; &lt;&lt; std::endl;
-        cout_mtx.unlock();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    class Triangle {
+    private:
+        int edge;
+    public:
+        // default parameter value
+        Triangle(int length = 1) {
+            edge = length;
+        }
+    };
     
     int main()
     {
-        std::thread t1(worker);
-        std::thread t2(worker);
+        /*
+        Square sq1; // won&apos;t work
+        */
     
-        t1.detach();
-        t2.detach();
+        Square sq2(3);
+        Triangle tr;
+    
         return 0;
     }
 </code>
@@ -159,31 +163,25 @@ pre {
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o detach.o detach.cxx
+g++ -g -Wall -Os -c -o defaults.o defaults.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -Wall -g -lpthread -o detach.bin detach.o
+g++ -o defaults.bin defaults.o
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./detach.bin
-</code>
-</pre>
-<h3>Output</h3>
-<pre class="language-bash" begin language-bash>
-<code>
-thread 139810392323648 sleep cycle 1
+./defaults.bin
 </code>
 </pre>
 <ul class="pager">
 <li class="previous"><a href="/6.3.1.7.html">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/6.3.2.0.html">next page</a></li>
+<li class="next"><a href="/6.3.1.9.html">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

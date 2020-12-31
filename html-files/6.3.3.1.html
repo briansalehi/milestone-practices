@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>std::future - std::async</title>
+<title>diamond problem</title>
 <style>
 a,
 a:hover,
@@ -109,37 +109,92 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.3.0.html">Multithreading</a></li>
-<li class="breadcrumb-item"><a href="/6.3.3.0.html">Future and Promise</a></li>
-<li class="breadcrumb-item active" >std::future - std::async</li>
+<li class="breadcrumb-item"><a href="/6.3.0.html">Object Orientation</a></li>
+<li class="breadcrumb-item"><a href="/6.3.3.0.html">Polymorphism</a></li>
+<li class="breadcrumb-item active" >diamond problem</li>
 </ol>
-<h2>std::future - std::async</h2>
+<h2>diamond problem</h2>
 <div class="comment-style" >
-   The code asynchronously calls a function, passing it a parameter.<br />
-   Once the future finishes, it obtains the resulting value and stores it in a variable.<br />
+   Imagine the hierarchy of inheriting classes look like a diamond.<br />
+   <br />
+   ```txt
+   Top
+   Middle1 Middle2 Middle3
+   Bottom
+   ```
+   <br />
+   When we create this structure and inherit those classes as usual,<br />
+   We will see that for each Middle class there will be an invokation of Top class.<br />
+   That is, Top class's constructor will be called 3 times here.<br />
+   This is called the **Diamond Problem** and we fix this problem by virtually inheriting Top class.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>future-async.cxx</cite>
+  <cite>diamond.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;thread&gt;
-    #include &lt;future&gt;
     
-    std::thread::id worker() {
-        std::thread::id thread_id = std::this_thread::get_id();
-        return thread_id;
-    }
+    class Top {
+    public:
+        Top() {
+            std::cout &lt;&lt; &quot;Top Constructor Invoked&quot; &lt;&lt; std::endl;
+        }
+        
+        ~Top() {
+            std::cout &lt;&lt; &quot;Top Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
+    
+    // comment virtual to see what would happen
+    class Middle1: public virtual Top {
+    public:
+        Middle1() {
+            std::cout &lt;&lt; &quot;Middle1 Constructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    
+        ~Middle1() {
+            std::cout &lt;&lt; &quot;Middle1 Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
+    
+    // virtual base class in the diamond problem makes base class to invoke once
+    class Middle2: public virtual Top {
+    public:
+        Middle2() {
+            std::cout &lt;&lt; &quot;Middle2 Constructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    
+        ~Middle2() {
+            std::cout &lt;&lt; &quot;Middle2 Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
+    
+    class Middle3: public virtual Top {
+    public:
+        Middle3() {
+            std::cout &lt;&lt; &quot;Middle3 Constructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    
+        ~Middle3() {
+            std::cout &lt;&lt; &quot;Middle3 Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
+    
+    class Bottom: public Middle1, public Middle2, public Middle3 {
+    public:
+        Bottom() {
+            std::cout &lt;&lt; &quot;Bottom Constructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    
+        ~Bottom() {
+            std::cout &lt;&lt; &quot;Bottom Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
     
     int main()
     {
-        std::future&lt;std::thread::id&gt; f1 = std::async(worker);
-        std::future&lt;std::thread::id&gt; f2 = std::async(worker);
-        std::thread::id id1 = f1.get();
-        std::thread::id id2 = f2.get();
-        std::cout &lt;&lt; &quot;thread 1: &quot; &lt;&lt; id1 &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;thread 2: &quot; &lt;&lt; id2 &lt;&lt; std::endl;
+        Bottom last;
         return 0;
     }
 </code>
@@ -148,30 +203,38 @@ pre {
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o future-async.o future-async.cxx
+g++ -g -Wall -Os -c -o diamond.o diamond.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -Wall -g -lpthread -o future-async.bin future-async.o
+g++ -o diamond.bin diamond.o
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./future-async.bin
+./diamond.bin
 </code>
 </pre>
 <h3>Output</h3>
 <pre class="language-bash" begin language-bash>
 <code>
-thread 1: 140008709973568
-thread 2: 140008701580864
+Top Constructor Invoked
+Middle1 Constructor Invoked
+Middle2 Constructor Invoked
+Middle3 Constructor Invoked
+Bottom Constructor Invoked
+Bottom Destructor Invoked
+Middle3 Destructor Invoked
+Middle2 Destructor Invoked
+Middle1 Destructor Invoked
+Top Destructor Invoked
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="/6.3.3.0.html">previous page</a></li>
+<li class="previous"><a href="/cpp/object-orientation/polymorphism">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.3.3.2.html">next page</a></li>
 </ul>

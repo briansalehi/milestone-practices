@@ -1,0 +1,5 @@
+This is a sample file
+to demonstrate how C++ reads a file
+and learn iterating through lines
+using files is an interesting topic
+

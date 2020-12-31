@@ -1,0 +1,7 @@
+Enter pi number: Enter a sentence: 
+Enter your fullname: 
+Enter your fullname again: 
+your pi is 3.14159
+sentence is: 
+your broken name is: 
+your fullname is: 

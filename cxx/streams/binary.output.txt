@@ -1,0 +1,3 @@
+wrote object into file
+read object from file
+Adam is 35 years old

@@ -1,1 +1,1 @@
-Standard Template Library (STL)
+Standard Template Library
