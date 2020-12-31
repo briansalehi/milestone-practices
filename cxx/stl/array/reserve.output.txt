@@ -1,0 +1,9 @@
+initial vector
+size: 5	capacity: 6
+
+pushing back into std::vector
+size: 6	capacity: 6
+
+poping back from std::vector
+size: 5	capacity: 6
+

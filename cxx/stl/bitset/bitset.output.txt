@@ -1,0 +1,16 @@
+bits:	0011 1001
+and:	0001
+or:	1011
+xor:	1010
+not:	1100
+left shift:	1100
+right shift:	0001
+bit[2]:	1
+set operator:	1111
+set(1):	1011
+reset operator:	0000
+reset(1):	1001
+flip operator:	1100
+size operator:	4
+count 1s operator:	2
+count 0s operator:	2

@@ -1,0 +1,4 @@
+unmodifiable initial value:1
+modifiable initial value:1
+unmodifiable final value:1
+modifiable final value:2

@@ -1,0 +1,12 @@
+4:forth 3:third 2:second 1:first 
+size: 4
+bucket: 13
+load factor: 0.307692
+max load factor: 1
+
+5:fifth 4:forth 3:third 2:second 1:first 
+size: 5
+bucket: 13
+load factor: 0.384615
+max load factor: 1
+

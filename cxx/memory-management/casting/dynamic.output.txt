@@ -1,0 +1,6 @@
+dynamic cast failed
+this function is in derived
+this function is in bottom
+std::bad_cast
+this function is in derived
+this function is in bottom

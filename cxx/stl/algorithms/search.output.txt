@@ -1,0 +1,10 @@
+1: one
+2: two
+3: three
+4: four
+4: four
+4: four
+5: five
+
+found sub-range in position: 2
+found 3 instances of pair (4, "four") in position: 3

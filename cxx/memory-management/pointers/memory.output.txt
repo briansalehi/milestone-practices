@@ -1,0 +1,7 @@
+number:	15
+&number:	0x7ffcac37735c
+pointer:	0x7ffcac37735c
+*pointer: 15
+&pointer:	0x7ffcac377360
+size of number:		4
+size of pointer:	8

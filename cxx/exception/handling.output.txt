@@ -1,0 +1,13 @@
+function A invoked
+Class A constructor
+Class B constructor
+function B invoked
+Class A constructor
+Class B constructor
+Class B destructor
+Class A destructor
+Class B destructor
+Class A destructor
+Exception catched in A
+Exception thrown from B
+All good in main()

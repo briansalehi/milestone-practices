@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>bitset</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
+<li class="breadcrumb-item"><a href="/6.4.0.html">Standard Template Library</a></li>
+<li class="breadcrumb-item"><a href="/6.4.6.0.html">STL Bit Flags by std::bitset</a></li>
+<li class="breadcrumb-item active" >bitset</li>
+</ol>
+<h2>bitset</h2>
+<hr />
+<h3>Source</h3>
+  <cite>bitset.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;bitset&gt;
+    
+    int main()
+    {
+        // different bitset instantiating
+        std::bitset&lt;4&gt; rawBits;
+        std::bitset&lt;4&gt; stringBits(&quot;0011&quot;);
+        std::bitset&lt;4&gt; binaryBits(0b1001);
+        std::bitset&lt;4&gt; decimalBits(255); // C++14
+        std::bitset&lt;4&gt; copyBits(binaryBits);
+    
+        // bitset operators
+        // &quot;1101&quot; &gt;&gt; rawBits; // string literal insertion
+        std::cout &lt;&lt; &quot;bits:\t&quot; &lt;&lt; stringBits &lt;&lt; &quot; &quot; &lt;&lt; binaryBits &lt;&lt; std::endl; // output stream
+        std::cout &lt;&lt; &quot;and:\t&quot; &lt;&lt; (binaryBits &amp; stringBits) &lt;&lt; std::endl; // binary and
+        std::cout &lt;&lt; &quot;or:\t&quot; &lt;&lt; (binaryBits | stringBits) &lt;&lt; std::endl; // binary or
+        std::cout &lt;&lt; &quot;xor:\t&quot; &lt;&lt; (binaryBits ^ stringBits) &lt;&lt; std::endl; // binary xor
+        std::cout &lt;&lt; &quot;not:\t&quot; &lt;&lt; (~stringBits) &lt;&lt; std::endl; // binary not
+        std::cout &lt;&lt; &quot;left shift:\t&quot; &lt;&lt; (stringBits &lt;&lt; 2) &lt;&lt; std::endl; // 2 shifts to left (Bx4)
+        std::cout &lt;&lt; &quot;right shift:\t&quot; &lt;&lt; (stringBits &gt;&gt; 1) &lt;&lt; std::endl; // a shift to right (B/2)
+        std::cout &lt;&lt; &quot;bit[2]:\t&quot; &lt;&lt; stringBits[1] &lt;&lt; std::endl; // second bit by subscript operator
+    
+        // bitset member methods
+        std::cout &lt;&lt; &quot;set operator:\t&quot; &lt;&lt; rawBits.set() &lt;&lt; std::endl; // set to 1111
+        std::cout &lt;&lt; &quot;set(1):\t&quot; &lt;&lt; binaryBits.set(1) &lt;&lt; std::endl; // set 2nd bit to 1 (1001 to 1011)
+        std::cout &lt;&lt; &quot;reset operator:\t&quot; &lt;&lt; rawBits.reset() &lt;&lt; std::endl; // reset to 0000
+        std::cout &lt;&lt; &quot;reset(1):\t&quot; &lt;&lt; binaryBits.reset(1) &lt;&lt; std::endl; // reset 2nd bit to 0 (1011 to 1001)
+        std::cout &lt;&lt; &quot;flip operator:\t&quot; &lt;&lt; stringBits.flip() &lt;&lt; std::endl; // flip (0011 to 1100)
+        std::cout &lt;&lt; &quot;size operator:\t&quot; &lt;&lt; stringBits.size() &lt;&lt; std::endl; // size (4)
+        std::cout &lt;&lt; &quot;count 1s operator:\t&quot; &lt;&lt; stringBits.count() &lt;&lt; std::endl; // count, number of set bits
+        std::cout &lt;&lt; &quot;count 0s operator:\t&quot; &lt;&lt; (stringBits.size() - stringBits.count()) &lt;&lt; std::endl; // count, number of 0 bits
+        
+        return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o bitset.o bitset.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o bitset.bin bitset.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./bitset.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+bits:	0011 1001
+and:	0001
+or:	1011
+xor:	1010
+not:	1100
+left shift:	1100
+right shift:	0001
+bit[2]:	1
+set operator:	1111
+set(1):	1011
+reset operator:	0000
+reset(1):	1001
+flip operator:	1100
+size operator:	4
+count 1s operator:	2
+count 0s operator:	2
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="/6.4.6.0.html">previous page</a></li>
+<li class="top"><a href="/">top page</a></li>
+<li class="next"><a href="/6.4.6.2.html">next page</a></li>
+</ul>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+</body>
+</html>

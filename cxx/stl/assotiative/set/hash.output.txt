@@ -1,0 +1,12 @@
+4 3 2 1 
+size: 4
+bucket: 5
+load factor: 0.8
+max load factor: 1
+
+5 4 3 2 1 
+size: 5
+bucket: 5
+load factor: 1
+max load factor: 1
+

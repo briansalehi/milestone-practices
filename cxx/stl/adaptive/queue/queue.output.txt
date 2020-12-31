@@ -1,0 +1,7 @@
+queue size: 3
+last back element: 3
+last front element: 1
+element: 1
+element: 2
+element: 3
+queue is empty

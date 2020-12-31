@@ -1,0 +1,6 @@
+stack size: 3
+top element: 3
+element: 3
+element: 2
+element: 1
+stack is empty

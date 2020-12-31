@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>dynamic casting</title>
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+.pager .top {
+	float: center;
+}
+
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: darkblue;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+</style>
+</head>
+<body class="container">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
+<li class="breadcrumb-item"><a href="/6.6.0.html">Memory Management</a></li>
+<li class="breadcrumb-item"><a href="/6.6.1.0.html">Casting Operators</a></li>
+<li class="breadcrumb-item active" >dynamic casting</li>
+</ol>
+<h2>dynamic casting</h2>
+<div class="comment-style" >
+   ref[2]
+   Dynamic casting can only be applied to polymorphic objects, that is, objects
+   that come from a class with at least one virtual function.<br />
+   Dynamic casting is most often applied for casting pointers within the class
+   hierarchy. If an illegal pointer cast is attempted, then the result is a null pointer.<br />
+   end[2]
+   <br />
+   When you have a pointer to an object of type _A_, and you need to know
+   if you can assign an object's address of another type, say _B_, to that pointer,<br />
+   you can check their compatibility by **dynamic_cast** operator.<br />
+   <br />
+   This operator will return a null pointer if objects are not compatible.<br />
+   <br />
+   Note that only classes containing virtual functions can be used in dynamic_cast operator,<br />
+   as they are the only reason that two inherited objects might not match.<br />
+   <br />
+   References can also be used, but virtual_cast operator will not return null pointer in that case,<br />
+   instead, it will throw a type **bad_cast** exception when two object types don't match.<br />
+   <br />
+   **bad_cast** class is derived from exception class and is defined in **typeinfo** header file.<br />
+</div>
+<hr />
+<h3>Source</h3>
+  <cite>dynamic.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;typeinfo&gt;
+    
+    struct Base {
+        Base() {};
+        virtual void intro() { std::cout &lt;&lt; &quot;this is base class\n&quot;; }
+    };
+    
+    struct Derived: public Base {
+        Derived() {};
+        void intro() { std::cout &lt;&lt; &quot;this is derived class\n&quot;; }
+        virtual void display() { std::cout &lt;&lt; &quot;this function is in derived\n&quot;; }
+    };
+    
+    struct Bottom: public Derived {
+        Bottom() {};
+        void intro() { std::cout &lt;&lt; &quot;this is bottom class\n&quot;; }
+        void display() { std::cout &lt;&lt; &quot;this function is in bottom\n&quot;; }
+        void show() { std::cout &lt;&lt; &quot;this function is only in bottom\n&quot;; }
+    };
+    
+    template &lt;typename object_t&gt;
+    void match(object_t*  object) {
+        Derived* derived_pointer;
+    
+        if ((derived_pointer = dynamic_cast&lt;Derived*&gt;(object))) {
+            derived_pointer-&gt;display();
+        }
+        else {
+            std::cout &lt;&lt; &quot;dynamic cast failed\n&quot;;
+        }
+    }
+    
+    template &lt;typename object_t&gt;
+    void match(object_t &amp;object) {
+        try {
+            Derived &amp;derived_pointer = dynamic_cast&lt;Derived &amp;&gt;(object);
+            derived_pointer.display();
+        } catch(std::bad_cast &amp;exp) {
+            std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
+        }
+    }
+    
+    int main()
+    {
+        // using pointer
+        Base *base_object = new Base;
+        Derived *derived_object = new Derived;
+        Bottom *bottom_object = new Bottom;
+    
+        match(base_object);
+        match(derived_object);
+        match(bottom_object);
+    
+        // using reference
+        Base base;
+        Derived derived;
+        Bottom bottom;
+    
+        match(base);
+        match(derived);
+        match(bottom);
+    
+        return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o dynamic.o dynamic.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o dynamic.bin dynamic.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./dynamic.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+dynamic cast failed
+this function is in derived
+this function is in bottom
+std::bad_cast
+this function is in derived
+this function is in bottom
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a href="/6.6.1.1.html">previous page</a></li>
+<li class="top"><a href="/">top page</a></li>
+<li class="next"><a href="/6.6.1.3.html">next page</a></li>
+</ul>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
+</body>
+</html>

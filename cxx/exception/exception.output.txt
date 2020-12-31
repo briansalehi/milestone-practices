@@ -1,0 +1,2 @@
+Enter array length (-1): -1
+Exception: std::bad_array_new_length
