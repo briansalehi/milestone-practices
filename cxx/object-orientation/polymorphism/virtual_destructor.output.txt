@@ -1,0 +1,4 @@
+Base Constructor Invoked
+Derived Constructor Invoked
+Derived Destructor Invoked
+Base Destructor Invoked

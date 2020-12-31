@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Cut Delimited Strings</title>
+<title>Print Last Lines</title>
 <style>
 a,
 a:hover,
@@ -110,39 +110,58 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
-<li class="breadcrumb-item active" >Cut Delimited Strings</li>
+<li class="breadcrumb-item active" >Print Last Lines</li>
 </ol>
-<h2>Cut Delimited Strings</h2>
+<h2>Print Last Lines</h2>
 <div class="comment-style" >
-   Cuts text delimited by -d 'D' option and -f <N> field of N.<br />
+   If option -n <N> given, prints last N lines of text.<br />
+   N is 10 by default.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>cut.sh</cite>
+  <cite>tail.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
     #!/usr/bin/env bash
     
-    echo &quot;column1:column2:column3:column4&quot; | cut -d &apos;:&apos; -f 3
+    tail -n 5 /etc/services
+    
+    head -n 45 /etc/services | tail -n 5
+    
+    cat /etc/services | head -n 50 | tail -n 5
 </code>
 </pre>
 <h3>Execution</h3>
 <h4>run</h4>
 <pre class="command-line" data-user="bash" data-host="milestone">
 <code class="language-bash">
-bash ./cut.sh
+bash ./tail.sh
 </code>
 </pre>
 <h3>Output</h3>
 <pre class="language-bash" begin language-bash>
 <code>
-column3
+robotraconteur  48653/udp
+matahari        49000/tcp
+nusrp           49001/tcp
+nusdp-disc      49001/udp
+inspider        49150/tcp
+msg-icp            29/udp
+msg-auth           31/tcp
+msg-auth           31/udp
+dsp                33/tcp
+dsp                33/udp
+time               37/tcp
+time               37/udp
+rap                38/tcp
+rap                38/udp
+rlp                39/tcp
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="/linux/text-processing/tr">previous page</a></li>
+<li class="previous"><a href="/linux/text-processing/head">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/development-tools">next page</a></li>
+<li class="next"><a href="/linux/text-processing/tr">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

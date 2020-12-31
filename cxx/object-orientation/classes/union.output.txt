@@ -1,0 +1,4 @@
+size of 10 simple integer 4
+size of F simple character 4
+value is a number: 20
+value is a character: M

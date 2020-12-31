@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QComboBox</title>
+<title>std::unique_lock</title>
 <style>
 a,
 a:hover,
@@ -109,31 +109,78 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.3.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a href="/6.3.2.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QComboBox</li>
+<li class="breadcrumb-item"><a href="/6.3.0.html">Multithreading</a></li>
+<li class="breadcrumb-item"><a href="/6.3.2.0.html">Mutex</a></li>
+<li class="breadcrumb-item active" >std::unique_lock</li>
 </ol>
-<h2>QComboBox</h2>
+<h2>std::unique_lock</h2>
+<div class="comment-style" >
+   The unique lock is a general-purpose mutex wrapper. It's similar to the timed mutex, but with additional features, primary of which is the concept of ownership.<br />
+   Unlike other lock types, a unique lock does not necessarily own the mutex it wraps if it contains any at all.<br />
+   Mutexes can be transferred between unique lock instances along with ownership of the said mutexes using **swap()** function.<br />
+   <br />
+   Types example:<br />
+   <br />
+   ```cxx
+   std::mutex m1, m2, m3;<br />
+   <br />
+   std::unique_lock<std::mutex> lock1(m1, std::defer_lock);<br />
+   std::unique_lock<std::mutex> lock2(m2, std::try_lock);<br />
+   std::unique_lock<std::mutex> lock3(m3, std::adopt_lock);<br />
+   ```
+</div>
 <hr />
 <h3>Source</h3>
-  <cite>combobox.cxx</cite>
+  <cite>unique-lock.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;QApplication&gt;
-    #include &lt;QStringList&gt;
-    #include &lt;QComboBox&gt;
+    #include &lt;iostream&gt;
+    #include &lt;thread&gt;
+    #include &lt;mutex&gt;
     
-    int main(int argc, char **argv)
-    {
-    	QApplication app(argc, argv);
-    	QStringList roleTitles({&quot;Developer&quot;, &quot;Maintainer&quot;, &quot;Tester&quot;, &quot;User&quot;});
+    std::mutex mutex;
     
-    	QComboBox roleComboBox;
-    	roleComboBox.addItems(roleTitles);
-    
-    	roleComboBox.show();
-    	return app.exec();
+    void worker() {
+        std::thread::id thread_id = std::this_thread::get_id();
+        std::unique_lock&lt;std::mutex&gt; lock(mutex);
+        std::cout &lt;&lt; &quot;thread id: &quot; &lt;&lt; thread_id &lt;&lt; std::endl;
     }
+    
+    int main()
+    {
+        std::thread t1(worker);
+        std::thread t2(worker);
+    
+        t1.join();
+        t2.join();
+        return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o unique-lock.o unique-lock.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -Wall -g -lpthread -o unique-lock.bin unique-lock.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./unique-lock.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+thread id: 140459104147008
+thread id: 140459095754304
 </code>
 </pre>
 <ul class="pager">

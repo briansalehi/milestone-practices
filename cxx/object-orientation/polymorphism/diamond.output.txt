@@ -1,0 +1,10 @@
+Top Constructor Invoked
+Middle1 Constructor Invoked
+Middle2 Constructor Invoked
+Middle3 Constructor Invoked
+Bottom Constructor Invoked
+Bottom Destructor Invoked
+Middle3 Destructor Invoked
+Middle2 Destructor Invoked
+Middle1 Destructor Invoked
+Top Destructor Invoked

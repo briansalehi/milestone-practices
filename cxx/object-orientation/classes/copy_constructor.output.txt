@@ -1,0 +1,8 @@
+constructor invoked
+message is at address: 0x7ffec53d9598
+copy constructor invoked
+copied message is at address: 0x7ffec53d95a0
+message length: 15
+message text: Cxx Programming
+destructor invoked
+destructor invoked

@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Graphical User Interface</title>
+<title>Multithreading</title>
 <style>
 a,
 a:hover,
@@ -172,16 +172,11 @@ button.list-group-item:hover {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item active" >Graphical User Interface</li>
+<li class="breadcrumb-item active" >Multithreading</li>
 </ol>
-<h2>Graphical User Interface</h2>
-<div class="comment-style" >
-   This section holds essential parts of Qt framework to practice.<br />
-   None of the practices will have output due to the nature of their executaion.<br />
-   Try to write code by yourself and see the results.<br />
-</div>
+<h2>Multithreading</h2>
 <ul class="pager">
-<li class="previous"><a href="/6.2.3.3.html">previous page</a></li>
+<li class="previous"><a href="/6.2.5.13.html">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.3.1.0.html">next page</a></li>
 </ul>
@@ -189,68 +184,88 @@ button.list-group-item:hover {
 <h3>Table of Content</h3>
 <div class="list-group list-group-root well" >
 <a href="#6-3-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Fundamentals
-	<span class="badge badge-primary badge-pill">1</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Threads
+	<span class="badge badge-primary badge-pill">8</span>
 </a>
 <div class="list-group collapse" id="6-3-1-0">
 <a href="6.3.1.1.html" class="list-group-item group-child">
-	1. Application Object
+	1. Creating Threads
+	
+</a>
+<a href="6.3.1.2.html" class="list-group-item group-child">
+	2. Sleeping Thread
+	
+</a>
+<a href="6.3.1.3.html" class="list-group-item group-child">
+	3. Sleep Until
+	
+</a>
+<a href="6.3.1.4.html" class="list-group-item group-child">
+	4. Passing Parameters to Threads
+	
+</a>
+<a href="6.3.1.5.html" class="list-group-item group-child">
+	5. Swapping Threads
+	
+</a>
+<a href="6.3.1.6.html" class="list-group-item group-child">
+	6. Moving a Thread
+	
+</a>
+<a href="6.3.1.7.html" class="list-group-item group-child">
+	7. High Resolution Clock
+	
+</a>
+<a href="6.3.1.8.html" class="list-group-item group-child">
+	8. Detach Threads
 	
 </a>
 </div>
 <a href="#6-3-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Widgets
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Mutex
 	<span class="badge badge-primary badge-pill">6</span>
 </a>
 <div class="list-group collapse" id="6-3-2-0">
 <a href="6.3.2.1.html" class="list-group-item group-child">
-	1. QLabel
+	1. std::lock_guard
 	
 </a>
 <a href="6.3.2.2.html" class="list-group-item group-child">
-	2. QPushButton
+	2. recursive_mutex
 	
 </a>
 <a href="6.3.2.3.html" class="list-group-item group-child">
-	3. QLineEdit
+	3. std::scoped_lock
 	
 </a>
 <a href="6.3.2.4.html" class="list-group-item group-child">
-	4. QDateTimeEdit
+	4. try_lock
 	
 </a>
 <a href="6.3.2.5.html" class="list-group-item group-child">
-	5. QSpinBox
+	5. try_lock_for
 	
 </a>
 <a href="6.3.2.6.html" class="list-group-item group-child">
-	6. QComboBox
+	6. std::unique_lock
 	
 </a>
 </div>
 <a href="#6-3-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Layouts
-	<span class="badge badge-primary badge-pill">5</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Future and Promise
+	<span class="badge badge-primary badge-pill">3</span>
 </a>
 <div class="list-group collapse" id="6-3-3-0">
 <a href="6.3.3.1.html" class="list-group-item group-child">
-	1. QGridLayout
+	1. std::future - std::async
 	
 </a>
 <a href="6.3.3.2.html" class="list-group-item group-child">
-	2. QFormLayout
+	2. std::future - std::promise
 	
 </a>
 <a href="6.3.3.3.html" class="list-group-item group-child">
-	3. QStackedLayout
-	
-</a>
-<a href="6.3.3.4.html" class="list-group-item group-child">
-	4. QVBoxLayout
-	
-</a>
-<a href="6.3.3.5.html" class="list-group-item group-child">
-	5. QHBoxLayout
+	3. std::packaged_task
 	
 </a>
 </div>

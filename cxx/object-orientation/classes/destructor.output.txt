@@ -1,0 +1,4 @@
+constructor
+length: 15
+message: Cxx Programming
+distructor

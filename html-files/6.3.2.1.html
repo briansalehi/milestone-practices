@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QLabel</title>
+<title>std::lock_guard</title>
 <style>
 a,
 a:hover,
@@ -109,35 +109,68 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.3.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a href="/6.3.2.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QLabel</li>
+<li class="breadcrumb-item"><a href="/6.3.0.html">Multithreading</a></li>
+<li class="breadcrumb-item"><a href="/6.3.2.0.html">Mutex</a></li>
+<li class="breadcrumb-item active" >std::lock_guard</li>
 </ol>
-<h2>QLabel</h2>
+<h2>std::lock_guard</h2>
 <div class="comment-style" >
-   Labels are used to embed and string in application window.<br />
+   **std::lock_guard** is a simple mutex wrapper, which handles the obtaining of a lock on the *mutex* object it gets as parameter, as well as its release when the lock guard goes out of scope.<br />
+   This is a helpful mechanism to ensure that one does not forget to release a mutex lock, and to help reduce clutter in one's code when one has to release the same mutex in multiple locations.<br />
+   With the lock guard, however, we do not have to worry about such details, which allows us to focus on the business logic instead of worrying about mutex management.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>label.cxx</cite>
+  <cite>lock-guard.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;QApplication&gt;
-    #include &lt;QString&gt;
-    #include &lt;QLabel&gt;
+    #include &lt;iostream&gt;
+    #include &lt;thread&gt;
+    #include &lt;mutex&gt;
     
-    int main(int argc, char **argv)
-    {
-    	QApplication app(argc, argv);
-    	QString text(&quot;This is a simple Qt application&quot;);
+    std::mutex mutex;
     
-    	QLabel label(text);
-    	label.setFont(QFont(&quot;Free Sans&quot;, 12));
-    	label.setAlignment(Qt::AlignCenter);
-    
-    	label.show();
-    	return app.exec();
+    void worker() {
+        std::thread::id thread_id = std::this_thread::get_id();
+        std::lock_guard&lt;std::mutex&gt; lock(mutex);
+        std::cout &lt;&lt; &quot;thread id: &quot; &lt;&lt; thread_id &lt;&lt; std::endl;
     }
+    
+    int main()
+    {
+        std::thread t1(worker);
+        std::thread t2(worker);
+    
+        t1.join();
+        t2.join();
+        return 0;
+    }
+</code>
+</pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o lock-guard.o lock-guard.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -Wall -g -lpthread -o lock-guard.bin lock-guard.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./lock-guard.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+thread id: 140616957265472
+thread id: 140616948872768
 </code>
 </pre>
 <ul class="pager">

@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>General Purpose GPU Programming (GPGPU)</title>
+<title>Image Processing</title>
 <style>
 a,
 a:hover,
@@ -172,16 +172,11 @@ button.list-group-item:hover {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item active" >General Purpose GPU Programming (GPGPU)</li>
+<li class="breadcrumb-item active" >Image Processing</li>
 </ol>
-<h2>General Purpose GPU Programming (GPGPU)</h2>
-<div class="comment-style" >
-   This section covers famous parallel programming libraries including
-   CUDA and OpenCL or maybe even OpenGL.<br />
-   Try not to skim and code all the pages by yourself.<br />
-</div>
+<h2>Image Processing</h2>
 <ul class="pager">
-<li class="previous"><a href="/6.4.5.1.11.html">previous page</a></li>
+<li class="previous"><a href="/6.4.3.5.html">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
 <li class="next"><a href="/6.5.1.0.html">next page</a></li>
 </ul>
@@ -189,14 +184,398 @@ button.list-group-item:hover {
 <h3>Table of Content</h3>
 <div class="list-group list-group-root well" >
 <a href="#6-5-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. OpenCL
-	<span class="badge badge-primary badge-pill">1</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Data Types
+	<span class="badge badge-primary badge-pill">43</span>
 </a>
 <div class="list-group collapse" id="6-5-1-0">
-<a href="6.5.1.1.html" class="list-group-item group-child">
-	1. 
+<a href="6.5.1.1.0.html" class="list-group-item group-child">
+	1. Basic Types
+	<span class="badge badge-primary badge-pill">8</span>
+</a>
+<div class="list-group collapse" id="6-5-1-1-0">
+<a href="6.5.1.1.1.html" class="list-group-item group-child">
+	1. cv::Point
 	
 </a>
+<a href="6.5.1.1.2.html" class="list-group-item group-child">
+	2. cv::Size
+	
+</a>
+<a href="6.5.1.1.3.html" class="list-group-item group-child">
+	3. cv::Vec
+	
+</a>
+<a href="6.5.1.1.4.html" class="list-group-item group-child">
+	4. cv::Scalar
+	
+</a>
+<a href="6.5.1.1.5.html" class="list-group-item group-child">
+	5. cv::Rect
+	
+</a>
+<a href="6.5.1.1.6.html" class="list-group-item group-child">
+	6. cv::RotatedRect
+	
+</a>
+<a href="6.5.1.1.7.html" class="list-group-item group-child">
+	7. cv::Complex
+	
+</a>
+<a href="6.5.1.1.8.html" class="list-group-item group-child">
+	8. cv::Matx
+	
+</a>
+</div>
+<a href="6.5.1.2.0.html" class="list-group-item group-child">
+	2. Helper Objects
+	<span class="badge badge-primary badge-pill">6</span>
+</a>
+<div class="list-group collapse" id="6-5-1-2-0">
+<a href="6.5.1.2.1.html" class="list-group-item group-child">
+	1. cv::Range
+	
+</a>
+<a href="6.5.1.2.2.html" class="list-group-item group-child">
+	2. cv::Ptr
+	
+</a>
+<a href="6.5.1.2.3.html" class="list-group-item group-child">
+	3. cv::TermCriteria
+	
+</a>
+<a href="6.5.1.2.4.html" class="list-group-item group-child">
+	4. cv::Exception
+	
+</a>
+<a href="6.5.1.2.5.html" class="list-group-item group-child">
+	5. cv::DataType
+	
+</a>
+<a href="6.5.1.2.6.html" class="list-group-item group-child">
+	6. cv::InputArray, cv::OutputArray, cv::noArray
+	
+</a>
+</div>
+<a href="6.5.1.3.0.html" class="list-group-item group-child">
+	3. Images
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="6-5-1-3-0">
+<a href="6.5.1.3.1.html" class="list-group-item group-child">
+	1. cv::Mat members
+	
+</a>
+<a href="6.5.1.3.2.html" class="list-group-item group-child">
+	2. access array elements indivitually
+	
+</a>
+<a href="6.5.1.3.3.html" class="list-group-item group-child">
+	3. creating an array
+	
+</a>
+</div>
+<a href="6.5.1.4.0.html" class="list-group-item group-child">
+	4. Utility Functions
+	<span class="badge badge-primary badge-pill">26</span>
+</a>
+<div class="list-group collapse" id="6-5-1-4-0">
+<a href="6.5.1.4.1.html" class="list-group-item group-child">
+	1. cv::alignPtr
+	
+</a>
+<a href="6.5.1.4.2.html" class="list-group-item group-child">
+	2. cv::alignSize
+	
+</a>
+<a href="6.5.1.4.3.html" class="list-group-item group-child">
+	3. cv::allocate (will be removed)
+	
+</a>
+<a href="6.5.1.4.4.html" class="list-group-item group-child">
+	4. cv::CV_Assert
+	
+</a>
+<a href="6.5.1.4.5.html" class="list-group-item group-child">
+	5. cv::cubeRoot
+	
+</a>
+<a href="6.5.1.4.6.html" class="list-group-item group-child">
+	6. cvCeil
+	
+</a>
+<a href="6.5.1.4.7.html" class="list-group-item group-child">
+	7. cvFloor
+	
+</a>
+<a href="6.5.1.4.8.html" class="list-group-item group-child">
+	8. cvIsInf
+	
+</a>
+<a href="6.5.1.4.9.html" class="list-group-item group-child">
+	9. cvIsNaN
+	
+</a>
+<a href="6.5.1.4.10.html" class="list-group-item group-child">
+	10. cvRound
+	
+</a>
+<a href="6.5.1.4.11.html" class="list-group-item group-child">
+	11. cv::deallocate (will be removed)
+	
+</a>
+<a href="6.5.1.4.12.html" class="list-group-item group-child">
+	12. cv::error
+	
+</a>
+<a href="6.5.1.4.13.html" class="list-group-item group-child">
+	13. cv::CV_Error
+	
+</a>
+<a href="6.5.1.4.14.html" class="list-group-item group-child">
+	14. cv::fastatan2
+	
+</a>
+<a href="6.5.1.4.15.html" class="list-group-item group-child">
+	15. cv::fastFree()
+	
+</a>
+<a href="6.5.1.4.16.html" class="list-group-item group-child">
+	16. cv::fastMalloc()
+	
+</a>
+<a href="6.5.1.4.17.html" class="list-group-item group-child">
+	17. cv::format
+	
+</a>
+<a href="6.5.1.4.18.html" class="list-group-item group-child">
+	18. cv::getCPUTickCount
+	
+</a>
+<a href="6.5.1.4.19.html" class="list-group-item group-child">
+	19. cv::getNumThreads
+	
+</a>
+<a href="6.5.1.4.20.html" class="list-group-item group-child">
+	20. cv::getOptimalDFTSize
+	
+</a>
+<a href="6.5.1.4.21.html" class="list-group-item group-child">
+	21. cv::getThreadNum
+	
+</a>
+<a href="6.5.1.4.22.html" class="list-group-item group-child">
+	22. cv::getTickCount
+	
+</a>
+<a href="6.5.1.4.23.html" class="list-group-item group-child">
+	23. cv::getTickFrequency
+	
+</a>
+<a href="6.5.1.4.24.html" class="list-group-item group-child">
+	24. cv::setNumThreads
+	
+</a>
+<a href="6.5.1.4.25.html" class="list-group-item group-child">
+	25. cv::setUseOptimized
+	
+</a>
+<a href="6.5.1.4.26.html" class="list-group-item group-child">
+	26. cv::useOptimized
+	
+</a>
+</div>
+</div>
+<a href="#6-5-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Fundamentals
+	<span class="badge badge-primary badge-pill">9</span>
+</a>
+<div class="list-group collapse" id="6-5-2-0">
+<a href="6.5.2.1.0.html" class="list-group-item group-child">
+	1. Devices
+	<span class="badge badge-primary badge-pill">2</span>
+</a>
+<div class="list-group collapse" id="6-5-2-1-0">
+<a href="6.5.2.1.1.html" class="list-group-item group-child">
+	1. live camera as input stream
+	
+</a>
+<a href="6.5.2.1.2.html" class="list-group-item group-child">
+	2. write to output video file
+	
+</a>
+</div>
+<a href="6.5.2.2.0.html" class="list-group-item group-child">
+	2. Tools
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="6-5-2-2-0">
+<a href="6.5.2.2.1.html" class="list-group-item group-child">
+	1. image viewer
+	
+</a>
+<a href="6.5.2.2.2.html" class="list-group-item group-child">
+	2. video player
+	
+</a>
+<a href="6.5.2.2.3.html" class="list-group-item group-child">
+	3. video trackbar slider
+	
+</a>
+</div>
+<a href="6.5.2.3.0.html" class="list-group-item group-child">
+	3. Transformation
+	<span class="badge badge-primary badge-pill">4</span>
+</a>
+<div class="list-group collapse" id="6-5-2-3-0">
+<a href="6.5.2.3.1.html" class="list-group-item group-child">
+	1. pyramid downsampling
+	
+</a>
+<a href="6.5.2.3.2.html" class="list-group-item group-child">
+	2. BGR to gray
+	
+</a>
+<a href="6.5.2.3.3.html" class="list-group-item group-child">
+	3. gaussian blur convolution filter
+	
+</a>
+<a href="6.5.2.3.4.html" class="list-group-item group-child">
+	4. edge detection
+	
+</a>
+</div>
+</div>
+<a href="#6-5-3-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Transformations
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="6-5-3-0">
+</div>
+<a href="#6-5-4-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Operations
+	<span class="badge badge-primary badge-pill">13</span>
+</a>
+<div class="list-group collapse" id="6-5-4-0">
+<a href="6.5.4.1.0.html" class="list-group-item group-child">
+	1. Drawing Functions
+	<span class="badge badge-primary badge-pill">10</span>
+</a>
+<div class="list-group collapse" id="6-5-4-1-0">
+<a href="6.5.4.1.1.html" class="list-group-item group-child">
+	1. cv::circle
+	
+</a>
+<a href="6.5.4.1.2.html" class="list-group-item group-child">
+	2. cv::clipLine
+	
+</a>
+<a href="6.5.4.1.3.html" class="list-group-item group-child">
+	3. cv::ellipse2Poly
+	
+</a>
+<a href="6.5.4.1.4.html" class="list-group-item group-child">
+	4. cv::ellipse
+	
+</a>
+<a href="6.5.4.1.5.html" class="list-group-item group-child">
+	5. cv::fillConvexPoly
+	
+</a>
+<a href="6.5.4.1.6.html" class="list-group-item group-child">
+	6. cv::getTextSize
+	
+</a>
+<a href="6.5.4.1.7.html" class="list-group-item group-child">
+	7. cv::line
+	
+</a>
+<a href="6.5.4.1.8.html" class="list-group-item group-child">
+	8. cv::LineIterator
+	
+</a>
+<a href="6.5.4.1.9.html" class="list-group-item group-child">
+	9. cv::putText
+	
+</a>
+<a href="6.5.4.1.10.html" class="list-group-item group-child">
+	10. cv::rectangle
+	
+</a>
+</div>
+<a href="6.5.4.2.0.html" class="list-group-item group-child">
+	2. Functors
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="6-5-4-2-0">
+<a href="6.5.4.2.1.html" class="list-group-item group-child">
+	1. cv::PCA::backProject
+	
+</a>
+<a href="6.5.4.2.2.html" class="list-group-item group-child">
+	2. cv::PCA
+	
+</a>
+<a href="6.5.4.2.3.html" class="list-group-item group-child">
+	3. cv::PCA::project()
+	
+</a>
+</div>
+</div>
+<a href="#6-5-5-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>5. Functions
+	<span class="badge badge-primary badge-pill">11</span>
+</a>
+<div class="list-group collapse" id="6-5-5-0">
+<a href="6.5.5.1.0.html" class="list-group-item group-child">
+	1. Data Files
+	<span class="badge badge-primary badge-pill">11</span>
+</a>
+<div class="list-group collapse" id="6-5-5-1-0">
+<a href="6.5.5.1.1.html" class="list-group-item group-child">
+	1. cv::FileNode
+	
+</a>
+<a href="6.5.5.1.2.html" class="list-group-item group-child">
+	2. cv::FileStorage
+	
+</a>
+<a href="6.5.5.1.3.html" class="list-group-item group-child">
+	3. cv::VideoCapture::get() and cv::VideoCapture::set()
+	
+</a>
+<a href="6.5.5.1.4.html" class="list-group-item group-child">
+	4. cv::VideoCapture::grab() and cv::VideoCapture::retrieve()
+	
+</a>
+<a href="6.5.5.1.5.html" class="list-group-item group-child">
+	5. cv::imdecode
+	
+</a>
+<a href="6.5.5.1.6.html" class="list-group-item group-child">
+	6. cv::imencode
+	
+</a>
+<a href="6.5.5.1.7.html" class="list-group-item group-child">
+	7. cv::imread
+	
+</a>
+<a href="6.5.5.1.8.html" class="list-group-item group-child">
+	8. cv::imwrite
+	
+</a>
+<a href="6.5.5.1.9.html" class="list-group-item group-child">
+	9. cv::VideoCapture
+	
+</a>
+<a href="6.5.5.1.10.html" class="list-group-item group-child">
+	10. cv::VideoCapture::read()
+	
+</a>
+<a href="6.5.5.1.11.html" class="list-group-item group-child">
+	11. cv::VideoWriter
+	
+</a>
+</div>
 </div>
 </div>
 <!-- jquery -->

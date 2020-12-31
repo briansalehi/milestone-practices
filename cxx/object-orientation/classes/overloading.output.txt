@@ -1,0 +1,9 @@
+constructing circle
+area of the circle is: 0
+perimeter of the circle is: 0
+setting radius to 1
+area of the circle is: 3.14159
+perimeter of the circle is: 6.28318
+overloading circle constructor
+area of the circle is: 28.2743
+perimeter of the circle is: 18.8495

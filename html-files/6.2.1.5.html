@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Swapping Threads</title>
+<title>type conversion</title>
 <style>
 a,
 a:hover,
@@ -109,49 +109,69 @@ pre {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a href="/6.2.0.html">Multithreading</a></li>
-<li class="breadcrumb-item"><a href="/6.2.1.0.html">Threads</a></li>
-<li class="breadcrumb-item active" >Swapping Threads</li>
+<li class="breadcrumb-item"><a href="/6.2.0.html">Object Oriented C++ Programming</a></li>
+<li class="breadcrumb-item"><a href="/6.2.1.0.html">Classes and Objects</a></li>
+<li class="breadcrumb-item active" >type conversion</li>
 </ol>
-<h2>Swapping Threads</h2>
+<h2>type conversion</h2>
 <div class="comment-style" >
-   We can take advantage of **std::swap()** function in standard library and swap two thread objects.<br />
+   Single-argument constructors are used to convert different types into the object.<br />
+   Use **explicit** keyword to avoid implicit conversions.<br />
+   One important motive to use explicit conversion over implicit is, simply, compile-time errors are better than run-time errors!<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>swap.cxx</cite>
+  <cite>conversion.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;chrono&gt;
-    #include &lt;thread&gt;
-    #include &lt;mutex&gt;
     
-    std::mutex cout_mtx;
+    class Implicit {
+    public:
+        Implicit(): number{0} {};
+        Implicit(const int&amp; input): number(input) {};
     
-    void worker() {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+        void show() {
+            std::cout &lt;&lt; &quot;implicit: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        }
+    
+    private:
+        int number;
+    };
+    
+    class Explicit {
+    public:
+        Explicit(): number{0} {};
+        explicit Explicit(const int&amp; input): number{input} {};
+    
+        void show() {
+            std::cout &lt;&lt; &quot;explicit: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        }
+    
+    private:
+        int number;
+    };
     
     int main()
     {
-        std::thread t1(worker);
-        std::thread t2(worker);
+        Implicit num1;
+        num1 = 2;
+        num1.show();
     
-        cout_mtx.lock();
-        std::cout &lt;&lt; &quot;thread 1: &quot; &lt;&lt; t1.get_id() &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;thread 2: &quot; &lt;&lt; t2.get_id() &lt;&lt; std::endl;
-        cout_mtx.unlock();
+        Implicit num2;
+        num2 = 3.14;
+        num2.show();
     
-        std::swap(t1, t2);
+        Explicit num3(4);
+        // num3 = 5; // not authorized
+        num3.show();
     
-        cout_mtx.lock();
-        std::cout &lt;&lt; &quot;thread 1: &quot; &lt;&lt; t1.get_id() &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;thread 2: &quot; &lt;&lt; t2.get_id() &lt;&lt; std::endl;
-        cout_mtx.unlock();
+        /*
+        Explicit num4;
+        num4 = 5.6; // not authorized
+        num4.show();
+        */
     
-        t1.join();
-        t2.join();
         return 0;
     }
 </code>
@@ -160,28 +180,27 @@ pre {
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o swap.o swap.cxx
+g++ -g -Wall -Os -c -o conversion.o conversion.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -Wall -g -lpthread -o swap.bin swap.o
+g++ -o conversion.bin conversion.o
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./swap.bin
+./conversion.bin
 </code>
 </pre>
 <h3>Output</h3>
 <pre class="language-bash" begin language-bash>
 <code>
-thread 1: 140488595695168
-thread 2: 140488587302464
-thread 1: 140488587302464
-thread 2: 140488595695168
+implicit: 2
+implicit: 3
+explicit: 4
 </code>
 </pre>
 <ul class="pager">

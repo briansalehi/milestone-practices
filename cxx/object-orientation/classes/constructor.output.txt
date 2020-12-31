@@ -1,0 +1,4 @@
+constructing message
+length: 15
+message: Cxx programming
+deleting message
