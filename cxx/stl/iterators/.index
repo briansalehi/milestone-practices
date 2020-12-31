@@ -1,1 +1,6 @@
 README.md
+istream_iterator.cxx
+ostream_iterator.cxx
+front_insert_iterator.cxx
+back_insert_iterator.cxx
+reverse_iterator.cxx

@@ -1,1 +1,13 @@
 README.md
+array.cxx
+clear.cxx
+deque.cxx
+distance.cxx
+insert.cxx
+instantiate.cxx
+memory.cxx
+pushback.cxx
+remove.cxx
+reserve.cxx
+semantics.cxx
+subscript.cxx
