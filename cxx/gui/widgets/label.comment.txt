@@ -1,1 +1,1 @@
-Labels are used to embed and string in application window.
+Labels are used to embed a string in application window.

@@ -1,0 +1,1 @@
+Spin box is usually used for limited range of numbers.
