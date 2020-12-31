@@ -1,1 +1,1 @@
-QWidget
+widgets

@@ -1,0 +1,2 @@
+To use grid layout, you must specify which placeholders each widget should
+fill.

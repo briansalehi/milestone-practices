@@ -1,0 +1,1 @@
+Horizontal box layout represents a horizontally growing layout.
