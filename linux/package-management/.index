@@ -1,1 +1,9 @@
 README.md
+repository.txt
+package-managers.txt
+dpkg.sh
+apt.sh
+rpm.sh
+yum.sh
+pacman.sh
+dnf.sh

@@ -1,0 +1,1 @@
+Joins two or more files based on a <b>common</b> field or column.

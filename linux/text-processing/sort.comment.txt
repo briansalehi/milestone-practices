@@ -1,0 +1,8 @@
+Sort file content based on characters.
+
+If -h option given, numbers are sorted based on their human readable
+size, e.g. 30K < 20M < 10G
+
+-n will sort file numeric.
+
+-r reverses sort result.

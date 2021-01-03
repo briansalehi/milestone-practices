@@ -1,0 +1,27 @@
+Sed is a stream processing tool which has its own reputation and we will not
+cover everything about it (we can't) in a single practice.
+
+To learn sed in depth, visit
+<a href="/linux/stream-processing/sed">stream processing</a> chapter.
+
+We will cover the most basic and regularly used features of Sed here, which
+are deleting and printing lines, and also substitution of strings.
+
+Using Sed is straightforward, you call sed following options and then Sed
+script surrounded by single quotes.
+The Sed script itself follows a specific syntax, first the address of lines
+can be given by numbers or string pattern, then a command is followed by that
+address to give desired results.
+
+<pre>
+<code class="language-bash">
+sed options '/address/command'
+</code>
+</pre>
+
+In case of addess, we are using line numbers in this example.
+And for commands, we used <b>d</b> to delete mentioned lines.
+We used <b>p</b> to print specified lines, which requires -n to avoid
+duplicate printing of lines, simply because sed itself also prints lines
+alongside our print command.
+And then we used <b>s</b> to substitute word <i>amazing</i> to <i>useful</i>.

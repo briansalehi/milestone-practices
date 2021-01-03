@@ -1,0 +1,2 @@
+Truncates duplicate lines of file.
+To get better results, sort file first.

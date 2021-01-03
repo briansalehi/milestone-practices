@@ -1,0 +1,1 @@
+Splits file in chuncks based on size or lines.
