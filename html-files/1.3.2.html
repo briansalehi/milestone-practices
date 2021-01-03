@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Milestone Practices</title>
+<title>Print File Content in Reverse</title>
 <style>
 a,
 a:hover,
@@ -110,13 +110,24 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
-<li class="breadcrumb-item active" >...</li>
+<li class="breadcrumb-item active" >Print File Content in Reverse</li>
 </ol>
+<h2>Print File Content in Reverse</h2>
+<div class="comment-style" >
+   Prints the content of files in rerverse order.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>tac.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
+    #!/usr/bin/env bash
+    
+    echo &quot;first line&quot; &gt; /tmp/sample
+    echo &quot;second line&quot; &gt;&gt; /tmp/sample
+    echo &quot;third line&quot; &gt;&gt; /tmp/sample
+    
+    tac /tmp/sample
 </code>
 </pre>
 <h3>Execution</h3>
@@ -124,6 +135,14 @@ pre {
 <pre class="command-line" data-user="bash" data-host="milestone">
 <code class="language-bash">
 bash ./tac.sh
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+third line
+second line
+first line
 </code>
 </pre>
 <ul class="pager">

@@ -5,7 +5,7 @@ const.cxx
 constexpr.cxx
 define.cxx
 enumeration.cxx
-external_linkage.cxx
+external-linkage.cxx
 global.cxx
 global-enumeration.cxx
 initialization.cxx

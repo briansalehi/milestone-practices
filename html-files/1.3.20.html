@@ -133,25 +133,35 @@ pre {
    awk [options] 'scripts'
    </code>
    </pre>
-   </br>
    <br />
    In Awk, <b>NR</b> stands for <b>N</b>umber of <b>R</b>ecord which keeps
    track of the line Awk is holding in its buffer to process.<br />
    <br />
    <b>NF</b> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory.<br />
+   To print the second field though, we used <i>print $2</i> command in awk
+   script.<br />
    <br />
    <b>FS</b> stands for <b>F</b>ield <b>S</b>eparator which Awk uses to devide
    fields within a line to process.<br />
    <i>FS</i> can also be given by -F option.<br />
    <br />
-   Here we have gave FS="," to separate fields within lines and NF=3 to select
-   the third field in NR=2 second line.<br />
+   Here we have set FS="," variable to separate fields within lines and NF=3 to
+   select the third field in NR=2 second line.<br />
 </div>
 <hr />
 <h3>Source</h3>
   <cite>awk.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
+    #!/usr/bin/env bash
+    
+    cat &lt;&lt; EOF &gt; /tmp/sample
+    a1,a2,a3
+    b1,b2,b3
+    c1,c2,c3
+    EOF
+    
+    awk &apos;BEGIN{ FS = &quot;,&quot; } if NR == 2 { print $2 }&apos; /tmp/sample
 </code>
 </pre>
 <h3>Execution</h3>

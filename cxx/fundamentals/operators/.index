@@ -3,7 +3,7 @@ arithmetic.cxx
 bitwise.cxx
 compound.cxx
 equality.cxx
-increment&decrement.cxx
+increment.cxx
 logical.cxx
 shifting.cxx
 sizeof.cxx
