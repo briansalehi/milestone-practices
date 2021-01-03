@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Milestone Practices</title>
+<title>Truncate Duplicates</title>
 <style>
 a,
 a:hover,
@@ -110,13 +110,37 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
-<li class="breadcrumb-item active" >...</li>
+<li class="breadcrumb-item active" >Truncate Duplicates</li>
 </ol>
+<h2>Truncate Duplicates</h2>
+<div class="comment-style" >
+   Truncates duplicate lines of file.<br />
+   To get better results, sort file first.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>uniq.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
+    #!/usr/bin/env bash
+    
+    cat &lt;&lt; EOF &gt; /tmp/sample
+    a
+    a
+    b
+    b
+    b
+    c
+    b
+    b
+    a
+    EOF
+    
+    # truncates neighbours only
+    uniq /tmp/sample
+    
+    # to truncate all duplicates, sort first
+    sort /tmp/sample | uniq
 </code>
 </pre>
 <h3>Execution</h3>
@@ -126,10 +150,23 @@ pre {
 bash ./uniq.sh
 </code>
 </pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+a
+b
+c
+b
+a
+a
+b
+c
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a href="/1.3.14.html">previous page</a></li>
+<li class="previous"><a href="/linux/text-processing/split">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/1.3.16.html">next page</a></li>
+<li class="next"><a href="/linux/text-processing/fmt">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

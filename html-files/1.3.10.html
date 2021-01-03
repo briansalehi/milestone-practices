@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Milestone Practices</title>
+<title>Merge Files</title>
 <style>
 a,
 a:hover,
@@ -110,13 +110,32 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
-<li class="breadcrumb-item active" >...</li>
+<li class="breadcrumb-item active" >Merge Files</li>
 </ol>
+<h2>Merge Files</h2>
+<div class="comment-style" >
+   Merges two or more files line by line.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>paste.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
+    #!/usr/bin/env bash
+    
+    echo &quot;Name&quot; &gt; /tmp/name
+    echo &quot;Jane&quot; &gt;&gt; /tmp/name
+    echo &quot;John&quot; &gt;&gt; /tmp/name
+    
+    echo &quot;Number&quot; &gt; /tmp/number
+    echo &quot;+12345&quot; &gt;&gt; /tmp/number
+    echo &quot;+16789&quot; &gt;&gt; /tmp/number
+    
+    echo &quot;Country&quot; &gt; /tmp/country
+    echo &quot;US&quot; &gt;&gt; /tmp/country
+    echo &quot;Ca&quot; &gt;&gt; /tmp/country
+    
+    paste /tmp/name /tmp/number /tmp/country
 </code>
 </pre>
 <h3>Execution</h3>
@@ -126,10 +145,18 @@ pre {
 bash ./paste.sh
 </code>
 </pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+Name	Number	Country
+Jane	+12345	US
+John	+16789	Ca
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a href="/1.3.9.html">previous page</a></li>
+<li class="previous"><a href="/linux/text-processing/join">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/1.3.11.html">next page</a></li>
+<li class="next"><a href="/linux/text-processing/expand">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

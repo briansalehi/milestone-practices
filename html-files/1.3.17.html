@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Milestone Practices</title>
+<title>Number Lines</title>
 <style>
 a,
 a:hover,
@@ -110,13 +110,26 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
-<li class="breadcrumb-item active" >...</li>
+<li class="breadcrumb-item active" >Number Lines</li>
 </ol>
+<h2>Number Lines</h2>
+<div class="comment-style" >
+   Numbers lines of file except blank lines.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>nl.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
+    #!/usr/bin/env bash
+    
+    cat &lt;&lt; EOF &gt; /tmp/sample
+    first
+    second
+    third
+    EOF
+    
+    nl /tmp/sample
 </code>
 </pre>
 <h3>Execution</h3>
@@ -126,10 +139,18 @@ pre {
 bash ./nl.sh
 </code>
 </pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+1	first
+2	second
+3	third
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a href="/1.3.16.html">previous page</a></li>
+<li class="previous"><a href="/linux/text-processing/fmt">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/1.3.18.html">next page</a></li>
+<li class="next"><a href="/linux/text-processing/pr">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

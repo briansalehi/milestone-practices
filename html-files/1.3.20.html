@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Milestone Practices</title>
+<title>Awk</title>
 <style>
 a,
 a:hover,
@@ -110,8 +110,43 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.3.0.html">Text Processing Commands</a></li>
-<li class="breadcrumb-item active" >...</li>
+<li class="breadcrumb-item active" >Awk</li>
 </ol>
+<h2>Awk</h2>
+<div class="comment-style" >
+   Awk is a strong text processing programmng language which deserves its own
+   chapter, or maybe books!<br />
+   To learn Awk in depth, visit <a href="/stream-processing/awk">Awk chapter</a>.<br />
+   <br />
+   Covering everything about Awk in a single page is impossible!<br />
+   So a brief overview of Awk is that it keeps track of line and word numbers.<br />
+   We can easily manipulate text, select lines and fields to print.<br />
+   <br />
+   In this sample, the easiest task for Awk is represented which selects the
+   second line and third field within that line to print.<br />
+   <br />
+   Using Awk is straightforward, you give options to <i>awk</i> and then begin
+   writing Awk scripts surrounded by single quotes.<br />
+   <br />
+   <pre>
+   <code class="language-bash">
+   awk [options] 'scripts'
+   </code>
+   </pre>
+   </br>
+   <br />
+   In Awk, <b>NR</b> stands for <b>N</b>umber of <b>R</b>ecord which keeps
+   track of the line Awk is holding in its buffer to process.<br />
+   <br />
+   <b>NF</b> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory.<br />
+   <br />
+   <b>FS</b> stands for <b>F</b>ield <b>S</b>eparator which Awk uses to devide
+   fields within a line to process.<br />
+   <i>FS</i> can also be given by -F option.<br />
+   <br />
+   Here we have gave FS="," to separate fields within lines and NF=3 to select
+   the third field in NR=2 second line.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>awk.sh</cite>
@@ -127,9 +162,9 @@ bash ./awk.sh
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a href="/1.3.19.html">previous page</a></li>
+<li class="previous"><a href="/linux/text-processing/sed">previous page</a></li>
 <li class="top"><a href="/">top page</a></li>
-<li class="next"><a href="/1.4.0.html">next page</a></li>
+<li class="next"><a href="/linux/package-management">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
