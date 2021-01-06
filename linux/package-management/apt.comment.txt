@@ -1,1 +1,6 @@
+<b>If you don't use Debian-based distribution, skip this page</b>.
+
 Uses mirrors to install/remove packages.
+
+-y or --yes option can be used to prevent apt from asking for download
+confirmation step.

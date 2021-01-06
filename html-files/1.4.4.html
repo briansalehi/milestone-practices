@@ -114,7 +114,12 @@ pre {
 </ol>
 <h2>apt</h2>
 <div class="comment-style" >
+   <b>If you don't use Debian-based distribution, skip this page</b>.<br />
+   <br />
    Uses mirrors to install/remove packages.<br />
+   <br />
+   -y or --yes option can be used to prevent apt from asking for download
+   confirmation step.<br />
 </div>
 <hr />
 <h3>Source</h3>
@@ -131,6 +136,9 @@ pre {
     
     # upgrades installed packages
     apt upgrade
+    
+    # upgrades Debian
+    apt dist-upgrade
     
     # searches through all packages
     apt search gedit
@@ -152,9 +160,6 @@ pre {
     
     # installs missing packages
     apt install --fix-missing
-    
-    # installs missing dependencies
-    apt install --fix-broken
 </code>
 </pre>
 <ul class="pager">

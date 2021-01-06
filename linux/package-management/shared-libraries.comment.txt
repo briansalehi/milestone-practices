@@ -1,0 +1,67 @@
+Most Linux software relies heavily on <i>shared libraries</i>.
+Binary program files can point to libraries either by name alone or by
+providing a complete path.
+
+In the first case, you must configure a <b>library path</b>, a set of
+directtories in which programs should search for libraries.
+
+The first way to set the library patah is to edit /etc/ld.so.config file.
+This file consists of a series of lines, each of which lists one directory in
+which shared library files may be found.
+
+Some distributions have an additional type of line in this file.
+These lines begin with the include directive; they list files that are to be
+included as if they were part of the main file.
+These lines tell the system to load all of the files in /etc/ld.so.config.d/
+whose names end in .config.
+
+<h4>Temporarily Changing the Path</h4>
+Sometimes it is necessary to change library path. For instance, you might want
+to test the effect of a new library before using it for all off you programs.
+To do so, you could install the shared libraries in an unusual location and
+then set the <b>LD_LIBRARY_PATH</b>.
+
+To set the LD_LIBRARY_PATH environment variable using the bash shell, you can
+type following command:
+
+<pre>
+	<code class="language-bash">
+		export LD_LIBRARY_PATH=~/.local/testlib:/opt/newlib
+	</code>
+</pre>
+
+This line adds two directories, ~/.local/testlib and /opt/newlib, to the
+search path.
+
+<h4> correcting problems</h4>
+Library path problems usually manifest as a program's inability to locate a
+library.
+First check if library is installed, if not, install it.
+If library is installed but program cannot find it, check which library the
+program is using by <b>ld</b> command.
+
+<pre>
+	<code class="language-bash">
+		ldd /bin/ls
+	</code>
+</pre>
+
+Sometimes, the library's path is har-coded in the program's binary file.
+When this happens, you may need to create a symbolic link from the location of
+the library on your sysstem to the location the program expects.
+
+A similar problem can occur when the program expects a library to have one
+name nut the library has another name.
+
+<h4>Rebuilding the Library Cache</h4>
+Linuux doesn't read /etc/ld.so.config every time a program runs.
+Instead, the system relies on a cached list of directories and the files they
+contain stored in a binary format in /etc/ld.so.cache.
+
+To rebuild the cache run following command:
+
+<pre>
+	<code class="language-bash">
+		ldconfig
+	</code>
+</pre>

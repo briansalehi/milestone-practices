@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Sed</title>
+<title>Managing Shared Libraries</title>
 <style>
 a,
 a:hover,
@@ -103,95 +103,100 @@ pre {
 	content: '> ';
 }
 
-.just-padding {
-  padding: 15px;
-}
-
-a.list-group-item:focus,
-a.list-group-item:hover,
-button.list-group-item:focus,
-button.list-group-item:hover {
-	color: #555;
-	text-decoration: none;
-	background-color: #dfdfdf;
-}
-
-.group-child {
-	background-color: #f0f0f0;
-}
-
-.dark-mode .list-group-item {
-	background-color: #212529;
-	color: #aaaaaa;
-}
-
-.dark-mode .group-child {
-	background-color: #3a3a3a;
-}
-
-.dark-mode a.list-group-item:focus,
-.dark-mode a.list-group-item:hover,
-.dark-mode button.list-group-item:focus,
-.dark-mode button.list-group-item:hover {
-	background-color: #555555;
-	color: #bdc0c4;
-}
-
-.list-group.list-group-root {
-  padding: 0;
-  overflow: hidden;
-}
-
-.list-group.list-group-root .list-group {
-  margin-bottom: 0;
-}
-
-.list-group.list-group-root .list-group-item {
-  border-radius: 0;
-  border-width: 1px 0 0 0;
-}
-
-.list-group.list-group-root > .list-group-item:first-child {
-  border-top-width: 0;
-}
-
-.list-group.list-group-root > .list-group > .list-group-item {
-  padding-left: 30px;
-}
-
-.list-group.list-group-root > .list-group > .list-group > .list-group-item {
-  padding-left: 45px;
-}
-
-.list-group-item .glyphicon {
-  margin-right: 5px;
-}
 </style>
 </head>
 <body class="container">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
-<li class="breadcrumb-item"><a href="/1.5.0.html">Stream Processing</a></li>
-<li class="breadcrumb-item active" >Sed</li>
+<li class="breadcrumb-item"><a href="/1.4.0.html">Package Management</a></li>
+<li class="breadcrumb-item active" >Managing Shared Libraries</li>
 </ol>
-<h2>Sed</h2>
+<h2>Managing Shared Libraries</h2>
 <div class="comment-style" >
-   Sed is a strong stream processing tool.<br />
+   Most Linux software relies heavily on <i>shared libraries</i>.<br />
+   Binary program files can point to libraries either by name alone or by
+   providing a complete path.<br />
+   <br />
+   In the first case, you must configure a <b>library path</b>, a set of
+   directtories in which programs should search for libraries.<br />
+   <br />
+   The first way to set the library patah is to edit /etc/ld.so.config file.<br />
+   This file consists of a series of lines, each of which lists one directory in
+   which shared library files may be found.<br />
+   <br />
+   Some distributions have an additional type of line in this file.<br />
+   These lines begin with the include directive; they list files that are to be
+   included as if they were part of the main file.<br />
+   These lines tell the system to load all of the files in /etc/ld.so.config.d/
+   whose names end in .config.<br />
+   <br />
+   <h4>Temporarily Changing the Path</h4>
+   Sometimes it is necessary to change library path. For instance, you might want
+   to test the effect of a new library before using it for all off you programs.<br />
+   To do so, you could install the shared libraries in an unusual location and
+   then set the <b>LD_LIBRARY_PATH</b>.<br />
+   <br />
+   To set the LD_LIBRARY_PATH environment variable using the bash shell, you can
+   type following command:<br />
+   <br />
+   <pre>
+   <code class="language-bash">
+   export LD_LIBRARY_PATH=~/.local/testlib:/opt/newlib
+   </code>
+   </pre>
+   <br />
+   This line adds two directories, ~/.local/testlib and /opt/newlib, to the
+   search path.<br />
+   <br />
+   <h4> correcting problems</h4>
+   Library path problems usually manifest as a program's inability to locate a
+   library.<br />
+   First check if library is installed, if not, install it.<br />
+   If library is installed but program cannot find it, check which library the
+   program is using by <b>ld</b> command.<br />
+   <br />
+   <pre>
+   <code class="language-bash">
+   ldd /bin/ls
+   </code>
+   </pre>
+   <br />
+   Sometimes, the library's path is har-coded in the program's binary file.<br />
+   When this happens, you may need to create a symbolic link from the location of
+   the library on your sysstem to the location the program expects.<br />
+   <br />
+   A similar problem can occur when the program expects a library to have one
+   name nut the library has another name.<br />
+   <br />
+   <h4>Rebuilding the Library Cache</h4>
+   Linuux doesn't read /etc/ld.so.config every time a program runs.<br />
+   Instead, the system relies on a cached list of directories and the files they
+   contain stored in a binary format in /etc/ld.so.cache.<br />
+   <br />
+   To rebuild the cache run following command:<br />
+   <br />
+   <pre>
+   <code class="language-bash">
+   ldconfig
+   </code>
+   </pre>
 </div>
-<ul class="pager">
-<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/stream-processing">previous page</a></li>
-<li class="top"><a title="Press ALT + SHIFT + T to move Top" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/linux/stream-processing/sed/introduction">next page</a></li>
-</ul>
 <hr />
-<h3>Table of Content</h3>
-<div class="list-group list-group-root well" >
-<a href="/linux/stream-processing/sed/introduction" class="list-group-item">
-	1. Introduction
-	
-</a>
-</div>
+<h3>Source</h3>
+  <cite>shared-libraries.sh</cite>
+<pre class="line-numbers" >
+<code class="language-bash">
+    #!/usr/bin/env bash
+    
+    ldd /usr/bin/ls
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/package-management/cmake">previous page</a></li>
+<li class="top"><a title="Press ALT + SHIFT + T to move Top" accesskey="T" href="/">top page</a></li>
+<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/linux/process-management">next page</a></li>
+</ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->

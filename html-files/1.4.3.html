@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Debian Package Manager</title>
+<title>dpkg</title>
 <style>
 a,
 a:hover,
@@ -110,14 +110,31 @@ pre {
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a href="/1.4.0.html">Package Management</a></li>
-<li class="breadcrumb-item active" >Debian Package Manager</li>
+<li class="breadcrumb-item active" >dpkg</li>
 </ol>
-<h2>Debian Package Manager</h2>
+<h2>dpkg</h2>
+<div class="comment-style" >
+   <b>If you're not using Debian-based distribution, skip this page</b>.<br />
+   <br />
+   <b>dpkg</b> or Debian Package Manager is Debian's default package manager.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>dpkg.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
+    #!/usr/bin/env bash
+    
+    dpkg -G --install package.deb
+    
+    dpkg --remove package
+    
+    dpkg --purge package
+    
+    dpkg --innfo package.deb
+    
+    dpkg --list pattern
+    
 </code>
 </pre>
 <ul class="pager">

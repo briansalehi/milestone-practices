@@ -9,3 +9,4 @@ pacman.sh
 dnf.sh
 make.sh
 cmake.sh
+shared-libraries.sh

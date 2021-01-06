@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Stream Processing</title>
+<title>Process Management</title>
 <style>
 a,
 a:hover,
@@ -172,47 +172,44 @@ button.list-group-item:hover {
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
-<li class="breadcrumb-item active" >Stream Processing</li>
+<li class="breadcrumb-item active" >Process Management</li>
 </ol>
-<h2>Stream Processing</h2>
+<h2>Process Management</h2>
 <div class="comment-style" >
-   Old Unix years came with a lot of powerful tools which are still heavily used
-   in advanced environments.<br />
-   To name a few of these tools, Sed and Awk are two advanced stream processing
-   tools which deserve their own chapters. To be more specific, they even have
-   their own heavy books!<br />
+   Packages are just archives of source files which once installed, executable
+   files are generated.<br />
+   These programs only passively exist on storage as files, but once they are
+   executed they become process.<br />
+   To monitor what processes are running on a Linux system, we use administration
+   tools like <b>ps</b> command.<br />
    <br />
-   In these chapters you will be practicing both of these tools, also in the
-   third chapter the combination of both.<br />
+   This chapter reviews some of process management tools required for every Linux
+   user and administrator.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/package-management/cmake">previous page</a></li>
+<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/package-management/shared-libraries">previous page</a></li>
 <li class="top"><a title="Press ALT + SHIFT + T to move Top" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/linux/stream-processing/sed">next page</a></li>
+<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/linux/process-management/ps">next page</a></li>
 </ul>
 <hr />
 <h3>Table of Content</h3>
 <div class="list-group list-group-root well" >
-<a href="#1-5-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Sed
-	<span class="badge badge-primary badge-pill">1</span>
-</a>
-<div class="list-group collapse" id="1-5-1-0">
-<a href="/linux/stream-processing/sed/introduction" class="list-group-item group-child">
-	1. Introduction
+<a href="/linux/process-management/ps" class="list-group-item">
+	1. ps
 	
 </a>
-</div>
-<a href="#1-5-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Awk
-	<span class="badge badge-primary badge-pill">1</span>
-</a>
-<div class="list-group collapse" id="1-5-2-0">
-<a href="/linux/stream-processing/awk/introduction" class="list-group-item group-child">
-	1. Introduction
+<a href="/linux/process-management/pgrep" class="list-group-item">
+	2. pgrep
 	
 </a>
-</div>
+<a href="/linux/process-management/top" class="list-group-item">
+	3. top
+	
+</a>
+<a href="/linux/process-management/kill" class="list-group-item">
+	4. kill
+	
+</a>
 </div>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

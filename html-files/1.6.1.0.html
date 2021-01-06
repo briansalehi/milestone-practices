@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Introduction</title>
+<title>Sed</title>
 <style>
 a,
 a:hover,
@@ -103,36 +103,95 @@ pre {
 	content: '> ';
 }
 
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
 </style>
 </head>
 <body class="container">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/1.0.html">Linux Administration</a></li>
-<li class="breadcrumb-item"><a href="/1.5.0.html">Stream Processing</a></li>
-<li class="breadcrumb-item"><a href="/1.5.2.0.html">Awk</a></li>
-<li class="breadcrumb-item active" >Introduction</li>
+<li class="breadcrumb-item"><a href="/1.6.0.html">Stream Processing</a></li>
+<li class="breadcrumb-item active" >Sed</li>
 </ol>
-<h2>Introduction</h2>
-<hr />
-<h3>Source</h3>
-  <cite>introduction.txt</cite>
-<pre class="line-numbers" >
-<code class="language-bash">
-</code>
-</pre>
-<h3>Execution</h3>
-<h4>run</h4>
-<pre class="command-line" data-user="bash" data-host="milestone">
-<code class="language-bash">
-bash ./introduction.txt
-</code>
-</pre>
+<h2>Sed</h2>
+<div class="comment-style" >
+   Sed is a strong stream processing tool.<br />
+</div>
 <ul class="pager">
-<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/stream-processing/awk">previous page</a></li>
+<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/stream-processing">previous page</a></li>
 <li class="top"><a title="Press ALT + SHIFT + T to move Top" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/development-tools">next page</a></li>
+<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/linux/stream-processing/sed/introduction">next page</a></li>
 </ul>
+<hr />
+<h3>Table of Content</h3>
+<div class="list-group list-group-root well" >
+<a href="/linux/stream-processing/sed/introduction" class="list-group-item">
+	1. Introduction
+	
+</a>
+</div>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->

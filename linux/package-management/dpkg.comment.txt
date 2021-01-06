@@ -1,0 +1,3 @@
+<b>If you're not using Debian-based distribution, skip this page</b>.
+
+<b>dpkg</b> or Debian Package Manager is Debian's default package manager.

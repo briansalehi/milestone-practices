@@ -9,6 +9,9 @@ apt list --upgradable
 # upgrades installed packages
 apt upgrade
 
+# upgrades Debian
+apt dist-upgrade
+
 # searches through all packages
 apt search gedit
 
@@ -29,6 +32,3 @@ apt autoremove
 
 # installs missing packages
 apt install --fix-missing
-
-# installs missing dependencies
-apt install --fix-broken
