@@ -113,18 +113,48 @@ pre {
 <li class="breadcrumb-item active" >apt</li>
 </ol>
 <h2>apt</h2>
+<div class="comment-style" >
+   Uses mirrors to install/remove packages.<br />
+</div>
 <hr />
 <h3>Source</h3>
   <cite>apt.sh</cite>
 <pre class="line-numbers" >
 <code class="language-bash">
-</code>
-</pre>
-<h3>Execution</h3>
-<h4>run</h4>
-<pre class="command-line" data-user="bash" data-host="milestone">
-<code class="language-bash">
-bash ./apt.sh
+    #!/usr/bin/env bash
+    
+    # updates apt repository
+    apt update
+    
+    # lists upgradable packages
+    apt list --upgradable
+    
+    # upgrades installed packages
+    apt upgrade
+    
+    # searches through all packages
+    apt search gedit
+    
+    # prints package information
+    apt show gedit
+    
+    # installs packages
+    apt install gedit
+    
+    # remove packages
+    apt remove gedit
+    
+    # removes packages with dependencies
+    apt purge gedit
+    
+    # removes unnecessary packages
+    apt autoremove
+    
+    # installs missing packages
+    apt install --fix-missing
+    
+    # installs missing dependencies
+    apt install --fix-broken
 </code>
 </pre>
 <ul class="pager">

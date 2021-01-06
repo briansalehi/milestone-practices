@@ -7,3 +7,5 @@ rpm.sh
 yum.sh
 pacman.sh
 dnf.sh
+make.sh
+cmake.sh
