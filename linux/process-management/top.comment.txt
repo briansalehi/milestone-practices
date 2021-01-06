@@ -1,0 +1,3 @@
+Top is an interactive monitoring tool.
+
+To quit the top, press q and for help press h.
