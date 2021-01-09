@@ -5,3 +5,6 @@ line-edit.cxx
 datetime-edit.cxx
 spinbox.cxx
 combobox.cxx
+dial.cxx
+lcdnumber.cxx
+slider.cxx

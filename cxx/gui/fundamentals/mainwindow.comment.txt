@@ -1,0 +1,3 @@
+QMainWindow is derived from QWidget.
+As such, by calling the show() method, a window will appear.
+If you were to replace QMainWindow with QLabel, this will still work.

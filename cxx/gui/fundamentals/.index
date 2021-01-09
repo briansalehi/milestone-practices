@@ -1,2 +1,5 @@
 README.md
 application.cxx
+widget.cxx
+connect.cxx
+mainwindow.cxx

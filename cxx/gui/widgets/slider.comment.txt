@@ -1,0 +1,1 @@
+Slider is suitable for setting a number in a range of values.

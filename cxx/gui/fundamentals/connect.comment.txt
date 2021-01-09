@@ -1,0 +1,8 @@
+<i>connect</i> is a static function which requires 4 parameters:
+
+<pre>
+	<code class="language-cpp">
+		connect(senderObject, SIGNAL(senderMethod), receiverObject,
+SLOT(receiverMethod));
+	</code>
+</pre>

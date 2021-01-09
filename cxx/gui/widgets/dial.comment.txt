@@ -1,0 +1,1 @@
+Represents a dial suited for adjusting a number in a range of values.
