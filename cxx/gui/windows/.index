@@ -1,3 +1,4 @@
 README.md
 main.cxx mainwindow.cxx mainwindow.hpp
 menubar.cxx menubar-mainwindow.cxx menubar-mainwindow.hpp
+toolbar.cxx toolbar-mainwindow.cxx toolbar-mainwindow.hpp
