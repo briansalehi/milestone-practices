@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QStackedLayout</title>
+<title>QLineEdit</title>
 <style>
 a,
 a:hover,
@@ -107,46 +107,42 @@ pre {
 </head>
 <body class="container">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 1 to move " accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 2 to move " accesskey="2" href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 3 to move " accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 4 to move " accesskey="4" href="/6.8.3.0.html">Layouts</a></li>
-<li class="breadcrumb-item active" >QStackedLayout</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.3.0.html">Widgets</a></li>
+<li class="breadcrumb-item active" >QLineEdit</li>
 </ol>
-<h2>QStackedLayout</h2>
+<h2>QLineEdit</h2>
 <div class="comment-style" >
-   Stacked layout
+   Line Edit is a placeholder for text.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>stacked.cxx</cite>
+  <cite>line-edit.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
-    #include &lt;QStackedLayout&gt;
-    #include &lt;QLabel&gt;
+    #include &lt;QLineEdit&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
-    	QWidget *window = new QWidget;
-    	QStackedLayout *layout = new QStackedLayout;
     
-    	QLabel *label = new QLabel(&quot;stacked layout&quot;);
-    	label-&gt;setAlignment(Qt::AlignCenter);
+    	QLineEdit password;
+    	password.setPlaceholderText(&quot;enter password&quot;);
+    	password.setEchoMode(QLineEdit::Password);
+    	password.setFixedWidth(200);
     
-    	layout-&gt;addWidget(label);
-    
-    	window-&gt;setLayout(layout);
-    	window-&gt;show();
+    	password.show();
     	return app.exec();
     }
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/cpp/gui/layouts/QFormLayout">previous page</a></li>
-<li class="top"><a title="Press ALT + SHIFT + T to move Top" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/cpp/gui/layouts/QVBoxLayout">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/widgets/QPushButton">previous page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/widgets/QDateTimeEdit">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

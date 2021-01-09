@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Introduction</title>
+<title>QVBoxLayout</title>
 <style>
 a,
 a:hover,
@@ -107,31 +107,53 @@ pre {
 </head>
 <body class="container">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 1 to move " accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 2 to move " accesskey="2" href="/1.0.html">Linux Administration</a></li>
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 3 to move " accesskey="3" href="/1.6.0.html">Stream Processing</a></li>
-<li class="breadcrumb-item"><a title="Press ALT + SHIFT + 4 to move " accesskey="4" href="/1.6.2.0.html">Awk</a></li>
-<li class="breadcrumb-item active" >Introduction</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.4.0.html">Layouts</a></li>
+<li class="breadcrumb-item active" >QVBoxLayout</li>
 </ol>
-<h2>Introduction</h2>
+<h2>QVBoxLayout</h2>
+<div class="comment-style" >
+   Vertical box layout represents a vertically growing layout.<br />
+</div>
 <hr />
 <h3>Source</h3>
-  <cite>introduction.txt</cite>
+  <cite>vbox.cxx</cite>
 <pre class="line-numbers" >
-<code class="language-bash">
-</code>
-</pre>
-<h3>Execution</h3>
-<h4>run</h4>
-<pre class="command-line" data-user="bash" data-host="milestone">
-<code class="language-bash">
-bash ./introduction.txt
+<code class="language-cpp">
+    #include &lt;QApplication&gt;
+    #include &lt;QVBoxLayout&gt;
+    #include &lt;QLineEdit&gt;
+    #include &lt;QPushButton&gt;
+    
+    int main(int argc, char **argv)
+    {
+    	QApplication app(argc, argv);
+    	QWidget *window = new QWidget;
+    	QVBoxLayout *layout = new QVBoxLayout;
+    
+    	QLineEdit *firstname = new QLineEdit;
+    	QLineEdit *lastname = new QLineEdit;
+    	QPushButton *submit = new QPushButton(&quot;Submit&quot;);
+    
+    	firstname-&gt;setPlaceholderText(&quot;first name&quot;);
+    	lastname-&gt;setPlaceholderText(&quot;last name&quot;);
+    
+    	layout-&gt;addWidget(firstname);
+    	layout-&gt;addWidget(lastname);
+    	layout-&gt;addWidget(submit);
+    
+    	window-&gt;setLayout(layout);
+    	window-&gt;show();
+    	return app.exec();
+    }
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Press ALT + SHIFT + B to move Backward" accesskey="B" href="/linux/stream-processing/awk">previous page</a></li>
-<li class="top"><a title="Press ALT + SHIFT + T to move Top" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Press ALT + SHIFT + F to move Forward" accesskey="F" href="/development-tools">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts/QStackedLayout">previous page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts/QHBoxLayout">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -141,6 +163,8 @@ bash ./introduction.txt
 <!-- prism js -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
 <!-- prism languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <!-- prism plugins -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
