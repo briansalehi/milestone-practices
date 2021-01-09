@@ -1,0 +1,3 @@
+Most applications hold a set of clickable(s) that reveal a list of another
+set of actions that expose more functionality to the user.
+The most popular among these are the File, Edit, and Help menus.

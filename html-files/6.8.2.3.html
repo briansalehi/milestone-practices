@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Graphical User Interface</title>
+<title>QToolbar</title>
 <style>
 a,
 a:hover,
@@ -103,200 +103,39 @@ pre {
 	content: '> ';
 }
 
-.just-padding {
-  padding: 15px;
-}
-
-a.list-group-item:focus,
-a.list-group-item:hover,
-button.list-group-item:focus,
-button.list-group-item:hover {
-	color: #555;
-	text-decoration: none;
-	background-color: #dfdfdf;
-}
-
-.group-child {
-	background-color: #f0f0f0;
-}
-
-.dark-mode .list-group-item {
-	background-color: #212529;
-	color: #aaaaaa;
-}
-
-.dark-mode .group-child {
-	background-color: #3a3a3a;
-}
-
-.dark-mode a.list-group-item:focus,
-.dark-mode a.list-group-item:hover,
-.dark-mode button.list-group-item:focus,
-.dark-mode button.list-group-item:hover {
-	background-color: #555555;
-	color: #bdc0c4;
-}
-
-.list-group.list-group-root {
-  padding: 0;
-  overflow: hidden;
-}
-
-.list-group.list-group-root .list-group {
-  margin-bottom: 0;
-}
-
-.list-group.list-group-root .list-group-item {
-  border-radius: 0;
-  border-width: 1px 0 0 0;
-}
-
-.list-group.list-group-root > .list-group-item:first-child {
-  border-top-width: 0;
-}
-
-.list-group.list-group-root > .list-group > .list-group-item {
-  padding-left: 30px;
-}
-
-.list-group.list-group-root > .list-group > .list-group > .list-group-item {
-  padding-left: 45px;
-}
-
-.list-group-item .glyphicon {
-  margin-right: 5px;
-}
 </style>
 </head>
 <body class="container">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
-<li class="breadcrumb-item active" >Graphical User Interface</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.2.0.html">Windows</a></li>
+<li class="breadcrumb-item active" >QToolbar</li>
 </ol>
-<h2>Graphical User Interface</h2>
-<div class="comment-style" >
-   This section holds essential parts of Qt framework to practice.<br />
-   None of the practices will have output due to the nature of their executaion.<br />
-   Try to write code by yourself and see the results.<br />
-</div>
-<ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.7.3.3.html">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/fundamentals">next page</a></li>
-</ul>
+<h2>QToolbar</h2>
 <hr />
-<h3>Table of Content</h3>
-<div class="list-group list-group-root well" >
-<a href="#6-8-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Fundamentals
-	<span class="badge badge-primary badge-pill">4</span>
-</a>
-<div class="list-group collapse" id="6-8-1-0">
-<a href="/cpp/gui/fundamentals/QApplication" class="list-group-item group-child">
-	1. Application Object
-	
-</a>
-<a href="/cpp/gui/fundamentals/QWidget" class="list-group-item group-child">
-	2. QWidget
-	
-</a>
-<a href="/cpp/gui/fundamentals/connect" class="list-group-item group-child">
-	3. connect
-	
-</a>
-<a href="/cpp/gui/fundamentals/QMainWindow" class="list-group-item group-child">
-	4. QMainWindow
-	
-</a>
-</div>
-<a href="#6-8-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Windows
-	<span class="badge badge-primary badge-pill">3</span>
-</a>
-<div class="list-group collapse" id="6-8-2-0">
-<a href="/cpp/gui/windows/QMainWindow" class="list-group-item group-child">
-	1. QMainWindow
-	
-</a>
-<a href="/cpp/gui/windows/QMenuBar" class="list-group-item group-child">
-	2. QMenuBar
-	
-</a>
-<a href="/cpp/gui/windows/QToolbar" class="list-group-item group-child">
-	3. QToolbar
-	
-</a>
-</div>
-<a href="#6-8-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Widgets
-	<span class="badge badge-primary badge-pill">9</span>
-</a>
-<div class="list-group collapse" id="6-8-3-0">
-<a href="/cpp/gui/widgets/QLabel" class="list-group-item group-child">
-	1. QLabel
-	
-</a>
-<a href="/cpp/gui/widgets/QPushButton" class="list-group-item group-child">
-	2. QPushButton
-	
-</a>
-<a href="/cpp/gui/widgets/QLineEdit" class="list-group-item group-child">
-	3. QLineEdit
-	
-</a>
-<a href="/cpp/gui/widgets/QDateTimeEdit" class="list-group-item group-child">
-	4. QDateTimeEdit
-	
-</a>
-<a href="/cpp/gui/widgets/QSpinBox" class="list-group-item group-child">
-	5. QSpinBox
-	
-</a>
-<a href="/cpp/gui/widgets/QComboBox" class="list-group-item group-child">
-	6. QComboBox
-	
-</a>
-<a href="/cpp/gui/widgets/QDial" class="list-group-item group-child">
-	7. QDial
-	
-</a>
-<a href="/cpp/gui/widgets/QLCDNumber" class="list-group-item group-child">
-	8. QLCDNumber
-	
-</a>
-<a href="/cpp/gui/widgets/QSlider" class="list-group-item group-child">
-	9. QSlider
-	
-</a>
-</div>
-<a href="#6-8-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Layouts
-	<span class="badge badge-primary badge-pill">5</span>
-</a>
-<div class="list-group collapse" id="6-8-4-0">
-<a href="/cpp/gui/layouts/QGridLayout" class="list-group-item group-child">
-	1. QGridLayout
-	
-</a>
-<a href="/cpp/gui/layouts/QFormLayout" class="list-group-item group-child">
-	2. QFormLayout
-	
-</a>
-<a href="/cpp/gui/layouts/QStackedLayout" class="list-group-item group-child">
-	3. QStackedLayout
-	
-</a>
-<a href="/cpp/gui/layouts/QVBoxLayout" class="list-group-item group-child">
-	4. QVBoxLayout
-	
-</a>
-<a href="/cpp/gui/layouts/QHBoxLayout" class="list-group-item group-child">
-	5. QHBoxLayout
-	
-</a>
-</div>
-</div>
+<h3>Source</h3>
+  <cite>toolbar.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+</code>
+</pre>
+  <cite>toolbar-mainwindow.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+</code>
+</pre>
+  <cite>toolbar-mainwindow.hpp</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/windows/QMenuBar">previous page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/widgets">next page</a></li>
+</ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->
