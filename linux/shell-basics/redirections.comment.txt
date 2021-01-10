@@ -1,0 +1,16 @@
+Redirections can be used to write a command's output to a file, e.g. create a
+log file.
+
+Right shift can be used to write to file.
+
+Double right shift is used to append output to file.
+
+Left shift is used to input file contents in standard input.
+
+Double left shift is only used when a special word, usually EOF is typed
+afterward, when typed so, standard input will read until it's caught EOF.
+
+Triple left shift is used to write command's output to standard input.
+
+Pipe is used to write left hand command's output to right hand's standard
+input.

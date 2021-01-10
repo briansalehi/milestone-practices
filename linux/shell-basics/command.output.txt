@@ -1,2 +1,2 @@
 Linux
-Linux fsystem 5.9.10-arch1-1 #1 SMP PREEMPT Sun, 22 Nov 2020 14:16:59 +0000 x86_64 GNU/Linux
+Linux fsystem 5.9.14-arch1-1 #1 SMP PREEMPT Sat, 12 Dec 2020 14:37:12 +0000 x86_64 GNU/Linux

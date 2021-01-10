@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cat /tmp/sample
+cat /tmp/sample-file

@@ -1,7 +1,7 @@
 number:	15
-&number:	0x7ffcac37735c
-pointer:	0x7ffcac37735c
+&number:	0x7ffd0782bb4c
+pointer:	0x7ffd0782bb4c
 *pointer: 15
-&pointer:	0x7ffcac377360
+&pointer:	0x7ffd0782bb50
 size of number:		4
 size of pointer:	8

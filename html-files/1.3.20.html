@@ -161,7 +161,7 @@ pre {
     c1,c2,c3
     EOF
     
-    awk &apos;BEGIN{ FS = &quot;,&quot; } if NR == 2 { print $2 }&apos; /tmp/sample
+    awk &apos;BEGIN{ FS = &quot;,&quot; } NR == 2 { print $2 }&apos; /tmp/sample
 </code>
 </pre>
 <h3>Execution</h3>
@@ -169,6 +169,12 @@ pre {
 <pre class="command-line" data-user="bash" data-host="milestone">
 <code class="language-bash">
 bash ./awk.sh
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-bash" begin language-bash>
+<code>
+b2
 </code>
 </pre>
 <ul class="pager">

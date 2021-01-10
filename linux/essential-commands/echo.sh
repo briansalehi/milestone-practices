@@ -6,4 +6,4 @@ echo 'this is too a string'
 echo "$SHELL"
 echo '$SHELL'
 
-echo "file entry" > /tmp/sample
+echo "file entry" > /tmp/sample-file
