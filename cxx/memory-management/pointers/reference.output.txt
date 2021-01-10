@@ -1,4 +1,4 @@
 enter a number: result of number x number: 25
 reference of the result: 25
-&number: 0x7ffeb6b93a84
-&result: 0x7ffeb6b93a84
+&number: 0x7fff97495f84
+&result: 0x7fff97495f84

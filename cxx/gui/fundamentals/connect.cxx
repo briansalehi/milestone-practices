@@ -3,13 +3,11 @@
 
 int main(int argc, char **argv)
 {
-	QApplication app(argc, arv);
+	QApplication app(argc, argv);
 
 	QPushButton *closeButton = new QPushButton;
 
-	layout->addWidget(closeButton);
-
-	connect(closeButton, SIGNAL(clicked()), &app, SLOT(exit()));
+	QObject::connect(closeButton, SIGNAL(clicked()), &app, SLOT(exit()));
 
 	closeButton->show();
 	return app.exec();
