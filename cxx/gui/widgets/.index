@@ -8,3 +8,5 @@ combobox.cxx
 dial.cxx
 lcdnumber.cxx
 slider.cxx
+table-view.cxx
+message-box.cxx

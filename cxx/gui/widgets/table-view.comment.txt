@@ -1,0 +1,1 @@
+Tables are essential data holder blocks which appear in many places.
