@@ -15,6 +15,7 @@ class MainWindow : public QMainWindow {
 public:
 	MainWindow();
 
+private:
 	QMenu *fileMenu;
 	QMenu *helpMenu;
 
