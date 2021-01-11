@@ -10,3 +10,4 @@ lcdnumber.cxx
 slider.cxx
 table-view.cxx
 message-box.cxx
+input-dialog.cxx
