@@ -53,9 +53,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = toolbar.cxx \
-		toolbar-mainwindow.cxx 
+		toolbar-mainwindow.cxx moc_toolbar-mainwindow.cpp
 OBJECTS       = toolbar.o \
-		toolbar-mainwindow.o
+		toolbar-mainwindow.o \
+		moc_toolbar-mainwindow.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -158,7 +159,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -293,7 +293,6 @@ toolbar.make: toolbar.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/m
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -417,7 +416,6 @@ toolbar.make: toolbar.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/m
 /usr/lib/qt/mkspecs/features/qt_config.prf:
 /usr/lib/qt/mkspecs/linux-g++/qmake.conf:
 /usr/lib/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
@@ -486,8 +484,14 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_toolbar-mainwindow.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_toolbar-mainwindow.cpp
+moc_toolbar-mainwindow.cpp: toolbar-mainwindow.hpp \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/brian/development/websites/milextone/cxx/gui/windows/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/websites/milextone/cxx/gui/windows -I/home/brian/development/websites/milextone/cxx/gui/windows -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include toolbar-mainwindow.hpp -o moc_toolbar-mainwindow.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -500,15 +504,18 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
-toolbar.o: toolbar.cxx 
+toolbar.o: toolbar.cxx toolbar-mainwindow.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o toolbar.o toolbar.cxx
 
-toolbar-mainwindow.o: toolbar-mainwindow.cxx 
+toolbar-mainwindow.o: toolbar-mainwindow.cxx toolbar-mainwindow.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o toolbar-mainwindow.o toolbar-mainwindow.cxx
+
+moc_toolbar-mainwindow.o: moc_toolbar-mainwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_toolbar-mainwindow.o moc_toolbar-mainwindow.cpp
 
 ####### Install
 
