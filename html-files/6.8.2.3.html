@@ -119,19 +119,124 @@ pre {
   <cite>toolbar.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
+    #include &quot;toolbar-mainwindow.hpp&quot;
+    
+    #include &lt;QApplication&gt;
+    
+    int main(int argc, char **argv)
+    {
+    	QApplication app(argc, argv);
+    	QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);
+    	MainWindow mainWindow;
+    	mainWindow.show();
+    	return app.exec();
+    }
 </code>
 </pre>
   <cite>toolbar-mainwindow.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
+    #include &quot;toolbar-mainwindow.hpp&quot;
+    
+    MainWindow::MainWindow()
+    {
+    	setWindowTitle(&quot;Toolbar Sample&quot;);
+    	resize(400, 200);
+    
+    	fileMenu = menuBar()-&gt;addMenu(&quot;&amp;File&quot;);
+    	helpMenu = menuBar()-&gt;addMenu(&quot;&amp;Help&quot;);
+    	toolbar = addToolBar(&quot;Editing Toolbar&quot;);
+    	toolbar-&gt;setMovable(true);
+    
+    	QPixmap newIcon (&quot;new.png&quot;);
+    	QPixmap openIcon (&quot;open.png&quot;);
+    	QPixmap quitIcon (&quot;quit.png&quot;);
+    	QPixmap helpIcon (&quot;help.png&quot;);
+    	QPixmap aboutIcon (&quot;about.png&quot;);
+    
+    	newAction = new QAction(newIcon, &quot;&amp;New&quot;, this);
+    	newAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_N));
+    	openAction = new QAction(openIcon, &quot;&amp;Open&quot;, this);
+    	openAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
+    	quitAction = new QAction(quitIcon, &quot;&amp;Quit&quot;, this);
+    	quitAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
+    	helpAction = new QAction(helpIcon, &quot;&amp;Help&quot;, this);
+    	helpAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_H));
+    	aboutAction = new QAction(aboutIcon, &quot;&amp;About&quot;, this);
+    	aboutAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_A));
+    
+    	fileMenu-&gt;addAction(newAction);
+    	fileMenu-&gt;addAction(openAction);
+    	fileMenu-&gt;addSeparator();
+    	fileMenu-&gt;addAction(quitAction);
+    	helpMenu-&gt;addAction(helpAction);
+    	helpMenu-&gt;addSeparator();
+    	helpMenu-&gt;addAction(aboutAction);
+    
+    	newToolBarAction = toolbar-&gt;addAction(newIcon, &quot;&amp;New&quot;);
+    	openToolBarAction = toolbar-&gt;addAction(openIcon, &quot;&amp;Open&quot;);
+    
+    	QObject::connect(quitAction, &amp;QAction::triggered, this, &amp;QApplication::quit);
+    }
 </code>
 </pre>
   <cite>toolbar-mainwindow.hpp</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
+    #ifndef MAINWINDOW_H
+    #define MAINWINDOW_H
+    
+    #include &lt;QApplication&gt;
+    #include &lt;QMainWindow&gt;
+    #include &lt;QMenuBar&gt;
+    #include &lt;QMenu&gt;
+    #include &lt;QToolBar&gt;
+    #include &lt;QTableView&gt;
+    #include &lt;QAction&gt;
+    #include &lt;Qt&gt;
+    #include &lt;QtGui&gt;
+    #include &lt;QLabel&gt;
+    
+    class MainWindow : public QMainWindow {
+    
+    	Q_OBJECT
+    
+    public:
+    	MainWindow();
+    
+    private:
+    	QMenu *fileMenu;
+    	QMenu *helpMenu;
+    	QToolBar *toolbar;
+    
+    	QAction *newAction;
+    	QAction *openAction;
+    	QAction *quitAction;
+    	QAction *helpAction;
+    	QAction *aboutAction;
+    	QAction *newToolBarAction;
+    	QAction *openToolBarAction;
+    };
+    
+    #endif
 </code>
 </pre>
 <h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+make -C ./cxx/gui/windows -f toolbar.make
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./toolbar.bin
+</code>
+</pre>
+<h3>Output</h3>
+  <cite>toolbar.png</cite>
+<img class="img-responsive" src="/cpp/gui/windows/QToolbar.screenshot.png" alt="toolbar.cxx Screenshot">
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/windows/QMenuBar">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
