@@ -13,12 +13,32 @@ app.get("/", function(req, res) {
 	});
 });
 
-app.get("/*.*", (req, res) => {
+app.get("/*.html", (req, res) => {
 	fs.stat(`html-files${req.path}`, function (err, stat) {
 		if (err == null) {
 			res.status(200).sendFile(path.join(__dirname, `html-files${req.path}`));
 		} else {
 			res.status(404).sendFile(path.join(__dirname, 'no-practice.html'));
+		}
+	});
+});
+
+app.get("/*.png", (req, res) => {
+	fs.stat(`html-files${req.path}`, function (err, stat) {
+		if (err == null) {
+			res.status(200).sendFile(path.join(__dirname, `html-files${req.path}`));
+		} else {
+			res.status(404).sendFile(path.join(__dirname, 'no-image.html'));
+		}
+	});
+});
+
+app.get("/*.jpg", (req, res) => {
+	fs.stat(`html-files${req.path}`, function (err, stat) {
+		if (err == null) {
+			res.status(200).sendFile(path.join(__dirname, `html-files${req.path}`));
+		} else {
+			res.status(404).sendFile(path.join(__dirname, 'no-image.html'));
 		}
 	});
 });
