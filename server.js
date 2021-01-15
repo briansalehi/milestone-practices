@@ -33,6 +33,16 @@ app.get("/*.png", (req, res) => {
 	});
 });
 
+app.get("/*.jpg", (req, res) => {
+	fs.stat(`html-files${req.path}`, function (err, stat) {
+		if (err == null) {
+			res.status(200).sendFile(path.join(__dirname, `html-files${req.path}`));
+		} else {
+			res.status(404).sendFile(path.join(__dirname, 'no-image.html'));
+		}
+	});
+});
+
 app.get("/*", (req, res) => {
 	fs.stat(`html-files${req.path}`, function (err, stat) {
 		if (err == null) {
