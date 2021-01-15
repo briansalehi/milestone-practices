@@ -115,47 +115,47 @@ pre {
 </ol>
 <h2>Preprocessor Directives</h2>
 <div class="comment-style" >
-   Directives aimed at the preprocessor start with the # character.<br />
-   <br />
-   The following table shows some of the most common preprocessor directives.<br />
-   <br />
-   <table class="table">
-   <thead>
-   <tr>
-   <th scope="col">#</th>
-   <th scope="col">Directive</th>
-   <th scope="col">Functionality</th>
-   </tr>
-   </thead>
-   <tbody>
-   <tr>
-   <th scope="row">1</th>
-   <td>#include [file]</td>
-   <td>The specified file is inserted into the code at the location of the directive.</td>
-   </tr>
-   <tr>
-   <th scope="row">2</th>
-   <td>#define [key] [value]</td>
-   <td>Every occurrence of the speci- fied key is replaced with the specified value.</td>
-   </tr>
-   <tr>
-   <th scope="row">3</th>
-   <td>#ifndef [key] #endif</td>
-   <td>Code within the ifdef or ifndef locks are condition- ally included or omitted based on whether the specified key has been defined with #define .</td>
-   </tr>
-   <tr>
-   <th scope="row">4</th>
-   <td>#pragma [xyz]</td>
-   <td>xyz is compiler dependent. It often allows the programmer to display a warning or error if the directive is reached during preprocessing.</td>
-   </tr>
-   </tbody>
-   </table>
-   <br />
-   One example of using preprocessor directives is to avoid multiple includes.<br />
-   <br />
-   If your compiler supports the #pragma once directive, and most modern
-   compilers do, then this can be rewritten as follows:<br />
-   #pragma once
+Directives aimed at the preprocessor start with the # character.<br />
+<br />
+The following table shows some of the most common preprocessor directives.<br />
+<br />
+<table class="table">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">Directive</th>
+<th scope="col">Functionality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">1</th>
+<td>#include [file]</td>
+<td>The specified file is inserted into the code at the location of the directive.</td>
+</tr>
+<tr>
+<th scope="row">2</th>
+<td>#define [key] [value]</td>
+<td>Every occurrence of the speci- fied key is replaced with the specified value.</td>
+</tr>
+<tr>
+<th scope="row">3</th>
+<td>#ifndef [key] #endif</td>
+<td>Code within the ifdef or ifndef locks are condition- ally included or omitted based on whether the specified key has been defined with #define .</td>
+</tr>
+<tr>
+<th scope="row">4</th>
+<td>#pragma [xyz]</td>
+<td>xyz is compiler dependent. It often allows the programmer to display a warning or error if the directive is reached during preprocessing.</td>
+</tr>
+</tbody>
+</table>
+<br />
+One example of using preprocessor directives is to avoid multiple includes.<br />
+<br />
+If your compiler supports the #pragma once directive, and most modern
+compilers do, then this can be rewritten as follows:<br />
+#pragma once
 </div>
 <hr />
 <h3>Source</h3>

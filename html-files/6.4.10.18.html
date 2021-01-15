@@ -115,17 +115,17 @@ pre {
 </ol>
 <h2>std::set_union()</h2>
 <div class="comment-style" >
-   **std::set_union** function concatenates two container members and places
-   the resulting container into fifth parameter which is an output iterator.<br />
-   Problem rises when we what to use *container.begin()* at the fifth parameter
-   as an output iterator.<br />
-   two reasons make this not to work:<br />
-   <br />
-   * begin() returns a constant key, and cannot be used as an output iterator
-   * begin() cannot be used directly becase *set_union* overwrites existing data in a container
-   and requires the container to have sufficient space to hold the new information.<br />
-   **std::insert_iterator** solves this problem by allocating new space to hold new data.<br />
-   iterators are discussed later in iterators chapter.<br />
+**std::set_union** function concatenates two container members and places
+the resulting container into fifth parameter which is an output iterator.<br />
+Problem rises when we what to use *container.begin()* at the fifth parameter
+as an output iterator.<br />
+two reasons make this not to work:<br />
+<br />
+* begin() returns a constant key, and cannot be used as an output iterator
+* begin() cannot be used directly becase *set_union* overwrites existing data in a container
+and requires the container to have sufficient space to hold the new information.<br />
+**std::insert_iterator** solves this problem by allocating new space to hold new data.<br />
+iterators are discussed later in iterators chapter.<br />
 </div>
 <hr />
 <h3>Source</h3>

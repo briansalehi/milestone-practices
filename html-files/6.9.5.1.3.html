@@ -116,34 +116,34 @@ pre {
 </ol>
 <h2>cv::VideoCapture::get() and cv::VideoCapture::set()</h2>
 <div class="comment-style" >
-   The **cv::VideoCapture::get()** and **cv::VideoCapture::set()** functions allow us
-   to perform reading from and writing to video meta-data.<br />
-   <br />
-   ```cxx
-   double cv::VideoCapture::get(
-   int propidq// property identifier
-   );<br />
-   <br />
-   bool cv::VideoCapture::set(
-   int propid,	// property identifier
-   double value	// value to which to set the property
-   );<br />
-   <br />
-   Video capture properties used by **cv::VideoCapture::get()** and
-   **cv::VideoCapture::set()**
-   <br />
-   ```cxx
-   cv::CAP_PROP_POS_MSEC		// current position in video file (ms) or video capture timestamp
-   cv::CAP_PROP_POS_FRAMES		// zero-based index of next frame
-   cv::CAP_PROP_POS_AVI_RATIO	// relative position in the video (range is 0.0 to 1.0)
-   cv::CAP_PROP_FRAME_WIDTH	// width of frames in the video
-   cv::CAP_PROP_FRAME_HEIGHT	// height of frames in the video
-   cv::CAP_PROP_FPS		// frame rate at which the video was recorded
-   cv::CAP_PROP_FOURCC		// four character code indicating codec
-   cv::CAP_PROP_FRAME_COUNT	// total number of frames in a video file
-   cv::CAP_PROP_FORMAT		// format of the Mat objects returned (e.g., CV_8UC3)
-   cv::CAP_PROP_MODE		// indicates capture mode; value are specific to video backend being used (e.g., DC1394)
-   ```
+The **cv::VideoCapture::get()** and **cv::VideoCapture::set()** functions allow us
+to perform reading from and writing to video meta-data.<br />
+<br />
+```cxx
+double cv::VideoCapture::get(
+int propidq// property identifier
+);<br />
+<br />
+bool cv::VideoCapture::set(
+int propid,	// property identifier
+double value	// value to which to set the property
+);<br />
+<br />
+Video capture properties used by **cv::VideoCapture::get()** and
+**cv::VideoCapture::set()**
+<br />
+```cxx
+cv::CAP_PROP_POS_MSEC		// current position in video file (ms) or video capture timestamp
+cv::CAP_PROP_POS_FRAMES		// zero-based index of next frame
+cv::CAP_PROP_POS_AVI_RATIO	// relative position in the video (range is 0.0 to 1.0)
+cv::CAP_PROP_FRAME_WIDTH	// width of frames in the video
+cv::CAP_PROP_FRAME_HEIGHT	// height of frames in the video
+cv::CAP_PROP_FPS		// frame rate at which the video was recorded
+cv::CAP_PROP_FOURCC		// four character code indicating codec
+cv::CAP_PROP_FRAME_COUNT	// total number of frames in a video file
+cv::CAP_PROP_FORMAT		// format of the Mat objects returned (e.g., CV_8UC3)
+cv::CAP_PROP_MODE		// indicates capture mode; value are specific to video backend being used (e.g., DC1394)
+```
 </div>
 <hr />
 <h3>Source</h3>

@@ -116,36 +116,36 @@ pre {
 </ol>
 <h2>cv::ellipse</h2>
 <div class="comment-style" >
-   ```cxx
-   // overload I
-   void cv::ellipse(
-   cv::Mat&        img,<br />
-   cv::Point       center,<br />
-   cv::Size        axes,<br />
-   double          angle,<br />
-   double          startAngle,<br />
-   double          endAngle,<br />
-   cv::Scalar&     color,<br />
-   int             thickness = 1,<br />
-   int             lineType = 8,<br />
-   int             shift = 0
-   );<br />
-   <br />
-   cv::RotatedRect(
-   cv::Point       center,<br />
-   cv::Size        size,<br />
-   douoble         angle
-   );<br />
-   <br />
-   // overload II
-   void cv::ellipse(
-   cv::Mat&            img,<br />
-   cv::RotatedRect&    box,<br />
-   cv::Scalar&         color,<br />
-   int                 thickness = 1,<br />
-   int                 lineType = 8,<br />
-   );<br />
-   ```
+```cxx
+// overload I
+void cv::ellipse(
+cv::Mat&        img,<br />
+cv::Point       center,<br />
+cv::Size        axes,<br />
+double          angle,<br />
+double          startAngle,<br />
+double          endAngle,<br />
+cv::Scalar&     color,<br />
+int             thickness = 1,<br />
+int             lineType = 8,<br />
+int             shift = 0
+);<br />
+<br />
+cv::RotatedRect(
+cv::Point       center,<br />
+cv::Size        size,<br />
+douoble         angle
+);<br />
+<br />
+// overload II
+void cv::ellipse(
+cv::Mat&            img,<br />
+cv::RotatedRect&    box,<br />
+cv::Scalar&         color,<br />
+int                 thickness = 1,<br />
+int                 lineType = 8,<br />
+);<br />
+```
 </div>
 <hr />
 <h3>Source</h3>

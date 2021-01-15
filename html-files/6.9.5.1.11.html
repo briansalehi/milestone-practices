@@ -116,31 +116,31 @@ pre {
 </ol>
 <h2>cv::VideoWriter</h2>
 <div class="comment-style" >
-   Just as we did with the **cv::VideoCapture** device for reading, we must first
-   create a **cv::VideoWriter** device before we can write out our video.<br />
-   <br />
-   This video writer, have two constructors; one is a simple default constructor
-   that just creates an uninitialized video object that we will have to open later,<br />
-   and the other has all of the arguments necessary to actually set up the writer.<br />
-   <br />
-   ```cxx
-   cv::VideoWriter::VideoWriter(
-   const std::string& filename.	// output filename
-   int fourcc,	// codec, use CV_FOURCC() macro
-   double fps,	// frame rate
-   cv::Size frame_size,	// size of individual images
-   bool is_color	// whether pass color or gray
-   );<br />
-   ```
-   <br />
-   Once you have verified that video writer is ready to write, you can write frames
-   by simply passing your array to the writer:<br />
-   <br />
-   ```cxx
-   cv::VideoWriter::write(
-   const cv::Mat& image);'
-   );<br />
-   ```
+Just as we did with the **cv::VideoCapture** device for reading, we must first
+create a **cv::VideoWriter** device before we can write out our video.<br />
+<br />
+This video writer, have two constructors; one is a simple default constructor
+that just creates an uninitialized video object that we will have to open later,<br />
+and the other has all of the arguments necessary to actually set up the writer.<br />
+<br />
+```cxx
+cv::VideoWriter::VideoWriter(
+const std::string& filename.	// output filename
+int fourcc,	// codec, use CV_FOURCC() macro
+double fps,	// frame rate
+cv::Size frame_size,	// size of individual images
+bool is_color	// whether pass color or gray
+);<br />
+```
+<br />
+Once you have verified that video writer is ready to write, you can write frames
+by simply passing your array to the writer:<br />
+<br />
+```cxx
+cv::VideoWriter::write(
+const cv::Mat& image);'
+);<br />
+```
 </div>
 <hr />
 <h3>Source</h3>

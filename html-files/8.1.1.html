@@ -114,20 +114,20 @@ pre {
 </ol>
 <h2>Everything is an object - Object creation steps</h2>
 <div class="comment-style" >
-   When we are creating an object using new (e.g. SampleClass sampleClass = new SampleClass(1, 2);),<br />
-   following steps happen step by step consecutively:<br />
-   <b>* so pay attention that constructor is not the first thing that would get called after using  new  keyword,<br />
-   actually it is the last step.</b>
-   <br />
-   1) Static inline initialization
-   2) Static variables (sets them with default value)
-   3) static blocks
-   <br />
-   4) Inline initialization
-   5) variables initialization (non-static variables) (sets them with default value)
-   6) Non-static blocks
-   <br />
-   7) Final initialization (constructor)
+When we are creating an object using new (e.g. SampleClass sampleClass = new SampleClass(1, 2);),<br />
+following steps happen step by step consecutively:<br />
+<b>* so pay attention that constructor is not the first thing that would get called after using  new  keyword,<br />
+actually it is the last step.</b>
+<br />
+1) Static inline initialization
+2) Static variables (sets them with default value)
+3) static blocks
+<br />
+4) Inline initialization
+5) variables initialization (non-static variables) (sets them with default value)
+6) Non-static blocks
+<br />
+7) Final initialization (constructor)
 </div>
 <hr />
 <h3>Source</h3>

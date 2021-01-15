@@ -116,48 +116,48 @@ pre {
 </ol>
 <h2>cv::FileNode</h2>
 <div class="comment-style" >
-   Member functions of a **cv::FileNode**
-   <br />
-   ```cxx
-   cv::FileNode fn
-   cv::FileNode fn1(fn0);<br />
-   cv::FileNode(fs, node);<br />
-   fn[(std::string)key];<br />
-   fn[(const char*)key];<br />
-   fn[(int)id];<br />
-   fn.type();<br />
-   fn.empty();<br />
-   fn.isNone();<br />
-   fn.isSeq();<br />
-   fn.isMap();<br />
-   fn.isInt();<br />
-   fn.isReal();<br />
-   fn.isSrting();<br />
-   fn.name();<br />
-   size_t sz = fn.size();<br />
-   (int)fn;<br />
-   (float)fn;<br />
-   (double)fn;<br />
-   (std::string)fn;<br />
-   ```
-   <br />
-   Possible return values for **cv::FileNode::type()**
-   <br />
-   ```cxx
-   cv::FileNode::NODE = 0
-   cv::FileNode::INT = 1
-   cv::FileNode::REAL = 2
-   cv::FileNode::FLOAT = 2
-   cv::FileNode::STR = 3
-   cv::FileNode::STRING = 3
-   cv::FileNode::REF = 4
-   cv::FileNode::SEQ = 5
-   cv::FileNode::MAP = 6
-   cv::FileNode::FLOW = 8
-   cv::FileNode::USER = 16
-   cv::FileNode::EMPTY = 32
-   cv::FileNode::NAMED = 64
-   ```
+Member functions of a **cv::FileNode**
+<br />
+```cxx
+cv::FileNode fn
+cv::FileNode fn1(fn0);<br />
+cv::FileNode(fs, node);<br />
+fn[(std::string)key];<br />
+fn[(const char*)key];<br />
+fn[(int)id];<br />
+fn.type();<br />
+fn.empty();<br />
+fn.isNone();<br />
+fn.isSeq();<br />
+fn.isMap();<br />
+fn.isInt();<br />
+fn.isReal();<br />
+fn.isSrting();<br />
+fn.name();<br />
+size_t sz = fn.size();<br />
+(int)fn;<br />
+(float)fn;<br />
+(double)fn;<br />
+(std::string)fn;<br />
+```
+<br />
+Possible return values for **cv::FileNode::type()**
+<br />
+```cxx
+cv::FileNode::NODE = 0
+cv::FileNode::INT = 1
+cv::FileNode::REAL = 2
+cv::FileNode::FLOAT = 2
+cv::FileNode::STR = 3
+cv::FileNode::STRING = 3
+cv::FileNode::REF = 4
+cv::FileNode::SEQ = 5
+cv::FileNode::MAP = 6
+cv::FileNode::FLOW = 8
+cv::FileNode::USER = 16
+cv::FileNode::EMPTY = 32
+cv::FileNode::NAMED = 64
+```
 </div>
 <hr />
 <h3>Source</h3>

@@ -115,21 +115,21 @@ pre {
 </ol>
 <h2>switch case</h2>
 <div class="comment-style" >
-   When dealing with kind of data holding only a specific
-   possible amount of values, you should use enumeration.<br />
-   <br />
-   As an example, a traffic control has only 3 light colors,<br />
-   so to prevent the possibility of adding another color to
-   this range, we use an enumeration.<br />
-   <br />
-   Though, an enumeration is declared by integers, its
-   elements are not of type int and they should not be
-   compared by other types but itself.<br />
-   What makes the comparison of type *int* and *traffic_light*
-   possible, is because compiler will promote one type to
-   the other one having higher rank.<br />
-   So in this case, *traffic_light* will be promoted to
-   type int and switch case statement compares the values.<br />
+When dealing with kind of data holding only a specific
+possible amount of values, you should use enumeration.<br />
+<br />
+As an example, a traffic control has only 3 light colors,<br />
+so to prevent the possibility of adding another color to
+this range, we use an enumeration.<br />
+<br />
+Though, an enumeration is declared by integers, its
+elements are not of type int and they should not be
+compared by other types but itself.<br />
+What makes the comparison of type *int* and *traffic_light*
+possible, is because compiler will promote one type to
+the other one having higher rank.<br />
+So in this case, *traffic_light* will be promoted to
+type int and switch case statement compares the values.<br />
 </div>
 <hr />
 <h3>Source</h3>

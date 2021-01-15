@@ -116,26 +116,26 @@ pre {
 </ol>
 <h2>cv::rectangle</h2>
 <div class="comment-style" >
-   The **cv::rectangle()** function draws a rectangle with corners pt1 to pt2 in the image img. An alternative form of this function allow the rectangle's location and size to be specific by a single **cv::Rect** argument r.<br />
-   <br />
-   ```cxx
-   void rectangle(
-   cv::Mat&    img, // Image to be drawn on
-   cv::Point   pt1, // First corner of rectangle
-   cv::Point   pt2. // Opposite corner of rectangle
-   const cv::Scalar&   color, // Color, BGR form
-   int lineType = 8, // Correctness, 4 or 8
-   int shift = 0 // Bits of radius to treat as fraction
-   );<br />
-   <br />
-   void rectangle(
-   cv::Mat&    img, // Image to be drawn on
-   cv::Rect    r, // Rectangle to draw
-   const cv::Scalar&   color, // Color, BGR form
-   int lineType = 8, // Correctness, 4 or 8
-   int shift = 0 // Bits of radius to treat as fraction
-   );<br />
-   ```
+The **cv::rectangle()** function draws a rectangle with corners pt1 to pt2 in the image img. An alternative form of this function allow the rectangle's location and size to be specific by a single **cv::Rect** argument r.<br />
+<br />
+```cxx
+void rectangle(
+cv::Mat&    img, // Image to be drawn on
+cv::Point   pt1, // First corner of rectangle
+cv::Point   pt2. // Opposite corner of rectangle
+const cv::Scalar&   color, // Color, BGR form
+int lineType = 8, // Correctness, 4 or 8
+int shift = 0 // Bits of radius to treat as fraction
+);<br />
+<br />
+void rectangle(
+cv::Mat&    img, // Image to be drawn on
+cv::Rect    r, // Rectangle to draw
+const cv::Scalar&   color, // Color, BGR form
+int lineType = 8, // Correctness, 4 or 8
+int shift = 0 // Bits of radius to treat as fraction
+);<br />
+```
 </div>
 <hr />
 <h3>Source</h3>

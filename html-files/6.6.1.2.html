@@ -115,26 +115,26 @@ pre {
 </ol>
 <h2>dynamic casting</h2>
 <div class="comment-style" >
-   ref[2]
-   Dynamic casting can only be applied to polymorphic objects, that is, objects
-   that come from a class with at least one virtual function.<br />
-   Dynamic casting is most often applied for casting pointers within the class
-   hierarchy. If an illegal pointer cast is attempted, then the result is a null pointer.<br />
-   end[2]
-   <br />
-   When you have a pointer to an object of type _A_, and you need to know
-   if you can assign an object's address of another type, say _B_, to that pointer,<br />
-   you can check their compatibility by **dynamic_cast** operator.<br />
-   <br />
-   This operator will return a null pointer if objects are not compatible.<br />
-   <br />
-   Note that only classes containing virtual functions can be used in dynamic_cast operator,<br />
-   as they are the only reason that two inherited objects might not match.<br />
-   <br />
-   References can also be used, but virtual_cast operator will not return null pointer in that case,<br />
-   instead, it will throw a type **bad_cast** exception when two object types don't match.<br />
-   <br />
-   **bad_cast** class is derived from exception class and is defined in **typeinfo** header file.<br />
+ref[2]
+Dynamic casting can only be applied to polymorphic objects, that is, objects
+that come from a class with at least one virtual function.<br />
+Dynamic casting is most often applied for casting pointers within the class
+hierarchy. If an illegal pointer cast is attempted, then the result is a null pointer.<br />
+end[2]
+<br />
+When you have a pointer to an object of type _A_, and you need to know
+if you can assign an object's address of another type, say _B_, to that pointer,<br />
+you can check their compatibility by **dynamic_cast** operator.<br />
+<br />
+This operator will return a null pointer if objects are not compatible.<br />
+<br />
+Note that only classes containing virtual functions can be used in dynamic_cast operator,<br />
+as they are the only reason that two inherited objects might not match.<br />
+<br />
+References can also be used, but virtual_cast operator will not return null pointer in that case,<br />
+instead, it will throw a type **bad_cast** exception when two object types don't match.<br />
+<br />
+**bad_cast** class is derived from exception class and is defined in **typeinfo** header file.<br />
 </div>
 <hr />
 <h3>Source</h3>

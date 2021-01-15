@@ -114,33 +114,33 @@ pre {
 </ol>
 <h2>Sed</h2>
 <div class="comment-style" >
-   Sed is a stream processing tool which has its own reputation and we will not
-   cover everything about it (we can't) in a single practice.<br />
-   <br />
-   To learn sed in depth, visit
-   <a href="/linux/stream-processing/sed">stream processing</a> chapter.<br />
-   <br />
-   We will cover the most basic and regularly used features of Sed here, which
-   are deleting and printing lines, and also substitution of strings.<br />
-   <br />
-   Using Sed is straightforward, you call sed following options and then Sed
-   script surrounded by single quotes.<br />
-   The Sed script itself follows a specific syntax, first the address of lines
-   can be given by numbers or string pattern, then a command is followed by that
-   address to give desired results.<br />
-   <br />
-   <pre>
-   <code class="language-bash">
-   sed options '/address/command'
-   </code>
-   </pre>
-   <br />
-   In case of addess, we are using line numbers in this example.<br />
-   And for commands, we used <b>d</b> to delete mentioned lines.<br />
-   We used <b>p</b> to print specified lines, which requires -n to avoid
-   duplicate printing of lines, simply because sed itself also prints lines
-   alongside our print command.<br />
-   And then we used <b>s</b> to substitute word <i>amazing</i> to <i>useful</i>.<br />
+Sed is a stream processing tool which has its own reputation and we will not
+cover everything about it (we can't) in a single practice.<br />
+<br />
+To learn sed in depth, visit
+<a href="/linux/stream-processing/sed">stream processing</a> chapter.<br />
+<br />
+We will cover the most basic and regularly used features of Sed here, which
+are deleting and printing lines, and also substitution of strings.<br />
+<br />
+Using Sed is straightforward, you call sed following options and then Sed
+script surrounded by single quotes.<br />
+The Sed script itself follows a specific syntax, first the address of lines
+can be given by numbers or string pattern, then a command is followed by that
+address to give desired results.<br />
+<br />
+<pre>
+<code class="language-bash">
+sed options '/address/command'
+</code>
+</pre>
+<br />
+In case of addess, we are using line numbers in this example.<br />
+And for commands, we used <b>d</b> to delete mentioned lines.<br />
+We used <b>p</b> to print specified lines, which requires -n to avoid
+duplicate printing of lines, simply because sed itself also prints lines
+alongside our print command.<br />
+And then we used <b>s</b> to substitute word <i>amazing</i> to <i>useful</i>.<br />
 </div>
 <hr />
 <h3>Source</h3>

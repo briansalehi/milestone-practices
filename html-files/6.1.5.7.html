@@ -115,32 +115,32 @@ pre {
 </ol>
 <h2>multiple parameters</h2>
 <div class="comment-style" >
-   Considering the design of a clean code, a function should not have more than
-   two arguments, at most three.<br />
-   What you usually try to give to a function can be put in a larger structure.<br />
-   Say, you want to give a function three variables: book_title, book_pages, book_price
-   <br />
-   ```cxx
-   void function(const char* book_title, int book_pages, int book_price);<br />
-   ```
-   <br />
-   Instead, you can create a structure named **book** containing:<br />
-   <br />
-   ```cxx
-   struct class Book {
-   char* title;<br />
-   int pages;<br />
-   int price;<br />
-   } book;<br />
-   ```
-   <br />
-   And call the function with one argument:<br />
-   <br />
-   ```cxx
-   void function(const Book book) {
-   // do something with book.title, book.pages, book.price
-   }
-   ```
+Considering the design of a clean code, a function should not have more than
+two arguments, at most three.<br />
+What you usually try to give to a function can be put in a larger structure.<br />
+Say, you want to give a function three variables: book_title, book_pages, book_price
+<br />
+```cxx
+void function(const char* book_title, int book_pages, int book_price);<br />
+```
+<br />
+Instead, you can create a structure named **book** containing:<br />
+<br />
+```cxx
+struct class Book {
+char* title;<br />
+int pages;<br />
+int price;<br />
+} book;<br />
+```
+<br />
+And call the function with one argument:<br />
+<br />
+```cxx
+void function(const Book book) {
+// do something with book.title, book.pages, book.price
+}
+```
 </div>
 <hr />
 <h3>Source</h3>

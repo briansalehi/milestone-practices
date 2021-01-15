@@ -115,15 +115,15 @@ pre {
 </ol>
 <h2>dynamic memory allocation using new & delete operators</h2>
 <div class="comment-style" >
-   Memory addresses can be assigned to pointers either by **dereference operator &** or by allocating new memory block and assigning the address of its first by to the pointer.<br />
-   **new** operator allocates as much memory as you need by the type specifying after it.<br />
-   **always** use **delete** operator after you finish working with allocated memories used by **new**.<br />
-   <br />
-   begin[5]
-   After you are finished with your dynamically allocated memory, you need to deallocate the memory
-   using the delete operator. To prevent the pointer from being used after having deallocated the
-   memory it points to, it’s recommended to set your pointer to nullptr.<br />
-   end[5]
+Memory addresses can be assigned to pointers either by **dereference operator &** or by allocating new memory block and assigning the address of its first by to the pointer.<br />
+**new** operator allocates as much memory as you need by the type specifying after it.<br />
+**always** use **delete** operator after you finish working with allocated memories used by **new**.<br />
+<br />
+begin[5]
+After you are finished with your dynamically allocated memory, you need to deallocate the memory
+using the delete operator. To prevent the pointer from being used after having deallocated the
+memory it points to, it’s recommended to set your pointer to nullptr.<br />
+end[5]
 </div>
 <hr />
 <h3>Source</h3>

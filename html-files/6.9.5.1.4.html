@@ -116,32 +116,32 @@ pre {
 </ol>
 <h2>cv::VideoCapture::grab() and cv::VideoCapture::retrieve()</h2>
 <div class="comment-style" >
-   **BUGGY**: needs to be fixed, cv::VideoCapture::retrieve() won't retrieve next
-   frame as loop iterates.<br />
-   <br />
-   The **cv::VideoCapture::grab()** function copies the currently available image
-   to an internal buffer that is invisible to the user.<br />
-   <br />
-   ```cxx
-   bool cv::VideoCapture::grab();<br />
-   ```
-   <br />
-   As was the case with **cv::VideoCapture::read()**, **cv::VideoCapture::grab()**
-   returns true only if the grab was successful.<br />
-   <br />
-   **cv::VideoCapture::retrieve()** functions analogously to
-   **cv::VideoCapture::read()** except that it operates from the internal buffer to
-   which **cv::VideoCapture::grab()** copies frames.<br />
-   <br />
-   ```cxx
-   bool cv::VideoCapture::retrieve(
-   cv::OutputArray image,	// image into which to read data
-   int channel = 0	// used for multihead devices like Kinect and Videre
-   );<br />
-   ```
-   <br />
-   Another difference is the additional argument **channel**. The channel argument
-   is used when the device being accessed natively has multiple heads.<br />
+**BUGGY**: needs to be fixed, cv::VideoCapture::retrieve() won't retrieve next
+frame as loop iterates.<br />
+<br />
+The **cv::VideoCapture::grab()** function copies the currently available image
+to an internal buffer that is invisible to the user.<br />
+<br />
+```cxx
+bool cv::VideoCapture::grab();<br />
+```
+<br />
+As was the case with **cv::VideoCapture::read()**, **cv::VideoCapture::grab()**
+returns true only if the grab was successful.<br />
+<br />
+**cv::VideoCapture::retrieve()** functions analogously to
+**cv::VideoCapture::read()** except that it operates from the internal buffer to
+which **cv::VideoCapture::grab()** copies frames.<br />
+<br />
+```cxx
+bool cv::VideoCapture::retrieve(
+cv::OutputArray image,	// image into which to read data
+int channel = 0	// used for multihead devices like Kinect and Videre
+);<br />
+```
+<br />
+Another difference is the additional argument **channel**. The channel argument
+is used when the device being accessed natively has multiple heads.<br />
 </div>
 <hr />
 <h3>Source</h3>

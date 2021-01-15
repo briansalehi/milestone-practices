@@ -116,20 +116,20 @@ pre {
 </ol>
 <h2>gaussian blur convolution filter</h2>
 <div class="comment-style" >
-   There is nothing new in this code except **cv::GaussianBlur()** function
-   and **cv::moveWindow()**.<br />
-   <br />
-   First, we created two image structures of type **cv::Mat**, one to open
-   the sample image and the other to store the blurred image in it.<br />
-   <br />
-   Notice how we used **cv::GaussianBlur()** function, it takes the image we
-   give as the source and takes second argument of type **cv::Mat** as the destination
-   of filtered source, **cv::Size()** function as third argument to specify the size of
-   blocks of pixels being filtered by Gaussian convolution filter, and two constants as
-   forth and fifth arguments.<br />
-   <br />
-   Then I used **cv::moveWindow()** function to move the destination image to avoid
-   windows overlaps.<br />
+There is nothing new in this code except **cv::GaussianBlur()** function
+and **cv::moveWindow()**.<br />
+<br />
+First, we created two image structures of type **cv::Mat**, one to open
+the sample image and the other to store the blurred image in it.<br />
+<br />
+Notice how we used **cv::GaussianBlur()** function, it takes the image we
+give as the source and takes second argument of type **cv::Mat** as the destination
+of filtered source, **cv::Size()** function as third argument to specify the size of
+blocks of pixels being filtered by Gaussian convolution filter, and two constants as
+forth and fifth arguments.<br />
+<br />
+Then I used **cv::moveWindow()** function to move the destination image to avoid
+windows overlaps.<br />
 </div>
 <hr />
 <h3>Source</h3>

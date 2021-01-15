@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Not Implemented Yet</title>
+<title>Neural Structure</title>
 <style>
 a,
 a:hover,
@@ -110,16 +110,55 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/10.0.html">Machine Learning</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/10.1.0.html">Neural Networks</a></li>
-<li class="breadcrumb-item active" >Not Implemented Yet</li>
+<li class="breadcrumb-item active" >Neural Structure</li>
 </ol>
-<h2>Not Implemented Yet</h2>
-<hr />
-<h3>Source</h3>
-  <cite>deadend.py</cite>
-<pre class="line-numbers" >
-<code class="language-py">
-</code>
-</pre>
+<h2>Neural Structure</h2>
+<div class="comment-style" >
+Real biological neurons take many inputs, not just one.<br />
+Similarly, we simply combine input signals by adding them up, and the
+resultant sum is the input to the sigmoid function which controls the output.<br />
+This reflects how real neurons work. The following diagram illustrates this
+idea of combining inputs and then applying the threshold to the combined sum:<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-threshold-function-diagram.jpg" alt="sigmoid threshold function diagram">
+<br />
+If the combined signal is not large enough then the effect of the sigmoid
+threshold function is to suppress the output signal. If the sum x if large
+enough the effect of the sigmoid is to fire the neuron. Interestingly, if only
+one of the several inputs is large and the rest small, this may be enough to
+fire the neuron. What's more, the neuron can fire if some of the inputs
+are individually almost, but not quite, large enough because when combined the
+signal is large enough to overcome the threshold.<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/3x3-neural-network-connections.jpg" alt="3x3 neural network connections">
+<br />
+The following diagram again shows the connected nodes, but this time a weight
+is shown associated with each connection. A low weight will de-emphasise a
+signal, and a high weight will amplify it.<br />
+<br />
+The weight w2,3 is simply the weight associated with the signal that passed
+between node 2 in a layer to node 3 in the next layer. So w1,2 is the weight
+that diminishes or amplifies the signal between node 1 and node 2 in the next
+layer.<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/3x3-neural-network-connections-with-weights.jpg" alt="3x3 neural network connections with weights">
+<br />
+You might reasonably challenge this design and ask yourself why each node
+should connect to every other node in the previous and next layer. They
+don't have to and you could connect them in all sorts of creative ways. We
+don't because the uniformity of this full connectivity is actually easier
+to encode as computer instructions, and because there shouldn't be any big
+harm in having a few more connections than the absolute minimum that might be
+needed for solving a specific task. The learning process will de-emphasise
+those few extra connections if they aren't actually needed.<br />
+<br />
+What do we mean by this? It means that as the network learns to improve its
+outputs by refining the link weights inside the network, some weights become
+zero or close to zero. Zero, or almost zero, weights means those links
+don't contribute to the network because signals don't pass. A zero
+weight means the signals are multiplied by zero, which results in zero, so the
+link is effectively broken.<br />
+</div>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/machine-learning/neural-networks">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

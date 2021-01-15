@@ -115,20 +115,18 @@ pre {
 </ol>
 <h2>Standard Streams</h2>
 <div class="comment-style" >
-   Instead of saying that my program prints something on display, we should say
-   that my program sends something to the output stream.<br />
-   Somehow, it's more impressive!<br />
-   <br />
-   Some might argue about using "
-" over std::endl as newline.<br />
-   Well, the only big difference is that <b>std::endl</b> promises to flush the
-   output stream.<br />
-   It means that the program will wait until newline character is printed.<br />
-   It is possible on some systems in some circumstances a prompt might not be
-   displayed until after you enter the information being prompted for.<br />
-   Personally, I use "
-" when I'm printing a string in output stream and use
-   <b>std::endl</b> otherwise.<br />
+Instead of saying that my program prints something on display, we should say
+that my program sends something to the output stream.<br />
+Somehow, it's more impressive!<br />
+<br />
+Some might argue about using "\n" over std::endl as newline.<br />
+Well, the only big difference is that <b>std::endl</b> promises to flush the
+output stream.<br />
+It means that the program will wait until newline character is printed.<br />
+It is possible on some systems in some circumstances a prompt might not be
+displayed until after you enter the information being prompted for.<br />
+Personally, I use "\n" when I'm printing a string in output stream and use
+<b>std::endl</b> otherwise.<br />
 </div>
 <hr />
 <h3>Source</h3>

@@ -116,39 +116,39 @@ pre {
 </ol>
 <h2>video trackbar slider</h2>
 <div class="comment-style" >
-   To add a **trackbar slider** to the video player we have made previously,<br />
-   a few more lines should be written.<br />
-   <br />
-   First, to make this slider work on our player, it should have access to the
-   **video capture object** of type **cv::VideoCapture**, here called *g_video_cap*.<br />
-   So, we set *video* object globally accessible in our program.<br />
-   Besides, we need a global slider position variable so that we know where the slider is
-   set anywhere in our program.<br />
-   <br />
-   Trackbar slider requires a function callback in order to move between frames
-   with it. Here we call it **move_slider** function.<br />
-   This function gets destination frame position as its first argument, and a
-   null pointer as its second argument.<br />
-   Then it uses **set** method of *g_video_cap* to move the slider position.<br />
-   This method takes an opencv constant **cv::PROP_CAP_POS_FRAMES** which indicates
-   the position of current frame where the slider is set on.<br />
-   Then it takes the *position* of new frame
-   as its second argument to move the slider to it.<br />
-   <br />
-   To move slider around, we need to have some information about how many frames does the video is contained of.<br />
-   So we use opencv constants to get these kind of information by using **get** method in video object right after
-   we opened the file.<br />
-   <br />
-   Now, we open the video file and create a new window and resize it to the size of our interest.<br />
-   Then we create the taskbar slider by using **cv::createTaskbar** function which takes slider position name
-   as its first argument, the window name which the video will be played on as its second argument, the global
-   slider position variable as its third argument, number of total frames that video is contained of as fourth
-   argument, and finally **move_slider** callback function as its fifth argument to let the taskbar move slider.<br />
-   <br />
-   Finally we create a loop to show video frames one by one until we run out of video frames.<br />
-   Between this loop, we need to move the slider one frame before the player actually shows next frame in window.<br />
-   We do that by **cv::setTrackPos()** function which takes the position name, window name and slider position as
-   its three arguments respectively.<br />
+To add a **trackbar slider** to the video player we have made previously,<br />
+a few more lines should be written.<br />
+<br />
+First, to make this slider work on our player, it should have access to the
+**video capture object** of type **cv::VideoCapture**, here called *g_video_cap*.<br />
+So, we set *video* object globally accessible in our program.<br />
+Besides, we need a global slider position variable so that we know where the slider is
+set anywhere in our program.<br />
+<br />
+Trackbar slider requires a function callback in order to move between frames
+with it. Here we call it **move_slider** function.<br />
+This function gets destination frame position as its first argument, and a
+null pointer as its second argument.<br />
+Then it uses **set** method of *g_video_cap* to move the slider position.<br />
+This method takes an opencv constant **cv::PROP_CAP_POS_FRAMES** which indicates
+the position of current frame where the slider is set on.<br />
+Then it takes the *position* of new frame
+as its second argument to move the slider to it.<br />
+<br />
+To move slider around, we need to have some information about how many frames does the video is contained of.<br />
+So we use opencv constants to get these kind of information by using **get** method in video object right after
+we opened the file.<br />
+<br />
+Now, we open the video file and create a new window and resize it to the size of our interest.<br />
+Then we create the taskbar slider by using **cv::createTaskbar** function which takes slider position name
+as its first argument, the window name which the video will be played on as its second argument, the global
+slider position variable as its third argument, number of total frames that video is contained of as fourth
+argument, and finally **move_slider** callback function as its fifth argument to let the taskbar move slider.<br />
+<br />
+Finally we create a loop to show video frames one by one until we run out of video frames.<br />
+Between this loop, we need to move the slider one frame before the player actually shows next frame in window.<br />
+We do that by **cv::setTrackPos()** function which takes the position name, window name and slider position as
+its three arguments respectively.<br />
 </div>
 <hr />
 <h3>Source</h3>

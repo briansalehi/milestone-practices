@@ -116,40 +116,40 @@ pre {
 </ol>
 <h2>cv::putText</h2>
 <div class="comment-style" >
-   This function is OpenCV's one main text drawing routine.<br />
-   <br />
-   ```cxx
-   void cv::putText(
-   cv::Mat&    img, // image to be drawn on
-   const std::string&  text, // write this
-   cv::Point   origin, // upper-left corner of text box
-   int     fontFace, // font style
-   double  fontScale, // font size
-   cv::Scalar  color, // color in BGR form
-   int     thickness = 1, // thickness of line
-   int     lineType = 8 // correctedness 4 or 8
-   bool    bottomLeftOrigin = false // true= origin at lower left
-   );<br />
-   ```
-   <br />
-   Font styles are macros of type int:<br />
-   <br />
-   ```
-   cv::FONT_HERSHEY_SIMPLEX
-   cv::FONT_HERSHEY_PLAIN
-   cv::FONT_HERSHEY_DUPLEX
-   cv::FONT_HERSHEY_COMPLEX
-   cv::FONT_HERSHEY_TRIPLEX
-   cv::FONT_HERSHEY_COMPLEX_SMALL
-   cv::FONT_HERSHEY_SCRIPT_SIMPLEX
-   cv::FONT_HERSHEY_SCRIPT_COMPLEX
-   ```
-   <br />
-   Special styles:<br />
-   <br />
-   ```cxx
-   cv::FONT_HERSHEY_ITALIC
-   ```
+This function is OpenCV's one main text drawing routine.<br />
+<br />
+```cxx
+void cv::putText(
+cv::Mat&    img, // image to be drawn on
+const std::string&  text, // write this
+cv::Point   origin, // upper-left corner of text box
+int     fontFace, // font style
+double  fontScale, // font size
+cv::Scalar  color, // color in BGR form
+int     thickness = 1, // thickness of line
+int     lineType = 8 // correctedness 4 or 8
+bool    bottomLeftOrigin = false // true= origin at lower left
+);<br />
+```
+<br />
+Font styles are macros of type int:<br />
+<br />
+```
+cv::FONT_HERSHEY_SIMPLEX
+cv::FONT_HERSHEY_PLAIN
+cv::FONT_HERSHEY_DUPLEX
+cv::FONT_HERSHEY_COMPLEX
+cv::FONT_HERSHEY_TRIPLEX
+cv::FONT_HERSHEY_COMPLEX_SMALL
+cv::FONT_HERSHEY_SCRIPT_SIMPLEX
+cv::FONT_HERSHEY_SCRIPT_COMPLEX
+```
+<br />
+Special styles:<br />
+<br />
+```cxx
+cv::FONT_HERSHEY_ITALIC
+```
 </div>
 <hr />
 <h3>Source</h3>

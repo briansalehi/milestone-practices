@@ -116,48 +116,48 @@ pre {
 </ol>
 <h2>cv::VideoCapture</h2>
 <div class="comment-style" >
-   **cv::VideoCapture** object contains the information needed for reading frames
-   from a camera or video file.<br />
-   <br />
-   ```cxx
-   cv::VideoCapture::VideoCapture(
-   const std::string& filename
-   );<br />
-   <br />
-   cv::VideoCapture::VideoCapture(
-   int device
-   );<br />
-   <br />
-   cv::VideoCapture::VideoCapture();<br />
-   ```
-   <br />
-   If the open is successful and we are able to start reading frames, the member
-   function **cv::VideoCapture::isOpened()** will return true.<br />
-   <br />
-   Camera domain indicating where HighGUI should look for your camera.<br />
-   ```cxx
-   cv::CAP_ANY	// 0
-   cv::CAP_MIL	// 100
-   cv::CAP_VFW	// 200
-   cv::CAP_V4L	// 200
-   cv::CAP_V4L2	// 200
-   cv::CAP_FIREWIRE	// 300
-   cv::CAP_IEEE1394	// 300
-   cv::CAP_DC1394	// 300
-   cv::CAP_CMU1394	// 300
-   cv::CAP_QT	// 500
-   cv::CAP_DSHOW	// 700
-   cv::CAP_PVAPI	// 800
-   cv::CAP_OPENNI	// 900
-   cv::CAP_ANDROID	// 1000
-   ```
-   <br />
-   You can pass -1 to **cv::VideoCapture::VideoCapture()**, which will cause OpenCV
-   to open a window that allows you to select the desired camera.<br />
-   <br />
-   In case you create the **cv::VideoCapture** object without providing any
-   information about what is to be opened, you should explicitely open the source
-   you want to read from before you can use the object.<br />
+**cv::VideoCapture** object contains the information needed for reading frames
+from a camera or video file.<br />
+<br />
+```cxx
+cv::VideoCapture::VideoCapture(
+const std::string& filename
+);<br />
+<br />
+cv::VideoCapture::VideoCapture(
+int device
+);<br />
+<br />
+cv::VideoCapture::VideoCapture();<br />
+```
+<br />
+If the open is successful and we are able to start reading frames, the member
+function **cv::VideoCapture::isOpened()** will return true.<br />
+<br />
+Camera domain indicating where HighGUI should look for your camera.<br />
+```cxx
+cv::CAP_ANY	// 0
+cv::CAP_MIL	// 100
+cv::CAP_VFW	// 200
+cv::CAP_V4L	// 200
+cv::CAP_V4L2	// 200
+cv::CAP_FIREWIRE	// 300
+cv::CAP_IEEE1394	// 300
+cv::CAP_DC1394	// 300
+cv::CAP_CMU1394	// 300
+cv::CAP_QT	// 500
+cv::CAP_DSHOW	// 700
+cv::CAP_PVAPI	// 800
+cv::CAP_OPENNI	// 900
+cv::CAP_ANDROID	// 1000
+```
+<br />
+You can pass -1 to **cv::VideoCapture::VideoCapture()**, which will cause OpenCV
+to open a window that allows you to select the desired camera.<br />
+<br />
+In case you create the **cv::VideoCapture** object without providing any
+information about what is to be opened, you should explicitely open the source
+you want to read from before you can use the object.<br />
 </div>
 <hr />
 <h3>Source</h3>

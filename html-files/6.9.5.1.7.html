@@ -116,24 +116,24 @@ pre {
 </ol>
 <h2>cv::imread</h2>
 <div class="comment-style" >
-   **cv::imread()** function reads an image file from the filesystem.<br />
-   <br />
-   ```cxx
-   cv::Mat cv::imread(
-   const std::string& filename,	// input filename
-   int flags = cv::IMREAD_COLOR	//flags set how to interpret file
-   );<br />
-   ```
-   <br />
-   Flags accepted by **cv::imread()** :<br />
-   <br />
-   ```cxx
-   cv::IMREAD_COLOR	// always load to three-channel array
-   cv::IMREAD_GRAYSCALE	// always load to single-channel array
-   cv::IMREAD_ANYCOLOR	// channels as indicated by file (up to three)
-   cv::IMREAD_ANYDEPTH	// allow loading of more than 8-bit depth
-   cv::IMREAD_UNCHANGED	// equivalent to combining cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH
-   ```
+**cv::imread()** function reads an image file from the filesystem.<br />
+<br />
+```cxx
+cv::Mat cv::imread(
+const std::string& filename,	// input filename
+int flags = cv::IMREAD_COLOR	//flags set how to interpret file
+);<br />
+```
+<br />
+Flags accepted by **cv::imread()** :<br />
+<br />
+```cxx
+cv::IMREAD_COLOR	// always load to three-channel array
+cv::IMREAD_GRAYSCALE	// always load to single-channel array
+cv::IMREAD_ANYCOLOR	// channels as indicated by file (up to three)
+cv::IMREAD_ANYDEPTH	// allow loading of more than 8-bit depth
+cv::IMREAD_UNCHANGED	// equivalent to combining cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH
+```
 </div>
 <hr />
 <h3>Source</h3>

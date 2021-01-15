@@ -115,10 +115,10 @@ pre {
 </ol>
 <h2>High Resolution Clock</h2>
 <div class="comment-style" >
-   There's a way to count time during execution of program and that's using high resolution clock in **std::chrono**.<br />
-   Here we captured time value before and after **sleep_for()** function and then evaluated the elapsed time during sleeping of threads.<br />
-   To get the time difference we used **std::chrono::duration** template class initiated by **<double, std::milli>** which specifies that we need the elapsed time in milli seconds.<br />
-   Notice that to get the value of milli seconds you need to call the **count()** function on *elapsed* object.<br />
+There's a way to count time during execution of program and that's using high resolution clock in **std::chrono**.<br />
+Here we captured time value before and after **sleep_for()** function and then evaluated the elapsed time during sleeping of threads.<br />
+To get the time difference we used **std::chrono::duration** template class initiated by **<double, std::milli>** which specifies that we need the elapsed time in milli seconds.<br />
+Notice that to get the value of milli seconds you need to call the **count()** function on *elapsed* object.<br />
 </div>
 <hr />
 <h3>Source</h3>

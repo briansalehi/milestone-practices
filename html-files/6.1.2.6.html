@@ -115,32 +115,32 @@ pre {
 </ol>
 <h2>enumerations</h2>
 <div class="comment-style" >
-   Enumerations are one of the constant types in C++.<br />
-   Though, enumerations can only be defined by integer types, enumeration members are not of type int.<br />
-   Therefore, they cannot be assigned to integers, unless you convert them explicitely (discussed later).<br />
-   <br />
-   By default, enum class has only following predefined operatrs:<br />
-   <br />
-   * assignment operator
-   * initialization operator
-   * and comparison operators
-   <br />
-   But more operators can be implemented on enum classes too.<br />
-   For example, we can make an enumeration object increment by one using ++ operator (will be discussed later).<br />
-   <br />
-   ```cpp
-   // prefix increment operator++ (operator overloading is discussed later)
-   TrafficLight& operator++ (TrafficLight& light) {
-   switch (light) {
-   case TrafficLight::red : light = TrafficLight::yellow;<br />
-   case TrafficLight::yellow : light = TrafficLight::green;<br />
-   case TrafficLight::green : light = TrafficLight::red;<br />
-   }
-   return light;<br />
-   }
-   <br />
-   ++light; // using operator++ , now light is yellow
-   ```
+Enumerations are one of the constant types in C++.<br />
+Though, enumerations can only be defined by integer types, enumeration members are not of type int.<br />
+Therefore, they cannot be assigned to integers, unless you convert them explicitely (discussed later).<br />
+<br />
+By default, enum class has only following predefined operatrs:<br />
+<br />
+* assignment operator
+* initialization operator
+* and comparison operators
+<br />
+But more operators can be implemented on enum classes too.<br />
+For example, we can make an enumeration object increment by one using ++ operator (will be discussed later).<br />
+<br />
+```cpp
+// prefix increment operator++ (operator overloading is discussed later)
+TrafficLight& operator++ (TrafficLight& light) {
+switch (light) {
+case TrafficLight::red : light = TrafficLight::yellow;<br />
+case TrafficLight::yellow : light = TrafficLight::green;<br />
+case TrafficLight::green : light = TrafficLight::red;<br />
+}
+return light;<br />
+}
+<br />
+++light; // using operator++ , now light is yellow
+```
 </div>
 <hr />
 <h3>Source</h3>

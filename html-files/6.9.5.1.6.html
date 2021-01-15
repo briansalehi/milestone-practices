@@ -116,17 +116,17 @@ pre {
 </ol>
 <h2>cv::imencode</h2>
 <div class="comment-style" >
-   **cv::imencode()** compresses an image into supported file formats specified in
-   file extension.<br />
-   <br />
-   ```cxx
-   void cv::imencode(
-   const string&	ext,	// extension specified codec
-   cv::InputArray	img,	// image to be encoded
-   std::vector<uchar>&	buf,	// encoded file bytes go here
-   const std::vector<int>&	params = std::vector<int>()	// (optional) for parametrized formats
-   );<br />
-   ```
+**cv::imencode()** compresses an image into supported file formats specified in
+file extension.<br />
+<br />
+```cxx
+void cv::imencode(
+const string&	ext,	// extension specified codec
+cv::InputArray	img,	// image to be encoded
+std::vector<uchar>&	buf,	// encoded file bytes go here
+const std::vector<int>&	params = std::vector<int>()	// (optional) for parametrized formats
+);<br />
+```
 </div>
 <hr />
 <h3>Source</h3>

@@ -116,53 +116,53 @@ pre {
 </ol>
 <h2>creating an array</h2>
 <div class="comment-style" >
-   You can create an array by instanting a variable of type **cv::Mat**.<br />
-   An array created in this manner has no size and no data type.<br />
-   You can however, later ask it to allocate data by using a member function such
-   as **create()**.<br />
-   <br />
-   #### **cv::Mat** constructors that do not copy data
-   <br />
-   ```cxx
-   cv::Mat; // default constructor
-   cv::Mat(int rows, int cols, int type); // two dimensional array by type
-   cv::Mat(int rows, int cols, int type, const cv::Scalar& s); // two dimensional array by type with initialization value
-   cv::Mat(int rows, int cols, int type, void* data, size_t step=AUTO_STEP); // two dimensional array by type with preexisting data
-   cv::Mat(cv::Size sz, int type); // two dimensional array by type in size sz
-   cv::Mat(cv::Size sz, int type, const cv::Scalar& s); // two dimensional array by type with initialization value in size sz
-   cv::Mat(cv::size sz, int type, void* data, size_t step=AUTO_STEP); // two dimensional array by type with preexisting data in size sz
-   cv::Mat(int ndims, const int* sizes, int type); // multidimensional array by type
-   cv::Mat(int ndims, const int* sizes, int type, const cv::Scalar& s); // multidimensional array by type with initialization value
-   cv::Mat(int ndims, const int* sizes, int type, void* data, size_t step=AUTO_STEP); // multidimensional array by type with preexisting data
-   ```
-   <br />
-   #### **cv::Mat** copy constructors that copy data from other **cv::Mat**s
-   <br />
-   ```cxx
-   cv::Mat(const cv::Mat& mat); // copy constructor
-   cv::Mat(const cv::Mat& mat, const cv::Range& rows, const cv::Range& cols); // copy constructor that only copies a subset of rows and columns
-   cv::Mat(const cv::Mat& mat, const cv::Rect& roi); // copy constructor that only copies a subset of rows and columns by a region of interest
-   cv::Mat(const cv::Mat& mat, const cv::Range* ranges); // generalized region of interest copy constructor that uses an array of ranges to select from an n-dimensional array
-   cv::Mat(const cv::MatExpr& expr); // copy constructor that initializes m with the result of an algebraic expression of other matrices
-   ```
-   <br />
-   #### **cv::Mat** template constructors
-   <br />
-   ```cxx
-   cv::Mat(const cv::Vec<T,n>& vec, bool copyData=true); // construct a one-dimensional
-   cv::Mat(const cv::Matx<T,m,n>& vec, bool copyData=true); // constructor for a two-dimensional array of type T and size mxn from a cv::Matx of the same type
-   cv::Mat(const std::vector<T>& vec, bool copyData=true); // construct a one-dimensional array of type T from an STL vector containing elements of the same type
-   ```
-   <br />
-   #### **cv::Mat** static functions that create cv::Mat
-   <br />
-   The class **cv::Mat** also provides a number of static member functions to create certain kinds of commonly used arrays. These include functions like **zeros()**, **ones()**, **eye()**, which construct a matrix full of zeros, ones, or an identity matrix, respectly.<br />
-   <br />
-   ```cxx
-   cv::Mat::zeros(rows, cols, type); // create a cv::Mat of size rowsxcols, which is full of zeros with a type (CV_32F, etc.)
-   cv::Mat::ones(rows, cols, type); // create a cv::Mat of size rowsxcols, which is full of ones with a type (CV_32F, etc.)
-   cv::Mat::eye(rows, cols, type); // create a cv::Mat of size rowsxcols, which is an identity matrix, with a type (CV_32F, etc.)
-   ```
+You can create an array by instanting a variable of type **cv::Mat**.<br />
+An array created in this manner has no size and no data type.<br />
+You can however, later ask it to allocate data by using a member function such
+as **create()**.<br />
+<br />
+#### **cv::Mat** constructors that do not copy data
+<br />
+```cxx
+cv::Mat; // default constructor
+cv::Mat(int rows, int cols, int type); // two dimensional array by type
+cv::Mat(int rows, int cols, int type, const cv::Scalar& s); // two dimensional array by type with initialization value
+cv::Mat(int rows, int cols, int type, void* data, size_t step=AUTO_STEP); // two dimensional array by type with preexisting data
+cv::Mat(cv::Size sz, int type); // two dimensional array by type in size sz
+cv::Mat(cv::Size sz, int type, const cv::Scalar& s); // two dimensional array by type with initialization value in size sz
+cv::Mat(cv::size sz, int type, void* data, size_t step=AUTO_STEP); // two dimensional array by type with preexisting data in size sz
+cv::Mat(int ndims, const int* sizes, int type); // multidimensional array by type
+cv::Mat(int ndims, const int* sizes, int type, const cv::Scalar& s); // multidimensional array by type with initialization value
+cv::Mat(int ndims, const int* sizes, int type, void* data, size_t step=AUTO_STEP); // multidimensional array by type with preexisting data
+```
+<br />
+#### **cv::Mat** copy constructors that copy data from other **cv::Mat**s
+<br />
+```cxx
+cv::Mat(const cv::Mat& mat); // copy constructor
+cv::Mat(const cv::Mat& mat, const cv::Range& rows, const cv::Range& cols); // copy constructor that only copies a subset of rows and columns
+cv::Mat(const cv::Mat& mat, const cv::Rect& roi); // copy constructor that only copies a subset of rows and columns by a region of interest
+cv::Mat(const cv::Mat& mat, const cv::Range* ranges); // generalized region of interest copy constructor that uses an array of ranges to select from an n-dimensional array
+cv::Mat(const cv::MatExpr& expr); // copy constructor that initializes m with the result of an algebraic expression of other matrices
+```
+<br />
+#### **cv::Mat** template constructors
+<br />
+```cxx
+cv::Mat(const cv::Vec<T,n>& vec, bool copyData=true); // construct a one-dimensional
+cv::Mat(const cv::Matx<T,m,n>& vec, bool copyData=true); // constructor for a two-dimensional array of type T and size mxn from a cv::Matx of the same type
+cv::Mat(const std::vector<T>& vec, bool copyData=true); // construct a one-dimensional array of type T from an STL vector containing elements of the same type
+```
+<br />
+#### **cv::Mat** static functions that create cv::Mat
+<br />
+The class **cv::Mat** also provides a number of static member functions to create certain kinds of commonly used arrays. These include functions like **zeros()**, **ones()**, **eye()**, which construct a matrix full of zeros, ones, or an identity matrix, respectly.<br />
+<br />
+```cxx
+cv::Mat::zeros(rows, cols, type); // create a cv::Mat of size rowsxcols, which is full of zeros with a type (CV_32F, etc.)
+cv::Mat::ones(rows, cols, type); // create a cv::Mat of size rowsxcols, which is full of ones with a type (CV_32F, etc.)
+cv::Mat::eye(rows, cols, type); // create a cv::Mat of size rowsxcols, which is an identity matrix, with a type (CV_32F, etc.)
+```
 </div>
 <hr />
 <h3>Source</h3>

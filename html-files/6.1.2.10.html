@@ -115,49 +115,49 @@ pre {
 </ol>
 <h2>list initialization</h2>
 <div class="comment-style" >
-   Initialization list can be used over conventional initializations.<br />
-   <br />
-   begin[5]
-   There are two types of initialization that use braced initializer lists:<br />
-   <br />
-   * Copy list initialization. _T obj = {arg1, arg2, ...};_
-   * Direct list initialization. _T obj {arg1, arg2, ...};_
-   <br />
-   In combination with auto type deduction, there is an important difference between copy- and direct
-   list initialization introduced with C++17.<br />
-   <br />
-   Starting with C++17, you have the following results:<br />
-   <br />
-   ```cpp
-   // Copy list initialization
-   auto a = {11}; // initializer_list<int>
-   auto b = {11, 22}; // initializer_list<int>
-   <br />
-   // Direct list initialization
-   auto c {11}; // int
-   auto d {11, 22}; // Error, too many elements.<br />
-   ```
-   <br />
-   Note that for copy list initialization, all the elements in the braced initializer must be of the same
-   type. For example, the following does not compile:<br />
-   <br />
-   ```cpp
-   auto b = {11, 22.33}; // Compilation error
-   ```
-   <br />
-   In earlier versions of the standard (C++11/14), both copy- and direct list initialization deduce an
-   initializer_list<> :<br />
-   <br />
-   ```cpp
-   // Copy list initialization
-   auto a = {11}; // initializer_list<int>
-   auto b = {11, 22}; // initializer_list<int>
-   <br />
-   // Direct list initialization
-   auto c {11}; // initializer_list<int>
-   auto d {11, 22}; // initializer_list<int>
-   ```
-   end[5]
+Initialization list can be used over conventional initializations.<br />
+<br />
+begin[5]
+There are two types of initialization that use braced initializer lists:<br />
+<br />
+* Copy list initialization. _T obj = {arg1, arg2, ...};_
+* Direct list initialization. _T obj {arg1, arg2, ...};_
+<br />
+In combination with auto type deduction, there is an important difference between copy- and direct
+list initialization introduced with C++17.<br />
+<br />
+Starting with C++17, you have the following results:<br />
+<br />
+```cpp
+// Copy list initialization
+auto a = {11}; // initializer_list<int>
+auto b = {11, 22}; // initializer_list<int>
+<br />
+// Direct list initialization
+auto c {11}; // int
+auto d {11, 22}; // Error, too many elements.<br />
+```
+<br />
+Note that for copy list initialization, all the elements in the braced initializer must be of the same
+type. For example, the following does not compile:<br />
+<br />
+```cpp
+auto b = {11, 22.33}; // Compilation error
+```
+<br />
+In earlier versions of the standard (C++11/14), both copy- and direct list initialization deduce an
+initializer_list<> :<br />
+<br />
+```cpp
+// Copy list initialization
+auto a = {11}; // initializer_list<int>
+auto b = {11, 22}; // initializer_list<int>
+<br />
+// Direct list initialization
+auto c {11}; // initializer_list<int>
+auto d {11, 22}; // initializer_list<int>
+```
+end[5]
 </div>
 <hr />
 <h3>Source</h3>

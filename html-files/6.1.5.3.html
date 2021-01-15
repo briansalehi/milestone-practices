@@ -115,25 +115,25 @@ pre {
 </ol>
 <h2>parameters with default value</h2>
 <div class="comment-style" >
-   Note that default values are only set in function declarations, not function definitions.<br />
-   Note that arguments with default values are only allowed if they are after arguments without having values.<br />
-   That is, you can't do this:<br />
-   <br />
-   ```c
-   void function(int x = 1, int y);<br />
-   ```
-   <br />
-   Functions have a special concept named **signature**, to help compilers distinguish the functions with the same name but different return types or number of arguments or different types of arguments in C++.<br />
-   A function signature is the contained of types used to define function's return type, its arguments and order of them.<br />
-   So a function like *void function(int x, int y)* has a signature of return type void and two int arguments.<br />
-   By using a default value, you actually change the function's signature, so these two functions are identical:<br />
-   <br />
-   ```c
-   void function(int x, int y = 1);<br />
-   void function(int x);<br />
-   ```
-   <br />
-   You should remember this when using function overloading which will be discussed later.<br />
+Note that default values are only set in function declarations, not function definitions.<br />
+Note that arguments with default values are only allowed if they are after arguments without having values.<br />
+That is, you can't do this:<br />
+<br />
+```c
+void function(int x = 1, int y);<br />
+```
+<br />
+Functions have a special concept named **signature**, to help compilers distinguish the functions with the same name but different return types or number of arguments or different types of arguments in C++.<br />
+A function signature is the contained of types used to define function's return type, its arguments and order of them.<br />
+So a function like *void function(int x, int y)* has a signature of return type void and two int arguments.<br />
+By using a default value, you actually change the function's signature, so these two functions are identical:<br />
+<br />
+```c
+void function(int x, int y = 1);<br />
+void function(int x);<br />
+```
+<br />
+You should remember this when using function overloading which will be discussed later.<br />
 </div>
 <hr />
 <h3>Source</h3>

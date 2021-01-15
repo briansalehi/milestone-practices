@@ -115,19 +115,19 @@ pre {
 </ol>
 <h2>pointers ownership</h2>
 <div class="comment-style" >
-   **auto_ptr** and **unique_ptr** smart pointers will transfer the object's ownership.<br />
-   meaning, the pointer will point to an invalid address when it's assigned to another
-   pointer. and the new pointer will own the object.<br />
-   <br />
-   You must carefully use unique_ptr, not to forget that only one pointer will point
-   to the object's address it points to. that's why its name is unique.<br />
-   <br />
-   **shared_ptr** instead, won't transfer ownership and will copy to another object (copy
-   constructor), and it will count the number of pointers that points to the object.<br />
-   *delete* operator will only be called when last pointer is destroyed.<br />
-   <br />
-   Use **unique_ptr** when you need to transfer ownership and use **shared_ptr** when
-   you need to share an object to multiple pointers.<br />
+**auto_ptr** and **unique_ptr** smart pointers will transfer the object's ownership.<br />
+meaning, the pointer will point to an invalid address when it's assigned to another
+pointer. and the new pointer will own the object.<br />
+<br />
+You must carefully use unique_ptr, not to forget that only one pointer will point
+to the object's address it points to. that's why its name is unique.<br />
+<br />
+**shared_ptr** instead, won't transfer ownership and will copy to another object (copy
+constructor), and it will count the number of pointers that points to the object.<br />
+*delete* operator will only be called when last pointer is destroyed.<br />
+<br />
+Use **unique_ptr** when you need to transfer ownership and use **shared_ptr** when
+you need to share an object to multiple pointers.<br />
 </div>
 <hr />
 <h3>Source</h3>

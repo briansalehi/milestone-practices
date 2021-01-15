@@ -116,52 +116,52 @@ pre {
 </ol>
 <h2>image viewer</h2>
 <div class="comment-style" >
-   This is a simple program to view images.<br />
-   <br />
-   To explain this program line by line, first
-   we talk about the **cv** namespace.<br />
-   To use functions, objects and constants in
-   opencv, you must specify their namespace,<br />
-   though I recommend you always specify it explicitly.<br />
-   That it, instead of using *using namespace cv*, just
-   specify *cv::* behind each opencv component.<br />
-   That way you will never end up having name conflicts.<br />
-   <br />
-   **cv::imread()** function reads filename in its first
-   argument, and -1 to read the image colorful, 0 as black
-   and white.<br />
-   This function returns a structure of type **cv::Mat** in
-   return, and you store it as the loaded image.<br />
-   Wide variety of images are supported by this function,<br />
-   eg: JPG, PNG, etc.<br />
-   After loading an image, always use exception handling in
-   case there's would problem.<br />
-   <br />
-   **cv::namedWindow()** function creates a window with
-   a name above its bar, named by its first argument.<br />
-   It takes a *cv constant* such as **cv::WINDOW_AUTOSIZE**
-   to allow the **cv::imshow()** function resize it as much
-   as it's needed to fill the image in its real size.<br />
-   You can also use 0 or **cv::WINDOW_NORMAL**, which makes
-   the image fill in a normal window.<br />
-   <br />
-   **cv::resizeWindow()** function, as its name indicates,<br />
-   resizes the newly created window.<br />
-   It takes window name as its first argument and y and x as
-   its second and third arguments respectively.<br />
-   <br />
-   **cv::imshow()** function will take an image structure of
-   type **cv::Mat** returned by **cv::imread()** function,<br />
-   to fill in the newly created window as its second argument.<br />
-   If no window is created, it will create it by itself.<br />
-   First argument also takes the name of previously created
-   window to fill the image in or the window name to be created.<br />
-   <br />
-   **cv::waitKey()** function waits for the user to hit a key.<br />
-   <br />
-   **cv::destroyWindow()** function, as its name indicates,<br />
-   destroys the windows named previously by **cv::namedWindow()**
-   as its first argument.<br />
+This is a simple program to view images.<br />
+<br />
+To explain this program line by line, first
+we talk about the **cv** namespace.<br />
+To use functions, objects and constants in
+opencv, you must specify their namespace,<br />
+though I recommend you always specify it explicitly.<br />
+That it, instead of using *using namespace cv*, just
+specify *cv::* behind each opencv component.<br />
+That way you will never end up having name conflicts.<br />
+<br />
+**cv::imread()** function reads filename in its first
+argument, and -1 to read the image colorful, 0 as black
+and white.<br />
+This function returns a structure of type **cv::Mat** in
+return, and you store it as the loaded image.<br />
+Wide variety of images are supported by this function,<br />
+eg: JPG, PNG, etc.<br />
+After loading an image, always use exception handling in
+case there's would problem.<br />
+<br />
+**cv::namedWindow()** function creates a window with
+a name above its bar, named by its first argument.<br />
+It takes a *cv constant* such as **cv::WINDOW_AUTOSIZE**
+to allow the **cv::imshow()** function resize it as much
+as it's needed to fill the image in its real size.<br />
+You can also use 0 or **cv::WINDOW_NORMAL**, which makes
+the image fill in a normal window.<br />
+<br />
+**cv::resizeWindow()** function, as its name indicates,<br />
+resizes the newly created window.<br />
+It takes window name as its first argument and y and x as
+its second and third arguments respectively.<br />
+<br />
+**cv::imshow()** function will take an image structure of
+type **cv::Mat** returned by **cv::imread()** function,<br />
+to fill in the newly created window as its second argument.<br />
+If no window is created, it will create it by itself.<br />
+First argument also takes the name of previously created
+window to fill the image in or the window name to be created.<br />
+<br />
+**cv::waitKey()** function waits for the user to hit a key.<br />
+<br />
+**cv::destroyWindow()** function, as its name indicates,<br />
+destroys the windows named previously by **cv::namedWindow()**
+as its first argument.<br />
 </div>
 <hr />
 <h3>Source</h3>
