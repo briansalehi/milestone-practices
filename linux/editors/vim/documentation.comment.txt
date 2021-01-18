@@ -1,0 +1,8 @@
+[<b>:help</b>]
+
+The best way to get to know Vim's documentation is by spending time in it.
+
+Documentations are referenced regularly in pages in the following format
+[<b>:h vimtutor</b>] abbreviated for :help.
+
+The help reference is a kind of hyperlink to Vim's built-in documentation.

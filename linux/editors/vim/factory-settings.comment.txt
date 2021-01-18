@@ -1,0 +1,39 @@
+You may find that some things don’t work for you the way that they are described in the text.
+
+Try quitting Vim and then launching it with these options: 
+
+<pre class="language-bash">
+    <code>
+        vim -u NONE -N
+    </code>
+</pre>
+
+The -u NONE flag tells Vim not to source your vimrc on startup.
+That way, your customizations won’t be applied and plugins will be
+disabled.
+
+When Vim starts up without loading a vimrc file, it reverts to vi compatible
+mode, which causes many useful features to be disabled. The -N flag prevents
+this by setting the ‘nocompatible’ option.
+
+Some of Vim’s built-in features are implemented with Vim script, which
+means that they will only work when plugins are enabled.
+This file contains the absolute minimum configuration that is required to
+activate Vim’s built-in plugins:
+
+<cite>path/to/vimrc</cite>
+<pre class="language-vim">
+    <code>
+        set compatible
+        filetype plugin on
+    </code>
+</pre>
+
+When launching Vim, you can use this file instead of your default vimrc by
+running the following:
+
+<pre class="language-bash">
+    <code>
+        vim -u path/to/vimrc
+    </code>
+</pre>
