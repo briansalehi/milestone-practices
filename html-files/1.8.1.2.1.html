@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Notation</title>
+<title>Normal Mode</title>
 <style>
 a,
 a:hover,
@@ -111,167 +111,46 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">Editors</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Vim</a></li>
-<li class="breadcrumb-item active" >Notation</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/1.8.1.2.0.html">Modes</a></li>
+<li class="breadcrumb-item active" >Normal Mode</li>
 </ol>
-<h2>Notation</h2>
+<h2>Normal Mode</h2>
 <div class="comment-style" >
-(See <b>:h ke0-notation</b> )
-<br/>
+Normal mode is Vim’s natural resting state.<br />
 <br />
-Vim commands are composed by either sequences of keystrokes as if a pianist
-picks out a melody by playing one note at a time or chordal key commands by
-pressing multiple keys at a time.<br />
+The general theme used to type commands is as follows:<br />
 <br />
-<h4>Playing Melody</h4>
-Sequence of keystrokes appear as follows:<br />
+Other text editors spend most of their time in something that resembles Insert
+mode. So to the Vim newcomer, it can seem strange that Normal mode is the
+default.<br />
 <br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>x</mark></td>
-<td>Press x once</td>
-</td>
-<tr>
-<td><mark>dw</mark></td>
-<td>In sequence, press d then w</td>
-</td>
-<tr>
-<td><mark>dap</mark></td>
-<td>In sequence, press d, a then p</td>
-</td>
-</tbody>
-</table>
+Much of the power of Normal mode stems from the way that operator commands can
+be combined with motions.<br />
 <br />
-<h4>Playing Chords</h4>
-<pre class="language-vim">
-<code>
-&lt;C-p&gt;<br />
-</code>
-</pre>
+Many Normal mode commands can be executed with a count, which causes them to
+be run multiple times. (see [<b>:h count</b>] )
 <br />
-Is equivalent to <mark>Ctrl-p</mark> which means press the
-<mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> keys at the same time.<br />
+The <mark>&lt;C-a&gt;</mark> and <mark>&lt;C-x&gt;</mark> commands perform
+addition and subtraction on numbers.<br />
+When run without a count they increment by one, but if we prefix a number,<br />
+then we can add or subtract by any whole number. For example, if we positioned
+our cursor on a 5 character, running <mark>10&lt;C-a&gt;</mark> would modify
+it to read 15.<br />
+But what happens if the cursor is not positioned on a numeric digit? The
+documentation says that the <mark>&lt;C-a&gt;</mark> command will “add
+[count] to the number at or after the cursor” (see [<b>:h ctrl-a</b> ). So
+if the cursor is not already positioned on a number, then the
+<mark>&lt;C-a&gt;</mark> command will look ahead for a digit on the cur-rent
+line.<br />
 <br />
-<h4>Chords</h4>
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>&lt;C-p&gt;</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time</td>
-</td>
-<tr>
-<td><mark>g&lt;C-]&gt;</mark></td>
-<td>Press <mark>g</mark> followed by <mark>&lt;Ctrl&gt;</mark> and <mark>]</mark> at the same time</td>
-</td>
-<tr>
-<td><mark>&lt;C-r&gt;0</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, then <mark>0</mark></td>
-</td>
-<tr>
-<td><mark>&lt;C-p&gt;</mark><mark>&lt;C-=&gt;</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time, then <mark>&lt;Ctrl&gt;</mark> and <mark>=</mark> at the same time</td>
-</td>
-</tbody>
-</table>
-<br />
-<h4>Placeholders</h4>
-<br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>f{char}</mark></td>
-<td>Press <mark>f</mark> followed by any other character</td>
-</td>
-<tr>
-<td><mark>`{a-z}</mark></td>
-<td>Press <mark>`</mark> followed by any lowercase letter</td>
-</td>
-<tr>
-<td><mark>m{a-zA-Z}</mark></td>
-<td>Press <mark>m</mark> followed by any lowercase or uppercase letter</td>
-</td>
-<tr>
-<td><mark>d{motion}</mark></td>
-<td>Press <mark>d</mark> followed by any motion command</td>
-</td>
-<tr>
-<td><mark>&lt;C-r&gt;{register}</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, followed by the address of register</td>
-</td>
-</tbody>
-</table>
-<br />
-<h4>Special Keys</h4>
-<br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>&lt;Esc&gt;</mark></td>
-<td>Press the Escape key</td>
-</td>
-<tr>
-<td><mark>&lt;CR&gt;</mark></td>
-<td>Press the carriage return key {also known as <mark>&lt;Enter&gt;</mark></td>
-</td>
-<tr>
-<td><mark>&lt;Ctrl&gt;</mark></td>
-<td>Press the Control key</td>
-</td>
-<tr>
-<td><mark>&lt;Tab&gt;</mark></td>
-<td>Press the Tab key</td>
-</td>
-<tr>
-<td><mark>&lt;Shift&gt;</mark></td>
-<td>Press the Shift key</td>
-</td>
-<tr>
-<td><mark>&lt;S-Tab&gt;</mark></td>
-<td>Press the Shift and Tab keys at the same time</td>
-</td>
-<tr>
-<td><mark>&lt;Up&gt;</mark></td>
-<td>Press the up arrow key</td>
-</td>
-<tr>
-<td><mark>&lt;Down&gt;</mark></td>
-<td>Press the down arrow key</td>
-</td>
-<tr>
-<td><mark>&lt;␣&gt;</mark></td>
-<td>Press the space bar</td>
-</td>
-</tbody>
-</table>
+Just because you can save keystrokes by using a count doesn’t mean that
+you should. Later, we’ll see sometimes it’s better simply to repeat a
+command than take the time to count how many times you want to run it.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/documentation">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/modes">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/prompts">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/operators">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

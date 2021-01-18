@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Notation</title>
+<title>Textual and Graphical User Interface</title>
 <style>
 a,
 a:hover,
@@ -111,167 +111,23 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">Editors</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Vim</a></li>
-<li class="breadcrumb-item active" >Notation</li>
+<li class="breadcrumb-item active" >Textual and Graphical User Interface</li>
 </ol>
-<h2>Notation</h2>
+<h2>Textual and Graphical User Interface</h2>
 <div class="comment-style" >
-(See <b>:h ke0-notation</b> )
+(See <b>:h gui</b> )
 <br/>
 <br />
-Vim commands are composed by either sequences of keystrokes as if a pianist
-picks out a melody by playing one note at a time or chordal key commands by
-pressing multiple keys at a time.<br />
+Traditionally, Vim runs inside of the terminal, with no graphical user interface (GUI).<br />
 <br />
-<h4>Playing Melody</h4>
-Sequence of keystrokes appear as follows:<br />
-<br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>x</mark></td>
-<td>Press x once</td>
-</td>
-<tr>
-<td><mark>dw</mark></td>
-<td>In sequence, press d then w</td>
-</td>
-<tr>
-<td><mark>dap</mark></td>
-<td>In sequence, press d, a then p</td>
-</td>
-</tbody>
-</table>
-<br />
-<h4>Playing Chords</h4>
-<pre class="language-vim">
-<code>
-&lt;C-p&gt;<br />
-</code>
-</pre>
-<br />
-Is equivalent to <mark>Ctrl-p</mark> which means press the
-<mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> keys at the same time.<br />
-<br />
-<h4>Chords</h4>
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>&lt;C-p&gt;</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time</td>
-</td>
-<tr>
-<td><mark>g&lt;C-]&gt;</mark></td>
-<td>Press <mark>g</mark> followed by <mark>&lt;Ctrl&gt;</mark> and <mark>]</mark> at the same time</td>
-</td>
-<tr>
-<td><mark>&lt;C-r&gt;0</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, then <mark>0</mark></td>
-</td>
-<tr>
-<td><mark>&lt;C-p&gt;</mark><mark>&lt;C-=&gt;</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time, then <mark>&lt;Ctrl&gt;</mark> and <mark>=</mark> at the same time</td>
-</td>
-</tbody>
-</table>
-<br />
-<h4>Placeholders</h4>
-<br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>f{char}</mark></td>
-<td>Press <mark>f</mark> followed by any other character</td>
-</td>
-<tr>
-<td><mark>`{a-z}</mark></td>
-<td>Press <mark>`</mark> followed by any lowercase letter</td>
-</td>
-<tr>
-<td><mark>m{a-zA-Z}</mark></td>
-<td>Press <mark>m</mark> followed by any lowercase or uppercase letter</td>
-</td>
-<tr>
-<td><mark>d{motion}</mark></td>
-<td>Press <mark>d</mark> followed by any motion command</td>
-</td>
-<tr>
-<td><mark>&lt;C-r&gt;{register}</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, followed by the address of register</td>
-</td>
-</tbody>
-</table>
-<br />
-<h4>Special Keys</h4>
-<br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>&lt;Esc&gt;</mark></td>
-<td>Press the Escape key</td>
-</td>
-<tr>
-<td><mark>&lt;CR&gt;</mark></td>
-<td>Press the carriage return key {also known as <mark>&lt;Enter&gt;</mark></td>
-</td>
-<tr>
-<td><mark>&lt;Ctrl&gt;</mark></td>
-<td>Press the Control key</td>
-</td>
-<tr>
-<td><mark>&lt;Tab&gt;</mark></td>
-<td>Press the Tab key</td>
-</td>
-<tr>
-<td><mark>&lt;Shift&gt;</mark></td>
-<td>Press the Shift key</td>
-</td>
-<tr>
-<td><mark>&lt;S-Tab&gt;</mark></td>
-<td>Press the Shift and Tab keys at the same time</td>
-</td>
-<tr>
-<td><mark>&lt;Up&gt;</mark></td>
-<td>Press the up arrow key</td>
-</td>
-<tr>
-<td><mark>&lt;Down&gt;</mark></td>
-<td>Press the down arrow key</td>
-</td>
-<tr>
-<td><mark>&lt;␣&gt;</mark></td>
-<td>Press the space bar</td>
-</td>
-</tbody>
-</table>
+It doesn’t matter whether you run Vim in the terminal or as GVim.<br />
+We’ll focus on core commands that work just as well in either. We’ll
+learn how to do things the Vim way.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/documentation">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/versions">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/prompts">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/compound-commands">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

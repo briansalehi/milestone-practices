@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Factory Settings</title>
+<title>Built-in Documentation</title>
 <style>
 a,
 a:hover,
@@ -111,54 +111,24 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">Editors</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Vim</a></li>
-<li class="breadcrumb-item active" >Factory Settings</li>
+<li class="breadcrumb-item active" >Built-in Documentation</li>
 </ol>
-<h2>Factory Settings</h2>
+<h2>Built-in Documentation</h2>
 <div class="comment-style" >
-You may find that some things don’t work for you the way that they are described in the text.<br />
+(See <b>:help</b> )
+<br/>
 <br />
-Try quitting Vim and then launching it with these options:<br />
+The best way to get to know Vim's documentation is by spending time in it.<br />
 <br />
-<pre class="language-bash">
-<code>
-vim -u NONE -N
-</code>
-</pre>
+Documentations are referenced regularly in pages in the following format
+[<b>:h vimtutor</b>] abbreviated for :help.<br />
 <br />
-The -u NONE flag tells Vim not to source your vimrc on startup.<br />
-That way, your customizations won’t be applied and plugins will be
-disabled.<br />
-<br />
-When Vim starts up without loading a vimrc file, it reverts to vi compatible
-mode, which causes many useful features to be disabled. The -N flag prevents
-this by setting the ‘nocompatible’ option.<br />
-<br />
-Some of Vim’s built-in features are implemented with Vim script, which
-means that they will only work when plugins are enabled.<br />
-This file contains the absolute minimum configuration that is required to
-activate Vim’s built-in plugins:<br />
-<br />
-<cite>path/to/vimrc</cite>
-<pre class="language-vim">
-<code>
-set compatible
-filetype plugin on
-</code>
-</pre>
-<br />
-When launching Vim, you can use this file instead of your default vimrc by
-running the following:<br />
-<br />
-<pre class="language-bash">
-<code>
-vim -u path/to/vimrc
-</code>
-</pre>
+The help reference is a kind of hyperlink to Vim's built-in documentation.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/prompts">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/installation">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/versions">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/notation">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
