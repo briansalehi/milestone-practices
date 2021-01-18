@@ -1,0 +1,66 @@
+When facing a repetitive task, we can achieve an optimal editing strategy by
+making both the motion and the change repeatable.
+
+Whenever Vim makes it easy to repeat an action or a motion, it always provides
+some way of backing out in case we accidentally go too far.
+
+Following table summarizes Vim’s repeatable commands along with their
+corresponding reverse action.
+
+Vim is optimized for repetition. In order to exploit this, we have to be
+mindful of how we compose repeatable changes.
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Intent</th>
+			<th scope="col">Act</th>
+			<th scope="col">Repeat</th>
+			<th scope="col">Reverse</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Make a change</td>
+			<td>{edit}</td>
+			<td><mark>.</mark></td>
+			<td><mark>u</mark></td>
+		</td>
+		<tr>
+			<td>Scan line for next character</td>
+			<td><mark>f{char}</mark>/<mark>t{char}</mark></td>
+			<td><mark>;</mark></td>
+			<td><mark>,</mark></td>
+		</td>
+		<tr>
+			<td>Scan line for previous character</td>
+			<td><mark>F{char}</mark>/<mark>T{char}</mark></td>
+			<td><mark>;</mark></td>
+			<td><mark>,</mark></td>
+		</td>
+		<tr>
+			<td>Scan document for next match</td>
+			<td>/pattern<mark>&lt;CR&gt;</mark></td>
+			<td><mark>n</mark></td>
+			<td><mark>N</mark></td>
+		</td>
+		<tr>
+			<td>Scan document for previous match</td>
+			<td>?pattern<mark>&lt;CR&gt;</mark></td>
+			<td><mark>n</mark></td>
+			<td><mark>N</mark></td>
+		</td>
+		<tr>
+			<td>Perform substitution</td>
+			<td>s/target/replacement</td>
+			<td><mark>&</mark></td>
+			<td><mark>u</mark></td>
+		</td>
+		<tr>
+			<td>Execute a sequence of changes</td>
+			<td><mark>qx{change}q</mark></td>
+			<td><mark>@x</mark></td>
+			<td><mark>u</mark></td>
+		</td>
+	</tbody>
+</table>

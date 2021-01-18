@@ -1,12 +1,11 @@
-<b>[:h key-notation]</b>
+(See <b>:h ke0-notation</b> )
 <br/>
 
 Vim commands are composed by either sequences of keystrokes as if a pianist
 picks out a melody by playing one note at a time or chordal key commands by
 pressing multiple keys at a time.
 
-<h4>Playing Melody</h>
-
+<h4>Playing Melody</h4>
 Sequence of keystrokes appear as follows:
 
 <table class="table table-dark">
@@ -26,14 +25,13 @@ Sequence of keystrokes appear as follows:
 			<td>In sequence, press d then w</td>
 		</td>
 		<tr>
-			<td>dap</td>
+			<td><mark>dap</mark></td>
 			<td>In sequence, press d, a then p</td>
 		</td>
 	</tbody>
 </table>
 
 <h4>Playing Chords</h4>
-
 <pre class="language-vim">
     <code>
         &lt;C-p&gt;
@@ -44,7 +42,6 @@ Is equivalent to <mark>Ctrl-p</mark> which means press the
 <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> keys at the same time.
 
 <h4>Chords</h4>
-
 <table class="table table-dark">
 	<thead>
 		<tr>
@@ -59,7 +56,7 @@ Is equivalent to <mark>Ctrl-p</mark> which means press the
 		</td>
 		<tr>
 			<td><mark>g&lt;C-]&gt;</mark></td>
-			<td>Press <mark>&lt;g&gt;</mark> followed by <mark>&lt;Ctrl&gt;</mark> and <mark>]</mark> at the same time</td>
+			<td>Press <mark>g</mark> followed by <mark>&lt;Ctrl&gt;</mark> and <mark>]</mark> at the same time</td>
 		</td>
 		<tr>
 			<td><mark>&lt;C-r&gt;0</mark></td>
@@ -67,7 +64,7 @@ Is equivalent to <mark>Ctrl-p</mark> which means press the
 		</td>
 		<tr>
 			<td><mark>&lt;C-p&gt;</mark><mark>&lt;C-=&gt;</mark></td>
-			<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time, then <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time</td>
+			<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time, then <mark>&lt;Ctrl&gt;</mark> and <mark>=</mark> at the same time</td>
 		</td>
 	</tbody>
 </table>

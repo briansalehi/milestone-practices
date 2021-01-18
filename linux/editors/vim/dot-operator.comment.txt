@@ -1,0 +1,59 @@
+(See <b>:h .</b> )
+<b/>
+
+The dot command lets us repeat the last change. It is the most powerful and
+versatile command in Vim.
+
+Along with Normal mode commands, we also create a change each time we dip into
+Insert mode.
+From the moment we enter Insert mode (by pressing <mark>i</mark>, for example)
+until we return to Normal mode (by pressing <mark>&lt;Esc&gt;</mark>), Vim
+records every keystroke. After making a change such as this, the dot command
+will replay our keystrokes.
+
+In all of the use cases of dot command, we’re using one keystroke to move
+and one keystroke to execute.
+This is the ultimate formula for dot command.
+
+<h3>Example 1: Repeating</h3>
+
+For a common use case as appending a semicolon at the end of a series of
+lines, Vim provides a dedicated command that combines two steps into one.
+
+In an example, we need to append a semicolon at the end of each line. Doing so
+involves moving our cursor to the end of the line and then switching to Insert
+mode to make the change. The <mark>$ </mark> command will handle the motion
+for us, and then we can run <mark>a</mark>;&lt;Esc&gt; to make the change.
+
+The dot command will repeat that last change, but doing so, the dot operator
+only repeats the <mark>a</mark> command because <mark>$a</mark>; command
+sequence consists of 2 commands.
+
+By using the compound command <mark>A</mark> instead of <mark>$a</mark>, we
+give the dot command a boost.
+
+Now we can repeat the change on consecutive lines just by typing
+<mark>j.</mark> as many times as it takes.
+
+<h3>Example 2: Padding a Character</h3>
+We can pad a single character with two spaces (one in front, the other behind)
+by using an idiomatic Vim solution.
+
+The <mark>s</mark> command compounds two steps into one: it deletes the
+character under the cursor and then enters Insert mode. Having deleted the +
+sign, we then type <mark>␣+␣</mark> and leave Insert mode.
+
+There’s another trick in this example. The <mark>f{char}</mark> command
+tells Vim to look ahead for the next occurrence of the specified character and
+then move the cursor directly to it if a match is found (see [<b>:h f</b>] ).
+So when we type <mark>f+</mark>, our cursor goes straight to the next +
+symbol.
+
+The <mark>;</mark> command will repeat the last search that the <mark>f</mark>
+command performed. So instead of typing <mark>f+</mark> four times, we can use
+that command once and then follow up by using the <mark>;</mark> command three
+times.
+
+The <mark>;</mark> command takes us to our next target, and the <mark>.</mark>
+command repeats the last change, so we can complete the changes by typing
+<mark>;.</mark> three times.

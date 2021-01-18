@@ -1,0 +1,11 @@
+(see [<b>:h *</b>] )
+<br/>
+
+<mark>*</mark> command executes a search for the word under the cursor.
+
+Two things should happen:
+The cursor will jump forward to the next match, and all occurrences will be
+highlighted. If you don’t see any highlighting, try running [<b>:set
+hls</b>].
+
+To jump to next match, type <mark>n</mark> command.

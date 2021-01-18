@@ -1,4 +1,4 @@
-[<b>:help</b>]
+(See <b>:help</b> )
 <br/>
 
 The best way to get to know Vim's documentation is by spending time in it.

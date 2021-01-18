@@ -1,0 +1,43 @@
+We could say that the <mark>A</mark> command compounds two actions
+<mark>$a</mark> into a single keystroke.
+It’s not alone in doing this. Many of Vim’s single-key commands can be
+seen as a condensed version of two or more other commands.
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Compound Command</th>
+			<th scope="col">Equivalent in Longhand</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><mark>C</mark></td>
+			<td><mark>c$</mark></td>
+		</td>
+		<tr>
+			<td><mark>s</mark></td>
+			<td><mark>cl</mark></td>
+		</td>
+		<tr>
+			<td><mark>S</mark></td>
+			<td><mark>^C</mark></td>
+		</td>
+		<tr>
+			<td><mark>I</mark></td>
+			<td><mark>^i</mark></td>
+		</td>
+		<tr>
+			<td><mark>A</mark></td>
+			<td><mark>$a</mark></td>
+		</td>
+		<tr>
+			<td><mark>o</mark></td>
+			<td><mark>A&lt;CR&gt;</mark></td>
+		</td>
+		<tr>
+			<td><mark>O</mark></td>
+			<td><mark>ko</mark></td>
+		</td>
+	</tbody>
+</table>
