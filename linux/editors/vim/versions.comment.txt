@@ -1,0 +1,7 @@
+[<bold>:h +feature-list</bold>]
+
+Some of Vim’s functionality can be disabled during compilation. For
+example, when configuring the build, we could provide the --with-features=tiny
+option, which would disable all but the most fundamental features (there are
+also feature sets labeled small, normal, big, and huge). You can browse the
+feature list by looking up [<bold>:h +feature-list</bold>]

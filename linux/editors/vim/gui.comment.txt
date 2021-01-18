@@ -1,0 +1,7 @@
+[<b>:h gui</b>]
+
+Traditionally, Vim runs inside of the terminal, with no graphical user interface (GUI).
+
+It doesn’t matter whether you run Vim in the terminal or as GVim.
+We’ll focus on core commands that work just as well in either. We’ll
+learn how to do things the Vim way.
