@@ -161,6 +161,33 @@ Notice how we did initialize *Base* class in *Derived* constructor's initializat
     }
 </code>
 </pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o base_initialization.o base_initialization.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o base_initialization.bin base_initialization.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./base_initialization.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-txt" begin language-txt>
+<code>
+Base Constructor Invoked
+Derived Constructor Invoked
+derived member: 1
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/inheritance">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

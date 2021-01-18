@@ -147,6 +147,31 @@ this iterator only works with containers that allow **rapid insertion complexity
     }
 </code>
 </pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o back_insert_iterator.o back_insert_iterator.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o back_insert_iterator.bin back_insert_iterator.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./back_insert_iterator.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-txt" begin language-txt>
+<code>
+0 1 2 3 4 5 6 7 8 9
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.4.7.3.html">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

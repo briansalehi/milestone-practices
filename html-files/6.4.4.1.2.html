@@ -156,6 +156,32 @@ and increment it in a loop until you hit the botton of the container.<br />
     }
 </code>
 </pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o find.o find.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -o find.bin find.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./find.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-txt" begin language-txt>
+<code>
+1 2 3 4 5
+found element 3 at position 2
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.4.4.1.1.html">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

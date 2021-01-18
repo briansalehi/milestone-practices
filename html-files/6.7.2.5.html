@@ -148,6 +148,32 @@ pre {
     }
 </code>
 </pre>
+<h3>Execution</h3>
+<h4>compile</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -g -Wall -Os -c -o try-lock-for.o try-lock-for.cxx
+</code>
+</pre>
+<h4>link</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+g++ -Wall -g -lpthread -o try-lock-for.bin try-lock-for.o
+</code>
+</pre>
+<h4>run</h4>
+<pre class="command-line" data-user="cpp" data-host="milestone">
+<code class="language-bash">
+./try-lock-for.bin
+</code>
+</pre>
+<h3>Output</h3>
+<pre class="language-txt" begin language-txt>
+<code>
+thread id: 140056480654912thread id:
+140056472262208
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.7.2.4.html">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

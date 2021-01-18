@@ -1,0 +1,4 @@
+./cxx/image-processing/operations/drawing/clipline.cxx:2:10: fatal error: opencv2/imgproc/imgproc.hpp: No such file or directory
+    2 | #include <opencv2/imgproc/imgproc.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.

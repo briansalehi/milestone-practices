@@ -1,0 +1,2 @@
+Regardless of its similarity with Make in name, CMake does much more than Make
+is capable of.

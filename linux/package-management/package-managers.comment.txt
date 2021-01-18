@@ -1,0 +1,4 @@
+Package managers are essential tools on any Linux system.
+Every Linux distribution comes with its default package management.
+You need to know which one is your package manager and only read the
+corresponding practice page.
