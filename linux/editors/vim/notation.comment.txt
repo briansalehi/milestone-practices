@@ -1,6 +1,5 @@
-Notation
-
-[<b>:h key-notation</b>]
+<b>[:h key-notation]</b>
+<br/>
 
 Vim commands are composed by either sequences of keystrokes as if a pianist
 picks out a melody by playing one note at a time or chordal key commands by

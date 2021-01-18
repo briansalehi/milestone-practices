@@ -191,37 +191,6 @@ To make sure object is moved we also use **std::move()** function.<br />
     }
 </code>
 </pre>
-<h3>Execution</h3>
-<h4>compile</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-g++ -g -Wall -Os -c -o move_constructor.o move_constructor.cxx
-</code>
-</pre>
-<h4>link</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-g++ -o move_constructor.bin move_constructor.o
-</code>
-</pre>
-<h4>run</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-./move_constructor.bin
-</code>
-</pre>
-<h3>Output</h3>
-<pre class="language-txt" begin language-txt>
-<code>
-Constructor Invoked
-member address: 0x7ffc7b2acc68
-Move Constructor Invoked
-movable member address: 0x7ffc7b2acc68
-moved member address: 0x7ffc7b2acc70
-Destructor Invoked
-Destructor Invoked
-</code>
-</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.14.html">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

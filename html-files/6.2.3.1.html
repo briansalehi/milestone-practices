@@ -199,40 +199,6 @@ This is called the **Diamond Problem** and we fix this problem by virtually inhe
     }
 </code>
 </pre>
-<h3>Execution</h3>
-<h4>compile</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-g++ -g -Wall -Os -c -o diamond.o diamond.cxx
-</code>
-</pre>
-<h4>link</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-g++ -o diamond.bin diamond.o
-</code>
-</pre>
-<h4>run</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-./diamond.bin
-</code>
-</pre>
-<h3>Output</h3>
-<pre class="language-txt" begin language-txt>
-<code>
-Top Constructor Invoked
-Middle1 Constructor Invoked
-Middle2 Constructor Invoked
-Middle3 Constructor Invoked
-Bottom Constructor Invoked
-Bottom Destructor Invoked
-Middle3 Destructor Invoked
-Middle2 Destructor Invoked
-Middle1 Destructor Invoked
-Top Destructor Invoked
-</code>
-</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/polymorphism">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

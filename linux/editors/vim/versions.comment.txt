@@ -1,4 +1,5 @@
 [<bold>:h +feature-list</bold>]
+<br/>
 
 Some of Vim’s functionality can be disabled during compilation. For
 example, when configuring the build, we could provide the --with-features=tiny

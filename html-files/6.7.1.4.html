@@ -156,34 +156,6 @@ Any returned value from workers to thread constructors are ignored. unless we us
     }
 </code>
 </pre>
-<h3>Execution</h3>
-<h4>compile</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-g++ -g -Wall -Os -c -o parameters.o parameters.cxx
-</code>
-</pre>
-<h4>link</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-g++ -Wall -g -lpthread -o parameters.bin parameters.o
-</code>
-</pre>
-<h4>run</h4>
-<pre class="command-line" data-user="cpp" data-host="milestone">
-<code class="language-bash">
-./parameters.bin
-</code>
-</pre>
-<h3>Output</h3>
-<pre class="language-txt" begin language-txt>
-<code>
-starting thread 1
-starting thread 4
-starting thread 2
-starting thread 3
-</code>
-</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.7.1.3.html">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

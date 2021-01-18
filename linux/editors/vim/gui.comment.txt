@@ -1,4 +1,5 @@
 [<b>:h gui</b>]
+<br/>
 
 Traditionally, Vim runs inside of the terminal, with no graphical user interface (GUI).
 
