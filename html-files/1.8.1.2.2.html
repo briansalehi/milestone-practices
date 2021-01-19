@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Delete a Word</title>
+<title>Operator-Pending Mode</title>
 <style>
 a,
 a:hover,
@@ -111,34 +111,42 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">Editors</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Vim</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/1.8.1.3.0.html">Operators</a></li>
-<li class="breadcrumb-item active" >Delete a Word</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/1.8.1.2.0.html">Modes</a></li>
+<li class="breadcrumb-item active" >Operator-Pending Mode</li>
 </ol>
-<h2>Delete a Word</h2>
+<h2>Operator-Pending Mode</h2>
 <div class="comment-style" >
-(See <b>:h aw</b> )
-<br/>
+Normal, Insert, and Visual modes are readily identified, but Vim has other
+modes that are easy to overlook. Operator-Pending mode is a case in point. We
+use it dozens of times daily, but it usually lasts for just a fraction of a
+second. For example, we invoke it when we run the command dw. It lasts during
+the brief interval between pressing d and w keys. Blink and you'll miss it!<br />
 <br />
-Suppose that our cursor is positioned in the middle of a word and we want to
-delete that word.<br />
+If we think of Vim as a finite-state machine, then Operator-Pending mode is a
+state that accepts only motion commands. It is activated when we invoke an
+operator command, and then nothing happens until we provide a motion, which
+completes the operation. While Operator-Pending mode is active, we can return
+to Normal mode in the usual manner by pressing escape, which aborts the
+operation.<br />
 <br />
-We might begin by deleting the word backward by pressing <mark>db</mark>
-command sequence.<br />
+Many commands are invoked by two or more keystrokes (for examples, look up
+<mark>:hg</mark> , <mark>:h z</mark> , <mark>:h ctrl-w</mark> , or <mark>:h
+[</mark> ), but in most cases, the first keystroke merely acts as a prefix for
+the second. These commands don't initiate Operator-Pending mode. Instead, we
+can think of them as namespaces that expand the number of available command
+mappings. Only the operator commands initiate Operator-Pending mode.<br />
 <br />
-Or moving back and deleting forward by pressing <mark>b</mark> followed by
-<mark>dw</mark>.<br />
-<br />
-Both of our solutions so far have involved some kind of preparation or
-clean-up. We can be more surgical by using the <mark>aw</mark> text object
-instead of a motion, which makes up our command to <mark>daw</mark>.<br />
-<br />
-The <mark>daw</mark> command is easily remembered by the mnemonic <i>delete a
-word</i>.<br />
+Why, you might be wondering, is an entire mode dedicated to those brief
+moments between invoking operator and motion commands, whereas the namespaced
+com-mands are merely an extension of Normal mode? Good question! Because we
+can create custom mappings that initiate or target Operator-Pending mode. In
+other words, it allows us to create custom operators and motions, which in
+turn allows us to expand Vim's vocabulary.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/operators/undo">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/modes/normal-mode">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/operators/dot-operator">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/operators">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

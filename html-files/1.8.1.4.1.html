@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Compound Commands</title>
+<title>Custom Motions</title>
 <style>
 a,
 a:hover,
@@ -111,58 +111,36 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">Editors</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Vim</a></li>
-<li class="breadcrumb-item active" >Compound Commands</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/1.8.1.4.0.html">...</a></li>
+<li class="breadcrumb-item active" >Custom Motions</li>
 </ol>
-<h2>Compound Commands</h2>
+<h2>Custom Motions</h2>
 <div class="comment-style" >
-We could say that the <mark>A</mark> command compounds two actions
-<mark>$a</mark> into a single keystroke.<br />
-It’s not alone in doing this. Many of Vim’s single-key commands can be
-seen as a condensed version of two or more other commands.<br />
+(See <b>:h omap-info</b> )
 <br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Compound Command</th>
-<th scope="col">Equivalent in Longhand</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>C</mark></td>
-<td><mark>c$</mark></td>
-</td>
-<tr>
-<td><mark>s</mark></td>
-<td><mark>cl</mark></td>
-</td>
-<tr>
-<td><mark>S</mark></td>
-<td><mark>^C</mark></td>
-</td>
-<tr>
-<td><mark>I</mark></td>
-<td><mark>^i</mark></td>
-</td>
-<tr>
-<td><mark>A</mark></td>
-<td><mark>$a</mark></td>
-</td>
-<tr>
-<td><mark>o</mark></td>
-<td><mark>A&lt;CR&gt;</mark></td>
-</td>
-<tr>
-<td><mark>O</mark></td>
-<td><mark>ko</mark></td>
-</td>
-</tbody>
-</table>
+Vim's standard set of motions is fairly comprehensive, but we can augment it
+further by defining new motions and text objects.<br />
+<br />
+Kana Natsuno's <a
+href="https://github.com/kana/vim-textobj-entire">textobj-entire plugin</a> is
+a good example. It adds two new text objects to Vim: <mark>ie</mark> and
+<mark>ae</mark>, which act upon the entire file.<br />
+<br />
+If we wanted to autoindent the entire file using the <mark>=</mark> command,<br />
+we could run <mark>gg=G</mark>.<br />
+<br />
+But if we had the textobj-entire plugin installed, we could simply run
+<mark>=ae</mark>. It wouldn't matter where our cursor was when we ran this
+command; it would always act upon the entire file.<br />
+<br />
+Note that if we had both the <i>commentary</i> and <i>textobj-entire</i>
+plugins installed, we could use them together. Running <mark>gcae</mark> would
+toggle commenting throughout the current file.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/gui">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/1.8.1.4.0.html">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/dot-operator">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

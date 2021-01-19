@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Repeating and Reversing</title>
+<title>Custom Operators</title>
 <style>
 a,
 a:hover,
@@ -111,81 +111,35 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">Editors</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Vim</a></li>
-<li class="breadcrumb-item active" >Repeating and Reversing</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/1.8.1.3.0.html">Operators</a></li>
+<li class="breadcrumb-item active" >Custom Operators</li>
 </ol>
-<h2>Repeating and Reversing</h2>
+<h2>Custom Operators</h2>
 <div class="comment-style" >
-When facing a repetitive task, we can achieve an optimal editing strategy by
-making both the motion and the change repeatable.<br />
+(See <b>:h :map-operator</b> )
 <br />
-Whenever Vim makes it easy to repeat an action or a motion, it always provides
-some way of backing out in case we accidentally go too far.<br />
+The number of actions that we can perform using Vim's default set of operators
+and motions is vast. But we can expand these even further by rolling our own
+custom motions and operators.<br />
 <br />
-Following table summarizes Vim’s repeatable commands along with their
-corresponding reverse action.<br />
+The standard set of operators that ships with Vim is relatively small, but it
+is possible to define new ones. Tim Pope's <a
+href="https://github.com/tpope/vim-commentary">commentary.vim plugin</a>
+provides a good example.<br />
+This adds a command for commenting and uncommenting lines of code in all
+languages supported by Vim.<br />
 <br />
-Vim is optimized for repetition. In order to exploit this, we have to be
-mindful of how we compose repeatable changes.<br />
-<br />
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Intent</th>
-<th scope="col">Act</th>
-<th scope="col">Repeat</th>
-<th scope="col">Reverse</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Make a change</td>
-<td>{edit}</td>
-<td><mark>.</mark></td>
-<td><mark>u</mark></td>
-</td>
-<tr>
-<td>Scan line for next character</td>
-<td><mark>f{char}</mark>/<mark>t{char}</mark></td>
-<td><mark>;</mark></td>
-<td><mark>,</mark></td>
-</td>
-<tr>
-<td>Scan line for previous character</td>
-<td><mark>F{char}</mark>/<mark>T{char}</mark></td>
-<td><mark>;</mark></td>
-<td><mark>,</mark></td>
-</td>
-<tr>
-<td>Scan document for next match</td>
-<td>/pattern<mark>&lt;CR&gt;</mark></td>
-<td><mark>n</mark></td>
-<td><mark>N</mark></td>
-</td>
-<tr>
-<td>Scan document for previous match</td>
-<td>?pattern<mark>&lt;CR&gt;</mark></td>
-<td><mark>n</mark></td>
-<td><mark>N</mark></td>
-</td>
-<tr>
-<td>Perform substitution</td>
-<td>s/target/replacement</td>
-<td><mark>&</mark></td>
-<td><mark>u</mark></td>
-</td>
-<tr>
-<td>Execute a sequence of changes</td>
-<td><mark>qx{change}q</mark></td>
-<td><mark>@x</mark></td>
-<td><mark>u</mark></td>
-</td>
-</tbody>
-</table>
+The commentary command is triggered by <mark>gc{motion}</mark>, which toggles
+commenting for the specified lines.<br />
+It's an operator command, so we can combine it with all of the usual motions.<br />
+<mark>gcap</mark> will toggle commenting for the current paragraph.<br />
+<mark>gcG</mark> comments from the current line to the end of the file.<br />
+<mark>gcc</mark> comments the current line.<br />
 </div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/dot-operator">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/operators/arithmetic">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim/star-operator">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/1.8.1.4.0.html">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
