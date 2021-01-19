@@ -4,8 +4,7 @@ MainWindow::MainWindow() {
 	setWindowTitle("Qt Application");
 	resize(400, 300);
 
-	QLabel *mainWidget = new QLabel("Sample Application");
-	mainWidget->setAlignment(Qt::AlignCenter);
+	mainWidget = new QLabel("Sample Application");
 
 	setCentralWidget(mainWidget);
 };

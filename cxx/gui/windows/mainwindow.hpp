@@ -9,6 +9,9 @@ class MainWindow : public QMainWindow {
 
 public:
 	MainWindow();
+
+private:
+	QWidget *mainWidget;
 };
 
 #endif

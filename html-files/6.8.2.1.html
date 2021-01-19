@@ -149,8 +149,7 @@ We subclass QMainWindow because we need to illustrate the menu and toolbars.<br 
     	setWindowTitle(&quot;Qt Application&quot;);
     	resize(400, 300);
     
-    	QLabel *mainWidget = new QLabel(&quot;Sample Application&quot;);
-    	mainWidget-&gt;setAlignment(Qt::AlignCenter);
+    	mainWidget = new QLabel(&quot;Sample Application&quot;);
     
     	setCentralWidget(mainWidget);
     };
@@ -170,6 +169,9 @@ We subclass QMainWindow because we need to illustrate the menu and toolbars.<br 
     
     public:
     	MainWindow();
+    
+    private:
+    	QWidget *mainWidget;
     };
     
     #endif
