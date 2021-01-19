@@ -1,4 +1,4 @@
-(See <b>:h ke0-notation</b> )
+(See <b>:h key-notation</b> )
 <br/>
 
 Vim commands are composed by either sequences of keystrokes as if a pianist
