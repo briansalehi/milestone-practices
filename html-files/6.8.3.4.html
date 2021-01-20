@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QDateTimeEdit</title>
+<title>QVBoxLayout</title>
 <style>
 a,
 a:hover,
@@ -110,28 +110,42 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.3.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QDateTimeEdit</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.3.0.html">Layouts</a></li>
+<li class="breadcrumb-item active" >QVBoxLayout</li>
 </ol>
-<h2>QDateTimeEdit</h2>
+<h2>QVBoxLayout</h2>
 <div class="comment-style" >
-Date time can be set simply by using this widget.<br />
+Vertical box layout represents a vertically growing layout.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>datetime-edit.cxx</cite>
+  <cite>vbox.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
-    #include &lt;QDateTimeEdit&gt;
+    #include &lt;QVBoxLayout&gt;
+    #include &lt;QLineEdit&gt;
+    #include &lt;QPushButton&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
+    	QWidget *window = new QWidget;
+    	QVBoxLayout *layout = new QVBoxLayout;
     
-    	QDateTimeEdit birthDate;
-    	
-    	birthDate.show();
+    	QLineEdit *firstname = new QLineEdit;
+    	QLineEdit *lastname = new QLineEdit;
+    	QPushButton *submit = new QPushButton(&quot;Submit&quot;);
+    
+    	firstname-&gt;setPlaceholderText(&quot;first name&quot;);
+    	lastname-&gt;setPlaceholderText(&quot;last name&quot;);
+    
+    	layout-&gt;addWidget(firstname);
+    	layout-&gt;addWidget(lastname);
+    	layout-&gt;addWidget(submit);
+    
+    	window-&gt;setLayout(layout);
+    	window-&gt;show();
     	return app.exec();
     }
 </code>
@@ -140,22 +154,23 @@ Date time can be set simply by using this widget.<br />
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-make -C ./cxx/gui/widgets -f datetime-edit.make
+make -C ./cxx/gui/layouts -f vbox.make
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./datetime-edit.bin
+./vbox.bin
 </code>
 </pre>
 <h3>Output</h3>
-  <cite>datetime-edit.png</cite>
-<img class="img-responsive" src="/cpp/gui/widgets/QDateTimeEdit.screenshot.png" alt="datetime-edit.cxx Screenshot">
+  <cite>vbox.png</cite>
+<img class="img-responsive" src="/cpp/gui/layouts/QVBoxLayout.screenshot.png" alt="vbox.cxx Screenshot">
+<b>Screenshot Not Found</b>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/widgets/QLineEdit">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts/QStackedLayout">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/widgets/QSpinBox">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts/QHBoxLayout">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -115,8 +115,8 @@ pre {
 </ol>
 <h2>Moving a Thread</h2>
 <div class="comment-style" >
-You can move one thread to another using **std::move()**. notice that we didn't wait for *t1* to join anymore,<br />
-that's because by using **move semantics** we do not copy an instance of an object but we move it to another block of memory,<br />
+You can move one thread to another using **std::move()**. notice that we didn't wait for *t1* to join anymore,
+that's because by using **move semantics** we do not copy an instance of an object but we move it to another block of memory,
 so in here, *t1* no longer exists after we move it to *t2*.<br />
 We will only have one thread here because we created *t1* and moved it to *t2*.<br />
 <br />

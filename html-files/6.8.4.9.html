@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>QLCDNumber</title>
+<title>QSlider</title>
 <style>
 a,
 a:hover,
@@ -110,29 +110,33 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.3.0.html">Widgets</a></li>
-<li class="breadcrumb-item active" >QLCDNumber</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.4.0.html">Widgets</a></li>
+<li class="breadcrumb-item active" >QSlider</li>
 </ol>
-<h2>QLCDNumber</h2>
+<h2>QSlider</h2>
 <div class="comment-style" >
-LCD Number widget displays number in the classical Liquid Cristal Display way.<br />
+Slider is suitable for setting a number in a range of values.<br />
 </div>
 <hr />
 <h3>Source</h3>
-  <cite>lcdnumber.cxx</cite>
+  <cite>slider.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
-    #include &lt;QLCDNumber&gt;
+    #include &lt;QSlider&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
-    	QLCDNumber *lcd = new QLCDNumber;
+    	QSlider *slider = new QSlider;
     
-    	lcd-&gt;setPalette(Qt::green);
+    	slider-&gt;setTickPosition(QSlider::TicksAbove);
+    	slider-&gt;setTickInterval(10);
+    	slider-&gt;setSingleStep(1);
+    	slider-&gt;setMinimum(0);
+    	slider-&gt;setMaximum(100);
     
-    	lcd-&gt;show();
+    	slider-&gt;show();
     	return app.exec();
     }
 </code>
@@ -141,22 +145,23 @@ LCD Number widget displays number in the classical Liquid Cristal Display way.<b
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-make -C ./cxx/gui/widgets -f lcdnumber.make
+make -C ./cxx/gui/widgets -f slider.make
 </code>
 </pre>
 <h4>run</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-./lcdnumber.bin
+./slider.bin
 </code>
 </pre>
 <h3>Output</h3>
-  <cite>lcdnumber.png</cite>
-<img class="img-responsive" src="/cpp/gui/widgets/QLCDNumber.screenshot.png" alt="lcdnumber.cxx Screenshot">
+  <cite>slider.png</cite>
+<img class="img-responsive" src="/cpp/gui/widgets/QSlider.screenshot.png" alt="slider.cxx Screenshot">
+<b>Screenshot Not Found</b>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/widgets/QDial">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/widgets/QLCDNumber">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/widgets/QSlider">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/widgets/QTableView">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

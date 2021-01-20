@@ -115,7 +115,7 @@ pre {
 </ol>
 <h2>friend</h2>
 <div class="comment-style" >
-Friend functions are introduced in previous sections,<br />
+Friend functions are introduced in previous sections,
 but it didn't mention how to use them.<br />
 The usage of friend operators are introduced here with a problem.<br />
 When we write: **object + 1** , meaning that the object is placed in left side
@@ -130,9 +130,9 @@ We can solve such problem in two ways:<br />
 <br />
 ref[6]
 The ability to declare friendship relationships between classes is useful, but the
-extensive use of friends often indicates a poor class structure design. For example,<br />
+extensive use of friends often indicates a poor class structure design. For example,
 a better solution would be to have class Vector define a public subscripting operator.<br />
-Then the multiply function could use this public member to access the vector class,<br />
+Then the multiply function could use this public member to access the vector class,
 rather than access private member data.<br />
 Note that “friendship” is not transitive. For example, if a new class Tensor
 was made a friend of Matrix, Tensor would not be a friend of Vector, unless class
