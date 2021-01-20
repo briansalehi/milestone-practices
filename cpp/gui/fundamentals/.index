@@ -1,5 +1,6 @@
 README.md
 application.cxx
 widget.cxx
-connect.cxx
+layout.cxx
 mainwindow.cxx
+signals.cxx

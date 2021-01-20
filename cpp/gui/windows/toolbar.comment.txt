@@ -1,0 +1,2 @@
+Toolbars can be used similar to menus except that they are more accessible to
+users.
