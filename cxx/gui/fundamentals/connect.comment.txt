@@ -2,7 +2,6 @@
 
 <pre>
 	<code class="language-cpp">
-		connect(senderObject, SIGNAL(senderMethod), receiverObject,
-SLOT(receiverMethod));
+		connect(senderObject, SIGNAL(senderMethod), receiverObject, SLOT(receiverMethod));
 	</code>
 </pre>
