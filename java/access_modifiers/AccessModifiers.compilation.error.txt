@@ -1,1 +1,1 @@
-/home/brian/.local/bin/practice-manager: line 1335: javac: command not found
+/home/brian/.local/bin/practice-manager: line 1327: javac: command not found
