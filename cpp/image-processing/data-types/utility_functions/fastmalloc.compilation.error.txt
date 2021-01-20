@@ -1,4 +1,4 @@
-./cxx/image-processing/data-types/utility_functions/fastmalloc.cxx:1:10: fatal error: opencv2/core/types.hpp: No such file or directory
+./cpp/image-processing/data-types/utility_functions/fastmalloc.cxx:1:10: fatal error: opencv2/core/types.hpp: No such file or directory
     1 | #include <opencv2/core/types.hpp>
       |          ^~~~~~~~~~~~~~~~~~~~~~~~
 compilation terminated.

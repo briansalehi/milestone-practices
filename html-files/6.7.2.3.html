@@ -111,7 +111,7 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.7.0.html">Multithreading</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.7.2.0.html">Mutex</a></li>
-<li class="breadcrumb-item active" >std::scoped_lock</li>
+<li class="breadcrumb-item active" std::scoped_lock breadcrumb-item active>std::scoped_lock</li>
 </ol>
 <h2>std::scoped_lock</h2>
 <div class="comment-style" >
@@ -149,6 +149,7 @@ It differs from a lock guard in that it is a wrapper for not one, but multiple m
     }
 </code>
 </pre>
+<hr />
 <h3>Execution</h3>
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
@@ -168,6 +169,7 @@ g++ -Wall -g -lpthread -o scoped-lock.bin scoped-lock.o
 ./scoped-lock.bin
 </code>
 </pre>
+<hr />
 <h3>Output</h3>
 <pre class="language-txt" begin language-txt>
 <code>

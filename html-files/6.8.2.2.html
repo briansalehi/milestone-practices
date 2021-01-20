@@ -111,7 +111,7 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.2.0.html">Windows</a></li>
-<li class="breadcrumb-item active" >QMenuBar</li>
+<li class="breadcrumb-item active" QMenuBar breadcrumb-item active>QMenuBar</li>
 </ol>
 <h2>QMenuBar</h2>
 <div class="comment-style" >
@@ -212,11 +212,12 @@ The most popular among these are the File, Edit, and Help menus.<br />
     #endif
 </code>
 </pre>
+<hr />
 <h3>Execution</h3>
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-make -C ./cxx/gui/windows -f menubar.make
+make -C ./cpp/gui/windows -f menubar.make
 </code>
 </pre>
 <h4>run</h4>
@@ -225,6 +226,7 @@ make -C ./cxx/gui/windows -f menubar.make
 ./menubar.bin
 </code>
 </pre>
+<hr />
 <h3>Output</h3>
   <cite>menubar.png</cite>
 <img class="img-responsive" src="/cpp/gui/windows/QMenuBar.screenshot.png" alt="menubar.cxx Screenshot">

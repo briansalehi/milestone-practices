@@ -1,4 +1,4 @@
-./cxx/image-processing/data-types/utility_functions/cvisnan.cxx:2:10: fatal error: opencv2/core/core.hpp: No such file or directory
+./cpp/image-processing/data-types/utility_functions/cvisnan.cxx:2:10: fatal error: opencv2/core/core.hpp: No such file or directory
     2 | #include <opencv2/core/core.hpp>
       |          ^~~~~~~~~~~~~~~~~~~~~~~
 compilation terminated.

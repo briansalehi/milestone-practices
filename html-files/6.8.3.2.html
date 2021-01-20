@@ -111,7 +111,7 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.3.0.html">Layouts</a></li>
-<li class="breadcrumb-item active" >QFormLayout</li>
+<li class="breadcrumb-item active" QFormLayout breadcrumb-item active>QFormLayout</li>
 </ol>
 <h2>QFormLayout</h2>
 <div class="comment-style" >
@@ -159,11 +159,12 @@ Form layout is simple vertical layout which represents a simple form.<br />
     }
 </code>
 </pre>
+<hr />
 <h3>Execution</h3>
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-make -C ./cxx/gui/layouts -f form.make
+make -C ./cpp/gui/layouts -f form.make
 </code>
 </pre>
 <h4>run</h4>
@@ -172,6 +173,7 @@ make -C ./cxx/gui/layouts -f form.make
 ./form.bin
 </code>
 </pre>
+<hr />
 <h3>Output</h3>
   <cite>form.png</cite>
 <img class="img-responsive" src="/cpp/gui/layouts/QFormLayout.screenshot.png" alt="form.cxx Screenshot">

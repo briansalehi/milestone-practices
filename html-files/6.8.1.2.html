@@ -111,14 +111,44 @@ pre {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" >QWidget</li>
+<li class="breadcrumb-item active" QWidget breadcrumb-item active>QWidget</li>
 </ol>
 <h2>QWidget</h2>
 <div class="comment-style" >
-Using widgets like layout directly show in a Qt application is practice, one
+Widgets are the graphical components with which we construct user interfaces.<br />
+<br />
+Using widgets directly as a window is not the practice, one
 way to get over with this bad design is to use QWidget instances as a
 window, though in the next page, you will see that QMainWindow is the ultimate
 answer to designing Qt applications practically.<br />
+<br />
+<cite>Class hierarchy in Qt</cite>
+<img class="img-responsive" src="/cpp/gui/fundamentals/qt-objects-hierarchy.png" alt="qt objects hierarchy">
+<br />
+At the very top of the hierarchy is the QObject. A lot of classes inherit from
+the QObject class. The QObject class also contains the mechanisms of signals
+and slots and event management, among other things.<br />
+<br />
+There are a few critical points to note regarding widgets in Qt:<br />
+<ul>
+<li>
+Information is passed to widgets by way of events. For a textbox, an
+example of an event could be when a user clicks within the textbox or
+when the return key has been pressed while a textbox cursor is
+blinking.<br />
+</li>
+<li>
+Every widget can have a parent widget or children widgets.<br />
+</li>
+<li>
+Widgets that do not have a parent widget become a window when the
+show() function is called on them. Such a widget will be enclosed in
+a window with buttons to close, maximize, and minimize it.<br />
+</li>
+<li>
+A child widget is displayed within its parent widget.<br />
+</li>
+</ul>
 </div>
 <hr />
 <h3>Source</h3>
@@ -132,23 +162,22 @@ answer to designing Qt applications practically.<br />
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
+    
     	QWidget *window = new QWidget;
-    	QVBoxLayout *layout = new QVBoxLayout;
-    
-    	QLabel *label = new QLabel(&quot;Sample Qt Application&quot;);
-    
-    	layout-&gt;addWidget(label);
-    	window-&gt;setLayout(layout);
+    	window-&gt;setWindowTitle(&quot;Widget as Window&quot;);
+    	window-&gt;resize(250, 150);
     	window-&gt;show();
+    
     	return app.exec();
     }
 </code>
 </pre>
+<hr />
 <h3>Execution</h3>
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-make -C ./cxx/gui/fundamentals -f widget.make
+make -C ./cpp/gui/fundamentals -f widget.make
 </code>
 </pre>
 <h4>run</h4>
@@ -157,13 +186,14 @@ make -C ./cxx/gui/fundamentals -f widget.make
 ./widget.bin
 </code>
 </pre>
+<hr />
 <h3>Output</h3>
   <cite>widget.png</cite>
 <img class="img-responsive" src="/cpp/gui/fundamentals/QWidget.screenshot.png" alt="widget.cxx Screenshot">
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/fundamentals/QApplication">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/fundamentals/connect">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/fundamentals/layouts">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
