@@ -1,17 +1,19 @@
 #include <QApplication>
+#include <QMainWindow>
 #include <QPushButton>
 
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
-	QWidget *window = new QWidget;
-	window->setWindowTitle("Signals and Slots");
-	window->resize(250, 50);
+	QMainWindow window;
+	window.setWindowTitle("Signals and Slots");
+	window.resize(250, 50);
 
-	QPushButton *closeButton = new QPushButton;
+	QPushButton *closeButton = new QPushButton("Close");
 
-	QObject::connect(closeButton, SIGNAL(clicked()), &app, SLOT(exit()));
+	QObject::connect(closeButton, SIGNAL(clicked()), &app, SLOT(quit()));
 
-	window->show();
+	window.setCentralWidget(closeButton);
+	window.show();
 	return app.exec();
 }

@@ -5,12 +5,12 @@ MainWindow::MainWindow()
 	setWindowTitle("Menu Bar Sample");
 	resize(400, 300);
 
-	QPixmap newIcon("new.png");
-	QPixmap openIcon("open.png");
-	QPixmap editIcon("edit.png");
-	QPixmap closeIcon("close.png");
-	QPixmap helpIcon("help.png");
-	QPixmap aboutIcon("about.png");
+	QPixmap newIcon("icons/new.png");
+	QPixmap openIcon("icons/open.png");
+	QPixmap editIcon("icons/edit.png");
+	QPixmap closeIcon("icons/close.png");
+	QPixmap helpIcon("icons/help.png");
+	QPixmap aboutIcon("icons/about.png");
 
 	newAction = new QAction(newIcon, "&New", this);
 	newAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_N));
