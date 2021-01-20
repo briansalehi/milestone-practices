@@ -220,20 +220,22 @@ particular signal has been emitted.<br />
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
+    #include &lt;QMainWindow&gt;
     #include &lt;QPushButton&gt;
     
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
-    	QWidget *window = new QWidget;
-    	window-&gt;setWindowTitle(&quot;Signals and Slots&quot;);
-    	window-&gt;resize(250, 50);
+    	QMainWindow window;
+    	window.setWindowTitle(&quot;Signals and Slots&quot;);
+    	window.resize(250, 50);
     
-    	QPushButton *closeButton = new QPushButton;
+    	QPushButton *closeButton = new QPushButton(&quot;Close&quot;);
     
-    	QObject::connect(closeButton, SIGNAL(clicked()), &amp;app, SLOT(exit()));
+    	QObject::connect(closeButton, SIGNAL(clicked()), &amp;app, SLOT(quit()));
     
-    	window-&gt;show();
+    	window.setCentralWidget(closeButton);
+    	window.show();
     	return app.exec();
     }
 </code>
