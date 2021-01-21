@@ -3,7 +3,7 @@
 MainWindow::MainWindow()
 {
 	setWindowTitle("Toolbar Sample");
-	resize(400, 200);
+	resize(300, 100);
 
 	fileMenu = menuBar()->addMenu("&File");
 	helpMenu = menuBar()->addMenu("&Help");
