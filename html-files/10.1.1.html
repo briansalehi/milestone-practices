@@ -221,6 +221,69 @@ zero or close to zero. Zero, or almost zero, weights means those links
 don't contribute to the network because signals don't pass. A zero
 weight means the signals are multiplied by zero, which results in zero, so the
 link is effectively broken.<br />
+<br />
+we'll try doing the workings out with a smaller neural network with only 2
+layers, each with 2 neurons, as shown below:<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-without-weights.png" alt="two layers neural networks without weights">
+<br />
+Let's imagine the two inputs are 1.0 and 0.5. The following shows these inputs
+entering this smaller neural network.<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-inputs.png" alt="two layers neural networks with inputs">
+<br />
+Just as before, each node turns the sum of the inputs into an output using an
+activation function. We'll also use the sigmoid function that we saw before,
+where x is the sum of incoming signals to a neuron, and y is the output of
+that neuron.<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function.png" alt="sigmoid function">
+<br />
+The x in this function is the combined input into a node. That combination was
+the raw outputs from the connected nodes in the previous layer, but moderated
+by the link weights.<br />
+<br />
+The following diagram shows all these numbers now marked.<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-weights.png" alt="two layers neural networks with weights">
+<br />
+The first layer of nodes is the input layer, and it doesn't do anything other
+than represent the input signals. That is, the input nodes don't apply an
+activation function to the input.<br />
+<br />
+The following diagram is like the one we saw previously but now includes the
+need to moderate the incoming signals with the link weights.<br />
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/node-with-input-and-weights.png" alt="node with input and weights">
+<br />
+So let's first focus on node 1 in the layer 2.<br />
+<br />
+The combined moderated input is:<br />
+<br />
+x = (output from first node * link weight) + (output from second node * link weight)
+x = (1.0 * 0.9) + (0.5 * 0.3)
+x = 0.9 + 0.15
+x = 1.05
+<br />
+If we didn't moderate the signal, we'd have a very simple addition of the
+signals 1.0 + 0.5, but we don't want that. It is the weights that do the
+learning in a neural networks as they are iteratively refined to give better
+and better results.<br />
+<br />
+We can now, finally, calculate that node's output using the activation
+function.<br />
+<br />
+x = (1.0 * 0.2) + (0.5 * 0.8)
+x = 0.2 + 0.4
+x = 0.6
+<br />
+So the node's output using the sigmoid activation function would be:<br />
+<br />
+y = 1/(1 + 0.5488) = 1/(1.5488)
+y = 0.6457
+<br />
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-outputs.png" alt="two layers neural networks with outputs">
+<br />
 </div>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/machine-learning/neural-networks">previous page</a></li>
