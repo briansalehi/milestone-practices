@@ -1,1 +1,4 @@
-Vertical box layout represents a vertically growing layout.
+In a QVBoxLayout layout, widgets are aligned vertically and they are packed in
+the layout from top to bottom.
+
+![vbox-layout.png]

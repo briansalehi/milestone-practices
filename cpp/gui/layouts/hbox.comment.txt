@@ -1,1 +1,3 @@
 Horizontal box layout represents a horizontally growing layout.
+
+![hbox-layout.png]
