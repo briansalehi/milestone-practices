@@ -13,7 +13,7 @@
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 
-<title>Milestone Practices</title>
+<title>Neural Networks Structure</title>
 <style>
 a,
 a:hover,
@@ -167,15 +167,28 @@ button.list-group-item:hover {
   margin-right: 5px;
 }
 </style>
-</head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+
+<title>Milestone Practices</title>
 <body class="container">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/10.0.html">Machine Learning</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/10.1.0.html">Neural Networks</a></li>
-<li class="breadcrumb-item active" Neural Structure breadcrumb-item active>Neural Structure</li>
+<li class="breadcrumb-item active" Neural Networks Structure breadcrumb-item active>Neural Networks Structure</li>
 </ol>
-<h2>Neural Structure</h2>
+<h2>Neural Networks Structure</h2>
 <div class="comment-style" >
 Real biological neurons take many inputs, not just one.<br />
 Similarly, we simply combine input signals by adding them up, and the
@@ -186,8 +199,8 @@ idea of combining inputs and then applying the threshold to the combined sum:<br
 <img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-threshold-function-diagram.jpg" alt="sigmoid threshold function diagram">
 <br />
 If the combined signal is not large enough then the effect of the sigmoid
-threshold function is to suppress the output signal. If the sum x if large
-enough the effect of the sigmoid is to fire the neuron. Interestingly, if only
+threshold function is to suppress the output signal. If the sum x is large
+enough, the effect of the sigmoid is to fire the neuron. Interestingly, if only
 one of the several inputs is large and the rest small, this may be enough to
 fire the neuron. What's more, the neuron can fire if some of the inputs
 are individually almost, but not quite, large enough because when combined the
