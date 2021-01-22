@@ -244,13 +244,13 @@ To write data at the end of a file, use **std::ios_base::app** object in *fstrea
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o append.o append.cxx
+gcc -lstdc++ -Wall -O0 -c -o append..o append.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -o append.bin append.o
+gcc -lstdc++ -o append.bin append..o
 </code>
 </pre>
 <h4>run</h4>

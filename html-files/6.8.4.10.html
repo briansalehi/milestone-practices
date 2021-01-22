@@ -224,21 +224,17 @@ Tables are essential data holder blocks which appear in many places.<br />
     	QTableView *table = new QTableView;
     	QStandardItemModel *model = new QStandardItemModel(1, 3, window);
     
-    	table-&gt;setContextMenuPolicy(Qt::CustomContextMenu);
-    	table-&gt;horizontalHeader()-&gt;setSectionResizeMode(QHeaderView::Stretch);
     	model-&gt;setHorizontalHeaderItem(0, new QStandardItem(QString(&quot;Name&quot;)));
     	model-&gt;setHorizontalHeaderItem(1, new QStandardItem(QString(&quot;Date of Birth&quot;)));
     	model-&gt;setHorizontalHeaderItem(2, new QStandardItem(QString(&quot;Phone Number&quot;)));
+    
+    	model-&gt;setItem(0, 0, new QStandardItem(QString(&quot;Jane Doe&quot;)));
+    	model-&gt;setItem(0, 1, new QStandardItem(QDate(1990, 1, 1).toString()));
+    	model-&gt;setItem(0, 2, new QStandardItem(QString(&quot;123&quot;)));
+    
+    	table-&gt;setContextMenuPolicy(Qt::CustomContextMenu);
+    	table-&gt;horizontalHeader()-&gt;setSectionResizeMode(QHeaderView::Stretch);
     	table-&gt;setModel(model);
-    
-    	QStandardItem *firstItem = new QStandardItem(QString(&quot;Jane Doe&quot;));
-    	QDate birthdate(1990, 1, 1);
-    	QStandardItem *secondItem = new QStandardItem(birthdate.toString());
-    	QStandardItem *thirdItem = new QStandardItem(QString(&quot;0123456789&quot;));
-    
-    	model-&gt;setItem(0, 0, firstItem);
-    	model-&gt;setItem(0, 1, secondItem);
-    	model-&gt;setItem(0, 2, thirdItem);
     
     	layout-&gt;addWidget(table);
     	window-&gt;setLayout(layout);

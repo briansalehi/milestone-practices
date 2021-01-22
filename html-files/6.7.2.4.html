@@ -247,13 +247,13 @@ To do so, we use **try_lock** function.<br />
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o try-lock.o try-lock.cxx
+gcc -lstdc++ -Wall -O0 -c -o try-lock..o try-lock.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -Wall -g -lpthread -o try-lock.bin try-lock.o
+gcc -Wall -g -lpthread -o try-lock.bin try-lock..o
 </code>
 </pre>
 <h4>run</h4>

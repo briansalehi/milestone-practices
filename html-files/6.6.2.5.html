@@ -243,13 +243,13 @@ Do not allocate new memory until you delete the previously allocated one. By all
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o leakage.o leakage.cxx
+gcc -lstdc++ -Wall -O0 -c -o leakage..o leakage.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -o leakage.bin leakage.o
+gcc -lstdc++ -o leakage.bin leakage..o
 </code>
 </pre>
 <h4>run</h4>

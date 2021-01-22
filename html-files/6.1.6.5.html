@@ -224,13 +224,13 @@ Want to use **goto** statement? don't!<br />
 <h4>compile</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -g -Wall -Os -c -o goto.o goto.cxx
+gcc -lstdc++ -Wall -O0 -c -o goto..o goto.cxx
 </code>
 </pre>
 <h4>link</h4>
 <pre class="command-line" data-user="cpp" data-host="milestone">
 <code class="language-bash">
-g++ -o goto.bin goto.o
+gcc -lstdc++ -o goto.bin goto..o
 </code>
 </pre>
 <h4>run</h4>
