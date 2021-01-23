@@ -1,0 +1,26 @@
+There are times when an application needs to inform the user of an action or
+to receive input for further processing. Usually, another window, typically
+small in size, will appear with such information or instructions. In Qt, the
+QMessageBox provides us with the functionality to raise alerts and receive
+input using QInputDialog.
+
+![messagebox-types.png]
+
+This QMessageBox instance is being used to communicate to the user that an
+operation was successful.
+
+The icon and number of buttons on a QMessageBox instance is configurable.
+
+The first parameter to the call of the static method QInputDialog::getInt()
+is used as parent widget, and the second as the title of the dialog window.
+The request is captured in the
+second parameter. The third parameter here is used to specify the default
+number of the input field. 1, and model->rowCount(), are the minimum and
+maximum values that should be accepted.
+
+The last but one parameter, 1, is the incremental step between the minimum and
+maximum value. True or False will be stored in &ok. When the user clicks OK,
+True will be stored in &ok and, based on that, the if statement will call the
+removeRow on the model object. Whatever value that the user inputs will be
+passed to rowId. We pass rowId-1 to get the actual index of the row in the
+model.

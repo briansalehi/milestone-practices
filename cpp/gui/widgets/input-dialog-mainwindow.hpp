@@ -2,21 +2,21 @@
 
 #include <QApplication>
 #include <QMainWindow>
-#include <QMessageBox>
+#include <QInputDialog>
 #include <QToolBar>
 #include <QAction>
 
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
-
+	
 public:
 	MainWindow();
 
 private slots:
-	void alert();
+	void getInput();
 
 private:
-	QToolBar *helpToolBar;
-	QAction *aboutAction;
+	QToolBar *editingToolBar;
+	QAction *editAction;
 };

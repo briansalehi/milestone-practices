@@ -9,5 +9,5 @@ dial.cxx
 lcdnumber.cxx
 slider.cxx
 table-view.cxx
-messagebox.cxx
-input-dialog.cxx
+messagebox.cxx messagebox-mainwindow.cxx messagebox-mainwindow.hpp
+input-dialog.cxx input-dialog-mainwindow.cxx input-dialog-mainwindow.hpp

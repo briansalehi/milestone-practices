@@ -1,1 +1,1 @@
-Getting Started with Qt 5 - Benjamin Baka
+Getting Started with Qt 5 by Benjamin Baka
