@@ -211,6 +211,68 @@ button.list-group-item:hover {
     }
 </code>
 </pre>
+  <cite>messagebox-mainwindow.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &quot;messagebox-mainwindow.hpp&quot;
+    
+    MainWindow::MainWindow()
+    {
+    	setWindowTitle(&quot;Question Message Box&quot;);
+    	setWindowIcon(QIcon(&quot;icons/prompt.png&quot;));
+    	resize(350, 100);
+    
+    	aboutAction = new QAction(QIcon(&quot;icons/about.png&quot;), &quot;&amp;About&quot;);
+    	helpToolBar = addToolBar(&quot;Help&quot;);
+    	helpToolBar-&gt;addAction(aboutAction);
+    
+    	QObject::connect(aboutAction, &amp;QAction::triggered, this, &amp;MainWindow::alert);
+    	emit aboutAction-&gt;triggered();
+    }
+    
+    void MainWindow::alert()
+    {
+    	int response = QMessageBox::question(
+    		this,
+    		tr(&quot;Message Box Title&quot;),
+    		tr(&quot;Informing user the risk of taking some action&quot;),
+    		QMessageBox::Discard | QMessageBox::Default,
+    		QMessageBox::Apply
+    	);
+    
+    	if (response == QMessageBox::Yes) {
+    		// destructive action
+    	}
+    }
+</code>
+</pre>
+  <cite>messagebox-mainwindow.hpp</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #pragma once
+    
+    #include &lt;QApplication&gt;
+    #include &lt;QMainWindow&gt;
+    #include &lt;QMessageBox&gt;
+    #include &lt;QToolBar&gt;
+    #include &lt;QAction&gt;
+    
+    class MainWindow : public QMainWindow
+    {
+    	Q_OBJECT
+    
+    public:
+    	MainWindow();
+    
+    private slots:
+    	void alert();
+    
+    private:
+    	QToolBar *helpToolBar;
+    	QAction *aboutAction;
+    };
+</code>
+</pre>
 <hr />
 <h3>Execution</h3>
 <h4>compile</h4>
