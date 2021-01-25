@@ -170,7 +170,7 @@ div.code-toolbar>.toolbar span {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.7.1.0.html">Threads</a></li>
 <li class="breadcrumb-item active" Moving a Thread breadcrumb-item active>Moving a Thread</li>
 </ol>
-<h2>Moving a Thread</h2>
+<h2 id="Moving-a-Thread">Moving a Thread</h2>
 <div class="comment-style" >
 You can move one thread to another using **std::move()**. notice that we didn't wait for *t1* to join anymore,
 that's because by using **move semantics** we do not copy an instance of an object but we move it to another block of memory,
@@ -180,7 +180,7 @@ We will only have one thread here because we created *t1* and moved it to *t2*.<
 Also notice how we used **std::this_thread::get_id()** function in *worker* function, to get the id of calling thread which has the type **std::thread::id**.<br />
 </div>
 <hr />
-<h3>Source</h3>
+<h3 id="Source">Source</h3>
   <cite>move-thread.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
@@ -209,27 +209,27 @@ Also notice how we used **std::this_thread::get_id()** function in *worker* func
 </code>
 </pre>
 <hr />
-<h3>Execution</h3>
-<h4>compile</h4>
+<h3 id="Execution">Execution</h3>
+<h4 id="compile">compile</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -Wall -O0 -c -o move-thread..o move-thread.cxx
 </code>
 </pre>
-<h4>link</h4>
+<h4 id="link">link</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -Wall -g -lpthread -o move-thread.bin move-thread..o
 </code>
 </pre>
-<h4>run</h4>
+<h4 id="run">run</h4>
 <pre class="command-line" >
 <code class="language-bash">
 ./move-thread.bin
 </code>
 </pre>
 <hr />
-<h3>Output</h3>
+<h3 id="Output">Output</h3>
 <pre class="language-txt" begin language-txt>
 <code>
 running thread 140024860063296

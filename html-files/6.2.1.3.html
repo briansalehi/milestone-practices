@@ -170,7 +170,7 @@ div.code-toolbar>.toolbar span {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
 <li class="breadcrumb-item active" constant expression in classes breadcrumb-item active>constant expression in classes</li>
 </ol>
-<h2>constant expression in classes</h2>
+<h2 id="constant-expression-in-classes">constant expression in classes</h2>
 <div class="comment-style" >
 **Constant expressions** are special functions evaluated in compile time.<br />
 They can boost your programs when used.<br />
@@ -178,7 +178,7 @@ Fortunately, we can take advantage of them in classes too. We can make constant 
 Here in this practice, we will have our number variable evaluated in compile time!<br />
 </div>
 <hr />
-<h3>Source</h3>
+<h3 id="Source">Source</h3>
   <cite>constexpr.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
@@ -203,27 +203,27 @@ Here in this practice, we will have our number variable evaluated in compile tim
 </code>
 </pre>
 <hr />
-<h3>Execution</h3>
-<h4>compile</h4>
+<h3 id="Execution">Execution</h3>
+<h4 id="compile">compile</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -Wall -O0 -c -o constexpr..o constexpr.cxx
 </code>
 </pre>
-<h4>link</h4>
+<h4 id="link">link</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -o constexpr.bin constexpr..o
 </code>
 </pre>
-<h4>run</h4>
+<h4 id="run">run</h4>
 <pre class="command-line" >
 <code class="language-bash">
 ./constexpr.bin
 </code>
 </pre>
 <hr />
-<h3>Output</h3>
+<h3 id="Output">Output</h3>
 <pre class="language-txt" begin language-txt>
 <code>
 number: 10

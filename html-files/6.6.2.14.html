@@ -170,14 +170,14 @@ div.code-toolbar>.toolbar span {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.6.2.0.html">Pointers and References</a></li>
 <li class="breadcrumb-item active" using try...catch breadcrumb-item active>using try...catch</li>
 </ol>
-<h2>using try...catch</h2>
+<h2 id="using-try...catch">using try...catch</h2>
 <div class="comment-style" >
 **new** will throw an exception if the requested amount of memory is invalid.<br />
 You can use **try...catch** statements to catch such exceptions.<br />
 Exceptions will be discussed more later.<br />
 </div>
 <hr />
-<h3>Source</h3>
+<h3 id="Source">Source</h3>
   <cite>try_catch.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
@@ -202,34 +202,34 @@ Exceptions will be discussed more later.<br />
 </code>
 </pre>
 <hr />
-<h3>Execution</h3>
-<h4>compile</h4>
+<h3 id="Execution">Execution</h3>
+<h4 id="compile">compile</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -Wall -O0 -c -o try_catch..o try_catch.cxx
 </code>
 </pre>
-<h4>link</h4>
+<h4 id="link">link</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -o try_catch.bin try_catch..o
 </code>
 </pre>
-<h4>run</h4>
+<h4 id="run">run</h4>
 <pre class="command-line" >
 <code class="language-bash">
 ./try_catch.bin
 </code>
 </pre>
 <hr />
-<h3>Input</h3>
+<h3 id="Input">Input</h3>
 <pre class="language-bash" begin language-bash>
 <code>
 1000000000
 </code>
 </pre>
 <hr />
-<h3>Output</h3>
+<h3 id="Output">Output</h3>
 <pre class="language-txt" begin language-txt>
 <code>
 Enter the amount of memory to be allocated:

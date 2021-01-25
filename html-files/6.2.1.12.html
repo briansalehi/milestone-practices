@@ -170,7 +170,7 @@ div.code-toolbar>.toolbar span {
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
 <li class="breadcrumb-item active" friend classes & functions breadcrumb-item active>friend classes & functions</li>
 </ol>
-<h2>friend classes & functions</h2>
+<h2 id="friend-classes-&-functions">friend classes & functions</h2>
 <div class="comment-style" >
 To access private memebers of a class, you either can declare a method inside that class to return the value of that private member,
 or you make a foreign function friends with that class to give it access to private member of the class.<br />
@@ -181,7 +181,7 @@ This practice only shows you how to define a friend class, it will not tell you 
 friend functions will be discussed more in operator overloadings.<br />
 </div>
 <hr />
-<h3>Source</h3>
+<h3 id="Source">Source</h3>
   <cite>friend.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
@@ -211,27 +211,27 @@ friend functions will be discussed more in operator overloadings.<br />
 </code>
 </pre>
 <hr />
-<h3>Execution</h3>
-<h4>compile</h4>
+<h3 id="Execution">Execution</h3>
+<h4 id="compile">compile</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -Wall -O0 -c -o friend..o friend.cxx
 </code>
 </pre>
-<h4>link</h4>
+<h4 id="link">link</h4>
 <pre class="command-line" >
 <code class="language-bash">
 gcc -lstdc++ -o friend.bin friend..o
 </code>
 </pre>
-<h4>run</h4>
+<h4 id="run">run</h4>
 <pre class="command-line" >
 <code class="language-bash">
 ./friend.bin
 </code>
 </pre>
 <hr />
-<h3>Output</h3>
+<h3 id="Output">Output</h3>
 <pre class="language-txt" begin language-txt>
 <code>
 0
