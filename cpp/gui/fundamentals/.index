@@ -6,3 +6,4 @@ mainwindow.cxx
 signals.cxx
 events.cxx events-mainwindow.cxx events-mainwindow.hpp
 custom-events.cxx custom-events-mainwindow.cxx custom-events-mainwindow.hpp custom-events-textedit.cxx custom-events-textedit.hpp
+custom-signals.cxx custom-signals-mainwindow.cxx custom-signals-mainwindow.hpp
