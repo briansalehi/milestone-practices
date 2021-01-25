@@ -4,3 +4,4 @@ widget.cxx
 layout.cxx
 mainwindow.cxx
 signals.cxx
+events.cxx events-mainwindow.cxx events-mainwindow.hpp
