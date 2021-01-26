@@ -1,1 +1,2 @@
+Python Crash Course: chapter 2 and 3
 Learning Python - Mark Lutz: page 164

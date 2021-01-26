@@ -1,0 +1,2 @@
+Python Crash Course: chapter 1
+Learning Python, 5th Edition: page 155

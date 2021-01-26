@@ -1,0 +1,13 @@
+Python calls any number with a decimal point a float. This term is used in
+most programming languages, and it refers to the fact that a decimal point can
+appear at any position in a number.
+
+Python 2 returns a slightly different result when you divide two integers like
+3 / 2.
+
+Instead of 1.5, Python returns 1. Division of integers in Python 2 results in
+an integer with the remainder truncated. Note that the result is not a rounded
+integer; the remainder is simply omitted.
+
+To avoid this behavior in Python 2, make sure that at least one of the numbers
+is a float.
