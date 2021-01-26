@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>String</title>
+<title>Comments</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -187,12 +187,12 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/7.0.html">Python</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Core Object Types</a></li>
-<li class="breadcrumb-item active" String breadcrumb-item active>String</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item active" Comments breadcrumb-item active>Comments</li>
 </ol>
 <h2>
-<a id="String" class="anchor" aria-hidden="true" href="#String">
-String
+<a id="Comments" class="anchor" aria-hidden="true" href="#Comments">
+Comments
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -200,28 +200,13 @@ String
 </a>
 </h2>
 <div class="comment-style" >
-String is a sequence.<br />
-Sequences maintain a left-to-right order among the items they contain.<br />
-Their items are stored and fetched by their relative positions.<br />
-Strictly speaking, strings are sequences of one-character strings.<br />
-Other more general sequence types include <i>lists</i> and
-<i>tuples</i>, covered in later chapters.<br />
+A comment allows you to write notes in English within your programs.<br />
 <br />
-As sequences, strings support operations that assume a positional ordering
-among items.<br />
+In Python, the hash mark (#) indicates a comment. Anything following a hash
+mark in your code is ignored by the Python interpreter.<br />
 <br />
-In Python, we can index backwards from the end using a negative index.<br />
-Formally, a negative index is simply added to the string's length, but two
-operations are equivalent.<br />
-<br />
-Slicing is a way to extract an entire section in a single step.<br />
-To copy an entire string, use colon character as index.<br />
-<br />
-As sequences, strins also support <i>concatenation</i> with the plus sign
-(joining two strings into a new string) and <i>repetition</i> (making a new
-string by repeating another).<br />
-<br />
-Strings are immutable and their items cannot be changed.<br />
+The main reason to write comments is to explain what your code is supposed to
+do and how you are making it work.<br />
 </div>
 <hr />
 <h3>
@@ -233,71 +218,9 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>string.py</cite>
+  <cite>comments.py</cite>
 <pre class="line-numbers" >
 <code class="language-python">
-    #!/usr/bin/env python3
-    
-    name = &apos;Jane Doe&apos;
-    
-    # length of string
-    len(name) # 8
-    
-    # first index
-    name[0] # &apos;J&apos;
-    
-    # index backward, both equivalent
-    name[-1] # &apos;e&apos;
-    name[len(name)-1] # &apos;e&apos;
-    
-    # slice string
-    name[0:4] # &apos;Jane&apos;
-    name[5:] # &apos;Doe&apos;
-    
-    # entire string
-    name[:] # &apos;Jane Doe&apos;
-    
-    # concatanation
-    &apos;John&apos; + name[4:] # &apos;John Doe&apos;
-    
-    # repetition
-    &apos;!&apos; * 3 # &apos;!!!&apos;
-    
-    # change in place
-    expanded = list(name)
-    expanded[4] = &apos;-&apos;
-    &apos;&apos;.join(expanded) # &apos;Jane-Doe&apos;
-    
-    # encoding into bytearray
-    name.encode(&apos;utf8&apos;) # b&apos;Jane Doe&apos;
-    
-    # decode from bytearray
-    b&apos;Jane Doe&apos;.decode(&apos;utf16&apos;) # &apos;Jane Doe&apos;
-    
-    # find and replace
-    name.find(&apos;D&apos;) # 6
-    name.replace(&apos;D&apos;, &apos;J&apos;) # &apos;Jane Joe&apos;
-    
-    # expanding string into list
-    name.split(&apos; &apos;) # [&apos;Jane&apos;, &apos;Doe&apos;]
-    
-    # change case
-    name.upper() # &apos;JANE DOE&apos;
-    name.lower() # &apos;jane doe&apos;
-    name.title() # &apos;Jane Doe&apos;
-    
-    # content test
-    name.isalpha() # False, holds space
-    name.isalnum() # False
-    name.isprintable() # True
-    
-    # space strip
-    name.rstrip() # &apos;Jane Doe&apos;
-    name.lstrip() # &apos;Jane Doe&apos;
-    name.strip() # &apos;Jane Doe&apos;
-    
-    # format string
-    &apos;{}, {}&apos;.format(&apos;A&apos;, &apos;B&apos;) # &apos;A B&apos;
 </code>
 </pre>
 <hr />
@@ -321,13 +244,13 @@ run
 </h4>
 <pre>
 <code class="language-bash">
-python3 ./string.py
+python3 ./comments.py
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/7.1.1.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/python/fundamentals/variables">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/7.1.3.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/python/fundamentals/integers">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

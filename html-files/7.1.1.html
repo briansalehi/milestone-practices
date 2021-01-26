@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Numbers</title>
+<title>Variables</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -187,12 +187,12 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/7.0.html">Python</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Core Object Types</a></li>
-<li class="breadcrumb-item active" Numbers breadcrumb-item active>Numbers</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item active" Variables breadcrumb-item active>Variables</li>
 </ol>
 <h2>
-<a id="Numbers" class="anchor" aria-hidden="true" href="#Numbers">
-Numbers
+<a id="Variables" class="anchor" aria-hidden="true" href="#Variables">
+Variables
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -200,12 +200,21 @@ Numbers
 </a>
 </h2>
 <div class="comment-style" >
-Python's core objects set includes the usual suspects: <i>integers</i> that
-have no fractional part, <i>floating-point</i> numbers that do, and more
-exotic types, <i>complex</i> numbers with imaginary parts, <i>decimals</i>
-with fixed precision, <i>radionals</i> with numerator and denominator are
-available as numeric values in Python, also more types are available as
-third-party add-ones.<br />
+Variable names can contain only letters, numbers, and underscores. They can
+start with a letter or an underscore, but not with a number.<br />
+<br />
+Spaces are not allowed in variable names, but underscores can be used to
+separate words in variable names.<br />
+<br />
+Avoid using Python keywords and function names as variable names.<br />
+<br />
+Variable names should be short but descriptive.<br />
+<br />
+Many programming errors are simple, single-character typos in one line of a
+program. If you’re spending a long time searching for one of these errors,
+know that you’re in good company. Many experienced and talented programmers
+spend hours hunting down these kinds of tiny errors. Try to laugh about it and
+move on, knowing it will happen frequently throughout your programming life.<br />
 </div>
 <hr />
 <h3>
@@ -217,28 +226,9 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>numbers.py</cite>
+  <cite>variables.py</cite>
 <pre class="line-numbers" >
 <code class="language-python">
-    #!/usr/bin/env python3
-    
-    # Addition
-    140 + 160
-    
-    # Subtraction
-    73 - 18
-    
-    # Multiplication
-    2.5 * 4
-    
-    # Division
-    17 / 3
-    
-    # Remainder (Modulus)
-    983452 % 10
-    
-    # Exponentation
-    2 ** 100
 </code>
 </pre>
 <hr />
@@ -262,13 +252,13 @@ run
 </h4>
 <pre>
 <code class="language-bash">
-python3 ./numbers.py
+python3 ./variables.py
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/7.1.0.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/python/fundamentals">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/7.1.2.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/python/fundamentals/comments">next page</a></li>
 </ul>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
