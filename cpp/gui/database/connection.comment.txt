@@ -1,0 +1,27 @@
+The QtSql module comes equipped with classes and drivers for accessing
+databases. To proceed beyond this point, you should have made the necessary
+configuration during the installation of Qt on your system to enable database
+access.
+
+The QtSql module is comprised of the following layers:
+
+<ul>
+  <li>UI layer</li>
+  <li>SQL API layer</li>
+  <li>Driver layer</li>
+</ul>
+
+Let's create a database with the following tables by issuing the following
+statements:
+
+<pre>
+	<code class="language-sql">
+		use contact_db;   CREATE TABLE IF NOT 
+		EXISTS contacts (   id INT AUTO_INCREMENT,
+		   last_name VARCHAR(255) 
+		NOT NULL,   first_name VARCHAR(255) 
+		NOT NULL,   phone_number VAR
+		CHAR(255) NOT NULL,   PRIMARY KEY (id
+		))  ENGINE=INNODB;
+	</code>
+</pre>
