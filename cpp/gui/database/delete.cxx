@@ -1,5 +1,6 @@
 #include <QtSql>
 #include <QDebug>
+#include <QString>
 
 int main()
 {
@@ -16,4 +17,8 @@ int main()
 	} else {
 		qDebug() << "Database connection established!";
 	}
-};
+
+	QSqlQuery statement(connection);
+	statement.exec("delete from contacts where id > 2");
+	qDebug() << "Number of rows affected:" << statement.numRowsAffected();
+}

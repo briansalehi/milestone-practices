@@ -1,2 +1,7 @@
 README.md
-connection.cxx
+connection.cxx connection.sql
+query.cxx query.sql
+insert.cxx
+update.cxx
+delete.cxx
+modeling.cxx

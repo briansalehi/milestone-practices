@@ -1,5 +1,6 @@
 #include <QtSql>
 #include <QDebug>
+#include <QString>
 
 int main()
 {
@@ -15,5 +16,16 @@ int main()
 		return 1;
 	} else {
 		qDebug() << "Database connection established!";
+		qDebug() << "";
 	}
-};
+
+	QSqlQuery statement("select * from contacts", connection);
+	QSqlRecord record = statement.record();
+
+	while (statement.next()) {
+		QString id = statement.value(record.indexOf("id")).toString();
+		QString firstname = statement.value(record.indexOf("firstname")).toString();
+		QString lastname = statement.value(record.indexOf("lastname")).toString();
+		qDebug() << id << " - " << firstname << " - " << lastname;
+	}
+}

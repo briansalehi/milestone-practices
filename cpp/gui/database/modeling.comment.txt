@@ -1,0 +1,41 @@
+There are two classes that can be used in accessing the database. These are
+the QSqlTableModel and  QSqlQueryModel classes. The QSqlQueryModel class only
+provides a read-only model to the database. QSqlTableModel provides both read
+and write model access to the database.
+
+In the early days of the PHP language, data, presentation, and business logic
+were all jumbled up in one or more scripts. This made debugging and eventual
+code maintenance a nightmare. This same dilemma does crop up from time to time
+in language and framework design.
+
+The Model-View-Controller (MVC) approach is an attempt to solve this problem.
+It recognizes that one critical piece of software is data. By recognizing
+this, it abstracts the data into what is called a model. A model is basically
+a representation of the data in a software. This data can be a list of strings
+or integers. It can be the folders and files under a parent folder. The data
+can also be a list of rows that have been returned from a query against a
+database.
+
+This data that has been obtained needs to displayed or presented to the user.
+The component(s) through which the data is piped is called the view.
+
+In Qt, there are a number of widgets that can be used to display data in a
+model. Some typical views for data presentation are as follows:
+
+![qt-sql-model-view.png]
+
+These view classes are optimized for the displaying of information such that,
+when they are associated with a model, a change in the model will cause the
+view to be automatically updated. The view maintains its own state and gets
+informed when there are changes in the model.
+
+For instance, when a list of names is displayed in a QListView, a call to
+remove() on the model will both remove the item from the model's list and also
+update the view by reducing the number of items on display.
+
+Instead of writing code to update the view, the view class does so on our
+behalf.
+
+This instance receives as arguments a pointer to a parent object and a
+connection to the database connection. This QSqlTableModel model allows for
+editing of the rows in a table too.

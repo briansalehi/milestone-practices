@@ -11,6 +11,8 @@ The QtSql module is comprised of the following layers:
   <li>Driver layer</li>
 </ul>
 
+![qt-sql-layers.png]
+
 Let's create a database with the following tables by issuing the following
 statements:
 

@@ -1,0 +1,5 @@
+To change the order in which the data is inserted, we can use the
+statement.bindValue() function instead.
+
+An alternative to using the positions of the placeholders would be to name
+them.

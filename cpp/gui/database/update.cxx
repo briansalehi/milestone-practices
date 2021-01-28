@@ -16,4 +16,10 @@ int main()
 	} else {
 		qDebug() << "Database connection established!";
 	}
-};
+
+	QSqlQuery statement(connection);
+	statement.exec("update contacts set firstname = 'Jessica' where id = 1");
+	qDebug() << "Number of rows affected:" << statement.numRowsAffected();
+	statement.exec("update contacts set firstname = 'Jane' where id = 1");
+	qDebug() << "Number of rows affected:" << statement.numRowsAffected();
+}

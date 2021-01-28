@@ -1,0 +1,7 @@
+The statement here sets the firstname of the record with an ID of 1 to
+'Jessica'.
+statement.numRowsAffected() will return nothing, especially in
+the case where the first record in the table with id=1 is missing.
+Do take note of this.
+
+The UPDATE operation follows the same logic as the DELETE operation.
