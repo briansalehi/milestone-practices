@@ -269,7 +269,7 @@ compile
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -Wall -O0 -c -o slicing..o slicing.cxx
+gcc -lstdc++ -Wall -O0 -c -o ./slicing.o ./slicing.cxx
 </code>
 </pre>
 <h4>
@@ -283,7 +283,7 @@ link
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -o slicing.bin slicing..o
+gcc -lstdc++ -o ./slicing.bin ./slicing.o
 </code>
 </pre>
 <h4>

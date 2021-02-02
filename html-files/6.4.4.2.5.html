@@ -297,7 +297,7 @@ compile
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -Wall -O0 -c -o find..o find.cxx
+gcc -lstdc++ -Wall -O0 -c -o ./find.o ./find.cxx
 </code>
 </pre>
 <h4>
@@ -311,7 +311,7 @@ link
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -o find.bin find..o
+gcc -lstdc++ -o ./find.bin ./find.o
 </code>
 </pre>
 <h4>

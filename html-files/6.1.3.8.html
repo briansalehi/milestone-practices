@@ -295,7 +295,7 @@ compile
 </h4>
 <pre>
 <code class="language-bash">
-gcc -Wall -Os -std=c++17 string-view..o string-view.cxx
+gcc -Wall -Os -std=c++17 ./string-view.o ./string-view.cxx
 </code>
 </pre>
 <h4>
@@ -309,7 +309,7 @@ link
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -o string-view.bin string-view..o
+gcc -lstdc++ -o ./string-view.bin ./string-view.o
 </code>
 </pre>
 <h4>

@@ -308,7 +308,7 @@ compile
 </h4>
 <pre>
 <code class="language-bash">
-gcc -std=c++17 -g -Wall -c -o namespace..o namespace.cxx
+gcc -std=c++17 -g -Wall -c -o ./namespace.o ./namespace.cxx
 </code>
 </pre>
 <h4>
@@ -322,7 +322,7 @@ link
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -o namespace.bin namespace..o
+gcc -lstdc++ -o ./namespace.bin ./namespace.o
 </code>
 </pre>
 <h4>

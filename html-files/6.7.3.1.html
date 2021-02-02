@@ -259,7 +259,7 @@ compile
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -Wall -O0 -c -o future-async..o future-async.cxx
+gcc -lstdc++ -Wall -O0 -c -o ./future-async.o ./future-async.cxx
 </code>
 </pre>
 <h4>
@@ -273,7 +273,7 @@ link
 </h4>
 <pre>
 <code class="language-bash">
-gcc -Wall -g -lpthread -o future-async.bin future-async..o
+gcc -Wall -g -lpthread -o ./future-async.bin ./future-async.o
 </code>
 </pre>
 <h4>

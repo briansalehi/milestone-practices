@@ -300,7 +300,7 @@ compile
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -Wall -O0 -c -o preprocessing..o preprocessing.cxx
+gcc -lstdc++ -Wall -O0 -c -o ./preprocessing.o ./preprocessing.cxx
 </code>
 </pre>
 <h4>
@@ -314,7 +314,7 @@ link
 </h4>
 <pre>
 <code class="language-bash">
-gcc -lstdc++ -o preprocessing.bin preprocessing..o
+gcc -lstdc++ -o ./preprocessing.bin ./preprocessing.o
 </code>
 </pre>
 <h4>
