@@ -377,6 +377,19 @@ Source
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c/network-programming/sockets/udp-client">next page</a></li>
 </ul>
+<script>
+function darkmode(manual) {
+	const hours = new Date().getHours();
+	const isNight = !(hours > 6 && hours < 20);
+	var bodystyle = document.body;
+	if (isNight || manual) {
+		bodystyle.classList.add("dark-mode");
+	} else {
+		bodystyle.classList.remove("dark-mode");
+	}
+}
+darkmode();
+</script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- bootstrap -->
@@ -395,17 +408,6 @@ Source
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
-function darkmode(manual) {
-	const hours = new Date().getHours();
-	const isNight = !(hours > 6 && hours < 20);
-	var bodystyle = document.body;
-	if (isNight || manual) {
-		bodystyle.classList.add("dark-mode");
-	} else {
-		bodystyle.classList.remove("dark-mode");
-	}
-}
-darkmode();
 $(function() {
   $('.list-group-item').on('click', function() {
     $('.glyphicon', this)
