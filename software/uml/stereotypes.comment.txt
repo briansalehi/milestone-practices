@@ -1,0 +1,90 @@
+Before jumping into the different types of diagrams that make up UML, you need
+to know about two elements of UML notation that are used throughout a model:
+notes and stereotypes.
+
+Notes allow you to enter additional comments that aren't captured in your
+diagrams. You can write anything you want in a note to explain your diagram,
+similar to a comment in code. Notes are pictured with the folded rectangle
+notation.
+
+![a-note-sample.png]
+
+Notes can be placed on a diagram in isolation or attached to a specific part
+of the diagram.
+
+A note is attached to another element on the diagram using a dotted line.
+
+![note-attachment.png]
+
+Stereotypes signify a special use or intent and can be applied to almost any
+element of UML notation. Stereotypes modify the meaning of an element and
+describe the element's role within your model.
+A stereotype sometimes has an associated icon, such as in following figure's
+stick-figure actor symbol.
+To learn more about actors, see <a href="/software-design/uml/actors">actors</a>.
+
+There isn't always a special icon for a stereotype.
+
+Stereotype is shown using guillemots at either end of the stereotype name, as
+in «stereotype_name», shown in the following figure.
+
+![stereotype-sample.png]
+
+However, because guillemots require an extended character set, you can
+substitute them for angle brackets, as in <<stereotype_name>>.
+
+There is no limit to the number of stereotypes with which an element can be
+associated.
+
+![multiple-stereotypes.png]
+
+The UML specification defines a set of "standard" or predefined stereotypes.
+Some of the more useful standard stereotypes include:
+
+<h4>Stereotype applied to classes</h4>
+
+<ul>
+<li>utility</li>
+Represents a class that provides utility services through static methods, just
+as Java's Math class.
+</ul>
+
+<h4>Stereotypes applied to components</h4>
+
+<ul>
+<li>service</li>
+A stateless, functional component that computes a value; could be used to
+represent a web service.
+
+<li>subsystem</li>
+A large component that is actually a subordinate system of a larger system.
+</ul>
+
+<h4>Stereotypes applied to artifacts</h4>
+
+<ul>
+<li>executable</li>
+A physical file that is executable, such as an .exe file.
+
+<li>file</li>
+A physical file used by your system; this could be a configuration file such
+as a .txt file.
+
+<li>library</li>
+A static or dynamic library file; you could use this to model .dll or .jar
+library files.
+
+<li>source</li>
+A source file containing code, such as a .java or .cpp file.
+</ul>
+
+Stereotypes can contain extra information that relates to the element to which
+they are applied. This extra information is specified using tagged values.
+
+A tagged value is drawn on a diagram using a similar notation to notes, but
+the folded rectangle contains the name of any stereotypes and settings for any
+associated tagged values. The tagged value note is then attached to the
+stereotyped element using a dotted line with a circle at the element end, as
+shown in the following figure.
+
+![tagged-value-sample.png]

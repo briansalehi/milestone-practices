@@ -1,0 +1,64 @@
+UML can be used as much or as little as you like.
+
+<ul>
+</li>UML as a sketch</li>
+Use UML to make brief sketches to convey key points. These are throwaway
+sketches—they could be written on a whiteboard or even a beer coaster in a
+crunch.
+
+<li>UML as a blueprint</li>
+Provide a detailed specification of a system with UML diagrams. These diagrams
+would not be disposable but would be generated with a UML tool. This approach
+is generally associated with software systems and usually involves using
+forward and reverse engineering to keep the model synchronized with the code.
+
+<li>UML as a programming language This goes directly from a UML model to</li>
+executable code (not just portions of the code as with forward engineering),
+meaning that every aspect of the system is modeled. Theoretically, you can
+keep your model indefinitely and use transformations and code generation to
+deploy to different environments.
+</ul>
+
+In certain industries, such as medical and defense, software projects tend to
+lean toward UML as a blueprint because a high level of quality is demanded.
+Software design is heavily reviewed since it could be mission-critical: you
+don't want your heart monitoring machine to suddenly display the "blue screen
+of death."
+
+Some projects can get away with less modeling. In fact, some commercial
+industries find that too much modeling is cumbersome and slows down
+productivity. For such projects, it makes sense to use UML as a sketch and
+have your model contain some architectural diagrams and a few class and
+sequence diagrams to illustrate key points.
+
+<h4>Software Development Process</h4>
+A software development process is a recipe used for constructing
+software—determining the capabilities it has, how it is constructed, who works
+on what, and the timeframes for all activities.
+
+A few well-known software development processes include:
+
+<ul>
+<li>Waterfall</li>
+The waterfall method attempts to pin down the requirements early in the
+project life cycle. After gathering requirements, software design is performed
+in full. Once the design is complete, the software is implemented. The problem
+with this method is that if a change in requirements occurs, the impact can be
+devastating.
+
+<li>Iterative</li>
+Iterative methods attempt to address the shortcomings of the waterfall
+approach by accepting that change will happen and, in fact, embracing it. The
+Unified Process is a well-known iterative process. It consists of multiple
+phases, each phase containing some amount of the following activities:
+requirements, design, and implementation (coding). Iterative methods encompass
+a wider range of approaches (e.g., agile iterative processes), and they can
+range from using UML as sketch to using UML as blueprint.
+
+<li>Agile methods</li>
+Agile methods use iterations in extremely short bursts and attempt to minimize
+risk by always having a working system of expanding capabilities.
+Methodologies under this category have introduced some of the more interesting
+development practices, such as pair programming and test-driven development.
+Agile methods emphasize using UML as a sketch.
+</ul>

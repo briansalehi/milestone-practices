@@ -1,9 +1,0 @@
-To show your system's boundary on a use case diagram, draw a box around all of
-the use cases but keep the actors outside of the box.
-
-Use Case Overview diagrams give you an opportunity to paint a broad picture of
-your system's context or domain.
-
-Use cases show what your system should do.
-Activity diagrams allow you to
-specify how your system will accomplish its goals.

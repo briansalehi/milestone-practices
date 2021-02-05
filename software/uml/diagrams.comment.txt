@@ -1,0 +1,127 @@
+Many newcomers to UML focus on the different types of diagrams used to model
+their system. It's very easy to assume that the set of diagrams that have been
+created actually are the model.
+
+But UML modeling is not just about diagrams; it's about capturing your system
+as a model—the diagrams are actually just windows into that model.
+
+A particular diagram will show you some parts of your model but not
+necessarily everything.
+
+Well, the first thing to understand is that your model sits behind your
+modeling tool and diagrams as a collection of elements. Each of those elements
+could be a use case, a class, an activity, or any other construct that UML
+supports. The collection of all the elements that describe your system,
+including their connections to each other, make up your model.
+
+up of elements, then you wouldn't have much to look at. This is where diagrams
+come in.
+
+Rather than actually being your model, diagrams are used merely as a canvas on
+which you can create new elements that are then added to your model and
+organize related elements into a set of views on your underlying model.
+
+So, when you next use your UML tool to work with a set of diagrams in UML
+notation, it is worth remembering that what you are manipulating is a view of
+the contents of your model. You can change elements of your model within the
+diagram, but the diagram itself is not the model—it's just a useful way of
+presenting some small part of the information your model contains.
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Diagram Type</th>
+      <th scope="col">Models</th>
+      <th scope="col">Introduced</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Use Case</td>
+      <td>Interactions between your system and users or other external
+systems. Also helpful in mapping requirements to your systems.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Activity</td>
+      <td>Sequential and parallel activities within your system.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Class</td>
+      <td>Classes, types, interfaces and the relationship between them.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Object</td>
+      <td>Object instances of the classes defined in the class diagrams in
+configurations that are important to your system.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Sequence</td>
+      <td>Interactions between objects where the order of the interactions is
+important.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>Communication</td>
+      <td>The ways in which objects interact and the connections that are
+needed to support that interaction.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>Timing</td>
+      <td>Interactions between objects where timing is an important concern.</td>
+      <td>UML 2.0</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>Interaction Overview</td>
+      <td>Used to collect sequence, communication and timing diagrams together
+to capture an important interaction that occurs within your system.</td>
+      <td>UML 2.0</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Composite Structure</td>
+      <td>The internals of class or component, and can describe class
+relationships within a given context.</td>
+      <td>UML 2.0</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>Component</td>
+      <td>Important components within your system and the interfaces they use
+to interact with each other.</td>
+      <td>UML 2.0</td>
+    </tr>
+    <tr>
+      <th scope="row">11</th>
+      <td>Package</td>
+      <td>The hierarchical organization of groups of classes and components.</td>
+      <td>UML 2.0</td>
+    </tr>
+    <tr>
+      <th scope="row">12</th>
+      <td>State Machine</td>
+      <td>The state of an object throughout its lifetime and the events that
+can change that state.</td>
+      <td>UML 1.x</td>
+    </tr>
+    <tr>
+      <th scope="row">13</th>
+      <td>Deployment</td>
+      <td>How your system is finally deployed in a given real world situation.</td>
+      <td>UML 1.x</td>
+    </tr>
+  </tbody>
+/table>

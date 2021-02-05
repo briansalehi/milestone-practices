@@ -1,0 +1,30 @@
+Two reasonably new approaches to system development inspired many of the
+improvements made in UML 2.0. In a nutshell, Model Driven Architectures (MDAs)
+provide a framework that supports the development of Platform Independent
+Models (PIMs) —models that capture the system in a generic manner that is
+divorced from concerns such as implementation language and platform.
+
+PIMs can then be transformed into separate Platform Specific Models (PSMs)
+that contain concrete specifications for a particular system deployment
+(containing details such as implementation language and communications
+protocols, etc.). MDA requires a formally structured and interoperable
+meta-model to perform its transformations, and this level of meta-model is now
+provided by UML 2.0.
+
+For many of the same reasons, executable UML provides a means by which a PSM
+could contain enough complete information so that the model can be effectively
+run. Some day, you could conceivably drag around a few symbols, and complete,
+runnable software would pop out! An executable UML engine requires that the
+UML model be defined well enough for it to be able to generate and execute the
+modeled system.
+
+Unfortunately, even though UML 2.0 is supposed to provide the mechanisms to
+make MDA and executable UML a reality, tools support is not yet fully
+developed.
+
+The designers of UML 2.0 were very careful to ensure that UML 2.0 would not be
+too unfamiliar to people who were already using UML 1.x. Many of the original
+diagrams and associated notations have been retained and extended in UML 2.0
+as shown in the following table. However, new diagram types have been
+introduced to extend the language just enough so that it can support the
+latest best practices.

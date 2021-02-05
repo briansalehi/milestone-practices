@@ -1,0 +1,23 @@
+An actor is drawn in UML notation using either a "stick man" or a stereotyped
+box (see <a htef="/software-design/uml/sterotypes">Stereotypes</a>) and is
+labeled with an appropriate name, as shown in the following figure.
+
+![actor-sample.png]
+
+Above figure captures the Administrator role as it is described in Requirement
+A.1 of a weblog content management system (CMS) which shall allow an
+administrator to create a new blog account, provided the personal details of
+the new blogger are verified using the author credentials database.
+
+The requirement's description indicates that the Administrator interacts with
+the system to create a new blogger's account. The Administratorinteracts with
+the system and is not part of the system; therefore, the Administrator is
+defined as an actor.
+
+When going through the process of capturing all of the actors that interact
+with your system, you will find that some actors are related to each other, as
+shown in the following figure.
+
+The Administrator actor is really a special kind of system user. To show that
+an administrator can do whatever a regular user can do (with some extra
+additions), a generalization arrow is used.
