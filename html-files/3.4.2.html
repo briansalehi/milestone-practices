@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Use Case</title>
+<title>Degrees of UML</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -188,17 +188,83 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
-<li class="breadcrumb-item active" Use Case breadcrumb-item active>Use Case</li>
+<li class="breadcrumb-item active" Degrees of UML breadcrumb-item active>Degrees of UML</li>
 </ol>
 <h2>
-<a id="Use-Case" class="anchor" aria-hidden="true" href="#Use-Case">
-Use Case
+<a id="Degrees-of-UML" class="anchor" aria-hidden="true" href="#Degrees-of-UML">
+Degrees of UML
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+<div class="comment-style" >
+UML can be used as much or as little as you like.<br />
+<br />
+<ul>
+</li>UML as a sketch</li>
+Use UML to make brief sketches to convey key points. These are throwaway
+sketches—they could be written on a whiteboard or even a beer coaster in a
+crunch.<br />
+<br />
+<li>UML as a blueprint</li>
+Provide a detailed specification of a system with UML diagrams. These diagrams
+would not be disposable but would be generated with a UML tool. This approach
+is generally associated with software systems and usually involves using
+forward and reverse engineering to keep the model synchronized with the code.<br />
+<br />
+<li>UML as a programming language This goes directly from a UML model to</li>
+executable code (not just portions of the code as with forward engineering),
+meaning that every aspect of the system is modeled. Theoretically, you can
+keep your model indefinitely and use transformations and code generation to
+deploy to different environments.<br />
+</ul>
+<br />
+In certain industries, such as medical and defense, software projects tend to
+lean toward UML as a blueprint because a high level of quality is demanded.<br />
+Software design is heavily reviewed since it could be mission-critical: you
+don't want your heart monitoring machine to suddenly display the "blue screen
+of death."
+<br />
+Some projects can get away with less modeling. In fact, some commercial
+industries find that too much modeling is cumbersome and slows down
+productivity. For such projects, it makes sense to use UML as a sketch and
+have your model contain some architectural diagrams and a few class and
+sequence diagrams to illustrate key points.<br />
+<br />
+<h4>Software Development Process</h4>
+A software development process is a recipe used for constructing
+software—determining the capabilities it has, how it is constructed, who works
+on what, and the timeframes for all activities.<br />
+<br />
+A few well-known software development processes include:<br />
+<br />
+<ul>
+<li>Waterfall</li>
+The waterfall method attempts to pin down the requirements early in the
+project life cycle. After gathering requirements, software design is performed
+in full. Once the design is complete, the software is implemented. The problem
+with this method is that if a change in requirements occurs, the impact can be
+devastating.<br />
+<br />
+<li>Iterative</li>
+Iterative methods attempt to address the shortcomings of the waterfall
+approach by accepting that change will happen and, in fact, embracing it. The
+Unified Process is a well-known iterative process. It consists of multiple
+phases, each phase containing some amount of the following activities:<br />
+requirements, design, and implementation (coding). Iterative methods encompass
+a wider range of approaches (e.g., agile iterative processes), and they can
+range from using UML as sketch to using UML as blueprint.<br />
+<br />
+<li>Agile methods</li>
+Agile methods use iterations in extremely short bursts and attempt to minimize
+risk by always having a working system of expanding capabilities.<br />
+Methodologies under this category have introduced some of the more interesting
+development practices, such as pair programming and test-driven development.<br />
+Agile methods emphasize using UML as a sketch.<br />
+</ul>
+</div>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -212,45 +278,10 @@ References
 <ul class="list-group">
 <li class="list-group-item" Learning UML 2.0: chapter 2 list-group-item>Learning UML 2.0: chapter 2</li>
 </ul>
-<div class="comment-style" >
-A use case in UML is drawn as an oval with a name that describes the
-interaction that it represents.<br />
-<br />
-A use case is something that provides some measurable result to the user or an
-external system.<br />
-<br />
-A use case is a case (or situation) where your system is used to fulfill one
-or more of your user's requirements; a use case captures a piece of
-functionality that the system provides.<br />
-<br />
-Use cases are an excellent starting point for just about every facet of
-object-oriented system development, design, testing, and documentation.<br />
-They describe a system's requirements strictly from the outside looking in;<br />
-they specify the value that the system delivers to users.<br />
-<br />
-Because use cases are your system's functional requirements, they should be
-the first serious output from your model after a project is started.<br />
-<br />
-Use cases specify only what your system is supposed to do, i.e., the
-system's functional requirements.<br />
-<br />
-The terms <b>shall</b> and <b>should</b> have a special and exact meaning
-when it comes to requirements.<br />
-A <i>shall requirement</i> must be fulfilled; if the feature that implements
-a shall requirement is not in the final system, then the system does not meet
-this requirement.<br />
-A <i>should requirement</i> implies that the requirement is not critical to
-the system working but is still desirable.<br />
-If a system's development is running into problems that will cause delivery
-delays, then it's often the should requirements that are sacrificed first.<br />
-<br />
-If use cases are truly requirements, then they must have very clear
-pass/fail criteria.<br />
-</div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/actor">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/history">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/communication-line">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/diagrams">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {
