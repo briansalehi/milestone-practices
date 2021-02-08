@@ -3,3 +3,16 @@ programs are expected to be ended in their last line.
 
 Avoid multiple return statements, there is always a better way to do what you
 are going to do with multiple return statements.
+
+For example, in the following source code, isEven() could be substituted by:
+
+<pre class="language-cpp">
+	<code>
+		bool isEven(int number)
+		{
+			return (number % 2) == 0 ? true : false;
+		}
+	</code>
+</pre>
+
+Read more about <a href="/cpp/fundamentals/program-flow/ternary">Ternary operator</a>.

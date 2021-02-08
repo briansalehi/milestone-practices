@@ -1,2 +1,0 @@
-would you like to see a message (y/n)? y
-inbox is empty!

@@ -1,29 +1,15 @@
-#include <iostream>
-
-void Talk()
+bool isEven(const int number)
 {
-    char answer = 'n';
-
-    std::cout << "would you like to see a message (y/n)? ";
-    std::cin >> answer;
-    std::cout << answer << std::endl;
-
-    /*
-        in this case, multiple return statements could simply be avoided
-        by checking if (answer == 'y') while answer is initialized by 'n'
-    */
-    if (answer == 'n') {
-        return;
-    }
-    
-    std::cout << "inbox is empty!" << std::endl;
-    
-    return;
+	if ((number % 2) == 0) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 int main()
 {
-    Talk();
-
+	isEven(2); // true
+	isEven(3); // false
     return 0;
 }

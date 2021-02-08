@@ -1,15 +1,15 @@
 const double pi = 3.1415;
 
-double Volume(double r, double h)
+double cylinderVolume(double radius, double height)
 {
-    return pi*r*r*h;
+    return pi * radius * radius * height;
 }
 
 int main()
 {
     int radius = 1, height = 3;
 
-    int volume = Volume(radius, height);
+    int volume = cylinderVolume(radius, height);
 
     return 0;
 }

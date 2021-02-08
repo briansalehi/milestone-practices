@@ -1,0 +1,1 @@
+Sam's Teach Yourself C++ in One Hour a Day: chapter 7
