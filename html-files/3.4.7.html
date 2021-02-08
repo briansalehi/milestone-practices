@@ -363,7 +363,7 @@ the Main Flow.</td>
 </tbody>
 </table>
 <br />
-The <<include>> relationship declares that the use case at the head of the
+The &lt;&lt;include&gt;&gt; relationship declares that the use case at the head of the
 dotted arrow completely reuses all of the steps from the use case being
 included. In the following figure, the Create a new Blog Account and Create a
 new Personal Wiki completely reuse all of the steps declared in the Check
@@ -396,27 +396,27 @@ that two different types of blog accounts can be created.<br />
 But be careful—by using inheritance, you are effectively saying that every
 step in the general use case must occur in the specialized use cases. Also,
 every relationship that the general use case has with external actors or use
-cases, as shown with the <<include>> relationship between Create a new Blog
+cases, as shown with the &lt;&lt;include&gt;&gt; relationship between Create a new Blog
 Account and Check Identity, must also make sense in the more specialized use
 cases, such as Create a new Editorial Blog Account.<br />
 <br />
 If you really don't want your more specific use case to do everything that the
 general use case describes, then don't use generalization. Instead, you might
-want to consider using either the <<include>> relationship shown in the
-previous section or the <<extend>> relationship coming up in the next
+want to consider using either the &lt;&lt;include&gt;&gt; relationship shown in the
+previous section or the &lt;&lt;extend&gt;&gt; relationship coming up in the next
 section.<br />
 <br />
-Following figure shows you how <<extend>> works.<br />
+Following figure shows you how &lt;&lt;extend&gt;&gt; works.<br />
 <br />
 <img class="img-responsive" src="/software-design/uml/extend-relationship.png" alt="extend relationship" loading="lazy">
 <br />
 The designers of UML 2.0 took a very different view as to the meaning of
-<<extend>> between use cases. They wanted a means for you to show that a use
+&lt;&lt;extend&gt;&gt; between use cases. They wanted a means for you to show that a use
 case might completely reuse another use case's behavior, similar to the
-<<include>> relationship, but that this reuse was optional and dependent
+&lt;&lt;include&gt;&gt; relationship, but that this reuse was optional and dependent
 either on a runtime or system implementation decision.<br />
 <br />
-The <<extend>> relationship is ideal in this sort of reuse situation, as shown
+The &lt;&lt;extend&gt;&gt; relationship is ideal in this sort of reuse situation, as shown
 in the following figure.<br />
 <br />
 <img class="img-responsive" src="/software-design/uml/extend-example-in-diagram.png" alt="extend example in diagram" loading="lazy">
