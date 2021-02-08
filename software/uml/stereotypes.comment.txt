@@ -31,7 +31,7 @@ in «stereotype_name», shown in the following figure.
 ![stereotype-sample.png]
 
 However, because guillemots require an extended character set, you can
-substitute them for angle brackets, as in <<stereotype_name>>.
+substitute them for angle brackets, as in &lt;&lt;stereotype_name&gt;&gt;.
 
 There is no limit to the number of stereotypes with which an element can be
 associated.

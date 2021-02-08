@@ -124,4 +124,4 @@ can change that state.</td>
       <td>UML 1.x</td>
     </tr>
   </tbody>
-/table>
+</table>
