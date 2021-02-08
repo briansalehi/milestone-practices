@@ -1,8 +1,8 @@
 const double pi = 3.141592;
 
 // function declaration
-double Area(double r);
-double Circumference(double r);
+double Area(double);
+double Circumference(double);
 
 int main()
 {
@@ -14,5 +14,5 @@ int main()
 }
 
 // function definition
-double Area(double r) { return pi * r * r; }
-double Circumference(double r) { return 2 * pi * r; }
+double Area(double radius) { return pi * radius * radius; }
+double Circumference(double radius) { return 2 * pi * radius; }
