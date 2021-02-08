@@ -262,17 +262,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./inline.o ./inline.cxx
+g++ -Wall -g -o ./inline.o -c ./inline.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./inline.bin ./inline.o
+g++ -g -o ./inline.bin ./inline.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./inline.bin options
+./inline.bin
 </code>
 </pre>
 <hr />

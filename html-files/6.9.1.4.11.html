@@ -259,17 +259,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./deallocate.o ./deallocate.cxx
+g++ -Wall -g -o ./deallocate.o -c ./deallocate.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./deallocate.bin ./deallocate.o
+g++ -g -o ./deallocate.bin ./deallocate.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./deallocate.bin options
+./deallocate.bin
 </code>
 </pre>
 <hr />

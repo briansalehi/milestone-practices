@@ -246,17 +246,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./pushback.o ./pushback.cxx
+g++ -Wall -g -o ./pushback.o -c ./pushback.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./pushback.bin ./pushback.o
+g++ -g -o ./pushback.bin ./pushback.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./pushback.bin options
+./pushback.bin
 </code>
 </pre>
 <hr />

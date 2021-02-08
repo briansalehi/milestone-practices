@@ -241,17 +241,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./typedef.o ./typedef.cxx
+g++ -Wall -g -o ./typedef.o -c ./typedef.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./typedef.bin ./typedef.o
+g++ -g -o ./typedef.bin ./typedef.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./typedef.bin options
+./typedef.bin
 </code>
 </pre>
 <hr />

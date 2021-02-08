@@ -252,17 +252,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./useoptimized.o ./useoptimized.cxx
+g++ -Wall -g -o ./useoptimized.o -c ./useoptimized.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./useoptimized.bin ./useoptimized.o
+g++ -g -o ./useoptimized.bin ./useoptimized.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./useoptimized.bin options
+./useoptimized.bin
 </code>
 </pre>
 <hr />

@@ -242,17 +242,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./global.o ./global.cxx
+g++ -Wall -g -o ./global.o -c ./global.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./global.bin ./global.o
+g++ -g -o ./global.bin ./global.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./global.bin options
+./global.bin
 </code>
 </pre>
 <hr />

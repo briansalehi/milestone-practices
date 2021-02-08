@@ -279,17 +279,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./protected.o ./protected.cxx
+g++ -Wall -g -o ./protected.o -c ./protected.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./protected.bin ./protected.o
+g++ -g -o ./protected.bin ./protected.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./protected.bin options
+./protected.bin
 </code>
 </pre>
 <hr />

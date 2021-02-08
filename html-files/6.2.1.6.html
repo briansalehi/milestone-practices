@@ -345,17 +345,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./copy_constructor.o ./copy_constructor.cxx
+g++ -Wall -g -o ./copy_constructor.o -c ./copy_constructor.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./copy_constructor.bin ./copy_constructor.o
+g++ -g -o ./copy_constructor.bin ./copy_constructor.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./copy_constructor.bin options
+./copy_constructor.bin
 </code>
 </pre>
 <hr />

@@ -241,17 +241,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./hex.o ./hex.cxx
+g++ -Wall -g -o ./hex.o -c ./hex.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./hex.bin ./hex.o
+g++ -g -o ./hex.bin ./hex.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./hex.bin options
+./hex.bin
 </code>
 </pre>
 <hr />

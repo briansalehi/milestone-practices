@@ -275,17 +275,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./bgr2gray.o ./bgr2gray.cxx
+g++ -Wall -g -o ./bgr2gray.o -c ./bgr2gray.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./bgr2gray.bin ./bgr2gray.o
+g++ -g -o ./bgr2gray.bin ./bgr2gray.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./bgr2gray.bin options
+./bgr2gray.bin
 </code>
 </pre>
 <hr />

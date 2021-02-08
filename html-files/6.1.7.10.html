@@ -256,17 +256,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./ios.o ./ios.cxx
+g++ -Wall -g -o ./ios.o -c ./ios.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./ios.bin ./ios.o
+g++ -g -o ./ios.bin ./ios.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./ios.bin options
+./ios.bin
 </code>
 </pre>
 <hr />

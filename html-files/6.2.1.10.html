@@ -274,17 +274,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./destructor.o ./destructor.cxx
+g++ -Wall -g -o ./destructor.o -c ./destructor.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./destructor.bin ./destructor.o
+g++ -g -o ./destructor.bin ./destructor.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./destructor.bin options
+./destructor.bin
 </code>
 </pre>
 <hr />

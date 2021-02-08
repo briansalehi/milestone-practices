@@ -250,17 +250,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./store-lambda.o ./store-lambda.cxx
+g++ -Wall -g -o ./store-lambda.o -c ./store-lambda.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./store-lambda.bin ./store-lambda.o
+g++ -g -o ./store-lambda.bin ./store-lambda.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./store-lambda.bin options
+./store-lambda.bin
 </code>
 </pre>
 <hr />

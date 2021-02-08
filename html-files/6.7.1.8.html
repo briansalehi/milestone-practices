@@ -261,17 +261,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./detach.o ./detach.cxx
+g++ -Wall -g -o ./detach.o -c ./detach.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./detach.bin ./detach.o
+g++ -g -o ./detach.bin ./detach.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./detach.bin options
+./detach.bin
 </code>
 </pre>
 <hr />

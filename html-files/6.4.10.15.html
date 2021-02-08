@@ -291,17 +291,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./search.o ./search.cxx
+g++ -Wall -g -o ./search.o -c ./search.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./search.bin ./search.o
+g++ -g -o ./search.bin ./search.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./search.bin options
+./search.bin
 </code>
 </pre>
 <hr />

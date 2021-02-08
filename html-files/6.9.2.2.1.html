@@ -309,17 +309,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./image.o ./image.cxx
+g++ -Wall -g -o ./image.o -c ./image.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./image.bin ./image.o
+g++ -g -o ./image.bin ./image.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./image.bin options
+./image.bin
 </code>
 </pre>
 <hr />

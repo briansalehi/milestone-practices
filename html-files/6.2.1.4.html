@@ -283,17 +283,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./constructor.o ./constructor.cxx
+g++ -Wall -g -o ./constructor.o -c ./constructor.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./constructor.bin ./constructor.o
+g++ -g -o ./constructor.bin ./constructor.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./constructor.bin options
+./constructor.bin
 </code>
 </pre>
 <hr />

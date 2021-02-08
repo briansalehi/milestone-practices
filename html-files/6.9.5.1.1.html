@@ -336,17 +336,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./file-node.o ./file-node.cxx
+g++ -Wall -g -o ./file-node.o -c ./file-node.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./file-node.bin ./file-node.o
+g++ -g -o ./file-node.bin ./file-node.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./file-node.bin options
+./file-node.bin
 </code>
 </pre>
 <hr />

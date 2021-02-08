@@ -255,17 +255,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./fastmalloc.o ./fastmalloc.cxx
+g++ -Wall -g -o ./fastmalloc.o -c ./fastmalloc.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./fastmalloc.bin ./fastmalloc.o
+g++ -g -o ./fastmalloc.bin ./fastmalloc.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./fastmalloc.bin options
+./fastmalloc.bin
 </code>
 </pre>
 <hr />

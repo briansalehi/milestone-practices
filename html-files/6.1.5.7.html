@@ -268,17 +268,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./lambda.o ./lambda.cxx
+g++ -Wall -g -o ./lambda.o -c ./lambda.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./lambda.bin ./lambda.o
+g++ -g -o ./lambda.bin ./lambda.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./lambda.bin options
+./lambda.bin
 </code>
 </pre>
 <hr />

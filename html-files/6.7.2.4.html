@@ -272,17 +272,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./try-lock.o ./try-lock.cxx
+g++ -Wall -g -o ./try-lock.o -c ./try-lock.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./try-lock.bin ./try-lock.o
+g++ -g -o ./try-lock.bin ./try-lock.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./try-lock.bin options
+./try-lock.bin
 </code>
 </pre>
 <hr />

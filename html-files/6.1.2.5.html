@@ -253,17 +253,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./define.o ./define.cxx
+g++ -Wall -g -o ./define.o -c ./define.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./define.bin ./define.o
+g++ -g -o ./define.bin ./define.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./define.bin options
+./define.bin
 </code>
 </pre>
 <hr />

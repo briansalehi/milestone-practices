@@ -306,17 +306,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./file-storage.o ./file-storage.cxx
+g++ -Wall -g -o ./file-storage.o -c ./file-storage.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./file-storage.bin ./file-storage.o
+g++ -g -o ./file-storage.bin ./file-storage.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./file-storage.bin options
+./file-storage.bin
 </code>
 </pre>
 <hr />

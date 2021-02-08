@@ -253,17 +253,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./instantiation.o ./instantiation.cxx
+g++ -Wall -g -o ./instantiation.o -c ./instantiation.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./instantiation.bin ./instantiation.o
+g++ -g -o ./instantiation.bin ./instantiation.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./instantiation.bin options
+./instantiation.bin
 </code>
 </pre>
 <hr />

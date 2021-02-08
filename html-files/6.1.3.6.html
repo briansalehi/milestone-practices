@@ -244,17 +244,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./store.o ./store.cxx
+g++ -Wall -g -o ./store.o -c ./store.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./store.bin ./store.o
+g++ -g -o ./store.bin ./store.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./store.bin options
+./store.bin
 </code>
 </pre>
 <hr />

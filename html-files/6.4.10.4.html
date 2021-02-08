@@ -256,17 +256,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./count.o ./count.cxx
+g++ -Wall -g -o ./count.o -c ./count.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./count.bin ./count.o
+g++ -g -o ./count.bin ./count.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./count.bin options
+./count.bin
 </code>
 </pre>
 <hr />

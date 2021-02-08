@@ -253,17 +253,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./getcputickcount.o ./getcputickcount.cxx
+g++ -Wall -g -o ./getcputickcount.o -c ./getcputickcount.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./getcputickcount.bin ./getcputickcount.o
+g++ -g -o ./getcputickcount.bin ./getcputickcount.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./getcputickcount.bin options
+./getcputickcount.bin
 </code>
 </pre>
 <hr />

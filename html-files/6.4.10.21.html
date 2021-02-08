@@ -269,17 +269,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./transform.o ./transform.cxx
+g++ -Wall -g -o ./transform.o -c ./transform.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./transform.bin ./transform.o
+g++ -g -o ./transform.bin ./transform.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./transform.bin options
+./transform.bin
 </code>
 </pre>
 <hr />

@@ -310,17 +310,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./trackbar.o ./trackbar.cxx
+g++ -Wall -g -o ./trackbar.o -c ./trackbar.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./trackbar.bin ./trackbar.o
+g++ -g -o ./trackbar.bin ./trackbar.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./trackbar.bin options
+./trackbar.bin
 </code>
 </pre>
 <hr />

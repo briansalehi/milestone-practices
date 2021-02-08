@@ -291,17 +291,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./preprocessing.o ./preprocessing.cxx
+g++ -Wall -g -o ./preprocessing.o -c ./preprocessing.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./preprocessing.bin ./preprocessing.o
+g++ -g -o ./preprocessing.bin ./preprocessing.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./preprocessing.bin options
+./preprocessing.bin
 </code>
 </pre>
 <hr />

@@ -312,17 +312,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./create_mat.o ./create_mat.cxx
+g++ -Wall -g -o ./create_mat.o -c ./create_mat.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./create_mat.bin ./create_mat.o
+g++ -g -o ./create_mat.bin ./create_mat.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./create_mat.bin options
+./create_mat.bin
 </code>
 </pre>
 <hr />

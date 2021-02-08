@@ -256,17 +256,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./function.o ./function.cxx
+g++ -Wall -g -o ./function.o -c ./function.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./function.bin ./function.o
+g++ -g -o ./function.bin ./function.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./function.bin options
+./function.bin
 </code>
 </pre>
 <hr />

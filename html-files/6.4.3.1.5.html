@@ -268,17 +268,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./remove.o ./remove.cxx
+g++ -Wall -g -o ./remove.o -c ./remove.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./remove.bin ./remove.o
+g++ -g -o ./remove.bin ./remove.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./remove.bin options
+./remove.bin
 </code>
 </pre>
 <hr />

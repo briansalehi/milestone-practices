@@ -263,17 +263,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./static.o ./static.cxx
+g++ -Wall -g -o ./static.o -c ./static.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./static.bin ./static.o
+g++ -g -o ./static.bin ./static.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./static.bin options
+./static.bin
 </code>
 </pre>
 <hr />

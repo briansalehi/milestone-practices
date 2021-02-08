@@ -281,17 +281,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./circle.o ./circle.cxx
+g++ -Wall -g -o ./circle.o -c ./circle.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./circle.bin ./circle.o
+g++ -g -o ./circle.bin ./circle.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./circle.bin options
+./circle.bin
 </code>
 </pre>
 <hr />

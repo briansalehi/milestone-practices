@@ -274,17 +274,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./switch_case.o ./switch_case.cxx
+g++ -Wall -g -o ./switch_case.o -c ./switch_case.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./switch_case.bin ./switch_case.o
+g++ -g -o ./switch_case.bin ./switch_case.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./switch_case.bin options
+./switch_case.bin
 </code>
 </pre>
 <hr />

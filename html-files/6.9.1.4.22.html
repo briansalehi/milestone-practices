@@ -253,17 +253,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./gettickcount.o ./gettickcount.cxx
+g++ -Wall -g -o ./gettickcount.o -c ./gettickcount.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./gettickcount.bin ./gettickcount.o
+g++ -g -o ./gettickcount.bin ./gettickcount.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./gettickcount.bin options
+./gettickcount.bin
 </code>
 </pre>
 <hr />

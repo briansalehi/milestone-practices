@@ -263,17 +263,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./reserve.o ./reserve.cxx
+g++ -Wall -g -o ./reserve.o -c ./reserve.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./reserve.bin ./reserve.o
+g++ -g -o ./reserve.bin ./reserve.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./reserve.bin options
+./reserve.bin
 </code>
 </pre>
 <hr />

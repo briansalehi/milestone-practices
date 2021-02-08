@@ -266,17 +266,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./errors.o ./errors.cxx
+g++ -Wall -g -o ./errors.o -c ./errors.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./errors.bin ./errors.o
+g++ -g -o ./errors.bin ./errors.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./errors.bin options
+./errors.bin
 </code>
 </pre>
 <hr />

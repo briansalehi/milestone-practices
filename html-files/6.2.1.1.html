@@ -269,17 +269,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./abstraction.o ./abstraction.cxx
+g++ -Wall -g -o ./abstraction.o -c ./abstraction.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./abstraction.bin ./abstraction.o
+g++ -g -o ./abstraction.bin ./abstraction.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./abstraction.bin options
+./abstraction.bin
 </code>
 </pre>
 <hr />

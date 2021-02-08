@@ -245,17 +245,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./getline.o ./getline.cxx
+g++ -Wall -g -o ./getline.o -c ./getline.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./getline.bin ./getline.o
+g++ -g -o ./getline.bin ./getline.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./getline.bin options
+./getline.bin
 </code>
 </pre>
 <hr />

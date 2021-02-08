@@ -268,17 +268,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./leakage.o ./leakage.cxx
+g++ -Wall -g -o ./leakage.o -c ./leakage.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./leakage.bin ./leakage.o
+g++ -g -o ./leakage.bin ./leakage.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./leakage.bin options
+./leakage.bin
 </code>
 </pre>
 <hr />

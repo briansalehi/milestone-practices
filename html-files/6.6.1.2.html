@@ -314,17 +314,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./dynamic.o ./dynamic.cxx
+g++ -Wall -g -o ./dynamic.o -c ./dynamic.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./dynamic.bin ./dynamic.o
+g++ -g -o ./dynamic.bin ./dynamic.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./dynamic.bin options
+./dynamic.bin
 </code>
 </pre>
 <hr />

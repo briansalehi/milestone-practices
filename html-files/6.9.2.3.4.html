@@ -275,17 +275,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./edge-detection.o ./edge-detection.cxx
+g++ -Wall -g -o ./edge-detection.o -c ./edge-detection.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./edge-detection.bin ./edge-detection.o
+g++ -g -o ./edge-detection.bin ./edge-detection.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./edge-detection.bin options
+./edge-detection.bin
 </code>
 </pre>
 <hr />

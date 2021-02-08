@@ -293,17 +293,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./predicate.o ./predicate.cxx
+g++ -Wall -g -o ./predicate.o -c ./predicate.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./predicate.bin ./predicate.o
+g++ -g -o ./predicate.bin ./predicate.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./predicate.bin options
+./predicate.bin
 </code>
 </pre>
 <hr />

@@ -304,17 +304,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./grab-retrieve.o ./grab-retrieve.cxx
+g++ -Wall -g -o ./grab-retrieve.o -c ./grab-retrieve.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./grab-retrieve.bin ./grab-retrieve.o
+g++ -g -o ./grab-retrieve.bin ./grab-retrieve.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./grab-retrieve.bin options
+./grab-retrieve.bin
 </code>
 </pre>
 <hr />

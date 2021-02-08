@@ -288,17 +288,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./line.o ./line.cxx
+g++ -Wall -g -o ./line.o -c ./line.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./line.bin ./line.o
+g++ -g -o ./line.bin ./line.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./line.bin options
+./line.bin
 </code>
 </pre>
 <hr />

@@ -258,17 +258,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./contents.o ./contents.cxx
+g++ -Wall -g -o ./contents.o -c ./contents.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./contents.bin ./contents.o
+g++ -g -o ./contents.bin ./contents.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./contents.bin options
+./contents.bin
 </code>
 </pre>
 <hr />

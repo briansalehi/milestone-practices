@@ -250,17 +250,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./try_catch.o ./try_catch.cxx
+g++ -Wall -g -o ./try_catch.o -c ./try_catch.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./try_catch.bin ./try_catch.o
+g++ -g -o ./try_catch.bin ./try_catch.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./try_catch.bin options
+./try_catch.bin
 </code>
 </pre>
 <hr />

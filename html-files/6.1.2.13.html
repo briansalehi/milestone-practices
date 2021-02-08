@@ -245,17 +245,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./overflow.o ./overflow.cxx
+g++ -Wall -g -o ./overflow.o -c ./overflow.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./overflow.bin ./overflow.o
+g++ -g -o ./overflow.bin ./overflow.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./overflow.bin options
+./overflow.bin
 </code>
 </pre>
 <hr />

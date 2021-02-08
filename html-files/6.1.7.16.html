@@ -241,17 +241,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./showpoint.o ./showpoint.cxx
+g++ -Wall -g -o ./showpoint.o -c ./showpoint.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./showpoint.bin ./showpoint.o
+g++ -g -o ./showpoint.bin ./showpoint.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./showpoint.bin options
+./showpoint.bin
 </code>
 </pre>
 <hr />

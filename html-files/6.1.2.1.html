@@ -242,17 +242,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./argument.o ./argument.cxx
+g++ -Wall -g -o ./argument.o -c ./argument.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./argument.bin ./argument.o
+g++ -g -o ./argument.bin ./argument.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./argument.bin options
+./argument.bin
 </code>
 </pre>
 <hr />

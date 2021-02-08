@@ -290,17 +290,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./initialization.o ./initialization.cxx
+g++ -Wall -g -o ./initialization.o -c ./initialization.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./initialization.bin ./initialization.o
+g++ -g -o ./initialization.bin ./initialization.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./initialization.bin options
+./initialization.bin
 </code>
 </pre>
 <hr />

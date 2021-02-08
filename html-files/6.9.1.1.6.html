@@ -284,17 +284,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./rotated.o ./rotated.cxx
+g++ -Wall -g -o ./rotated.o -c ./rotated.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./rotated.bin ./rotated.o
+g++ -g -o ./rotated.bin ./rotated.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./rotated.bin options
+./rotated.bin
 </code>
 </pre>
 <hr />

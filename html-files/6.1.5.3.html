@@ -270,17 +270,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./parameters.o ./parameters.cxx
+g++ -Wall -g -o ./parameters.o -c ./parameters.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./parameters.bin ./parameters.o
+g++ -g -o ./parameters.bin ./parameters.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./parameters.bin options
+./parameters.bin
 </code>
 </pre>
 <hr />

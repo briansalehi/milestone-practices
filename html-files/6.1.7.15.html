@@ -242,17 +242,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./showbase.o ./showbase.cxx
+g++ -Wall -g -o ./showbase.o -c ./showbase.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./showbase.bin ./showbase.o
+g++ -g -o ./showbase.bin ./showbase.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./showbase.bin options
+./showbase.bin
 </code>
 </pre>
 <hr />

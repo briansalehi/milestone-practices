@@ -270,17 +270,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./unique_ptr.o ./unique_ptr.cxx
+g++ -Wall -g -o ./unique_ptr.o -c ./unique_ptr.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./unique_ptr.bin ./unique_ptr.o
+g++ -g -o ./unique_ptr.bin ./unique_ptr.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./unique_ptr.bin options
+./unique_ptr.bin
 </code>
 </pre>
 <hr />

@@ -258,17 +258,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./declaration.o ./declaration.cxx
+g++ -Wall -g -o ./declaration.o -c ./declaration.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./declaration.bin ./declaration.o
+g++ -g -o ./declaration.bin ./declaration.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./declaration.bin options
+./declaration.bin
 </code>
 </pre>
 <hr />

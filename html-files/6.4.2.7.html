@@ -256,17 +256,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./memory.o ./memory.cxx
+g++ -Wall -g -o ./memory.o -c ./memory.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./memory.bin ./memory.o
+g++ -g -o ./memory.bin ./memory.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./memory.bin options
+./memory.bin
 </code>
 </pre>
 <hr />

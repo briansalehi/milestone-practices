@@ -251,17 +251,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./constexpr.o ./constexpr.cxx
+g++ -Wall -g -o ./constexpr.o -c ./constexpr.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./constexpr.bin ./constexpr.o
+g++ -g -o ./constexpr.bin ./constexpr.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./constexpr.bin options
+./constexpr.bin
 </code>
 </pre>
 <hr />

@@ -253,17 +253,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./main.o ./main.cxx
+g++ -Wall -g -o ./main.o -c ./main.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./main.bin ./main.o
+g++ -g -o ./main.bin ./main.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./main.bin options
+./main.bin
 </code>
 </pre>
 <hr />

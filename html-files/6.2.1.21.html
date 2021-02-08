@@ -252,17 +252,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./stack_prohibition.o ./stack_prohibition.cxx
+g++ -Wall -g -o ./stack_prohibition.o -c ./stack_prohibition.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./stack_prohibition.bin ./stack_prohibition.o
+g++ -g -o ./stack_prohibition.bin ./stack_prohibition.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./stack_prohibition.bin options
+./stack_prohibition.bin
 </code>
 </pre>
 <hr />

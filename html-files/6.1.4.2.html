@@ -252,17 +252,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./bitwise.o ./bitwise.cxx
+g++ -Wall -g -o ./bitwise.o -c ./bitwise.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./bitwise.bin ./bitwise.o
+g++ -g -o ./bitwise.bin ./bitwise.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./bitwise.bin options
+./bitwise.bin
 </code>
 </pre>
 <hr />

@@ -299,17 +299,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./namespace.o ./namespace.cxx
+g++ -Wall -g -o ./namespace.o -c ./namespace.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./namespace.bin ./namespace.o
+g++ -g -o ./namespace.bin ./namespace.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./namespace.bin options
+./namespace.bin
 </code>
 </pre>
 <hr />

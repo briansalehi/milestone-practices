@@ -255,17 +255,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./passing.o ./passing.cxx
+g++ -Wall -g -o ./passing.o -c ./passing.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./passing.bin ./passing.o
+g++ -g -o ./passing.bin ./passing.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./passing.bin options
+./passing.bin
 </code>
 </pre>
 <hr />

@@ -263,17 +263,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./stack.o ./stack.cxx
+g++ -Wall -g -o ./stack.o -c ./stack.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./stack.bin ./stack.o
+g++ -g -o ./stack.bin ./stack.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./stack.bin options
+./stack.bin
 </code>
 </pre>
 <hr />
