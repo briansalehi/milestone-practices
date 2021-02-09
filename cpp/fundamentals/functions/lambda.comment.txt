@@ -1,11 +1,39 @@
-You are already familiar with **vectors**. Though, we never used **for_each** function, but don't worry, we will get there soon.  
-We just found a great way to display the elements of a container, that's useful. But what did really happen there?  
-**for_each** function gets three arguments, beginning of a container,
-end of a container and a function to pass elements of that container one by one.  
-So, instead of passing the third argument with a function, instead we created a lambda function on the same line!  
-Lambda functions are famous for their small size and simplicity.  
-They are functions with no name! that is, they are anonymous functions.  
-They are actually called where they are declared.
+This section is just an introduction to a concept that’s not exactly easy for
+beginners. So, skim through it and try to learn the concept without being
+disappointed if you don’t grasp it all. Lambda functions are discussed in
+depth <a href="">algorithms section</a>.
 
-Don't get too smart with lambda functions.  
+The syntax of a lambda function is the following:
+<pre class="language-cpp">
+	<code>
+		[optional parameters](parameter list){ statements; }
+	</code>
+</pre>
+
+Lambda functions were introduced in C++11 and help in the usage of STL
+algorithms to sort or process data. Typically, a sort function requires you to
+supply a binary predicate.
+
+This is a function that compares two arguments and returns true if one is less
+than the other, else false, thereby helping in deciding the order of elements
+in a sort operation.
+
+Such predicates are typically implemented as operators in a class, leading to
+a tedious bit of coding. Lambda functions can compact predicate definitions.
+
+You are already familiar with <b>vectors</b>. Though, we never used
+<b>for_each</b> and <b>sort</b> function, but don't worry, we will get there
+soon.
+
+<b>for_each</b> and <b>sort</b> functions gets three arguments, beginning of a
+container, end of a container and a function to pass elements of that
+container one by one.
+
+So, instead of passing the third argument with a function, instead we created
+a lambda function on the same line!
+
+Lambda functions are famous for their small size and simplicity.
+They are functions with no name! that is, they are anonymous functions.
+They are actually called where they are declared.
+But don't get too smart with lambda functions!
 They need to be simple and do one small task.  
