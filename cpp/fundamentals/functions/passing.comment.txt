@@ -1,4 +1,75 @@
-You already know that array names point to the address of their first element in memory.  
-So we can make an advantage of using this behaviour of arrays to pass an
-array to a function by only giving the array name to the function's argument.  
-Also note how did we write the function's declaration to accept an argument of type array.
+You already know that array names point to the address of their first element
+in memory.
+
+A pointer is also a variable one that stores an address in memory.
+Thus, like all variables, a pointer occupies space in memory.
+Just the same way as a variable of type int is used to contain an integer
+value, a pointer variable is used to contain a memory address.
+
+What’s special about pointers is that the value contained in a pointer (in
+this case, 0x558) is interpreted as a memory address.
+So, a pointer is a special variable that points to a location in memory.
+
+So we can make an advantage of using this behaviour of arrays to pass an array
+to a function by only giving the array name to the function's argument.
+
+Memory locations are typically addressed using hexadecimal notation.
+
+Also note how did we write the function's declaration to accept an argument of
+type array.
+
+A pointer being a variable needs to be declared, too. You normally declare a
+pointer to point to a specific value type (for example, int). This would mean
+that the address contained in the pointer points to a location in the memory
+that holds an integer. You can also specify a pointer to a block of memory
+(also called a void pointer).
+
+It is convention to prefix 0x when displaying hexadecimal numbers. Thus, 0xA
+is hexadecimal for 10 in decimal; 0xF is  hexadecimal for 15; and 0x10 is
+hexadecimal for 16.
+A pointer being a variable needs to be declared like all variables do:
+
+<pre class="language-cpp">
+	<code>
+		PointedType * PointerVariableName;
+	</code>
+</pre>
+
+As is the case with most variables, unless you initialize a pointer it will
+contain a random value. You don’t want a random memory address to be accessed
+so you initialize a pointer to NULL. NULL is a value that can be checked
+against and one that cannot be a memory address:
+
+<pre class="language-cpp">
+	<code>
+		PointedType * PointerVariableName = NULL; // initializing value
+	</code>
+</pre>
+
+You know that the amount of memory consumed by a variable is dependent on its
+type.
+
+So, using the preceding output that says that integer age is located at
+address 0x0045FE00 and using the knowledge that sizeof(int) is 4, you know
+that the four bytes located in the range 0x0045FE00 to 0x0045FE04 belong to
+the integer age.
+
+The referencing operator (&amp;) is also called the address-of  operator.
+
+To store the address of this variable in a pointer, you would declare a
+pointer to the same Type and initialize the pointer to the variable’s address
+using the referencing operator (&amp;):
+
+<pre class="language-cpp">
+	<code>
+		// Declaring a pointer to Type and initializing to address
+		Type* Pointer = &amp;Variable;
+	</code>
+</pre>
+
+The dereferencing operator (*) is also called the indirection operator.
+
+The length of an address, that is the number of bytes required to store it, is
+a constant for a given system. The sizeof() a pointer is hence dependent on
+the compiler and the operating system the program has been compiled for and is
+not dependent on the nature of the data being pointed to.
