@@ -1,1 +1,1 @@
-inline functions
+Inline Functions

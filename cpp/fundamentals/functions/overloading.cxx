@@ -8,8 +8,7 @@ double function(double arg) {
 
 int main()
 {
-    int one = function(1);
-    double pi = function(3.14);
-
+    function(1);
+    function(3.14);
     return 0;
 }

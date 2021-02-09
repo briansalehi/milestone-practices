@@ -1,7 +1,8 @@
 #include <iostream>
 
 // recursive function
-int Power(int base, int p) {
+int Power(int base, int p)
+{
     if (p < 2) {
         return base;
     }

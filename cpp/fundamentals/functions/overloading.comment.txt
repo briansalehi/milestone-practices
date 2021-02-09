@@ -1,29 +1,47 @@
-As previously discussed, functions have the concept of **signature** which makes them distinguishable even if they have the same name!  
-Consider following functions, all are of the same name but with different signatures:  
+Functions with the same name and return type but with different parameters or
+set of parameters are said to be overloaded functions. Overloaded functions
+can be quite useful in applications where a function with a particular name
+that produces a certain type of output might need to be invoked with different
+sets of parameters. Say you need to be writing an application that computes
+the area of a circle and the area of a cylinder.
 
-```cxx
-void function(int x);
-void function(double x);
-int function(int x);
-```
+The function that computes the area of a circle needs a parameter—the radius.
+The other function that computes the area of the cylinder needs the height of
+the cylinder in  addition to the radius of the cylinder. Both functions need
+to return the data of the same type, containing the area. So, C++ enables you
+to define two overloaded functions, both called Area, both returning double,
+but one that takes only the radius as input and another that takes the height
+and the radius as input parameters.
 
-Don't forget that following two functions are identical when you use default argument values:
+As previously discussed, functions have the concept of <b>signature</b> which
+makes them distinguishable even if they have the same name!
 
-```cxx
-void function();
-void function(int x = 1);
-```
+Consider following functions, all are of the same name but with different
+signatures:
 
-Function overloading has its own price too.  
-For each function, there will be memory occupation, make function overloads as few as possible.  
-Also, consider using default arguments for functions having same signature type but with different argument numbers.
+<pre class="language-cpp">
+	<code>
+		void function(int x);
+		void function(double x);
+		int function(int x);
+	</code>
+</pre>
 
-ref[2]
-Overloading means defining two or more functions or operators that have the same  
-name, but whose effect depends on the types of their actual arguments.
+Don't forget that following two functions are identical when you use default
+argument values:
 
-Function overloading occurs when two or more functions are defined with the  
-same name but with different argument lists. Such definitions are useful in  
-situations where we desire two functions that achieve essentially the same  
-purpose, but do it with different types of arguments.
-end[2]
+<pre class="language-cpp">
+	<code>
+		void function();
+		void function(int x = 1);
+	</code>
+</pre>
+
+Function overloading has its own price too.
+For each function, there will be memory occupation, make function overloads as
+few as possible.
+Also, consider using default arguments for functions having same signature
+type but with different argument numbers.
+
+Overloading means defining two or more functions or operators that have the
+same name, but whose effect depends on the types of their actual arguments.

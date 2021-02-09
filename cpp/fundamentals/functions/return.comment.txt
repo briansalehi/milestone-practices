@@ -19,3 +19,9 @@ For example, in the following source code, isEven() could be substituted by:
 </pre>
 
 Read more about <a href="/cpp/fundamentals/program-flow/ternary">Ternary operator</a>.
+
+You are not restricted to having only one return statement in your function
+definition.
+You can return from any point in the function, and multiple times if you want.
+Depending on the logic and the need of the application, this might or might
+not be poor programming practice.

@@ -4,10 +4,10 @@ parameters.cxx
 return.cxx
 default.cxx
 recursion.cxx
-auto.cxx
-inline.cxx
-lambda.cxx
 overloading.cxx
+inline.cxx
+auto.cxx
+lambda.cxx
 passing.cxx
 reference.cxx
 void.cxx

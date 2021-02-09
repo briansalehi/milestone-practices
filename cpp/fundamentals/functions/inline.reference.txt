@@ -1,1 +1,2 @@
-6: 32
+C++ Primer Plus: page 32
+Sam's Teach Yourself C++ in One Hour a Day: chapter 7

@@ -2,8 +2,9 @@
 
 const double pi = 3.1415;
 
-void circleArea(double radius = 1) {
-    double area = pi*radius*radius;
+void circleArea(double radius = 1)
+{
+    double area = pi * radius * radius;
     std::cout << "Radius: " << radius << ", Area: " << area << std::endl;
 }
 
