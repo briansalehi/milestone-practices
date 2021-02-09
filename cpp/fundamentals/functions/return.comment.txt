@@ -1,3 +1,6 @@
+When programming a function that does not need to return any value, specify
+the return type as void.
+
 As we discussed earlier, multiple return statements can be confusing as all
 programs are expected to be ended in their last line.
 

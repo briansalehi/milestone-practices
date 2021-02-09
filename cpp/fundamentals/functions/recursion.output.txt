@@ -1,2 +1,2 @@
-enter base and exponent: 2 10
+Enter base and exponent: 2 10
 1024

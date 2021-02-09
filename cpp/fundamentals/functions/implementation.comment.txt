@@ -1,0 +1,21 @@
+The function prototype basically tells what a function is called, the list of
+parameters the function accepts, and the return type of the function.
+
+Any function in a C++ program must be declared before the main function.  
+This can be done in two ways:
+
+<ul>
+<li>Write function declaration before <b>main</b> and then write function
+definition after it</li>
+<li>Write function definition before <b>main</b> once</li>
+</ul>
+
+The actual meat and potatoes the implementation of a function is what is
+called the definition.
+
+A function definition is always comprised of a statement block. A return
+statement is necessary unless the function is declared with return type void.
+
+Calling a function is the same as invoking one. When a function declaration
+contains parameters, the function call needs to send arguments. Arguments are
+values the func-tion requests within its parameter list.

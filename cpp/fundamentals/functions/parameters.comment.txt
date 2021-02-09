@@ -1,5 +1,9 @@
+A function can have multiple parameters separated by commas, but it can have
+only one return type.
+
 Considering the design of a clean code, a function should not have more than
 two arguments, at most three.  
+
 What you usually try to give to a function can be put in a larger structure.  
 Say, you want to give a function three variables:
 
