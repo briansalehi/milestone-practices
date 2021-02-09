@@ -1,0 +1,52 @@
+A reference is an alias for a variable. When you declare a reference, you need
+to initialize it to a variable. Thus, the reference variable is just a
+different way to access the data stored in the variable being referenced.
+
+You would declare a reference using the reference operator (&amp;) as seen in the
+following statement:
+
+<pre class="language-cpp">
+	<code>
+		VarType original = Value;
+		VarType&amp; ReferenceVariable = original;
+	</code>
+</pre>
+
+References enable you to work with the memory location they are initialized
+to. This makes references particularly useful when programming functions.
+
+It would be ideal if we could avoid or eliminate the copy steps, enabling the function to work directly on the data in the caller’s stack. References enable you to do just that.
+A version of the function without the copy step looks like this:
+
+<pre class="language-cpp">
+	<code>
+		ReturnType DoSomething(Type&amp; parameter); // note the reference&amp;
+	</code>
+</pre>
+
+This function would be invoked as the following:
+
+<pre class="language-cpp">
+	<code>
+		ReturnType Result = DoSomething(argument);
+	</code>
+</pre>
+
+As the argument is being passed by reference, Parameter is not a copy of
+argument rather an alias of the latter, much like Ref in Listing 8.17.
+Additionally, a function that accepts a parameter as a reference can
+optionally return values using reference  parameters.
+
+You might need to have references that are not allowed to change the value of
+the  original variable being aliased. Using const when declaring such
+references is the way to achieve that:
+
+<pre class="language-cpp">
+	<code>
+		int original = 30;
+		const int&amp; constRef = original;
+		constRef = 40; // Not allowed: constRef can’t change value in original int&amp;
+		ref2 = constRef; // Not allowed: ref2 is not const
+		const int&amp; constRef2 = constRef; // OK
+	</code>
+</pre>

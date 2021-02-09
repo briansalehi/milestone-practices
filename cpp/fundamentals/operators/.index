@@ -7,3 +7,5 @@ increment.cxx
 logical.cxx
 shifting.cxx
 sizeof.cxx
+dynamic-memory.cxx
+references.cxx

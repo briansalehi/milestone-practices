@@ -7,6 +7,7 @@ inline int sum(int a, int b)
 
 int main()
 {
-    std::cout << sum << std::endl;
+	int a = 1, b = 2;
+    std::cout << sum(a, b) << std::endl;
     return 0;
 }

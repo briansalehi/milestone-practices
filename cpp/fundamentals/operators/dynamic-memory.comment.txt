@@ -1,0 +1,176 @@
+To program an application that is able to optimally consume memory resources
+on the basis of the needs of the user, you need to use dynamic memory
+allocation.
+
+C++ supplies you two operators, new and delete, to help you better manage the
+memory consumption of your application.
+
+You use new to allocate new memory blocks. The most frequently used form of
+new returns a pointer to the requested memory if successful or else throws an
+exception.
+
+When using new, you need to specify the data type for which the memory is
+being  allocated:
+
+<pre class="language-cpp">
+	<code>
+		Type* Pointer = new Type; // request memory for one element
+	</code>
+</pre>
+
+You can also specify the number of elements you want to allocate that memory
+for (when you need to allocate memory for more than one element):
+
+<pre class="language-cpp">
+	<code>
+		Type* Pointer = new Type[numElements]; // request memory for numElements
+	</code>
+</pre>
+
+Every allocation using new needs to be eventually released using an equal and
+opposite de-allocation via delete:
+
+<pre class="language-cpp">
+	<code>
+		Type* Pointer = new Type; // allocate memory
+		delete Pointer; // release memory allocated above
+	</code>
+</pre>
+
+This rule also applies when you request memory for multiple elements:
+
+<pre class="language-cpp">
+	<code>
+		Type* Pointer = new Type[numElements]; // allocate a block
+		delete[] Pointer; // release block allocated above
+	</code>
+</pre>
+
+Operators <b>new</b> and <b>delete</b> allocate memory from the free store. 
+The free store is a memory abstraction in the form of a pool of memory
+where your application can allocate (that is, reserve) memory from and
+deallocate (that is, release) memory to.
+
+The address contained in the pointer is incremented or decremented by the
+sizeof the type being pointed to (and not necessarily a byte). This way, the
+compiler ensures that the pointer never points to the middle or end of data
+placed in the memory; it only points to the beginning.
+
+If a pointer has been declared as
+
+<pre class="language-cpp">
+	<code>
+		Type* pType = Address;
+		++pType
+	</code>
+</pre>
+
+Would mean that <i>pType</i> contains (and hence points to)
+
+<pre class="language-cpp">
+	<code>
+		Address + sizeof(Type)
+	</code>
+</pre>
+
+Pointers are variables, too, and hence the const keyword that is relevant to
+variables is relevant to pointers as well. However, pointers are a special
+kind of variable as they contain a memory address and are used to modify
+memory at that address. Thus, when it comes to pointers and constants, you
+have the following combinations:
+
+<ul>
+<li>The address contained in the pointer is constant and cannot be changed, yet
+the data at that address can be changed</li>
+
+<pre class="language-cpp">
+	<code>
+		int daysInMonth = 30;
+		int* const pDaysInMonth = &daysInMonth;
+		*pDaysInMonth = 31; // OK! Data pointed to can be changed
+		int daysInLunarMonth = 28;
+		pDaysInMonth = &daysInLunarMonth; // Not OK! Cannot change address!
+	</code>
+</pre>
+
+<li>Data pointed to is constant and cannot be changed, yet the address
+contained in the pointer can be changed—that is, the pointer can also point
+elsewhere</li>
+
+<pre class="language-cpp">
+	<code>
+		int hoursInDay = 24;
+		const int* pointsToInt = &hoursInDay;
+		int monthsInYear = 12;
+		pointsToInt = &monthsInYear; // OK!
+		*pointsToInt = 13; // Not OK! Cannot change data being pointed to
+		int* newPointer = pointsToInt; // Not OK! Cannot assign const to non-const
+	</code>
+</pre>
+
+<li>Both the address contained in the pointer and the value being pointed to are
+constant and cannot be changed (most restrictive variant):</li>
+
+<pre class="language-cpp">
+	<code>
+		int hoursInDay = 24;
+		const int* const pHoursInDay = &hoursInDay;
+		*pHoursInDay = 25; // Not OK! Cannot change data being pointed to
+		int daysInMonth = 30;
+		pHoursInDay = &daysInMonth; // Not OK! Cannot change address
+	</code>
+</pre>
+</ul>
+
+It is important to remember that pointers that are allocated dynamically using
+operator new still need to be released using operator delete, even if you
+accessed data using syntax com-monly used with static arrays.
+
+If you forget this, your application leaks memory, and that’s bad.
+
+<h4>Common Programming Mistakes When Using Pointers</h4>
+
+Memory Leaks This is probably one of the most frequent problems with C++
+applications: The longer they run, the larger the amount of memory they
+consume and the slower the system gets.
+
+This typically happens when the programmer did not ensure that his application
+releases memory allocated dynamically using new with a matching call to delete
+after the block of memory is no longer required.
+
+When Pointers Don’t Point to Valid Memory Locations When you dereference a
+pointer using operator (*) to access the pointed value, you need to be sure
+that the pointer contains a valid memory location, or else your program will
+either crash or misbehave. Logical as this may seem, invalid pointers are
+quite a common reason for application crashes. Pointers can be invalid for a
+range of reasons, primarily due to poor programming and memory management.
+
+Dangling Pointers (Also Called Stray or Wild Pointers) Note that any valid
+pointer is invalid after it has been released using delete. In other words To
+avoid this problem, some programmers follow the convention of assigning NULL
+to a pointer when initializing it or after it has been deleted. They also
+always check a pointer for validity (by comparing against NULL) before
+dereferencing it using operator (*).
+
+Checking Whether Allocation Request Using new Succeeded In our code to this
+point, we have assumed that new will return a valid pointer to a block of
+memory. Indeed, new usually succeeds unless the application asks for an
+unusually large amount of memory or if the system is in such a critical state
+that it has no memory to spare. There are applications that need to make
+requests for large chunks of memory (for example, database applications).
+Additionally, it is good to not simply assume that memory allocation requests
+will always be successful. C++ provides you with two  possible methods to
+ensure that your pointer is valid before you use it. The default method—one
+that we have been using thus far uses exceptions wherein unsuccessful
+allocations result in an exception of the type <b>std::bad_alloc</b> to be
+thrown.
+An excep-tion results in the execution of your application being disrupted, and
+unless you have programmed an exception handler, your application ends rather
+unelegantly with an error message "unhandled exception."
+
+For those who don’t want to rely on exceptions, there is a variant of new
+called <b>new(nothrow)</b>.
+This variant does not throw an exception when allocation
+requests fail, rather it results in the operator new returning NULL. The
+pointer being assigned,  therefore, can be checked for validity against NULL
+before it is used.
