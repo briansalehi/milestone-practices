@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>recursive functions</title>
+<title>Pointer Parameters</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.5.0.html">Functions</a></li>
-<li class="breadcrumb-item active" recursive functions breadcrumb-item active>recursive functions</li>
+<li class="breadcrumb-item active" Pointer Parameters breadcrumb-item active>Pointer Parameters</li>
 </ol>
 <h2>
-<a id="recursive-functions" class="anchor" aria-hidden="true" href="#recursive-functions">
-recursive functions
+<a id="Pointer-Parameters" class="anchor" aria-hidden="true" href="#Pointer-Parameters">
+Pointer Parameters
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,10 +201,81 @@ recursive functions
 </a>
 </h2>
 <div class="comment-style" >
-When a function calls itself, we happen to be using that function recursively.<br />
-To use a function recursively, we must be sure we have a break condition in our function to break the recursion steps somewhere, unless you want to watch your system run out of memory! nothing dangerious will happen in that case as your operating system will stop your program's execution and throws an exception due to too much memory consumption.<br />
-Recursive functions are useful in many cases, but in powerful systems!<br />
-You shouldn't use recursive functions in embedded systems as they consume a huge amount of memory.<br />
+You already know that array names point to the address of their first element
+in memory.<br />
+<br />
+A pointer is also a variable one that stores an address in memory.<br />
+Thus, like all variables, a pointer occupies space in memory.<br />
+Just the same way as a variable of type int is used to contain an integer
+value, a pointer variable is used to contain a memory address.<br />
+<br />
+What’s special about pointers is that the value contained in a pointer (in
+this case, 0x558) is interpreted as a memory address.<br />
+So, a pointer is a special variable that points to a location in memory.<br />
+<br />
+So we can make an advantage of using this behaviour of arrays to pass an array
+to a function by only giving the array name to the function's argument.<br />
+<br />
+Memory locations are typically addressed using hexadecimal notation.<br />
+<br />
+Also note how did we write the function's declaration to accept an argument of
+type array.<br />
+<br />
+A pointer being a variable needs to be declared, too. You normally declare a
+pointer to point to a specific value type (for example, int). This would mean
+that the address contained in the pointer points to a location in the memory
+that holds an integer. You can also specify a pointer to a block of memory
+(also called a void pointer).<br />
+<br />
+It is convention to prefix 0x when displaying hexadecimal numbers. Thus, 0xA
+is hexadecimal for 10 in decimal; 0xF is  hexadecimal for 15; and 0x10 is
+hexadecimal for 16.<br />
+A pointer being a variable needs to be declared like all variables do:<br />
+<br />
+<pre class="language-cpp">
+<code>
+PointedType * PointerVariableName;<br />
+</code>
+</pre>
+<br />
+As is the case with most variables, unless you initialize a pointer it will
+contain a random value. You don’t want a random memory address to be accessed
+so you initialize a pointer to NULL. NULL is a value that can be checked
+against and one that cannot be a memory address:<br />
+<br />
+<pre class="language-cpp">
+<code>
+PointedType * PointerVariableName = NULL; // initializing value
+</code>
+</pre>
+<br />
+You know that the amount of memory consumed by a variable is dependent on its
+type.<br />
+<br />
+So, using the preceding output that says that integer age is located at
+address 0x0045FE00 and using the knowledge that sizeof(int) is 4, you know
+that the four bytes located in the range 0x0045FE00 to 0x0045FE04 belong to
+the integer age.<br />
+<br />
+The referencing operator (&amp;) is also called the address-of  operator.<br />
+<br />
+To store the address of this variable in a pointer, you would declare a
+pointer to the same Type and initialize the pointer to the variable’s address
+using the referencing operator (&amp;):<br />
+<br />
+<pre class="language-cpp">
+<code>
+// Declaring a pointer to Type and initializing to address
+Type* Pointer = &amp;Variable;<br />
+</code>
+</pre>
+<br />
+The dereferencing operator (*) is also called the indirection operator.<br />
+<br />
+The length of an address, that is the number of bytes required to store it, is
+a constant for a given system. The sizeof() a pointer is hence dependent on
+the compiler and the operating system the program has been compiled for and is
+not dependent on the nature of the data being pointed to.<br />
 </div>
 <hr />
 <h3>
@@ -216,27 +287,26 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>recursion.cxx</cite>
+  <cite>pointers.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    // recursive function
-    int Power(int base, int p) {
-        if (p &lt; 2) {
-            return base;
+    void Display(const int arr[], const size_t len) {
+        for (size_t i = 0; i &lt; len; ++i) {
+            std::cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;
         }
-        
-        return base * Power (base, --p);
+        std::cout &lt;&lt; std::endl;
     }
     
     int main()
     {
-        int base, exponent;
-        std::cout &lt;&lt; &quot;enter base and exponent: &quot;;
-        std::cin &gt;&gt; base &gt;&gt; exponent;
-        std::cout &lt;&lt; base &lt;&lt; &quot; &quot; &lt;&lt; exponent &lt;&lt; std::endl;
-        std::cout &lt;&lt; Power(base, exponent) &lt;&lt; std::endl;
+        const size_t length = 10;
+        int array[length] = {0};
+        array[4] = 1;
+        array[9] = 1;
+    
+        Display(array, length);
     
         return 0;
     }
@@ -254,17 +324,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./recursion.o -c ./recursion.cxx
+g++ -Wall -g -o ./pointers.o -c ./pointers.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./recursion.bin ./recursion.o
+g++ -g -o ./pointers.bin ./pointers.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./recursion.bin
+./pointers.bin
 </code>
 </pre>
 <hr />
@@ -278,9 +348,9 @@ Output
 </a>
 </h3>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.1.5.9.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/lambda-functions">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.1.5.11.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/reference-parameters">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

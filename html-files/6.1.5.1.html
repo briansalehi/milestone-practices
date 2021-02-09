@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Function Declaration</title>
+<title>Function Implementation</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.5.0.html">Functions</a></li>
-<li class="breadcrumb-item active" Function Declaration breadcrumb-item active>Function Declaration</li>
+<li class="breadcrumb-item active" Function Implementation breadcrumb-item active>Function Implementation</li>
 </ol>
 <h2>
-<a id="Function-Declaration" class="anchor" aria-hidden="true" href="#Function-Declaration">
-Function Declaration
+<a id="Function-Implementation" class="anchor" aria-hidden="true" href="#Function-Implementation">
+Function Implementation
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -212,6 +212,16 @@ This can be done in two ways:<br />
 definition after it</li>
 <li>Write function definition before <b>main</b> once</li>
 </ul>
+<br />
+The actual meat and potatoes the implementation of a function is what is
+called the definition.<br />
+<br />
+A function definition is always comprised of a statement block. A return
+statement is necessary unless the function is declared with return type void.<br />
+<br />
+Calling a function is the same as invoking one. When a function declaration
+contains parameters, the function call needs to send arguments. Arguments are
+values the func-tion requests within its parameter list.<br />
 </div>
 <hr />
 <h3>
@@ -223,7 +233,7 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>declaration.cxx</cite>
+  <cite>implementation.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     const double pi = 3.141592;
@@ -258,17 +268,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./declaration.o -c ./declaration.cxx
+g++ -Wall -Wno-unused-variable -g -o ./implementation.o -c ./implementation.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./declaration.bin ./declaration.o
+g++ -g -o ./implementation.bin ./implementation.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./declaration.bin
+./implementation.bin
 </code>
 </pre>
 <hr />
@@ -281,10 +291,14 @@ Output
 </svg>
 </a>
 </h3>
+<pre>
+<code class="language-txt">
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.1.5.2.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/function-parameters">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {
