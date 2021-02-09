@@ -1,0 +1,4 @@
+./cpp/fundamentals/functions/parameters.cxx: In function ‘int main()’:
+./cpp/fundamentals/functions/parameters.cxx:12:9: warning: unused variable ‘volume’ [-Wunused-variable]
+   12 |     int volume = cylinderVolume(radius, height);
+      |         ^~~~~~

@@ -1,0 +1,4 @@
+./cpp/fundamentals/functions/auto.cxx: In function ‘int main()’:
+./cpp/fundamentals/functions/auto.cxx:8:6: warning: unused variable ‘result’ [-Wunused-variable]
+    8 |  int result = sum(1,2);
+      |      ^~~~~~

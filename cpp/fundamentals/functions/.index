@@ -8,5 +8,5 @@ overloading.cxx
 inline.cxx
 auto.cxx
 lambda.cxx
-passing.cxx
+pointers.cxx
 reference.cxx
