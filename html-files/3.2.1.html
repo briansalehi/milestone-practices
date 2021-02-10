@@ -199,6 +199,111 @@ Strategy Pattern
 </svg>
 </a>
 </h2>
+<div class="comment-style" >
+<b>Note:</b> Images appearing in this page is subject to copy right and will
+be replaced by <a href="https://milextone.ir">Milestone</a> properties, DO NOT
+USE THEM ELSEWHERE.<br />
+<br />
+You may occasionally come across a design where part of your code needs
+different behavior and you know that you just can't create an interface and
+implement some classes with it each with different configurations.<br />
+<br />
+Consider a duck simulation game having a <i>Duck</i> super class with
+predefined behaviors: <i>quack, swim, display</i>.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation.png" alt="duck simulation" loading="lazy">
+<br />
+Now you want to add a <i>fly</i> behavior for ducks.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-new-fly-behavior.png" alt="duck simulation with new fly behavior" loading="lazy">
+<br />
+This change is usually inevitable in applications.<br />
+No matter how well you design an application, over time it must grow and
+change or it will die.<br />
+<br />
+Whenever you need to modify a behavior, you’re often forced to track down and
+change it in all the different subclasses where that behavior is defined,
+probably introducing new bugs along the way!<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-more-bugs.png" alt="duck simulation with more bugs" loading="lazy">
+<br />
+For example we know that <i>fly()</i> and <i>quack()</i> are the parts of
+the Duck class that vary across ducks.<br />
+You may think that to separate these behaviors from the <i>Duck</i> class,
+we’ll pull both methods out of the <i>Duck</i> class and create a new set of
+classes to represent each behavior.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png" alt="duck simulation with behaviors as separate classes" loading="lazy">
+<br />
+Luckily, there’s a design principle for just this situation.<br />
+<br />
+The <b>Strategy Pattern</b> defines a family of algorithms, encapsulates each
+one, and makes them interchangeable.<br />
+<br />
+Identify the aspects of your application that vary and separate them from what
+stays the same.<br />
+<br />
+In other words, if you’ve got some aspect of your code that is changing, say
+with every new requirement, then you know you’ve got a behavior that needs to
+be pulled out and separated from all the stuff that doesn’t change.<br />
+<br />
+Here’s another way to think about this principle: take the parts that vary and
+encapsulate them, so that later you can alter or extend the parts that vary
+without affecting those that don’t.<br />
+All patterns provide a way to let some part of a system vary independently of
+all other parts.<br />
+<br />
+As simple as this concept is, it forms the basis for almost every design
+pattern. All patterns provide a way to let some part of a system vary
+independently of all other parts.<br />
+<br />
+We’ll use an interface to represent each behavior—for instance,
+<i>FlyBehavior</i> and <i>QuackBehavior</i>—and each implementation of a
+behavior will implement one of those interfaces.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-separate-interfaces.png" alt="duck simulation with separate interfaces" loading="lazy">
+<br />
+Notice that all ducks can swim, even Rubber Ducks and Decoy Ducks!<br />
+So, we are not going to separate them from implementation.<br />
+<br />
+The <b>HAS-A</b> relationship is an interesting one: each duck has a
+<i>FlyBehavior</i> and a <i>QuackBehavior</i> to which it delegates flying and
+quacking.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png" alt="duck simulation with behaviors as compositions" loading="lazy">
+<br />
+When you put two classes together like this you’re using composition.<br />
+Instead of inheriting their behavior, the ducks get their behavior by being
+composed with the right behavior object.<br />
+<br />
+Creating systems using composition gives you a lot more flexibility. Not only
+does it let you encapsulate a family of algorithms into their own set of
+classes, but it also lets you change behavior at runtime as long as the object
+you’re composing with implements the correct behavior interface.<br />
+<br />
+<h4>Design Principle</h4>
+Design to an interface, not an implementation.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-interface.png" alt="duck simulation quack interface" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-mallardduck-implementaion.png" alt="duck simulation mallardduck implementaion" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-duck-implementation.png" alt="duck simulation duck implementation" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-fly-implementation.png" alt="duck simulation fly implementation" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-implementation.png" alt="duck simulation quack implementation" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-implementation.png" alt="duck simulation implementation" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-runtime-behavior.png" alt="duck simulation with runtime behavior" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-modelduck-with-dynamic-behavior.png" alt="duck simulation modelduck with dynamic behavior" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-execution.png" alt="duck simulation execution" loading="lazy">
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-diagram.png" alt="duck simulation diagram" loading="lazy">
+</div>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -212,46 +317,6 @@ References
 <ul class="list-group">
 <li class="list-group-item" Head First Design Patterns, 2nd Edition: chapter 1 list-group-item>Head First Design Patterns, 2nd Edition: chapter 1</li>
 </ul>
-<div class="comment-style" >
-<h4>The Strategy Pattern defines a family of algorithms, encapsulates each
-one, and makes them interchangeable.</h4>
-Identify the aspects of your application that vary and separate them from what
-stays the same.<br />
-<br />
-In other words, if you’ve got some aspect of your code that is changing, say
-with every new requirement, then you know you’ve got a behavior that needs to
-be pulled out and separated from all the stuff that doesn’t change.<br />
-Here’s another way to think about this principle: take the parts that vary and
-encapsulate them, so that later you can alter or extend the parts that vary
-without affecting those that don’t.<br />
-All patterns provide a way to let some part of a system vary independently of
-all other parts.<br />
-<br />
-When you put two classes together like this you’re using composition.<br />
-Instead of inheriting from behavior methods directly, they get their behavior
-by being composed with the right behavior object.<br />
-<br />
-<h4>Design Principle</h4>
-Design to an interface, not an implementation.<br />
-<br />
-Design Patterns give you a shared vocabulary with other developers.<br />
-Once you’ve got the vocabulary, you can more easily communicate with
-other developers and inspire those who don’t know patterns to start
-learning them. It also elevates your thinking about architectures by
-letting you think at the pattern level, not the nitty-gritty object level.<br />
-<br />
-The power of a shared pattern vocabulary When you communicate using
-patterns, you are doing more than just sharing LINGO.<br />
-Shared pattern vocabularies are POWERFUL. When you communicate with another
-developer or your team using patterns, you are communicating not just a
-pattern name but a whole set of qualities, characteristics, and constraints
-that the pattern represents.<br />
-<br />
-Talking at the pattern level allows you to stay “in the design” longer.<br />
-Talking about software systems using patterns allows you to keep the
-discussion at the design level, without having to dive down to the
-nitty-gritty details of implementing objects and classes.<br />
-</div>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
