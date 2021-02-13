@@ -17,11 +17,11 @@ Instead, you can create a structure named <b>Book</b> containing:
 
 <pre class="language-cpp line-numbers">
 	<code>
-		struct Book {
-			char* title;
-			int pages;
-			int price;
-		} book;
+	struct Book {
+	    char* title;
+	    int pages;
+		int price;
+	} book;
 	</code>
 </pre>
 

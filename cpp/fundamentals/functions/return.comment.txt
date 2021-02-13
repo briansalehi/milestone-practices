@@ -13,7 +13,7 @@ For example, in the following source code, isEven() could be substituted by:
 	<code>
 		bool isEven(int number)
 		{
-			return (number % 2) == 0 ? true : false;
+		    return (number % 2) == 0 ? true : false;
 		}
 	</code>
 </pre>
