@@ -18,4 +18,4 @@ statement is necessary unless the function is declared with return type void.
 
 Calling a function is the same as invoking one. When a function declaration
 contains parameters, the function call needs to send arguments. Arguments are
-values the func-tion requests within its parameter list.
+values the function requests within its parameter list.

@@ -6,7 +6,7 @@ all be at the tail end of the parameter list.
 
 That is, you can't do this:  
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		void function(int x = 1, int y);
 	</code>
@@ -24,7 +24,7 @@ return type void and two int arguments.
 By using a default value, you actually change the function's signature, so
 these two functions are identical:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		void function(int x, int y = 1);
 		void function(int x);

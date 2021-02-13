@@ -19,7 +19,7 @@ makes them distinguishable even if they have the same name!
 Consider following functions, all are of the same name but with different
 signatures:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		void function(int x);
 		void function(double x);
@@ -30,7 +30,7 @@ signatures:
 Don't forget that following two functions are identical when you use default
 argument values:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		void function();
 		void function(int x = 1);

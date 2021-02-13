@@ -4,7 +4,7 @@ disappointed if you don’t grasp it all. Lambda functions are discussed in
 depth <a href="">algorithms section</a>.
 
 The syntax of a lambda function is the following:
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		[optional parameters](parameter list){ statements; }
 	</code>

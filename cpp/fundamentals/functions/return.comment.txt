@@ -9,7 +9,7 @@ are going to do with multiple return statements.
 
 For example, in the following source code, isEven() could be substituted by:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		bool isEven(int number)
 		{

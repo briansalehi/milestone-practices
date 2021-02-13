@@ -29,7 +29,7 @@ is hexadecimal for 10 in decimal; 0xF is  hexadecimal for 15; and 0x10 is
 hexadecimal for 16.
 A pointer being a variable needs to be declared like all variables do:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		PointedType * PointerVariableName;
 	</code>
@@ -40,7 +40,7 @@ contain a random value. You don’t want a random memory address to be accessed
 so you initialize a pointer to NULL. NULL is a value that can be checked
 against and one that cannot be a memory address:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		PointedType * PointerVariableName = NULL; // initializing value
 	</code>
@@ -60,7 +60,7 @@ To store the address of this variable in a pointer, you would declare a
 pointer to the same Type and initialize the pointer to the variable’s address
 using the referencing operator (&amp;):
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		// Declaring a pointer to Type and initializing to address
 		Type* Pointer = &amp;Variable;

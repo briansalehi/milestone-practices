@@ -7,7 +7,7 @@ two arguments, at most three.
 What you usually try to give to a function can be put in a larger structure.  
 Say, you want to give a function three variables:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		void function(char* book_title, int book_pages, int book_price);
 	</code>
@@ -15,7 +15,7 @@ Say, you want to give a function three variables:
 
 Instead, you can create a structure named <b>Book</b> containing:  
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		struct Book {
 			char* title;
@@ -27,7 +27,7 @@ Instead, you can create a structure named <b>Book</b> containing:
 
 And call the function with one argument:
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		void function(Book book) {
 			// do something with book.title, book.pages, book.price
