@@ -210,7 +210,7 @@ two arguments, at most three.<br />
 What you usually try to give to a function can be put in a larger structure.<br />
 Say, you want to give a function three variables:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 void function(char* book_title, int book_pages, int book_price);<br />
 </code>
@@ -218,7 +218,7 @@ void function(char* book_title, int book_pages, int book_price);<br />
 <br />
 Instead, you can create a structure named <b>Book</b> containing:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 struct Book {
 char* title;<br />
@@ -230,7 +230,7 @@ int price;<br />
 <br />
 And call the function with one argument:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 void function(Book book) {
 // do something with book.title, book.pages, book.price
@@ -285,12 +285,12 @@ g++ -Wall -g -o ./parameters.o -c ./parameters.cxx
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./parameters.bin ./parameters.o
+g++ -g -o ./parameters ./parameters.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./parameters.bin
+./parameters
 </code>
 </pre>
 <ul class="pager">

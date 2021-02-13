@@ -209,7 +209,7 @@ all be at the tail end of the parameter list.<br />
 <br />
 That is, you can't do this:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 void function(int x = 1, int y);<br />
 </code>
@@ -227,7 +227,7 @@ return type void and two int arguments.<br />
 By using a default value, you actually change the function's signature, so
 these two functions are identical:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 void function(int x, int y = 1);<br />
 void function(int x);<br />
@@ -299,12 +299,12 @@ g++ -Wall -g -o ./default.o -c ./default.cxx
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./default.bin ./default.o
+g++ -g -o ./default ./default.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./default.bin
+./default
 </code>
 </pre>
 <hr />

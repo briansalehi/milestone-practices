@@ -222,7 +222,7 @@ makes them distinguishable even if they have the same name!<br />
 Consider following functions, all are of the same name but with different
 signatures:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 void function(int x);<br />
 void function(double x);<br />
@@ -233,7 +233,7 @@ int function(int x);<br />
 Don't forget that following two functions are identical when you use default
 argument values:<br />
 <br />
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 <code>
 void function();<br />
 void function(int x = 1);<br />
@@ -295,12 +295,12 @@ g++ -Wall -g -o ./overloading.o -c ./overloading.cxx
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./overloading.bin ./overloading.o
+g++ -g -o ./overloading ./overloading.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./overloading.bin
+./overloading
 </code>
 </pre>
 <ul class="pager">
