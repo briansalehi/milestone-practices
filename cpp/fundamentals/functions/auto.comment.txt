@@ -3,7 +3,7 @@ You are already familiar with type
 
 It lets you leave variable type deduction to the compiler that does so on the
 basis of the initialization value assigned to the variable. Starting with
-.++14, the same applies also to functions.
+C++14, the same applies also to functions.
 
 Instead of specifying the return type, you would use auto and let the compiler
 deduce the return type for you on the basis of return values you program.

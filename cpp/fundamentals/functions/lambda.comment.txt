@@ -1,7 +1,7 @@
 This section is just an introduction to a concept that’s not exactly easy for
 beginners. So, skim through it and try to learn the concept without being
 disappointed if you don’t grasp it all. Lambda functions are discussed in
-depth <a href="">algorithms section</a>.
+depth <a href="/cpp/">algorithms section</a>.
 
 The syntax of a lambda function is the following:
 <pre class="language-cpp line-numbers">

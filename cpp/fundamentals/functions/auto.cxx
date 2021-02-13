@@ -5,6 +5,6 @@ auto sum(int a, int b)
 
 int main()
 {
-	int result = sum(1,2);
+	int result = sum(1, 2);
     return 0;
 }

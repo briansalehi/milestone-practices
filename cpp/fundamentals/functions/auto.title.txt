@@ -1,1 +1,1 @@
-deduction of types by auto keyword
+Return Value Type Deduction

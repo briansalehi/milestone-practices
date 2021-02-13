@@ -1,9 +1,9 @@
-In earlier chapters we discussed about **constant expresssions**.  
+In earlier chapters we discussed about <b>constant expresssions</b>.  
 They are functions which will be evaluated in compile time.  
 Meaning, the function's body will be evaluated and the result will  
 be replaced to the position of function calls.  
 
-**inline** functions work the same way but in run-time.  
+<b>inline</b> functions work the same way but in run-time.  
 That is, function body will be moved to wherever it was called.  
 This way, program will not be sacrificing the time to port the program  
 execution flow to another point of memory.  
