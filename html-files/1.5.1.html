@@ -250,6 +250,15 @@ Output
 </svg>
 </a>
 </h3>
+<pre>
+<code class="language-bash">
+UID          PID    PPID  C STIME TTY          TIME CMD
+brian       5197    5190  0 Jan10 pts/0    00:00:01 bash
+brian     254263    5197 13 00:52 pts/0    00:00:03  \_ bash /home/brian/.local/bin/practice-manager -f
+brian     265189  254263  0 00:52 pts/0    00:00:00      \_ bash ./linux/process-management/ps.sh
+brian     265190  265189  0 00:52 pts/0    00:00:00          \_ ps -f --forest
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/process-management">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
