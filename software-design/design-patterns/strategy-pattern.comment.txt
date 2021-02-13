@@ -33,6 +33,7 @@ classes to represent each behavior.
 
 ![duck-simulation-with-behaviors-as-separate-classes.png]
 
+But still you're going to need change a lot whenever new requirements arrive.
 Luckily, there’s a design principle for just this situation.
 
 The <b>Strategy Pattern</b> defines a family of algorithms, encapsulates each
