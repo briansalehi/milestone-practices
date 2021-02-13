@@ -3,6 +3,7 @@
 #include <vector>
 
 void display(std::vector<int>& container) {
+	// lambda function to display elements of a container
     for_each(container.cbegin(), container.cend(), [](const int elem) { std::cout << elem << " "; });
     std::cout << std::endl;
 }
@@ -19,7 +20,7 @@ int main()
 
     display(container);
 
-    // descending order sort
+    // lambda function used to sort a container
     sort(container.begin(), container.end(), [](int a, int b) { return(a < b); });
     
     display(container);

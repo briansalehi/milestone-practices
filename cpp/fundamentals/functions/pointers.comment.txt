@@ -42,7 +42,7 @@ against and one that cannot be a memory address:
 
 <pre class="language-cpp line-numbers">
 	<code>
-		PointedType * PointerVariableName = NULL; // initializing value
+		PointedType* PointerVariableName = NULL; // initializing value
 	</code>
 </pre>
 
