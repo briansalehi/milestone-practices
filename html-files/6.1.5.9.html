@@ -204,7 +204,7 @@ Lambda Functions
 This section is just an introduction to a concept that’s not exactly easy for
 beginners. So, skim through it and try to learn the concept without being
 disappointed if you don’t grasp it all. Lambda functions are discussed in
-depth <a href="">algorithms section</a>.<br />
+depth <a href="/cpp/">algorithms section</a>.<br />
 <br />
 The syntax of a lambda function is the following:<br />
 <pre class="language-cpp line-numbers">
@@ -272,6 +272,7 @@ Source
     #include &lt;vector&gt;
     
     void display(std::vector&lt;int&gt;&amp; container) {
+    	// lambda function to display elements of a container
         for_each(container.cbegin(), container.cend(), [](const int elem) { std::cout &lt;&lt; elem &lt;&lt; &quot; &quot;; });
         std::cout &lt;&lt; std::endl;
     }
@@ -288,7 +289,7 @@ Source
     
         display(container);
     
-        // descending order sort
+        // lambda function used to sort a container
         sort(container.begin(), container.end(), [](int a, int b) { return(a &lt; b); });
         
         display(container);
@@ -339,7 +340,7 @@ Output
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.1.5.8.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/auto-return-value">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/pointers-parameters">next page</a></li>
 </ul>
