@@ -363,17 +363,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-gcc -g -Wall -O0 -c -o ./udp-client.o ./udp-client.c &
+gcc -g -Wall -O0 -c -o ./udp-client.o ./udp-client.c
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-gcc -g -o ./udp-client.bin ./udp-client.o &
+gcc -g -o ./udp-client.bin ./udp-client.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./udp-client.bin localhost helix 'UDP based connection message' &
+./udp-client.bin localhost helix 'UDP based connection message'
 </code>
 </pre>
 <hr />
@@ -386,6 +386,12 @@ Output
 </svg>
 </a>
 </h3>
+<pre>
+<code class="language-c">
+sending message to: ::1:[10860]
+failed to send message
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/udp-server">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

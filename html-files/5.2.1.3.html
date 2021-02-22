@@ -363,17 +363,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-gcc -g -Wall -O0 -c -o ./ipv6-server.o ./ipv6-server.c &
+gcc -g -Wall -O0 -c -o ./ipv6-server.o ./ipv6-server.c
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-gcc -g -o ./ipv6-server.bin ./ipv6-server.o &
+gcc -g -o ./ipv6-server.bin ./ipv6-server.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./ipv6-server.bin 8081 &
+./ipv6-server.bin 8081
 </code>
 </pre>
 <hr />
@@ -386,6 +386,14 @@ Output
 </svg>
 </a>
 </h3>
+<pre>
+<code class="language-c">
+server running: ::1:[8081]
+new connection from: ::1:46348
+received 29 bytes: IPv6 based connection message
+sent 29 bytes: IPv6 based connection message
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/ipv4-client">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

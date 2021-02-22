@@ -379,17 +379,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-gcc -g -Wall -O0 -c -o ./generic-server.o ./generic-server.c &
+gcc -g -Wall -O0 -c -o ./generic-server.o ./generic-server.c
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-gcc -g -o ./generic-server.bin ./generic-server.o &
+gcc -g -o ./generic-server.bin ./generic-server.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./generic-server.bin helix &
+./generic-server.bin helix
 </code>
 </pre>
 <hr />
@@ -402,6 +402,13 @@ Output
 </svg>
 </a>
 </h3>
+<pre>
+<code class="language-c">
+trying address: 0.0.0.0:[10860]
+client connected: 127.0.0.1:[55856]
+received 26 bytes: Generic connection messagesent 26 bytes
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/ipv6-client">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

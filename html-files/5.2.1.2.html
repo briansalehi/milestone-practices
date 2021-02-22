@@ -318,17 +318,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-gcc -g -Wall -O0 -c -o ./ipv4-client.o ./ipv4-client.c &
+gcc -g -Wall -O0 -c -o ./ipv4-client.o ./ipv4-client.c
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-gcc -g -o ./ipv4-client.bin ./ipv4-client.o &
+gcc -g -o ./ipv4-client.bin ./ipv4-client.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./ipv4-client.bin 127.0.0.1 8080 'IPv4 based connection message' &
+./ipv4-client.bin 127.0.0.1 1080 'IPv4 based connection message'
 </code>
 </pre>
 <hr />
@@ -343,7 +343,7 @@ Output
 </h3>
 <pre>
 <code class="language-c">
-connected: 127.0.0.1:[8080]
+connected: 127.0.0.1:[1080]
 sent 29 bytes: IPv4 based connection message
 incoming data matched
 </code>

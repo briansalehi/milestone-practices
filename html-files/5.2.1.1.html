@@ -237,7 +237,7 @@ Source
     /* exception handler */
     void throw_exception(const char *msg)
     {
-    	printf(&quot;%s\n&quot;, msg);
+    	fprintf(stderr, &quot;%s\n&quot;, msg);
     	exit(1);
     }
     
@@ -354,7 +354,7 @@ gcc -g -o ./ipv4-server.bin ./ipv4-server.o
 </pre>
 <pre>
 <code class="language-bash">
-./ipv4-server.bin 8080 &
+./ipv4-server.bin 1080
 </code>
 </pre>
 <hr />
@@ -367,6 +367,14 @@ Output
 </svg>
 </a>
 </h3>
+<pre>
+<code class="language-c">
+listening: 0.0.0.0:[1080]
+client connected: 127.0.0.1:[38148]
+received 29 bytes: IPv4 based connection messageV
+sent 29 bytes back
+</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
