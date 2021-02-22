@@ -11,7 +11,7 @@
 
 void throw_exception(const char *msg)
 {
-	printf("%s\n", msg);
+	fprintf(stderr, "%s\n", msg);
 	exit(1);
 }
 

@@ -22,8 +22,10 @@ int setup_connection(const in_port_t local_port)
 	/* fill up server address structure */
 	struct sockaddr_in6 local_address;
 	local_address.sin6_family = AF_INET6;
-	local_address.sin6_addr = in6addr_any;
 	local_address.sin6_port = htons(local_port);
+
+	if (inet_pton(AF_INET6, "::1", &local_address.sin6_addr.s6_addr) <= 0)
+		throw_exception("failed to translate address");
 
 	/* open port and bind to it */
 	if (bind(local_socket, (struct sockaddr *) &local_address, sizeof(local_address)) < 0) {
