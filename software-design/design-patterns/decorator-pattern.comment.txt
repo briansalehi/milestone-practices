@@ -1,4 +1,102 @@
-<h4>Design Principle</h4>
+We’ll re-examine the typical overuse of inheritance and you’ll learn how to
+decorate your classes at runtime using a form of object composition.
+
+Starbuzz Coffee has made a name for itself as the fastest-growing coffee shop
+around.
+When they first went into business they designed their classes like this:
+
+![coffeeshop-initial-bevarage-class.png]
+
+In addition to your coffee, you can also ask for several condiments.
+Starbuzz charges a bit for each condiment, so they really need to get them
+built into their order system.
+Here’s their first attempt:
+
+![coffeeshop-condiment-classes.png]
+
+Let’s start with the Beverage base class and add instance variables to
+represent whether or not each beverage has milk, soy, mocha, and whip:
+
+![coffeeshop-bevarage-with-condiment-members.png]
+
+Now let’s add in the subclasses, one for each beverage on the menu:
+
+![coffeeshop-bevarage-with-subclasses.png]
+
+As it turns out, though, there are some clever OO techniques for allowing
+systems to be extended, even if we can’t change the underlying code. Think
+about the Observer Pattern (in Chapter 2)...by adding new Observers, we can
+extend the Subject at any time, without adding code to the Subject. You’ll see
+quite a few more ways of extending behavior with other OO design techniques.
+
+While it may seem like a contradiction, there are techniques for allowing code
+to be extended without direct modification.
+
+Areas of code that need to be extended; applying the Open-Closed Principle
+EVERYWHERE is wasteful and unnecessary, and can lead to complex,
+hard-to-understand code.
+
+Okay, but how do you “decorate” an object, and how does delegation come into
+this? A hint: think of decorator objects as “wrappers.” Let’s see how this
+works:
+
+We start with our DarkRoast object.
+
+![coffeeshop-bevarage-class-construction-1.png]
+
+The customer wants Mocha, so we create a Mocha object and wrap it around the
+DarkRoast.
+
+![coffeeshop-bevarage-class-construction-2.png]
+
+The customer also wants Whip, so we create a Whip decorator and wrap Mocha
+with it.
+
+![coffeeshop-bevarage-class-construction-3.png]
+
+Now it’s time to compute the cost for the customer. We do this by calling
+cost() on the outermost decorator, Whip, and Whip is going to delegate
+computing the cost to the objects it decorates. And so on. Let’s see how this
+works:
+
+![coffeeshop-bevarage-class-construction-4.png]
+
+Here’s what we know about Decorators, so far:
+
+Decorators have the same supertype as the objects they decorate.
+
+You can use one or more decorators to wrap an object.
+
+Given that the decorator has the same supertype as the object it decorates, we
+can pass around a decorated object in place of the original (wrapped) object.
+
+The decorator adds its own behavior before and/or after delegating to the
+object it decorates to do the rest of the job.
+
+Objects can be decorated at any time, so we can decorate objects dynamically
+at runtime with as many decorators as we like.
+
+The Decorator Pattern attaches additional responsibilities to an object
+dynamically. Decorators provide a flexible alternative to subclassing for
+extending functionality.
+
+![coffeeshop-decorator-pattern.png]
+
+Let’s rework our Starbuzz beverages using the Decorator Pattern:
+
+![coffeeshop-decorated bevarage class.png]
+
+Let’s start with the Beverage class, which doesn’t need to change from
+Starbuzz’s original design. Let’s take a look:
+
+![coffeeshop-bevarage-class-implementation.png]
+
+Let’s implement the abstract class for the Condiments (the Decorator) as
+well:
+
+
+
+<b>Design Principle</b>
 Classes should be open for extension, but closed for modification.
 
 <h4>The Open-Closed Principle</h4>
