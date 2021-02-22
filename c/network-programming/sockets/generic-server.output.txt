@@ -1,0 +1,3 @@
+trying address: 0.0.0.0:[10860]
+client connected: 127.0.0.1:[55856]
+received 26 bytes: Generic connection messagesent 26 bytes
