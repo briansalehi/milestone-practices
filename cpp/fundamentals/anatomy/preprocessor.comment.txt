@@ -1,8 +1,10 @@
-Directives aimed at the preprocessor start with the # character.
+As the name suggests, a preprocessor is a tool that runs before the actual
+compilation starts. Preprocessor directives are commands to the preprocessor
+and always start with a pound sign #.
 
 The following table shows some of the most common preprocessor directives.
 
-<table class="table">
+<table class="table table-dark">
 	<thead>
 		<tr>
 			<th scope="col">#</th>
@@ -35,6 +37,17 @@ The following table shows some of the most common preprocessor directives.
 </table>
 
 One example of using preprocessor directives is to avoid multiple includes.
+
+<pre class="language-cpp line-numbers">
+	<code>
+		#ifndef SAMPLE_H
+		#define SAMPLE_H
+		
+		declarations...
+		
+		#endif
+	</code>
+</pre>
 
 If your compiler supports the #pragma once directive, and most modern
 compilers do, then this can be rewritten as follows:
