@@ -1,15 +1,5 @@
-When dealing with kind of data holding only a specific  
-possible amount of values, you should use enumeration.  
-
-As an example, a traffic control has only 3 light colors,  
-so to prevent the possibility of adding another color to  
-this range, we use an enumeration.
-
-Though, an enumeration is declared by integers, its  
-elements are not of type int and they should not be  
-compared by other types but itself.  
-What makes the comparison of type *int* and *traffic_light*  
-possible, is because compiler will promote one type to  
-the other one having higher rank.  
-So in this case, *traffic_light* will be promoted to  
-type int and switch case statement compares the values.
+The objective of switch-case is to enable you to check a particular expression
+against a host of possible constants and possibly perform a different action
+for each of those different values. The new C++ keywords you would often find
+in such a construct are <b>switch</b>, <b>case</b>, <b>default</b>, and
+<b>break</b>.

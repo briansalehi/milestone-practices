@@ -1,13 +1,31 @@
-Notice the expression **rvalue** and **lvalue**.  
-When we refer to **rvalue**, we generally are talking about the right operand of equation.  
-And otherwise, when we refer to **lvalue**, we are talking about the left operand of the equation.  
-The difference between rvalue and lvalue is that an lvalue is an object reference and a rvalue is a value.  
-An lvalue always has a defined region of storage, so you can take its address.  
-An rvalue is an expression that is not an lvalue.  
-Examples of rvalues include literals,
-the results of most operators, and function calls that return nonreferences.  
+Notice the expression <b>rvalue</b> and <b>lvalue</b>. When we refer to
+<b>rvalue</b>, we generally are talking about the right operand of equation.
+And otherwise, when we refer to <b>lvalue</b>, we are talking about the left
+operand of the equation.
+
+The difference between rvalue and lvalue is that an lvalue is an object
+reference and a rvalue is a value.
+An lvalue always has a defined region of storage, so you can take its address.
 An rvalue does not necessarily have any storage associated with it.
 
-So, ++rvalue, increments the rvalue and then assigns to the lvalue if there's any.  
-rvalue++, assigns rvalue to the lvalue if there's any and then increments it.  
-Some might argue that prefix ++ operator is faster, we will discuss it in classes and objects chapters.
+Examples of rvalues include literals, the results of most operators and
+function calls that return nonreferences.
+
+So, ++rvalue, increments the rvalue and then assigns to the lvalue if there's
+any.
+rvalue++, assigns rvalue to the lvalue if there's any and then increments it.
+Some might argue that prefix ++ operator is faster, we will discuss it in
+classes and objects chapters.
+
+It’s important to first understand the difference between prefix and postfix
+and then use the one that works for you. The result of execution of the
+postfix operators is that the l-value is first assigned the r-value and after
+that assignment the r-value is incremented (or decremented). This means that
+in all cases where a postfix operator has been used, the value of num2 is the
+old value of num1 (the value before the increment or decrement operation).
+
+Prefix operators have exactly the opposite in behavior. The r-value is first
+incremented and then assigned to the l-value. In these cases, num2 and num1
+carry the same value.
+Following source demonstrates the effect of prefix and postfix increment and
+decrement operators on a sample integer.

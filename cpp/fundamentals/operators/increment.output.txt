@@ -1,4 +1,4 @@
 first number: 10
-first number after increment: 11 and second: 10
+first number after postfix increment: 11 and second: 10
 first number: 10
-first number after incremented: 11 and second: 11
+first number after prefix increment: 11 and second: 11

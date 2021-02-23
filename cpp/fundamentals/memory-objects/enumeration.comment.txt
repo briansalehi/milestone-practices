@@ -1,26 +1,45 @@
 Enumerations are one of the constant types in C++.  
-Though, enumerations can only be defined by integer types, enumeration members are not of type int.
-Therefore, they cannot be assigned to integers, unless you convert them explicitely (discussed later).
+
+When dealing with kind of data holding only a specific possible amount of
+values, you should use enumeration.
+
+As an example, a traffic control has only 3 light colors, so to prevent the
+possibility of adding another color to this range, we use an enumeration.
+
+Though, an enumeration is declared by integers, its elements are not of type
+int and they should not be compared by other types but itself.
+What makes the comparison of type <i>int</i> and <i>traffic_light</i>
+possible, is because compiler will promote one type to the other one having
+higher rank.
+So in this case, <i>traffic_light</i> will be promoted to type int and switch
+case statement compares the values.
 
 By default, enum class has only following predefined operatrs:
 
-* assignment operator
-* initialization operator
-* and comparison operators
+<ul>
+<li>Assignment operator =</li>
+<li>Initialization operator {...}</li>
+<li>Comparison operators ==</li>
+</ul>
 
 But more operators can be implemented on enum classes too.  
-For example, we can make an enumeration object increment by one using ++ operator (will be discussed later).
+For example, we can make an enumeration object increment by one using ++
+operator, which is discussed in <a href="/cpp/fundamentals/program-flow/switch-case/">postfix and prefix operators</a>.
 
-```cpp
-// prefix increment operator++ (operator overloading is discussed later)
-TrafficLight& operator++ (TrafficLight& light) {
-    switch (light) {
-        case TrafficLight::red : light = TrafficLight::yellow;
-        case TrafficLight::yellow : light = TrafficLight::green;
-        case TrafficLight::green : light = TrafficLight::red;
-    }
-    return light;
-}
+<pre class="language-cpp line-numbers">
+	<code>
+		TrafficLight light = TrafficLight::yellow;
 
-++light; // using operator++ , now light is yellow
-```
+		// prefix increment operator++ (operator overloading is discussed later)
+		TrafficLight& operator++ (TrafficLight& light) {
+			switch (light) {
+				case TrafficLight::red : light = TrafficLight::yellow;
+				case TrafficLight::yellow : light = TrafficLight::green;
+				case TrafficLight::green : light = TrafficLight::red;
+			}
+			return light;
+		}
+
+		++light; // using operator++ , now light is yellow
+	</code>
+</pre>

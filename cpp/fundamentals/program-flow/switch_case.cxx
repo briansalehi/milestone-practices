@@ -14,13 +14,13 @@ int main()
 
     switch (input) {
         case red:
-            std::cout << "light is red" << std::endl;
+            std::cout << "Light is red" << std::endl;
             break;
         case yellow:
-            std::cout << "light is yellow" << std::endl;
+            std::cout << "Light is yellow" << std::endl;
             break;
         case green:
-            std::cout << "light is green" << std::endl;
+            std::cout << "Light is green" << std::endl;
             break;
         default:
             std::cout << "your input is not in valid range!" << std::endl;
