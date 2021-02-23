@@ -1,0 +1,14 @@
+README.md
+comments.sql
+create-database.sql
+use-database.sql
+create-table.sql
+add-column.sql
+delete-column.sql
+create-index.sql
+delete-index.sql
+query-single-table.sql
+join-tables.sql
+add-row.sql
+update-row.sql
+delete-row.sql

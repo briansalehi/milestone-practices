@@ -1,0 +1,4 @@
+This sample also shows the <i>result set</i> that's returned by the SELECT
+statement. A result set is a logical table that's created temporarily whithin
+database. When an application requests data from a 	database, it receives a
+result set.

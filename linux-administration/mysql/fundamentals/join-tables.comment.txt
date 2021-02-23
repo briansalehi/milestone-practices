@@ -1,0 +1,16 @@
+Following sample presents a SELECT statement that retrieves data from two
+tables. This type of operation is called <i>join</i> because the data from the
+two tables is joined together into a single result set.
+
+An <i>inner join</i> is the most common type of join. By using an inner join,
+rows from the two tables in the join are included in the result set only if
+their related columns match.
+
+Although this sample uses only how to join data from two tables, you can
+extend this syntax to join data from three or more tables.
+
+In addition to inner joins, most relational databases including MYSQL support
+other types of joins such as <i>outer joins</i>. An outer join lets you
+include all rows from a table even if the other table doesn't have a matching
+row. You'll learn more about different types of joins in
+<a href="/linux-administration/mysql/joins/">joins chapter</a>.

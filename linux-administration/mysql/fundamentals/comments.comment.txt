@@ -1,0 +1,4 @@
+To code a <i>block comment</i>, type /* at the start of the block and */ and
+the end.
+
+To code an <i>inline comment</i>, type -- followed by the comment.

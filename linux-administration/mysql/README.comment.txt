@@ -1,82 +1,18 @@
-Following table summarizes some of the most common SQL statements. These
-statements can be divided into two categories. The statements that work with
-the data in a database are called the <i>data manipulation language</i>
-(<b>DML</b>). These are the statements that application programmers use the
-most.
+SQL is a freeform language. That means that you can include line breaks,
+spaces, and indentation without affecting the way the database interprets the
+code.
 
-<cite>SQL statements used to work with data (DML)</cite>
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Statement</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>SELECT</b></td>
-      <td>Retrieves data from one or more tables.</td>
-    </tr>
-    <tr>
-      <td><b>INSERT</b></td>
-      <td>Adds new rows to a table.</td>
-    </tr>
-    <tr>
-      <td><b>UPDATE</b></td>
-      <td>Changes existing rows in a table.</td>
-    </tr>
-    <tr>
-      <td><b>DELETE</b></td>
-      <td>Delets existing rows from a table.</td>
-    </tr>
-  </tbody>
-</table>
+In addition, SQL isn't case-sensitive. That means that you can use uppercase
+or lowercase or combination of both without affecting the way the database
+interprets the code.
 
-The statements that create databases and work with the objects within a
-database are called the <i>data definition language</i> (<b>DDL</b>). These
-statements are used exclusively by <i>database administrators</i>
-(<b>DBA</b>s).
-
-<cite>SQL statements used to work with database objects (DDL)</cite>
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Statement</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>CREATE DATABASE</b></td>
-      <td>Creates a new database on the server.</td>
-    </tr>
-    <tr>
-      <td><b>CREATE TABLE</b></td>
-      <td>Creates a new table in a database.</td>
-    </tr>
-    <tr>
-      <td><b>CREATE INDEX</b></td>
-      <td>Creates a new index for a table.</td>
-    </tr>
-    <tr>
-      <td><b>ALTER TABLE</b></td>
-      <td>Changes the definition of an existing table.</td>
-    </tr>
-    <tr>
-      <td><b>ALTER INDEX</b></td>
-      <td>Changes the structure of an existing index.</td>
-    </tr>
-    <tr>
-      <td><b>DROP DATABASE</b></td>
-      <td>Delets an existing database and all of its tables.</td>
-    </tr>
-    <tr>
-      <td><b>DROP TABLE</b></td>
-      <td>Delets an existing table.</td>
-    </tr>
-    <tr>
-      <td><b>DROP INDEX</b></td>
-      <td>Delets an existing index.</td>
-    </tr>
-  </tbody>
-</table>
+<h4>Coding Recommendations</h4>
+<ul>
+<li>Capitalize all keywords, and use lowercase for the other code in a SQL
+statement.</li>
+<li>Separate the words in names with underscores, as in invoice_number.</li>
+<li>Start each clause on a new line.</li>
+<li>Break long clauses into multiple lines and indent continued lines.</li>
+<li>Use <i>comments</i> only for portions of code that are difficult to
+understand. Then, make sure that the comments are correct and up-to-date.</li>
+</ul>
