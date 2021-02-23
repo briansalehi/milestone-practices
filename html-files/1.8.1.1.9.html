@@ -201,7 +201,7 @@ Notation
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 (See <b>:h key-notation</b> )
 <br/>
 <br />
@@ -213,33 +213,33 @@ pressing multiple keys at a time.<br />
 Sequence of keystrokes appear as follows:<br />
 <br />
 <table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>x</mark></td>
-<td>Press x once</td>
-</td>
-<tr>
-<td><mark>dw</mark></td>
-<td>In sequence, press d then w</td>
-</td>
-<tr>
-<td><mark>dap</mark></td>
-<td>In sequence, press d, a then p</td>
-</td>
-</tbody>
+	<thead>
+		<tr>
+			<th scope="col">Notation</th>
+			<th scope="col">Meaning</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><mark>x</mark></td>
+			<td>Press x once</td>
+		</td>
+		<tr>
+			<td><mark>dw</mark></td>
+			<td>In sequence, press d then w</td>
+		</td>
+		<tr>
+			<td><mark>dap</mark></td>
+			<td>In sequence, press d, a then p</td>
+		</td>
+	</tbody>
 </table>
 <br />
 <h4>Playing Chords</h4>
 <pre class="language-vim">
-<code>
-&lt;C-p&gt;<br />
-</code>
+    <code>
+        &lt;C-p&gt;<br />
+    </code>
 </pre>
 <br />
 Is equivalent to <mark>Ctrl-p</mark> which means press the
@@ -247,112 +247,112 @@ Is equivalent to <mark>Ctrl-p</mark> which means press the
 <br />
 <h4>Chords</h4>
 <table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>&lt;C-p&gt;</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time</td>
-</td>
-<tr>
-<td><mark>g&lt;C-]&gt;</mark></td>
-<td>Press <mark>g</mark> followed by <mark>&lt;Ctrl&gt;</mark> and <mark>]</mark> at the same time</td>
-</td>
-<tr>
-<td><mark>&lt;C-r&gt;0</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, then <mark>0</mark></td>
-</td>
-<tr>
-<td><mark>&lt;C-p&gt;</mark><mark>&lt;C-=&gt;</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time, then <mark>&lt;Ctrl&gt;</mark> and <mark>=</mark> at the same time</td>
-</td>
-</tbody>
+	<thead>
+		<tr>
+			<th scope="col">Notation</th>
+			<th scope="col">Meaning</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><mark>&lt;C-p&gt;</mark></td>
+			<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time</td>
+		</td>
+		<tr>
+			<td><mark>g&lt;C-]&gt;</mark></td>
+			<td>Press <mark>g</mark> followed by <mark>&lt;Ctrl&gt;</mark> and <mark>]</mark> at the same time</td>
+		</td>
+		<tr>
+			<td><mark>&lt;C-r&gt;0</mark></td>
+			<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, then <mark>0</mark></td>
+		</td>
+		<tr>
+			<td><mark>&lt;C-p&gt;</mark><mark>&lt;C-=&gt;</mark></td>
+			<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> at the same time, then <mark>&lt;Ctrl&gt;</mark> and <mark>=</mark> at the same time</td>
+		</td>
+	</tbody>
 </table>
 <br />
 <h4>Placeholders</h4>
 <br />
 <table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>f{char}</mark></td>
-<td>Press <mark>f</mark> followed by any other character</td>
-</td>
-<tr>
-<td><mark>`{a-z}</mark></td>
-<td>Press <mark>`</mark> followed by any lowercase letter</td>
-</td>
-<tr>
-<td><mark>m{a-zA-Z}</mark></td>
-<td>Press <mark>m</mark> followed by any lowercase or uppercase letter</td>
-</td>
-<tr>
-<td><mark>d{motion}</mark></td>
-<td>Press <mark>d</mark> followed by any motion command</td>
-</td>
-<tr>
-<td><mark>&lt;C-r&gt;{register}</mark></td>
-<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, followed by the address of register</td>
-</td>
-</tbody>
+	<thead>
+		<tr>
+			<th scope="col">Notation</th>
+			<th scope="col">Meaning</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><mark>f{char}</mark></td>
+			<td>Press <mark>f</mark> followed by any other character</td>
+		</td>
+		<tr>
+			<td><mark>`{a-z}</mark></td>
+			<td>Press <mark>`</mark> followed by any lowercase letter</td>
+		</td>
+		<tr>
+			<td><mark>m{a-zA-Z}</mark></td>
+			<td>Press <mark>m</mark> followed by any lowercase or uppercase letter</td>
+		</td>
+		<tr>
+			<td><mark>d{motion}</mark></td>
+			<td>Press <mark>d</mark> followed by any motion command</td>
+		</td>
+		<tr>
+			<td><mark>&lt;C-r&gt;{register}</mark></td>
+			<td>Press <mark>&lt;Ctrl&gt;</mark> and <mark>r</mark> at the same time, followed by the address of register</td>
+		</td>
+	</tbody>
 </table>
 <br />
 <h4>Special Keys</h4>
 <br />
 <table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Notation</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><mark>&lt;Esc&gt;</mark></td>
-<td>Press the Escape key</td>
-</td>
-<tr>
-<td><mark>&lt;CR&gt;</mark></td>
-<td>Press the carriage return key {also known as <mark>&lt;Enter&gt;</mark></td>
-</td>
-<tr>
-<td><mark>&lt;Ctrl&gt;</mark></td>
-<td>Press the Control key</td>
-</td>
-<tr>
-<td><mark>&lt;Tab&gt;</mark></td>
-<td>Press the Tab key</td>
-</td>
-<tr>
-<td><mark>&lt;Shift&gt;</mark></td>
-<td>Press the Shift key</td>
-</td>
-<tr>
-<td><mark>&lt;S-Tab&gt;</mark></td>
-<td>Press the Shift and Tab keys at the same time</td>
-</td>
-<tr>
-<td><mark>&lt;Up&gt;</mark></td>
-<td>Press the up arrow key</td>
-</td>
-<tr>
-<td><mark>&lt;Down&gt;</mark></td>
-<td>Press the down arrow key</td>
-</td>
-<tr>
-<td><mark>&lt;␣&gt;</mark></td>
-<td>Press the space bar</td>
-</td>
-</tbody>
+	<thead>
+		<tr>
+			<th scope="col">Notation</th>
+			<th scope="col">Meaning</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><mark>&lt;Esc&gt;</mark></td>
+			<td>Press the Escape key</td>
+		</td>
+		<tr>
+			<td><mark>&lt;CR&gt;</mark></td>
+			<td>Press the carriage return key {also known as <mark>&lt;Enter&gt;</mark></td>
+		</td>
+		<tr>
+			<td><mark>&lt;Ctrl&gt;</mark></td>
+			<td>Press the Control key</td>
+		</td>
+		<tr>
+			<td><mark>&lt;Tab&gt;</mark></td>
+			<td>Press the Tab key</td>
+		</td>
+		<tr>
+			<td><mark>&lt;Shift&gt;</mark></td>
+			<td>Press the Shift key</td>
+		</td>
+		<tr>
+			<td><mark>&lt;S-Tab&gt;</mark></td>
+			<td>Press the Shift and Tab keys at the same time</td>
+		</td>
+		<tr>
+			<td><mark>&lt;Up&gt;</mark></td>
+			<td>Press the up arrow key</td>
+		</td>
+		<tr>
+			<td><mark>&lt;Down&gt;</mark></td>
+			<td>Press the down arrow key</td>
+		</td>
+		<tr>
+			<td><mark>&lt;␣&gt;</mark></td>
+			<td>Press the space bar</td>
+		</td>
+	</tbody>
 </table>
 </div>
 <hr />

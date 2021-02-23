@@ -200,42 +200,42 @@ Parameters
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 A function can have multiple parameters separated by commas, but it can have
 only one return type.<br />
 <br />
 Considering the design of a clean code, a function should not have more than
-two arguments, at most three.<br />
+two arguments, at most three.  
 <br />
-What you usually try to give to a function can be put in a larger structure.<br />
+What you usually try to give to a function can be put in a larger structure.  
 Say, you want to give a function three variables:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-void function(char* book_title, int book_pages, int book_price);<br />
-</code>
+	<code>
+		void function(char* book_title, int book_pages, int book_price);<br />
+	</code>
 </pre>
 <br />
-Instead, you can create a structure named <b>Book</b> containing:<br />
+Instead, you can create a structure named <b>Book</b> containing:  
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-struct Book {
-char* title;<br />
-int pages;<br />
-int price;<br />
-} book;<br />
-</code>
+	<code>
+	struct Book {
+	    char* title;<br />
+	    int pages;<br />
+		int price;<br />
+	} book;<br />
+	</code>
 </pre>
 <br />
 And call the function with one argument:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-void function(Book book) {
-// do something with book.title, book.pages, book.price
-}
-</code>
+	<code>
+		void function(Book book) {
+			// do something with book.title, book.pages, book.price
+		}
+	</code>
 </pre>
 </div>
 <hr />

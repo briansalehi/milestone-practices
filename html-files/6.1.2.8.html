@@ -200,8 +200,8 @@ enumerations
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-Enumerations are one of the constant types in C++.<br />
+<div>
+Enumerations are one of the constant types in C++.  
 <br />
 When dealing with kind of data holding only a specific possible amount of
 values, you should use enumeration.<br />
@@ -225,26 +225,26 @@ By default, enum class has only following predefined operatrs:<br />
 <li>Comparison operators ==</li>
 </ul>
 <br />
-But more operators can be implemented on enum classes too.<br />
+But more operators can be implemented on enum classes too.  
 For example, we can make an enumeration object increment by one using ++
 operator, which is discussed in <a href="/cpp/fundamentals/program-flow/switch-case/">postfix and prefix operators</a>.<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-TrafficLight light = TrafficLight::yellow;<br />
+	<code>
+		TrafficLight light = TrafficLight::yellow;<br />
 <br />
-// prefix increment operator++ (operator overloading is discussed later)
-TrafficLight& operator++ (TrafficLight& light) {
-switch (light) {
-case TrafficLight::red : light = TrafficLight::yellow;<br />
-case TrafficLight::yellow : light = TrafficLight::green;<br />
-case TrafficLight::green : light = TrafficLight::red;<br />
-}
-return light;<br />
-}
+		// prefix increment operator++ (operator overloading is discussed later)
+		TrafficLight& operator++ (TrafficLight& light) {
+			switch (light) {
+				case TrafficLight::red : light = TrafficLight::yellow;<br />
+				case TrafficLight::yellow : light = TrafficLight::green;<br />
+				case TrafficLight::green : light = TrafficLight::red;<br />
+			}
+			return light;<br />
+		}
 <br />
-++light; // using operator++ , now light is yellow
-</code>
+		++light; // using operator++ , now light is yellow
+	</code>
 </pre>
 </div>
 <hr />

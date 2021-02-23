@@ -201,15 +201,15 @@ Factory Settings
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 You may find that some things don’t work for you the way that they are described in the text.<br />
 <br />
-Try quitting Vim and then launching it with these options:<br />
+Try quitting Vim and then launching it with these options: 
 <br />
 <pre class="language-bash">
-<code>
-vim -u NONE -N
-</code>
+    <code>
+        vim -u NONE -N
+    </code>
 </pre>
 <br />
 The -u NONE flag tells Vim not to source your vimrc on startup.<br />
@@ -227,19 +227,19 @@ activate Vim’s built-in plugins:<br />
 <br />
 <cite>path/to/vimrc</cite>
 <pre class="language-vim">
-<code>
-set compatible
-filetype plugin on
-</code>
+    <code>
+        set compatible
+        filetype plugin on
+    </code>
 </pre>
 <br />
 When launching Vim, you can use this file instead of your default vimrc by
 running the following:<br />
 <br />
 <pre class="language-bash">
-<code>
-vim -u path/to/vimrc
-</code>
+    <code>
+        vim -u path/to/vimrc
+    </code>
 </pre>
 </div>
 <hr />

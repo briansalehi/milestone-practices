@@ -200,9 +200,9 @@ std::lock_guard
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-**std::lock_guard** is a simple mutex wrapper, which handles the obtaining of a lock on the *mutex* object it gets as parameter, as well as its release when the lock guard goes out of scope.<br />
-This is a helpful mechanism to ensure that one does not forget to release a mutex lock, and to help reduce clutter in one's code when one has to release the same mutex in multiple locations.<br />
+<div>
+**std::lock_guard** is a simple mutex wrapper, which handles the obtaining of a lock on the *mutex* object it gets as parameter, as well as its release when the lock guard goes out of scope.  
+This is a helpful mechanism to ensure that one does not forget to release a mutex lock, and to help reduce clutter in one's code when one has to release the same mutex in multiple locations.  
 With the lock guard, however, we do not have to worry about such details, which allows us to focus on the business logic instead of worrying about mutex management.<br />
 </div>
 <hr />

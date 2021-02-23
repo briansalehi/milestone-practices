@@ -200,19 +200,19 @@ typeinfo
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 Using *implicit* type declaration makes your code readable for sure,
-but it won't hide the fact that you need to know what kind of types you are using in your program.<br />
-Type deductions also make it even harder when variable types are complex.<br />
+but it won't hide the fact that you need to know what kind of types you are using in your program.  
+Type deductions also make it even harder when variable types are complex.  
 <br />
 To find a variable's type, you can you **typeid()** object in *typeinfo* header file,
-and use **name()** method to show the type name.<br />
+and use **name()** method to show the type name.  
 Also using **before()** method clarifies which type precedes the other.<br />
 <br />
 The output **d** represents type **double**.<br />
 **4Base** indicates the name of class named Base,
 **FiiE** means function with signature of ii,
-**PFddE** means pointer to function with signature of dd.<br />
+**PFddE** means pointer to function with signature of dd.  
 this is how Cxx language finds its functions, variables and objects!<br />
 So, when using 4 overloaded functions all having the same name, it's not a magic that Cxx can find the proper function.<br />
 </div>

@@ -200,30 +200,30 @@ assignment operator
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-Operators **-=**, **+=** and similar can be overloaded in a class.<br />
+<div>
+Operators **-=**, **+=** and similar can be overloaded in a class.  
 Notice that this class is far away from being a perfect date class, days can exceed 31 and values are not controlled. So just take advantage of learning operator overloading not implementing a date class.<br />
 <br />
 ref[6]
-C++ also allows overloading of operators, such as +, *, +=, and <<. Not
-surprisingly, such a definition is called operator overloading. Suppose we would
-like to write an equality test for two Passenger objects. We can denote this in a
+C++ also allows overloading of operators, such as +, *, +=, and <<. Not  
+surprisingly, such a definition is called operator overloading. Suppose we would  
+like to write an equality test for two Passenger objects. We can denote this in a  
 natural way by overloading the == operator as shown below.<br />
 <br />
 ```cxx
 bool operator==(const Passenger& x, const Passenger& y) {
-return x.name == y.name
-&& x.mealPref == y.mealPref
-&& x.isFreqFlyer == y.isFreqFlyer
-&& x.freqFlyerNo == y.freqFlyerNo;<br />
+	return x.name == y.name
+		&& x.mealPref == y.mealPref
+		&& x.isFreqFlyer == y.isFreqFlyer
+		&& x.freqFlyerNo == y.freqFlyerNo;<br />
 }
 ```
 <br />
-Operator overloading is a powerful mechanism, but it is easily abused. It can be
-very confusing for someone reading your program to find that familiar operations
-such as “+” and “/” have been assigned new and possibly confusing meanings.<br />
-Good programmers usually restrict operator overloading to certain general purpose
-operators such as “ <<” (output), “=” (assignment), “==” (equality)
+Operator overloading is a powerful mechanism, but it is easily abused. It can be  
+very confusing for someone reading your program to find that familiar operations  
+such as “+” and “/” have been assigned new and possibly confusing meanings.  
+Good programmers usually restrict operator overloading to certain general purpose  
+operators such as “ <<” (output), “=” (assignment), “==” (equality)  
 , “[ ]” (indexing, for sequences).<br />
 end[6]
 </div>

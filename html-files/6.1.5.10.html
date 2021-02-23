@@ -200,7 +200,7 @@ Pointer Parameters
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 You already know that array names point to the address of their first element
 in memory.<br />
 <br />
@@ -233,9 +233,9 @@ hexadecimal for 16.<br />
 A pointer being a variable needs to be declared like all variables do:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-PointedType * PointerVariableName;<br />
-</code>
+	<code>
+		PointedType * PointerVariableName;<br />
+	</code>
 </pre>
 <br />
 As is the case with most variables, unless you initialize a pointer it will
@@ -244,9 +244,9 @@ so you initialize a pointer to NULL. NULL is a value that can be checked
 against and one that cannot be a memory address:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-PointedType* PointerVariableName = NULL; // initializing value
-</code>
+	<code>
+		PointedType* PointerVariableName = NULL; // initializing value
+	</code>
 </pre>
 <br />
 You know that the amount of memory consumed by a variable is dependent on its
@@ -264,10 +264,10 @@ pointer to the same Type and initialize the pointer to the variable’s address
 using the referencing operator (&amp;):<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-// Declaring a pointer to Type and initializing to address
-Type* Pointer = &amp;Variable;<br />
-</code>
+	<code>
+		// Declaring a pointer to Type and initializing to address
+		Type* Pointer = &amp;Variable;<br />
+	</code>
 </pre>
 <br />
 The dereferencing operator (*) is also called the indirection operator.<br />

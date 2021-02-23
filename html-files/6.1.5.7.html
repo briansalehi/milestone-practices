@@ -200,27 +200,27 @@ Inline Functions
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-In earlier chapters we discussed about <b>constant expresssions</b>.<br />
-They are functions which will be evaluated in compile time.<br />
-Meaning, the function's body will be evaluated and the result will
-be replaced to the position of function calls.<br />
+<div>
+In earlier chapters we discussed about <b>constant expresssions</b>.  
+They are functions which will be evaluated in compile time.  
+Meaning, the function's body will be evaluated and the result will  
+be replaced to the position of function calls.  
 <br />
-<b>inline</b> functions work the same way but in run-time.<br />
-That is, function body will be moved to wherever it was called.<br />
-This way, program will not be sacrificing the time to port the program
-execution flow to another point of memory.<br />
-But don't be too smart using inline functions. Making a function inline
-and using it many times will make your binary file too big as each of
-the function calls will be replaced by the function body.<br />
-So, using inline functions are only helpful when the function body is
+<b>inline</b> functions work the same way but in run-time.  
+That is, function body will be moved to wherever it was called.  
+This way, program will not be sacrificing the time to port the program  
+execution flow to another point of memory.  
+But don't be too smart using inline functions. Making a function inline  
+and using it many times will make your binary file too big as each of  
+the function calls will be replaced by the function body.  
+So, using inline functions are only helpful when the function body is  
 small and you call it as few times as possible.<br />
 <br />
 ref[2]
-Very short functions may be defined to be “inline.” This is a hint to the compiler
-it should simply expand the function code in place, rather than using the system’s
-call-return mechanism. As a rule of thumb, in-line functions should be very short
-(at most a few lines) and should not involve any loops or conditionals.<br />
+Very short functions may be defined to be “inline.” This is a hint to the compiler  
+it should simply expand the function code in place, rather than using the system’s  
+call-return mechanism. As a rule of thumb, in-line functions should be very short  
+(at most a few lines) and should not involve any loops or conditionals.  
 end[2]
 </div>
 <hr />

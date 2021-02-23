@@ -200,7 +200,7 @@ Dynamic Memory Allocation
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 To program an application that is able to optimally consume memory resources
 on the basis of the needs of the user, you need to use dynamic memory
 allocation.<br />
@@ -216,40 +216,40 @@ When using new, you need to specify the data type for which the memory is
 being  allocated:<br />
 <br />
 <pre class="language-cpp">
-<code>
-Type* Pointer = new Type; // request memory for one element
-</code>
+	<code>
+		Type* Pointer = new Type; // request memory for one element
+	</code>
 </pre>
 <br />
 You can also specify the number of elements you want to allocate that memory
 for (when you need to allocate memory for more than one element):<br />
 <br />
 <pre class="language-cpp">
-<code>
-Type* Pointer = new Type[numElements]; // request memory for numElements
-</code>
+	<code>
+		Type* Pointer = new Type[numElements]; // request memory for numElements
+	</code>
 </pre>
 <br />
 Every allocation using new needs to be eventually released using an equal and
 opposite de-allocation via delete:<br />
 <br />
 <pre class="language-cpp">
-<code>
-Type* Pointer = new Type; // allocate memory
-delete Pointer; // release memory allocated above
-</code>
+	<code>
+		Type* Pointer = new Type; // allocate memory
+		delete Pointer; // release memory allocated above
+	</code>
 </pre>
 <br />
 This rule also applies when you request memory for multiple elements:<br />
 <br />
 <pre class="language-cpp">
-<code>
-Type* Pointer = new Type[numElements]; // allocate a block
-delete[] Pointer; // release block allocated above
-</code>
+	<code>
+		Type* Pointer = new Type[numElements]; // allocate a block
+		delete[] Pointer; // release block allocated above
+	</code>
 </pre>
 <br />
-Operators <b>new</b> and <b>delete</b> allocate memory from the free store.<br />
+Operators <b>new</b> and <b>delete</b> allocate memory from the free store. 
 The free store is a memory abstraction in the form of a pool of memory
 where your application can allocate (that is, reserve) memory from and
 deallocate (that is, release) memory to.<br />
@@ -262,18 +262,18 @@ placed in the memory; it only points to the beginning.<br />
 If a pointer has been declared as
 <br />
 <pre class="language-cpp">
-<code>
-Type* pType = Address;<br />
-++pType
-</code>
+	<code>
+		Type* pType = Address;<br />
+		++pType
+	</code>
 </pre>
 <br />
 Would mean that <i>pType</i> contains (and hence points to)
 <br />
 <pre class="language-cpp">
-<code>
-Address + sizeof(Type)
-</code>
+	<code>
+		Address + sizeof(Type)
+	</code>
 </pre>
 <br />
 Pointers are variables, too, and hence the const keyword that is relevant to
@@ -287,13 +287,13 @@ have the following combinations:<br />
 the data at that address can be changed</li>
 <br />
 <pre class="language-cpp">
-<code>
-int daysInMonth = 30;<br />
-int* const pDaysInMonth = &daysInMonth;<br />
-*pDaysInMonth = 31; // OK! Data pointed to can be changed
-int daysInLunarMonth = 28;<br />
-pDaysInMonth = &daysInLunarMonth; // Not OK! Cannot change address!<br />
-</code>
+	<code>
+		int daysInMonth = 30;<br />
+		int* const pDaysInMonth = &daysInMonth;<br />
+		*pDaysInMonth = 31; // OK! Data pointed to can be changed
+		int daysInLunarMonth = 28;<br />
+		pDaysInMonth = &daysInLunarMonth; // Not OK! Cannot change address!<br />
+	</code>
 </pre>
 <br />
 <li>Data pointed to is constant and cannot be changed, yet the address
@@ -301,27 +301,27 @@ contained in the pointer can be changed—that is, the pointer can also point
 elsewhere</li>
 <br />
 <pre class="language-cpp">
-<code>
-int hoursInDay = 24;<br />
-const int* pointsToInt = &hoursInDay;<br />
-int monthsInYear = 12;<br />
-pointsToInt = &monthsInYear; // OK!<br />
-*pointsToInt = 13; // Not OK! Cannot change data being pointed to
-int* newPointer = pointsToInt; // Not OK! Cannot assign const to non-const
-</code>
+	<code>
+		int hoursInDay = 24;<br />
+		const int* pointsToInt = &hoursInDay;<br />
+		int monthsInYear = 12;<br />
+		pointsToInt = &monthsInYear; // OK!<br />
+		*pointsToInt = 13; // Not OK! Cannot change data being pointed to
+		int* newPointer = pointsToInt; // Not OK! Cannot assign const to non-const
+	</code>
 </pre>
 <br />
 <li>Both the address contained in the pointer and the value being pointed to are
 constant and cannot be changed (most restrictive variant):</li>
 <br />
 <pre class="language-cpp">
-<code>
-int hoursInDay = 24;<br />
-const int* const pHoursInDay = &hoursInDay;<br />
-*pHoursInDay = 25; // Not OK! Cannot change data being pointed to
-int daysInMonth = 30;<br />
-pHoursInDay = &daysInMonth; // Not OK! Cannot change address
-</code>
+	<code>
+		int hoursInDay = 24;<br />
+		const int* const pHoursInDay = &hoursInDay;<br />
+		*pHoursInDay = 25; // Not OK! Cannot change data being pointed to
+		int daysInMonth = 30;<br />
+		pHoursInDay = &daysInMonth; // Not OK! Cannot change address
+	</code>
 </pre>
 </ul>
 <br />

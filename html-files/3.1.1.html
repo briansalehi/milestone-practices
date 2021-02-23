@@ -199,7 +199,7 @@ Naming
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 <h4>Use Intention-Revealing Names</h4>
 For example, the name <i>d</i> reveals nothing.<br />
 It doesn't evoke a sense of elapsed time, nor of days.<br />
@@ -207,24 +207,24 @@ We should choose a name that specifies what is being measured and the unit of
 that measurement:<br />
 <br />
 <pre class="language-cpp">
-<code>
-int elapsedTimeInDays;<br />
-int daysSinceCreation;<br />
-int daysSinceModification;<br />
-int fileAgeInDays;<br />
-</code>
+	<code>
+		int elapsedTimeInDays;<br />
+		int daysSinceCreation;<br />
+		int daysSinceModification;<br />
+		int fileAgeInDays;<br />
+	</code>
 </pre>
 <br />
 Sometimes the problem is not the simplicity of the code but the
 <i>implicity</i> of it.<br />
 <br />
 <pre class="language-cpp">
-<code>
-int cell[];<br />
-...<br />
-if (cell[0] == 4)
-...<br />
-</code>
+	<code>
+		int cell[];<br />
+		...<br />
+		if (cell[0] == 4)
+		    ...<br />
+	</code>
 </pre>
 <br />
 Here, zeroth subscription does not signify anything, neither does the number
@@ -232,23 +232,23 @@ Here, zeroth subscription does not signify anything, neither does the number
 By giving concepts names, we make the code readable considerably:<br />
 <br />
 <pre class="language-cpp">
-<code>
-int cell[];<br />
-...<br />
-if (cell[STATUS_VALUE] == FLAGGED)
-...<br />
-</code>
+	<code>
+		int cell[];<br />
+		...<br />
+		if (cell[STATUS_VALUE] == FLAGGED)
+		...<br />
+	</code>
 </pre>
 <br />
 Further improvements can also be made by object oriented design:<br />
 <br />
 <pre class="language-cpp">
-<code>
-Cell cell = new Cell;<br />
-...<br />
-if (cell.isFlagged())
-...<br />
-</code>
+	<code>
+		Cell cell = new Cell;<br />
+		...<br />
+		if (cell.isFlagged())
+		    ...<br />
+	</code>
 </pre>
 <br />
 <h4>Avoid Disinformation</h4>
@@ -266,12 +266,12 @@ The problem of course, is that they look almost entirely like the constants
 one and zero, respectively.<br />
 <br />
 <pre class="language-cpp">
-<code>
-if ( O == l )
-O = 0;<br />
-else
-l = 1;<br />
-</code>
+	<code>
+		if ( O == l )
+		    O = 0;<br />
+		else
+		    l = 1;<br />
+	</code>
 </pre>
 <br />
 <h4>Make Meaningful Distinctions</h4>
@@ -286,11 +286,11 @@ How is <i>NameString</i> better than <i>Name</i>?<br />
 Consider these function names:<br />
 <br />
 <pre class="language-cpp">
-<code>
-getActiveAccount();<br />
-getActiveAccounts();<br />
-getActiveAccountInfo();<br />
-</code>
+	<code>
+		getActiveAccount();<br />
+		getActiveAccounts();<br />
+		getActiveAccountInfo();<br />
+	</code>
 </pre>
 <br />
 How are the programmers supposed to know which of these fuunctions to call?<br />
@@ -300,17 +300,17 @@ Distinguish names in such a way the reader knows what the differences offer.<br 
 Names should be pronouceable in conversations:<br />
 <br />
 <pre class="language-cpp">
-<code>
-Date genymmdhms;<br />
-</code>
+	<code>
+		Date genymmdhms;<br />
+	</code>
 </pre>
 <br />
 Hey, Mikey, take a look at "gen emm dee aich emm ess"!<br />
 <br />
 <pre class="language-cpp">
-<code>
-Date generationTimestamp;<br />
-</code>
+	<code>
+		Date generationTimestamp;<br />
+	</code>
 </pre>
 <br />
 Hey, Mikey, take a look at this record! The generation timestamp is set

@@ -199,7 +199,7 @@ Observer Pattern
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 The Observer Pattern defines a one-to-many dependency between objects so
 that when one object changes state, all of its dependents are notified and
 updated automatically.<br />
@@ -227,17 +227,17 @@ add our code to the measurementsChanged() method in the WeatherData class:<br />
 <br />
 <pre class="language-java line-numbers no-whitespace-normalization"><code>
 public class WeatherData {
-public void measurementsChanged() {
-float temp = getTemprature();<br />
-float humidity = getHumidity();<br />
-float pressure = getPressure();<br />
+	public void measurementsChanged() {
+		float temp = getTemprature();<br />
+		float humidity = getHumidity();<br />
+		float pressure = getPressure();<br />
 <br />
-// we're going to update each display by calling its update
-// method and passing it the most recent measurements.<br />
-currentConditionsDisplay.update(temp, humidity, pressure);<br />
-statisitcsDisplay.update(temp, humidity, pressure);<br />
-forecastDisplay.update(temp, humidity, pressure);<br />
-}
+		// we're going to update each display by calling its update
+		// method and passing it the most recent measurements.<br />
+		currentConditionsDisplay.update(temp, humidity, pressure);<br />
+		statisitcsDisplay.update(temp, humidity, pressure);<br />
+		forecastDisplay.update(temp, humidity, pressure);<br />
+	}
 }
 </code></pre>
 <br />
@@ -254,11 +254,11 @@ elements. They all have an <i>update()</i> method that takes the <i>temp</i>,
 <i>humidity</i>, and <i>pressure</i> values.<br />
 <br />
 <pre class="language-java line-numbers">
-<code>
-currentConditionsDisplay.update(temp, humidity, pressure);<br />
-statisitcsDisplay.update(temp, humidity, pressure);<br />
-forecastDisplay.update(temp, humidity, pressure);<br />
-</code>
+	<code>
+		currentConditionsDisplay.update(temp, humidity, pressure);<br />
+		statisitcsDisplay.update(temp, humidity, pressure);<br />
+		forecastDisplay.update(temp, humidity, pressure);<br />
+	</code>
 </pre>
 <br />
 This part looks like an area of change. We need to encapsulate this.<br />
@@ -283,91 +283,91 @@ So, let’s get our implemention of the weather station underway. Let’s start
 with the interfaces:<br />
 <br />
 <pre class="language-java line-numbers">
-<code>
-public interface Subject {
-public void registerObserver(Observer o);<br />
-public void removeObserver(Observer o);<br />
-public void notifyObjservers();<br />
-}
+	<code>
+		public interface Subject {
+			public void registerObserver(Observer o);<br />
+			public void removeObserver(Observer o);<br />
+			public void notifyObjservers();<br />
+		}
 <br />
-public interface Observer {
-public void update(float temp, float humidity, float pressure);<br />
-}
+		public interface Observer {
+			public void update(float temp, float humidity, float pressure);<br />
+		}
 <br />
-public interface DisplayElement {
-public void display();<br />
-}
-</code>
+		public interface DisplayElement {
+			public void display();<br />
+		}
+	</code>
 </pre>
 <br />
 Now lets implement the Subject interface in WeatherData:<br />
 <br />
 <pre class="language-java line-numbers">
-<code>
-public class WeatherData implements Subject {
-private List&lt;Observer&gt; observers;<br />
-private float temprature;<br />
-private float humidity;<br />
-private float pressure;<br />
+	<code>
+		public class WeatherData implements Subject {
+			private List&lt;Observer&gt; observers;<br />
+			private float temprature;<br />
+			private float humidity;<br />
+			private float pressure;<br />
 <br />
-public WeatherData() {
-observers = new ArrayList&lt;Observers&gt;();<br />
-}
+			public WeatherData() {
+				observers = new ArrayList&lt;Observers&gt;();<br />
+			}
 <br />
-public void registerObservers(Observer o) {
-observers.add(o);<br />
-}
+			public void registerObservers(Observer o) {
+				observers.add(o);<br />
+			}
 <br />
-public void removeObserver(Observer o) {
-observers.remove(o);<br />
-}
+			public void removeObserver(Observer o) {
+				observers.remove(o);<br />
+			}
 <br />
-public void notifyObservers() {
-for (Observer observer : observers) {
-observer.update(temprature, humidity, pressure);<br />
-}
-}
+			public void notifyObservers() {
+				for (Observer observer : observers) {
+					observer.update(temprature, humidity, pressure);<br />
+				}
+			}
 <br />
-public void measurementsChange() {
-notifyObservers();<br />
-}
+			public void measurementsChange() {
+				notifyObservers();<br />
+			}
 <br />
-public void setMeasurements(float temprature, float humidity, float pressure) {
-this.temprature = temprature;<br />
-this.humidity = humidity;<br />
-this.pressure = pressure;<br />
-measurementsChanged();<br />
-}
+			public void setMeasurements(float temprature, float humidity, float pressure) {
+				this.temprature = temprature;<br />
+				this.humidity = humidity;<br />
+				this.pressure = pressure;<br />
+				measurementsChanged();<br />
+			}
 <br />
-// other WeatherData methods here
-}
-</code>
+			// other WeatherData methods here
+		}
+	</code>
 </pre>
 <br />
 Now Let's build those display elements:<br />
 <br />
 <pre class="language-java line-numbers">
-<code>
-public class CurrentConditionsDisplay implements Observer, DisplayElement {
-private float temprature;<br />
-private float humidity;<br />
-private WeatherData weatherdata;<br />
+	<code>
+		public class CurrentConditionsDisplay implements Observer, DisplayElement {
+			private float temprature;<br />
+			private float humidity;<br />
+			private WeatherData weatherdata;<br />
 <br />
-public CurrentConditionsDisplay(WeatherData weatherdata) {
-this.weatherdata = weatherdata;<br />
-weatherdata.registerObserver(this);<br />
-}
+			public CurrentConditionsDisplay(WeatherData weatherdata) {
+				this.weatherdata = weatherdata;<br />
+				weatherdata.registerObserver(this);<br />
+			}
 <br />
-public void update(float temprature, float humidity, float pressure) {
-this.temprature = temprature;<br />
-this.humidity = humidity;<br />
-display();<br />
-}
+			public void update(float temprature, float humidity, float pressure) {
+				this.temprature = temprature;<br />
+				this.humidity = humidity;<br />
+				display();<br />
+			}
 <br />
-public void display() {
-System.out.println("Current conditions: " + temprature
-+ "F degrees and " + humidity + "% humidity");<br />
-</code>
+			public void display() {
+				System.out.println("Current conditions: " + temprature
+					+ "F degrees and " + humidity + "% humidity");<br />
+	</code>
 </pre>
 <br />
 All we need is some code to glue everything together. We’ll be adding some
@@ -375,21 +375,21 @@ more displays and generalizing things in a bit. For now, here’s our first
 attempt:<br />
 <br />
 <pre class="language-java line-numbers">
-<code>
-public class WeatherStation {
-public static void main(String[] args) {
-WeatherData weatherdata = new WeatherData();<br />
+	<code>
+		public class WeatherStation {
+			public static void main(String[] args) {
+				WeatherData weatherdata = new WeatherData();<br />
+				
+				CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(weatherdata);<br />
+				StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherdata);<br />
+				ForecastDisplay forecastDisplay = new ForecastDisplay(weatherdata);<br />
 <br />
-CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(weatherdata);<br />
-StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherdata);<br />
-ForecastDisplay forecastDisplay = new ForecastDisplay(weatherdata);<br />
-<br />
-weatherdata.setMeasurements(80, 65, 30.4f);<br />
-weatherdata.setMeasurements(82, 70, 29.2f);<br />
-weatherdata.setMeasurements(78, 90, 29.2f);<br />
-}
-}
-</code>
+				weatherdata.setMeasurements(80, 65, 30.4f);<br />
+				weatherdata.setMeasurements(82, 70, 29.2f);<br />
+				weatherdata.setMeasurements(78, 90, 29.2f);<br />
+			}
+		}
+	</code>
 </pre>
 <br />
 In our current Weather Station design, we are pushing all three pieces of data
@@ -405,12 +405,12 @@ Subject has getter methods for its data, and then change our Observers to use
 them to pull the data that’s appropriate for their needs. Let’s do that.<br />
 <br />
 <pre class="language-java line-numbers">
-<code>
-public void update() {
-this.temprature = weatherdata.getTemprature();<br />
-this.humidity = weatherdata.getHumidity();<br />
-display();<br />
-</code>
+	<code>
+		public void update() {
+			this.temprature = weatherdata.getTemprature();<br />
+			this.humidity = weatherdata.getHumidity();<br />
+			display();<br />
+	</code>
 </pre>
 </div>
 <hr />

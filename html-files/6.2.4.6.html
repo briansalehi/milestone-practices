@@ -200,14 +200,14 @@ unary operators
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-operators can be separated as unary and binary operators.<br />
+<div>
+operators can be separated as unary and binary operators.  
 to overload prefix ++ operator, it needs no argument
-but postfix ++ operator must have an argument of type int.<br />
-Be careful when implementing overloaded operators, implementations must match the definition of operators.<br />
-For example here I implemented additional operator + in a wrong way but it's a little bit tricky to find it.<br />
+but postfix ++ operator must have an argument of type int.  
+Be careful when implementing overloaded operators, implementations must match the definition of operators.  
+For example here I implemented additional operator + in a wrong way but it's a little bit tricky to find it.  
 Additional operator should not modify the member itself but it should treat the member as a constant and instead return an object with an additioned member.<br />
-This way, **base+2** won't work anymore because it doesn't change anything in *base*. instead it returns an instance of *Base* class having its member additioned. So, in order to make this work we also need the assignment = operator which we will discuss later.<br />
+This way, **base+2** won't work anymore because it doesn't change anything in *base*. instead it returns an instance of *Base* class having its member additioned. So, in order to make this work we also need the assignment = operator which we will discuss later.  
 <br />
 ```cxx
 base + 2; // should not change anything

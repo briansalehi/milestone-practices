@@ -200,45 +200,45 @@ struct
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-Structures are just the same as classes in C++.<br />
-In C, to create an structure you need to specify keyword **struct**, we do that here too.<br />
-But to create another sample from that structure in C, you also need to specify **struct** again.<br />
+<div>
+Structures are just the same as classes in C++.  
+In C, to create an structure you need to specify keyword **struct**, we do that here too.  
+But to create another sample from that structure in C, you also need to specify **struct** again.  
 <br />
 ```c
 struct complex {
-int number;<br />
-double fraction;<br />
-char* array;<br />
+    int number;<br />
+    double fraction;<br />
+    char* array;<br />
 };<br />
 <br />
 int main(void) {
-struct complex sample;<br />
+    struct complex sample;<br />
 }
 ```
 <br />
-But we do not need to specify the keyword **struct** here in the time of creating an object from that structure:<br />
+But we do not need to specify the keyword **struct** here in the time of creating an object from that structure:  
 <br />
 ```cxx
 struct complex {
-int number;<br />
-double fraction;<br />
-char* array;<br />
+    int number;<br />
+    double fraction;<br />
+    char* array;<br />
 };<br />
 <br />
 int main() {
-complex sample;<br />
+    complex sample;<br />
 }
 ```
 <br />
-That'll do! we now have an object named *sample* and we can access to its members by **member operator?**:<br />
+That'll do! we now have an object named *sample* and we can access to its members by **member operator?**:  
 <br />
 ```cxx
 sample.number = 2;<br />
 ```
 <br />
 <br />
-**NOTE**: all of members and methods of structures and unions in C++ are **public** unless otherwise is specified.<br />
+**NOTE**: all of members and methods of structures and unions in C++ are **public** unless otherwise is specified.  
 That is, you can skip writing *public*, *private* or *protected*. That way everything is public by default. But in classes you must at least specify one.<br />
 </div>
 <hr />

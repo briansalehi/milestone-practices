@@ -214,7 +214,7 @@ References
 <ul class="list-group">
 <li class="list-group-item" 1:193,194 list-group-item>1:193,194</li>
 </ul>
-<div class="comment-style" >
+<div>
 **BUGGY**: needs to be fixed, cv::VideoCapture::retrieve() won't retrieve next
 frame as loop iterates.<br />
 <br />
@@ -234,8 +234,8 @@ which **cv::VideoCapture::grab()** copies frames.<br />
 <br />
 ```cxx
 bool cv::VideoCapture::retrieve(
-cv::OutputArray image,	// image into which to read data
-int channel = 0	// used for multihead devices like Kinect and Videre
+	cv::OutputArray image,	// image into which to read data
+	int channel = 0	// used for multihead devices like Kinect and Videre
 );<br />
 ```
 <br />

@@ -200,19 +200,19 @@ Default Values
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 Note that default values are only set in <b>function declarations</b>,
 not <b>function definitions</b>.<br />
 <br />
 You can have multiple parameters with default values; however, these should
 all be at the tail end of the parameter list.<br />
 <br />
-That is, you can't do this:<br />
+That is, you can't do this:  
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-void function(int x = 1, int y);<br />
-</code>
+	<code>
+		void function(int x = 1, int y);<br />
+	</code>
 </pre>
 <br />
 Functions have a special concept named <b>signature</b>, to help compilers
@@ -228,10 +228,10 @@ By using a default value, you actually change the function's signature, so
 these two functions are identical:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-void function(int x, int y = 1);<br />
-void function(int x);<br />
-</code>
+	<code>
+		void function(int x, int y = 1);<br />
+		void function(int x);<br />
+	</code>
 </pre>
 <br />
 You should remember this when using

@@ -199,7 +199,7 @@ Decorator Pattern
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 We’ll re-examine the typical overuse of inheritance and you’ll learn how to
 decorate your classes at runtime using a form of object composition.<br />
 <br />
@@ -311,18 +311,18 @@ lead to complex, hard-to-understand code.<br />
 <br />
 <h4>Decorator Pattern Considerations</h4>
 <ul>
-<li>Decorators have the same supertype as the objects they decorate.</li>
-<li>You can use one or more decorators to wrap an object.</li>
-<li>Given that the decorator has the same supertype as the object it
+	<li>Decorators have the same supertype as the objects they decorate.</li>
+	<li>You can use one or more decorators to wrap an object.</li>
+	<li>Given that the decorator has the same supertype as the object it
 decorates, we can pass around a decorated object in place of the original
 (wrapped) object.</li>
-<li>The decorator adds its own behavior before and/or after delegating to
+	<li>The decorator adds its own behavior before and/or after delegating to
 the object it decorates to do the rest of the job.</li>
-<li>Objects can be decorated at any time, so we can decorate objects
+	<li>Objects can be decorated at any time, so we can decorate objects
 dynamically at runtime with as many decorators as we like.</li>
-<li>The Decorator Pattern attaches additional responsibilities to an object
+	<li>The Decorator Pattern attaches additional responsibilities to an object
 dynamically.</li>
-<li>Decorators provide a flexible alternative to subclassing for extending
+	<li>Decorators provide a flexible alternative to subclassing for extending
 functionality.</li>
 </ul>
 </div>

@@ -199,7 +199,7 @@ Managing Shared Libraries
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 Most Linux software relies heavily on <i>shared libraries</i>.<br />
 Binary program files can point to libraries either by name alone or by
 providing a complete path.<br />
@@ -227,9 +227,9 @@ To set the LD_LIBRARY_PATH environment variable using the bash shell, you can
 type following command:<br />
 <br />
 <pre>
-<code class="language-bash">
-export LD_LIBRARY_PATH=~/.local/testlib:/opt/newlib
-</code>
+	<code class="language-bash">
+		export LD_LIBRARY_PATH=~/.local/testlib:/opt/newlib
+	</code>
 </pre>
 <br />
 This line adds two directories, ~/.local/testlib and /opt/newlib, to the
@@ -243,9 +243,9 @@ If library is installed but program cannot find it, check which library the
 program is using by <b>ld</b> command.<br />
 <br />
 <pre>
-<code class="language-bash">
-ldd /bin/ls
-</code>
+	<code class="language-bash">
+		ldd /bin/ls
+	</code>
 </pre>
 <br />
 Sometimes, the library's path is har-coded in the program's binary file.<br />
@@ -263,9 +263,9 @@ contain stored in a binary format in /etc/ld.so.cache.<br />
 To rebuild the cache run following command:<br />
 <br />
 <pre>
-<code class="language-bash">
-ldconfig
-</code>
+	<code class="language-bash">
+		ldconfig
+	</code>
 </pre>
 </div>
 <hr />

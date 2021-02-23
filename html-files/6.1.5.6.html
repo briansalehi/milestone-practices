@@ -200,7 +200,7 @@ Function Overloading
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 Functions with the same name and return type but with different parameters or
 set of parameters are said to be overloaded functions. Overloaded functions
 can be quite useful in applications where a function with a particular name
@@ -223,21 +223,21 @@ Consider following functions, all are of the same name but with different
 signatures:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-void function(int x);<br />
-void function(double x);<br />
-int function(int x);<br />
-</code>
+	<code>
+		void function(int x);<br />
+		void function(double x);<br />
+		int function(int x);<br />
+	</code>
 </pre>
 <br />
 Don't forget that following two functions are identical when you use default
 argument values:<br />
 <br />
 <pre class="language-cpp line-numbers">
-<code>
-void function();<br />
-void function(int x = 1);<br />
-</code>
+	<code>
+		void function();<br />
+		void function(int x = 1);<br />
+	</code>
 </pre>
 <br />
 Function overloading has its own price too.<br />

@@ -200,7 +200,7 @@ low level conversion by charconv header
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 begin[5]
 For converting integers to characters, the following set of functions is available:<br />
 <br />
@@ -213,8 +213,8 @@ The result is of type **to_chars_result** , a type defined as follows:<br />
 <br />
 ```cxx
 struct to_chars_result {
-char* ptr;<br />
-std::errc ec;<br />
+	char* ptr;<br />
+	std::errc ec;<br />
 };<br />
 ```
 <br />
@@ -234,10 +234,10 @@ Here, FloatT can be float , double , or long double . Formatting can be specifie
 <br />
 ```cxx
 enum class chars_format {
-scientific,
-fixed,
-hex,
-general = fixed | scientific
+	scientific,
+	fixed,
+	hex,
+	general = fixed | scientific
 };<br />
 ```
 <br />
@@ -253,8 +253,8 @@ Here, from_chars_result is a type defined as follows:<br />
 <br />
 ```cxx
 struct from_chars_result {
-const char* ptr;<br />
-std::errc ec;<br />
+	const char* ptr;<br />
+	std::errc ec;<br />
 };<br />
 ```
 <br />

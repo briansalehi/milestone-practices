@@ -214,18 +214,18 @@ References
 <ul class="list-group">
 <li class="list-group-item"  list-group-item></li>
 </ul>
-<div class="comment-style" >
-We want to get a video file as input stream, and write the log polar version of it into an output file.<br />
-To achieve this goal a few more lines are added to the code.<br />
-**cv::VideoWriter** writes to a video file the same way **cv::VideoCapture** reads from a video file.<br />
-But it needs a few more parameters to make the output file.<br />
-First it gets output file name.<br />
-then it gets the codec integer number as second argument. This will specify the way output video frames are compressed.<br />
-Codec numbers can be achieved by **cv::VideoCapture.fourcc()** function, which itself gets four arguments each having type **char**.<br />
-We give this function four characters of **MJPG** representing the **JPG** image files.<br />
-Third argument of **cv::VideoWriter** is frames per second, and fourth argument of type **cv::Size** which we worked with in earlier practices.<br />
+<div>
+We want to get a video file as input stream, and write the log polar version of it into an output file.  
+To achieve this goal a few more lines are added to the code.  
+**cv::VideoWriter** writes to a video file the same way **cv::VideoCapture** reads from a video file.  
+But it needs a few more parameters to make the output file.  
+First it gets output file name.  
+then it gets the codec integer number as second argument. This will specify the way output video frames are compressed.  
+Codec numbers can be achieved by **cv::VideoCapture.fourcc()** function, which itself gets four arguments each having type **char**.  
+We give this function four characters of **MJPG** representing the **JPG** image files.  
+Third argument of **cv::VideoWriter** is frames per second, and fourth argument of type **cv::Size** which we worked with in earlier practices.  
 <br />
-Now that the output file stream is ready, we put each frame of the input video to the frame, log polarize it and the write it to the output file.<br />
+Now that the output file stream is ready, we put each frame of the input video to the frame, log polarize it and the write it to the output file.  
 To do that, **cv::logPolar()** function is used, which takes 5 arguments. First input frame, second output frame, third argument is of type **cv::Point2f()** return type, and two other as constants.<br />
 <br />
 Now by running this program, input video will be shown on a window, its polarized version will be on second window, meanwhile it will be written to the output video file.<br />

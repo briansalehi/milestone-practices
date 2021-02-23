@@ -200,9 +200,9 @@ std::unique_lock
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 The unique lock is a general-purpose mutex wrapper. It's similar to the timed mutex, but with additional features, primary of which is the concept of ownership.<br />
-Unlike other lock types, a unique lock does not necessarily own the mutex it wraps if it contains any at all.<br />
+Unlike other lock types, a unique lock does not necessarily own the mutex it wraps if it contains any at all.  
 Mutexes can be transferred between unique lock instances along with ownership of the said mutexes using **swap()** function.<br />
 <br />
 Types example:<br />

@@ -200,26 +200,26 @@ static casting
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 Variable types can be casted to type of another,
-but you must be careful when you do it.<br />
+but you must be careful when you do it.  
 Suppose you have a type of **double**,
 you must not cast it to type **int** as its last 4 bytes will get lost!<br />
 <br />
 ref[6]
-Static casting is used when a conversion is made between two related types, for
+Static casting is used when a conversion is made between two related types, for  
 example numbers to numbers or pointers to pointers.<br />
 <br />
-The most common use is for conversions between numeric types. Some of these
-conversions may involve the loss of information, for example a conversion from
-a **double** to an **int**. This conversion is done by truncating the fractional
+The most common use is for conversions between numeric types. Some of these  
+conversions may involve the loss of information, for example a conversion from  
+a **double** to an **int**. This conversion is done by truncating the fractional  
 part (not rounding).<br />
 <br />
-This type of casting is more verbose than the C-style and functional-style casts
-shown earlier. But this form is appropriate, because it serves as a visible warning to
+This type of casting is more verbose than the C-style and functional-style casts  
+shown earlier. But this form is appropriate, because it serves as a visible warning to  
 the programmer that a potentially unsafe operation is taking place.<br />
 <br />
-Some older C++ compilers may not support the newer cast operators,
+Some older C++ compilers may not support the newer cast operators,  
 but then the traditional C-style and functional-style casts can be used instead.<br />
 end[6]
 </div>

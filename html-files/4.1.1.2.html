@@ -213,7 +213,7 @@ References
 <ul class="list-group">
 <li class="list-group-item"  list-group-item></li>
 </ul>
-<div class="comment-style" >
+<div>
 In section <b>.data</b> , initialized data is declared and defined, in the
 following format:<br />
 <br />
@@ -233,35 +233,35 @@ cannot be changed in the program. They are declared in the following format:<br 
 <br>
 <br />
 <table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Type</th>
-<th scope="col">Length</th>
-<th scope="col">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>db</td>
-<td>8 bits</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td>dw</td>
-<td>16 bits</td>
-<td>Word</td>
-</tr>
-<tr>
-<td>dd</td>
-<td>32 bits</td>
-<td>Double word</td>
-</tr>
-<tr>
-<td>dq</td>
-<td>64 bits</td>
-<td>Quadword</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Length</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>db</td>
+      <td>8 bits</td>
+      <td>Byte</td>
+    </tr>
+    <tr>
+      <td>dw</td>
+      <td>16 bits</td>
+      <td>Word</td>
+    </tr>
+    <tr>
+      <td>dd</td>
+      <td>32 bits</td>
+      <td>Double word</td>
+    </tr>
+    <tr>
+      <td>dq</td>
+      <td>64 bits</td>
+      <td>Quadword</td>
+    </tr>
+  </tbody>
 </table>
 <br />
 The acronym bss stands for Block Started by Symbol , and its history goes
@@ -273,35 +273,35 @@ variables is declared in this section, in the following format:<br />
 </br>
 <br />
 <table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">Type</th>
-<th scope="col">Length</th>
-<th scope="col">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>resb</td>
-<td>8 bits</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td>resw</td>
-<td>16 bits</td>
-<td>Word</td>
-</tr>
-<tr>
-<td>resd</td>
-<td>32 bits</td>
-<td>Double word</td>
-</tr>
-<tr>
-<td>resq</td>
-<td>64 bits</td>
-<td>Quadword</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Length</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>resb</td>
+      <td>8 bits</td>
+      <td>Byte</td>
+    </tr>
+    <tr>
+      <td>resw</td>
+      <td>16 bits</td>
+      <td>Word</td>
+    </tr>
+    <tr>
+      <td>resd</td>
+      <td>32 bits</td>
+      <td>Double word</td>
+    </tr>
+    <tr>
+      <td>resq</td>
+      <td>64 bits</td>
+      <td>Quadword</td>
+    </tr>
+  </tbody>
 </table>
 <br />
 The variables in <i>section .bss</i> do not contain any values; the values
@@ -318,10 +318,10 @@ available for the .bss variables at execution time, the program will crash.<br /
 This section contains the program code and starts with the following:<br />
 <br />
 <pre class="line-numbers">
-<code class="language-nasm">
-global main
-main:<br />
-</code>
+	<code class="language-nasm">
+		global main
+	main:<br />
+	</code>
 </pre>
 <br />
 The <b>main:</b> part is called a label.<br />

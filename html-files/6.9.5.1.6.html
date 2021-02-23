@@ -214,16 +214,16 @@ References
 <ul class="list-group">
 <li class="list-group-item" 1:188,189 list-group-item>1:188,189</li>
 </ul>
-<div class="comment-style" >
+<div>
 **cv::imencode()** compresses an image into supported file formats specified in
 file extension.<br />
 <br />
 ```cxx
 void cv::imencode(
-const string&	ext,	// extension specified codec
-cv::InputArray	img,	// image to be encoded
-std::vector<uchar>&	buf,	// encoded file bytes go here
-const std::vector<int>&	params = std::vector<int>()	// (optional) for parametrized formats
+	const string&	ext,	// extension specified codec
+	cv::InputArray	img,	// image to be encoded
+	std::vector<uchar>&	buf,	// encoded file bytes go here
+	const std::vector<int>&	params = std::vector<int>()	// (optional) for parametrized formats
 );<br />
 ```
 </div>

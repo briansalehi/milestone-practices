@@ -214,18 +214,18 @@ References
 <ul class="list-group">
 <li class="list-group-item" 1:194-196 list-group-item>1:194-196</li>
 </ul>
-<div class="comment-style" >
+<div>
 The **cv::VideoCapture::get()** and **cv::VideoCapture::set()** functions allow us
 to perform reading from and writing to video meta-data.<br />
 <br />
 ```cxx
 double cv::VideoCapture::get(
-int propidq// property identifier
+	int propidq// property identifier
 );<br />
 <br />
 bool cv::VideoCapture::set(
-int propid,	// property identifier
-double value	// value to which to set the property
+	int propid,	// property identifier 
+	double value	// value to which to set the property
 );<br />
 <br />
 Video capture properties used by **cv::VideoCapture::get()** and

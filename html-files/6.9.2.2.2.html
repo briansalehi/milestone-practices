@@ -214,30 +214,30 @@ References
 <ul class="list-group">
 <li class="list-group-item" learning opencv 3: 25,26 list-group-item>learning opencv 3: 25,26</li>
 </ul>
-<div class="comment-style" >
+<div>
 A video file can be opened just the way an image is read,
 with a small difference. Videos are contained of frames of
 images. That is, we need a loop to show all video frames as
 images in a window.<br />
 <br />
 **cv::VideoCapture** is an object which holds a video structure,
-here called *video*.<br />
-After creating video structure, we need to open a video file.<br />
+here called *video*.  
+After creating video structure, we need to open a video file.  
 **open()** is a method in **cv::VideoCapture** object, which
 takes video filename in its argument.<br />
 <br />
 Creation of window is discussed in **image viewer** program
-previously.<br />
+previously.  
 We open a window, resize it to an acceptable scale.<br />
 <br />
 Then we create an image structure of type **cv::Mat**
-and redirect the video frames one by one to this structure.<br />
+and redirect the video frames one by one to this structure.  
 Frames should be checked if they are empty, indicating that
 there are no frames left to read. so we break the loop.<br />
 <br />
 We use **cv::waitKey()** function here to wait for 33 mili
 seconds, if user hits a key between this time interval, the
-loop will break and program exits as user interrupted.<br />
+loop will break and program exits as user interrupted.  
 Notice how we compared the value returned by **cv::waitKey()**.<br />
 </div>
 <hr />

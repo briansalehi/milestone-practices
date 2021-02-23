@@ -200,9 +200,9 @@ scoped enumeration
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-C-style enumerations are defined with **enum** and their members are visible globally!<br />
-It is a good idea to never use globals as they may give you conflict errors and some other troubles.<br />
+<div>
+C-style enumerations are defined with **enum** and their members are visible globally!  
+It is a good idea to never use globals as they may give you conflict errors and some other troubles.  
 If you use **enum class**, all enumeration members will only be visible in their scope and to use them
 you should specify their scope name following by scope resolution, *scope::member*.<br />
 <br />
@@ -221,10 +221,10 @@ follows:<br />
 ```cxx
 enum class PieceType : unsigned long
 {
-King = 1,
-Queen,
-Rook = 10,
-Pawn
+	King = 1,
+	Queen,
+	Rook = 10,
+	Pawn
 };<br />
 ```
 end[5]

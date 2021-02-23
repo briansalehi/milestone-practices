@@ -214,20 +214,20 @@ References
 <ul class="list-group">
 <li class="list-group-item" 1: 165,166 list-group-item>1: 165,166</li>
 </ul>
-<div class="comment-style" >
+<div>
 This function is OpenCV's one main text drawing routine.<br />
 <br />
 ```cxx
 void cv::putText(
-cv::Mat&    img, // image to be drawn on
-const std::string&  text, // write this
-cv::Point   origin, // upper-left corner of text box
-int     fontFace, // font style
-double  fontScale, // font size
-cv::Scalar  color, // color in BGR form
-int     thickness = 1, // thickness of line
-int     lineType = 8 // correctedness 4 or 8
-bool    bottomLeftOrigin = false // true= origin at lower left
+    cv::Mat&    img, // image to be drawn on
+    const std::string&  text, // write this
+    cv::Point   origin, // upper-left corner of text box
+    int     fontFace, // font style
+    double  fontScale, // font size
+    cv::Scalar  color, // color in BGR form
+    int     thickness = 1, // thickness of line
+    int     lineType = 8 // correctedness 4 or 8
+    bool    bottomLeftOrigin = false // true= origin at lower left
 );<br />
 ```
 <br />

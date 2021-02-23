@@ -199,16 +199,16 @@ macro functions
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
-Be careful using macro functions, you might easily make mistakes.<br />
-Keep in mind that macros are only compile-time string substitutions in your code.<br />
+<div>
+Be careful using macro functions, you might easily make mistakes.  
+Keep in mind that macros are only compile-time string substitutions in your code.  
 Let's say we have this function:<br />
 <br />
 ```cxx
 #define SQUARED(x) (x * x)
 ```
 <br />
-If you set x as 3+2, compiler will see this as (3+2 * 3+2). considering mathematical precedence, 2*3 will be first evaluated.<br />
+If you set x as 3+2, compiler will see this as (3+2 * 3+2). considering mathematical precedence, 2*3 will be first evaluated.  
 So to make sure your macro functions work as they supposed to, surround them with parenthesis.<br />
 </div>
 <hr />

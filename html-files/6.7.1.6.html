@@ -200,10 +200,10 @@ Moving a Thread
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 You can move one thread to another using **std::move()**. notice that we didn't wait for *t1* to join anymore,
 that's because by using **move semantics** we do not copy an instance of an object but we move it to another block of memory,
-so in here, *t1* no longer exists after we move it to *t2*.<br />
+so in here, *t1* no longer exists after we move it to *t2*.  
 We will only have one thread here because we created *t1* and moved it to *t2*.<br />
 <br />
 Also notice how we used **std::this_thread::get_id()** function in *worker* function, to get the id of calling thread which has the type **std::thread::id**.<br />

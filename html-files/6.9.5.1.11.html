@@ -214,7 +214,7 @@ References
 <ul class="list-group">
 <li class="list-group-item" 1:196,197 list-group-item>1:196,197</li>
 </ul>
-<div class="comment-style" >
+<div>
 Just as we did with the **cv::VideoCapture** device for reading, we must first
 create a **cv::VideoWriter** device before we can write out our video.<br />
 <br />
@@ -224,11 +224,11 @@ and the other has all of the arguments necessary to actually set up the writer.<
 <br />
 ```cxx
 cv::VideoWriter::VideoWriter(
-const std::string& filename.	// output filename
-int fourcc,	// codec, use CV_FOURCC() macro
-double fps,	// frame rate
-cv::Size frame_size,	// size of individual images
-bool is_color	// whether pass color or gray
+	const std::string& filename.	// output filename
+	int fourcc,	// codec, use CV_FOURCC() macro
+	double fps,	// frame rate
+	cv::Size frame_size,	// size of individual images
+	bool is_color	// whether pass color or gray
 );<br />
 ```
 <br />
@@ -237,7 +237,7 @@ by simply passing your array to the writer:<br />
 <br />
 ```cxx
 cv::VideoWriter::write(
-const cv::Mat& image);'
+	const cv::Mat& image);'
 );<br />
 ```
 </div>

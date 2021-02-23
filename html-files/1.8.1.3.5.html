@@ -201,7 +201,7 @@ Incrementing and Decrementing Operator
 </svg>
 </a>
 </h2>
-<div class="comment-style" >
+<div>
 Vim interprets numerals with a leading zero to be in octal notation rather
 than in decimal.<br />
 <br />
@@ -209,9 +209,9 @@ If you work with octal numbers frequently, Vim's default behavior might suit
 you. If you don't, you probably want to add the following line to your vimrc:<br />
 <br />
 <pre class="language-vim">
-<code>
-set nrformats=
-</code>
+    <code>
+        set nrformats=
+    </code>
 </pre>
 <br />
 This will cause Vim to treat all numerals as decimal, regardless of whether
