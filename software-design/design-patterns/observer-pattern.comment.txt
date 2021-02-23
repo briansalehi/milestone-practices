@@ -23,23 +23,21 @@ measurements.
 Here’s a first implementation possibility—as we’ve discussed, we’re going to
 add our code to the measurementsChanged() method in the WeatherData class:
 
-<pre class="language-java line-numbers">
-	<code>
-		public class WeatherData {
-		    public void measurementsChanged() {
-		        float temp = getTemprature();
-		        float humidity = getHumidity();
-		        float pressure = getPressure();
+<pre class="language-java line-numbers no-whitespace-normalization"><code>
+public class WeatherData {
+	public void measurementsChanged() {
+		float temp = getTemprature();
+		float humidity = getHumidity();
+		float pressure = getPressure();
 
-		        // we're going to update each display by calling its update
-		        // method and passing it the most recent measurements.
-		        currentConditionsDisplay.update(temp, humidity, pressure);
-		        statisitcsDisplay.update(temp, humidity, pressure);
-		        forecastDisplay.update(temp, humidity, pressure);
-		    }
-	    }
-	</code>
-</pre>
+		// we're going to update each display by calling its update
+		// method and passing it the most recent measurements.
+		currentConditionsDisplay.update(temp, humidity, pressure);
+		statisitcsDisplay.update(temp, humidity, pressure);
+		forecastDisplay.update(temp, humidity, pressure);
+	}
+}
+</code></pre>
 
 What’s wrong with our implementation anyway?
 Think back to all those Chapter 1 concepts and principles—which are we
