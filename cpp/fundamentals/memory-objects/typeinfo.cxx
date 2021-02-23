@@ -10,6 +10,7 @@ int function(const int param) {
     return param;
 }
 
+// overloaded function
 double function(const double param) {
     return param;
 }
@@ -17,8 +18,9 @@ double function(const double param) {
 int main()
 {
     double number = 3.141592;
-    int (*ifp)(const int) = function;
+    int (*ifp)(const int) = function; // function pointer
     double (*dfp)(const double) = function;
+	int* variable = nullptr;
 
     // name() method indicates the type of object was given
     std::cout << typeid(number).name() << std::endl;
@@ -30,6 +32,7 @@ int main()
     std::cout << typeid(*ifp).name() << std::endl;
     std::cout << typeid(dfp).name() << std::endl;
 
+    std::cout << typeid(variable).name() << std::endl;
 
     // before() method clarifies which type precedes the other 
     if (typeid(char).before(typeid(int))) {

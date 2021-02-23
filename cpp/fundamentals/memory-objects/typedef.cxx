@@ -1,8 +1,7 @@
-typedef unsigned long positive_t;
+typedef unsigned long distance_t;
 
 int main()
 {
-    positive_t distance = 1000000;
-
+    distance_t distance = 1000000;
     return 0;
 }
