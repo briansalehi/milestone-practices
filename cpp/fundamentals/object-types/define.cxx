@@ -5,7 +5,7 @@ Constants in C++:
     declared by const keyword
     constant expression using constexpr keyword (C++11)
     emulated constants using enum keyword
-    => defined constants, depricated
+ => defined constants, depricated
 */
 
 #include <iostream>

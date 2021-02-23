@@ -1,0 +1,5 @@
+Indiscriminate use of global variables is considered poor programming
+practice. This is because global variables can be assigned values in any/every
+function and can contain an unpredictable state, especially when functions
+that modify them run in different threads or are programmed by different
+programmers in a team.

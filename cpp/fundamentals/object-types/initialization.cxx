@@ -2,16 +2,14 @@
 
 int main()
 {
-    const int static_length = 10;
-    int dynamic_length = 5;
-    double constant_fraction = 3.141592;
+    const double constant_fraction = 3.141592;
 
-    int number1{static_length};
-    int number2{dynamic_length};
-    double pi = {constant_fraction};
+    int number = constant_fraction; // narrowing
 
-    std::cout << number1 << std::endl;
-    std::cout << number2 << std::endl;
+	double pi{constant_fraction}; // direct list initialization
+    pi = {constant_fraction}; // copy list initialization
+
+    std::cout << number << std::endl;
     std::cout << pi << std::endl;
 
     return 0;

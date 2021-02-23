@@ -1,1 +1,3 @@
+#C++ Primer Plus
 Professional C++: page 8
+#Sam's Teach Yourself C++ in One Hour a Day

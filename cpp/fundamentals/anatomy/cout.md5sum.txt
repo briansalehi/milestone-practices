@@ -1,1 +1,0 @@
-f7dcfd64fdd967e2e8e8d9087ca71d64  ./01.the_basics/02.the_anatomy/07.cout.cxx

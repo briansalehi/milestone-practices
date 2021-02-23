@@ -1,4 +1,0 @@
-input/output streams will be discussed more on later chapters.
-
-setf() is a method to override output streaming behaviour.  
-options are held in ios_base class, included in iostream file.

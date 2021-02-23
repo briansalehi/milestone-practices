@@ -1,5 +1,3 @@
-#include <iostream>
-
 // multiple input arguments
 int multiply(int a, int b)
 {
@@ -9,7 +7,6 @@ int multiply(int a, int b)
 int main()
 {
     // passing multiple parameters to function
-    std::cout << multiply(4,5) << std::endl;
-
+    int result = multiply(4, 5);
     return 0;
 }

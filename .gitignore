@@ -4,6 +4,7 @@
 *.object
 *.bin
 *.binary
+*.md5sum
 a.out
 package-lock.json
 markdown-files/

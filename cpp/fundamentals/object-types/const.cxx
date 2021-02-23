@@ -1,8 +1,8 @@
 /*
 Constants in C++:
 
-=>  literal constants, such as literal strings
-=>  declared by const keyword
+    literal constants, such as literal strings
+ => declared by const keyword
     constant expression using constexpr keyword (C++11)
     emulated constants using enum keyword
     defined constants, depricated

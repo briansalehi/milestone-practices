@@ -1,4 +1,1 @@
-We have 5 constants in C++, which we have two of them in this exercise:
-
-* literal constants: which are the strings written surrounded by single quotes
-* const variables: which are declared by **const** keyword
+Constant variables can be declared by <b>const</b> keyword.

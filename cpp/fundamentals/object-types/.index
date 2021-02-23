@@ -1,10 +1,12 @@
 README.md
-argument.cxx
+multiple-declaration.cxx
 auto.cxx
+argument.cxx
+literals.cxx
 const.cxx
 constexpr.cxx
-define.cxx
 enumeration.cxx
+define.cxx
 external-linkage.cxx
 global.cxx
 global-enumeration.cxx
@@ -14,7 +16,6 @@ no_linkage.cxx
 overflow.cxx
 scoped-enumeration.cxx
 sizeof.cxx
-storage.cxx
 structured-binding.cxx
 typedef.cxx
 typeinfo.cxx

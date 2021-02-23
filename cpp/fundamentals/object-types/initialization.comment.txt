@@ -1,43 +1,71 @@
-Initialization list can be used over conventional initializations.
+Avoid Narrowing Conversion Errors by Using List Initialization.
 
-begin[5]
+When you initialize a variable of a smaller integer type (say, short) using
+another of a larger type (say, an int), you are risking a narrowing conversion
+error, because the  compiler has to fit data stored in a type that can
+potentially hold much larger numbers into a type that doesn’t have the same
+capacity (that is, is narrower).
+
+Narrowing isn’t restricted to conversions between integer types only. You may
+face  narrowing errors if you initialize a float using a double, a float (or
+double) using an int, or an int using a float. Some compilers may warn, but
+this warning will not cause an error that stops compilation. In such cases,
+you may be confronted by bugs that occur infrequently and at execution time.
+
+To avoid this problem, C++11 recommends list initialization techniques that
+prevent  narrowing. To use this feature, insert initialization
+values/variables within braces {…}.
+
 There are two types of initialization that use braced initializer lists:
 
-* Copy list initialization. _T obj = {arg1, arg2, ...};_
-* Direct list initialization. _T obj {arg1, arg2, ...};_
+<pre class="language-cpp line-numbers">
+	<code>
+		// Copy list initialization
+		T obj = {arg1, arg2, ...};
 
-In combination with auto type deduction, there is an important difference between copy- and direct
-list initialization introduced with C++17.
+		// Direct list initialization
+		T obj{arg1, arg2, ...};
+	</code>
+</pre>
+
+In combination with auto type deduction, there is an important difference
+between copy and direct list initialization introduced with C++17.
 
 Starting with C++17, you have the following results:
 
-```cpp
-// Copy list initialization
-auto a = {11}; // initializer_list<int>
-auto b = {11, 22}; // initializer_list<int>
+<pre class="language-cpp line-numbers">
+	<code>
+		// Copy list initialization
+		auto a = {11}; // initializer_list&lt;int&gt;
+		auto b = {11, 22}; // initializer_list&lt;int&gt;
 
-// Direct list initialization
-auto c {11}; // int
-auto d {11, 22}; // Error, too many elements.
-```
+		// Direct list initialization
+		auto c{11}; // int
+		auto d{11, 22}; // Error, too many elements.
+	</code>
+</pre>
 
-Note that for copy list initialization, all the elements in the braced initializer must be of the same
-type. For example, the following does not compile:
+Note that for copy list initialization, all the elements in the braced
+initializer must be of the same type. For example, the following does not
+compile:
 
-```cpp
-auto b = {11, 22.33}; // Compilation error
-```
+<pre class="language-cpp line-numbers">
+	<code>
+		auto b = {11, 22.33}; // Compilation error
+	</code>
+</pre>
 
-In earlier versions of the standard (C++11/14), both copy- and direct list initialization deduce an
-initializer_list<> :
+In earlier versions of the standard (C++11/14), both copy and direct list
+initialization deduce an initializer_list&lt;&gt; :
 
-```cpp
-// Copy list initialization
-auto a = {11}; // initializer_list<int>
-auto b = {11, 22}; // initializer_list<int>
+<pre class="language-cpp line-numbers">
+	<code>
+		// Copy list initialization
+		auto a = {11}; // initializer_list&lt;int&gt;
+		auto b = {11, 22}; // initializer_list&lt;int&gt;
 
-// Direct list initialization
-auto c {11}; // initializer_list<int>
-auto d {11, 22}; // initializer_list<int>
-```
-end[5]
+		// Direct list initialization
+		auto c {11}; // initializer_list&lt;int&gt;
+		auto d {11, 22}; // initializer_list&lt;int&gt;
+	</code>
+</pre>
