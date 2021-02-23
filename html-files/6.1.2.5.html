@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>*define* keyword</title>
+<title>Literal Constants</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -188,12 +188,12 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.2.0.html">Object Types</a></li>
-<li class="breadcrumb-item active" *define* keyword breadcrumb-item active>*define* keyword</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.2.0.html">Memory Objects</a></li>
+<li class="breadcrumb-item active" Literal Constants breadcrumb-item active>Literal Constants</li>
 </ol>
 <h2>
-<a id="*define*-keyword" class="anchor" aria-hidden="true" href="#*define*-keyword">
-*define* keyword
+<a id="Literal-Constants" class="anchor" aria-hidden="true" href="#Literal-Constants">
+Literal Constants
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,10 +201,32 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 </a>
 </h2>
 <div class="comment-style" >
-Though, it's the easier way, but it's highly recommended not to use preprocessor directives for variables,
-as they do not have types and they are just string replacements.<br />
-There are much better ways to do the same task by constexpr.<br />
+C++14 adds support for chunking separators in the form of a single quotation
+mark. This improves readability of code, as seen in the following
+initializations:<br />
+<br />
+<pre class="language-cpp line-numbers">
+<code>
+int moneyInBank = -70'000; // -70000
+long populationChange = -85'000; // -85000
+long long countryGDPChange = -70'000'000'000; // -70 billion
+double pi = 3.141'592'653'59; // 3.14159265359
+</code>
+</pre>
 </div>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class="list-group-item" Sam's Teach Yourself C++ in One Hour a Day list-group-item>Sam's Teach Yourself C++ in One Hour a Day</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -215,27 +237,26 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>define.cxx</cite>
+  <cite>literals.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     /*
     Constants in C++:
     
-        literal constants, such as literal strings
+     =&gt; literal constants, such as literal strings
         declared by const keyword
         constant expression using constexpr keyword (C++11)
         emulated constants using enum keyword
-        =&gt; defined constants, depricated
+        defined constants, depricated
     */
-    
-    #include &lt;iostream&gt;
-    
-    #define PI 3.14159
     
     int main()
     {
-        // string replacement, not smart preprocessing
-        std::cout &lt;&lt; &quot;Pi number: &quot; &lt;&lt; PI &lt;&lt; std::endl;
+        // the number 10 is a literal constant
+    	int number = 10;
+    
+    	// the &apos;sample string&apos; is a literal constant
+    	const char* string = &quot;sample string&quot;;
     
         return 0;
     }
@@ -253,38 +274,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./define.o -c ./define.cxx
+g++ -Wall -g -o ./literals.o -c ./literals.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./define.bin ./define.o
+g++ -g -o ./literals.bin ./literals.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./define.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-Pi number: 3.14159
+./literals.bin
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/object-types/constexpr">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/memory-objects/arguments">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/object-types/enumeration">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/memory-objects/const">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

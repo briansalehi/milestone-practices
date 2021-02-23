@@ -1,2 +1,5 @@
-Python Crash Course: chapter 2 and 3
+#Learning Python
+#Learning Python by Mark Lutz
 Learning Python - Mark Lutz: page 164
+#Python Crash Course by Eric Matthew
+Python Crash Course: chapter 2 and 3

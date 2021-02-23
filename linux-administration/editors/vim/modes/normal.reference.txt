@@ -1,1 +1,3 @@
+#LPIC-1 Study Guide - Christine Brensnahan and Richard Blum
 Practical Vim: chapter 2
+#Practical Vim - Drew Neil

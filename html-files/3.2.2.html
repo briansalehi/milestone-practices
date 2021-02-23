@@ -204,16 +204,216 @@ The Observer Pattern defines a one-to-many dependency between objects so
 that when one object changes state, all of its dependents are notified and
 updated automatically.<br />
 <br />
-<h4>Design Principle</h4>
-Strive for loosely coupled designs between objects that interact.<br />
+Consider a weather monitoring device which retrieves an update every few
+minutes and displays weather data on 3 monitors.<br />
+<br />
+Our job is to alter the measurementsChanged() method so that it updates the
+three displays for current conditions, weather stats, and forecast.<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/weatherdata-class-diagram.png" alt="weatherdata class diagram" loading="lazy">
+<br />
+We’ll need to implement three display elements that use the weather data:<br />
+<ul>
+<li>a current conditions display</li>
+<li>a statistics display</li>
+<li>and a forecast display</li>
+</ul>
+<br />
+These displays must be updated as often as the WeatherData has new
+measurements.<br />
+<br />
+Here’s a first implementation possibility—as we’ve discussed, we’re going to
+add our code to the measurementsChanged() method in the WeatherData class:<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+public class WeatherData {
+public void measurementsChanged() {
+float temp = getTemprature();<br />
+float humidity = getHumidity();<br />
+float pressure = getPressure();<br />
+<br />
+// we're going to update each display by calling its update
+// method and passing it the most recent measurements.<br />
+currentConditionsDisplay.update(temp, humidity, pressure);<br />
+statisitcsDisplay.update(temp, humidity, pressure);<br />
+forecastDisplay.update(temp, humidity, pressure);<br />
+}
+}
+</code>
+</pre>
+<br />
+What’s wrong with our implementation anyway?<br />
+Think back to all those Chapter 1 concepts and principles—which are we
+violating, and which are we not? Think in particular about the effects of
+change on this code. Let’s work through our thinking as we look at the code:<br />
+<br />
+By coding to concrete implementations, we have no way to add or remove other
+display elements without making changes to the code.<br />
+<br />
+At least we seem to be using a common interface to talk to the display
+elements. They all have an <i>update()</i> method that takes the <i>temp</i>,
+<i>humidity</i>, and <i>pressure</i> values.<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+currentConditionsDisplay.update(temp, humidity, pressure);<br />
+statisitcsDisplay.update(temp, humidity, pressure);<br />
+forecastDisplay.update(temp, humidity, pressure);<br />
+</code>
+</pre>
+<br />
+This part looks like an area of change. We need to encapsulate this.<br />
+What if we want to add or remove displays at runtime? This looks hardcoded.<br />
+<br />
+Let’s take a look at the structure of the Observer Pattern, complete with its
+Subject and Observer classes. Here’s the class diagram:<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/observer-pattern-diagram.png" alt="observer pattern diagram" loading="lazy">
 <br />
 When two objects are loosely coupled, they can interact, but they typically
-have very little knowledge of each other. Loosely coupled designs often give
-us a lot of flexibility. And as it turns out, the Observer Pattern is a great
-example of loose coupling.<br />
+have very little knowledge of each other. As we’re going to see, loosely
+coupled designs often give us a lot of flexibility (more on that in a bit).<br />
+And, as it turns out, the Observer Pattern is a great example of loose
+coupling.<br />
 <br />
-Loosely coupled designs allow us to build flexible OO systems that can
-handle change because they minimize the interdependency between objects.<br />
+Using observer pattern, the design of weather station would look like this:<br />
+<br />
+<img class="img-responsive" src="/software-design/design-patterns/weather-station-diagram.png" alt="weather station diagram" loading="lazy">
+<br />
+So, let’s get our implemention of the weather station underway. Let’s start
+with the interfaces:<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+public interface Subject {
+public void registerObserver(Observer o);<br />
+public void removeObserver(Observer o);<br />
+public void notifyObjservers();<br />
+}
+<br />
+public interface Observer {
+public void update(float temp, float humidity, float pressure);<br />
+}
+<br />
+public interface DisplayElement {
+public void display();<br />
+}
+</code>
+</pre>
+<br />
+Now lets implement the Subject interface in WeatherData:<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+public class WeatherData implements Subject {
+private List&lt;Observer&gt; observers;<br />
+private float temprature;<br />
+private float humidity;<br />
+private float pressure;<br />
+<br />
+public WeatherData() {
+observers = new ArrayList&lt;Observers&gt;();<br />
+}
+<br />
+public void registerObservers(Observer o) {
+observers.add(o);<br />
+}
+<br />
+public void removeObserver(Observer o) {
+observers.remove(o);<br />
+}
+<br />
+public void notifyObservers() {
+for (Observer observer : observers) {
+observer.update(temprature, humidity, pressure);<br />
+}
+}
+<br />
+public void measurementsChange() {
+notifyObservers();<br />
+}
+<br />
+public void setMeasurements(float temprature, float humidity, float pressure) {
+this.temprature = temprature;<br />
+this.humidity = humidity;<br />
+this.pressure = pressure;<br />
+measurementsChanged();<br />
+}
+<br />
+// other WeatherData methods here
+}
+</code>
+</pre>
+<br />
+Now Let's build those display elements:<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+public class CurrentConditionsDisplay implements Observer, DisplayElement {
+private float temprature;<br />
+private float humidity;<br />
+private WeatherData weatherdata;<br />
+<br />
+public CurrentConditionsDisplay(WeatherData weatherdata) {
+this.weatherdata = weatherdata;<br />
+weatherdata.registerObserver(this);<br />
+}
+<br />
+public void update(float temprature, float humidity, float pressure) {
+this.temprature = temprature;<br />
+this.humidity = humidity;<br />
+display();<br />
+}
+<br />
+public void display() {
+System.out.println("Current conditions: " + temprature
++ "F degrees and " + humidity + "% humidity");<br />
+</code>
+</pre>
+<br />
+All we need is some code to glue everything together. We’ll be adding some
+more displays and generalizing things in a bit. For now, here’s our first
+attempt:<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+public class WeatherStation {
+public static void main(String[] args) {
+WeatherData weatherdata = new WeatherData();<br />
+<br />
+CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(weatherdata);<br />
+StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherdata);<br />
+ForecastDisplay forecastDisplay = new ForecastDisplay(weatherdata);<br />
+<br />
+weatherdata.setMeasurements(80, 65, 30.4f);<br />
+weatherdata.setMeasurements(82, 70, 29.2f);<br />
+weatherdata.setMeasurements(78, 90, 29.2f);<br />
+}
+}
+</code>
+</pre>
+<br />
+In our current Weather Station design, we are pushing all three pieces of data
+to the update() method in the displays, even if the displays don’t need all
+these values. That’s okay, but what if Weather-O-Rama adds another data value
+later, like wind speed? Then we’ll have to change all the update() methods in
+all the displays, even if most of them don’t need or want the wind speed
+data.<br />
+<br />
+Updating the WeatherStation code to allow Observers to pull the data they
+need is a pretty straightforward exercise. All we need to do is make sure the
+Subject has getter methods for its data, and then change our Observers to use
+them to pull the data that’s appropriate for their needs. Let’s do that.<br />
+<br />
+<pre class="language-java line-numbers">
+<code>
+public void update() {
+this.temprature = weatherdata.getTemprature();<br />
+this.humidity = weatherdata.getHumidity();<br />
+display();<br />
+</code>
+</pre>
 </div>
 <hr />
 <h3>
@@ -261,6 +461,7 @@ darkmode();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

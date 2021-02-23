@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>*auto* keyword</title>
+<title>Multiple Variable Declarations</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -188,12 +188,12 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.2.0.html">Object Types</a></li>
-<li class="breadcrumb-item active" *auto* keyword breadcrumb-item active>*auto* keyword</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.2.0.html">Memory Objects</a></li>
+<li class="breadcrumb-item active" Multiple Variable Declarations breadcrumb-item active>Multiple Variable Declarations</li>
 </ol>
 <h2>
-<a id="*auto*-keyword" class="anchor" aria-hidden="true" href="#*auto*-keyword">
-*auto* keyword
+<a id="Multiple-Variable-Declarations" class="anchor" aria-hidden="true" href="#Multiple-Variable-Declarations">
+Multiple Variable Declarations
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,18 +201,23 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 </a>
 </h2>
 <div class="comment-style" >
-**auto** type is a way to let compiler deduce a type and replace it in compile type.<br />
-using auto type will make your code a lot easier and shorter, specially when it comes to
-iterators, which will be discussed later.<br />
-<br />
-Just like anything in your daily life, type **auto** has its cons too.<br />
-Your code might look easier to read by using type **auto**, but be aware that
-using too many *auto* types will make types hard to guess and soon your program will look confusing,
-as all types are no longer explicitely visible!<br />
-<br />
-Personally, I always prefer using explicit types, even if they make my code longer and harder to read,
-at least I won't end up guessing my variable types. But it's just a matter of taste.<br />
+You may come across C++ code wherein a variable name is prefixed with
+characters that explain the type of the variable. This convention is called
+the Hungarian notation.<br />
 </div>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class="list-group-item" Sam's Teach Yourself C++ in One Hour a Day: chapter 1 list-group-item>Sam's Teach Yourself C++ in One Hour a Day: chapter 1</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -223,15 +228,13 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>auto.cxx</cite>
+  <cite>multiple-declaration.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     int main()
     {
-        // types are deduced by compiler at compile time
-        auto guess = true; // will be deduced as bool
-        auto deduct = 3.1415; // will be deduced as double
-    
+        // multiple declaration and initialization
+        int multiplicant = 2, multiplier = 4;
         return 0;
     }
 </code>
@@ -248,38 +251,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./auto.o -c ./auto.cxx
+g++ -Wall -g -o ./multiple-declaration.o -c ./multiple-declaration.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./auto.bin ./auto.o
+g++ -g -o ./multiple-declaration.bin ./multiple-declaration.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./auto.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-
+./multiple-declaration.bin
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/object-types/arguments">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/memory-objects/lvalue">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/object-types/const">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/memory-objects/auto">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

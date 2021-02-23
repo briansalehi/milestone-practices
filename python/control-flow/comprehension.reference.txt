@@ -1,1 +1,3 @@
+#Learning Python by Mark Lutz
 Learning Python - Mark Lutz: page 169
+#Python Crash Course by Eric Matthew
