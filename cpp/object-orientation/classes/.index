@@ -17,8 +17,6 @@ struct.cxx
 union.cxx
 friend.cxx
 aggregation.cxx
-default-methods.cxx
-deleted-methods.cxx
+default-constructible.cxx
+deleted-expression.cxx
 initializer_list.cxx
-nested.cxx
-overloading.cxx
