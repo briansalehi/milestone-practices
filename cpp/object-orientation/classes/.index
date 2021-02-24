@@ -6,7 +6,7 @@ initialization.cxx
 constexpr.cxx
 destructor.cxx
 copy_constructor.cxx
-conversion.cxx
+implicit-conversion.cxx
 move_constructor.cxx
 non_copyable.cxx
 singleton.cxx

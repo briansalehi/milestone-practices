@@ -1,1 +1,67 @@
+<p>Space on the stack is often limited. If you are writing a database that may contain tera-bytes of data in its internal structures, you might want to ensure that a client of this class cannot instantiate it on the stack; instead it is forced to create instances only on the free store. The key to ensuring this is declaring the destructor private:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class MonsterDB
+		{
+		private:
+			~MonsterDB(); // private destructor
+			//... members that consume a huge amount of data
+		};
+	</code>
+</pre>
+
+<p>Declaring a private destructor ensures that one is not allowed to create an instance like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		int main()
+		{
+			MonsterDB myDatabase; // compile error
+			// … more code
+			return 0;
+		}
+	</code>
+</pre>
+
+<p>This instance, if successfully constructed, would be on the stack. All objects on the stack get popped when the stack is unwound and therefore the compiler would need to compile and invoke the destructor ~MonsterDB() at the end of main(). However, this destructor is private and therefore inaccessible, resulting in a compile failure.</p>
+
 <p>Declaring <i>destructor</i> as a private method, prevents an object from being created on the stack, but can only be available on the heap. That is, object cannot be created on compile-time, but it can be created on run-time.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		int main()
+		{
+			MonsterDB* myDatabase = new MonsterDB(); // no error
+			// … more code
+			return 0;
+		}
+	</code>
+</pre>
+
+<p>If you see a memory leak there, you are not mistaken. As the destructor is not accessible from main, you cannot do a delete, either. What class MonsterDB needs to support is a public static member function that would destroy the instance (a class member would have access to the private destructor):</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class MonsterDB
+		{
+		private:
+			~MonsterDB(); // private destructor
+			//... members that consume a huge amount of data
+
+		public:
+			void destroyInstance(MonsterDB& object)
+			{
+				delete object;
+			}
+		};
+
+		int main()
+		{
+			MonsterDB* myDatabase = new MonsterDB();
+			delete myDatabase; // error: cannot access destructor
+			MonsterDB::destroyInstance(myDatabase); // properly deallocate memory
+			return 0;
+		}
+	</code>
+</pre>

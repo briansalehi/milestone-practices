@@ -1,0 +1,62 @@
+<p>Single-argument constructors are used to convert different types into the object.</p>
+
+<p>Constructors can be overloaded, that is, they may take one or more parameters. This feature is often used to convert one type to another. Let’s consider a class Human that features an overloaded constructor that accepts an integer.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Human
+		{
+			int age;
+		public:
+			Human(int humansAge): age(humansAge) {}
+		};
+
+		// Function that takes a Human as a parameter
+		void DoSomething(Human person)
+		{
+			std::cout << "Human sent did something" << std::endl;
+		}
+	</code>
+</pre>
+
+<p>This constructor allows a conversion:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Human kid(10); // convert integer in to a Human
+		DoSomething(kid);
+	</code>
+</pre>
+
+<p>Such converting constructors allow implicit conversions:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Human anotherKid = 11; // int converted to Human
+		DoSomething(10); // 10 converted to Human!
+	</code>
+</pre>
+
+<p>We declared <i>DoSomething(Human person)</i> as a function that accepts a parameter of type <i>Human</i> and does not accept an <i>int</i>!</p>
+
+<p>So, why did that line work?</p>
+<p>The compiler knows that class Human supports a constructor that accepts an integer and per-formed an implicit conversion for you—it created an object of type Human using the integer you supplied and sent it as an argu-ment to the function.</p>
+
+<p>To avoid implicit conversions, use keyword <i>explicit</i> at the time of declaring the constructor:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Human
+		{
+			int age;
+		public:
+			explicit Human(int humansAge): age(humansAge) {}
+		};
+	</code>
+</pre>
+
+<p>Using explicit is not a prerequisite but in many cases a good programming practice. The following sample in Listing 9.12 dem-onstrates a version of class Human that does not permit implicit conversions.</p>
+
+<p>The problem of implicit conversions and avoiding them using keyword <i>explicit</i> applies to operators too. Remember to note the usage of explicit when programming conversion operators introduced to you in <a href="/cpp/object-oriented/operators/">operators</a>.</p>
+
+<p>One important motive to use explicit conversion over implicit is, simply, compile-time errors are better than run-time errors!</p>

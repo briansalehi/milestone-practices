@@ -1,5 +1,0 @@
-<p>Single-argument constructors are used to convert different types into the object.</p>
-
-<p>Use <b>explicit</b> keyword to avoid implicit conversions.</p>  
-
-<p>One important motive to use explicit conversion over implicit is, simply, compile-time errors are better than run-time errors!</p>
