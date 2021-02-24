@@ -1,3 +1,1 @@
-Though, it's the easier way, but it's highly recommended not to use preprocessor directives for variables,
-as they do not have types and they are just string replacements.  
-There are much better ways to do the same task by constexpr.
+<p>Though, it's the easier way, but it's highly recommended not to use preprocessor directives for variables, as they do not have types and they are just string replacements. There are much better ways to do the same task by constexpr.</p>

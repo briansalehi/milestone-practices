@@ -1,20 +1,10 @@
-Enumerations are one of the constant types in C++.  
+<p>Enumerations are one of the constant types in C++.</p>  
 
-When dealing with kind of data holding only a specific possible amount of
-values, you should use enumeration.
+<p>When dealing with kind of data holding only a specific possible amount of values, you should use enumeration. As an example, a traffic control has only 3 light colors, so to prevent the possibility of adding another color to this range, we use an enumeration.</p>
 
-As an example, a traffic control has only 3 light colors, so to prevent the
-possibility of adding another color to this range, we use an enumeration.
+<p>Though, an enumeration is declared by integers, its elements are not of type int and they should not be compared by other types but itself.  What makes the comparison of type <i>int</i> and <i>traffic_light</i> possible, is because compiler will promote one type to the other one having higher rank. So in this case, <i>traffic_light</i> will be promoted to type int and switch case statement compares the values.</p>
 
-Though, an enumeration is declared by integers, its elements are not of type
-int and they should not be compared by other types but itself.
-What makes the comparison of type <i>int</i> and <i>traffic_light</i>
-possible, is because compiler will promote one type to the other one having
-higher rank.
-So in this case, <i>traffic_light</i> will be promoted to type int and switch
-case statement compares the values.
-
-By default, enum class has only following predefined operatrs:
+<p>By default, enum class has only following predefined operatrs:</p>
 
 <ul>
 <li>Assignment operator =</li>
@@ -22,9 +12,7 @@ By default, enum class has only following predefined operatrs:
 <li>Comparison operators ==</li>
 </ul>
 
-But more operators can be implemented on enum classes too.  
-For example, we can make an enumeration object increment by one using ++
-operator, which is discussed in <a href="/cpp/fundamentals/program-flow/switch-case/">postfix and prefix operators</a>.
+<p>But more operators can be implemented on enum classes too. For example, we can make an enumeration object increment by one using ++operator, which is discussed in <a href="/cpp/fundamentals/program-flow/switch-case/">postfix and prefix operators</a>.</p>
 
 <pre class="language-cpp line-numbers">
 	<code>

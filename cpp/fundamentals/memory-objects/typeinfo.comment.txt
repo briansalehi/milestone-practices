@@ -1,14 +1,5 @@
-Using *implicit* type declaration makes your code readable for sure,
-but it won't hide the fact that you need to know what kind of types you are using in your program.  
-Type deductions also make it even harder when variable types are complex.  
+<p>Using <i>implicit<i> type declaration makes your code readable for sure, but it won't hide the fact that you need to know what kind of types you are using in your program. Type deductions also make it even harder when variable types are complex.</p>  
 
-To find a variable's type, you can you **typeid()** object in *typeinfo* header file,
-and use **name()** method to show the type name.  
-Also using **before()** method clarifies which type precedes the other.
+<p>To find a variable's type, you can you <i>typeid()</i> object in <i>ypeinfo</i> header file, and use <i>name()</i> method to show the type name. Also using <i>before()</i> method clarifies which type precedes the other.</p>
 
-The output **d** represents type **double**.
-**4Base** indicates the name of class named Base,
-**FiiE** means function with signature of ii,
-**PFddE** means pointer to function with signature of dd.  
-this is how Cxx language finds its functions, variables and objects!
-So, when using 4 overloaded functions all having the same name, it's not a magic that Cxx can find the proper function.
+<p>The output <i>d</i> represents type <i>double</i>. <i>4Base</i> indicates the name of class named Base, <i>FiiE</i> means function with signature of ii, <i>PFddE</i> means pointer to function with signature of dd. This is how Cxx language finds its functions, variables and objects! So, when using 4 overloaded functions all having the same name, it's not a magic that Cxx can find the proper function.</p>

@@ -1,19 +1,5 @@
-<b>auto</b> type is a way to let compiler deduce a type and replace it in
-compile type.
+<p><i>auto</i> type is a way to let compiler deduce a type and replace it in compile type. Using auto requires you to initialize the variable for the compiler that uses this initial value in deciding what the variable type can be.</p>
 
-Using auto requires you to initialize the variable for the compiler that uses
-this initial value in deciding what the variable type can be.
+<p>When you don’t initialize a variable of type auto, you get a compile error.</p>
 
-When you don’t initialize a variable of type auto, you get a  compile error.
-
-Using auto type sometimes makes your code shorter, specially when it comes to
-iterators, which will be discussed later.
-
-Just like anything in your daily life, type <b>auto</b> has its cons too.
-Your code might look easier to read by using type <b>auto</b>, but be aware
-that using too many <b>auto</b> types will make types hard to guess and soon
-your program will look confusing, as all types are no longer explicitely
-visible!
-
-Personally, I prefer using explicit types wherever possible, even if they make
-my code longer, at least I won't end up guessing my variable types.
+<p>Using auto type sometimes makes your code shorter, specially when it comes to iterators, which will be discussed later. But just like anything in your daily life, type <i>auto</i> has its cons too. Your code might look easier to read by using type <i>auto</i>, but be aware that using too many <i>auto</i> types will make types hard to guess and soon your program will look confusing, as all types are no longer explicitely visible! Personally, I prefer using explicit types wherever possible, even if they make my code longer, at least I won't end up guessing my variable types.</p>

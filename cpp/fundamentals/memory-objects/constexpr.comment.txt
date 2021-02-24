@@ -1,7 +1,3 @@
-One of the greatest new features coming by standard 11 is **constexpr**
-which can evaluate some calculations in compile time.
+<p>One of the greatest new features coming by standard 11 is <i>constexpr</i> which can evaluate some calculations in compile time.</p>
 
-Though, don't go rough on constexpr. Compilers might ignore and process it as a function.  
-To make a function return double, you should add fraction part to at least one number.
-Compilers will assume type double as int, if they don't find using fraction parts necessary.
-So you need to force them to use double when values don't have fraction parts by using a trailing *.0* in numbers.
+<p>Though, don't go rough on constexpr. Compilers might ignore and process it as a function. To make a function return double, you should add fraction part to at least one number. Compilers will assume type double as int, if they don't find using fraction parts necessary. So you need to force them to use double when values don't have fraction parts by using a trailing <b>.0</b> in numbers.</p>

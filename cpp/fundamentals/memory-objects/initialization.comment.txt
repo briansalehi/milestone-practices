@@ -1,22 +1,12 @@
-Avoid Narrowing Conversion Errors by Using List Initialization.
+<p>Avoid Narrowing Conversion Errors by Using List Initialization.</p>
 
-When you initialize a variable of a smaller integer type (say, short) using
-another of a larger type (say, an int), you are risking a narrowing conversion
-error, because the  compiler has to fit data stored in a type that can
-potentially hold much larger numbers into a type that doesn’t have the same
-capacity (that is, is narrower).
+<p>When you initialize a variable of a smaller integer type (say, short) using another of a larger type (say, an int), you are risking a narrowing conversion error, because the  compiler has to fit data stored in a type that can potentially hold much larger numbers into a type that doesn’t have the same capacity (that is, is narrower).</p>
 
-Narrowing isn’t restricted to conversions between integer types only. You may
-face  narrowing errors if you initialize a float using a double, a float (or
-double) using an int, or an int using a float. Some compilers may warn, but
-this warning will not cause an error that stops compilation. In such cases,
-you may be confronted by bugs that occur infrequently and at execution time.
+<p>Narrowing isn’t restricted to conversions between integer types only. You may face  narrowing errors if you initialize a float using a double, a float (or double) using an int, or an int using a float. Some compilers may warn, but this warning will not cause an error that stops compilation. In such cases, you may be confronted by bugs that occur infrequently and at execution time.</p>
 
-To avoid this problem, C++11 recommends list initialization techniques that
-prevent  narrowing. To use this feature, insert initialization
-values/variables within braces {…}.
+<p>To avoid this problem, C++11 recommends list initialization techniques that prevent  narrowing. To use this feature, insert initialization values/variables within braces {…}.</p>
 
-There are two types of initialization that use braced initializer lists:
+<p>There are two types of initialization that use braced initializer lists:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -28,10 +18,9 @@ There are two types of initialization that use braced initializer lists:
 	</code>
 </pre>
 
-In combination with auto type deduction, there is an important difference
-between copy and direct list initialization introduced with C++17.
+<p>In combination with auto type deduction, there is an important difference between copy and direct list initialization introduced with C++17.</p>
 
-Starting with C++17, you have the following results:
+<p>Starting with C++17, you have the following results:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -45,9 +34,7 @@ Starting with C++17, you have the following results:
 	</code>
 </pre>
 
-Note that for copy list initialization, all the elements in the braced
-initializer must be of the same type. For example, the following does not
-compile:
+<p>Note that for copy list initialization, all the elements in the braced initializer must be of the same type. For example, the following does not compile:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -55,8 +42,7 @@ compile:
 	</code>
 </pre>
 
-In earlier versions of the standard (C++11/14), both copy and direct list
-initialization deduce an initializer_list&lt;&gt; :
+<p>In earlier versions of the standard (C++11/14), both copy and direct list initialization deduce an initializer_list&lt;&gt; :</p>
 
 <pre class="language-cpp line-numbers">
 	<code>

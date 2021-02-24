@@ -1,6 +1,3 @@
-**Notice**: output values might differ on your system.
+<p><b>Notice</b>: output values might differ on your system.</p>
 
-You need to remember that **sizeof()** is an operator, not a function.  
-The amount of memory *sizeof()* operator represents does not depend on the value held by a variable,
-but it depends on the operating system which you are using.  
-Some systems will use int as a 8 byte memory block and some might use 4 bytes so as my system.
+<p>You need to remember that <i>sizeof()</i> is an operator, not a function. The amount of memory <i>sizeof()</i> operator represents does not depend on the value held by a variable, but it depends on the operating system which you are using. Some systems will use int as a 8 byte memory block and some might use 4 bytes so as my system.</p>

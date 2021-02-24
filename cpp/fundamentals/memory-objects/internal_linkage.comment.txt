@@ -1,1 +1,1 @@
-Using **static** keyword, will make a variable globally accessible only in the file it was declared.
+<p>Using <i>static</i> keyword, will make a variable globally accessible only in the file it was declared.</p>

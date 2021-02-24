@@ -1,6 +1,4 @@
-C++14 adds support for chunking separators in the form of a single quotation
-mark. This improves readability of code, as seen in the following
-initializations:
+<p>C++14 adds support for chunking separators in the form of a single quotation mark. This improves readability of code, as seen in the following initializations:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
