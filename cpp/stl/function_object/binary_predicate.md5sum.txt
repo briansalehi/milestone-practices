@@ -1,1 +1,0 @@
-519e2e74fbee6ed4cdae9699cdc09d1c  ./04.more_stl/01.function_object/04.binary_predicate.cxx

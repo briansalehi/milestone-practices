@@ -1,1 +1,0 @@
-1feb288e12806757cf80990746503602  ./04.more_stl/04.iterators/02.istream_iterator.cxx

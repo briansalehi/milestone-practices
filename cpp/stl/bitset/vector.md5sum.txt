@@ -1,1 +1,0 @@
-dc4f39219e30e943a25e0c277c193afe  ./04.more_stl/06.bitset/02.vector.cxx

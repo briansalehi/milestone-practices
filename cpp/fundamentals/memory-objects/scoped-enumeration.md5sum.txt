@@ -1,1 +1,0 @@
-7c3460f25631bf80851e6e20a8e24547  ./01.the_basics/03.variables&constants/16.scoped-enumeration.cxx

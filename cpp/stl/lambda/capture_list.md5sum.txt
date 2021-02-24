@@ -1,1 +1,0 @@
-36f9e8fd97cbc68712c2794f72fa96ea  ./04.more_stl/02.lambda/03.capture_list.cxx

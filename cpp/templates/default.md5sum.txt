@@ -1,1 +1,0 @@
-84726eb7a40dd3cc436fa9c385a11b4d  ./02.object_oriented/06.templates/09.default.cxx

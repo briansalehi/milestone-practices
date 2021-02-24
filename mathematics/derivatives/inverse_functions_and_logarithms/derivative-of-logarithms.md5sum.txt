@@ -1,1 +1,0 @@
-ac5790bbecde06ed03809f2ad9451829  ./03.derivatives/08.inverse_functions_and_logarithms/04.derivative-of-logarithms.tex

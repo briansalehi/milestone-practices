@@ -1,1 +1,0 @@
-46654fbaa252ee05145046abdfdd59d9  ./05.advanced/02.streams/03.cin.cxx

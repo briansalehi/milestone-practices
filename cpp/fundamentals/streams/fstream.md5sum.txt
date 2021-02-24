@@ -1,1 +1,0 @@
-f2257198ea25935d391fee1c00d12e0a  ./05.advanced/02.streams/04.fstream.cxx

@@ -1,1 +1,0 @@
-d3870cd7d732befff001bc7e1232be3b  ./03.stl/03.array/10.distance.cxx

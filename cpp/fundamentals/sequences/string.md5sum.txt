@@ -1,1 +1,0 @@
-ac5a22231b7980c2b8d94bb491b1d9ef  ./01.the_basics/04.arrays&strings/06.string.cxx

@@ -1,1 +1,0 @@
-ba85ffb033794d5f03f7021408cbac1b  ./04.more_stl/03.algorithms/06.foreach.cxx

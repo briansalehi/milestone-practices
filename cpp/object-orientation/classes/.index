@@ -18,7 +18,6 @@ union.cxx
 friend.cxx
 aggregation.cxx
 default-methods.cxx
-defaults.cxx
 deleted-methods.cxx
 initializer_list.cxx
 nested.cxx

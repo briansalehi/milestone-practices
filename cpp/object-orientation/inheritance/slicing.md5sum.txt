@@ -1,1 +1,0 @@
-23881f9711104154f317a6032c12ac71  ./02.object_oriented/02.inheritance/08.slicing.cxx

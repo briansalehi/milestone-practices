@@ -1,1 +1,0 @@
-d12f3954552c3890fd9d17fd56ca47f6  ./01.the_basics/04.input_output/03.conversion-specifiers.c

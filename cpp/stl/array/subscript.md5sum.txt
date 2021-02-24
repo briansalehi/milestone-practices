@@ -1,1 +1,0 @@
-4660a9d2004444cea620220f60351fb5  ./03.stl/03.array/04.subscript.cxx

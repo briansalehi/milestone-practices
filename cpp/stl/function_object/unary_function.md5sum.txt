@@ -1,1 +1,0 @@
-8269e8171b1c20a5a75836e4e5f4d97c  ./04.more_stl/01.function_object/01.unary_function.cxx

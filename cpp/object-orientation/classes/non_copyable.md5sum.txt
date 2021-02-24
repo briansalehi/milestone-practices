@@ -1,1 +1,0 @@
-c55826e21113b199451285c51f82e69c  ./02.object_oriented/01.classes&objects/11.non_copyable.cxx

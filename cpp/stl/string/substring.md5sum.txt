@@ -1,1 +1,0 @@
-b7f20bc2a54fcaafb7a345320417e042  ./03.stl/02.string/03.substring.cxx

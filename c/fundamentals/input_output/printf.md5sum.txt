@@ -1,1 +1,0 @@
-b7aa835a82a183f66a35f6a60dfeb7db  ./01.the_basics/04.input_output/01.printf.c

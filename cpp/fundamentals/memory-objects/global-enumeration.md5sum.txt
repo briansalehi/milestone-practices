@@ -1,1 +1,0 @@
-47324b5e7e2a7347db163fb1468b2dea  ./01.the_basics/03.variables&constants/15.global-enumeration.cxx

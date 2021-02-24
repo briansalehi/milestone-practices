@@ -1,1 +1,0 @@
-c1192ed7d2cc31cc5d9d0fa55172bec3  ./02.object_oriented/02.inheritance/07.protected.cxx

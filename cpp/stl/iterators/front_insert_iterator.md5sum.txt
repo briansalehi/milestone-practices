@@ -1,1 +1,0 @@
-a9282436bda24e0ca0ca2c796a5c2c02  ./04.more_stl/04.iterators/04.front_insert_iterator.cxx

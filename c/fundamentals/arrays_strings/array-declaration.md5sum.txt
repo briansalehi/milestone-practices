@@ -1,1 +1,0 @@
-80106acc2f7b8b3e77e3ad8b4b78e611  ./01.the_basics/03.arrays_strings/01.array-declaration.c

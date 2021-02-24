@@ -1,1 +1,0 @@
-20762875bee1750541bbf72e2a7307c1  ./03.stl/02.string/04.truncate.cxx

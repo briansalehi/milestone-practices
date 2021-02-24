@@ -1,1 +1,0 @@
-2584a6e12878138e0261e8bb74f250b8  ./05.advanced/02.streams/12.hex.cxx

@@ -1,1 +1,0 @@
-ac8d6f6c118cef0720345d61cbc7d652  ./04.more_stl/06.bitset/01.bitset.cxx

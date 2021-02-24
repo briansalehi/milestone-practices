@@ -1,1 +1,0 @@
-dbc85b3651a7e2e3311bdfc78b2cbcc9  ./05.advanced/02.streams/10.showpoint.cxx

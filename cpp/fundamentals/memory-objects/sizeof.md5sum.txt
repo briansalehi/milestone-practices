@@ -1,1 +1,0 @@
-28166e495d5ea63215a198ad2f51fcd1  ./01.the_basics/03.variables&constants/08.sizeof.cxx

@@ -1,1 +1,0 @@
-940b9b3efd705e5fd8b27ea4151ed9e4  ./03.derivatives/09.inverse_trigonometric_functions/02.derivative-of-arctan.tex

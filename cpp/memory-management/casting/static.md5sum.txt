@@ -1,1 +1,0 @@
-00e315dc1e524c959bdcd9655cf4ed3c  ./02.object_oriented/05.casting/01.static.cxx

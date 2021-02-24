@@ -1,1 +1,0 @@
-b45b610b22b8bd8d3ff65fa353239586  ./03.stl/04.list/03.insertion.cxx

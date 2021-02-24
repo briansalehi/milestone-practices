@@ -1,1 +1,0 @@
-55dcef61ad99a0d4e4191edd5cea13a1  ./02.object_oriented/04.operators/05.equality.cxx

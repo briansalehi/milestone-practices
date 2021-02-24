@@ -1,1 +1,0 @@
-05ab89f5481bc9f2d037e7886641e919  ./02.object_oriented/06.templates/12.tuples.cxx

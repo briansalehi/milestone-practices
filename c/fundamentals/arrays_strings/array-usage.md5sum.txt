@@ -1,1 +1,0 @@
-1c94d5b527325bf7888c527b1ff05c22  ./01.the_basics/03.arrays_strings/02.array-usage.c

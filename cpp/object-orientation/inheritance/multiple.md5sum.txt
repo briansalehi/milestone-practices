@@ -1,1 +1,0 @@
-97e1abef26598cedba7e187d016de32e  ./02.object_oriented/02.inheritance/09.multiple.cxx

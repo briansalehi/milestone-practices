@@ -1,1 +1,0 @@
-a33e4ec6e034f565e475186d22725cd8  ./02.object_oriented/06.templates/11.variadic.cxx

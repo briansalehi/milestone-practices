@@ -1,1 +1,0 @@
-f0b355f0fae6d2cb704554456e5e59b3  ./01.the_basics/03.arrays_strings/04.strlen.c

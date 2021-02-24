@@ -1,1 +1,0 @@
-4be9a1a9aae736ac075dd90edc850b1f  ./03.derivatives/08.inverse_functions_and_logarithms/02.derivative-of-natural-logarithm.tex

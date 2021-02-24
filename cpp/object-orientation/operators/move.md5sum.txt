@@ -1,1 +1,0 @@
-05ab89f5481bc9f2d037e7886641e919  ./02.object_oriented/04.operators/10.move.cxx

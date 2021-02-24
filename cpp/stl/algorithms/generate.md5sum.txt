@@ -1,1 +1,0 @@
-34704b62a10aae5db6dda17b729f95b4  ./04.more_stl/03.algorithms/05.generate.cxx

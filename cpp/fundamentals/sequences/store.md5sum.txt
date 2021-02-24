@@ -1,1 +1,0 @@
-682e0cd667ad27d21901a35e2c99d88d  ./01.the_basics/04.arrays&strings/02.store.cxx

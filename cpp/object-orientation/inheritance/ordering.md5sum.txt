@@ -1,1 +1,0 @@
-ed499f5c4e61f95f62bc1115d3d3b8c7  ./02.object_oriented/02.inheritance/05.ordering.cxx

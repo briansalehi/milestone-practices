@@ -1,1 +1,0 @@
-03cb7f14ad93590ab00623e962d66a05  ./05.advanced/02.streams/01.ios.cxx

@@ -1,1 +1,0 @@
-7d77710f8ebed9c2dc6a12f302ed960a  ./04.more_stl/05.adaptive/01.stack.cxx

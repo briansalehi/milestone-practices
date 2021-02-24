@@ -1,1 +1,0 @@
-f0c35122eadd45b4f62e7a779d1a17d9  ./05.advanced/01.smart/04.std-move.cxx

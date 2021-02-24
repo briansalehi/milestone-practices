@@ -1,1 +1,0 @@
-71e84be8ed9b799ef10f502d27708461  ./04.more_stl/02.lambda/01.unary_function.cxx

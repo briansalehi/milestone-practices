@@ -1,1 +1,0 @@
-04056d473614dc13e69814e63f0d51f4  ./01.the_basics/08.pointers&references/14.store-lambda.cxx

@@ -1,1 +1,0 @@
-be95471284a884120d389a8075fc60ca  ./03.stl/03.array/06.remove.cxx

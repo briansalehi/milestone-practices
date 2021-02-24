@@ -1,1 +1,0 @@
-78c34f3db31b64624126c0c369ff947c  ./05.advanced/02.streams/08.fmtflags.cxx

@@ -1,1 +1,0 @@
-da6fb2dc239be6adf1e66f38c8e96aac  ./01.the_basics/03.variables&constants/04.external_linkage.cxx

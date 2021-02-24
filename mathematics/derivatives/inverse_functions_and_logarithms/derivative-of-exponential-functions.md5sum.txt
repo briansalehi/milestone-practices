@@ -1,1 +1,0 @@
-d7e8ab829364800f2f97cc8ffe60e991  ./03.derivatives/08.inverse_functions_and_logarithms/03.derivative-of-exponential-functions.tex

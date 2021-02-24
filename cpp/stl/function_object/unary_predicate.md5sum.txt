@@ -1,1 +1,0 @@
-d9dc46528a8cf409988a998a71fddc81  ./04.more_stl/01.function_object/02.unary_predicate.cxx

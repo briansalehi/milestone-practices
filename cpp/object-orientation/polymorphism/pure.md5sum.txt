@@ -1,1 +1,0 @@
-b9f741cd693656be4faf77bdc1397373  ./02.object_oriented/03.polymorphism/03.pure.cxx

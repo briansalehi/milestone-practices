@@ -1,1 +1,0 @@
-d19720035e1f298b5e4c58b06205f735  ./03.stl/03.array/07.memory.cxx

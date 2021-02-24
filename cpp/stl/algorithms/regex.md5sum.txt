@@ -1,1 +1,0 @@
-6c47ed1545a0206a73db630020a3d4da  ./04.more_stl/03.algorithms/19.regex.cxx

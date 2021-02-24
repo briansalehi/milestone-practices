@@ -1,1 +1,0 @@
-192ce521ee85082bef993db9c0fcbde1  ./02.object_oriented/01.classes&objects/10.move_constructor.cxx

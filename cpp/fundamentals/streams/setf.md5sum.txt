@@ -1,1 +1,0 @@
-817693c529e60b11f84acf7d56c9eb75  ./05.advanced/02.streams/14.setf.cxx

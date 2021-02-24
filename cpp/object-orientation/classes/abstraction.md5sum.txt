@@ -1,1 +1,0 @@
-d5b71491140c2e4b89ed9b36244f55fe  ./02.object_oriented/01.classes&objects/02.abstraction.cxx

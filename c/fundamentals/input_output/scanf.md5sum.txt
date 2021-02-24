@@ -1,1 +1,0 @@
-d11a2a833b4283d8d45a5312f68bf9c5  ./01.the_basics/04.input_output/06.scanf.c
