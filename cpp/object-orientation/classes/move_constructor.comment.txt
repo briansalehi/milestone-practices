@@ -1,3 +1,31 @@
 <p>Move semantics are helpful when there's a big object which we cannot afford having another copy of it. In this situation when there's not enough memory to just have a few copies of an object, we need to directly move those objects when they are passed as arguments or they are returned from functions.</p>
 
 <p>To make <i>move semantics</i> happen, we need to declare a <i>move constructor</i>, the way we declared a copy constructor. Instead, here we have two & operators meaning the move operator. And there's another difference between move constructor and a copy constructor, and that's we set the source members to NULL after we moved them to the destination. This way, source will no longer exist, and the object is moved to the destination. No extra memory occupied. To make sure object is moved we also use <i>std::move()</i> function.</p>
+
+<p>The syntax of a move constructor is:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// move constructor
+		MyString(MyString&& moveSource)
+		{
+			if(moveSource.buffer != NULL)
+			{
+				buffer = moveSource.buffer;
+				// take ownership i.e. 'move'
+				moveSource.buffer = NULL;
+				// set the move source to NULL
+			}
+		}
+	</code>
+</pre>
+
+<p>When a move constructor is programmed, the compiler automatically opts for the same for “moving” the temporary resource and hence avoiding a deep-copy step. With the move constructor implemented, the comment should be appropriately changed to the fol-lowing:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		MyString sayHelloAgain(Copy(sayHello)); // invokes 1x copy, 1x move constructors
+	</code>
+</pre>
+
+<p>The move constructor is usually implemented with the move assignment operator, which is discussed in greater detail in <a href="/cpp/object-orientation/operators/move-assignment-operator/">move assignment operator</a>.</p>

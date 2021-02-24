@@ -1,1 +1,66 @@
+<p>You declare a class using the keyword class followed by the name of the class, followed by a statement block {…} that encloses a set of member attributes and member functions within curly braces, and finally terminated by a semicolon ‘;’.</p>
+
+<p>Encapsulation, which is the ability to logically group data and functions that work using it, is an important property of object-oriented programming.</p>
 <p>In simple words, encapsulation means putting all sorts of data and types together to make a meaningful block of bigger data.</p>  
+
+<p>You may often encounter the term method—these are essentially functions that are members of a class.</p>
+
+<p>A class is like a blueprint, and declaring a class alone has no effect on the execution of a program. The real-world avatar of a class at program execution time is an object. To use the features of a class, you typically create an instance of that class, called an object. You use that object to access its member methods and attributes.</p>
+
+<p>Creating an object of type class Human is similar to creating an instance of another type, say double:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		double pi= 3.1415; // a variable of type double
+		Human firstMan; // firstMan: an object of class Human
+	</code>
+</pre>
+
+<p>Alternatively, you would dynamically create an instance of class Human using new as you would for another type, say an int:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		int* pointsToNum = new int; // an integer allocated dynamically
+		delete pointsToNum; // de-allocating memory when done using
+		Human* firstWoman = new Human(); // dynamically allocated Human
+		delete firstWoman; // de-allocating memory
+	</code>
+</pre>
+
+<p>As the class declaration demonstrates, firstMan has attributes such as dateOfBirth that can be accessed using the dot operator (.)</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		firstMan.dateOfBirth = "1970";
+	</code>
+</pre>
+
+<p>This is because attribute dateOfBirth belongs to class Human, being a part of its blueprint as seen in the class declaration.</p>
+
+<p>Ditto for methods such as IntroduceSelf():</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		firstMan.IntroduceSelf();
+	</code>
+</pre>
+
+<p>If you have a pointer firstWoman to an instance of class Human, you can either use the pointer operator ( -&gt; ) to access members, as explained in the next section, or use the indirection operator (*) to reference the object following the dot operator.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Human* firstWoman = new Human();
+		(*firstWoman).IntroduceSelf();
+	</code>
+</pre>
+
+<p>If an object has been instantiated on the free store using new or if you have a pointer to an object, then you use the pointer operator ( -&gt; ) to access the member attributes and functions:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Human* firstWoman = new Human();
+		firstWoman-&gt;dateOfBirth = "1970";
+		firstWoman-&gt;IntroduceSelf();
+		delete firstWoman;
+	</code>
+</pre>

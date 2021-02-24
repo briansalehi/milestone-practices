@@ -1,3 +1,23 @@
 <p><b>Constant expressions</b> are special functions evaluated in compile time. They can boost your programs when used.</p>  
+
+<p>It is possible to define a constructor as a constant expression too, using keyword <i>constexpr</i>. In special cases where such a construct would be useful from a performance point of view, you would use it at the constructor declaration.</p>
+
 <p>Fortunately, we can take advantage of them in classes too. We can make constant expression constructors and methods to have them evaluated in compile time. Also, object creations can be specified as constant expressions too.</p>  
-<p>In this practice, we will have our number variable evaluated in compile time!</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Sample
+		{
+		private:
+			const char* someString;
+
+		public:
+			constexpr Sample(const char* input) :someString(input)
+			{
+				// constructor code
+			}
+		};
+	</code>
+</pre>
+
+<p>In this sample, we will have our number variable evaluated in compile time!</p>

@@ -1,22 +1,64 @@
 <p>When you pass a variable by value to a function, that function will copy that value and assigns that to its parameter. That is, after invoking that function, you will have two of those values on memory. This also happens when you pass an object to a function by values. Classes do not have any idea how to copy their members into new location by themselves. So that's out job to make sure an object will be copied properly when it's passed to a function.</p>
 
+<p>The copy constructor is an overloaded constructor that you supply. It is invoked by the compiler every time an object of the class is copied.</p>
+
+<p>The declaration syntax of a copy constructor for class MyString is the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class MyString
+		{
+		public:
+			MyString(const MyString& copySource); // copy constructor
+		};
+
+		MyString::MyString(const MyString& copySource)
+		{
+			// Copy constructor implementation code
+		}
+	</code>
+</pre>
+
 <p>Copy constructors are declared just like default constructors except that they have a reference of the object as their parameters with no return value.</p>
 
-<p>When a class performs memory allocation using new, care must be taken to avoid a number of common programming errors. A somewhat more insidious problem occurs when classes that allocate memory fail to provide a copy constructor or an assignment operator. Consider the following example, using our Vect class:</p>
+<p>Thus, a copy constructor takes an object of the same class by reference as a parameter. This parameter is an alias of the source object and is the handle you have in writing your custom copy code. You would use the copy constructor to ensure a deep copy of all buf-fers in the source.</p>
 
-<pre class="language-cpp line-numbers"><code>
-	Vect a(100);
-	Vect b = a;
-	Vect c;
-	c = a;
-</code></pre>
+<p>Using const in the copy constructor declaration ensures that the copy constructor does not modify the source object being referred to.</p>
 
-<p>It would seem that we have just created three separate vectors, all of size 100, but have we? In reality all three of these vectors share the same 100-element array. Let us see why this has occurred.</p>  
+<p>Additionally, the parameter in the copy constructor is passed by reference as a necessity. If this weren’t a reference, the copy constructor would itself invoke a copy, thus invoking itself again and so on till the system runs out of memory.</p>
 
-<p>The declaration of object a invokes the vector constructor, which allocates an array of 100 integers and a.data points to this array. The declaration “Vect b=a” initializes b from a. Since we provided no copy constructor in Vect, the system uses its default, which simply copies each member of a to b. In particular it sets “b.data=a.data.” Notice that this does not copy the contents of the array; rather it copies the pointer to the array’s initial element. This default action is sometimes called a shallow copy.</p>
+<p>There are cases where objects are subjected to copy steps automatically, due to the nature of the language and its needs. Consider the following:</p>
 
-<p>The declaration of c invokes the constructor with a default argument value of 10, and hence allocates an array of 10 elements in the free store. Because we have not provided an assignment operator, the statement “c=a,” also does a shallow copy of a to c. Only pointers are copied, not array contents. Worse yet, we have lost the pointer to c’s original 10-element array, thus creating a memory leak.</p>
+<pre class="language-cpp line-numbers">
+	<code>
+		class MyString
+		{
+		public:
+			MyString(const MyString& copySource); // copy constructor
+		};
 
-<p>Now, a, b, and c all have members that point to the same array in the free store. If the contents of the arrays of one of the three were to change, the other two would mysteriously change as well. Worse yet, if one of the three were to be deleted before the others (for example, if this variable was declared in a nested block), the destructor would delete the shared array. When either of the other two attempts to access the now deleted array, the results would be disastrous. In short, there are many problems here.</p>
+		MyString::MyString(const MyString& copySource)
+		{
+			// Copy constructor implementation code
+		}
 
-<p>Fortunately, there is a simple fix for all of these problems. The problems arose because we allocated memory and we used the system’s default copy constructor and assignment operator. If a class allocates memory, you should provide a copy constructor and assignment operator to allocate new memory for making copies.</p>
+		MyString Copy(MyString& source) // function
+		{
+			MyString copyForReturn(source.GetString()); // create copy
+			return copyForReturn; // return by value invokes copy constructor
+		}
+
+		int main()
+		{
+			MyString sayHello("Hello World of C++");
+			MyString sayHelloAgain(Copy(sayHello)); // invokes 2x copy constructor
+			return 0;
+		}
+	</code>
+</pre>
+
+<p>As the comment indicates, in the instantiation of sayHelloAgain, the copy constructor was invoked twice, thus a deep copy was performed twice because of our call to function Copy(sayHello) that returns a MyString by value. However, this value returned is very temporary and is not available outside this expression. So, the copy constructor invoked in good faith by the C++ compiler is a burden on performance. This impact becomes sig-nificant if our class were to contain objects of great size.</p>
+
+<p>To avoid this performance bottleneck, versions of C++ starting with C++11 feature a <a href="/cpp/object-orientation/classes/move-constructor/">move constructor</a> in addition to a copy constructor which will be discussed next page.</p>
+
+<p>The copy constructor is usually implemented with the copy assignment operator, which is discussed in greater detail in <a href="/cpp/object-orientation/operators/copy-assignment-operator/">copy assignment operator</a>.</p>

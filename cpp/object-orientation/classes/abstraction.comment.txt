@@ -1,3 +1,9 @@
+<p>Information can be classified into at least two categories: data that we don’t mind the public knowing and data that is private. C++ enables you to model class attributes and methods as public or private. Public class members can be used by anyone in possession of an object of the class. Private class members can be used only within the class (or its “friends”). C++ keywords public and private help you as the designer of a class decide what parts of a class can be invoked from outside it, for instance, from main(), and what cannot.</p>
+
+<p>While allowing you to design a class as a container that encapsulates data and methods that operate on that data, C++ empowers you to decide what information remains unreachable to the outside world (that is, unavailable outside the class) via keyword private. At the same time, you have the possibility to allow controlled access to even information declared private via methods that you have declared as public. Thus your implementation of a class can abstract member information that classes and functions outside this class don’t need to have access to.</p>
+
+<p>Abstraction is an important concept in object-oriented languages. It empowers  programmers to decide what attributes of a class need to remain known only to the class and its members with nobody outside it (with the exception of those declared as its “friends”) having access to it.</p>
+
 <p>Abstraction is the access level to object members. Object members can be accessed from different scopes based on their abstraction.</p>
 
 <p>One important feature of classes is the notion of access control. Members may  be declared to be public, which means that they are accessible from outside the class, or private, which means that they are accessible only from within the class.</p>
@@ -5,3 +11,5 @@
 <p>All external access to class objects takes place through the public members, or the public interface as it is called.</p>
 
 <p>Note that if no access specifier is given, the default is private for classes and public for structures.</p>
+
+<p>This models a real-world scenario quite well, don’t you think? You were named at birth; people are allowed to know your name, but nobody (except you) has the authority to change it.</p>

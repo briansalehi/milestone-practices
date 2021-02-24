@@ -1,35 +1,31 @@
 #include <iostream>
 #include <string>
 
-// class
-class Human {
-public: // abstraction
+class Human
+{
+public: // access modifier
     std::string name;
     short age;
 
-    // method
-    void introduce(){
+    // method (function within a class)
+    void introduce()
+	{
         std::cout << "I am " << name << ", and I'm " << age << " years old." << std::endl;
     }
 };
 
 int main()
 {
-    // class instance, object man
-    Human person;
-    // dot operator to access object elements
-    person.name = "Brian";
+    Human person; // object
+    person.name = "Brian"; // dot operator to access object elements
     person.age = 23;
-
-    // allocating new object
-    Human* ghost = new Human();
-    // pointer operator to access object pointer elements
-    ghost->name = "Cane";
-    ghost->age = 1240;
-
     person.introduce();
-    ghost->introduce();
 
+    Human* Eve = new Human(); // allocating new object
+    Eve->name = "Cane"; // pointer operator to access object pointer elements
+    Eve->age = 1240;
+    Eve->introduce();
     delete ghost; // never forget to delete newly allocated memory
+
     return 0;
 }

@@ -1,3 +1,74 @@
-<p>Destructors are invoked just before the object is completely destroyed. Constructors and destructors are great places to allocate memory right after object creation and delete just before object destruction.</p>
+<p>A destructor, like a constructor, is a special function, too. A constructor is invoked at object instantiation, and destructors are automatically invoked just before the object is completely destroyed. Constructors and destructors are great places to allocate memory right after object creation and delete just before object destruction.</p>
 
-<p>A constructor is called when a class object comes into existence. A destructor is a member function that is automatically called when a class object ceases to exist.</p>
+<p>The destructor looks like a function that takes the name of the class, yet has a tilde (~) preceding it. So, class Human would have a destructor that is declared like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Human
+		{
+			~Human(); // declaration of a destructor
+		};
+	</code>
+</pre>
+
+<p>This destructor can either be implemented inline in the class or externally outside the class declaration. An implementation or definition inside the class looks like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Human
+		{
+		public:
+			~Human()
+			{
+				// destructor code here
+			}
+		};
+	</code>
+</pre>
+
+<p>A variant enabling you to define the destructor outside the class’s declaration looks like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Human
+		{
+		public:
+			~Human(); // destructor declaration
+		};
+
+		// destructor definition (implementation)
+		Human::~Human()
+		{
+			// destructor code here
+		}
+	</code>
+</pre>
+
+<p>A destructor is always invoked when an object of a class is destroyed when it goes out of scope or is deleted via delete. This property makes a destructor the ideal place to reset variables and release dynamically allocated memory and other resources.</p>
+
+<p>A destructor cannot be overloaded. A class can have only one destructor. If you forget to implement a destructor, the compiler creates and invokes a dummy destructor, that is, an empty one (that does no cleanup of dynamically allocated memory).</p>
+
+<p>Classes such as MyString, shown in the following sample, contain a pointer member buffer that points to dynamically allocated memory, allocated in the constructor using new and deallocated in the destructor using delete[]. When an object of this class is copied, the pointer member is copied, but not the pointed memory, resulting in two objects pointing to the same dynamically allocated buffer in memory. When an object is destructed, delete[] deallocates the memory, thereby invalidating the pointer copy held by the other object. Such copies are shallow and are a threat to the stability of the program.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class MyString
+		{
+		private:
+			const char* string;
+
+		public:
+			MyString() : string(nullptr)
+			{
+				string = new char[100];
+			}
+
+			~MyString()
+			{
+				delete [] string;
+			}
+		};
+	</code>
+</pre>
+
+<p>When a class performs memory allocation using new, care must be taken to avoid a number of common programming errors. A somewhat more insidious problem occurs when classes that allocate memory fail to provide a <a href="/cpp/object-orientation/classes/copy-constructor/">copy constructor</a> or a <a href="/cpp/object-orientation/operators/copy-assignment-operator/">copy assignment operator</a>. Always program a copy constructor and copy assignment operator when your class contains raw pointer members (char* and the like).</p>
