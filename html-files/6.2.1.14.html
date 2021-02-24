@@ -201,7 +201,7 @@ Size of A Class
 </a>
 </h2>
 <div>
-<p>Operator sizeof(), covered in <a href="/cpp/fundamentals/operators/sizeof/">sizeof</a> is used to determine the memory requirement of a specific type, in bytes. This operator is valid for classes, too, and basically reports the sum of bytes consumed by each data attribute contained within the class declaration. Depending on the compiler you use, sizeof() might or might not include padding for certain attributes on word boundaries.</p>
+<p>Operator sizeof(), covered in <a href="/cpp/fundamentals/operators/sizeof">sizeof</a> is used to determine the memory requirement of a specific type, in bytes. This operator is valid for classes, too, and basically reports the sum of bytes consumed by each data attribute contained within the class declaration. Depending on the compiler you use, sizeof() might or might not include padding for certain attributes on word boundaries.</p>
 
 <p>Note that member functions and their local variables do not play a role in defining the sizeof() a class.</p>
 
@@ -209,6 +209,20 @@ Size of A Class
 <p>Remember that methods do not count in size of an object because they are not treated as data and they are just there to be invoked. So, what you see as a size of an object is basically the size of all data members in that object.</p>  
 <p>In this example you can see that it's 4 bytes, which makes sense. the member of this object is a *pointer to char* which is a pointer holding a memory address and memory addresses are 4 bytes on my system.</p>
 </div>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class="list-group-item" C++ Primer Plus list-group-item>C++ Primer Plus</li>
+<li class="list-group-item" Sam's Teach Yourself C++ in One Hour a Day: chapter 7 list-group-item>Sam's Teach Yourself C++ in One Hour a Day: chapter 7</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
