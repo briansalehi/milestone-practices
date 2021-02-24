@@ -1,4 +1,4 @@
-<p>Operator sizeof(), covered in <a href="/cpp/fundamentals/operators/sizeof/">sizeof</a> is used to determine the memory requirement of a specific type, in bytes. This operator is valid for classes, too, and basically reports the sum of bytes consumed by each data attribute contained within the class declaration. Depending on the compiler you use, sizeof() might or might not include padding for certain attributes on word boundaries.</p>
+<p>Operator sizeof(), covered in <a href="/cpp/fundamentals/operators/sizeof">sizeof</a> is used to determine the memory requirement of a specific type, in bytes. This operator is valid for classes, too, and basically reports the sum of bytes consumed by each data attribute contained within the class declaration. Depending on the compiler you use, sizeof() might or might not include padding for certain attributes on word boundaries.</p>
 
 <p>Note that member functions and their local variables do not play a role in defining the sizeof() a class.</p>
 

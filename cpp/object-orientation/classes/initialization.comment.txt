@@ -2,7 +2,7 @@
 
 <p>Thus, the initialization list is characterized by a colon (:) following the parameter  declaration contained in parentheses (…), followed by an individual member variable and the value it is initialized to. This initialization value can be a parameter such as  humansName or can even be a fixed value. Initialization lists can also be useful in  invoking base class constructors with specific arguments.</p>
 
-<pre class="langugage-cpp line-numbers">
+<pre class="language-cpp line-numbers">
 	<code>
 		class Human
 		{

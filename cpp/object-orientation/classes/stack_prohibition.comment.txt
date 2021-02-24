@@ -1,4 +1,4 @@
-<p>Space on the stack is often limited. If you are writing a database that may contain tera-bytes of data in its internal structures, you might want to ensure that a client of this class cannot instantiate it on the stack; instead it is forced to create instances only on the free store. The key to ensuring this is declaring the destructor private:</p>
+<p>Space on the stack is often limited. If you are writing a database that may contain terabytes of data in its internal structures, you might want to ensure that a client of this class cannot instantiate it on the stack; instead it is forced to create instances only on the free store. The key to ensuring this is declaring the destructor private:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>

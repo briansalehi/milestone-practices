@@ -40,7 +40,7 @@
 <p>We declared <i>DoSomething(Human person)</i> as a function that accepts a parameter of type <i>Human</i> and does not accept an <i>int</i>!</p>
 
 <p>So, why did that line work?</p>
-<p>The compiler knows that class Human supports a constructor that accepts an integer and per-formed an implicit conversion for you—it created an object of type Human using the integer you supplied and sent it as an argu-ment to the function.</p>
+<p>The compiler knows that class Human supports a constructor that accepts an integer and performed an implicit conversion for you—it created an object of type Human using the integer you supplied and sent it as an argument to the function.</p>
 
 <p>To avoid implicit conversions, use keyword <i>explicit</i> at the time of declaring the constructor:</p>
 
@@ -55,8 +55,8 @@
 	</code>
 </pre>
 
-<p>Using explicit is not a prerequisite but in many cases a good programming practice. The following sample in Listing 9.12 dem-onstrates a version of class Human that does not permit implicit conversions.</p>
+<p>Using explicit is not a prerequisite but in many cases a good programming practice. The following sample in Listing 9.12 demonstrates a version of class Human that does not permit implicit conversions.</p>
 
-<p>The problem of implicit conversions and avoiding them using keyword <i>explicit</i> applies to operators too. Remember to note the usage of explicit when programming conversion operators introduced to you in <a href="/cpp/object-oriented/operators/">operators</a>.</p>
+<p>The problem of implicit conversions and avoiding them using keyword <i>explicit</i> applies to operators too. Remember to note the usage of explicit when programming conversion operators introduced to you in <a href="/cpp/object-oriented/operators">operators</a>.</p>
 
 <p>One important motive to use explicit conversion over implicit is, simply, compile-time errors are better than run-time errors!</p>

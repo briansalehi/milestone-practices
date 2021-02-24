@@ -20,7 +20,7 @@
 
 <p>Don't forget that due to not having access to default constructor in order to create an instance object, you must declare a <i>static</i> method in the class to create one object for you.</p>
 
-<p>Use the singleton pattern only where absolutely necessary, keeping future growth of the application and its features in per-spective. Note that the very feature that it restricts creation of multiple instances can become an architectural bottleneck when a use case comes up that needs multiple instances of the class.</p>
+<p>Use the singleton pattern only where absolutely necessary, keeping future growth of the application and its features in perspective. Note that the very feature that it restricts creation of multiple instances can become an architectural bottleneck when a use case comes up that needs multiple instances of the class.</p>
 
 <p>For example, if our project were to change from modeling a nation to modeling the United Nations, which is currently represented by 193 member nations, each with its own president, clearly we would have an architectural problem given a singleton class President that would permit the existence of only one instance.</p>
 

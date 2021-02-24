@@ -20,7 +20,7 @@
 	</code>
 </pre>
 
-<p>When a move constructor is programmed, the compiler automatically opts for the same for “moving” the temporary resource and hence avoiding a deep-copy step. With the move constructor implemented, the comment should be appropriately changed to the fol-lowing:</p>
+<p>When a move constructor is programmed, the compiler automatically opts for the same for “moving” the temporary resource and hence avoiding a deep-copy step. With the move constructor implemented, the comment should be appropriately changed to the following:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -28,4 +28,4 @@
 	</code>
 </pre>
 
-<p>The move constructor is usually implemented with the move assignment operator, which is discussed in greater detail in <a href="/cpp/object-orientation/operators/move-assignment-operator/">move assignment operator</a>.</p>
+<p>The move constructor is usually implemented with the move assignment operator, which is discussed in greater detail in <a href="/cpp/object-orientation/operators/move-assignment-operator">move assignment operator</a>.</p>

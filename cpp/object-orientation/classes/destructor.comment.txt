@@ -71,4 +71,4 @@
 	</code>
 </pre>
 
-<p>When a class performs memory allocation using new, care must be taken to avoid a number of common programming errors. A somewhat more insidious problem occurs when classes that allocate memory fail to provide a <a href="/cpp/object-orientation/classes/copy-constructor/">copy constructor</a> or a <a href="/cpp/object-orientation/operators/copy-assignment-operator/">copy assignment operator</a>. Always program a copy constructor and copy assignment operator when your class contains raw pointer members (char* and the like).</p>
+<p>When a class performs memory allocation using new, care must be taken to avoid a number of common programming errors. A somewhat more insidious problem occurs when classes that allocate memory fail to provide a <a href="/cpp/object-orientation/classes/copy-constructor">copy constructor</a> or a <a href="/cpp/object-orientation/operators/copy-assignment-operator">copy assignment operator</a>. Always program a copy constructor and copy assignment operator when your class contains raw pointer members (char* and the like).</p>

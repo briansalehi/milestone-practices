@@ -136,4 +136,4 @@
 	</code>
 </pre>
 
-<p>Another way to initialize members is by using <a href="/cpp/object-orientation/classes/constructor-initialization-list/">constructor initialization lists</a>.</p>
+<p>Another way to initialize members is by using <a href="/cpp/object-orientation/classes/constructor-initialization-list">constructor initialization lists</a>.</p>

@@ -24,11 +24,11 @@
 
 <p>Similar to the struct, the members of a union are public by default. Unlike a struct, however, unions cannot be used in inheritance hierarchies.</p>
 
-<p>Additionally, the sizeof() a union is always fixed as the size of the largest member contained in the union—even if that mem-ber were inactive in an instance of the union.</p>
+<p>Additionally, the sizeof() a union is always fixed as the size of the largest member contained in the union—even if that member were inactive in an instance of the union.</p>
 
 <p>Often a union is used as a member of a struct to model a complex data type. In some implementations, the ability of a union to interpret the fixed memory space as another type is used for type conversions or memory reinterpretation—a practice that is controversial and not necessary given alternatives.</p>
 
-<p>C++17 is expected to introduce a typesafe alternative to a union called <a href="/cpp/object-oriented/classes/variant/">variant</a>.</p>
+<p>C++17 is expected to introduce a typesafe alternative to a union called <a href="/cpp/object-oriented/classes/variant">variant</a>.</p>
 
 <p>Unions too, are classes in C++ and their members are public by default unless otherwise is specified.</p>  
 
