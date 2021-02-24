@@ -1,2 +1,1 @@
-Declaring **destructor** as a private method, prevents an object from being created on the stack, but can only be available on the heap.  
-That is, object cannot be created on compile-time, but it can be created on run-time.
+<p>Declaring <i>destructor</i> as a private method, prevents an object from being created on the stack, but can only be available on the heap. That is, object cannot be created on compile-time, but it can be created on run-time.</p>

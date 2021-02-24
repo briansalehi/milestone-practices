@@ -1,13 +1,6 @@
-Constructors are the methods in classes having the same name of the class.
-They are invoked right after an object is created.
-Either they can have arguments or not.
+<p>Constructors are the methods in classes having the same name of the class.</p>
+<p>They are invoked right after an object is created.</p>
+<p>Either they can have arguments or not.</p>
+<p>Constructors have no return value.</p>
 
-Constructors have no return value.
-
-ref[6]
-An important aspect of classes is the capability to initialize a class’s  
-member data. A constructor is a special member function whose task is to  
-perform such an initialization. It is invoked when a new class object comes  
-into existence. There is an analogous destructor member function that is  
-called when a class object goes out of existence.
-end[6]
+<p>An important aspect of classes is the capability to initialize a class’s member data. A constructor is a special member function whose task is to perform such an initialization. It is invoked when a new class object comes into existence. There is an analogous destructor member function that is called when a class object goes out of existence.</p>

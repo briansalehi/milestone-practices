@@ -1,14 +1,7 @@
-Abstraction is the access level to object members. Object members can be  
-accessed from different scopes based on their abstraction.
+<p>Abstraction is the access level to object members. Object members can be accessed from different scopes based on their abstraction.</p>
 
-ref[6]
-One important feature of classes is the notion of access control. Members may  
-be declared to be public, which means that they are accessible from outside the  
-class, or private, which means that they are accessible only from within the class.
+<p>One important feature of classes is the notion of access control. Members may  be declared to be public, which means that they are accessible from outside the class, or private, which means that they are accessible only from within the class.</p>
 
-All external access to class objects takes place through the public members,  
-or the public interface as it is called.
+<p>All external access to class objects takes place through the public members, or the public interface as it is called.</p>
 
-Note that if no access specifier is given, the default is private for classes and  
-public for structures.
-end[6]
+<p>Note that if no access specifier is given, the default is private for classes and public for structures.</p>

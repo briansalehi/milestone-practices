@@ -1,2 +1,1 @@
-Constructors too, can have difault parameter values. But don't forget about the function signatures, as a function with one argument having default value does not differ with the one function having no arguments at all.  
-This might make your compiler complain about ambigious function declaration.
+<p>Constructors too, can have difault parameter values. But don't forget about the function signatures, as a function with one argument having default value does not differ with the one function having no arguments at all. This might make your compiler complain about ambigious function declaration.</p>

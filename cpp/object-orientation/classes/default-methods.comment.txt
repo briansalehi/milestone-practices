@@ -1,6 +1,3 @@
-**default** keyword can be used to let the compiler generate
-specified methods automatically just the way it creates a
-default constructor when you don't declare one.
+<p><b>default</b> keyword can be used to let the compiler generate specified methods automatically just the way it creates a default constructor when you don't declare one.</p>
 
-**Note** that some methods cannot be defaulted, such as overloaded copy constructors,
-overloaded + operator and etc.
+<p><b>Note</b> that some methods cannot be defaulted, such as overloaded copy constructors, overloaded + operator and etc.</p>

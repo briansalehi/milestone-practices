@@ -1,6 +1,3 @@
-To prevent an object from being assigned to another object, copy constructor
-and assignment operator should be put in private section.  
-Another way of doing that is to explicitely use **delete** keyword to
-declare that specified function is deleted.  
-Deleted functions are declared and are known to the functions stack, but they
-cannot be used.
+<p>To prevent an object from being assigned to another object, copy constructor and assignment operator should be put in private section. Another way of doing that is to explicitely use <b>delete</b> keyword to declare that specified function is deleted.</p>
+
+<p>Deleted functions are declared and are known to the functions stack, but they cannot be used.</p>

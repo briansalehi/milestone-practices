@@ -1,8 +1,9 @@
-As the name suggests, a preprocessor is a tool that runs before the actual
+<p>As the name suggests, a preprocessor is a tool that runs before the actual
 compilation starts. Preprocessor directives are commands to the preprocessor
-and always start with a pound sign #.
+and always start with a pound sign #.</p>
 
-The following table shows some of the most common preprocessor directives.
+<p>The following table shows some of the most common preprocessor
+directives.</p>
 
 <table class="table table-dark">
 	<thead>
@@ -36,7 +37,8 @@ The following table shows some of the most common preprocessor directives.
 	</tbody>
 </table>
 
-One example of using preprocessor directives is to avoid multiple includes.
+One example of using preprocessor directives is to avoid multiple
+includes.
 
 <pre class="language-cpp line-numbers">
 	<code>
