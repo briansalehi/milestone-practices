@@ -1,9 +1,6 @@
-<p>As the name suggests, a preprocessor is a tool that runs before the actual
-compilation starts. Preprocessor directives are commands to the preprocessor
-and always start with a pound sign #.</p>
+<p>As the name suggests, a preprocessor is a tool that runs before the actual compilation starts. Preprocessor directives are commands to the preprocessor and always start with a pound sign #.</p>
 
-<p>The following table shows some of the most common preprocessor
-directives.</p>
+<p>The following table shows some of the most common preprocessor directives.</p>
 
 <table class="table table-dark">
 	<thead>
@@ -37,20 +34,19 @@ directives.</p>
 	</tbody>
 </table>
 
-One example of using preprocessor directives is to avoid multiple
-includes.
+<p>One example of using preprocessor directives is to avoid multiple includes.</p>
 
-<pre class="language-cpp line-numbers">
-	<code>
-		#ifndef SAMPLE_H
-		#define SAMPLE_H
-		
-		declarations...
-		
-		#endif
-	</code>
-</pre>
+<pre class="language-cpp line-numbers"><code>
+	#ifndef SAMPLE_H
+	#define SAMPLE_H
+	
+	declarations...
+	
+	#endif
+</code></pre>
 
-If your compiler supports the #pragma once directive, and most modern
-compilers do, then this can be rewritten as follows:
-#pragma once
+<p>If your compiler supports the #pragma once directive, and most modern compilers do, then this can be rewritten as follows:</p>
+
+<pre class="language-cpp line-numbers"><code>
+	#pragma once
+</code></pre>

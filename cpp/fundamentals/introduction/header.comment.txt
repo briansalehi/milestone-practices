@@ -1,1 +1,1 @@
-Functions can be declared in header files and be implemented in source files.
+<p>Functions can be declared in header files and be implemented in source files.</p>
