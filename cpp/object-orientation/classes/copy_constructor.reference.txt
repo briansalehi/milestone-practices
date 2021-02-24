@@ -1,3 +1,2 @@
-6: 40,41
-#C++ Primer Plus
-#Sam's Teach Yourself C++ in One Hour a Day
+C++ Primer Plus: page 40, 41
+Sam's Teach Yourself C++ in One Hour a Day: chapter 7
