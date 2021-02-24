@@ -201,38 +201,38 @@ Awk
 </h2>
 <div>
 Awk is a strong text processing programmng language which deserves its own
-chapter, or maybe books!<br />
-To learn Awk in depth, visit <a href="/stream-processing/awk">Awk chapter</a>.<br />
-<br />
-Covering everything about Awk in a single page is impossible!<br />
-So a brief overview of Awk is that it keeps track of line and word numbers.<br />
-We can easily manipulate text, select lines and fields to print.<br />
-<br />
+chapter, or maybe books!
+To learn Awk in depth, visit <a href="/stream-processing/awk">Awk chapter</a>.
+
+Covering everything about Awk in a single page is impossible!
+So a brief overview of Awk is that it keeps track of line and word numbers.
+We can easily manipulate text, select lines and fields to print.
+
 In this sample, the easiest task for Awk is represented which selects the
-second line and third field within that line to print.<br />
-<br />
+second line and third field within that line to print.
+
 Using Awk is straightforward, you give options to <i>awk</i> and then begin
-writing Awk scripts surrounded by single quotes.<br />
-<br />
+writing Awk scripts surrounded by single quotes.
+
 <pre>
 <code class="language-bash">
 awk [options] 'scripts'
 </code>
 </pre>
-<br />
+
 In Awk, <b>NR</b> stands for <b>N</b>umber of <b>R</b>ecord which keeps
-track of the line Awk is holding in its buffer to process.<br />
-<br />
-<b>NF</b> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory.<br />
+track of the line Awk is holding in its buffer to process.
+
+<b>NF</b> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory.
 To print the second field though, we used <i>print $2</i> command in awk
-script.<br />
-<br />
+script.
+
 <b>FS</b> stands for <b>F</b>ield <b>S</b>eparator which Awk uses to devide
-fields within a line to process.<br />
-<i>FS</i> can also be given by -F option.<br />
-<br />
+fields within a line to process.
+<i>FS</i> can also be given by -F option.
+
 Here we have set FS="," variable to separate fields within lines and NF=3 to
-select the third field in NR=2 second line.<br />
+select the third field in NR=2 second line.
 </div>
 <hr />
 <h3>

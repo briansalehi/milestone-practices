@@ -201,104 +201,104 @@ Lists
 </h2>
 <div>
 Lists allow you to store sets of information in one place, whether you have
-just a few items or millions of items.<br />
-<br />
-A list is a collection of items in a particular order.<br />
-<br />
+just a few items or millions of items.
+
+A list is a collection of items in a particular order.
+
 You can put anything you want into a list, and the items in your list don’t
-have to be related in any particular way.<br />
-<br />
+have to be related in any particular way.
+
 In Python, square brackets ([]) indicate a list, and individual elements in
-the list are separated by commas.<br />
-<br />
+the list are separated by commas.
+
 To access an element in a list, write the name of the list followed by the
-index of the item enclosed in square brackets.<br />
-<br />
+index of the item enclosed in square brackets.
+
 Python has a special syntax for accessing the last element in a list. By
 asking for the item at index -1, Python always returns the last item in the
-list.<br />
-<br />
+list.
+
 This convention extends to other negative index values as well. The index -2
 returns the second item from the end of the list, the index -3 returns the
-third item from the end, and so forth.<br />
-<br />
+third item from the end, and so forth.
+
 To change an element, use the name of the list followed by the index of the
 element you want to change, and then provide the new value you want that item
-to have.<br />
-<br />
+to have.
+
 The simplest way to add a new element to a list is to append the item to the
 list. When you append an item to a list, the new element is added to the end
-of the list.<br />
-<br />
+of the list.
+
 The append() method adds an element to the end of the list without affecting
-any of the other elements in the list.<br />
-<br />
+any of the other elements in the list.
+
 You can add a new element at any position in your list by using the insert()
 method. You do this by specifying the index of the new element and the value
-of the new item.<br />
-<br />
+of the new item.
+
 You can remove an item according to its position in the list or according to
-its value.<br />
-<br />
+its value.
+
 If you know the position of the item you want to remove from a list, you can
-use the del statement.<br />
-<br />
+use the del statement.
+
 Sometimes you’ll want to use the value of an item after you remove it from a
-list.<br />
+list.
 The pop() method removes the last item in a list, but it lets you work with
-that item after removing it.<br />
-<br />
+that item after removing it.
+
 You can actually use pop() to remove an item in a list at any position by
-including the index of the item you want to remove in parentheses.<br />
-<br />
+including the index of the item you want to remove in parentheses.
+
 Sometimes you won’t know the position of the value you want to remove from a
 list. If you only know the value of the item you want to remove, you can use
-the remove() method.<br />
-<br />
+the remove() method.
+
 Python provides a number of different ways to organize your lists, depending
-on the situation.<br />
-<br />
-Python’s sort() method makes it relatively easy to sort a list.<br />
+on the situation.
+
+Python’s sort() method makes it relatively easy to sort a list.
 You can also sort this list in reverse alphabetical order by passing the
-argument reverse=True to the sort() method.<br />
-Either way, the order of the list is permanently changed.<br />
-<br />
+argument reverse=True to the sort() method.
+Either way, the order of the list is permanently changed.
+
 To maintain the original order of a list but present it in a sorted order, you
-can use the sorted() function.<br />
+can use the sorted() function.
 The sorted() function can also accept a reverse=True argument if you want to
-display a list in reverse alphabetical order.<br />
-<br />
-To reverse the original order of a list, you can use the reverse() method.<br />
-The reverse() method changes the order of a list permanently.<br />
-<br />
-You can quickly find the length of a list by using the len() function.<br />
+display a list in reverse alphabetical order.
+
+To reverse the original order of a list, you can use the reverse() method.
+The reverse() method changes the order of a list permanently.
+
+You can quickly find the length of a list by using the len() function.
 Python counts the items in a list starting with one, so you shouldn’t run into
-any off-by-one errors when determining the length of a list.<br />
-<br />
-Avoid index errors when working with lists.<br />
-An index error means Python can’t figure out the index you requested.<br />
-<br />
-<br />
-The Python list object is the most general sequence provided by the language.<br />
+any off-by-one errors when determining the length of a list.
+
+Avoid index errors when working with lists.
+An index error means Python can’t figure out the index you requested.
+
+
+The Python list object is the most general sequence provided by the language.
 Lists are positionally ordered collections of arbitrarily typed objects, and
-they have no fixed size.<br />
+they have no fixed size.
 They are also mutable; unlike strings, lists can be modified in place by
-assignment to offsets as well as a variety of list method calls.<br />
-<br />
+assignment to offsets as well as a variety of list method calls.
+
 Because they are sequences, lists support all the sequence operations on
 strings; the only difference is that the results are usually lists instead of
-strings.<br />
-<br />
+strings.
+
 <h5>type specific operations in list<h5>
 Python’s lists may be reminiscent of arrays in other languages, but they tend
 to be more powerful. For one thing, they have no fixed type constraint; the
 list in the code section, for example, contains three objects of completely
-different types (an integer, a string, and a floating-point number).<br />
+different types (an integer, a string, and a floating-point number).
 Further, lists have no fixed size. That is, they can grow and shrink on
-demand, in response to list-specific operations.<br />
-<br />
+demand, in response to list-specific operations.
+
 Because lists are mutable, most list methods also change the list object in
-place, instead of creating a new one. e.g. sort(), reverse(), etc.<br />
+place, instead of creating a new one. e.g. sort(), reverse(), etc.
 </div>
 <hr />
 <h3>

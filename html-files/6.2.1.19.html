@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>singleton object</title>
+<title>Default Constructible</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" singleton object breadcrumb-item active>singleton object</li>
+<li class="breadcrumb-item active" Default Constructible breadcrumb-item active>Default Constructible</li>
 </ol>
 <h2>
-<a id="singleton-object" class="anchor" aria-hidden="true" href="#singleton-object">
-singleton object
+<a id="Default-Constructible" class="anchor" aria-hidden="true" href="#Default-Constructible">
+Default Constructible
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,24 +201,10 @@ singleton object
 </a>
 </h2>
 <div>
-Declaring **default constructor**, **copy constructor** and **assignment operator** as private methods of a class, which prevent an object to be created, assigned or be copied.  
-You might wonder why such an object should ever exist. But truth is, sometimes you might need an object to be one and only! That is, only one instance of an object suffices and no other similar objects should ever exist with it.  
-This kind of object is called **singleton object**.  
-Don't forget that due to not having access to create a singleton object, you must declare a **static** method in the class to create one object for you.<br />
+<p><b>default</b> keyword can be used to let the compiler generate specified methods automatically just the way it creates a default constructor when you don't declare one.</p>
+
+<p><b>Note</b> that some methods cannot be defaulted, such as overloaded copy constructors, overloaded + operator and etc.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item"  list-group-item></li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -229,47 +215,36 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>singleton.cxx</cite>
+  <cite>default-constructible.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;string&gt;
     
-    class President {
-    private:
-        std::string name;
-        President() {}; // private default constructor
-        President(const President&amp; copy); // private copy constructor
-        President&amp; operator= (const President&amp; asign); // private copy assignment operator
-    
+    class Base {
     public:
-        // in classes, static makes a member to be shared across all instances of objects
-        static President&amp; get_instance() {
-            static President candidate;
-            return candidate;
+        Base() = default; // use default constructor
+        Base(int input): member{input} {}; // overloaded copy constructors cannot be defaulted
+        Base(Base&amp; base) = default; // use default copy constructor
+        Base&amp; operator= (const Base&amp; base) = default; // use default copy assignment
+    
+        void show() {
+            std::cout &lt;&lt; &quot;member: &quot; &lt;&lt; member &lt;&lt; std::endl;
         }
     
-        void introduce() {
-            std::cout &lt;&lt; &quot;current president: &quot; &lt;&lt; name &lt;&lt; std::endl;
-        }
-    
-        void set_candidate(std::string president) {
-            name = president;
-        }
-    
-        ~President() {}
+    private:
+        int member;
     };
+    
+    void make_copy(Base base) {
+        base.show();
+    }
     
     int main()
     {
-        President&amp; US = President::get_instance();
-        US.set_candidate(&quot;Donald Trump&quot;);
-        US.introduce();
-    
-        /*
-        President RU; // cannot make private object
-        President IT = US; // cannot assign private object
-        */
+        Base alpha(3); // used defined constructor
+        Base beta = alpha; // used default copy assignment
+        beta.show(); // should be 3
+        make_copy(beta); // use default copy constructor, should be 3
     
         return 0;
     }
@@ -287,17 +262,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./singleton.o -c ./singleton.cxx
+g++ -Wall -g -o ./default-constructible.o -c ./default-constructible.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./singleton.bin ./singleton.o
+g++ -g -o ./default-constructible.bin ./default-constructible.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./singleton.bin
+./default-constructible.bin
 </code>
 </pre>
 <hr />
@@ -312,13 +287,14 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-current president: Donald Trump
+member: 3
+member: 3
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.18.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/initialization-aggregation">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.20.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/delete-expression">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

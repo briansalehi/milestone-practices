@@ -201,43 +201,30 @@ Factory Pattern
 </h2>
 <div>
 Here we’ve got several concrete classes being instantiated, and the decision
-of which to instantiate is made at runtime depending on some set of conditions.<br />
-<br />
-What’s wrong with “new”?<br />
+of which to instantiate is made at runtime depending on some set of conditions.
+
+What’s wrong with “new”?
 Technically there’s nothing wrong with the new operator. After all, it’s a
-fundamental part of most modern object-oriented languages.<br />
+fundamental part of most modern object-oriented languages.
 The real culprit is our old friend CHANGE and how change impacts our use of
-new.<br />
-<br />
+new.
+
 If your code is written to an interface, then it will work with any new
-classes implementing that interface through polymorphism.<br />
+classes implementing that interface through polymorphism.
 However, when you have code that makes use of lots of concrete classes, you’re
 looking for trouble because that code may have to be changed as new concrete
-classes are added.<br />
-So, in other words, your code will not be “closed for modification”.<br />
-To extend your code with new concrete types, you’ll have to reopen it.<br />
-<br />
-Factories handle the details of object creation.<br />
-<br />
+classes are added.
+So, in other words, your code will not be “closed for modification”.
+To extend your code with new concrete types, you’ll have to reopen it.
+
+Factories handle the details of object creation.
+
 The Factory Method Pattern is useful if you’ve only got one concrete creator
-because you are decoupling the implementation of the product from its use.<br />
+because you are decoupling the implementation of the product from its use.
 If you add additional products or change a product’s implementation, it will
 not affect your Creator (because the Creator is not tightly coupled to any
-ConcreteProduct).<br />
+ConcreteProduct).
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Head First Design Pattern, 2nd Edition: chapter 4 list-group-item>Head First Design Pattern, 2nd Edition: chapter 4</li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns/decorator-pattern">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

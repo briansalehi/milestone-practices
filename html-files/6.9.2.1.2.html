@@ -224,11 +224,11 @@ then it gets the codec integer number as second argument. This will specify the 
 Codec numbers can be achieved by **cv::VideoCapture.fourcc()** function, which itself gets four arguments each having type **char**.  
 We give this function four characters of **MJPG** representing the **JPG** image files.  
 Third argument of **cv::VideoWriter** is frames per second, and fourth argument of type **cv::Size** which we worked with in earlier practices.  
-<br />
+
 Now that the output file stream is ready, we put each frame of the input video to the frame, log polarize it and the write it to the output file.  
-To do that, **cv::logPolar()** function is used, which takes 5 arguments. First input frame, second output frame, third argument is of type **cv::Point2f()** return type, and two other as constants.<br />
-<br />
-Now by running this program, input video will be shown on a window, its polarized version will be on second window, meanwhile it will be written to the output video file.<br />
+To do that, **cv::logPolar()** function is used, which takes 5 arguments. First input frame, second output frame, third argument is of type **cv::Point2f()** return type, and two other as constants.
+
+Now by running this program, input video will be shown on a window, its polarized version will be on second window, meanwhile it will be written to the output video file.
 </div>
 <hr />
 <h3>

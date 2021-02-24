@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>overloading constructors</title>
+<title>Initialization Aggregation</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" overloading constructors breadcrumb-item active>overloading constructors</li>
+<li class="breadcrumb-item active" Initialization Aggregation breadcrumb-item active>Initialization Aggregation</li>
 </ol>
 <h2>
-<a id="overloading-constructors" class="anchor" aria-hidden="true" href="#overloading-constructors">
-overloading constructors
+<a id="Initialization-Aggregation" class="anchor" aria-hidden="true" href="#Initialization-Aggregation">
+Initialization Aggregation
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,21 +201,74 @@ overloading constructors
 </a>
 </h2>
 <div>
-Constructors too, can be overloaded.<br />
+<p>You were shortly introduced to <i>initializer lists</i> previously. The thing is, objects can be initialized by initializer lists. We could initialize objects in multiple forms:</p>  
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Aggregate1 agg1("Cxx", 11);
+	</code>
+</pre>
+
+<p>or</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Aggregate1 agg1;
+		agg1.name = "Cxx";
+		agg1.number = 11;
+	</code>
+</pre>
+
+<p>But using <i>initializer lists</i> we simply put all of the values of different types in one box and set them to an object.</p>
+
+<p>The following initialization syntax is called an aggregate initialization syntax:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Type objectName = {argument1, …, argumentN}; // copy list initialization
+		// Alternatively, since C++11:
+		Type objectName {argument1, …, argumentN}; // direct list initialization
+	</code>
+</pre>
+
+<p>There are restrictions imposed by the standard on the specification of a struct or a class that can be called an aggregate. These restrictions get nuanced depending on the version of C++ standard that you refer to. Yet, it can be safely said that classes/structs that comprise public and non-static data members, contain no private or protected data members, contain no virtual member functions, feature none or only public inheritance (that is, no private, protected, or virtual inheritance), and no user-defined constructors are aggregates too and can be initialized as one.</p>
+
+<p>Thus, the following struct fulfills the prerequisites of being an aggregate and hence, can be initialized as one:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// declaration
+		struct Aggregate1
+		{
+			int num;
+			double pi;
+		};
+
+		// initialization
+		Aggregate1 a1{ 2017, 3.14 };
+	</code>
+</pre>
+
+
+<p>Another example:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// declaration
+		struct Aggregate2 {  int num;
+			char hello[6];
+			int impYears[5];
+		};
+
+		// initialization
+		Aggregate2 a2 {42, {'h', 'e', 'l', 'l', 'o'}, {1998, 2003, 2011, 2014, 2017}};
+	</code>
+</pre>
+
+<p>Aggregate initialization will initialize only the first non-static  member of a union.</p>
+
+<p>Therefore, for sake of clarity, it may be a good idea to not use aggregate initialization syntax on union.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item"  list-group-item></li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -226,59 +279,25 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>overloading.cxx</cite>
+  <cite>aggregation.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    
-    class Circle {
-    private:
-        const double pi = 3.14159;
-        double radius;
-    
+    class Aggregate1 {
     public:
-        Circle() {
-            std::cout &lt;&lt; &quot;constructing circle&quot; &lt;&lt; std::endl;
-            radius = 0;
-        }
+        const char* name;
+        int number;
+    };
     
-        // overloaded constructor
-        Circle(double length) {
-            std::cout &lt;&lt; &quot;overloading circle constructor&quot; &lt;&lt; std::endl;
-            radius = length;
-        }
-    
-        void SetRadius(double length) {
-            std::cout &lt;&lt; &quot;setting radius to &quot; &lt;&lt; length &lt;&lt; std::endl;
-            radius = length;
-        }
-    
-        void Area() {
-            double area = pi * radius * radius;
-            std::cout &lt;&lt; &quot;area of the circle is: &quot; &lt;&lt; area &lt;&lt; std::endl;
-        }
-    
-        void Perimeter() {
-            double perimeter = 2 * pi * radius;
-            std::cout &lt;&lt; &quot;perimeter of the circle is: &quot; &lt;&lt; perimeter &lt;&lt; std::endl;
-        }
+    struct Aggregate2 {
+    public:
+        int length;
+        int array[3];
     };
     
     int main()
     {
-        Circle ring1;
-        ring1.Area();
-        ring1.Perimeter();
-    
-        ring1.SetRadius(1);
-        ring1.Area();
-        ring1.Perimeter();
-    
-        Circle* ring2 = new Circle(3);
-        ring2-&gt;Area();
-        ring2-&gt;Perimeter();
-        delete ring2;
-    
+        Aggregate1 agg1 = {&quot;Cxx&quot;, 11};
+        Aggregate2 agg2 = {1, {2,3,4}};
         return 0;
     }
 </code>
@@ -295,46 +314,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./overloading.o -c ./overloading.cxx
+g++ -Wall -g -o ./aggregation.o -c ./aggregation.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./overloading.bin ./overloading.o
+g++ -g -o ./aggregation.bin ./aggregation.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./overloading.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-constructing circle
-area of the circle is: 0
-perimeter of the circle is: 0
-setting radius to 1
-area of the circle is: 3.14159
-perimeter of the circle is: 6.28318
-overloading circle constructor
-area of the circle is: 28.2743
-perimeter of the circle is: 18.8495
+./aggregation.bin
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.17.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/friends">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.19.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/default-constructible">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

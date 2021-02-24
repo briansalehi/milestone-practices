@@ -201,22 +201,22 @@ Creating Threads
 </a>
 </h2>
 <div>
-To create threads, you must first include **thread** and **mutex** header files.<br />
-<br />
-This program basically does nothing but printing a string into the output stream.<br />
-<br />
+To create threads, you must first include **thread** and **mutex** header files.
+
+This program basically does nothing but printing a string into the output stream.
+
 To write data in stdout stream, we must use *std::cout* which is not thread-safe, so we need to
 write a mutex to lock the thread, so that we are sure no other threads are writing to stdout
 in the same time.  
 To do that, we need to use a global variable named *cout_mtx* or any name of your interest.  
-Then we use it to lock each thread before writing data to the output stream.<br />
-<br />
+Then we use it to lock each thread before writing data to the output stream.
+
 To create a thread, we define a thread object and pass a pointer to function as its first parameter.  
-We can also pass parameters to the worker by passing them in thread parameters as you will see in next practice.<br />
-<br />
-After creating threads, we should use join method to make threads wait for each other after they complete their operations.<br />
-<br />
-To compile your code, you must use **-lpthread** linker option to make thread functions to work.<br />
+We can also pass parameters to the worker by passing them in thread parameters as you will see in next practice.
+
+After creating threads, we should use join method to make threads wait for each other after they complete their operations.
+
+To compile your code, you must use **-lpthread** linker option to make thread functions to work.
 </div>
 <hr />
 <h3>

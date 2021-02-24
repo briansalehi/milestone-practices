@@ -205,42 +205,29 @@ There are times when an application needs to inform the user of an action or
 to receive input for further processing. Usually, another window, typically
 small in size, will appear with such information or instructions. In Qt, the
 QMessageBox provides us with the functionality to raise alerts and receive
-input using QInputDialog.<br />
-<br />
+input using QInputDialog.
+
 <img class="img-responsive" src="/cpp/gui/widgets/messagebox-types.png" alt="messagebox types" loading="lazy">
-<br />
+
 This QMessageBox instance is being used to communicate to the user that an
-operation was successful.<br />
-<br />
-The icon and number of buttons on a QMessageBox instance is configurable.<br />
-<br />
+operation was successful.
+
+The icon and number of buttons on a QMessageBox instance is configurable.
+
 The first parameter to the call of the static method QInputDialog::getInt()
-is used as parent widget, and the second as the title of the dialog window.<br />
+is used as parent widget, and the second as the title of the dialog window.
 The request is captured in the
 second parameter. The third parameter here is used to specify the default
 number of the input field. 1, and model->rowCount(), are the minimum and
-maximum values that should be accepted.<br />
-<br />
+maximum values that should be accepted.
+
 The last but one parameter, 1, is the incremental step between the minimum and
 maximum value. True or False will be stored in &ok. When the user clicks OK,
 True will be stored in &ok and, based on that, the if statement will call the
 removeRow on the model object. Whatever value that the user inputs will be
 passed to rowId. We pass rowId-1 to get the actual index of the row in the
-model.<br />
+model.
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Getting Started with Qt 5: chapter 4 list-group-item>Getting Started with Qt 5: chapter 4</li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">

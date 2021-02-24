@@ -200,232 +200,249 @@ Observer Pattern
 </a>
 </h2>
 <div>
+<p>
 The Observer Pattern defines a one-to-many dependency between objects so
 that when one object changes state, all of its dependents are notified and
-updated automatically.<br />
-<br />
+updated automatically.
+</p>
+
+<p>
 Consider a weather monitoring device which retrieves an update every few
-minutes and displays weather data on 3 monitors.<br />
-<br />
+minutes and displays weather data on 3 monitors.
+</p>
+
+<p>
 Our job is to alter the measurementsChanged() method so that it updates the
-three displays for current conditions, weather stats, and forecast.<br />
-<br />
+three displays for current conditions, weather stats, and forecast.
+</p>
+
 <img class="img-responsive" src="/software-design/design-patterns/weatherdata-class-diagram.png" alt="weatherdata class diagram" loading="lazy">
-<br />
-We’ll need to implement three display elements that use the weather data:<br />
+
+<p>We’ll need to implement three display elements that use the weather data:</p>
 <ul>
 <li>a current conditions display</li>
 <li>a statistics display</li>
 <li>and a forecast display</li>
 </ul>
-<br />
+
+<p>
 These displays must be updated as often as the WeatherData has new
-measurements.<br />
-<br />
+measurements.
+</p>
+
+<p>
 Here’s a first implementation possibility—as we’ve discussed, we’re going to
-add our code to the measurementsChanged() method in the WeatherData class:<br />
-<br />
+add our code to the measurementsChanged() method in the WeatherData class:
+</p>
+
 <pre class="language-java line-numbers no-whitespace-normalization"><code>
 public class WeatherData {
 	public void measurementsChanged() {
-		float temp = getTemprature();<br />
-		float humidity = getHumidity();<br />
-		float pressure = getPressure();<br />
-<br />
+		float temp = getTemprature();
+		float humidity = getHumidity();
+		float pressure = getPressure();
+
 		// we're going to update each display by calling its update
-		// method and passing it the most recent measurements.<br />
-		currentConditionsDisplay.update(temp, humidity, pressure);<br />
-		statisitcsDisplay.update(temp, humidity, pressure);<br />
-		forecastDisplay.update(temp, humidity, pressure);<br />
+		// method and passing it the most recent measurements.
+		currentConditionsDisplay.update(temp, humidity, pressure);
+		statisitcsDisplay.update(temp, humidity, pressure);
+		forecastDisplay.update(temp, humidity, pressure);
 	}
 }
 </code></pre>
-<br />
-What’s wrong with our implementation anyway?<br />
+
+<p>
+What’s wrong with our implementation anyway?
 Think back to all those Chapter 1 concepts and principles—which are we
 violating, and which are we not? Think in particular about the effects of
-change on this code. Let’s work through our thinking as we look at the code:<br />
-<br />
+change on this code. Let’s work through our thinking as we look at the code:
+</p>
+
+<p>
 By coding to concrete implementations, we have no way to add or remove other
-display elements without making changes to the code.<br />
-<br />
+display elements without making changes to the code.
+</p>
+
+<p>
 At least we seem to be using a common interface to talk to the display
 elements. They all have an <i>update()</i> method that takes the <i>temp</i>,
-<i>humidity</i>, and <i>pressure</i> values.<br />
-<br />
+<i>humidity</i>, and <i>pressure</i> values.
+</p>
+
 <pre class="language-java line-numbers">
 	<code>
-		currentConditionsDisplay.update(temp, humidity, pressure);<br />
-		statisitcsDisplay.update(temp, humidity, pressure);<br />
-		forecastDisplay.update(temp, humidity, pressure);<br />
+		currentConditionsDisplay.update(temp, humidity, pressure);
+		statisitcsDisplay.update(temp, humidity, pressure);
+		forecastDisplay.update(temp, humidity, pressure);
 	</code>
 </pre>
-<br />
-This part looks like an area of change. We need to encapsulate this.<br />
-What if we want to add or remove displays at runtime? This looks hardcoded.<br />
-<br />
+
+<p>
+This part looks like an area of change. We need to encapsulate this.
+What if we want to add or remove displays at runtime? This looks hardcoded.
+</p>
+
+<p>
 Let’s take a look at the structure of the Observer Pattern, complete with its
-Subject and Observer classes. Here’s the class diagram:<br />
-<br />
+Subject and Observer classes. Here’s the class diagram:
+</p>
+
 <img class="img-responsive" src="/software-design/design-patterns/observer-pattern-diagram.png" alt="observer pattern diagram" loading="lazy">
-<br />
+
+<p>
 When two objects are loosely coupled, they can interact, but they typically
 have very little knowledge of each other. As we’re going to see, loosely
-coupled designs often give us a lot of flexibility (more on that in a bit).<br />
+coupled designs often give us a lot of flexibility (more on that in a bit).
 And, as it turns out, the Observer Pattern is a great example of loose
-coupling.<br />
-<br />
-Using observer pattern, the design of weather station would look like this:<br />
-<br />
+coupling.
+</p>
+
+<p>Using observer pattern, the design of weather station would look like this:</p>
+
 <img class="img-responsive" src="/software-design/design-patterns/weather-station-diagram.png" alt="weather station diagram" loading="lazy">
-<br />
+
+<p>
 So, let’s get our implemention of the weather station underway. Let’s start
-with the interfaces:<br />
-<br />
+with the interfaces:
+</p>
+
 <pre class="language-java line-numbers">
 	<code>
 		public interface Subject {
-			public void registerObserver(Observer o);<br />
-			public void removeObserver(Observer o);<br />
-			public void notifyObjservers();<br />
+			public void registerObserver(Observer o);
+			public void removeObserver(Observer o);
+			public void notifyObjservers();
 		}
-<br />
+
 		public interface Observer {
-			public void update(float temp, float humidity, float pressure);<br />
+			public void update(float temp, float humidity, float pressure);
 		}
-<br />
+
 		public interface DisplayElement {
-			public void display();<br />
+			public void display();
 		}
 	</code>
 </pre>
-<br />
-Now lets implement the Subject interface in WeatherData:<br />
-<br />
+
+<p>Now lets implement the Subject interface in WeatherData:</p>
+
 <pre class="language-java line-numbers">
 	<code>
 		public class WeatherData implements Subject {
-			private List&lt;Observer&gt; observers;<br />
-			private float temprature;<br />
-			private float humidity;<br />
-			private float pressure;<br />
-<br />
+			private List&lt;Observer&gt; observers;
+			private float temprature;
+			private float humidity;
+			private float pressure;
+
 			public WeatherData() {
-				observers = new ArrayList&lt;Observers&gt;();<br />
+				observers = new ArrayList&lt;Observers&gt;();
 			}
-<br />
+
 			public void registerObservers(Observer o) {
-				observers.add(o);<br />
+				observers.add(o);
 			}
-<br />
+
 			public void removeObserver(Observer o) {
-				observers.remove(o);<br />
+				observers.remove(o);
 			}
-<br />
+
 			public void notifyObservers() {
 				for (Observer observer : observers) {
-					observer.update(temprature, humidity, pressure);<br />
+					observer.update(temprature, humidity, pressure);
 				}
 			}
-<br />
+
 			public void measurementsChange() {
-				notifyObservers();<br />
+				notifyObservers();
 			}
-<br />
+
 			public void setMeasurements(float temprature, float humidity, float pressure) {
-				this.temprature = temprature;<br />
-				this.humidity = humidity;<br />
-				this.pressure = pressure;<br />
-				measurementsChanged();<br />
+				this.temprature = temprature;
+				this.humidity = humidity;
+				this.pressure = pressure;
+				measurementsChanged();
 			}
-<br />
+
 			// other WeatherData methods here
 		}
 	</code>
 </pre>
-<br />
-Now Let's build those display elements:<br />
-<br />
+
+<p>Now Let's build those display elements:</p>
+
 <pre class="language-java line-numbers">
 	<code>
 		public class CurrentConditionsDisplay implements Observer, DisplayElement {
-			private float temprature;<br />
-			private float humidity;<br />
-			private WeatherData weatherdata;<br />
-<br />
+			private float temprature;
+			private float humidity;
+			private WeatherData weatherdata;
+
 			public CurrentConditionsDisplay(WeatherData weatherdata) {
-				this.weatherdata = weatherdata;<br />
-				weatherdata.registerObserver(this);<br />
+				this.weatherdata = weatherdata;
+				weatherdata.registerObserver(this);
 			}
-<br />
+
 			public void update(float temprature, float humidity, float pressure) {
-				this.temprature = temprature;<br />
-				this.humidity = humidity;<br />
-				display();<br />
+				this.temprature = temprature;
+				this.humidity = humidity;
+				display();
 			}
-<br />
+
 			public void display() {
 				System.out.println("Current conditions: " + temprature
-					+ "F degrees and " + humidity + "% humidity");<br />
+					+ "F degrees and " + humidity + "% humidity");
 	</code>
 </pre>
-<br />
+
+<p>
 All we need is some code to glue everything together. We’ll be adding some
 more displays and generalizing things in a bit. For now, here’s our first
-attempt:<br />
-<br />
+attempt:
+</p>
+
 <pre class="language-java line-numbers">
 	<code>
 		public class WeatherStation {
 			public static void main(String[] args) {
-				WeatherData weatherdata = new WeatherData();<br />
+				WeatherData weatherdata = new WeatherData();
 				
-				CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(weatherdata);<br />
-				StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherdata);<br />
-				ForecastDisplay forecastDisplay = new ForecastDisplay(weatherdata);<br />
-<br />
-				weatherdata.setMeasurements(80, 65, 30.4f);<br />
-				weatherdata.setMeasurements(82, 70, 29.2f);<br />
-				weatherdata.setMeasurements(78, 90, 29.2f);<br />
+				CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(weatherdata);
+				StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherdata);
+				ForecastDisplay forecastDisplay = new ForecastDisplay(weatherdata);
+
+				weatherdata.setMeasurements(80, 65, 30.4f);
+				weatherdata.setMeasurements(82, 70, 29.2f);
+				weatherdata.setMeasurements(78, 90, 29.2f);
 			}
 		}
 	</code>
 </pre>
-<br />
+
+<p>
 In our current Weather Station design, we are pushing all three pieces of data
 to the update() method in the displays, even if the displays don’t need all
 these values. That’s okay, but what if Weather-O-Rama adds another data value
 later, like wind speed? Then we’ll have to change all the update() methods in
 all the displays, even if most of them don’t need or want the wind speed
-data.<br />
-<br />
+data.
+</p>
+
+<p>
 Updating the WeatherStation code to allow Observers to pull the data they
 need is a pretty straightforward exercise. All we need to do is make sure the
 Subject has getter methods for its data, and then change our Observers to use
-them to pull the data that’s appropriate for their needs. Let’s do that.<br />
-<br />
+them to pull the data that’s appropriate for their needs. Let’s do that.
+</p>
+
 <pre class="language-java line-numbers">
 	<code>
 		public void update() {
-			this.temprature = weatherdata.getTemprature();<br />
-			this.humidity = weatherdata.getHumidity();<br />
-			display();<br />
+			this.temprature = weatherdata.getTemprature();
+			this.humidity = weatherdata.getHumidity();
+			display();
 	</code>
 </pre>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Head First Design Patterns, 2nd Edition: chapter 2 list-group-item>Head First Design Patterns, 2nd Edition: chapter 2</li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns/strategy-pattern">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

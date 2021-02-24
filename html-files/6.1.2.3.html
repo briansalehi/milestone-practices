@@ -201,25 +201,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 </a>
 </h2>
 <div>
-<b>auto</b> type is a way to let compiler deduce a type and replace it in
-compile type.<br />
-<br />
-Using auto requires you to initialize the variable for the compiler that uses
-this initial value in deciding what the variable type can be.<br />
-<br />
-When you don’t initialize a variable of type auto, you get a  compile error.<br />
-<br />
-Using auto type sometimes makes your code shorter, specially when it comes to
-iterators, which will be discussed later.<br />
-<br />
-Just like anything in your daily life, type <b>auto</b> has its cons too.<br />
-Your code might look easier to read by using type <b>auto</b>, but be aware
-that using too many <b>auto</b> types will make types hard to guess and soon
-your program will look confusing, as all types are no longer explicitely
-visible!<br />
-<br />
-Personally, I prefer using explicit types wherever possible, even if they make
-my code longer, at least I won't end up guessing my variable types.<br />
+<p><i>auto</i> type is a way to let compiler deduce a type and replace it in compile type. Using auto requires you to initialize the variable for the compiler that uses this initial value in deciding what the variable type can be.</p>
+
+<p>When you don’t initialize a variable of type auto, you get a compile error.</p>
+
+<p>Using auto type sometimes makes your code shorter, specially when it comes to iterators, which will be discussed later. But just like anything in your daily life, type <i>auto</i> has its cons too. Your code might look easier to read by using type <i>auto</i>, but be aware that using too many <i>auto</i> types will make types hard to guess and soon your program will look confusing, as all types are no longer explicitely visible! Personally, I prefer using explicit types wherever possible, even if they make my code longer, at least I won't end up guessing my variable types.</p>
 </div>
 <hr />
 <h3>

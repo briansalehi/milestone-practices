@@ -202,12 +202,12 @@ std::set_difference()
 </h2>
 <div>
 as discussed in std::set_union practice page, differences.begin() iterator
-cannot be used as an output iterator for two reasons:<br />
-<br />
+cannot be used as an output iterator for two reasons:
+
 * begin() returns a constant key but _std::set_difference_ needs to change container values
 * _std::set_difference_ like _std::copy_ does not allocate new space in an empty container,
-but **std::insert_iterator** solves this problem.<br />
-iterators are discussed later in iterators chapter.<br />
+but **std::insert_iterator** solves this problem.
+iterators are discussed later in iterators chapter.
 </div>
 <hr />
 <h3>

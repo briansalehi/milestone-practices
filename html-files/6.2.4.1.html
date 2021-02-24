@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>assignment operator</title>
+<title>Assignment Operator</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.4.0.html">Operators</a></li>
-<li class="breadcrumb-item active" assignment operator breadcrumb-item active>assignment operator</li>
+<li class="breadcrumb-item active" Assignment Operator breadcrumb-item active>Assignment Operator</li>
 </ol>
 <h2>
-<a id="assignment-operator" class="anchor" aria-hidden="true" href="#assignment-operator">
-assignment operator
+<a id="Assignment-Operator" class="anchor" aria-hidden="true" href="#Assignment-Operator">
+Assignment Operator
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -202,44 +202,31 @@ assignment operator
 </h2>
 <div>
 Operators **-=**, **+=** and similar can be overloaded in a class.  
-Notice that this class is far away from being a perfect date class, days can exceed 31 and values are not controlled. So just take advantage of learning operator overloading not implementing a date class.<br />
-<br />
+Notice that this class is far away from being a perfect date class, days can exceed 31 and values are not controlled. So just take advantage of learning operator overloading not implementing a date class.
+
 ref[6]
 C++ also allows overloading of operators, such as +, *, +=, and <<. Not  
 surprisingly, such a definition is called operator overloading. Suppose we would  
 like to write an equality test for two Passenger objects. We can denote this in a  
-natural way by overloading the == operator as shown below.<br />
-<br />
+natural way by overloading the == operator as shown below.
+
 ```cxx
 bool operator==(const Passenger& x, const Passenger& y) {
 	return x.name == y.name
 		&& x.mealPref == y.mealPref
 		&& x.isFreqFlyer == y.isFreqFlyer
-		&& x.freqFlyerNo == y.freqFlyerNo;<br />
+		&& x.freqFlyerNo == y.freqFlyerNo;
 }
 ```
-<br />
+
 Operator overloading is a powerful mechanism, but it is easily abused. It can be  
 very confusing for someone reading your program to find that familiar operations  
 such as “+” and “/” have been assigned new and possibly confusing meanings.  
 Good programmers usually restrict operator overloading to certain general purpose  
 operators such as “ <<” (output), “=” (assignment), “==” (equality)  
-, “[ ]” (indexing, for sequences).<br />
+, “[ ]” (indexing, for sequences).
 end[6]
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" 6: 31 list-group-item>6: 31</li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -332,7 +319,7 @@ Output
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operators">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.4.2.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/operators/copy-assignment-operator">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

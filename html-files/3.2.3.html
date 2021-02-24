@@ -201,114 +201,114 @@ Decorator Pattern
 </h2>
 <div>
 We’ll re-examine the typical overuse of inheritance and you’ll learn how to
-decorate your classes at runtime using a form of object composition.<br />
-<br />
+decorate your classes at runtime using a form of object composition.
+
 Starbuzz Coffee has made a name for itself as the fastest-growing coffee shop
-around.<br />
-When they first went into business they designed their classes like this:<br />
-<br />
+around.
+When they first went into business they designed their classes like this:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-initial-bevarage-class.png" alt="coffeeshop initial bevarage class" loading="lazy">
-<br />
-In addition to your coffee, you can also ask for several condiments.<br />
+
+In addition to your coffee, you can also ask for several condiments.
 Starbuzz charges a bit for each condiment, so they really need to get them
-built into their order system.<br />
-Here’s their first attempt:<br />
-<br />
+built into their order system.
+Here’s their first attempt:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-condiment-classes.png" alt="coffeeshop condiment classes" loading="lazy">
-<br />
+
 Let’s start with the Beverage base class and add instance variables to
-represent whether or not each beverage has milk, soy, mocha, and whip:<br />
-<br />
+represent whether or not each beverage has milk, soy, mocha, and whip:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-with-condiment-members.png" alt="coffeeshop bevarage with condiment members" loading="lazy">
-<br />
-Now let’s add in the subclasses, one for each beverage on the menu:<br />
-<br />
+
+Now let’s add in the subclasses, one for each beverage on the menu:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-with-subclasses.png" alt="coffeeshop bevarage with subclasses" loading="lazy">
-<br />
+
 As it turns out, though, there are some clever OO techniques for allowing
 systems to be extended, even if we can’t change the underlying code. Think
 about the Observer Pattern (in Chapter 2)...by adding new Observers, we can
 extend the Subject at any time, without adding code to the Subject. You’ll see
-quite a few more ways of extending behavior with other OO design techniques.<br />
-<br />
+quite a few more ways of extending behavior with other OO design techniques.
+
 While it may seem like a contradiction, there are techniques for allowing code
-to be extended without direct modification.<br />
-<br />
+to be extended without direct modification.
+
 Areas of code that need to be extended; applying the Open-Closed Principle
 EVERYWHERE is wasteful and unnecessary, and can lead to complex,
-hard-to-understand code.<br />
-<br />
+hard-to-understand code.
+
 Okay, but how do you “decorate” an object, and how does delegation come into
 this? A hint: think of decorator objects as “wrappers.” Let’s see how this
-works:<br />
-<br />
-We start with our DarkRoast object.<br />
-<br />
+works:
+
+We start with our DarkRoast object.
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-1.png" alt="coffeeshop bevarage class construction 1" loading="lazy">
-<br />
+
 The customer wants Mocha, so we create a Mocha object and wrap it around the
-DarkRoast.<br />
-<br />
+DarkRoast.
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-2.png" alt="coffeeshop bevarage class construction 2" loading="lazy">
-<br />
+
 The customer also wants Whip, so we create a Whip decorator and wrap Mocha
-with it.<br />
-<br />
+with it.
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-3.png" alt="coffeeshop bevarage class construction 3" loading="lazy">
-<br />
+
 Now it’s time to compute the cost for the customer. We do this by calling
 cost() on the outermost decorator, Whip, and Whip is going to delegate
 computing the cost to the objects it decorates. And so on. Let’s see how this
-works:<br />
-<br />
+works:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-4.png" alt="coffeeshop bevarage class construction 4" loading="lazy">
-<br />
-Here’s what we know about Decorators, so far:<br />
-<br />
-Decorators have the same supertype as the objects they decorate.<br />
-<br />
-You can use one or more decorators to wrap an object.<br />
-<br />
+
+Here’s what we know about Decorators, so far:
+
+Decorators have the same supertype as the objects they decorate.
+
+You can use one or more decorators to wrap an object.
+
 Given that the decorator has the same supertype as the object it decorates, we
-can pass around a decorated object in place of the original (wrapped) object.<br />
-<br />
+can pass around a decorated object in place of the original (wrapped) object.
+
 The decorator adds its own behavior before and/or after delegating to the
-object it decorates to do the rest of the job.<br />
-<br />
+object it decorates to do the rest of the job.
+
 Objects can be decorated at any time, so we can decorate objects dynamically
-at runtime with as many decorators as we like.<br />
-<br />
+at runtime with as many decorators as we like.
+
 The Decorator Pattern attaches additional responsibilities to an object
 dynamically. Decorators provide a flexible alternative to subclassing for
-extending functionality.<br />
-<br />
+extending functionality.
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-decorator-pattern.png" alt="coffeeshop decorator pattern" loading="lazy">
-<br />
-Let’s rework our Starbuzz beverages using the Decorator Pattern:<br />
-<br />
+
+Let’s rework our Starbuzz beverages using the Decorator Pattern:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-decorated bevarage class.png" alt="coffeeshop decorated bevarage class" loading="lazy">
-<br />
+
 Let’s start with the Beverage class, which doesn’t need to change from
-Starbuzz’s original design. Let’s take a look:<br />
-<br />
+Starbuzz’s original design. Let’s take a look:
+
 <img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-implementation.png" alt="coffeeshop bevarage class implementation" loading="lazy">
-<br />
+
 Let’s implement the abstract class for the Condiments (the Decorator) as
-well:<br />
-<br />
-<br />
-<br />
+well:
+
+
+
 <b>Design Principle</b>
-Classes should be open for extension, but closed for modification.<br />
-<br />
+Classes should be open for extension, but closed for modification.
+
 <h4>The Open-Closed Principle</h4>
 While it may seem like a contradiction, there are techniques for allowing
-code to be extended without direct modification.<br />
-<br />
+code to be extended without direct modification.
+
 Be careful when choosing the areas of code that need to be extended; applying
 the Open-Closed Principle EVERYWHERE is wasteful and unnecessary, and can
-lead to complex, hard-to-understand code.<br />
-<br />
+lead to complex, hard-to-understand code.
+
 <h4>Decorator Pattern Considerations</h4>
 <ul>
 	<li>Decorators have the same supertype as the objects they decorate.</li>
@@ -326,19 +326,6 @@ dynamically.</li>
 functionality.</li>
 </ul>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Head First Design Pattern, 2nd Edition: chapter 3 list-group-item>Head First Design Pattern, 2nd Edition: chapter 3</li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns/observer-pattern">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

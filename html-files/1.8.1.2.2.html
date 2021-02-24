@@ -206,42 +206,29 @@ Normal, Insert, and Visual modes are readily identified, but Vim has other
 modes that are easy to overlook. Operator-Pending mode is a case in point. We
 use it dozens of times daily, but it usually lasts for just a fraction of a
 second. For example, we invoke it when we run the command dw. It lasts during
-the brief interval between pressing d and w keys. Blink and you'll miss it!<br />
-<br />
+the brief interval between pressing d and w keys. Blink and you'll miss it!
+
 If we think of Vim as a finite-state machine, then Operator-Pending mode is a
 state that accepts only motion commands. It is activated when we invoke an
 operator command, and then nothing happens until we provide a motion, which
 completes the operation. While Operator-Pending mode is active, we can return
 to Normal mode in the usual manner by pressing escape, which aborts the
-operation.<br />
-<br />
+operation.
+
 Many commands are invoked by two or more keystrokes (for examples, look up
 <mark>:hg</mark> , <mark>:h z</mark> , <mark>:h ctrl-w</mark> , or <mark>:h
 [</mark> ), but in most cases, the first keystroke merely acts as a prefix for
 the second. These commands don't initiate Operator-Pending mode. Instead, we
 can think of them as namespaces that expand the number of available command
-mappings. Only the operator commands initiate Operator-Pending mode.<br />
-<br />
+mappings. Only the operator commands initiate Operator-Pending mode.
+
 Why, you might be wondering, is an entire mode dedicated to those brief
 moments between invoking operator and motion commands, whereas the namespaced
 com-mands are merely an extension of Normal mode? Good question! Because we
 can create custom mappings that initiate or target Operator-Pending mode. In
 other words, it allows us to create custom operators and motions, which in
-turn allows us to expand Vim's vocabulary.<br />
+turn allows us to expand Vim's vocabulary.
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Practical Vim: page 27 list-group-item>Practical Vim: page 27</li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/editors/vim/modes/normal-mode">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

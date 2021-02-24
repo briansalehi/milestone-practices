@@ -202,122 +202,109 @@ Strategy Pattern
 <div>
 <b>Note:</b> Images appearing in this page is subject to copy right and will
 be replaced by <a href="https://milextone.ir">Milestone</a> properties, DO NOT
-USE THEM ELSEWHERE.<br />
-<br />
+USE THEM ELSEWHERE.
+
 You may occasionally come across a design where part of your code needs
 different behavior and you know that you just can't create an interface and
-implement some classes with it each with different configurations.<br />
-<br />
+implement some classes with it each with different configurations.
+
 Consider a duck simulation game having a <i>Duck</i> super class with
-predefined behaviors: <i>quack, swim, display</i>.<br />
-<br />
+predefined behaviors: <i>quack, swim, display</i>.
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation.png" alt="duck simulation" loading="lazy">
-<br />
-Now you want to add a <i>fly</i> behavior for ducks.<br />
-<br />
+
+Now you want to add a <i>fly</i> behavior for ducks.
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-new-fly-behavior.png" alt="duck simulation with new fly behavior" loading="lazy">
-<br />
-This change is usually inevitable in applications.<br />
+
+This change is usually inevitable in applications.
 No matter how well you design an application, over time it must grow and
-change or it will die.<br />
-<br />
+change or it will die.
+
 Whenever you need to modify a behavior, you’re often forced to track down and
 change it in all the different subclasses where that behavior is defined,
-probably introducing new bugs along the way!<br />
-<br />
+probably introducing new bugs along the way!
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-more-bugs.png" alt="duck simulation with more bugs" loading="lazy">
-<br />
+
 For example we know that <i>fly()</i> and <i>quack()</i> are the parts of
-the Duck class that vary across ducks.<br />
+the Duck class that vary across ducks.
 You may think that to separate these behaviors from the <i>Duck</i> class,
 we’ll pull both methods out of the <i>Duck</i> class and create a new set of
-classes to represent each behavior.<br />
-<br />
+classes to represent each behavior.
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png" alt="duck simulation with behaviors as separate classes" loading="lazy">
-<br />
-But still you're going to need change a lot whenever new requirements arrive.<br />
-Luckily, there’s a design principle for just this situation.<br />
-<br />
+
+But still you're going to need change a lot whenever new requirements arrive.
+Luckily, there’s a design principle for just this situation.
+
 The <b>Strategy Pattern</b> defines a family of algorithms, encapsulates each
-one, and makes them interchangeable.<br />
-<br />
+one, and makes them interchangeable.
+
 Identify the aspects of your application that vary and separate them from what
-stays the same.<br />
-<br />
+stays the same.
+
 In other words, if you’ve got some aspect of your code that is changing, say
 with every new requirement, then you know you’ve got a behavior that needs to
-be pulled out and separated from all the stuff that doesn’t change.<br />
-<br />
+be pulled out and separated from all the stuff that doesn’t change.
+
 Here’s another way to think about this principle: take the parts that vary and
 encapsulate them, so that later you can alter or extend the parts that vary
-without affecting those that don’t.<br />
+without affecting those that don’t.
 All patterns provide a way to let some part of a system vary independently of
-all other parts.<br />
-<br />
+all other parts.
+
 As simple as this concept is, it forms the basis for almost every design
 pattern. All patterns provide a way to let some part of a system vary
-independently of all other parts.<br />
-<br />
+independently of all other parts.
+
 We’ll use an interface to represent each behavior—for instance,
 <i>FlyBehavior</i> and <i>QuackBehavior</i>—and each implementation of a
-behavior will implement one of those interfaces.<br />
-<br />
+behavior will implement one of those interfaces.
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-separate-interfaces.png" alt="duck simulation with separate interfaces" loading="lazy">
-<br />
-Notice that all ducks can swim, even Rubber Ducks and Decoy Ducks!<br />
-So, we are not going to separate them from implementation.<br />
-<br />
+
+Notice that all ducks can swim, even Rubber Ducks and Decoy Ducks!
+So, we are not going to separate them from implementation.
+
 The <b>HAS-A</b> relationship is an interesting one: each duck has a
 <i>FlyBehavior</i> and a <i>QuackBehavior</i> to which it delegates flying and
-quacking.<br />
-<br />
+quacking.
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png" alt="duck simulation with behaviors as compositions" loading="lazy">
-<br />
-When you put two classes together like this you’re using composition.<br />
+
+When you put two classes together like this you’re using composition.
 Instead of inheriting their behavior, the ducks get their behavior by being
-composed with the right behavior object.<br />
-<br />
+composed with the right behavior object.
+
 Creating systems using composition gives you a lot more flexibility. Not only
 does it let you encapsulate a family of algorithms into their own set of
 classes, but it also lets you change behavior at runtime as long as the object
-you’re composing with implements the correct behavior interface.<br />
-<br />
+you’re composing with implements the correct behavior interface.
+
 <h4>Design Principle</h4>
-Design to an interface, not an implementation.<br />
-<br />
+Design to an interface, not an implementation.
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-interface.png" alt="duck simulation quack interface" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-mallardduck-implementaion.png" alt="duck simulation mallardduck implementaion" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-duck-implementation.png" alt="duck simulation duck implementation" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-fly-implementation.png" alt="duck simulation fly implementation" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-implementation.png" alt="duck simulation quack implementation" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-implementation.png" alt="duck simulation implementation" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-runtime-behavior.png" alt="duck simulation with runtime behavior" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-modelduck-with-dynamic-behavior.png" alt="duck simulation modelduck with dynamic behavior" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-execution.png" alt="duck simulation execution" loading="lazy">
-<br />
+
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-diagram.png" alt="duck simulation diagram" loading="lazy">
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Head First Design Patterns, 2nd Edition: chapter 1 list-group-item>Head First Design Patterns, 2nd Edition: chapter 1</li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

@@ -201,109 +201,96 @@ Notes and Stereotypes
 </h2>
 <div>
 Before jumping into the different types of diagrams that make up UML, you need
-to know about two elements of UML notation that are used throughout a model:<br />
-notes and stereotypes.<br />
-<br />
+to know about two elements of UML notation that are used throughout a model:
+notes and stereotypes.
+
 Notes allow you to enter additional comments that aren't captured in your
 diagrams. You can write anything you want in a note to explain your diagram,
 similar to a comment in code. Notes are pictured with the folded rectangle
-notation.<br />
-<br />
+notation.
+
 <img class="img-responsive" src="/software-design/uml/a-note-sample.png" alt="a note sample" loading="lazy">
-<br />
+
 Notes can be placed on a diagram in isolation or attached to a specific part
-of the diagram.<br />
-<br />
-A note is attached to another element on the diagram using a dotted line.<br />
-<br />
+of the diagram.
+
+A note is attached to another element on the diagram using a dotted line.
+
 <img class="img-responsive" src="/software-design/uml/note-attachment.png" alt="note attachment" loading="lazy">
-<br />
+
 Stereotypes signify a special use or intent and can be applied to almost any
 element of UML notation. Stereotypes modify the meaning of an element and
-describe the element's role within your model.<br />
+describe the element's role within your model.
 A stereotype sometimes has an associated icon, such as in following figure's
-stick-figure actor symbol.<br />
-To learn more about actors, see <a href="/software-design/uml/actors">actors</a>.<br />
-<br />
-There isn't always a special icon for a stereotype.<br />
-<br />
+stick-figure actor symbol.
+To learn more about actors, see <a href="/software-design/uml/actors">actors</a>.
+
+There isn't always a special icon for a stereotype.
+
 Stereotype is shown using guillemots at either end of the stereotype name, as
-in «stereotype_name», shown in the following figure.<br />
-<br />
+in «stereotype_name», shown in the following figure.
+
 <img class="img-responsive" src="/software-design/uml/stereotype-sample.png" alt="stereotype sample" loading="lazy">
-<br />
+
 However, because guillemots require an extended character set, you can
-substitute them for angle brackets, as in &lt;&lt;stereotype_name&gt;&gt;.<br />
-<br />
+substitute them for angle brackets, as in &lt;&lt;stereotype_name&gt;&gt;.
+
 There is no limit to the number of stereotypes with which an element can be
-associated.<br />
-<br />
+associated.
+
 <img class="img-responsive" src="/software-design/uml/multiple-stereotypes.png" alt="multiple stereotypes" loading="lazy">
-<br />
-The UML specification defines a set of "standard" or predefined stereotypes.<br />
-Some of the more useful standard stereotypes include:<br />
-<br />
+
+The UML specification defines a set of "standard" or predefined stereotypes.
+Some of the more useful standard stereotypes include:
+
 <h4>Stereotype applied to classes</h4>
-<br />
+
 <ul>
 <li>utility</li>
 Represents a class that provides utility services through static methods, just
-as Java's Math class.<br />
+as Java's Math class.
 </ul>
-<br />
+
 <h4>Stereotypes applied to components</h4>
-<br />
+
 <ul>
 <li>service</li>
 A stateless, functional component that computes a value; could be used to
-represent a web service.<br />
-<br />
+represent a web service.
+
 <li>subsystem</li>
-A large component that is actually a subordinate system of a larger system.<br />
+A large component that is actually a subordinate system of a larger system.
 </ul>
-<br />
+
 <h4>Stereotypes applied to artifacts</h4>
-<br />
+
 <ul>
 <li>executable</li>
-A physical file that is executable, such as an .exe file.<br />
-<br />
+A physical file that is executable, such as an .exe file.
+
 <li>file</li>
 A physical file used by your system; this could be a configuration file such
-as a .txt file.<br />
-<br />
+as a .txt file.
+
 <li>library</li>
 A static or dynamic library file; you could use this to model .dll or .jar
-library files.<br />
-<br />
+library files.
+
 <li>source</li>
-A source file containing code, such as a .java or .cpp file.<br />
+A source file containing code, such as a .java or .cpp file.
 </ul>
-<br />
+
 Stereotypes can contain extra information that relates to the element to which
-they are applied. This extra information is specified using tagged values.<br />
-<br />
+they are applied. This extra information is specified using tagged values.
+
 A tagged value is drawn on a diagram using a similar notation to notes, but
 the folded rectangle contains the name of any stereotypes and settings for any
 associated tagged values. The tagged value note is then attached to the
 stereotyped element using a dotted line with a circle at the element end, as
-shown in the following figure.<br />
-<br />
+shown in the following figure.
+
 <img class="img-responsive" src="/software-design/uml/tagged-value-sample.png" alt="tagged value sample" loading="lazy">
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Learning UML 2.0: chapter 2 list-group-item>Learning UML 2.0: chapter 2</li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/views">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

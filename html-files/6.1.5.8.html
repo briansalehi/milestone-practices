@@ -203,26 +203,26 @@ Return Value Type Deduction
 <div>
 You are already familiar with type
 <a href="/cpp/fundamentals/object-types/auto">auto</a>.  
-<br />
+
 It lets you leave variable type deduction to the compiler that does so on the
 basis of the initialization value assigned to the variable. Starting with
-C++14, the same applies also to functions.<br />
-<br />
+C++14, the same applies also to functions.
+
 Instead of specifying the return type, you would use auto and let the compiler
-deduce the return type for you on the basis of return values you program.<br />
-<br />
+deduce the return type for you on the basis of return values you program.
+
 But try not to be a lazy programmer, we already know that using explicit types
-make our programs easier to follow.<br />
-<br />
+make our programs easier to follow.
+
 When optimizing for speed, the compiler typically sees and utilizes
 opportunities to inline code where it would make sense and does it for
-you sometimes even in those cases where you have not explicitly requested it.<br />
-<br />
+you sometimes even in those cases where you have not explicitly requested it.
+
 Functions that rely on automatic return type deduction need to be defined
 (i.e., implemented) before they’re invoked. This is because the compiler needs
 to know a function’s return type at the point where it is used. If such a
 function has multiple return statements, they need to all deduce to the same
-type. Recursive calls need to follow at least one return statement.<br />
+type. Recursive calls need to follow at least one return statement.
 </div>
 <hr />
 <h3>

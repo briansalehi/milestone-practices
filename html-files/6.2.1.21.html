@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>stack prohibition</title>
+<title>Initializer List Parameter</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" stack prohibition breadcrumb-item active>stack prohibition</li>
+<li class="breadcrumb-item active" Initializer List Parameter breadcrumb-item active>Initializer List Parameter</li>
 </ol>
 <h2>
-<a id="stack-prohibition" class="anchor" aria-hidden="true" href="#stack-prohibition">
-stack prohibition
+<a id="Initializer-List-Parameter" class="anchor" aria-hidden="true" href="#Initializer-List-Parameter">
+Initializer List Parameter
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,22 +201,8 @@ stack prohibition
 </a>
 </h2>
 <div>
-Declaring **destructor** as a private method, prevents an object from being created on the stack, but can only be available on the heap.  
-That is, object cannot be created on compile-time, but it can be created on run-time.<br />
+<p>Initializer lists that you have been using so far, are themselves containers. They can be iterated and passed to function paramters. Containers and initializer lists will be discussed more later.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item"  list-group-item></li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -227,28 +213,28 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>stack_prohibition.cxx</cite>
+  <cite>initializer_list.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    class Database {
-    private:
-        // private destructor, prohibits instantiation on stack
-        ~Database() {}
+    #include &lt;iostream&gt;
+    #include &lt;initializer_list&gt;
     
-    public:
-        static void destruct(Database* object) {
-            delete object;
+    void show(const std::initializer_list&lt;int&gt;&amp; values) {
+        for (
+            std::initializer_list&lt;int&gt;::const_iterator iterator = values.begin();
+            iterator != values.end();
+            ++iterator)
+        {
+            std::cout &lt;&lt; *iterator;
         }
-    };
+        std::cout &lt;&lt; std::endl;
+    }
     
     int main()
     {
-        /*
-        Database db; // on stack
-        */
+        std::initializer_list&lt;int&gt; numbers = {0,1,2,3,4,5,6,7,8,9};
+        show(numbers);
     
-        Database* db = new Database; // on heap
-        Database::destruct(db);
         return 0;
     }
 </code>
@@ -265,17 +251,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./stack_prohibition.o -c ./stack_prohibition.cxx
+g++ -Wall -g -o ./initializer_list.o -c ./initializer_list.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./stack_prohibition.bin ./stack_prohibition.o
+g++ -g -o ./initializer_list.bin ./initializer_list.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./stack_prohibition.bin
+./initializer_list.bin
 </code>
 </pre>
 <hr />
@@ -290,13 +276,13 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-
+0123456789
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.20.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/delete-expression">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.22.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/inheritance">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

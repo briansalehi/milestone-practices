@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>default methods</title>
+<title>Copy Constructor</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" default methods breadcrumb-item active>default methods</li>
+<li class="breadcrumb-item active" Copy Constructor breadcrumb-item active>Copy Constructor</li>
 </ol>
 <h2>
-<a id="default-methods" class="anchor" aria-hidden="true" href="#default-methods">
-default methods
+<a id="Copy-Constructor" class="anchor" aria-hidden="true" href="#Copy-Constructor">
+Copy Constructor
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,26 +201,71 @@ default methods
 </a>
 </h2>
 <div>
-**default** keyword can be used to let the compiler generate
-specified methods automatically just the way it creates a
-default constructor when you don't declare one.<br />
-<br />
-**Note** that some methods cannot be defaulted, such as overloaded copy constructors,
-overloaded + operator and etc.<br />
+<p>When you pass a variable by value to a function, that function will copy that value and assigns that to its parameter. That is, after invoking that function, you will have two of those values on memory. This also happens when you pass an object to a function by values. Classes do not have any idea how to copy their members into new location by themselves. So that's out job to make sure an object will be copied properly when it's passed to a function.</p>
+
+<p>The copy constructor is an overloaded constructor that you supply. It is invoked by the compiler every time an object of the class is copied.</p>
+
+<p>The declaration syntax of a copy constructor for class MyString is the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class MyString
+		{
+		public:
+			MyString(const MyString& copySource); // copy constructor
+		};
+
+		MyString::MyString(const MyString& copySource)
+		{
+			// Copy constructor implementation code
+		}
+	</code>
+</pre>
+
+<p>Copy constructors are declared just like default constructors except that they have a reference of the object as their parameters with no return value.</p>
+
+<p>Thus, a copy constructor takes an object of the same class by reference as a parameter. This parameter is an alias of the source object and is the handle you have in writing your custom copy code. You would use the copy constructor to ensure a deep copy of all buf-fers in the source.</p>
+
+<p>Using const in the copy constructor declaration ensures that the copy constructor does not modify the source object being referred to.</p>
+
+<p>Additionally, the parameter in the copy constructor is passed by reference as a necessity. If this weren’t a reference, the copy constructor would itself invoke a copy, thus invoking itself again and so on till the system runs out of memory.</p>
+
+<p>There are cases where objects are subjected to copy steps automatically, due to the nature of the language and its needs. Consider the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class MyString
+		{
+		public:
+			MyString(const MyString& copySource); // copy constructor
+		};
+
+		MyString::MyString(const MyString& copySource)
+		{
+			// Copy constructor implementation code
+		}
+
+		MyString Copy(MyString& source) // function
+		{
+			MyString copyForReturn(source.GetString()); // create copy
+			return copyForReturn; // return by value invokes copy constructor
+		}
+
+		int main()
+		{
+			MyString sayHello("Hello World of C++");
+			MyString sayHelloAgain(Copy(sayHello)); // invokes 2x copy constructor
+			return 0;
+		}
+	</code>
+</pre>
+
+<p>As the comment indicates, in the instantiation of sayHelloAgain, the copy constructor was invoked twice, thus a deep copy was performed twice because of our call to function Copy(sayHello) that returns a MyString by value. However, this value returned is very temporary and is not available outside this expression. So, the copy constructor invoked in good faith by the C++ compiler is a burden on performance. This impact becomes sig-nificant if our class were to contain objects of great size.</p>
+
+<p>To avoid this performance bottleneck, versions of C++ starting with C++11 feature a <a href="/cpp/object-orientation/classes/move-constructor/">move constructor</a> in addition to a copy constructor which will be discussed next page.</p>
+
+<p>The copy constructor is usually implemented with the copy assignment operator, which is discussed in greater detail in <a href="/cpp/object-orientation/operators/copy-assignment-operator/">copy assignment operator</a>.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item"  list-group-item></li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -231,36 +276,69 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>default-methods.cxx</cite>
+  <cite>copy_constructor.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    #include &lt;cstring&gt;
     
-    class Base {
+    class Message {
+    private:
+        char* message;
+    
     public:
-        Base() = default; // use default constructor
-        Base(int input): member{input} {}; // overloaded copy constructors cannot be defaulted
-        Base(Base&amp; base) = default; // use default copy constructor
-        Base&amp; operator= (const Base&amp; base) = default; // use default copy assignment
+        Message(const char* raw) {
+            std::cout &lt;&lt; &quot;constructor invoked&quot; &lt;&lt; std::endl;
+            message = NULL;
     
-        void show() {
-            std::cout &lt;&lt; &quot;member: &quot; &lt;&lt; member &lt;&lt; std::endl;
+            if (raw != NULL) {
+                message = new char[strlen(raw)+1];
+                strcpy(message, raw);
+    
+                std::cout &lt;&lt; &quot;message is at address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;message &lt;&lt; std::endl;
+            }
         }
     
-    private:
-        int member;
+        Message(const Message&amp; cpymsg) {
+            std::cout &lt;&lt; &quot;copy constructor invoked&quot; &lt;&lt; std::endl;
+            message = NULL;
+    
+            if (cpymsg.message != NULL) {
+                message = new char[strlen(cpymsg.message)+1];
+                strcpy(message, cpymsg.message);
+    
+                std::cout &lt;&lt; &quot;copied message is at address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;message &lt;&lt; std::endl;
+            }
+        }
+    
+        void show() {
+            std::cout &lt;&lt; &quot;message text: &quot;;
+            std::cout &lt;&lt; message &lt;&lt; std::endl;
+        }
+    
+        void length() {
+            std::cout &lt;&lt; &quot;message length: &quot;;
+            std::cout &lt;&lt; std::dec &lt;&lt; strlen(message) &lt;&lt; std::endl;
+        }
+    
+        // destructor
+        ~Message() {
+            std::cout &lt;&lt; &quot;destructor invoked&quot; &lt;&lt; std::endl;
+            delete [] message;
+        }
     };
     
-    void make_copy(Base base) {
-        base.show();
+    // copy of object pointer
+    void get_info(Message raw) {
+        raw.length();
+        raw.show();
     }
     
     int main()
     {
-        Base alpha(3); // used defined constructor
-        Base beta = alpha; // used default copy assignment
-        beta.show(); // should be 3
-        make_copy(beta); // use default copy constructor, should be 3
+        Message msg(&quot;Cxx Programming&quot;);
+        get_info(msg);
     
         return 0;
     }
@@ -278,17 +356,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./default-methods.o -c ./default-methods.cxx
+g++ -Wall -g -o ./copy_constructor.o -c ./copy_constructor.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./default-methods.bin ./default-methods.o
+g++ -g -o ./copy_constructor.bin ./copy_constructor.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./default-methods.bin
+./copy_constructor.bin
 </code>
 </pre>
 <hr />
@@ -303,14 +381,20 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-member: 3
-member: 3
+constructor invoked
+message is at address: 0x7ffd7c9d94a8
+copy constructor invoked
+copied message is at address: 0x7ffd7c9d94b0
+message length: 15
+message text: Cxx Programming
+destructor invoked
+destructor invoked
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.6.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/destructor">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.8.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/implicit-type-conversion">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

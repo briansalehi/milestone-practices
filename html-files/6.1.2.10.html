@@ -201,33 +201,25 @@ scoped enumeration
 </a>
 </h2>
 <div>
-C-style enumerations are defined with **enum** and their members are visible globally!  
-It is a good idea to never use globals as they may give you conflict errors and some other troubles.  
-If you use **enum class**, all enumeration members will only be visible in their scope and to use them
-you should specify their scope name following by scope resolution, *scope::member*.<br />
-<br />
-begin[5]
-Enumerations as explained in the previous practices are not strongly typed, meaning they are not type
-safe. They are always interpreted as integers, and thus you can compare enumeration values from
-completely different enumeration types.<br />
-The strongly-typed enum class enumerations solve this problem.<br />
-For an enum class , the enumeration value names are not automatically exported to the enclosing
-scope, which means that you always have to use the scope resolution operator.<br />
-This also means that you can give shorter names to the enumeration values.<br />
-Additionally, the enumeration values are not automatically converted to
-integers.<br />
-By default, the underlying type of an enumeration value is an integer, but this can be changed as
-follows:<br />
-```cxx
-enum class PieceType : unsigned long
-{
-	King = 1,
-	Queen,
-	Rook = 10,
-	Pawn
-};<br />
-```
-end[5]
+<p>C-style enumerations are defined with <i>enum</i> and their members are visible globally!</p>  
+
+<p>It is a good idea to never use globals as they may give you conflict errors and some other troubles. If you use <i>enum class</i>, all enumeration members will only be visible in their scope and to use them you should specify their scope name following by scope resolution, <i>scope::member</i>.</p>
+
+<p>Enumerations as explained in the previous practices are not strongly typed, meaning they are not type safe. They are always interpreted as integers, and thus you can compare enumeration values from completely different enumeration types. The strongly-typed enum class enumerations solve this problem. For an enum class , the enumeration value names are not automatically exported to the enclosing scope, which means that you always have to use the scope resolution operator. This also means that you can give shorter names to the enumeration values.</p>
+
+<p>Additionally, the enumeration values are not automatically converted to integers. By default, the underlying type of an enumeration value is an integer, but this can be changed as follows:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		enum class PieceType : unsigned long
+		{
+			King = 1,
+			Queen,
+			Rook = 10,
+			Pawn
+		};
+	</code>
+</pre>
 </div>
 <hr />
 <h3>

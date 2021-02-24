@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>initialization aggregation</title>
+<title>Abstraction</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" initialization aggregation breadcrumb-item active>initialization aggregation</li>
+<li class="breadcrumb-item active" Abstraction breadcrumb-item active>Abstraction</li>
 </ol>
 <h2>
-<a id="initialization-aggregation" class="anchor" aria-hidden="true" href="#initialization-aggregation">
-initialization aggregation
+<a id="Abstraction" class="anchor" aria-hidden="true" href="#Abstraction">
+Abstraction
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,37 +201,22 @@ initialization aggregation
 </a>
 </h2>
 <div>
-You were shortly introduced to **initializer lists** previously.  
-The thing is, objects can be initialized by initializer lists.  
-We could initialize objects in multiple forms:  
-<br />
-```cxx
-Aggregate1 agg1("Cxx", 11);<br />
-```
-<br />
-or
-<br />
-```cxx
-Aggregate1 agg1;<br />
-agg1.name = "Cxx";<br />
-agg1.number = 11;<br />
-```
-<br />
-But using **initializer lists** we simply put all of the values of different types in one box and set them to an object.<br />
+<p>Information can be classified into at least two categories: data that we don’t mind the public knowing and data that is private. C++ enables you to model class attributes and methods as public or private. Public class members can be used by anyone in possession of an object of the class. Private class members can be used only within the class (or its “friends”). C++ keywords public and private help you as the designer of a class decide what parts of a class can be invoked from outside it, for instance, from main(), and what cannot.</p>
+
+<p>While allowing you to design a class as a container that encapsulates data and methods that operate on that data, C++ empowers you to decide what information remains unreachable to the outside world (that is, unavailable outside the class) via keyword private. At the same time, you have the possibility to allow controlled access to even information declared private via methods that you have declared as public. Thus your implementation of a class can abstract member information that classes and functions outside this class don’t need to have access to.</p>
+
+<p>Abstraction is an important concept in object-oriented languages. It empowers  programmers to decide what attributes of a class need to remain known only to the class and its members with nobody outside it (with the exception of those declared as its “friends”) having access to it.</p>
+
+<p>Abstraction is the access level to object members. Object members can be accessed from different scopes based on their abstraction.</p>
+
+<p>One important feature of classes is the notion of access control. Members may  be declared to be public, which means that they are accessible from outside the class, or private, which means that they are accessible only from within the class.</p>
+
+<p>All external access to class objects takes place through the public members, or the public interface as it is called.</p>
+
+<p>Note that if no access specifier is given, the default is private for classes and public for structures.</p>
+
+<p>This models a real-world scenario quite well, don’t you think? You were named at birth; people are allowed to know your name, but nobody (except you) has the authority to change it.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item"  list-group-item></li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -242,27 +227,32 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>aggregation.cxx</cite>
+  <cite>abstraction.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;string&gt;
+    #include &lt;iostream&gt;
     
-    class Aggregate1 {
-    public:
-        std::string name;
-        int number;
-    };
+    class Army {
+    private: // abstraction
+        int reinforcement = 150000;
     
-    struct Aggregate2 {
-    public:
-        int length;
-        int array[3];
+    public: // abstraction
+        void report() {
+            std::cout &lt;&lt; &quot;there are &quot; &lt;&lt; reinforcement &lt;&lt; &quot; reinforcement in the army&quot; &lt;&lt; std::endl;
+        }
+    
+        void join(int men) {
+            std::cout &lt;&lt; &quot;joining &quot; &lt;&lt; men &lt;&lt; &quot; reinforcement to the army&quot; &lt;&lt; std::endl;
+            reinforcement += men;
+        }
     };
     
     int main()
     {
-        Aggregate1 agg1 = {&quot;Cxx&quot;, 11};
-        Aggregate2 agg2 = {1, {2,3,4}};
+        Army forces;
+        forces.report();
+        forces.join(50000);
+        forces.report();
     
         return 0;
     }
@@ -280,17 +270,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./aggregation.o -c ./aggregation.cxx
+g++ -Wall -g -o ./abstraction.o -c ./abstraction.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./aggregation.bin ./aggregation.o
+g++ -g -o ./abstraction.bin ./abstraction.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./aggregation.bin
+./abstraction.bin
 </code>
 </pre>
 <hr />
@@ -305,13 +295,15 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-
+there are 150000 reinforcement in the army
+joining 50000 reinforcement to the army
+there are 200000 reinforcement in the army
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.1.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/encapsulation">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.3.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/constructor">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

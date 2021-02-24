@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>destructor</title>
+<title>Non-Copyable Objects</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" destructor breadcrumb-item active>destructor</li>
+<li class="breadcrumb-item active" Non-Copyable Objects breadcrumb-item active>Non-Copyable Objects</li>
 </ol>
 <h2>
-<a id="destructor" class="anchor" aria-hidden="true" href="#destructor">
-destructor
+<a id="Non-Copyable-Objects" class="anchor" aria-hidden="true" href="#Non-Copyable-Objects">
+Non-Copyable Objects
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,27 +201,28 @@ destructor
 </a>
 </h2>
 <div>
-Destructors are invoked just before the object is completely destroyed.  
-Constructors and destructors are great places to allocate memory right after object creation and delete just before object destruction.<br />
-<br />
-ref[6]
-A constructor is called when a class object comes into existence. A destructor is  
-a member function that is automatically called when a class object ceases to exist.<br />
-end[6]
+<p>Beyond modeling a certain constitution, you might be programming an operating system and need to model one local area network, one processor, and so on. You need to ensure that certain resources cannot be copied or duplicated. If you don’t declare a copy constructor, the C++ compiler inserts a default public copy constructor for you. This ruins your design and threatens your implementa-tion.</p>
+
+<p>You would ensure that your class cannot be copied by declaring a private copy constructor.</p>
+
+<p>Thus, the solution is the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class President
+		{
+		private:
+			President(const President&); // private copy constructor
+			President& operator= (const President&); // private copy assignment operator
+			// … other attributes
+		};
+	</code>
+</pre>
+
+<p>There is no need for implementation of the private copy constructor or assignment  operator. Just declaring them as private is adequate and sufficient toward fulfilling your goal of ensuring non-copyable objects of class President.</p>
+
+<p>Declaring <i>copy constructor</i> and <i>copy assignment operator</i> as private methods, will prevent an object from being copied. This way, you can make sure an object will not be passed by value to function arguments or it will not be returned by value from functions. This makes us sure that our object will not be too memory consuming.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" 6: 39 list-group-item>6: 39</li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -232,7 +233,7 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>destructor.cxx</cite>
+  <cite>non_copyable.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
@@ -241,36 +242,45 @@ Source
     class Message {
     private:
         char* message;
+        // avoid object to be copied
+        Message(const Message&amp; copy); // private copy constructor
+        Message&amp; operator= (const Message&amp; asign); // private copy assignment operator
     
     public:
         Message(const char* raw) {
-            std::cout &lt;&lt; &quot;constructor&quot; &lt;&lt; std::endl;
-            message = NULL;
+            std::cout &lt;&lt; &quot;Overloaded Constructor Invoked&quot; &lt;&lt; std::endl;
+            message = nullptr;
             message = new char[strlen(raw)+1];
             strcpy(message, raw);
         }
     
-        char* show() {
-            return message;
+        void show() {
+            std::cout &lt;&lt; &quot;message: &quot; &lt;&lt; message &lt;&lt; std::endl;
         }
     
         int length() {
             return strlen(message);
         }
     
-        // destructor
         ~Message() {
-            std::cout &lt;&lt; &quot;distructor&quot; &lt;&lt; std::endl;
+            std::cout &lt;&lt; &quot;Distructor Invoked&quot; &lt;&lt; std::endl;
             delete [] message;
         }
     };
     
+    void get_info(Message tmp) {
+        tmp.show();
+    }
+    
     int main()
     {
         Message msg(&quot;Cxx Programming&quot;);
-        std::cout &lt;&lt; &quot;length: &quot; &lt;&lt; msg.length() &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;message: &quot; &lt;&lt; msg.show() &lt;&lt; std::endl;
+        msg.show();
     
+        /*
+        get_info(msg); // cannot make a copy
+        */
+        
         return 0;
     }
 </code>
@@ -287,17 +297,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./destructor.o -c ./destructor.cxx
+g++ -Wall -g -o ./non_copyable.o -c ./non_copyable.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./destructor.bin ./destructor.o
+g++ -g -o ./non_copyable.bin ./non_copyable.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./destructor.bin
+./non_copyable.bin
 </code>
 </pre>
 <hr />
@@ -312,16 +322,15 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-constructor
-length: 15
+Overloaded Constructor Invoked
 message: Cxx Programming
-distructor
+Distructor Invoked
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.9.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/move-constructor">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.11.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/singleton">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

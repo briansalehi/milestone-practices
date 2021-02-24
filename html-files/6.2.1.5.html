@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>type conversion</title>
+<title>Constant Expression Classes</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -189,11 +189,11 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" type conversion breadcrumb-item active>type conversion</li>
+<li class="breadcrumb-item active" Constant Expression Classes breadcrumb-item active>Constant Expression Classes</li>
 </ol>
 <h2>
-<a id="type-conversion" class="anchor" aria-hidden="true" href="#type-conversion">
-type conversion
+<a id="Constant-Expression-Classes" class="anchor" aria-hidden="true" href="#Constant-Expression-Classes">
+Constant Expression Classes
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -201,23 +201,32 @@ type conversion
 </a>
 </h2>
 <div>
-Single-argument constructors are used to convert different types into the object.<br />
-Use **explicit** keyword to avoid implicit conversions.  
-One important motive to use explicit conversion over implicit is, simply, compile-time errors are better than run-time errors!<br />
+<p><b>Constant expressions</b> are special functions evaluated in compile time. They can boost your programs when used.</p>  
+
+<p>It is possible to define a constructor as a constant expression too, using keyword <i>constexpr</i>. In special cases where such a construct would be useful from a performance point of view, you would use it at the constructor declaration.</p>
+
+<p>Fortunately, we can take advantage of them in classes too. We can make constant expression constructors and methods to have them evaluated in compile time. Also, object creations can be specified as constant expressions too.</p>  
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Sample
+		{
+		private:
+			const char* someString;
+
+		public:
+			constexpr Sample(const char* input) : someString(input)
+			{
+				// constructor code
+			}
+		};
+	</code>
+</pre>
+
+<p>In this sample, we will have our number variable evaluated in compile time!</p>
+
+<p>By marking functions that operate on constants or const-expressions as <i>constexpr</i>, we are instructing the compiler to evaluate those functions and insert their result instead of inserting instructions that compute the result when the application is executed. This keyword can also be used with classes and objects that evaluate as constants as demonstrated in the source section. Note that the compiler would ignore <i>constexpr</i> when the function or class is used with entities that are not constant.</p>
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item"  list-group-item></li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -228,56 +237,25 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>conversion.cxx</cite>
+  <cite>constexpr.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    class Implicit {
-    public:
-        Implicit(): number{0} {};
-        Implicit(const int&amp; input): number(input) {};
-    
-        void show() {
-            std::cout &lt;&lt; &quot;implicit: &quot; &lt;&lt; number &lt;&lt; std::endl;
-        }
-    
+    class Base
+    {
     private:
-        int number;
-    };
-    
-    class Explicit {
+        const int member;
     public:
-        Explicit(): number{0} {};
-        explicit Explicit(const int&amp; input): number{input} {};
-    
-        void show() {
-            std::cout &lt;&lt; &quot;explicit: &quot; &lt;&lt; number &lt;&lt; std::endl;
-        }
-    
-    private:
-        int number;
+        constexpr Base(const int input): member{input} {}
+        constexpr const int show() const { return member; }
     };
     
     int main()
     {
-        Implicit num1;
-        num1 = 2;
-        num1.show();
-    
-        Implicit num2;
-        num2 = 3.14;
-        num2.show();
-    
-        Explicit num3(4);
-        // num3 = 5; // not authorized
-        num3.show();
-    
-        /*
-        Explicit num4;
-        num4 = 5.6; // not authorized
-        num4.show();
-        */
+        constexpr Base object(10);
+        const int number = object.show();
+        std::cout &lt;&lt; &quot;number: &quot; &lt;&lt; number &lt;&lt; std::endl;
     
         return 0;
     }
@@ -295,17 +273,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./conversion.o -c ./conversion.cxx
+g++ -Wall -g -o ./constexpr.o -c ./constexpr.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./conversion.bin ./conversion.o
+g++ -g -o ./constexpr.bin ./constexpr.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./conversion.bin
+./constexpr.bin
 </code>
 </pre>
 <hr />
@@ -320,15 +298,13 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-implicit: 2
-implicit: 3
-explicit: 4
+number: 10
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.2.1.4.html">previous page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/constructor-initialization-list">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.2.1.6.html">next page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/destructor">next page</a></li>
 </ul>
 <script>
 function darkmode(manual) {

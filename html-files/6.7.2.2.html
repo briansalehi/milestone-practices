@@ -202,12 +202,12 @@ recursive_mutex
 </h2>
 <div>
 **this practice needs to be fixed**
-<br />
-The recursive mutex is another subtype of the mutex. Even though it has exactly the same function as a regular mutex, it allows the calling thread, which is initially locked the mutex, to lock the same mutex repeatedly. By doing this, the mutex doesn't become available for other threads until the owning thread has unlocked the mutex as many times as it has locked it.<br />
-<br />
-One good reason to use a recursive mutex is for example when using recursive functions.<br />
-<br />
-A potential complication hereby is that the maximum number of times that a recursive mutex can be locked is not defined in the standard. When the implementation's limit has been reached, a **std::system_error** will be thrown if one tries to lock it, or false is returned when using the non-blocking **try_lock** function.<br />
+
+The recursive mutex is another subtype of the mutex. Even though it has exactly the same function as a regular mutex, it allows the calling thread, which is initially locked the mutex, to lock the same mutex repeatedly. By doing this, the mutex doesn't become available for other threads until the owning thread has unlocked the mutex as many times as it has locked it.
+
+One good reason to use a recursive mutex is for example when using recursive functions.
+
+A potential complication hereby is that the maximum number of times that a recursive mutex can be locked is not defined in the standard. When the implementation's limit has been reached, a **std::system_error** will be thrown if one tries to lock it, or false is returned when using the non-blocking **try_lock** function.
 </div>
 <hr />
 <h3>

@@ -204,56 +204,43 @@ Lambda Functions
 This section is just an introduction to a concept that’s not exactly easy for
 beginners. So, skim through it and try to learn the concept without being
 disappointed if you don’t grasp it all. Lambda functions are discussed in
-depth <a href="/cpp/">algorithms section</a>.<br />
-<br />
-The syntax of a lambda function is the following:<br />
+depth <a href="/cpp/">algorithms section</a>.
+
+The syntax of a lambda function is the following:
 <pre class="language-cpp line-numbers">
 	<code>
 		[optional parameters](parameter list){ statements; }
 	</code>
 </pre>
-<br />
+
 Lambda functions were introduced in C++11 and help in the usage of STL
 algorithms to sort or process data. Typically, a sort function requires you to
-supply a binary predicate.<br />
-<br />
+supply a binary predicate.
+
 This is a function that compares two arguments and returns true if one is less
 than the other, else false, thereby helping in deciding the order of elements
-in a sort operation.<br />
-<br />
+in a sort operation.
+
 Such predicates are typically implemented as operators in a class, leading to
-a tedious bit of coding. Lambda functions can compact predicate definitions.<br />
-<br />
+a tedious bit of coding. Lambda functions can compact predicate definitions.
+
 You are already familiar with <b>vectors</b>. Though, we never used
 <b>for_each</b> and <b>sort</b> function, but don't worry, we will get there
-soon.<br />
-<br />
+soon.
+
 <b>for_each</b> and <b>sort</b> functions gets three arguments, beginning of a
 container, end of a container and a function to pass elements of that
-container one by one.<br />
-<br />
+container one by one.
+
 So, instead of passing the third argument with a function, instead we created
-a lambda function on the same line!<br />
-<br />
-Lambda functions are famous for their small size and simplicity.<br />
-They are functions with no name! that is, they are anonymous functions.<br />
-They are actually called where they are declared.<br />
-But don't get too smart with lambda functions!<br />
+a lambda function on the same line!
+
+Lambda functions are famous for their small size and simplicity.
+They are functions with no name! that is, they are anonymous functions.
+They are actually called where they are declared.
+But don't get too smart with lambda functions!
 They need to be simple and do one small task.  
 </div>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class="list-group-item" Sam's Teach Yourself C++ in One Hour a Day: chapter 7 list-group-item>Sam's Teach Yourself C++ in One Hour a Day: chapter 7</li>
-</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
