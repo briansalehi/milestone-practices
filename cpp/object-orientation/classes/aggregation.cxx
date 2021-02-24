@@ -1,5 +1,3 @@
-#include <string>
-
 class Aggregate1 {
 public:
     std::string name;
@@ -16,6 +14,5 @@ int main()
 {
     Aggregate1 agg1 = {"Cxx", 11};
     Aggregate2 agg2 = {1, {2,3,4}};
-
     return 0;
 }

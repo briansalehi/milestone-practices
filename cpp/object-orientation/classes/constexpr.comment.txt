@@ -12,7 +12,7 @@
 			const char* someString;
 
 		public:
-			constexpr Sample(const char* input) :someString(input)
+			constexpr Sample(const char* input) : someString(input)
 			{
 				// constructor code
 			}
@@ -21,3 +21,5 @@
 </pre>
 
 <p>In this sample, we will have our number variable evaluated in compile time!</p>
+
+<p>By marking functions that operate on constants or const-expressions as <i>constexpr</i>, we are instructing the compiler to evaluate those functions and insert their result instead of inserting instructions that compute the result when the application is executed. This keyword can also be used with classes and objects that evaluate as constants as demonstrated in the source section. Note that the compiler would ignore <i>constexpr</i> when the function or class is used with entities that are not constant.</p>

@@ -1,3 +1,7 @@
+<p>Operator sizeof(), covered in <a href="/cpp/fundamentals/operators/sizeof/">sizeof</a> is used to determine the memory requirement of a specific type, in bytes. This operator is valid for classes, too, and basically reports the sum of bytes consumed by each data attribute contained within the class declaration. Depending on the compiler you use, sizeof() might or might not include padding for certain attributes on word boundaries.</p>
+
+<p>Note that member functions and their local variables do not play a role in defining the sizeof() a class.</p>
+
 <p>Objects too, have a size and can be measured by <i>sizeof()</i> operator.</p>  
 <p>Remember that methods do not count in size of an object because they are not treated as data and they are just there to be invoked. So, what you see as a size of an object is basically the size of all data members in that object.</p>  
 <p>In this example you can see that it's 4 bytes, which makes sense. the member of this object is a *pointer to char* which is a pointer holding a memory address and memory addresses are 4 bytes on my system.</p>

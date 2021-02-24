@@ -1,17 +1,24 @@
 <p>Structures are just the same as classes in C++.</p>  
+
+<p><i>struct</i> is a keyword from the days of C, and for all practical purposes it is treated by a C++ compiler similarly to a class. The exceptions are applicable to the access specifiers (public and private) when the programmer has not specified any. Unless specified, members in a struct are public by default (private for a class), and unless specified, a struct features public inheritance from a base struct (private for a class).</p> 
+
+<p>Inheritance is discussed in detail in <a href="/cpp/object-oriented/inheritance/">inheritance</a>.</p>
+
 <p>In C, to create an structure you need to specify keyword <i>struct</i>, we do that here too. But to create another sample from that structure in C, you also need to specify <i>struct</i> again.</p>  
 
-<pre class="language-cpp line-numbers"><code>
-	struct complex {
-		int number;
-		double fraction;
-		char* array;
-	};
+<pre class="language-cpp line-numbers">
+	<code>
+		struct complex {
+			int number;
+			double fraction;
+			char* array;
+		};
 
-	int main(void) {
-		struct complex sample;
-	}
-</code></pre>
+		int main(void) {
+			struct complex sample;
+		}
+	</code>
+</pre>
 
 <p>But we do not need to specify the keyword <i>struct</i> here in the time of creating an object from that structure:</p>  
 
@@ -27,10 +34,12 @@
 	}
 </code></pre>
 
-<p>That'll do! we now have an object named <i>sample</i> and we can access to its members by <i>member operator?</i>:</p>  
+<p>That'll do! we now have an object named <i>sample</i> and we can access to its members by <i>dot operator</i>:</p>  
 
-<pre class="language-cpp line-numbers"><code>
-	sample.number = 2;
-</code></pre>
+<pre class="language-cpp line-numbers">
+	<code>
+		sample.number = 2;
+	</code>
+</pre>
 
 <p><b>NOTE</b>: all of members and methods of structures and unions in C++ are <i>public</i> unless otherwise is specified. That is, you can skip writing <i>public</i>, <i>private</i> or <i>protected</i>. That way everything is public by default. But in classes you must at least specify one.</p>

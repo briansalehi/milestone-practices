@@ -1,3 +1,7 @@
+<p>A class does not permit external access to its data members and methods that are declared private. This rule is waived for classes and functions that are disclosed as friend classes or functions, using keyword <i>friend</i> as seen in the source section.</p>
+
+<p>Like functions, external classes can also be designated as a trusted friend, as seen in the source section.</p>
+
 <p>To access private memebers of a class, you either can declare a method inside that class to return the value of that private member, or you make a foreign function friends with that class to give it access to private member of the class. Either way, you need the declaration of those methods inside the class.</p>
 
 <p>To specify a foreign function as a friend, you need to write the declaration of that function with keyword <i>friend</i> in the head of declaration. You only have to specify <i>friend</i> keyword before function declaration inside the class not in definition of that function outside the class.</p>  

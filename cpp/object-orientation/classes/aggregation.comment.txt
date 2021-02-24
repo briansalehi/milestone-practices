@@ -1,15 +1,67 @@
-<p>You were shortly introduced to **initializer lists** previously. The thing is, objects can be initialized by initializer lists. We could initialize objects in multiple forms:</p>  
+<p>You were shortly introduced to <i>initializer lists</i> previously. The thing is, objects can be initialized by initializer lists. We could initialize objects in multiple forms:</p>  
 
-<pre class="language-cpp line-numbers"><code>
-	Aggregate1 agg1("Cxx", 11);
-</code></pre>
+<pre class="language-cpp line-numbers">
+	<code>
+		Aggregate1 agg1("Cxx", 11);
+	</code>
+</pre>
 
 <p>or</p>
 
-<pre class="language-cpp line-numbers"><code>
-	Aggregate1 agg1;
-	agg1.name = "Cxx";
-	agg1.number = 11;
-</code></pre>
+<pre class="language-cpp line-numbers">
+	<code>
+		Aggregate1 agg1;
+		agg1.name = "Cxx";
+		agg1.number = 11;
+	</code>
+</pre>
 
-<p>But using **initializer lists** we simply put all of the values of different types in one box and set them to an object.</p>
+<p>But using <i>initializer lists</i> we simply put all of the values of different types in one box and set them to an object.</p>
+
+<p>The following initialization syntax is called an aggregate initialization syntax:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Type objectName = {argument1, …, argumentN}; // copy list initialization
+		// Alternatively, since C++11:
+		Type objectName {argument1, …, argumentN}; // direct list initialization
+	</code>
+</pre>
+
+<p>There are restrictions imposed by the standard on the specification of a struct or a class that can be called an aggregate. These restrictions get nuanced depending on the version of C++ standard that you refer to. Yet, it can be safely said that classes/structs that comprise public and non-static data members, contain no private or protected data members, contain no virtual member functions, feature none or only public inheritance (that is, no private, protected, or virtual inheritance), and no user-defined constructors are aggregates too and can be initialized as one.</p>
+
+<p>Thus, the following struct fulfills the prerequisites of being an aggregate and hence, can be initialized as one:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// declaration
+		struct Aggregate1
+		{
+			int num;
+			double pi;
+		};
+
+		// initialization
+		Aggregate1 a1{ 2017, 3.14 };
+	</code>
+</pre>
+
+
+<p>Another example:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// declaration
+		struct Aggregate2 {  int num;
+			char hello[6];
+			int impYears[5];
+		};
+
+		// initialization
+		Aggregate2 a2 {42, {'h', 'e', 'l', 'l', 'o'}, {1998, 2003, 2011, 2014, 2017}};
+	</code>
+</pre>
+
+<p>Aggregate initialization will initialize only the first non-static  member of a union.</p>
+
+<p>Therefore, for sake of clarity, it may be a good idea to not use aggregate initialization syntax on union.</p>

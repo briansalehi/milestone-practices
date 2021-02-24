@@ -1,11 +1,12 @@
 #include <iostream>
 
-class Base {
+class Base
+{
 private:
-    int member;
+    const int member;
 public:
-    constexpr Base(int input): member{input} {}
-    constexpr int show() const { return member; }
+    constexpr Base(const int input): member{input} {}
+    constexpr const int show() const { return member; }
 };
 
 int main()
