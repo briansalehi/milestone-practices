@@ -1,0 +1,3 @@
+<p>An important concept in C++, this is a reserved keyword applicable within the scope of a class and contains the address of the object. In other words, the value of this is <i>&object</i>.</p>
+
+<p>Note that the <i>this</i> pointer is not sent to class methods declared as static functions, as static functions are not connected to an instance of the class. Instead they are shared by all instances. To use an instance variable in a static function, you would explicitly declare a parameter and send <i>this</i> pointer as an argument.</p>

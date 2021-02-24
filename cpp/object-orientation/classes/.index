@@ -11,6 +11,7 @@ move_constructor.cxx
 non_copyable.cxx
 singleton.cxx
 stack_prohibition.cxx
+this-pointer.cxx
 aggregation.cxx
 default-methods.cxx
 defaults.cxx
