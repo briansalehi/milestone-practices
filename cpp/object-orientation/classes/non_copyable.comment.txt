@@ -1,1 +1,21 @@
+<p>Beyond modeling a certain constitution, you might be programming an operating system and need to model one local area network, one processor, and so on. You need to ensure that certain resources cannot be copied or duplicated. If you don’t declare a copy constructor, the C++ compiler inserts a default public copy constructor for you. This ruins your design and threatens your implementa-tion.</p>
+
+<p>You would ensure that your class cannot be copied by declaring a private copy constructor.</p>
+
+<p>Thus, the solution is the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class President
+		{
+		private:
+			President(const President&); // private copy constructor
+			President& operator= (const President&); // private copy assignment operator
+			// … other attributes
+		};
+	</code>
+</pre>
+
+<p>There is no need for implementation of the private copy constructor or assignment  operator. Just declaring them as private is adequate and sufficient toward fulfilling your goal of ensuring non-copyable objects of class President.</p>
+
 <p>Declaring <i>copy constructor</i> and <i>copy assignment operator</i> as private methods, will prevent an object from being copied. This way, you can make sure an object will not be passed by value to function arguments or it will not be returned by value from functions. This makes us sure that our object will not be too memory consuming.</p>

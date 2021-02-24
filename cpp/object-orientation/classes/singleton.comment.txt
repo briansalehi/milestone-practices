@@ -1,2 +1,26 @@
-<p>Declaring <i>default constructor</i>, <i>copy constructor</i> and <i>assignment operator</i> as private methods of a class, which prevent an object to be created, assigned or be copied. You might wonder why such an object should ever exist. But truth is, sometimes you might need an object to be one and only! That is, only one instance of an object suffices and no other similar objects should ever exist with it.</p>
-<p>This kind of object is called <i>singleton object</i>. Don't forget that due to not having access to create a singleton object, you must declare a <i>static</i> method in the class to create one object for you.</p>
+<p>The class President discussed earlier is good, but it has a shortcoming: It cannot help creation of multiple presidents via instantiation of multiple objects:</p>
+
+<pre class="language-cpp">
+	<code>
+		President One, Two, Three;
+	</code>
+</pre>
+
+<p>Individually they are non-copyable thanks to the private copy constructors, but what you ideally need is a class President that has one, and only one, real-world  manifestation—that is, there is only one object and creation of additional ones is  prohibited.</p>
+
+<p>When the keyword static is used on a class’s data member, it ensures that the member is shared across all instances.</p>
+
+<p>When static is used on a local variable declared within the scope of a function, it ensures that the variable retains its value between function calls.</p>
+
+<p>When static is used on a member function—a method—the method is shared across all instances of the class.</p>
+
+<p>Keyword static is an essential ingredient in creating a singleton class as demonstrated as in the source section.</p>
+
+<p>Declaring <i>default constructor</i>, <i>copy constructor</i> and <i>assignment operator</i> as private methods of a class, which prevent an object to be created, assigned or be copied, makes a <i>singleton object</i>.</p>
+
+<p>Don't forget that due to not having access to default constructor in order to create an instance object, you must declare a <i>static</i> method in the class to create one object for you.</p>
+
+<p>Use the singleton pattern only where absolutely necessary, keeping future growth of the application and its features in per-spective. Note that the very feature that it restricts creation of multiple instances can become an architectural bottleneck when a use case comes up that needs multiple instances of the class.</p>
+
+<p>For example, if our project were to change from modeling a nation to modeling the United Nations, which is currently represented by 193 member nations, each with its own president, clearly we would have an architectural problem given a singleton class President that would permit the existence of only one instance.</p>
+
