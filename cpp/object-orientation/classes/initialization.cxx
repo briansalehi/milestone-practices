@@ -11,6 +11,5 @@ int main()
 {
     // initialization is mandatory
     Weather rainy(20);
-
     return 0;
 }

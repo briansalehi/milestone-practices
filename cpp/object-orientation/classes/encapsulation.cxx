@@ -25,7 +25,7 @@ int main()
     Eve->name = "Cane"; // pointer operator to access object pointer elements
     Eve->age = 1240;
     Eve->introduce();
-    delete ghost; // never forget to delete newly allocated memory
+    delete Eve; // never forget to delete newly allocated memory
 
     return 0;
 }

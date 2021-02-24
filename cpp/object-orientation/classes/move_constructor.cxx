@@ -16,7 +16,6 @@ public:
 
     Base(const Base& base) {
         std::cout << "Copy Constructor Invoked" << std::endl;
-        member = nullptr;
 
         if (base.member != nullptr) {
             member = new char[strlen(base.member)+1];
@@ -27,14 +26,12 @@ public:
 
     Base(const Base&& base) {
         std::cout << "Move Constructor Invoked" << std::endl;
-        member = nullptr;
 
-        if (base.member != nullptr) {
+        if (base.member) {
             member = new char[strlen(base.member)+1];
             strcpy(member, base.member);
-            std::cout << "movable member address: " << std::hex << &base.member << std::endl;
-            std::cout << "moved member address: " << std::hex << &member << std::endl;
-            delete [] base.member;
+            std::cout << "rvalue address: " << std::hex << &base.member << std::endl;
+            std::cout << "lvalue address: " << std::hex << &member << std::endl;
         }
     };
 
@@ -49,14 +46,22 @@ private:
     char* member;
 };
 
-Base&& move(Base& base) {
+Base copyObject(Base&base) {
+	return base;
+}
+
+Base moveObject(Base& base) {
     return std::move(base);
 }
 
 int main()
 {
-    Base object("using move semantics");
-    Base reference = move(object);
-
+	try {
+		Base object("using move semantics");
+		Base concrete = copyObject(object);
+		Base reference = moveObject(object);
+	} catch (std::exception& exp) {
+		std::cerr << exp.what() << std::endl;
+	}
     return 0;
 }

@@ -1,7 +1,10 @@
 Constructor Invoked
-member address: 0x7ffc7b2acc68
+member address: 0x7fff2c918748
+Copy Constructor Invoked
+copied member address: 0x7fff2c918750
 Move Constructor Invoked
-movable member address: 0x7ffc7b2acc68
-moved member address: 0x7ffc7b2acc70
+rvalue address: 0x7fff2c918748
+lvalue address: 0x7fff2c918758
+Destructor Invoked
 Destructor Invoked
 Destructor Invoked

@@ -1,6 +1,6 @@
 class Aggregate1 {
 public:
-    std::string name;
+    const char* name;
     int number;
 };
 
