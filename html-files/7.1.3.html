@@ -23,6 +23,11 @@ a:focus {
 pre {
 	margin-bottom: 1.3rem !important;
 }
+
+button.sticky {
+	position: sticky;
+	top: 0;
+}
 .dark-mode {
 	background-color: black;
 	color: #aaaaaa;
@@ -190,6 +195,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item active" Integers breadcrumb-item active>Integers</li>
 </ol>
+<button class='btn pull-right sticky' onclick='toggle_darkmode()'>&#9728;</button>
 <h2>
 <a id="Integers" class="anchor" aria-hidden="true" href="#Integers">
 Integers
@@ -286,17 +292,34 @@ Output
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/7.1.4.html">next page</a></li>
 </ul>
 <script>
-function darkmode(manual) {
-	const hours = new Date().getHours();
-	const isNight = !(hours > 6 && hours < 20);
+function darkmode() {
 	var bodystyle = document.body;
-	if (isNight || manual) {
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
 	} else {
+		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
 	}
 }
 darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+	}
+}
 </script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
