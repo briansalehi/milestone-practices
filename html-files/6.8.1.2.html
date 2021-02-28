@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" QWidget breadcrumb-item active>QWidget</li>
+<li class='breadcrumb-item active'>QWidget</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,22 +215,16 @@ QWidget
 </svg>
 </a>
 </h2>
-<div>
-Widgets are the graphical components with which we construct user interfaces.
+<p>Widgets are the graphical components with which we construct user interfaces.</p>
 
-Using widgets directly as a window is not the practice, one
-way to get over with this bad design is to use QWidget instances as a
-window, though in the next page, you will see that QMainWindow is the ultimate
-answer to designing Qt applications practically.
+<p>Using widgets directly as a window is not the practice, one way to get over with this bad design is to use QWidget instances as a window, though in the next page, you will see that QMainWindow is the ultimate answer to designing Qt applications practically.</p>
 
 <cite>Class hierarchy in Qt</cite>
-<img class="img-responsive" src="/cpp/gui/fundamentals/qt-objects-hierarchy.png" alt="qt objects hierarchy" loading="lazy">
+<img class="img-responsive" src="/cpp/gui/fundamentals/qt-objects-hierarchy.png" alt="qt objects hierarchy" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/qt-objects-hierarchy.png"'>
 
-At the very top of the hierarchy is the QObject. A lot of classes inherit from
-the QObject class. The QObject class also contains the mechanisms of signals
-and slots and event management, among other things.
+<p>At the very top of the hierarchy is the QObject. A lot of classes inherit from the QObject class. The QObject class also contains the mechanisms of signals and slots and event management, among other things.</p>
 
-There are a few critical points to note regarding widgets in Qt:
+<p>There are a few critical points to note regarding widgets in Qt:</p>
 <ul>
 	<li>
 		Information is passed to widgets by way of events. For a textbox, an
@@ -250,7 +244,6 @@ There are a few critical points to note regarding widgets in Qt:
 		A child widget is displayed within its parent widget.
 	</li>
 </ul>
-</div>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -262,7 +255,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Getting Started with Qt 5: chapter 2 list-group-item>Getting Started with Qt 5: chapter 2</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 2</li>
 </ul>
 <hr />
 <h3>
@@ -306,12 +299,42 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler -C ./cpp/gui/fundamentals -f widget.make
+qmake -project -nopwd -norecursive -o ./widget.pro ./widget.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./widget.bin options
+sed -i '/TARGET/s/$/.bin/' ./widget.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/a QT += widgets' ./widget.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/.*\///g' ./widget.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -o ./widget.make ./widget.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/fundamentals -f widget.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/fundamentals -f widget.make clean
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./widget.bin
 </code>
 </pre>
 <hr />
@@ -324,8 +347,7 @@ Output
 </svg>
 </a>
 </h3>
-  <cite>widget.png</cite>
-<img class="img-responsive" src="/cpp/gui/fundamentals/QWidget.screenshot.png" alt="widget.cxx Screenshot">
+<img class="img-responsive" src="/cpp/gui/fundamentals/QWidget.screenshot.png" alt="widget.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/QWidget.screenshot.png"'>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/fundamentals/QApplication">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

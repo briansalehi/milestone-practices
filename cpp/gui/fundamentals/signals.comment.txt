@@ -1,26 +1,16 @@
-Most of the widgets in Qt come with a number of signals and slots. However, it
-is possible to write your own signals and slots too.
+<p>Most of the widgets in Qt come with a number of signals and slots. However, it is possible to write your own signals and slots too.</p>
 
-GUI toolkits usually provide a means to react to things that occur within an
-application.
+<p>GUI toolkits usually provide a means to react to things that occur within an application.</p>
 
-For example, when you move a window or resize it, the action gets registered,
-and provided ample code has been written, it will be executed as a reaction to
-the moving or resizing of the window.
+<p>For example, when you move a window or resize it, the action gets registered, and provided ample code has been written, it will be executed as a reaction to the moving or resizing of the window.</p>
 
-One way to implement the ability to react to an action that has occurred is by
-using the design pattern called the Observer Pattern.
+<p>One way to implement the ability to react to an action that has occurred is by using the design pattern called the Observer Pattern.</p>
 
 ![observer-pattern-in-qt.png]
 
-A signal is a message that is passed to communicate that the state of an
-object has changed. This signal may carry information about the change that
-has occurred.
+<p>A signal is a message that is passed to communicate that the state of an object has changed. This signal may carry information about the change that has occurred.</p>
 
-A slot is a specific function of an object that is called whenever a certain
-signal has been emitted. Since slots are functions, they will embody lines of
-code that perform an action, such as closing a window, disabling a button, and
-sending an email, to mention but a few.
+<p>A slot is a specific function of an object that is called whenever a certain signal has been emitted. Since slots are functions, they will embody lines of code that perform an action, such as closing a window, disabling a button, and sending an email, to mention but a few.</p>
 
 <cite>An implementation sample of signals and slots</cite>
 <pre class="language-cpp">
@@ -29,7 +19,4 @@ sending an email, to mention but a few.
 	</code>
 </pre>
 
-It is not only possible to connect one signal to one slot, but to connect one
-signal to more than one slot. This involves repeating the QObject::connect()
-call and, in each instance, specifying the slot that should be called when a
-particular signal has been emitted.
+<p>It is not only possible to connect one signal to one slot, but to connect one signal to more than one slot. This involves repeating the QObject::connect() call and, in each instance, specifying the slot that should be called when a particular signal has been emitted.</p>

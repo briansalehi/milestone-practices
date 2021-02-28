@@ -215,9 +215,7 @@ Application Object
 </svg>
 </a>
 </h2>
-<div>
-QApplication is the main part of Qt applications.
-</div>
+<p>QApplication is the main part of Qt applications.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -229,7 +227,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Getting Started with Qt 5: chapter 1</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 1</li>
 </ul>
 <hr />
 <h3>
@@ -268,7 +266,37 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
+qmake -project -nopwd -norecursive -o ./application.pro ./application.cxx
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/s/$/.bin/' ./application.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/a QT += widgets' ./application.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/.*\///g' ./application.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -o ./application.make ./application.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
 make -C ./cpp/gui/fundamentals -f application.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/fundamentals -f application.make clean
 </code>
 </pre>
 <pre>
@@ -286,8 +314,7 @@ Output
 </svg>
 </a>
 </h3>
-  <cite>application.png</cite>
-<img class="img-responsive" src="/cpp/gui/fundamentals/QApplication.screenshot.png" alt="application.cxx Screenshot">
+<img class="img-responsive" src="/cpp/gui/fundamentals/QApplication.screenshot.png" alt="application.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/QApplication.screenshot.png"'>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/fundamentals">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
+INCPATH       = -I. -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -272,7 +272,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		custom-signals.pro custom-signals-mainwindow.hpp custom-signals.cxx \
+		custom-signals.pro custom-signals-mainwindow.hpp \
+		custom-signals-mainwindow.hpp custom-signals.cxx \
 		custom-signals-mainwindow.cxx
 QMAKE_TARGET  = custom-signals.bin
 DESTDIR       = 
@@ -733,7 +734,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents custom-signals-mainwindow.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents custom-signals-mainwindow.hpp custom-signals-mainwindow.hpp $(DISTDIR)/
 	$(COPY_FILE) --parents custom-signals.cxx custom-signals-mainwindow.cxx $(DISTDIR)/
 
 
@@ -766,13 +767,18 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_custom-signals-mainwindow.cpp
+compiler_moc_header_make_all: moc_custom-signals-mainwindow.cpp moc_custom-signals-mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_custom-signals-mainwindow.cpp
+	-$(DEL_FILE) moc_custom-signals-mainwindow.cpp moc_custom-signals-mainwindow.cpp
 moc_custom-signals-mainwindow.cpp: custom-signals-mainwindow.hpp \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/brian/development/projects/milestone-practices/cpp/gui/fundamentals/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/projects/milestone-practices/cpp/gui/fundamentals -I/home/brian/development/projects/milestone-practices/cpp/gui/fundamentals -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include custom-signals-mainwindow.hpp -o moc_custom-signals-mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/brian/development/projects/milestone-practices/cpp/gui/fundamentals/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/projects/milestone-practices/cpp/gui/fundamentals -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include custom-signals-mainwindow.hpp -o moc_custom-signals-mainwindow.cpp
+
+moc_custom-signals-mainwindow.cpp: custom-signals-mainwindow.hpp \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/brian/development/projects/milestone-practices/cpp/gui/fundamentals/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/projects/milestone-practices/cpp/gui/fundamentals -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include custom-signals-mainwindow.hpp -o moc_custom-signals-mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" Events breadcrumb-item active>Events</li>
+<li class='breadcrumb-item active'>Events</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,33 +215,15 @@ Events
 </svg>
 </a>
 </h2>
-<div>
-This chapter introduces the concept of events. To maintain a working state,
-messages are passed around from the windowing system to the application, and
-within the application itself. These messages may contain data that could be
-useful when delivered at some destination. The messages being talked about
-here are referred to as events in Qt.
+<p>This chapter introduces the concept of events. To maintain a working state, messages are passed around from the windowing system to the application, and within the application itself. These messages may contain data that could be useful when delivered at some destination. The messages being talked about here are referred to as events in Qt.</p>
 
-In Qt, all events that occur are encapsulated in objects that inherit from the
-QEvent abstract class. An example of an event that has occurred is when a
-window has been resized or moved. The change in the state of the application
-will be noticed, and an appropriate QEvent object will be created to represent
-it.
+<p>In Qt, all events that occur are encapsulated in objects that inherit from the QEvent abstract class. An example of an event that has occurred is when a window has been resized or moved. The change in the state of the application will be noticed, and an appropriate QEvent object will be created to represent it.</p>
 
-The application event loop delivers this object to certain objects that
-inherit from QObject. This QEvent object is handled by means of a method call
-that will be invoked.
+<p>The application event loop delivers this object to certain objects that inherit from QObject. This QEvent object is handled by means of a method call that will be invoked.</p>
 
-There are different types of events. When a mouse is clicked, a QMouseEvent
-object is created to represent this. The object will contain additional
-information, such as the specific mouse button that was clicked, together with
-the location where that event occurred.
+<p>There are different types of events. When a mouse is clicked, a QMouseEvent object is created to represent this. The object will contain additional information, such as the specific mouse button that was clicked, together with the location where that event occurred.</p>
 
-All QObjects have an event() method that receives events. For QWidgets, this
-method will relay the event object to more specific event handlers. It is
-possible to redefine what an event handler should do by sub-classing the
-widget of interest and re-implementing that event handler.
-</div>
+<p>All QObjects have an event() method that receives events. For QWidgets, this method will relay the event object to more specific event handlers. It is possible to redefine what an event handler should do by sub-classing the widget of interest and re-implementing that event handler.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -253,7 +235,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Gettings Started by Qt 5: chapter 5 list-group-item>Gettings Started by Qt 5: chapter 5</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 5</li>
 </ul>
 <hr />
 <h3>
@@ -279,72 +261,6 @@ Source
     }
 </code>
 </pre>
-  <cite>events-mainwindow.cxx</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    #include &quot;events-mainwindow.hpp&quot;
-    
-    MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
-    {
-    	setWindowTitle(&quot;Events&quot;);
-    	setWindowIcon(QIcon(&quot;event.png&quot;));
-    	resize(100, 50);
-    
-    	datetime = new QLabel(&quot;Date and Time&quot;);
-    	datetime-&gt;setAlignment(Qt::AlignCenter);
-    
-    	setCentralWidget(datetime);
-    	startTimer(1000);
-    }
-    
-    void MainWindow::moveEvent(QMoveEvent *event)
-    {
-    	int x = event-&gt;pos().x();
-    	int y = event-&gt;pos().y();
-    
-    	QString text = QString::number(x) + &quot;, &quot; + QString::number(y);
-    
-    	statusBar()-&gt;showMessage(text);
-    }
-    
-    void MainWindow::timerEvent(QTimerEvent *event)
-    {
-    	Q_UNUSED(event);
-    	QString datetimeString = QDateTime::currentDateTime().toString();
-    	datetime-&gt;setText(datetimeString);
-    }
-</code>
-</pre>
-  <cite>events-mainwindow.hpp</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    #pragma once
-    
-    #include &lt;QApplication&gt;
-    #include &lt;QMainWindow&gt;
-    #include &lt;QStatusBar&gt;
-    #include &lt;QMoveEvent&gt;
-    #include &lt;QTimerEvent&gt;
-    #include &lt;QDateTime&gt;
-    #include &lt;QString&gt;
-    #include &lt;QLabel&gt;
-    
-    class MainWindow : public QMainWindow
-    {
-    	Q_OBJECT
-    
-    public:
-    	MainWindow(QWidget *parent = nullptr);
-    
-    protected:
-    	void moveEvent(QMoveEvent *event);
-    	void timerEvent(QTimerEvent *event);
-    
-    private:
-    	QLabel *datetime;
-    };
-</code>
-</pre>
 <hr />
 <h3>
 <a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
@@ -357,12 +273,37 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler -C ./cpp/gui/fundamentals -f events.make
+qmake -project -nopwd -norecursive -o ./events.pro ./events.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./events.bin options
+sed -i '/TARGET/s/$/.bin/' ./events.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/a QT += widgets' ./events.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/.*\///g' ./events.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -o ./events.make ./events.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/fundamentals -f events.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./events.bin
 </code>
 </pre>
 <hr />
@@ -375,8 +316,7 @@ Output
 </svg>
 </a>
 </h3>
-  <cite>events.png</cite>
-<img class="img-responsive" src="/cpp/gui/fundamentals/events.screenshot.png" alt="events.cxx Screenshot">
+<img class="img-responsive" src="/cpp/gui/fundamentals/events.screenshot.png" alt="events.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/events.screenshot.png"'>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/fundamentals/signals">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

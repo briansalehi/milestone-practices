@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" QMainWindow breadcrumb-item active>QMainWindow</li>
+<li class='breadcrumb-item active'>QMainWindow</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,11 +215,9 @@ QMainWindow
 </svg>
 </a>
 </h2>
-<div>
-QMainWindow is derived from QWidget.
-As such, by calling the show() method, a window will appear.
-If you were to replace QMainWindow with QLabel, this will still work.
-</div>
+<p><i>QMainWindow</i> is derived from <i>QWidget</i>.</p>
+<p>As such, by calling the show() method, a window will appear.</p>
+<p>If you were to replace <i>QMainWindow</i> with <i>QLabel</i>, this will still work.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -231,7 +229,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Getting Started with Qt 5: chapter 3 list-group-item>Getting Started with Qt 5: chapter 3</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 3</li>
 </ul>
 <hr />
 <h3>
@@ -274,12 +272,42 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler -C ./cpp/gui/fundamentals -f mainwindow.make
+qmake -project -nopwd -norecursive -o ./mainwindow.pro ./mainwindow.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./mainwindow.bin options
+sed -i '/TARGET/s/$/.bin/' ./mainwindow.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/a QT += widgets' ./mainwindow.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/.*\///g' ./mainwindow.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -o ./mainwindow.make ./mainwindow.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/fundamentals -f mainwindow.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/fundamentals -f mainwindow.make clean
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./mainwindow.bin
 </code>
 </pre>
 <hr />
@@ -292,8 +320,7 @@ Output
 </svg>
 </a>
 </h3>
-  <cite>mainwindow.png</cite>
-<img class="img-responsive" src="/cpp/gui/fundamentals/QMainWindow.screenshot.png" alt="mainwindow.cxx Screenshot">
+<img class="img-responsive" src="/cpp/gui/fundamentals/QMainWindow.screenshot.png" alt="mainwindow.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/QMainWindow.screenshot.png"'>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/fundamentals/layouts">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item active" Signals and Slots breadcrumb-item active>Signals and Slots</li>
+<li class='breadcrumb-item active'>Signals and Slots</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,30 +215,19 @@ Signals and Slots
 </svg>
 </a>
 </h2>
-<div>
-Most of the widgets in Qt come with a number of signals and slots. However, it
-is possible to write your own signals and slots too.
+<p>Most of the widgets in Qt come with a number of signals and slots. However, it is possible to write your own signals and slots too.</p>
 
-GUI toolkits usually provide a means to react to things that occur within an
-application.
+<p>GUI toolkits usually provide a means to react to things that occur within an application.</p>
 
-For example, when you move a window or resize it, the action gets registered,
-and provided ample code has been written, it will be executed as a reaction to
-the moving or resizing of the window.
+<p>For example, when you move a window or resize it, the action gets registered, and provided ample code has been written, it will be executed as a reaction to the moving or resizing of the window.</p>
 
-One way to implement the ability to react to an action that has occurred is by
-using the design pattern called the Observer Pattern.
+<p>One way to implement the ability to react to an action that has occurred is by using the design pattern called the Observer Pattern.</p>
 
-<img class="img-responsive" src="/cpp/gui/fundamentals/observer-pattern-in-qt.png" alt="observer pattern in qt" loading="lazy">
+<img class="img-responsive" src="/cpp/gui/fundamentals/observer-pattern-in-qt.png" alt="observer pattern in qt" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/observer-pattern-in-qt.png"'>
 
-A signal is a message that is passed to communicate that the state of an
-object has changed. This signal may carry information about the change that
-has occurred.
+<p>A signal is a message that is passed to communicate that the state of an object has changed. This signal may carry information about the change that has occurred.</p>
 
-A slot is a specific function of an object that is called whenever a certain
-signal has been emitted. Since slots are functions, they will embody lines of
-code that perform an action, such as closing a window, disabling a button, and
-sending an email, to mention but a few.
+<p>A slot is a specific function of an object that is called whenever a certain signal has been emitted. Since slots are functions, they will embody lines of code that perform an action, such as closing a window, disabling a button, and sending an email, to mention but a few.</p>
 
 <cite>An implementation sample of signals and slots</cite>
 <pre class="language-cpp">
@@ -247,11 +236,7 @@ sending an email, to mention but a few.
 	</code>
 </pre>
 
-It is not only possible to connect one signal to one slot, but to connect one
-signal to more than one slot. This involves repeating the QObject::connect()
-call and, in each instance, specifying the slot that should be called when a
-particular signal has been emitted.
-</div>
+<p>It is not only possible to connect one signal to one slot, but to connect one signal to more than one slot. This involves repeating the QObject::connect() call and, in each instance, specifying the slot that should be called when a particular signal has been emitted.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -263,7 +248,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Getting Started with Qt 5: chapter 3 list-group-item>Getting Started with Qt 5: chapter 3</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 3</li>
 </ul>
 <hr />
 <h3>
@@ -297,21 +282,6 @@ Source
     	window.show();
     	return app.exec();
     }
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
 </code>
 </pre>
 <ul class="pager">
