@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.5.0.html">Database</a></li>
-<li class="breadcrumb-item active" Connection breadcrumb-item active>Connection</li>
+<li class='breadcrumb-item active'>Connection</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,7 +215,6 @@ Connection
 </svg>
 </a>
 </h2>
-<div>
 The QtSql module comes equipped with classes and drivers for accessing
 databases. To proceed beyond this point, you should have made the necessary
 configuration during the installation of Qt on your system to enable database
@@ -229,7 +228,7 @@ The QtSql module is comprised of the following layers:
   <li>Driver layer</li>
 </ul>
 
-<img class="img-responsive" src="/cpp/gui/database/qt-sql-layers.png" alt="qt sql layers" loading="lazy">
+<img class="img-responsive" src="/cpp/gui/database/qt-sql-layers.png" alt="qt sql layers" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/database/qt-sql-layers.png"'>
 
 Let's create a database with the following tables by issuing the following
 statements:
@@ -245,7 +244,6 @@ statements:
 		))  ENGINE=INNODB;
 	</code>
 </pre>
-</div>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -257,7 +255,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Getting Started with Qt 5: chapter 6 list-group-item>Getting Started with Qt 5: chapter 6</li>
+<li class='list-group-item'>Getting Started with Qt 5: chapter 6</li>
 </ul>
 <hr />
 <h3>
@@ -312,12 +310,42 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler -C ./cpp/gui/database -f connection.make
+qmake -project -nopwd -norecursive -o ./connection.pro ./connection.cxx ././connection.sql
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./connection.bin options
+sed -i '/TARGET/s/$/.bin/' ./connection.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/a QT += widgets' ./connection.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/.*\///g' ./connection.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -o ./connection.make ./connection.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/database -f connection.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/database -f connection.make clean
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./connection.bin
 </code>
 </pre>
 <hr />

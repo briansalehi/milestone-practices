@@ -204,7 +204,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.9.0.html">Image Processing</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.9.2.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/6.9.2.3.0.html">Transformation</a></li>
-<li class="breadcrumb-item active" pyramid downsampling breadcrumb-item active>pyramid downsampling</li>
+<li class='breadcrumb-item active'>pyramid downsampling</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -216,7 +216,6 @@ pyramid downsampling
 </svg>
 </a>
 </h2>
-<div>
 We will now use a function that uses Gaussian filtering to **downsapmle**
 an image by a factor of 2.
 That is, we are creating an image where was sampling every other pixel of the source image.
@@ -233,7 +232,6 @@ To avoid this, we want to first run a high-pass filter over the signal to
 
 In opencv, this **Gaussian blurring** and **downsampling** is accomplished
 by the function **cv::pryDown()**, which we implemented in this code.
-</div>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">

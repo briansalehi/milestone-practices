@@ -202,7 +202,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">Java SE Practices</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Wrapper Classes, AutoBoxing, and Unboxing</a></li>
-<li class="breadcrumb-item active" Auto Boxing and Unboxing breadcrumb-item active>Auto Boxing and Unboxing</li>
+<li class='breadcrumb-item active'>Auto Boxing and Unboxing</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -214,7 +214,6 @@ Auto Boxing and Unboxing
 </svg>
 </a>
 </h2>
-<div>
 While using wrapper classes, we could face two of famous Java functionalities:
 <ol>
     <li>Auto-Boxing: Java creates an object using its Auto-boxing functionality, while we want to assign a primitive type to a wrapper-class object. so we don't need to use "new" keyword.</li>
@@ -223,7 +222,6 @@ While using wrapper classes, we could face two of famous Java functionalities:
 
 You can find how these two work in the code section.
 
-</div>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -269,17 +267,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./Boxing.java
+compiler options ./Boxing.java ./
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./java/wrapper_class ./Boxing
+linker options ./java/wrapper_class Boxing
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./java/wrapper_class ./Boxing
+linker options ./java/wrapper_class Boxing
 </code>
 </pre>
 <hr />

@@ -202,7 +202,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.2.0.html">Design Patterns</a></li>
-<li class="breadcrumb-item active" Decorator Pattern breadcrumb-item active>Decorator Pattern</li>
+<li class='breadcrumb-item active'>Decorator Pattern</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -214,7 +214,6 @@ Decorator Pattern
 </svg>
 </a>
 </h2>
-<div>
 We’ll re-examine the typical overuse of inheritance and you’ll learn how to
 decorate your classes at runtime using a form of object composition.
 
@@ -222,23 +221,23 @@ Starbuzz Coffee has made a name for itself as the fastest-growing coffee shop
 around.
 When they first went into business they designed their classes like this:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-initial-bevarage-class.png" alt="coffeeshop initial bevarage class" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-initial-bevarage-class.png" alt="coffeeshop initial bevarage class" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-initial-bevarage-class.png"'>
 
 In addition to your coffee, you can also ask for several condiments.
 Starbuzz charges a bit for each condiment, so they really need to get them
 built into their order system.
 Here’s their first attempt:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-condiment-classes.png" alt="coffeeshop condiment classes" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-condiment-classes.png" alt="coffeeshop condiment classes" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-condiment-classes.png"'>
 
 Let’s start with the Beverage base class and add instance variables to
 represent whether or not each beverage has milk, soy, mocha, and whip:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-with-condiment-members.png" alt="coffeeshop bevarage with condiment members" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-with-condiment-members.png" alt="coffeeshop bevarage with condiment members" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-with-condiment-members.png"'>
 
 Now let’s add in the subclasses, one for each beverage on the menu:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-with-subclasses.png" alt="coffeeshop bevarage with subclasses" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-with-subclasses.png" alt="coffeeshop bevarage with subclasses" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-with-subclasses.png"'>
 
 As it turns out, though, there are some clever OO techniques for allowing
 systems to be extended, even if we can’t change the underlying code. Think
@@ -259,24 +258,24 @@ works:
 
 We start with our DarkRoast object.
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-1.png" alt="coffeeshop bevarage class construction 1" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-1.png" alt="coffeeshop bevarage class construction 1" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-class-construction-1.png"'>
 
 The customer wants Mocha, so we create a Mocha object and wrap it around the
 DarkRoast.
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-2.png" alt="coffeeshop bevarage class construction 2" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-2.png" alt="coffeeshop bevarage class construction 2" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-class-construction-2.png"'>
 
 The customer also wants Whip, so we create a Whip decorator and wrap Mocha
 with it.
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-3.png" alt="coffeeshop bevarage class construction 3" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-3.png" alt="coffeeshop bevarage class construction 3" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-class-construction-3.png"'>
 
 Now it’s time to compute the cost for the customer. We do this by calling
 cost() on the outermost decorator, Whip, and Whip is going to delegate
 computing the cost to the objects it decorates. And so on. Let’s see how this
 works:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-4.png" alt="coffeeshop bevarage class construction 4" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-construction-4.png" alt="coffeeshop bevarage class construction 4" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-class-construction-4.png"'>
 
 Here’s what we know about Decorators, so far:
 
@@ -297,16 +296,16 @@ The Decorator Pattern attaches additional responsibilities to an object
 dynamically. Decorators provide a flexible alternative to subclassing for
 extending functionality.
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-decorator-pattern.png" alt="coffeeshop decorator pattern" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-decorator-pattern.png" alt="coffeeshop decorator pattern" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-decorator-pattern.png"'>
 
 Let’s rework our Starbuzz beverages using the Decorator Pattern:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-decorated bevarage class.png" alt="coffeeshop decorated bevarage class" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-decorated bevarage class.png" alt="coffeeshop decorated bevarage class" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-decorated bevarage class.png"'>
 
 Let’s start with the Beverage class, which doesn’t need to change from
 Starbuzz’s original design. Let’s take a look:
 
-<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-implementation.png" alt="coffeeshop bevarage class implementation" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/coffeeshop-bevarage-class-implementation.png" alt="coffeeshop bevarage class implementation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/coffeeshop-bevarage-class-implementation.png"'>
 
 Let’s implement the abstract class for the Condiments (the Decorator) as
 well:
@@ -340,7 +339,6 @@ dynamically.</li>
 	<li>Decorators provide a flexible alternative to subclassing for extending
 functionality.</li>
 </ul>
-</div>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -352,7 +350,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Head First Design Pattern, 2nd Edition: chapter 3 list-group-item>Head First Design Pattern, 2nd Edition: chapter 3</li>
+<li class='list-group-item'>Head First Design Pattern, 2nd Edition: chapter 3</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns/observer-pattern">previous page</a></li>

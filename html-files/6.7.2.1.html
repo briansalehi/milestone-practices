@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.7.0.html">Multithreading</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.7.2.0.html">Mutex</a></li>
-<li class="breadcrumb-item active" std::lock_guard breadcrumb-item active>std::lock_guard</li>
+<li class='breadcrumb-item active'>std::lock_guard</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,11 +215,9 @@ std::lock_guard
 </svg>
 </a>
 </h2>
-<div>
 **std::lock_guard** is a simple mutex wrapper, which handles the obtaining of a lock on the *mutex* object it gets as parameter, as well as its release when the lock guard goes out of scope.  
 This is a helpful mechanism to ensure that one does not forget to release a mutex lock, and to help reduce clutter in one's code when one has to release the same mutex in multiple locations.  
 With the lock guard, however, we do not have to worry about such details, which allows us to focus on the business logic instead of worrying about mutex management.
-</div>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">

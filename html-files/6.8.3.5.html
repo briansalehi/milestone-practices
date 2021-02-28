@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.8.0.html">Graphical User Interface</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.8.3.0.html">Layouts</a></li>
-<li class="breadcrumb-item active" QHBoxLayout breadcrumb-item active>QHBoxLayout</li>
+<li class='breadcrumb-item active'>QHBoxLayout</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,11 +215,9 @@ QHBoxLayout
 </svg>
 </a>
 </h2>
-<div>
 Horizontal box layout represents a horizontally growing layout.
 
-<img class="img-responsive" src="/cpp/gui/layouts/hbox-layout.png" alt="hbox layout" loading="lazy">
-</div>
+<img class="img-responsive" src="/cpp/gui/layouts/hbox-layout.png" alt="hbox layout" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/layouts/hbox-layout.png"'>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -231,7 +229,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Getting Started with Qt 5: chapter 3 list-group-item>Getting Started with Qt 5: chapter 3</li>
+<li class='list-group-item'>Getting Started with Qt 5: chapter 3</li>
 </ul>
 <hr />
 <h3>
@@ -285,12 +283,42 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler -C ./cpp/gui/layouts -f hbox.make
+qmake -project -nopwd -norecursive -o ./hbox.pro ./hbox.cxx ./
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./hbox.bin options
+sed -i '/TARGET/s/$/.bin/' ./hbox.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/TARGET/a QT += widgets' ./hbox.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/.*\///g' ./hbox.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -o ./hbox.make ./hbox.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/layouts -f hbox.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/layouts -f hbox.make clean
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./hbox.bin
 </code>
 </pre>
 <hr />
@@ -303,8 +331,7 @@ Output
 </svg>
 </a>
 </h3>
-  <cite>hbox.png</cite>
-<img class="img-responsive" src="/cpp/gui/layouts/QHBoxLayout.screenshot.png" alt="hbox.cxx Screenshot">
+<img class="img-responsive" src="/cpp/gui/layouts/QHBoxLayout.screenshot.png" alt="hbox.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/layouts/QHBoxLayout.screenshot.png"'>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts/QVBoxLayout">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

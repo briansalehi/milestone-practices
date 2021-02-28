@@ -202,7 +202,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/10.0.html">Machine Learning</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/10.1.0.html">Neural Networks</a></li>
-<li class="breadcrumb-item active" Neural Networks Structure breadcrumb-item active>Neural Networks Structure</li>
+<li class='breadcrumb-item active'>Neural Networks Structure</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -214,14 +214,13 @@ Neural Networks Structure
 </svg>
 </a>
 </h2>
-<div>
 Real biological neurons take many inputs, not just one.
 Similarly, we simply combine input signals by adding them up, and the
 resultant sum is the input to the sigmoid function which controls the output.
 This reflects how real neurons work. The following diagram illustrates this
 idea of combining inputs and then applying the threshold to the combined sum:
 
-<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function-demonstration-in-a-node.png" alt="sigmoid function demonstration in a node" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function-demonstration-in-a-node.png" alt="sigmoid function demonstration in a node" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/sigmoid-function-demonstration-in-a-node.png"'>
 
 If the combined signal is not large enough then the effect of the sigmoid
 threshold function is to suppress the output signal. If the sum x is large
@@ -231,7 +230,7 @@ fire the neuron. What's more, the neuron can fire if some of the inputs
 are individually almost, but not quite, large enough because when combined the
 signal is large enough to overcome the threshold.
 
-<img class="img-responsive" src="/machine-learning/neural-networks/three-layers-neural-networks-sample-without-weights.png" alt="three layers neural networks sample without weights" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/three-layers-neural-networks-sample-without-weights.png" alt="three layers neural networks sample without weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/three-layers-neural-networks-sample-without-weights.png"'>
 
 The following diagram again shows the connected nodes, but this time a weight
 is shown associated with each connection. A low weight will de-emphasise a
@@ -242,7 +241,7 @@ between node 2 in a layer to node 3 in the next layer. So w1,2 is the weight
 that diminishes or amplifies the signal between node 1 and node 2 in the next
 layer.
 
-<img class="img-responsive" src="/machine-learning/neural-networks/three-layers-neural-networks-sample-with-weights.png" alt="three layers neural networks sample with weights" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/three-layers-neural-networks-sample-with-weights.png" alt="three layers neural networks sample with weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/three-layers-neural-networks-sample-with-weights.png"'>
 
 You might reasonably challenge this design and ask yourself why each node
 should connect to every other node in the previous and next layer. They
@@ -263,19 +262,19 @@ link is effectively broken.
 we'll try doing the workings out with a smaller neural network with only 2
 layers, each with 2 neurons, as shown below:
 
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-without-weights.png" alt="two layers neural networks without weights" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-without-weights.png" alt="two layers neural networks without weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-without-weights.png"'>
 
 Let's imagine the two inputs are 1.0 and 0.5. The following shows these inputs
 entering this smaller neural network.
 
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-inputs.png" alt="two layers neural networks with inputs" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-inputs.png" alt="two layers neural networks with inputs" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-with-inputs.png"'>
 
 Just as before, each node turns the sum of the inputs into an output using an
 activation function. We'll also use the sigmoid function that we saw before,
 where x is the sum of incoming signals to a neuron, and y is the output of
 that neuron.
 
-<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function.png" alt="sigmoid function" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function.png" alt="sigmoid function" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/sigmoid-function.png"'>
 
 The x in this function is the combined input into a node. That combination was
 the raw outputs from the connected nodes in the previous layer, but moderated
@@ -283,7 +282,7 @@ by the link weights.
 
 The following diagram shows all these numbers now marked.
 
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-weights.png" alt="two layers neural networks with weights" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-weights.png" alt="two layers neural networks with weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-with-weights.png"'>
 
 The first layer of nodes is the input layer, and it doesn't do anything other
 than represent the input signals. That is, the input nodes don't apply an
@@ -292,7 +291,7 @@ activation function to the input.
 The following diagram is like the one we saw previously but now includes the
 need to moderate the incoming signals with the link weights.
 
-<img class="img-responsive" src="/machine-learning/neural-networks/node-with-input-and-weights.png" alt="node with input and weights" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/node-with-input-and-weights.png" alt="node with input and weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/node-with-input-and-weights.png"'>
 
 So let's first focus on node 1 in the layer 2.
 
@@ -320,9 +319,8 @@ So the node's output using the sigmoid activation function would be:
 y = 1/(1 + 0.5488) = 1/(1.5488)
 y = 0.6457
 
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-outputs.png" alt="two layers neural networks with outputs" loading="lazy">
+<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-outputs.png" alt="two layers neural networks with outputs" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-with-outputs.png"'>
 
-</div>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/machine-learning/neural-networks">previous page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>

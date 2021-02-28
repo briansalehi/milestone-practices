@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.7.0.html">Multithreading</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.7.1.0.html">Threads</a></li>
-<li class="breadcrumb-item active" Creating Threads breadcrumb-item active>Creating Threads</li>
+<li class='breadcrumb-item active'>Creating Threads</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,7 +215,6 @@ Creating Threads
 </svg>
 </a>
 </h2>
-<div>
 To create threads, you must first include **thread** and **mutex** header files.
 
 This program basically does nothing but printing a string into the output stream.
@@ -232,7 +231,6 @@ We can also pass parameters to the worker by passing them in thread parameters a
 After creating threads, we should use join method to make threads wait for each other after they complete their operations.
 
 To compile your code, you must use **-lpthread** linker option to make thread functions to work.
-</div>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">

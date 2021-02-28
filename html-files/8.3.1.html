@@ -202,7 +202,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">Java SE Practices</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Wrapper Classes, AutoBoxing, and Unboxing</a></li>
-<li class="breadcrumb-item active" Wrapper Class breadcrumb-item active>Wrapper Class</li>
+<li class='breadcrumb-item active'>Wrapper Class</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -214,7 +214,6 @@ Wrapper Class
 </svg>
 </a>
 </h2>
-<div>
 As you know there are two main types of variables in Java: 1) Primitive-types   2) Reference types
 
 Primitive-types are categorized in 8 groups:
@@ -265,7 +264,6 @@ You can see these wrappers here:
 </table> 
 
 Example of constructing from each case is in the code section.
-</div>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -324,17 +322,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-compiler options ./WrapperClass.java
+compiler options ./WrapperClass.java ./
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./java/wrapper_class ./WrapperClass
+linker options ./java/wrapper_class WrapperClass
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-linker options ./java/wrapper_class ./WrapperClass
+linker options ./java/wrapper_class WrapperClass
 </code>
 </pre>
 <hr />

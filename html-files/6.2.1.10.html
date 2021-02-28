@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.2.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.2.1.0.html">Classes and Objects</a></li>
-<li class="breadcrumb-item active" Non-Copyable Objects breadcrumb-item active>Non-Copyable Objects</li>
+<li class='breadcrumb-item active'>Non-Copyable Objects</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,7 +215,6 @@ Non-Copyable Objects
 </svg>
 </a>
 </h2>
-<div>
 <p>Beyond modeling a certain constitution, you might be programming an operating system and need to model one local area network, one processor, and so on. You need to ensure that certain resources cannot be copied or duplicated. If you don’t declare a copy constructor, the C++ compiler inserts a default public copy constructor for you. This ruins your design and threatens your implementation.</p>
 
 <p>You would ensure that your class cannot be copied by declaring a private copy constructor.</p>
@@ -237,7 +236,6 @@ Non-Copyable Objects
 <p>There is no need for implementation of the private copy constructor or assignment  operator. Just declaring them as private is adequate and sufficient toward fulfilling your goal of ensuring non-copyable objects of class President.</p>
 
 <p>Declaring <i>copy constructor</i> and <i>copy assignment operator</i> as private methods, will prevent an object from being copied. This way, you can make sure an object will not be passed by value to function arguments or it will not be returned by value from functions. This makes us sure that our object will not be too memory consuming.</p>
-</div>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -249,8 +247,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" C++ Primer Plus list-group-item>C++ Primer Plus</li>
-<li class="list-group-item" Sam's Teach Yourself C++ in One Hour a Day: chapter 7 list-group-item>Sam's Teach Yourself C++ in One Hour a Day: chapter 7</li>
+<li class='list-group-item'>C++ Primer Plus</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7</li>
 </ul>
 <hr />
 <h3>

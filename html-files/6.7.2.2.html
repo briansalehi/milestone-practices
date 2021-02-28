@@ -203,7 +203,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.7.0.html">Multithreading</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.7.2.0.html">Mutex</a></li>
-<li class="breadcrumb-item active" recursive_mutex breadcrumb-item active>recursive_mutex</li>
+<li class='breadcrumb-item active'>recursive_mutex</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -215,7 +215,6 @@ recursive_mutex
 </svg>
 </a>
 </h2>
-<div>
 **this practice needs to be fixed**
 
 The recursive mutex is another subtype of the mutex. Even though it has exactly the same function as a regular mutex, it allows the calling thread, which is initially locked the mutex, to lock the same mutex repeatedly. By doing this, the mutex doesn't become available for other threads until the owning thread has unlocked the mutex as many times as it has locked it.
@@ -223,7 +222,6 @@ The recursive mutex is another subtype of the mutex. Even though it has exactly 
 One good reason to use a recursive mutex is for example when using recursive functions.
 
 A potential complication hereby is that the maximum number of times that a recursive mutex can be locked is not defined in the standard. When the implementation's limit has been reached, a **std::system_error** will be thrown if one tries to lock it, or false is returned when using the non-blocking **try_lock** function.
-</div>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">

@@ -202,7 +202,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.2.0.html">Design Patterns</a></li>
-<li class="breadcrumb-item active" Strategy Pattern breadcrumb-item active>Strategy Pattern</li>
+<li class='breadcrumb-item active'>Strategy Pattern</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
@@ -214,7 +214,6 @@ Strategy Pattern
 </svg>
 </a>
 </h2>
-<div>
 <b>Note:</b> Images appearing in this page is subject to copy right and will
 be replaced by <a href="https://milextone.ir">Milestone</a> properties, DO NOT
 USE THEM ELSEWHERE.
@@ -226,11 +225,11 @@ implement some classes with it each with different configurations.
 Consider a duck simulation game having a <i>Duck</i> super class with
 predefined behaviors: <i>quack, swim, display</i>.
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation.png" alt="duck simulation" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation.png" alt="duck simulation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation.png"'>
 
 Now you want to add a <i>fly</i> behavior for ducks.
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-new-fly-behavior.png" alt="duck simulation with new fly behavior" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-new-fly-behavior.png" alt="duck simulation with new fly behavior" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-new-fly-behavior.png"'>
 
 This change is usually inevitable in applications.
 No matter how well you design an application, over time it must grow and
@@ -240,7 +239,7 @@ Whenever you need to modify a behavior, you’re often forced to track down and
 change it in all the different subclasses where that behavior is defined,
 probably introducing new bugs along the way!
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-more-bugs.png" alt="duck simulation with more bugs" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-more-bugs.png" alt="duck simulation with more bugs" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-more-bugs.png"'>
 
 For example we know that <i>fly()</i> and <i>quack()</i> are the parts of
 the Duck class that vary across ducks.
@@ -248,7 +247,7 @@ You may think that to separate these behaviors from the <i>Duck</i> class,
 we’ll pull both methods out of the <i>Duck</i> class and create a new set of
 classes to represent each behavior.
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png" alt="duck simulation with behaviors as separate classes" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png" alt="duck simulation with behaviors as separate classes" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png"'>
 
 But still you're going to need change a lot whenever new requirements arrive.
 Luckily, there’s a design principle for just this situation.
@@ -277,7 +276,7 @@ We’ll use an interface to represent each behavior—for instance,
 <i>FlyBehavior</i> and <i>QuackBehavior</i>—and each implementation of a
 behavior will implement one of those interfaces.
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-separate-interfaces.png" alt="duck simulation with separate interfaces" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-separate-interfaces.png" alt="duck simulation with separate interfaces" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-separate-interfaces.png"'>
 
 Notice that all ducks can swim, even Rubber Ducks and Decoy Ducks!
 So, we are not going to separate them from implementation.
@@ -286,7 +285,7 @@ The <b>HAS-A</b> relationship is an interesting one: each duck has a
 <i>FlyBehavior</i> and a <i>QuackBehavior</i> to which it delegates flying and
 quacking.
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png" alt="duck simulation with behaviors as compositions" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png" alt="duck simulation with behaviors as compositions" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png"'>
 
 When you put two classes together like this you’re using composition.
 Instead of inheriting their behavior, the ducks get their behavior by being
@@ -300,26 +299,25 @@ you’re composing with implements the correct behavior interface.
 <h4>Design Principle</h4>
 Design to an interface, not an implementation.
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-interface.png" alt="duck simulation quack interface" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-interface.png" alt="duck simulation quack interface" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-quack-interface.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-mallardduck-implementaion.png" alt="duck simulation mallardduck implementaion" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-mallardduck-implementaion.png" alt="duck simulation mallardduck implementaion" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-mallardduck-implementaion.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-duck-implementation.png" alt="duck simulation duck implementation" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-duck-implementation.png" alt="duck simulation duck implementation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-duck-implementation.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-fly-implementation.png" alt="duck simulation fly implementation" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-fly-implementation.png" alt="duck simulation fly implementation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-fly-implementation.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-implementation.png" alt="duck simulation quack implementation" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-implementation.png" alt="duck simulation quack implementation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-quack-implementation.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-implementation.png" alt="duck simulation implementation" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-implementation.png" alt="duck simulation implementation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-implementation.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-runtime-behavior.png" alt="duck simulation with runtime behavior" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-runtime-behavior.png" alt="duck simulation with runtime behavior" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-runtime-behavior.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-modelduck-with-dynamic-behavior.png" alt="duck simulation modelduck with dynamic behavior" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-modelduck-with-dynamic-behavior.png" alt="duck simulation modelduck with dynamic behavior" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-modelduck-with-dynamic-behavior.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-execution.png" alt="duck simulation execution" loading="lazy">
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-execution.png" alt="duck simulation execution" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-execution.png"'>
 
-<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-diagram.png" alt="duck simulation diagram" loading="lazy">
-</div>
+<img class="img-responsive" src="/software-design/design-patterns/duck-simulation-diagram.png" alt="duck simulation diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-diagram.png"'>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -331,7 +329,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class="list-group-item" Head First Design Patterns, 2nd Edition: chapter 1 list-group-item>Head First Design Patterns, 2nd Edition: chapter 1</li>
+<li class='list-group-item'>Head First Design Patterns, 2nd Edition: chapter 1</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/design-patterns">previous page</a></li>
