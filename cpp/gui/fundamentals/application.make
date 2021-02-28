@@ -63,6 +63,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/g++-base.conf \
 		/usr/lib/qt/mkspecs/common/g++-unix.conf \
 		/usr/lib/qt/mkspecs/qconfig.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KWaylandClient.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KWaylandServer.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_3danimation.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_3danimation_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_3dcore.pri \
@@ -290,6 +292,8 @@ application.make: application.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/
 		/usr/lib/qt/mkspecs/common/g++-base.conf \
 		/usr/lib/qt/mkspecs/common/g++-unix.conf \
 		/usr/lib/qt/mkspecs/qconfig.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KWaylandClient.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KWaylandServer.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_3danimation.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_3danimation_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_3dcore.pri \
@@ -507,6 +511,8 @@ application.make: application.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/
 /usr/lib/qt/mkspecs/common/g++-base.conf:
 /usr/lib/qt/mkspecs/common/g++-unix.conf:
 /usr/lib/qt/mkspecs/qconfig.pri:
+/usr/lib/qt/mkspecs/modules/qt_KWaylandClient.pri:
+/usr/lib/qt/mkspecs/modules/qt_KWaylandServer.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_3danimation.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_3danimation_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_3dcore.pri:
