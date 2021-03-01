@@ -1,6 +1,5 @@
 #include <QApplication>
-#include <QVBoxLayout>
-#include <QLabel>
+#include <QWidget>
 
 int main(int argc, char **argv)
 {

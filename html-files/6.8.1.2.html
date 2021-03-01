@@ -217,7 +217,7 @@ QWidget
 </h2>
 <p>Widgets are the graphical components with which we construct user interfaces.</p>
 
-<p>Using widgets directly as a window is not the practice, one way to get over with this bad design is to use QWidget instances as a window, though in the next page, you will see that QMainWindow is the ultimate answer to designing Qt applications practically.</p>
+<p>Using widgets directly as a window is not professional, one way to get over with this bad design is to use QWidget instances as a window, though in the next page, you will see that QMainWindow is the ultimate answer to designing Qt applications practically.</p>
 
 <cite>Class hierarchy in Qt</cite>
 <img class="img-responsive" src="/cpp/gui/fundamentals/qt-objects-hierarchy.png" alt="qt objects hierarchy" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/qt-objects-hierarchy.png"'>
@@ -271,8 +271,7 @@ Source
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;QApplication&gt;
-    #include &lt;QVBoxLayout&gt;
-    #include &lt;QLabel&gt;
+    #include &lt;QWidget&gt;
     
     int main(int argc, char **argv)
     {

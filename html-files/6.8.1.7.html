@@ -253,6 +253,138 @@ Source
     }
 </code>
 </pre>
+  <cite>custom-events-mainwindow.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &quot;custom-events-mainwindow.hpp&quot;
+    
+    MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+    {
+    	setWindowTitle(&quot;Custom Events&quot;);
+    	setWindowIcon(QIcon(&quot;icons/event.png&quot;));
+    	resize(300, 200);
+    
+    	QWidget *mainWidget = new QWidget;
+    	QVBoxLayout *layout = new QVBoxLayout;
+    	slateDragTextEdit = new TextEdit;
+    
+    	layout-&gt;addWidget(slateDragTextEdit);
+    	mainWidget-&gt;setLayout(layout);
+    	setCentralWidget(mainWidget);
+    
+    	statusBar()-&gt;showMessage(QString::number(0));
+    
+    	QObject::connect(slateDragTextEdit, &amp;QTextEdit::textChanged, this, &amp;MainWindow::updateStatusBar);
+    }
+    void MainWindow::updateStatusBar()
+    {
+    	int charCount = slateDragTextEdit-&gt;toPlainText().count();
+    	statusBar()-&gt;showMessage(QString::number(charCount));
+    }
+</code>
+</pre>
+  <cite>custom-events-mainwindow.hpp</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #pragma once
+    
+    #include &lt;QApplication&gt;
+    #include &lt;QMainWindow&gt;
+    #include &lt;QLabel&gt;
+    #include &lt;QMoveEvent&gt;
+    #include &lt;QMouseEvent&gt;
+    #include &lt;QVBoxLayout&gt;
+    #include &lt;QDateTime&gt;
+    #include &lt;QMainWindow&gt;
+    #include &lt;QStatusBar&gt;
+    
+    #include &quot;custom-events-textedit.hpp&quot;
+    
+    class MainWindow : public QMainWindow
+    {
+    	Q_OBJECT
+    
+    public:
+    	MainWindow(QWidget *parent = nullptr);
+    
+    private slots:
+    	void updateStatusBar();
+    
+    private:
+    	TextEdit *slateDragTextEdit;
+    };
+</code>
+</pre>
+  <cite>custom-events-textedit.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &quot;custom-events-textedit.hpp&quot;
+    
+    TextEdit::TextEdit(QWidget *parent) : QTextEdit(parent)
+    {
+    	setAcceptDrops(true);
+    }
+    
+    void TextEdit::dragMoveEvent(QDragMoveEvent *event)
+    {
+    	event-&gt;acceptProposedAction();
+    }
+    
+    void TextEdit::dragLeaveEvent(QDragLeaveEvent *event)
+    {
+    	event-&gt;accept();
+    }
+    
+    void TextEdit::dragEnterEvent(QDragEnterEvent *event)
+    {
+    	event-&gt;acceptProposedAction();
+    }
+    
+    void TextEdit::dropEvent(QDropEvent *event)
+    {
+    	const QMimeData *mimeData = event-&gt;mimeData();
+    
+    	if (mimeData-&gt;hasText()) {
+    		QFile file(mimeData-&gt;urls().at(0).path());
+    		file.open(QFile::ReadOnly | QFile::Text);
+    		QString contents = file.readAll();
+    		setText(contents);
+    		event-&gt;acceptProposedAction();
+    	} else {
+    		event-&gt;ignore();
+    	}
+    }
+</code>
+</pre>
+  <cite>custom-events-textedit.hpp</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #pragma once
+    
+    #include &lt;QMoveEvent&gt;
+    #include &lt;QMouseEvent&gt;
+    #include &lt;QDateTime&gt;
+    #include &lt;QTextEdit&gt;
+    #include &lt;QTextStream&gt;
+    #include &lt;QMimeData&gt;
+    #include &lt;QMimeDatabase&gt;
+    #include &lt;QMimeType&gt;
+    
+    class TextEdit : public QTextEdit
+    {
+    	Q_OBJECT
+    
+    public:
+    	explicit TextEdit(QWidget *parent = nullptr);
+    
+    protected:
+    	void dragEnterEvent(QDragEnterEvent *event) override;
+    	void dragMoveEvent(QDragMoveEvent *event) override;
+    	void dragLeaveEvent(QDragLeaveEvent *event) override;
+    	void dropEvent(QDropEvent *event) override;
+    };
+</code>
+</pre>
 <hr />
 <h3>
 <a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
@@ -265,7 +397,7 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-qmake -project -nopwd -norecursive -o ./custom-events.pro ./custom-events.cxx ./
+qmake -project -nopwd -norecursive -o ./custom-events.pro ./custom-events.cxx ./custom-events-mainwindow.cxx ./custom-events-mainwindow.hpp ./custom-events-textedit.cxx ./custom-events-textedit.hpp
 </code>
 </pre>
 <pre>

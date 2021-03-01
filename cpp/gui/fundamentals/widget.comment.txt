@@ -1,6 +1,6 @@
 <p>Widgets are the graphical components with which we construct user interfaces.</p>
 
-<p>Using widgets directly as a window is not the practice, one way to get over with this bad design is to use QWidget instances as a window, though in the next page, you will see that QMainWindow is the ultimate answer to designing Qt applications practically.</p>
+<p>Using widgets directly as a window is not professional, one way to get over with this bad design is to use QWidget instances as a window, though in the next page, you will see that QMainWindow is the ultimate answer to designing Qt applications practically.</p>
 
 <cite>Class hierarchy in Qt</cite>
 ![qt-objects-hierarchy.png]
