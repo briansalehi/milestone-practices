@@ -4,7 +4,7 @@
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
-	QLabel label("Qt Application");
+	QLabel label("This is a Qt application!");
 	label.show();
 	return app.exec();
 }

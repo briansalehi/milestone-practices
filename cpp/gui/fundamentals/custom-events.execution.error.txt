@@ -1,0 +1,4 @@
+custom-events.make:795: warning: overriding recipe for target 'moc_custom-events-mainwindow.cpp'
+custom-events.make:784: warning: ignoring old recipe for target 'moc_custom-events-mainwindow.cpp'
+custom-events.make:800: warning: overriding recipe for target 'moc_custom-events-textedit.cpp'
+custom-events.make:789: warning: ignoring old recipe for target 'moc_custom-events-textedit.cpp'
