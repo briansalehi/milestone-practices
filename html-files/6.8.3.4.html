@@ -215,8 +215,7 @@ QVBoxLayout
 </svg>
 </a>
 </h2>
-In a QVBoxLayout layout, widgets are aligned vertically and they are packed in
-the layout from top to bottom.
+<p>In a QVBoxLayout layout, widgets are aligned vertically and they are packed in the layout from top to bottom.</p>
 
 <img class="img-responsive" src="/cpp/gui/layouts/vbox-layout.png" alt="vbox layout" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/layouts/vbox-layout.png"'>
 <hr />
@@ -230,7 +229,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Getting Started with Qt 5: chapter 3</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 3</li>
 </ul>
 <hr />
 <h3>
@@ -285,7 +284,7 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-qmake -project -nopwd -norecursive -o ./vbox.pro ./vbox.cxx ./
+qmake -project -nopwd -norecursive -o ./vbox.pro ./vbox.cxx
 </code>
 </pre>
 <pre>
@@ -300,12 +299,12 @@ sed -i '/TARGET/a QT += widgets' ./vbox.pro
 </pre>
 <pre>
 <code class="language-bash">
-sed -i '/^QT/,$s/\/.*\///g' ./vbox.pro
+sed -i '/^QT/,$s/\/[^ ]*\///g' ./vbox.pro
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-qmake -makefile -o ./vbox.make ./vbox.pro
+qmake -makefile -norecursive -o ./vbox.make ./vbox.pro
 </code>
 </pre>
 <pre>
@@ -335,9 +334,9 @@ Output
 </h3>
 <img class="img-responsive" src="/cpp/gui/layouts/QVBoxLayout.screenshot.png" alt="vbox.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/layouts/QVBoxLayout.screenshot.png"'>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts/QStackedLayout">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts/QHBoxLayout">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts/QStackedLayout">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts/QHBoxLayout">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

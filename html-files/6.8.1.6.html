@@ -215,15 +215,15 @@ Events
 </svg>
 </a>
 </h2>
-<p>This chapter introduces the concept of events. To maintain a working state, messages are passed around from the windowing system to the application, and within the application itself. These messages may contain data that could be useful when delivered at some destination. The messages being talked about here are referred to as events in Qt.</p>
+<p>To maintain a working state, messages are passed around from the windowing system to the application, and within the application itself. These messages may contain data that could be useful when delivered at some destination. The messages being talked about here are referred to as events in Qt.</p>
 
-<p>In Qt, all events that occur are encapsulated in objects that inherit from the QEvent abstract class. An example of an event that has occurred is when a window has been resized or moved. The change in the state of the application will be noticed, and an appropriate QEvent object will be created to represent it.</p>
+<p>In Qt, all events that occur are encapsulated in objects that inherit from the <code>QEvent</code> abstract class. An example of an event that has occurred is when a window has been resized or moved. The change in the state of the application will be noticed, and an appropriate <code>QEvent</code> object will be created to represent it.</p>
 
-<p>The application event loop delivers this object to certain objects that inherit from QObject. This QEvent object is handled by means of a method call that will be invoked.</p>
+<p>The application event loop delivers this object to certain objects that inherit from <code>QObject</code>. This <code>QEvent</code> object is handled by means of a method call that will be invoked.</p>
 
-<p>There are different types of events. When a mouse is clicked, a QMouseEvent object is created to represent this. The object will contain additional information, such as the specific mouse button that was clicked, together with the location where that event occurred.</p>
+<p>There are different types of events. When a mouse is clicked, a <code>QMouseEvent</code> object is created to represent this. The object will contain additional information, such as the specific mouse bucodeon that was clicked, together with the location where that event occurred.</p>
 
-<p>All QObjects have an event() method that receives events. For QWidgets, this method will relay the event object to more specific event handlers. It is possible to redefine what an event handler should do by sub-classing the widget of interest and re-implementing that event handler.</p>
+<p>All <code>QObjects</code> have an event() method that receives events. For <code>QWidgets</code>, this method will relay the event object to more specific event handlers. It is possible to redefine what an event handler should do by sub-classing the widget of interest and re-implementing that event handler.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">

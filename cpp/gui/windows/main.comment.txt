@@ -1,8 +1,5 @@
-Using only an instance of QMainWindow is not the best practice.
-Instead, from this point onward, we shall define our own custom widget, in
-which we shall define child widgets and make connections between signals and
-sockets.
+<p>Using only an instance of <code>QMainWindow</code> is not the best practice. Instead, from this point onward, we shall define our own custom widget, in which we shall define child widgets and make connections between signals and sockets.</p>
 
-We subclass QMainWindow because we need to illustrate the menu and toolbars.
+<p>We subclass <code>QMainWindow</code> because we need to illustrate the menu and toolbars.</p>
 
 ![mainwindow-diagram.png]

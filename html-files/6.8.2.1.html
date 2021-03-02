@@ -28,6 +28,10 @@ button.sticky {
 	position: sticky;
 	top: 1%;
 }
+
+img {
+	max-width: -moz-available;
+}
 .dark-mode {
 	background-color: black;
 	color: #aaaaaa;
@@ -215,12 +219,9 @@ QMainWindow
 </svg>
 </a>
 </h2>
-Using only an instance of QMainWindow is not the best practice.
-Instead, from this point onward, we shall define our own custom widget, in
-which we shall define child widgets and make connections between signals and
-sockets.
+<p>Using only an instance of <code>QMainWindow</code> is not the best practice. Instead, from this point onward, we shall define our own custom widget, in which we shall define child widgets and make connections between signals and sockets.</p>
 
-We subclass QMainWindow because we need to illustrate the menu and toolbars.
+<p>We subclass <code>QMainWindow</code> because we need to illustrate the menu and toolbars.</p>
 
 <img class="img-responsive" src="/cpp/gui/windows/mainwindow-diagram.png" alt="mainwindow diagram" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/windows/mainwindow-diagram.png"'>
 <hr />
@@ -234,7 +235,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Getting Started with Qt 5: chapter 4</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 4</li>
 </ul>
 <hr />
 <h3>
@@ -311,7 +312,7 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-qmake -project -nopwd -norecursive -o ./main.pro ./main.cxx ././mainwindow.cxx ././mainwindow.hpp
+qmake -project -nopwd -norecursive -o ./main.pro ./main.cxx ./mainwindow.cxx ./mainwindow.hpp
 </code>
 </pre>
 <pre>
@@ -326,12 +327,12 @@ sed -i '/TARGET/a QT += widgets' ./main.pro
 </pre>
 <pre>
 <code class="language-bash">
-sed -i '/^QT/,$s/\/.*\///g' ./main.pro
+sed -i '/^QT/,$s/\/[^ ]*\///g' ./main.pro
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-qmake -makefile -o ./main.make ./main.pro
+qmake -makefile -norecursive -o ./main.make ./main.pro
 </code>
 </pre>
 <pre>
@@ -361,9 +362,9 @@ Output
 </h3>
 <img class="img-responsive" src="/cpp/gui/windows/QMainWindow.screenshot.png" alt="main.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/windows/QMainWindow.screenshot.png"'>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/windows">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/windows/QMenuBar">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/windows">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/windows/QMenuBar">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

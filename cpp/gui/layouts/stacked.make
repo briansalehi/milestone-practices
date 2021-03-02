@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
+INCPATH       = -I. -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = stacked.bin1.0.0
-DISTDIR = /home/brian/development/projects/milestone-practices/cxx/gui/layouts/.tmp/stacked.bin1.0.0
+DISTDIR = /home/brian/development/projects/milestone-practices/cpp/gui/layouts/.tmp/stacked.bin1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -218,10 +218,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri \
@@ -445,10 +441,6 @@ stacked.make: stacked.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/m
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri \
@@ -662,10 +654,6 @@ stacked.make: stacked.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/m
 /usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri:

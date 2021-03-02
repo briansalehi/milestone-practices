@@ -215,8 +215,7 @@ QGridLayout
 </svg>
 </a>
 </h2>
-To use grid layout, you must specify which placeholders each widget should
-fill.
+<p>To use grid layout, you must specify which placeholders each widget should fill.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -228,7 +227,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Getting Started with Qt 5: chapter 3</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 3</li>
 </ul>
 <hr />
 <h3>
@@ -293,7 +292,7 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-qmake -project -nopwd -norecursive -o ./grid.pro ./grid.cxx ./
+qmake -project -nopwd -norecursive -o ./grid.pro ./grid.cxx
 </code>
 </pre>
 <pre>
@@ -308,12 +307,12 @@ sed -i '/TARGET/a QT += widgets' ./grid.pro
 </pre>
 <pre>
 <code class="language-bash">
-sed -i '/^QT/,$s/\/.*\///g' ./grid.pro
+sed -i '/^QT/,$s/\/[^ ]*\///g' ./grid.pro
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-qmake -makefile -o ./grid.make ./grid.pro
+qmake -makefile -norecursive -o ./grid.make ./grid.pro
 </code>
 </pre>
 <pre>
@@ -343,9 +342,9 @@ Output
 </h3>
 <img class="img-responsive" src="/cpp/gui/layouts/QGridLayout.screenshot.png" alt="grid.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/layouts/QGridLayout.screenshot.png"'>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts/QFormLayout">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/layouts">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts/QFormLayout">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

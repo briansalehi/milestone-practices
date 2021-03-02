@@ -1,2 +1,1 @@
-Toolbars can be used similar to menus except that they are more accessible to
-users.
+<p>Toolbars can be used similar to menus except that they are more accessible to users.</p>

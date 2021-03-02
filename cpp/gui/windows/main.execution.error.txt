@@ -1,0 +1,2 @@
+main.make:769: warning: overriding recipe for target 'moc_mainwindow.cpp'
+main.make:764: warning: ignoring old recipe for target 'moc_mainwindow.cpp'

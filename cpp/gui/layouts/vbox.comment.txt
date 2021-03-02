@@ -1,4 +1,3 @@
-In a QVBoxLayout layout, widgets are aligned vertically and they are packed in
-the layout from top to bottom.
+<p>In a QVBoxLayout layout, widgets are aligned vertically and they are packed in the layout from top to bottom.</p>
 
 ![vbox-layout.png]

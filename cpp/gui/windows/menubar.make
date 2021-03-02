@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
+INCPATH       = -I. -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = menubar.bin1.0.0
-DISTDIR = /home/brian/development/projects/milestone-practices/cxx/gui/windows/.tmp/menubar.bin1.0.0
+DISTDIR = /home/brian/development/projects/milestone-practices/cpp/gui/windows/.tmp/menubar.bin1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
@@ -221,10 +221,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri \
@@ -272,7 +268,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		menubar.pro menubar-mainwindow.hpp menubar.cxx \
+		menubar.pro menubar-mainwindow.hpp \
+		menubar-mainwindow.hpp menubar.cxx \
 		menubar-mainwindow.cxx
 QMAKE_TARGET  = menubar.bin
 DESTDIR       = 
@@ -449,10 +446,6 @@ menubar.make: menubar.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/m
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri \
@@ -666,10 +659,6 @@ menubar.make: menubar.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/m
 /usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_waylandcompositor_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webchannel.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webchannel_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_webengine.pri:
@@ -733,7 +722,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents menubar-mainwindow.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents menubar-mainwindow.hpp menubar-mainwindow.hpp $(DISTDIR)/
 	$(COPY_FILE) --parents menubar.cxx menubar-mainwindow.cxx $(DISTDIR)/
 
 
@@ -766,13 +755,18 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_menubar-mainwindow.cpp
+compiler_moc_header_make_all: moc_menubar-mainwindow.cpp moc_menubar-mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_menubar-mainwindow.cpp
+	-$(DEL_FILE) moc_menubar-mainwindow.cpp moc_menubar-mainwindow.cpp
 moc_menubar-mainwindow.cpp: menubar-mainwindow.hpp \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/brian/development/projects/milestone-practices/cxx/gui/windows/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/projects/milestone-practices/cxx/gui/windows -I/home/brian/development/projects/milestone-practices/cxx/gui/windows -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include menubar-mainwindow.hpp -o moc_menubar-mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/brian/development/projects/milestone-practices/cpp/gui/windows/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/projects/milestone-practices/cpp/gui/windows -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include menubar-mainwindow.hpp -o moc_menubar-mainwindow.cpp
+
+moc_menubar-mainwindow.cpp: menubar-mainwindow.hpp \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/brian/development/projects/milestone-practices/cpp/gui/windows/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/brian/development/projects/milestone-practices/cpp/gui/windows -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I/usr/include/c++/10.2.0 -I/usr/include/c++/10.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/10.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed -I/usr/include menubar-mainwindow.hpp -o moc_menubar-mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
