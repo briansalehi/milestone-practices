@@ -1,1 +1,11 @@
 README.md
+puts.c
+printf.c
+putchar.c
+scanf.c
+getchar.c
+limits.c
+modifiers.c
+flags.c
+conversion-specifiers.c
+sizeof.c
