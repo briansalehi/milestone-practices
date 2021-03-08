@@ -1,1 +1,1 @@
-std::exception
+Exception Class

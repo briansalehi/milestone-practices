@@ -1,0 +1,32 @@
+<p>To make statements exception safe, you enclose them within a <code>try</code> block and handle the exceptions that emerge out of the try block in the <code>catch</code> block:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void SomeFunc()
+		{
+			try {
+				int* numPtr = new int;
+				*numPtr = 999;
+				delete numPtr;
+			 } catch(...) { // ... catches all exceptions
+				std::cout << "Exception in SomeFunc(), quitting" << std::endl;
+			 }
+		}
+	</code>
+</pre>
+
+<p>In general, you can insert as many <code>catch()</code> blocks as you like, one after another, depending on the exceptions you expect and those that would help.</p>
+
+<p><code>catch(...)</code> as demonstrated earlier catches all those exception types that have not been explicitly caught by other catch statements.</p>
+
+<p>It is possible for you to throw an exception of your own choosing.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void DoSomething()
+		{
+			if(something_unwanted)
+				throw object;
+		}
+	</code>
+</pre>

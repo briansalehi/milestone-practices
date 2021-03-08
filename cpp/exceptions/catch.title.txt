@@ -1,1 +1,1 @@
-exception safety with try-catch
+Catching Exceptions

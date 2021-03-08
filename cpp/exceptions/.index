@@ -1,7 +1,6 @@
 README.md
-exception.cxx
-throw.cxx
 catch.cxx
-handling.cxx
-type.cxx
-inherit.cxx
+exception.cxx
+sequence.cxx
+throw.cxx
+custom.cxx

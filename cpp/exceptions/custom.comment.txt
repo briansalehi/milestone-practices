@@ -1,0 +1,5 @@
+<p>All existing exception handlers that <code>catch(const std::exception&)</code> and work for <code>bad_alloc</code>, <code>bad_cast</code> and the like will automatically scale up to catch your new exception class as well because it has the base class in common with them.</p>
+
+<p><code>virtual const char* what() const throw()</code> it ends with <code>throw()</code>, which means that this function itself is not expected to throw an exception. A very important and relevant restriction on a class that is used as an exception object. If you still insert a throw within this function, you can expect a compiler warning.</p>
+
+<p>If a function ends with <code>throw(int)</code>, it means that the function is expected to throw an exception of type <code>int</code>.</p>

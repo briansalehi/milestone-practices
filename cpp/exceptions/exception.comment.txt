@@ -1,0 +1,11 @@
+<p><code>std::exception</code> is the base class for the following important exceptions:</p>
+
+<ul>
+	<li><code>bad_alloc</code>: Thrown when a request for memory using new fails
+	<li><code>bad_cast</code>: Thrown by dynamic_cast when you try to cast a wrong type (a type that has no inheritance relation)
+	<li><code>ios_base::failure</code>: Thrown by the functions and methods in the iostream library
+</ul>
+
+<p>Class <code>std::exception</code> that is the base class supports a very useful and important virtual method <code>what()</code> that gives a more descriptive reason on the nature of the problem causing the exception.</p>
+
+<p>You can make use of <code>std::exception</code> being a base class for many exceptions types and create one <code>catch(const exception&)</code> that can catch all exceptions that have <code>std::exception</code> as base.</p>

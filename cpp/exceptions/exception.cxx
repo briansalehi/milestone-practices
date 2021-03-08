@@ -1,22 +1,22 @@
 #include <iostream>
 #include <exception>
-using namespace std;
 
-int main ()
+int main()
 {
-    cout << "Enter array length (-1): ";
+	std::cout << "Enter array length (-1): ";
     
     try {
         int length = 0;
-        cin >> length;
-        cout << length << endl;
+		std::cin >> length;
+		std::cout << length << std::endl;
 
-        int* numbers = new int [length];
+        int* numbers = new int[length];
         delete [] numbers;
-        cout << "deallocated array" << endl;
-    }
-    catch (std::exception& exp) { // exception base class will catch all exceptions
-        cout << "Exception: " << exp.what() << endl;
+		std::cout << "Deallocated array" << std::endl;
+    } catch (std::bad_alloc& exp) { // specific exception object
+		std::cout << "Bad Allocation: " << exp.what() << std::endl;
+	} catch (std::exception& exp) { // exception base class will catch all exceptions
+		std::cout << "Exception: " << exp.what() << std::endl;
     }
 
     return 0;

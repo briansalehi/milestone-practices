@@ -1,19 +1,19 @@
 #include <iostream>
-using namespace std;
 
-int main ()
+int main()
 {
-    cout << "how much memory do you need? ";
+	std::cout << "How much memory do you need? ";
+
     try {
         int size;
-        cin >> size; // type -1 to see the error
-        cout << size << endl;
+		std::cin >> size; // type -1 to see the error
+		std::cout << size << std::endl;
         
-        char* letter = new char [size];
+        char* letter = new char[size];
         delete [] letter;
     }
     catch (...) { // ... means catch all exceptions
-        cout << "Exception occured" << endl;
+		std::cout << "Exception caught" << std::endl;
     }
     
     return 0;
