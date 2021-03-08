@@ -1,1 +1,0 @@
-<p>You can throw an exception of whatever type you want. However, there is a benefit in inheriting from <code>std::exception</code>.</p>

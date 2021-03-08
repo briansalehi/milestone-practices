@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>exception safety with try-catch</title>
+<title>Exception Sequence</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -27,6 +27,10 @@ pre {
 button.sticky {
 	position: sticky;
 	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
 }
 .dark-mode {
 	background-color: black;
@@ -202,18 +206,34 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Exception Handling</a></li>
-<li class='breadcrumb-item active'>exception safety with try-catch</li>
+<li class='breadcrumb-item active'>Exception Sequence</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="exception-safety-with-try-catch" class="anchor" aria-hidden="true" href="#exception-safety-with-try-catch">
-exception safety with try-catch
+<a id="Exception-Sequence" class="anchor" aria-hidden="true" href="#Exception-Sequence">
+Exception Sequence
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+<p>Where an exception is thrown, using <code>throw</code>, the compiler inserts a dynamic lookup for a compatible <code>catch(Type)</code> that can handle this exception. The exception handling logic first checks if the line throwing the exception is within a try block. If so, it seeks the <code>catch(Type)</code> that can handle the exception of this Type. If the <code>throw</code> statement is not within a try block or if there is no compatible <code>catch()</code> for the exception type, the exception handling logic seeks the same in the calling function. So, the exception handling logic climbs the stack, one calling function after another, seeking a suitable <code>catch(Type)</code> that can handle the exception. At each step in the stack unwinding procedure, the variables local to that function are destroyed in reverse sequence of their construction.</p>
+
+
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 28</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -224,28 +244,36 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>catch.cxx</cite>
+  <cite>sequence.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    using namespace std;
+    #include &lt;exception&gt;
+    
+    void function()
+    {
+    	try {
+    		throw(&quot;An exception&quot;);
+    	// thrown exception of type const char* doesn&apos;t have std::exception as base
+    	} catch (std::exception&amp; exp) {
+    		std::cout &lt;&lt; &quot;Exception caught in function&quot; &lt;&lt; std::endl;
+    	}
+    }
     
     int main ()
     {
-        cout &lt;&lt; &quot;how much memory do you need? &quot;;
         try {
-            int size;
-            cin &gt;&gt; size; // type -1 to see the error
-            cout &lt;&lt; size &lt;&lt; endl;
-            
-            char* letter = new char [size];
-            delete [] letter;
+    		function();
         }
-        catch (...) { // ... means catch all exceptions
-            cout &lt;&lt; &quot;Exception occured&quot; &lt;&lt; endl;
+        catch (const char* reason) {
+    		// main will continue like there was no exception thrown in first place
+    		std::cout &lt;&lt; &quot;Exception caught in main: &quot; &lt;&lt; reason &lt;&lt; std::endl;
         }
-        
+    
+    	std::cout &lt;&lt; &quot;No exception was thrown!&quot; &lt;&lt; std::endl;
+    
         return 0;
+    }
 </code>
 </pre>
 <hr />
@@ -260,17 +288,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./catch.o -c ./catch.cxx
+g++ -Wall -g -o ./sequence.o -c ./sequence.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./catch.bin ./catch.o
+g++ -g -o ./sequence.bin ./sequence.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./catch.bin
+./sequence.bin
 </code>
 </pre>
 <hr />
@@ -285,13 +313,14 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-how much memory do you need? -1
+Exception caught in main: An exception
+No exception was thrown!
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.5.2.html">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.5.4.html">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/exceptions/exception-class">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.5.4.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

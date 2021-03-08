@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "Enter array length (-1): ";
+	std::cout << "Enter array length: ";
     
     try {
         int length = 0;

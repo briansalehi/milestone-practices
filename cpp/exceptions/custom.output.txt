@@ -1,2 +1,1 @@
-Enter dividen and divisor: 3 0
-result: Exception: dividing by zero is a crime
+Exception: dividing by zero is a crime

@@ -1,41 +1,34 @@
 #include <exception>
 #include <iostream>
 #include <string>
-using namespace std;
 
-class customException: public exception {
+class CustomException : public std::exception {
 private:
-    string reason;
+	std::string description;
 
 public:
-    customException (const char* why): reason(why) {}
+    CustomException(const char* reason): description(reason) {}
 
-    virtual const char* what () const throw() {
-        return reason.c_str();
+    virtual const char* what() const throw() {
+        return description.c_str();
     }
 };
 
-const double Divide (const int& dividen, const int& divisor) {
-    if (divisor == 0)
-        throw customException ("dividing by zero is a crime");
+const double divide(const int& dividen, const int& divisor) {
+    if (divisor == 0) {
+        throw CustomException("dividing by zero is a crime");
+	}
 
     return (dividen / divisor);
 }
 
-int main ()
+int main()
 {
-    int dividen = 0;
-    int divisor = 0;
-
-    cout << "Enter dividen and divisor: ";
-    cin >> dividen >> divisor;
-    cout << dividen << " " << divisor << endl;
-
     try {
-        cout << "result: " << Divide (dividen, divisor) << endl;
+		std::cout << divide(1, 0) << std::endl;
     }
-    catch (const customException& exp) {
-        cout << "Exception: " << exp.what () << endl;
+    catch (const CustomException& exp) {
+		std::cout << "Exception: " << exp.what () << std::endl;
     }
 
     return 0;

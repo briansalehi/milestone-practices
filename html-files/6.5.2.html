@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>throwing a custom exception</title>
+<title>Exception Class</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -27,6 +27,10 @@ pre {
 button.sticky {
 	position: sticky;
 	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
 }
 .dark-mode {
 	background-color: black;
@@ -202,18 +206,42 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Exception Handling</a></li>
-<li class='breadcrumb-item active'>throwing a custom exception</li>
+<li class='breadcrumb-item active'>Exception Class</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="throwing-a-custom-exception" class="anchor" aria-hidden="true" href="#throwing-a-custom-exception">
-throwing a custom exception
+<a id="Exception-Class" class="anchor" aria-hidden="true" href="#Exception-Class">
+Exception Class
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+<p><code>std::exception</code> is the base class for the following important exceptions:</p>
+
+<ul>
+	<li><code>bad_alloc</code>: Thrown when a request for memory using new fails
+	<li><code>bad_cast</code>: Thrown by dynamic_cast when you try to cast a wrong type (a type that has no inheritance relation)
+	<li><code>ios_base::failure</code>: Thrown by the functions and methods in the iostream library
+</ul>
+
+<p>Class <code>std::exception</code> that is the base class supports a very useful and important virtual method <code>what()</code> that gives a more descriptive reason on the nature of the problem causing the exception.</p>
+
+<p>You can make use of <code>std::exception</code> being a base class for many exceptions types and create one <code>catch(const exception&)</code> that can catch all exceptions that have <code>std::exception</code> as base.</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 28</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -224,60 +252,28 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>throw.cxx</cite>
+  <cite>exception.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    using namespace std;
+    #include &lt;exception&gt;
     
-    class Memory {
-    public:
-        Memory (long amount);
-        virtual ~Memory ();
-        long&amp; operator[] (long index);
-    
-    private:
-        long size; // compiler warning: variables should not be declared after pointers uninitialized! declare pointers for last
-        long* memory;
-    };
-    
-    Memory::Memory (long amount): size{amount}, memory{NULL} {
-        if (size &lt; 0) throw length_error {&quot;invalid size&quot;};
-        memory = new long[size];
-    }
-    
-    long&amp; Memory::operator[] (long index) {
-        if (index &lt; 0 || index &gt; size) throw out_of_range {&quot;out of range&quot;};
-        return memory[index];
-    }
-    
-    Memory::~Memory () {
-        if (memory)
-            delete [] memory;
-    }
-    
-    int main ()
+    int main()
     {
+    	std::cout &lt;&lt; &quot;Enter array length: &quot;;
+        
         try {
-            Memory x(1); // put a -1 instead to make an invalid array size and see the exception
-        }
-        catch (length_error&amp; err) {
-            cout &lt;&lt; err.what() &lt;&lt; endl;
-        }
+            int length = 0;
+    		std::cin &gt;&gt; length;
+    		std::cout &lt;&lt; length &lt;&lt; std::endl;
     
-        try {
-            Memory y(10);
-            y[9]; // put 12 to make it an invalid range of array
-        }
-        catch (out_of_range&amp; err) {
-            cout &lt;&lt; err.what() &lt;&lt; endl;
-        }
-    
-        try {
-            Memory z(0xffff); // put 4 more f to make too large amount of memory
-        }
-        catch (bad_alloc&amp; err) {
-            cout &lt;&lt; &quot;not enough space&quot; &lt;&lt; endl;
+            int* numbers = new int[length];
+            delete [] numbers;
+    		std::cout &lt;&lt; &quot;Deallocated array&quot; &lt;&lt; std::endl;
+        } catch (std::bad_alloc&amp; exp) { // specific exception object
+    		std::cout &lt;&lt; &quot;Bad Allocation: &quot; &lt;&lt; exp.what() &lt;&lt; std::endl;
+    	} catch (std::exception&amp; exp) { // exception base class will catch all exceptions
+    		std::cout &lt;&lt; &quot;Exception: &quot; &lt;&lt; exp.what() &lt;&lt; std::endl;
         }
     
         return 0;
@@ -296,17 +292,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./throw.o -c ./throw.cxx
+g++ -Wall -g -o ./exception.o -c ./exception.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./throw.bin ./throw.o
+g++ -g -o ./exception.bin ./exception.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./throw.bin
+./exception.bin < ./exception.input.txt
 </code>
 </pre>
 <hr />
@@ -321,13 +317,14 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-
+Enter array length: -1
+Bad Allocation: std::bad_array_new_length
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.5.1.html">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.5.3.html">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/exceptions/try-catch">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/exceptions/exception-sequence">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
