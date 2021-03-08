@@ -28,6 +28,10 @@ button.sticky {
 	position: sticky;
 	top: 1%;
 }
+
+img {
+	max-width: -moz-available;
+}
 .dark-mode {
 	background-color: black;
 	color: #aaaaaa;
@@ -212,19 +216,11 @@ C++
 </svg>
 </a>
 </h2>
-This repository is not intended to be a tutorial, you already have to know what
-you are dealing with.
+<p>This repository is not intended to be a tutorial, you already have to know what you are dealing with.</p>
 
-This repository is contained of practice pages, each of which discussing
-one particular topic in Cxx language.
-You can use them as daily practices to warm your hands up on coding in Cxx.
-All of topics are written as simple as possible and most of them are based on
-Cxx standards, So they should be easily compiled on your system.
+<p>This repository is contained of notebooks, each of which discussing one particular topic in Cxx language. You can use them as daily practices to warm your hands up on coding in Cxx. All of topics are written as simple as possible and most of them are based on Cxx standards, So they should be easily compiled on your system.</p>
 
-<b>NOTE:</b> As this repository is growing, non-standard sections are added to
-expand the topics covered in this practical repository and not all sections
-work with standard Cxx headers, e.g. General Purpose GPU Programming (GPGPU),
-Image Processing, Network Programming, GUI Development, etc.
+<p><b>NOTE:</b> As this repository is growing, non-standard sections are added to expand the topics covered in this practical repository and not all sections work with standard Cxx headers, e.g. General Purpose GPU Programming (GPGPU), Image Processing, Network Programming, GUI Development, etc.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -236,13 +232,13 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day</li>
-<li class='list-group-item'>C++ Primer Plus</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/udp-client">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/udp-client">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -430,52 +426,52 @@ Table of Content
 	
 </a>
 </div>
-<a href="/6.1.4.0.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences" class="list-group-item group-child">
 	4. Sequences
 	<span class="badge badge-primary badge-pill">11</span>
 </a>
 <div class="list-group collapse" id="6-1-4-0">
-<a href="/6.1.4.1.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/array" class="list-group-item group-child">
 	1. array
 	
 </a>
-<a href="/6.1.4.2.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/charconv" class="list-group-item group-child">
 	2. low level conversion by charconv header
 	
 </a>
-<a href="/6.1.4.3.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/char" class="list-group-item group-child">
 	3. C-style string
 	
 </a>
-<a href="/6.1.4.4.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/cstring" class="list-group-item group-child">
 	4. cstring
 	
 </a>
-<a href="/6.1.4.5.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/multidimensional-array" class="list-group-item group-child">
 	5. multidimentional array
 	
 </a>
-<a href="/6.1.4.6.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/modifying-array" class="list-group-item group-child">
 	6. modifying array
 	
 </a>
-<a href="/6.1.4.7.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/string" class="list-group-item group-child">
 	7. C++ standard string
 	
 </a>
-<a href="/6.1.4.8.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/string-view" class="list-group-item group-child">
 	8. std::string_view
 	
 </a>
-<a href="/6.1.4.9.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/vector" class="list-group-item group-child">
 	9. vector
 	
 </a>
-<a href="/6.1.4.10.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/wide-character-strings" class="list-group-item group-child">
 	10. wide character string
 	
 </a>
-<a href="/6.1.4.11.html" class="list-group-item group-child">
+<a href="/cpp/fundamentals/sequences/wide-string" class="list-group-item group-child">
 	11. wide string
 	
 </a>
@@ -665,7 +661,7 @@ Table of Content
 </div>
 <a href="#6-2-0" class="list-group-item" data-toggle="collapse">
 	<i class="glyphicon glyphicon-chevron-right"></i>2. Object Orientation
-	<span class="badge badge-primary badge-pill">49</span>
+	<span class="badge badge-primary badge-pill">53</span>
 </a>
 <div class="list-group collapse" id="6-2-0">
 <a href="/cpp/object-orientation/classes" class="list-group-item group-child">
@@ -885,6 +881,28 @@ Table of Content
 </a>
 <a href="/6.2.4.11.html" class="list-group-item group-child">
 	11. subscript operator
+	
+</a>
+</div>
+<a href="/cpp/object-orientation/exceptions" class="list-group-item group-child">
+	5. Exception Handling
+	<span class="badge badge-primary badge-pill">4</span>
+</a>
+<div class="list-group collapse" id="6-2-5-0">
+<a href="/cpp/object-orientation/exceptions/try-catch" class="list-group-item group-child">
+	1. Catching Exceptions
+	
+</a>
+<a href="/cpp/object-orientation/exceptions/exception-class" class="list-group-item group-child">
+	2. Exception Class
+	
+</a>
+<a href="/cpp/object-orientation/exceptions/exception-lookup" class="list-group-item group-child">
+	3. Exception Lookup
+	
+</a>
+<a href="/cpp/object-orientation/exceptions/custom-exception" class="list-group-item group-child">
+	4. Custom Exception
 	
 </a>
 </div>
@@ -1246,255 +1264,225 @@ Table of Content
 </div>
 </div>
 <a href="#6-5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. Exception Handling
-	<span class="badge badge-primary badge-pill">6</span>
-</a>
-<div class="list-group collapse" id="6-5-0">
-<a href="/6.5.1.html" class="list-group-item group-child">
-	1. std::exception
-	
-</a>
-<a href="/6.5.2.html" class="list-group-item group-child">
-	2. throwing a custom exception
-	
-</a>
-<a href="/6.5.3.html" class="list-group-item group-child">
-	3. exception safety with try-catch
-	
-</a>
-<a href="/6.5.4.html" class="list-group-item group-child">
-	4. how exception handling works
-	
-</a>
-<a href="/6.5.5.html" class="list-group-item group-child">
-	5. handling exception of a type
-	
-</a>
-<a href="/6.5.6.html" class="list-group-item group-child">
-	6. inheriting from std::exception class
-	
-</a>
-</div>
-<a href="#6-6-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6. Memory Management
+	<i class="glyphicon glyphicon-chevron-right"></i>5. Memory Management
 	<span class="badge badge-primary badge-pill">22</span>
 </a>
-<div class="list-group collapse" id="6-6-0">
-<a href="/6.6.1.0.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-5-0">
+<a href="/6.5.1.0.html" class="list-group-item group-child">
 	1. Casting Operators
 	<span class="badge badge-primary badge-pill">4</span>
 </a>
-<div class="list-group collapse" id="6-6-1-0">
-<a href="/6.6.1.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-5-1-0">
+<a href="/6.5.1.1.html" class="list-group-item group-child">
 	1. static casting
 	
 </a>
-<a href="/6.6.1.2.html" class="list-group-item group-child">
+<a href="/6.5.1.2.html" class="list-group-item group-child">
 	2. dynamic casting
 	
 </a>
-<a href="/6.6.1.3.html" class="list-group-item group-child">
+<a href="/6.5.1.3.html" class="list-group-item group-child">
 	3. constant casting
 	
 </a>
-<a href="/6.6.1.4.html" class="list-group-item group-child">
+<a href="/6.5.1.4.html" class="list-group-item group-child">
 	4. reinterpret casting
 	
 </a>
 </div>
-<a href="/6.6.2.0.html" class="list-group-item group-child">
+<a href="/6.5.2.0.html" class="list-group-item group-child">
 	2. Pointers and References
 	<span class="badge badge-primary badge-pill">14</span>
 </a>
-<div class="list-group collapse" id="6-6-2-0">
-<a href="/6.6.2.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-5-2-0">
+<a href="/6.5.2.1.html" class="list-group-item group-child">
 	1. using const on pointers
 	
 </a>
-<a href="/6.6.2.2.html" class="list-group-item group-child">
+<a href="/6.5.2.2.html" class="list-group-item group-child">
 	2. function pointer
 	
 </a>
-<a href="/6.6.2.3.html" class="list-group-item group-child">
+<a href="/6.5.2.3.html" class="list-group-item group-child">
 	3. incrementing and decrementing pointers
 	
 </a>
-<a href="/6.6.2.4.html" class="list-group-item group-child">
+<a href="/6.5.2.4.html" class="list-group-item group-child">
 	4. pointing to invalid memory
 	
 </a>
-<a href="/6.6.2.5.html" class="list-group-item group-child">
+<a href="/6.5.2.5.html" class="list-group-item group-child">
 	5. memory leakage
 	
 </a>
-<a href="/6.6.2.6.html" class="list-group-item group-child">
+<a href="/6.5.2.6.html" class="list-group-item group-child">
 	6. pointers
 	
 </a>
-<a href="/6.6.2.7.html" class="list-group-item group-child">
+<a href="/6.5.2.7.html" class="list-group-item group-child">
 	7. dynamic memory allocation using new & delete operators
 	
 </a>
-<a href="/6.6.2.8.html" class="list-group-item group-child">
+<a href="/6.5.2.8.html" class="list-group-item group-child">
 	8. using nothrow
 	
 </a>
-<a href="/6.6.2.9.html" class="list-group-item group-child">
+<a href="/6.5.2.9.html" class="list-group-item group-child">
 	9. passing parameters as pointers
 	
 </a>
-<a href="/6.6.2.10.html" class="list-group-item group-child">
+<a href="/6.5.2.10.html" class="list-group-item group-child">
 	10. pointer
 	
 </a>
-<a href="/6.6.2.11.html" class="list-group-item group-child">
+<a href="/6.5.2.11.html" class="list-group-item group-child">
 	11. allocating array of a type dynamically
 	
 </a>
-<a href="/6.6.2.12.html" class="list-group-item group-child">
+<a href="/6.5.2.12.html" class="list-group-item group-child">
 	12. references, substitution of pointers
 	
 </a>
-<a href="/6.6.2.13.html" class="list-group-item group-child">
+<a href="/6.5.2.13.html" class="list-group-item group-child">
 	13. storing callable objects
 	
 </a>
-<a href="/6.6.2.14.html" class="list-group-item group-child">
+<a href="/6.5.2.14.html" class="list-group-item group-child">
 	14. using try...catch
 	
 </a>
 </div>
-<a href="/6.6.3.0.html" class="list-group-item group-child">
+<a href="/6.5.3.0.html" class="list-group-item group-child">
 	3. Smart Pointers
 	<span class="badge badge-primary badge-pill">3</span>
 </a>
-<div class="list-group collapse" id="6-6-3-0">
-<a href="/6.6.3.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-5-3-0">
+<a href="/6.5.3.1.html" class="list-group-item group-child">
 	1. pointers ownership
 	
 </a>
-<a href="/6.6.3.2.html" class="list-group-item group-child">
+<a href="/6.5.3.2.html" class="list-group-item group-child">
 	2. std::unique_ptr
 	
 </a>
-<a href="/6.6.3.3.html" class="list-group-item group-child">
+<a href="/6.5.3.3.html" class="list-group-item group-child">
 	3. std::shared_ptr
 	
 </a>
 </div>
-<a href="/6.6.4.0.html" class="list-group-item group-child">
+<a href="/6.5.4.0.html" class="list-group-item group-child">
 	4. Move Semantics
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="6-6-4-0">
-<a href="/6.6.4.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-5-4-0">
+<a href="/6.5.4.1.html" class="list-group-item group-child">
 	1. std::move
 	
 </a>
 </div>
 </div>
-<a href="#6-7-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>7. Multithreading
+<a href="#6-6-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>6. Multithreading
 	<span class="badge badge-primary badge-pill">17</span>
 </a>
-<div class="list-group collapse" id="6-7-0">
-<a href="/6.7.1.0.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-6-0">
+<a href="/cpp/multithreading/threads" class="list-group-item group-child">
 	1. Threads
 	<span class="badge badge-primary badge-pill">8</span>
 </a>
-<div class="list-group collapse" id="6-7-1-0">
-<a href="/6.7.1.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-6-1-0">
+<a href="/6.6.1.1.html" class="list-group-item group-child">
 	1. Creating Threads
 	
 </a>
-<a href="/6.7.1.2.html" class="list-group-item group-child">
+<a href="/6.6.1.2.html" class="list-group-item group-child">
 	2. Sleeping Thread
 	
 </a>
-<a href="/6.7.1.3.html" class="list-group-item group-child">
+<a href="/6.6.1.3.html" class="list-group-item group-child">
 	3. Sleep Until
 	
 </a>
-<a href="/6.7.1.4.html" class="list-group-item group-child">
+<a href="/6.6.1.4.html" class="list-group-item group-child">
 	4. Passing Parameters to Threads
 	
 </a>
-<a href="/6.7.1.5.html" class="list-group-item group-child">
+<a href="/6.6.1.5.html" class="list-group-item group-child">
 	5. Swapping Threads
 	
 </a>
-<a href="/6.7.1.6.html" class="list-group-item group-child">
+<a href="/6.6.1.6.html" class="list-group-item group-child">
 	6. Moving a Thread
 	
 </a>
-<a href="/6.7.1.7.html" class="list-group-item group-child">
+<a href="/6.6.1.7.html" class="list-group-item group-child">
 	7. High Resolution Clock
 	
 </a>
-<a href="/6.7.1.8.html" class="list-group-item group-child">
+<a href="/6.6.1.8.html" class="list-group-item group-child">
 	8. Detach Threads
 	
 </a>
 </div>
-<a href="/6.7.2.0.html" class="list-group-item group-child">
+<a href="/cpp/multithreading/mutex" class="list-group-item group-child">
 	2. Mutex
 	<span class="badge badge-primary badge-pill">6</span>
 </a>
-<div class="list-group collapse" id="6-7-2-0">
-<a href="/6.7.2.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-6-2-0">
+<a href="/6.6.2.1.html" class="list-group-item group-child">
 	1. std::lock_guard
 	
 </a>
-<a href="/6.7.2.2.html" class="list-group-item group-child">
+<a href="/6.6.2.2.html" class="list-group-item group-child">
 	2. recursive_mutex
 	
 </a>
-<a href="/6.7.2.3.html" class="list-group-item group-child">
+<a href="/6.6.2.3.html" class="list-group-item group-child">
 	3. std::scoped_lock
 	
 </a>
-<a href="/6.7.2.4.html" class="list-group-item group-child">
+<a href="/6.6.2.4.html" class="list-group-item group-child">
 	4. try_lock
 	
 </a>
-<a href="/6.7.2.5.html" class="list-group-item group-child">
+<a href="/6.6.2.5.html" class="list-group-item group-child">
 	5. try_lock_for
 	
 </a>
-<a href="/6.7.2.6.html" class="list-group-item group-child">
+<a href="/6.6.2.6.html" class="list-group-item group-child">
 	6. std::unique_lock
 	
 </a>
 </div>
-<a href="/6.7.3.0.html" class="list-group-item group-child">
-	3. Future and Promise
+<a href="/cpp/multithreading/future" class="list-group-item group-child">
+	3. Future
 	<span class="badge badge-primary badge-pill">3</span>
 </a>
-<div class="list-group collapse" id="6-7-3-0">
-<a href="/6.7.3.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-6-3-0">
+<a href="/6.6.3.1.html" class="list-group-item group-child">
 	1. std::future - std::async
 	
 </a>
-<a href="/6.7.3.2.html" class="list-group-item group-child">
+<a href="/6.6.3.2.html" class="list-group-item group-child">
 	2. std::future - std::promise
 	
 </a>
-<a href="/6.7.3.3.html" class="list-group-item group-child">
+<a href="/6.6.3.3.html" class="list-group-item group-child">
 	3. std::packaged_task
 	
 </a>
 </div>
 </div>
-<a href="#6-8-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>8. Graphical User Interface
+<a href="#6-7-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>7. Graphical User Interface
 	<span class="badge badge-primary badge-pill">34</span>
 </a>
-<div class="list-group collapse" id="6-8-0">
+<div class="list-group collapse" id="6-7-0">
 <a href="/cpp/gui/fundamentals" class="list-group-item group-child">
 	1. Fundamentals
 	<span class="badge badge-primary badge-pill">8</span>
 </a>
-<div class="list-group collapse" id="6-8-1-0">
+<div class="list-group collapse" id="6-7-1-0">
 <a href="/cpp/gui/fundamentals/QApplication" class="list-group-item group-child">
 	1. Application Object
 	
@@ -1532,7 +1520,7 @@ Table of Content
 	2. Windows
 	<span class="badge badge-primary badge-pill">3</span>
 </a>
-<div class="list-group collapse" id="6-8-2-0">
+<div class="list-group collapse" id="6-7-2-0">
 <a href="/cpp/gui/windows/QMainWindow" class="list-group-item group-child">
 	1. QMainWindow
 	
@@ -1550,7 +1538,7 @@ Table of Content
 	3. Layouts
 	<span class="badge badge-primary badge-pill">5</span>
 </a>
-<div class="list-group collapse" id="6-8-3-0">
+<div class="list-group collapse" id="6-7-3-0">
 <a href="/cpp/gui/layouts/QGridLayout" class="list-group-item group-child">
 	1. QGridLayout
 	
@@ -1576,7 +1564,7 @@ Table of Content
 	4. Widgets
 	<span class="badge badge-primary badge-pill">12</span>
 </a>
-<div class="list-group collapse" id="6-8-4-0">
+<div class="list-group collapse" id="6-7-4-0">
 <a href="/cpp/gui/widgets/QLabel" class="list-group-item group-child">
 	1. QLabel
 	
@@ -1630,7 +1618,7 @@ Table of Content
 	5. Database
 	<span class="badge badge-primary badge-pill">6</span>
 </a>
-<div class="list-group collapse" id="6-8-5-0">
+<div class="list-group collapse" id="6-7-5-0">
 <a href="/cpp/gui/database/connection" class="list-group-item group-child">
 	1. Connection
 	
@@ -1643,7 +1631,7 @@ Table of Content
 	3. Insert
 	
 </a>
-<a href="/6.8.5.4.html" class="list-group-item group-child">
+<a href="/6.7.5.4.html" class="list-group-item group-child">
 	4. Update
 	
 </a>
@@ -1657,53 +1645,53 @@ Table of Content
 </a>
 </div>
 </div>
-<a href="#6-9-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>9. Image Processing
+<a href="#6-8-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>8. Image Processing
 	<span class="badge badge-primary badge-pill">76</span>
 </a>
-<div class="list-group collapse" id="6-9-0">
-<a href="/6.9.1.0.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-8-0">
+<a href="/6.8.1.0.html" class="list-group-item group-child">
 	1. Data Types
 	<span class="badge badge-primary badge-pill">43</span>
 </a>
-<div class="list-group collapse" id="6-9-1-0">
+<div class="list-group collapse" id="6-8-1-0">
 </div>
-<a href="/6.9.2.0.html" class="list-group-item group-child">
+<a href="/6.8.2.0.html" class="list-group-item group-child">
 	2. Fundamentals
 	<span class="badge badge-primary badge-pill">9</span>
 </a>
-<div class="list-group collapse" id="6-9-2-0">
+<div class="list-group collapse" id="6-8-2-0">
 </div>
-<a href="/6.9.3.0.html" class="list-group-item group-child">
+<a href="/6.8.3.0.html" class="list-group-item group-child">
 	3. Transformations
 	<span class="badge badge-primary badge-pill">0</span>
 </a>
-<div class="list-group collapse" id="6-9-3-0">
+<div class="list-group collapse" id="6-8-3-0">
 </div>
-<a href="/6.9.4.0.html" class="list-group-item group-child">
+<a href="/6.8.4.0.html" class="list-group-item group-child">
 	4. Operations
 	<span class="badge badge-primary badge-pill">13</span>
 </a>
-<div class="list-group collapse" id="6-9-4-0">
+<div class="list-group collapse" id="6-8-4-0">
 </div>
-<a href="/6.9.5.0.html" class="list-group-item group-child">
+<a href="/6.8.5.0.html" class="list-group-item group-child">
 	5. Functions
 	<span class="badge badge-primary badge-pill">11</span>
 </a>
-<div class="list-group collapse" id="6-9-5-0">
+<div class="list-group collapse" id="6-8-5-0">
 </div>
 </div>
-<a href="#6-10-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>10. General Purpose GPU Programming
+<a href="#6-9-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>9. General Purpose GPU Programming
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="6-10-0">
+<div class="list-group collapse" id="6-9-0">
 <a href="/cpp/gpgpu/opencl" class="list-group-item group-child">
 	1. OpenCL
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="6-10-1-0">
-<a href="/6.10.1.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="6-9-1-0">
+<a href="/6.9.1.1.html" class="list-group-item group-child">
 	1. Not Implemented Yet
 	
 </a>
