@@ -28,6 +28,10 @@ button.sticky {
 	position: sticky;
 	top: 1%;
 }
+
+img {
+	max-width: -moz-available;
+}
 .dark-mode {
 	background-color: black;
 	color: #aaaaaa;
@@ -215,6 +219,38 @@ std::string_view
 </svg>
 </a>
 </h2>
+<p>Consider a function that accepts a std::string as a parameter:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void display(const std::string& message)
+		{
+			std::cout << message << std::endl;
+		}
+	</code>
+</pre>
+
+<p>When invoked using a string literal, the string literal “Hello World!” is first converted into a temporary <code>std::string</code> that is consumed by the function <code>display()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		display(“Hello World!”);
+	</code>
+</pre>
+
+<p>This temporary conversion is a performance overhead that can be avoided by using std::string_view instead:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void display(std::string_view& message)
+		{
+			std::cout << message << std::endl;
+		}
+	</code>
+</pre>
+
+<p>A string literal will not incur allocation overhead when being passed to a function that accepts a <code>std::string_view</code> as argument.</p>
+
 begin[5]
 A **string_view** supports an interface similar to **std::string .
 One exception is the absence of **c_str()** , but **data()** is available.
@@ -280,21 +316,20 @@ Source
     #include &lt;string&gt;
     #include &lt;string_view&gt;
     
-    void print(const std::string_view printable)
+    void display(const std::string_view&amp; message)
     {
-    	std::cout &lt;&lt; printable &lt;&lt; std::endl;
+    	std::cout &lt;&lt; message &lt;&lt; std::endl;
     }
     
     int main()
     {
+    	// to use &quot;&quot;s and &quot;&quot;sv literal operator
+    	using namespace std::string_literals;
     	using namespace std::string_view_literals;
     
-    	std::string str{&quot;this is a string&quot;};
-    	auto literal = &quot;this is also a literal&quot;sv;
-    
-    	print(&quot;this is a literal&quot;);
-    	print(str);
-    	print(literal);
+    	display(&quot;this is a literal&quot;);
+    	display(&quot;this is a string&quot;s); // notice the &quot;&quot;s literal operator
+    	display(&quot;this is a string_view&quot;sv); // note the &quot;&quot;sv literal operator
     
     	return 0;
     }
@@ -312,7 +347,7 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./string-view.o -c ./string-view.cxx
+g++ -Wall -g -std=c++17 -o ./string-view.o -c ./string-view.cxx
 </code>
 </pre>
 <pre>
@@ -337,13 +372,15 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-
+this is a literal
+this is a string
+this is a string_view
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.1.4.7.html">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.1.4.9.html">next page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/sequences/string">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/sequences/vector">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

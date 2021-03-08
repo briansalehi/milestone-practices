@@ -1,3 +1,35 @@
+<p>Consider a function that accepts a std::string as a parameter:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void display(const std::string& message)
+		{
+			std::cout << message << std::endl;
+		}
+	</code>
+</pre>
+
+<p>When invoked using a string literal, the string literal “Hello World!” is first converted into a temporary <code>std::string</code> that is consumed by the function <code>display()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		display(“Hello World!”);
+	</code>
+</pre>
+
+<p>This temporary conversion is a performance overhead that can be avoided by using std::string_view instead:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void display(std::string_view& message)
+		{
+			std::cout << message << std::endl;
+		}
+	</code>
+</pre>
+
+<p>A string literal will not incur allocation overhead when being passed to a function that accepts a <code>std::string_view</code> as argument.</p>
+
 begin[5]
 A **string_view** supports an interface similar to **std::string .
 One exception is the absence of **c_str()** , but **data()** is available.

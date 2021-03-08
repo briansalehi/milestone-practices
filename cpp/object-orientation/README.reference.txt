@@ -1,2 +1,2 @@
-#C++ Primer Plus
-#Sam's Teach Yourself C++ in One Hour a Day
+C++ Primer Plus, 6th Edition - Stephen Prata
+Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao:: chapter 9

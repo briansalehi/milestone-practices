@@ -2,21 +2,20 @@
 #include <string>
 #include <string_view>
 
-void print(const std::string_view printable)
+void display(const std::string_view& message)
 {
-	std::cout << printable << std::endl;
+	std::cout << message << std::endl;
 }
 
 int main()
 {
+	// to use ""s and ""sv literal operator
+	using namespace std::string_literals;
 	using namespace std::string_view_literals;
 
-	std::string str{"this is a string"};
-	auto literal = "this is also a literal"sv;
-
-	print("this is a literal");
-	print(str);
-	print(literal);
+	display("this is a literal");
+	display("this is a string"s); // notice the ""s literal operator
+	display("this is a string_view"sv); // note the ""sv literal operator
 
 	return 0;
 }
