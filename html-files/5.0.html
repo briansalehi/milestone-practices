@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>C</title>
+<title>Software Design</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -204,27 +204,24 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class='breadcrumb-item active'>C</li>
+<li class='breadcrumb-item active'>Software Design</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="C" class="anchor" aria-hidden="true" href="#C">
-C
+<a id="Software-Design" class="anchor" aria-hidden="true" href="#Software-Design">
+Software Design
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>This section is not intended to be a tutorial, but a series of notebooks which help you learn more C programming language effectively.</p>
-
-<p>This section is contained of notebooks, each of which discussing one particular topic in C programming language. You can use them as daily practice to warm your hands up on coding in C. All of topics are written as simple as possible and most of them are based on C standards, So they should be easily compiled on your system using the compiler of your interest, e.g. GCC, Clang.</p>
-
-
+Making software requires principles.
+This section contains different aspects of making software.
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/docker">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c/io">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/clean-code">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -238,124 +235,80 @@ Table of Content
 </h3>
 <div class="list-group list-group-root well" >
 <a href="#5-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Input & Output Streams
-	<span class="badge badge-primary badge-pill">10</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Clean Code
+	<span class="badge badge-primary badge-pill">1</span>
 </a>
 <div class="list-group collapse" id="5-1-0">
-<a href="/5.1.1.html" class="list-group-item group-child">
-	1. 
-	
-</a>
-<a href="/5.1.2.html" class="list-group-item group-child">
-	2. printf function
-	
-</a>
-<a href="/5.1.3.html" class="list-group-item group-child">
-	3. putchar
-	
-</a>
-<a href="/5.1.4.html" class="list-group-item group-child">
-	4. scanf function
-	
-</a>
-<a href="/5.1.5.html" class="list-group-item group-child">
-	5. getchar
-	
-</a>
-<a href="/5.1.6.html" class="list-group-item group-child">
-	6. limits
-	
-</a>
-<a href="/5.1.7.html" class="list-group-item group-child">
-	7. modifiers
-	
-</a>
-<a href="/5.1.8.html" class="list-group-item group-child">
-	8. flags
-	
-</a>
-<a href="/5.1.9.html" class="list-group-item group-child">
-	9. conversion specifiers
-	
-</a>
-<a href="/5.1.10.html" class="list-group-item group-child">
-	10. sizeof operator's type
+<a href="/software-design/clean-code/naming" class="list-group-item group-child">
+	1. Naming
 	
 </a>
 </div>
 <a href="#5-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Objects and Types
-	<span class="badge badge-primary badge-pill">0</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Design Patterns
+	<span class="badge badge-primary badge-pill">4</span>
 </a>
 <div class="list-group collapse" id="5-2-0">
+<a href="/software-design/design-patterns/strategy-pattern" class="list-group-item group-child">
+	1. Strategy Pattern
+	
+</a>
+<a href="/software-design/design-patterns/observer-pattern" class="list-group-item group-child">
+	2. Observer Pattern
+	
+</a>
+<a href="/software-design/design-patterns/decorator-pattern" class="list-group-item group-child">
+	3. Decorator Pattern
+	
+</a>
+<a href="/software-design/design-patterns/factory-pattern" class="list-group-item group-child">
+	4. Factory Pattern
+	
+</a>
 </div>
 <a href="#5-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Functions
-	<span class="badge badge-primary badge-pill">0</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Unit Testing
+	<span class="badge badge-primary badge-pill">1</span>
 </a>
 <div class="list-group collapse" id="5-3-0">
+<a href="/software-design/unit-testing/code-design" class="list-group-item group-child">
+	1. Code Design
+	
+</a>
 </div>
 <a href="#5-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Control Statements
-	<span class="badge badge-primary badge-pill">0</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Unified Modeling Language
+	<span class="badge badge-primary badge-pill">7</span>
 </a>
 <div class="list-group collapse" id="5-4-0">
-</div>
-<a href="#5-5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. Arrays and Strings
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="5-5-0">
-</div>
-<a href="#5-6-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6. Operators
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="5-6-0">
-</div>
-<a href="#5-7-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>7. Network Programming
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="5-7-0">
-<a href="/c/network-programming/sockets" class="list-group-item group-child">
-	1. Sockets
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="5-7-1-0">
-<a href="/c/network-programming/sockets/ipv4-server" class="list-group-item group-child">
-	1. IPv4 server
+<a href="/software-design/uml/history" class="list-group-item group-child">
+	1. History
 	
 </a>
-<a href="/c/network-programming/sockets/ipv4-client" class="list-group-item group-child">
-	2. IPv4 client
+<a href="/software-design/uml/usage" class="list-group-item group-child">
+	2. Degrees of UML
 	
 </a>
-<a href="/c/network-programming/sockets/ipv6-server" class="list-group-item group-child">
-	3. IPv6 server
+<a href="/software-design/uml/diagrams" class="list-group-item group-child">
+	3. Diagrams
 	
 </a>
-<a href="/c/network-programming/sockets/ipv6-client" class="list-group-item group-child">
-	4. IPv6 client
+<a href="/software-design/uml/views" class="list-group-item group-child">
+	4. Views
 	
 </a>
-<a href="/c/network-programming/sockets/generic-server" class="list-group-item group-child">
-	5. address generic server
+<a href="/software-design/uml/stereotypes" class="list-group-item group-child">
+	5. Notes and Stereotypes
 	
 </a>
-<a href="/c/network-programming/sockets/generic-client" class="list-group-item group-child">
-	6. address generic client
+<a href="/software-design/uml/actors" class="list-group-item group-child">
+	6. Actors
 	
 </a>
-<a href="/c/network-programming/sockets/udp-server" class="list-group-item group-child">
-	7. UDP server
+<a href="/software-design/uml/use-case" class="list-group-item group-child">
+	7. Use Case
 	
 </a>
-<a href="/c/network-programming/sockets/udp-client" class="list-group-item group-child">
-	8. UDP client
-	
-</a>
-</div>
 </div>
 </div>
 <script>

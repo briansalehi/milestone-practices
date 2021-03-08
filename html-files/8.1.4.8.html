@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>std::string_view</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+button.sticky {
+	position: sticky;
+	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	z-index: 1;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.4.0.html">Sequences</a></li>
+<li class='breadcrumb-item active'>std::string_view</li>
+</ol>
+<button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
+<h2>
+<a id="std::string_view" class="anchor" aria-hidden="true" href="#std::string_view">
+std::string_view
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<p>Consider a function that accepts a std::string as a parameter:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void display(const std::string& message)
+		{
+			std::cout << message << std::endl;
+		}
+	</code>
+</pre>
+
+<p>When invoked using a string literal, the string literal “Hello World!” is first converted into a temporary <code>std::string</code> that is consumed by the function <code>display()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		display(“Hello World!”);
+	</code>
+</pre>
+
+<p>This temporary conversion is a performance overhead that can be avoided by using std::string_view instead:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void display(std::string_view& message)
+		{
+			std::cout << message << std::endl;
+		}
+	</code>
+</pre>
+
+<p>A string literal will not incur allocation overhead when being passed to a function that accepts a <code>std::string_view</code> as argument.</p>
+
+begin[5]
+A **string_view** supports an interface similar to **std::string .
+One exception is the absence of **c_str()** , but **data()** is available.
+On the other hand, **string_view** does add the methods
+**remove_prefix(size_t)** and **remove_suffix(size_t)** , which
+shrink the string by advancing the starting pointer by a given offset, or by moving the end pointer
+backward by a given offset.
+
+Note that you cannot concatenate a **string** and a **string_view** .
+
+```cxx
+string str = "Hello";
+string_view sv = " world";
+auto result = str + sv;
+```
+
+To make it compile, you need to replace the last line with:
+
+```cxx
+auto result = str + sv.data();
+```
+
+Use an **std::string_view** instead of **const std::string&** or **const
+char\*** whenever a function or method requires a read-only string as one of its
+parameters.
+
+You can use the standard user-defined literal “ sv ” to interpret a string
+literal as an **std::string_view** . For example:
+
+```cxx
+auto sv = "My string_view"sv;
+```
+
+The standard user-defined literal “ sv ” requires a **using namespace std::string_view_literals;** or **using namespace std;** .
+end[5]
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>5:67-69</li>
+</ul>
+<hr />
+<h3>
+<a id="Source" class="anchor" aria-hidden="true" href="#Source">
+Source
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+  <cite>string-view.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    #include &lt;string_view&gt;
+    
+    void display(const std::string_view&amp; message)
+    {
+    	std::cout &lt;&lt; message &lt;&lt; std::endl;
+    }
+    
+    int main()
+    {
+    	// to use &quot;&quot;s and &quot;&quot;sv literal operator
+    	using namespace std::string_literals;
+    	using namespace std::string_view_literals;
+    
+    	display(&quot;this is a literal&quot;);
+    	display(&quot;this is a string&quot;s); // notice the &quot;&quot;s literal operator
+    	display(&quot;this is a string_view&quot;sv); // note the &quot;&quot;sv literal operator
+    
+    	return 0;
+    }
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
+Execution
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-bash">
+g++ -Wall -g -std=c++17 -o ./string-view.o -c ./string-view.cxx
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+g++ -g -o ./string-view.bin ./string-view.o
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./string-view.bin
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-cpp">
+this is a literal
+this is a string
+this is a string_view
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/sequences/string">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/sequences/vector">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x1F312;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x1F315;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x1F315;';
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x1F312;';
+	}
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Naming</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+button.sticky {
+	position: sticky;
+	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	z-index: 1;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">Software Design</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.1.0.html">Clean Code</a></li>
+<li class='breadcrumb-item active'>Naming</li>
+</ol>
+<button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
+<h2>
+<a id="Naming" class="anchor" aria-hidden="true" href="#Naming">
+Naming
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<h4>Use Intention-Revealing Names</h4>
+For example, the name <i>d</i> reveals nothing.
+It doesn't evoke a sense of elapsed time, nor of days.
+We should choose a name that specifies what is being measured and the unit of
+that measurement:
+
+<pre class="language-cpp">
+	<code>
+		int elapsedTimeInDays;
+		int daysSinceCreation;
+		int daysSinceModification;
+		int fileAgeInDays;
+	</code>
+</pre>
+
+Sometimes the problem is not the simplicity of the code but the
+<i>implicity</i> of it.
+
+<pre class="language-cpp">
+	<code>
+		int cell[];
+		...
+		if (cell[0] == 4)
+		    ...
+	</code>
+</pre>
+
+Here, zeroth subscription does not signify anything, neither does the number
+4.
+By giving concepts names, we make the code readable considerably:
+
+<pre class="language-cpp">
+	<code>
+		int cell[];
+		...
+		if (cell[STATUS_VALUE] == FLAGGED)
+		...
+	</code>
+</pre>
+
+Further improvements can also be made by object oriented design:
+
+<pre class="language-cpp">
+	<code>
+		Cell cell = new Cell;
+		...
+		if (cell.isFlagged())
+		    ...
+	</code>
+</pre>
+
+<h4>Avoid Disinformation</h4>
+Avoid using obsecure naming like <i>hp</i> or similarly abbreviated names.
+
+Don't refer to data structures in names. <i>accountList</i> may lead to false
+conclusions unless it really is a list. So only <i>accounts</i> would be
+better.
+
+Using inconsistent spellings is disinformation.
+A truly aweful example of disinformative names would be the use of
+lower-case <i>L</i> or uppercase <i>O</i> as variable names, specially in
+combination.
+The problem of course, is that they look almost entirely like the constants
+one and zero, respectively.
+
+<pre class="language-cpp">
+	<code>
+		if ( O == l )
+		    O = 0;
+		else
+		    l = 1;
+	</code>
+</pre>
+
+<h4>Make Meaningful Distinctions</h4>
+Noise words like <i>a</i>, <i>an</i>, and <i>the</i> are meaningless
+distinction. So do <i>Info</i> and <i>Data</i> in <i>ProductInfo</i> and
+<i>ProductData</i> classes.
+
+Noise words are redundant. The word <i>variable</i> should never appear in a
+variable name. So does <i>table</i> in a table variable, or string as such.
+How is <i>NameString</i> better than <i>Name</i>?
+
+Consider these function names:
+
+<pre class="language-cpp">
+	<code>
+		getActiveAccount();
+		getActiveAccounts();
+		getActiveAccountInfo();
+	</code>
+</pre>
+
+How are the programmers supposed to know which of these fuunctions to call?
+Distinguish names in such a way the reader knows what the differences offer.
+
+<h4>Use Pronounceable Names</h4>
+Names should be pronouceable in conversations:
+
+<pre class="language-cpp">
+	<code>
+		Date genymmdhms;
+	</code>
+</pre>
+
+Hey, Mikey, take a look at "gen emm dee aich emm ess"!
+
+<pre class="language-cpp">
+	<code>
+		Date generationTimestamp;
+	</code>
+</pre>
+
+Hey, Mikey, take a look at this record! The generation timestamp is set
+to tomorrow's date! How can that be?
+
+<h4>Use Searchable Names</h4>
+One might easily grep for <i>MAX_CLASSES_PER_STUDENT</i>, but the number 7
+could be more troublesome.
+
+Single-letter names can ONLY be used as local variables inside small methods.
+The length of a name should correspond to the size of its scope.
+
+<h4>Avoid Encodings</h4>
+We have enough encodings to deal with without adding more to our burden.
+Encoded names are seldom pronounceable and are easy to mis-type.
+
+Do not add m_ prefixes to method names, we are way passed that age!
+
+<h4>Avoid Mental Mapping</h4>
+This is a problem with single letter variable names.
+While using them might not hurt in small scope iterations like <i>i</i> in for
+loops, however in most other contexts a single-letter name is poor choice.
+It's just a placeholder that the reader must mentally map to the actual
+concept.
+
+In general programmers are pretty smart. Smart people sometimes like to show
+off their smartness by demonstrating their mental juggling abilities.
+
+One difference between a smart programmer and a professional programmer is
+that the professional understands that <b>clarity is king</b>. Professionals
+use their power for good and write code that others can understand.
+
+<h4>Class Names</h4>
+Classes and objects should have noun or noun phrase names like
+</i>Customer</i>, </i>WikiPage</i>, <i>Account</i>, and <i>AddressParser</i>.
+Avoid words like <i>Manager</i>, <i>Processor</i>, <i>Data</i>, or
+<i>Info</i> in the name of a class.
+Also a class name should not be a verb.
+
+<h4>Method Names</h4>
+Methods should have a verb or verb phrase names like <i>postsPayment</i>,
+<i>deletePage</i>, or save.
+
+<h4>Don't Be Cute</h4>
+If names are too clever, they will be memorable only to people who share the
+author's sense of humor.
+<i>HolyHandGrenade</i> is cute for sure but <i>DeleteItems</i> might
+be a better name.
+Say what you mean, mean what you say.
+
+<h4>Pick One Word per Concept</h4>
+Pick one word for abstract concept and stick with it.
+For example, it's confusing to have <i>fetch</i>, <i>get</i>, and
+<i>retrieve</i> as equivalent methods of different classes.
+
+A consistent lexicon is a great boon to the programmers who must use your
+code.
+
+<h4>Don't Pun</h4>
+Avoid using the same word for two purposes.
+
+Using <i>insert</i> and <i>append</i> is a better idea than using only
+<i>add</i>.
+
+<h4>Use Solution Domain Names</h4>
+Remember that the people who read your code will be programmers.
+So go ahead and use computer science (CS) terms, algorithms, pattern
+names, math terms and so forth.
+
+<h4>Use Problem Domain Names</h4>
+When programmering terms and solution domain names will no longer come
+in hand, use domain names.
+At least the programmer who maintains your code can ask a domain expert what
+it means.
+
+Separating solution and domain concepts is part of the job of a good
+programmer and designer.
+The code that has more to do with problem domain concepts should have names
+drawn from the problem domain.
+
+<h4>Add Meaningful Context</h4>
+When you have variable names <i>firstName</i>, <i>lastName</i>, <i>street
+</i>, <i>houseNumber</i>, <i>city</i>, <i>state</i>, <i>zipcode</i>, but you
+just saw the <i>state</i> variable is being used stand alone in a method, you
+can add context by using prefixes:
+<i>addrFirstName</i>, <i>addrLastName</i>, <i>addrState</i>, and so on.
+Of course, a better solution is to create a class named <i>Address</i>.
+Then even the compiler knows that the variables belong to a bigger concept.
+
+<h4>Don't Add Gratuitous Content</h4>
+Shorter names are generally better than long ones, so long as they are clear.
+Add no more context to a name than is necessary.
+
+The names <i>accountAddress</i> and <i>customerAddress</i> are fine names
+for instances of the class <i>Address</i> but could be poor names for classes.
+<i>Address</i> is a fine name for a class.
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Clean Code - Robert C. Martin: chapter 2</li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/clean-code">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/design-patterns">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x1F312;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x1F315;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x1F315;';
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x1F312;';
+	}
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

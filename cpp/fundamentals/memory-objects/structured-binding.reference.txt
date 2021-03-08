@@ -1,6 +1,7 @@
 5: 26
 # [book name/reference number]: [page numbers e.g. single page 1 / two concurrent pages 1,2 / range of pages 1-5]
 #C++ Primer Plus
+#C++ Primer Plus, 6th Edition - Stephen Prata
 # e.g. 1: 45-47 # spaces between are ignored
 # e.g. book title: 45,46 # pages 45 and 46, pages must be separated by , to be meaningful to script
 # e.g. book title: 45-47 # pages 45 through 47, pages must be separated by - to be meaningful to script
@@ -8,3 +9,4 @@
 # e.g. https://example.com
 # [link]
 #Sam's Teach Yourself C++ in One Hour a Day
+#Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao

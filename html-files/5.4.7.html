@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Use Case</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+button.sticky {
+	position: sticky;
+	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	z-index: 1;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">Software Design</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.4.0.html">Unified Modeling Language</a></li>
+<li class='breadcrumb-item active'>Use Case</li>
+</ol>
+<button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
+<h2>
+<a id="Use-Case" class="anchor" aria-hidden="true" href="#Use-Case">
+Use Case
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+Once you have captured an initial set of actors that interact with your
+system, you can assemble the exact model of those interactions. The next step
+is to find cases where the system is being used to complete a specific job for
+an actor—use cases, in fact. Use cases can be identified from your user's
+requirements.
+
+A use case is a case (or situation) where your system is used to fulfill one
+or more of your user's requirements; a use case captures a piece of
+functionality that the system provides.
+
+A use case, or job, might be as simple as allowing the user to log in or as
+complex as executing a distributed transaction across multiple global
+databases. The important thing to remember is that a use case—from the user's
+perspective—is a complete use of the system; there is some interaction with
+the system, as well as some output from that interaction. For example,
+Requirement A.1 describes one main use of the CMS: to create a new blog
+account. following figure shows how this interaction is captured as a use
+case.
+
+<img class="img-responsive" src="/software-design/uml/use-case-sample.png" alt="use case sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/use-case-sample.png"'>
+
+A use case in UML is drawn as an oval with a name that describes the
+interaction that it represents.
+
+A use case is something that provides some measurable result to the user or an
+external system.
+Any piece of system behavior that meets this simple test is likely to be a
+good candidate for a use case.
+
+Use cases are an excellent starting point for just about every facet of
+object-oriented system development, design, testing, and documentation.
+They describe a system's requirements strictly from the outside looking in;
+they specify the value that the system delivers to users.
+
+Because use cases are your system's functional requirements, they should be
+the first serious output from your model after a project is started.
+
+Use cases specify only what your system is supposed to do, i.e., the
+system's functional requirements.
+
+The terms <b>shall</b> and <b>should</b> have a special and exact meaning
+when it comes to requirements.
+A <i>shall requirement</i> must be fulfilled; if the feature that implements
+a shall requirement is not in the final system, then the system does not meet
+this requirement.
+A <i>should requirement</i> implies that the requirement is not critical to
+the system working but is still desirable.
+If a system's development is running into problems that will cause delivery
+delays, then it's often the should requirements that are sacrificed first.
+
+If use cases are truly requirements, then they must have very clear
+pass/fail criteria.
+
+There's actually no specific "best way" to start analyzing requirements,
+but one useful first step is to look at the things that interact with your
+system. In use cases, these external things are called <a href="/software-design/uml/actors">actors</a>.
+
+A communication line connects an actor and a use case to show the actor
+participating in the use case. In this example, the Administrator actor is
+involved in the creation of a new blog account use case.
+
+<img class="img-responsive" src="/software-design/uml/communication-line-sample.png" alt="communication line sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/communication-line-sample.png"'>
+
+There is potential to have any number of actors involved in a use case. There
+is no theoretical limit to the number of actors that can participate in a use
+case.
+
+<img class="img-responsive" src="/software-design/uml/multiple-actors.png" alt="multiple actors" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiple-actors.png"'>
+
+<h4>System Boundaries</h4>
+
+Although there is an implicit separation between actors (external to your
+system) and use cases (internal to your system) that marks your system's
+boundary, UML does provide another small piece of notation if you want to make
+things crystal clear.
+To show your system's boundary on a use case diagram, draw a box around all of
+the use cases but keep the actors outside of the box. It's also good practice
+to name your box after the system you are developing, as shown for the CMS in
+following figure.
+
+<img class="img-responsive" src="/software-design/uml/system-boundaries.png" alt="system boundaries" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/system-boundaries.png"'>
+
+<h4>Use Case Description</h4>
+
+A diagram showing your use cases and actors may be a nice starting point, but
+it does not provide enough detail for your system designers to actually
+understand exactly how the system's concerns will be met. How can a system
+designer understand who the most important actor is from the use case notation
+alone? What steps are involved in the use case? The best way to express this
+important information is in the form of a text-based description—every use
+case should be accompanied by one.
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Use case description detail</th>
+      <th scope="col">What the detail means and why is it useful?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Related Requirements</td>
+      <td>Some indication as to which requirements this use case partially or
+completely fulfills.</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Goal in Context</td>
+      <td>The use case's place within the system and why this use case is
+important.</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Preconditions</td>
+      <td>What needs to happen before the use case can be executed.</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Successful End Condition</td>
+      <td>What the system's condition should be if the use case executes
+successully.</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Failed End Condition</td>
+      <td>What the system condition should be if the use case failed to
+execute successfully.</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>Primary Actors</td>
+      <td>The main actors that participate in the use case. Often includes the
+actors that trigger or directly receive information from a use case's
+execution.</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>Secondary Actors</td>
+      <td>Actors that participate but are not the main players in a use case's
+execution.</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>Trigger</td>
+      <td>The event triggered by an actor that causes the use case to execute.</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Main Flow</td>
+      <td>The place to describe each of the important steps in use case's
+normal execution.</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>Extensions</td>
+      <td>A description of any alternative steps from the ones described in
+the Main Flow.</td>
+    </tr>
+  </tbody>
+</table>
+
+The &lt;&lt;include&gt;&gt; relationship declares that the use case at the head of the
+dotted arrow completely reuses all of the steps from the use case being
+included. In the following figure, the Create a new Blog Account and Create a
+new Personal Wiki completely reuse all of the steps declared in the Check
+Identity use case.
+
+<img class="img-responsive" src="/software-design/uml/include-relationship.png" alt="include relationship" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/include-relationship.png"'>
+
+<h4>Inheritance (Specialized Use Case)</h4>
+
+Currently, the Content Management System contains a single Create a new Blog
+Account use case that describes the steps required to create an account. But
+what if the CMS supports several different types of blog accounts, and the
+steps required to create each of these accounts differs ever so slightly from
+the original use case? You want to describe the general behavior for creating
+a blog account—captured in the Create a new Blog Account use case—and then
+define specialized use cases in which the account being created is a specific
+type, such as a regular account with one blog or an editorial account that can
+make changes to entries in a set of blogs.
+
+This is where use case generalization comes in. A more common way of referring
+to generalization is using the term inheritance . Use case inheritance is
+useful when you want to show that one use case is a special type of another
+use case. To show use case inheritance , use the generalization arrow to
+connect the more general, or parent, use case to the more specific use case.
+The following figure shows how you could extend the CMS's use cases to show
+that two different types of blog accounts can be created.
+
+<img class="img-responsive" src="/software-design/uml/specialized-use-case.png" alt="specialized use case" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/specialized-use-case.png"'>
+
+But be careful—by using inheritance, you are effectively saying that every
+step in the general use case must occur in the specialized use cases. Also,
+every relationship that the general use case has with external actors or use
+cases, as shown with the &lt;&lt;include&gt;&gt; relationship between Create a new Blog
+Account and Check Identity, must also make sense in the more specialized use
+cases, such as Create a new Editorial Blog Account.
+
+If you really don't want your more specific use case to do everything that the
+general use case describes, then don't use generalization. Instead, you might
+want to consider using either the &lt;&lt;include&gt;&gt; relationship shown in the
+previous section or the &lt;&lt;extend&gt;&gt; relationship coming up in the next
+section.
+
+Following figure shows you how &lt;&lt;extend&gt;&gt; works.
+
+<img class="img-responsive" src="/software-design/uml/extend-relationship.png" alt="extend relationship" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/extend-relationship.png"'>
+
+The designers of UML 2.0 took a very different view as to the meaning of
+&lt;&lt;extend&gt;&gt; between use cases. They wanted a means for you to show that a use
+case might completely reuse another use case's behavior, similar to the
+&lt;&lt;include&gt;&gt; relationship, but that this reuse was optional and dependent
+either on a runtime or system implementation decision.
+
+The &lt;&lt;extend&gt;&gt; relationship is ideal in this sort of reuse situation, as shown
+in the following figure.
+
+<img class="img-responsive" src="/software-design/uml/extend-example-in-diagram.png" alt="extend example in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/extend-example-in-diagram.png"'>
+
+<h4>Use Case Overview</h4>
+
+When you are trying to understand a system, it is sometimes useful to get a
+glimpse of the context within which it sits. For this purpose, UML provides
+the Use Case Overview diagram. Use Case Overview diagrams give you an
+opportunity to paint a broad picture of your system's context or domain.
+
+<img class="img-responsive" src="/software-design/uml/use-case-overview.png" alt="use case overview" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/use-case-overview.png"'>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Learning UML 2.0: chapter 2</li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/actors">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x1F312;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x1F315;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x1F315;';
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x1F312;';
+	}
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

@@ -28,6 +28,10 @@ button.sticky {
 	position: sticky;
 	top: 1%;
 }
+
+img {
+	max-width: -moz-available;
+}
 .dark-mode {
 	background-color: black;
 	color: #aaaaaa;
@@ -261,9 +265,9 @@ be learned after.
 
 Please contribute to this project and share your knowledge with others!
 <ul class="pager">
-<li class="previous disabled"><a href="/#">previous page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">top page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux">next page</a></li>
+<li class="previous disabled"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -541,15 +545,27 @@ Table of Content
 </div>
 </div>
 <a href="#2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Development Tools
-	<span class="badge badge-primary badge-pill">2</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Linux Application Development
+	<span class="badge badge-primary badge-pill">0</span>
 </a>
 <div class="list-group collapse" id="2-0">
+</div>
+<a href="#3-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Linux Kernel Development
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="3-0">
+</div>
+<a href="#4-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Development Tools
+	<span class="badge badge-primary badge-pill">2</span>
+</a>
+<div class="list-group collapse" id="4-0">
 <a href="/development-tools/git" class="list-group-item group-child">
 	1. Git
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="2-1-0">
+<div class="list-group collapse" id="4-1-0">
 <a href="/development-tools/git/installation" class="list-group-item group-child">
 	1. Installation
 	
@@ -559,7 +575,7 @@ Table of Content
 	2. CMake
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="2-2-0">
+<div class="list-group collapse" id="4-2-0">
 <a href="/development-tools/cmake/installation" class="list-group-item group-child">
 	1. Installation
 	
@@ -569,19 +585,19 @@ Table of Content
 	3. Docker
 	<span class="badge badge-primary badge-pill">0</span>
 </a>
-<div class="list-group collapse" id="2-3-0">
+<div class="list-group collapse" id="4-3-0">
 </div>
 </div>
-<a href="#3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Software Design
+<a href="#5-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>5. Software Design
 	<span class="badge badge-primary badge-pill">13</span>
 </a>
-<div class="list-group collapse" id="3-0">
+<div class="list-group collapse" id="5-0">
 <a href="/software-design/clean-code" class="list-group-item group-child">
 	1. Clean Code
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="3-1-0">
+<div class="list-group collapse" id="5-1-0">
 <a href="/software-design/clean-code/naming" class="list-group-item group-child">
 	1. Naming
 	
@@ -591,7 +607,7 @@ Table of Content
 	2. Design Patterns
 	<span class="badge badge-primary badge-pill">4</span>
 </a>
-<div class="list-group collapse" id="3-2-0">
+<div class="list-group collapse" id="5-2-0">
 <a href="/software-design/design-patterns/strategy-pattern" class="list-group-item group-child">
 	1. Strategy Pattern
 	
@@ -613,7 +629,7 @@ Table of Content
 	3. Unit Testing
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="3-3-0">
+<div class="list-group collapse" id="5-3-0">
 <a href="/software-design/unit-testing/code-design" class="list-group-item group-child">
 	1. Code Design
 	
@@ -623,7 +639,7 @@ Table of Content
 	4. Unified Modeling Language
 	<span class="badge badge-primary badge-pill">7</span>
 </a>
-<div class="list-group collapse" id="3-4-0">
+<div class="list-group collapse" id="5-4-0">
 <a href="/software-design/uml/history" class="list-group-item group-child">
 	1. History
 	
@@ -654,107 +670,177 @@ Table of Content
 </a>
 </div>
 </div>
-<a href="#4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Assembly
+<a href="#6-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>6. Assembly
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
-<div class="list-group collapse" id="4-0">
+<div class="list-group collapse" id="6-0">
 <a href="/assembly/x86_64" class="list-group-item group-child">
 	1. x86_64
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
-<div class="list-group collapse" id="4-1-0">
+<div class="list-group collapse" id="6-1-0">
 </div>
 </div>
-<a href="#5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. C
-	<span class="badge badge-primary badge-pill">8</span>
+<a href="#7-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>7. C
+	<span class="badge badge-primary badge-pill">18</span>
 </a>
-<div class="list-group collapse" id="5-0">
-<a href="/c/fundamentals" class="list-group-item group-child">
-	1. Fundamentals
+<div class="list-group collapse" id="7-0">
+<a href="/c/io" class="list-group-item group-child">
+	1. Input & Output Streams
+	<span class="badge badge-primary badge-pill">10</span>
+</a>
+<div class="list-group collapse" id="7-1-0">
+<a href="/7.1.1.html" class="list-group-item group-child">
+	1. 
+	
+</a>
+<a href="/7.1.2.html" class="list-group-item group-child">
+	2. printf function
+	
+</a>
+<a href="/7.1.3.html" class="list-group-item group-child">
+	3. putchar
+	
+</a>
+<a href="/7.1.4.html" class="list-group-item group-child">
+	4. scanf function
+	
+</a>
+<a href="/7.1.5.html" class="list-group-item group-child">
+	5. getchar
+	
+</a>
+<a href="/7.1.6.html" class="list-group-item group-child">
+	6. limits
+	
+</a>
+<a href="/7.1.7.html" class="list-group-item group-child">
+	7. modifiers
+	
+</a>
+<a href="/7.1.8.html" class="list-group-item group-child">
+	8. flags
+	
+</a>
+<a href="/7.1.9.html" class="list-group-item group-child">
+	9. conversion specifiers
+	
+</a>
+<a href="/7.1.10.html" class="list-group-item group-child">
+	10. sizeof operator's type
+	
+</a>
+</div>
+<a href="/c/objects" class="list-group-item group-child">
+	2. Objects and Types
 	<span class="badge badge-primary badge-pill">0</span>
 </a>
-<div class="list-group collapse" id="5-1-0">
+<div class="list-group collapse" id="7-2-0">
+</div>
+<a href="/7.3.0.html" class="list-group-item group-child">
+	3. Functions
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="7-3-0">
+</div>
+<a href="/c/control-statements" class="list-group-item group-child">
+	4. Control Statements
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="7-4-0">
+</div>
+<a href="/c/memory" class="list-group-item group-child">
+	5. Memory
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="7-5-0">
+</div>
+<a href="/c/operators" class="list-group-item group-child">
+	6. Operators
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="7-6-0">
 </div>
 <a href="/c/network-programming" class="list-group-item group-child">
-	2. Network Programming
+	7. Network Programming
 	<span class="badge badge-primary badge-pill">8</span>
 </a>
-<div class="list-group collapse" id="5-2-0">
+<div class="list-group collapse" id="7-7-0">
 </div>
 </div>
-<a href="#6-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6. C++
-	<span class="badge badge-primary badge-pill">388</span>
+<a href="#8-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>8. C++
+	<span class="badge badge-primary badge-pill">387</span>
 </a>
-<div class="list-group collapse" id="6-0">
+<div class="list-group collapse" id="8-0">
 <a href="/cpp/fundamentals" class="list-group-item group-child">
 	1. Fundamentals
 	<span class="badge badge-primary badge-pill">90</span>
 </a>
-<div class="list-group collapse" id="6-1-0">
+<div class="list-group collapse" id="8-1-0">
 </div>
 <a href="/cpp/object-orientation" class="list-group-item group-child">
 	2. Object Orientation
-	<span class="badge badge-primary badge-pill">49</span>
+	<span class="badge badge-primary badge-pill">54</span>
 </a>
-<div class="list-group collapse" id="6-2-0">
+<div class="list-group collapse" id="8-2-0">
 </div>
 <a href="/cpp/templates" class="list-group-item group-child">
 	3. Macros and Templates
 	<span class="badge badge-primary badge-pill">13</span>
 </a>
-<div class="list-group collapse" id="6-3-0">
-<a href="/6.3.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="8-3-0">
+<a href="/8.3.1.html" class="list-group-item group-child">
 	1. validate expression using assert macro
 	
 </a>
-<a href="/6.3.2.html" class="list-group-item group-child">
+<a href="/8.3.2.html" class="list-group-item group-child">
 	2. static_assert
 	
 </a>
-<a href="/6.3.3.html" class="list-group-item group-child">
+<a href="/8.3.3.html" class="list-group-item group-child">
 	3. auto return type
 	
 </a>
-<a href="/6.3.4.html" class="list-group-item group-child">
+<a href="/8.3.4.html" class="list-group-item group-child">
 	4. template classes
 	
 </a>
-<a href="/6.3.5.html" class="list-group-item group-child">
+<a href="/8.3.5.html" class="list-group-item group-child">
 	5. template default parameter
 	
 </a>
-<a href="/6.3.6.html" class="list-group-item group-child">
+<a href="/8.3.6.html" class="list-group-item group-child">
 	6. define macro
 	
 </a>
-<a href="/6.3.7.html" class="list-group-item group-child">
+<a href="/8.3.7.html" class="list-group-item group-child">
 	7. template functions
 	
 </a>
-<a href="/6.3.8.html" class="list-group-item group-child">
+<a href="/8.3.8.html" class="list-group-item group-child">
 	8. macro functions
 	
 </a>
-<a href="/6.3.9.html" class="list-group-item group-child">
+<a href="/8.3.9.html" class="list-group-item group-child">
 	9. multiple inclusion guard
 	
 </a>
-<a href="/6.3.10.html" class="list-group-item group-child">
+<a href="/8.3.10.html" class="list-group-item group-child">
 	10. template with multiple parameters
 	
 </a>
-<a href="/6.3.11.html" class="list-group-item group-child">
+<a href="/8.3.11.html" class="list-group-item group-child">
 	11. template specialization
 	
 </a>
-<a href="/6.3.12.html" class="list-group-item group-child">
+<a href="/8.3.12.html" class="list-group-item group-child">
 	12. *tuples*
 	
 </a>
-<a href="/6.3.13.html" class="list-group-item group-child">
+<a href="/8.3.13.html" class="list-group-item group-child">
 	13. variable or variadic templates
 	
 </a>
@@ -763,79 +849,49 @@ Table of Content
 	4. Standard Template Library
 	<span class="badge badge-primary badge-pill">80</span>
 </a>
-<div class="list-group collapse" id="6-4-0">
-</div>
-<a href="/cpp/exception" class="list-group-item group-child">
-	5. Exception Handling
-	<span class="badge badge-primary badge-pill">6</span>
-</a>
-<div class="list-group collapse" id="6-5-0">
-<a href="/6.5.1.html" class="list-group-item group-child">
-	1. std::exception
-	
-</a>
-<a href="/6.5.2.html" class="list-group-item group-child">
-	2. throwing a custom exception
-	
-</a>
-<a href="/6.5.3.html" class="list-group-item group-child">
-	3. exception safety with try-catch
-	
-</a>
-<a href="/6.5.4.html" class="list-group-item group-child">
-	4. how exception handling works
-	
-</a>
-<a href="/6.5.5.html" class="list-group-item group-child">
-	5. handling exception of a type
-	
-</a>
-<a href="/6.5.6.html" class="list-group-item group-child">
-	6. inheriting from std::exception class
-	
-</a>
+<div class="list-group collapse" id="8-4-0">
 </div>
 <a href="/cpp/memory-management" class="list-group-item group-child">
-	6. Memory Management
+	5. Memory Management
 	<span class="badge badge-primary badge-pill">22</span>
 </a>
-<div class="list-group collapse" id="6-6-0">
+<div class="list-group collapse" id="8-5-0">
 </div>
 <a href="/cpp/multithreading" class="list-group-item group-child">
-	7. Multithreading
+	6. Multithreading
 	<span class="badge badge-primary badge-pill">17</span>
 </a>
-<div class="list-group collapse" id="6-7-0">
+<div class="list-group collapse" id="8-6-0">
 </div>
 <a href="/cpp/gui" class="list-group-item group-child">
-	8. Graphical User Interface
+	7. Graphical User Interface
 	<span class="badge badge-primary badge-pill">34</span>
 </a>
-<div class="list-group collapse" id="6-8-0">
+<div class="list-group collapse" id="8-7-0">
 </div>
 <a href="/cpp/image-processing" class="list-group-item group-child">
-	9. Image Processing
+	8. Image Processing
 	<span class="badge badge-primary badge-pill">76</span>
 </a>
-<div class="list-group collapse" id="6-9-0">
+<div class="list-group collapse" id="8-8-0">
 </div>
 <a href="/cpp/gpgpu" class="list-group-item group-child">
-	10. General Purpose GPU Programming
+	9. General Purpose GPU Programming
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="6-10-0">
+<div class="list-group collapse" id="8-9-0">
 </div>
 </div>
-<a href="#7-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>7. Python
+<a href="#9-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>9. Python
 	<span class="badge badge-primary badge-pill">12</span>
 </a>
-<div class="list-group collapse" id="7-0">
+<div class="list-group collapse" id="9-0">
 <a href="/python/fundamentals" class="list-group-item group-child">
 	1. Fundamentals
 	<span class="badge badge-primary badge-pill">5</span>
 </a>
-<div class="list-group collapse" id="7-1-0">
+<div class="list-group collapse" id="9-1-0">
 <a href="/python/fundamentals/variables" class="list-group-item group-child">
 	1. Variables
 	
@@ -848,7 +904,7 @@ Table of Content
 	3. Integers
 	
 </a>
-<a href="/7.1.4.html" class="list-group-item group-child">
+<a href="/9.1.4.html" class="list-group-item group-child">
 	4. Floats
 	
 </a>
@@ -861,20 +917,20 @@ Table of Content
 	2. Collections
 	<span class="badge badge-primary badge-pill">4</span>
 </a>
-<div class="list-group collapse" id="7-2-0">
+<div class="list-group collapse" id="9-2-0">
 <a href="/python/collections/lists" class="list-group-item group-child">
 	1. Lists
 	
 </a>
-<a href="/7.2.2.html" class="list-group-item group-child">
+<a href="/9.2.2.html" class="list-group-item group-child">
 	2. Tuple
 	
 </a>
-<a href="/7.2.3.html" class="list-group-item group-child">
+<a href="/9.2.3.html" class="list-group-item group-child">
 	3. Dictionary
 	
 </a>
-<a href="/7.2.4.html" class="list-group-item group-child">
+<a href="/9.2.4.html" class="list-group-item group-child">
 	4. Set
 	
 </a>
@@ -883,12 +939,12 @@ Table of Content
 	3. Control Flow
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
-<div class="list-group collapse" id="7-3-0">
-<a href="/7.3.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="9-3-0">
+<a href="/9.3.1.html" class="list-group-item group-child">
 	1. Generator
 	
 </a>
-<a href="/7.3.2.html" class="list-group-item group-child">
+<a href="/9.3.2.html" class="list-group-item group-child">
 	2. List Comprehension
 	
 </a>
@@ -897,110 +953,110 @@ Table of Content
 	4. Input and Output Stream
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="7-4-0">
-<a href="/7.4.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="9-4-0">
+<a href="/9.4.1.html" class="list-group-item group-child">
 	1. File
 	
 </a>
 </div>
 </div>
-<a href="#8-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>8. Java SE Practices
+<a href="#10-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>10. Java SE Practices
 	<span class="badge badge-primary badge-pill">5</span>
 </a>
-<div class="list-group collapse" id="8-0">
-<a href="/8.1.0.html" class="list-group-item group-child">
+<div class="list-group collapse" id="10-0">
+<a href="/10.1.0.html" class="list-group-item group-child">
 	1. Constructors
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="8-1-0">
-<a href="/8.1.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="10-1-0">
+<a href="/10.1.1.html" class="list-group-item group-child">
 	1. Everything is an object - Object creation steps
 	
 </a>
 </div>
-<a href="/8.2.0.html" class="list-group-item group-child">
+<a href="/10.2.0.html" class="list-group-item group-child">
 	2. ACCESS MODIFIERS
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="8-2-0">
-<a href="/8.2.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="10-2-0">
+<a href="/10.2.1.html" class="list-group-item group-child">
 	1. ACCESS MODIFIERS
 	
 </a>
 </div>
-<a href="/8.3.0.html" class="list-group-item group-child">
+<a href="/10.3.0.html" class="list-group-item group-child">
 	3. Wrapper Classes, AutoBoxing, and Unboxing
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
-<div class="list-group collapse" id="8-3-0">
-<a href="/8.3.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="10-3-0">
+<a href="/10.3.1.html" class="list-group-item group-child">
 	1. Wrapper Class
 	
 </a>
-<a href="/8.3.2.html" class="list-group-item group-child">
+<a href="/10.3.2.html" class="list-group-item group-child">
 	2. Auto Boxing and Unboxing
 	
 </a>
 </div>
-<a href="/8.4.0.html" class="list-group-item group-child">
+<a href="/10.4.0.html" class="list-group-item group-child">
 	4. Object Orientation
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="8-4-0">
-<a href="/8.4.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="10-4-0">
+<a href="/10.4.1.html" class="list-group-item group-child">
 	1. Encapsulation
 	
 </a>
 </div>
 </div>
-<a href="#9-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>9. Mathematics
+<a href="#11-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>11. Mathematics
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="9-0">
-<a href="/9.1.0.html" class="list-group-item group-child">
+<div class="list-group collapse" id="11-0">
+<a href="/11.1.0.html" class="list-group-item group-child">
 	1. Functions
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="9-1-0">
-<a href="/9.1.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="11-1-0">
+<a href="/11.1.1.html" class="list-group-item group-child">
 	1. Not Implemented Yet
 	
 </a>
 </div>
 </div>
-<a href="#10-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>10. Machine Learning
+<a href="#12-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>12. Machine Learning
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="10-0">
+<div class="list-group collapse" id="12-0">
 <a href="/machine-learning/neural-networks" class="list-group-item group-child">
 	1. Neural Networks
 	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="10-1-0">
+<div class="list-group collapse" id="12-1-0">
 <a href="/machine-learning/neural-networks/structure" class="list-group-item group-child">
 	1. Neural Networks Structure
 	
 </a>
 </div>
 </div>
-<a href="#11-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>11. Electronics
+<a href="#13-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>13. Electronics
 	<span class="badge badge-primary badge-pill">5</span>
 </a>
-<div class="list-group collapse" id="11-0">
-<a href="/11.1.0.html" class="list-group-item group-child">
+<div class="list-group collapse" id="13-0">
+<a href="/13.1.0.html" class="list-group-item group-child">
 	1. Digital Design
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
-<div class="list-group collapse" id="11-1-0">
-<a href="/11.1.1.html" class="list-group-item group-child">
+<div class="list-group collapse" id="13-1-0">
+<a href="/13.1.1.html" class="list-group-item group-child">
 	1. Binary Numbers
 	
 </a>
-<a href="/11.1.2.html" class="list-group-item group-child">
+<a href="/13.1.2.html" class="list-group-item group-child">
 	2. Digital Systems
 	
 </a>
@@ -1009,7 +1065,7 @@ Table of Content
 	2. Computer Aided Design (CAD)
 	<span class="badge badge-primary badge-pill">3</span>
 </a>
-<div class="list-group collapse" id="11-2-0">
+<div class="list-group collapse" id="13-2-0">
 </div>
 </div>
 </div>

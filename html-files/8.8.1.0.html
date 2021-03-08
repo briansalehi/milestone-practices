@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Data Types</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+button.sticky {
+	position: sticky;
+	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	z-index: 1;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.8.0.html">Image Processing</a></li>
+<li class='breadcrumb-item active'>Data Types</li>
+</ol>
+<button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
+<h2>
+<a id="Data-Types" class="anchor" aria-hidden="true" href="#Data-Types">
+Data Types
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/image-processing">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.8.1.1.0.html">Next Page</a></li>
+</ul>
+<hr />
+<h3>
+<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
+Table of Content
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<div class="list-group list-group-root well" >
+<a href="#8-8-1-1-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Basic Types
+	<span class="badge badge-primary badge-pill">8</span>
+</a>
+<div class="list-group collapse" id="8-8-1-1-0">
+<a href="/8.8.1.1.1.html" class="list-group-item group-child">
+	1. cv::Point
+	
+</a>
+<a href="/8.8.1.1.2.html" class="list-group-item group-child">
+	2. cv::Size
+	
+</a>
+<a href="/8.8.1.1.3.html" class="list-group-item group-child">
+	3. cv::Vec
+	
+</a>
+<a href="/8.8.1.1.4.html" class="list-group-item group-child">
+	4. cv::Scalar
+	
+</a>
+<a href="/8.8.1.1.5.html" class="list-group-item group-child">
+	5. cv::Rect
+	
+</a>
+<a href="/8.8.1.1.6.html" class="list-group-item group-child">
+	6. cv::RotatedRect
+	
+</a>
+<a href="/8.8.1.1.7.html" class="list-group-item group-child">
+	7. cv::Complex
+	
+</a>
+<a href="/8.8.1.1.8.html" class="list-group-item group-child">
+	8. cv::Matx
+	
+</a>
+</div>
+<a href="#8-8-1-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Helper Objects
+	<span class="badge badge-primary badge-pill">6</span>
+</a>
+<div class="list-group collapse" id="8-8-1-2-0">
+<a href="/8.8.1.2.1.html" class="list-group-item group-child">
+	1. cv::Range
+	
+</a>
+<a href="/8.8.1.2.2.html" class="list-group-item group-child">
+	2. cv::Ptr
+	
+</a>
+<a href="/8.8.1.2.3.html" class="list-group-item group-child">
+	3. cv::TermCriteria
+	
+</a>
+<a href="/8.8.1.2.4.html" class="list-group-item group-child">
+	4. cv::Exception
+	
+</a>
+<a href="/8.8.1.2.5.html" class="list-group-item group-child">
+	5. cv::DataType
+	
+</a>
+<a href="/8.8.1.2.6.html" class="list-group-item group-child">
+	6. cv::InputArray, cv::OutputArray, cv::noArray
+	
+</a>
+</div>
+<a href="#8-8-1-3-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Images
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="8-8-1-3-0">
+<a href="/8.8.1.3.1.html" class="list-group-item group-child">
+	1. cv::Mat members
+	
+</a>
+<a href="/8.8.1.3.2.html" class="list-group-item group-child">
+	2. access array elements indivitually
+	
+</a>
+<a href="/8.8.1.3.3.html" class="list-group-item group-child">
+	3. creating an array
+	
+</a>
+</div>
+<a href="#8-8-1-4-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Utility Functions
+	<span class="badge badge-primary badge-pill">26</span>
+</a>
+<div class="list-group collapse" id="8-8-1-4-0">
+<a href="/8.8.1.4.1.html" class="list-group-item group-child">
+	1. cv::alignPtr
+	
+</a>
+<a href="/8.8.1.4.2.html" class="list-group-item group-child">
+	2. cv::alignSize
+	
+</a>
+<a href="/8.8.1.4.3.html" class="list-group-item group-child">
+	3. cv::allocate (will be removed)
+	
+</a>
+<a href="/8.8.1.4.4.html" class="list-group-item group-child">
+	4. cv::CV_Assert
+	
+</a>
+<a href="/8.8.1.4.5.html" class="list-group-item group-child">
+	5. cv::cubeRoot
+	
+</a>
+<a href="/8.8.1.4.6.html" class="list-group-item group-child">
+	6. cvCeil
+	
+</a>
+<a href="/8.8.1.4.7.html" class="list-group-item group-child">
+	7. cvFloor
+	
+</a>
+<a href="/8.8.1.4.8.html" class="list-group-item group-child">
+	8. cvIsInf
+	
+</a>
+<a href="/8.8.1.4.9.html" class="list-group-item group-child">
+	9. cvIsNaN
+	
+</a>
+<a href="/8.8.1.4.10.html" class="list-group-item group-child">
+	10. cvRound
+	
+</a>
+<a href="/8.8.1.4.11.html" class="list-group-item group-child">
+	11. cv::deallocate (will be removed)
+	
+</a>
+<a href="/8.8.1.4.12.html" class="list-group-item group-child">
+	12. cv::error
+	
+</a>
+<a href="/8.8.1.4.13.html" class="list-group-item group-child">
+	13. cv::CV_Error
+	
+</a>
+<a href="/8.8.1.4.14.html" class="list-group-item group-child">
+	14. cv::fastatan2
+	
+</a>
+<a href="/8.8.1.4.15.html" class="list-group-item group-child">
+	15. cv::fastFree()
+	
+</a>
+<a href="/8.8.1.4.16.html" class="list-group-item group-child">
+	16. cv::fastMalloc()
+	
+</a>
+<a href="/8.8.1.4.17.html" class="list-group-item group-child">
+	17. cv::format
+	
+</a>
+<a href="/8.8.1.4.18.html" class="list-group-item group-child">
+	18. cv::getCPUTickCount
+	
+</a>
+<a href="/8.8.1.4.19.html" class="list-group-item group-child">
+	19. cv::getNumThreads
+	
+</a>
+<a href="/8.8.1.4.20.html" class="list-group-item group-child">
+	20. cv::getOptimalDFTSize
+	
+</a>
+<a href="/8.8.1.4.21.html" class="list-group-item group-child">
+	21. cv::getThreadNum
+	
+</a>
+<a href="/8.8.1.4.22.html" class="list-group-item group-child">
+	22. cv::getTickCount
+	
+</a>
+<a href="/8.8.1.4.23.html" class="list-group-item group-child">
+	23. cv::getTickFrequency
+	
+</a>
+<a href="/8.8.1.4.24.html" class="list-group-item group-child">
+	24. cv::setNumThreads
+	
+</a>
+<a href="/8.8.1.4.25.html" class="list-group-item group-child">
+	25. cv::setUseOptimized
+	
+</a>
+<a href="/8.8.1.4.26.html" class="list-group-item group-child">
+	26. cv::useOptimized
+	
+</a>
+</div>
+</div>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x1F312;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x1F315;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x1F315;';
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x1F312;';
+	}
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

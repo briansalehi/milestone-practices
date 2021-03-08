@@ -1,9 +1,11 @@
 1: 160,161
 # [book name]: [page numbers e.g. 1 or 1,2 or 1-5]
 #C++ Primer Plus
+#C++ Primer Plus, 6th Edition - Stephen Prata
 # e.g. book title: 45
 # e.g. book title: 45,46
 # e.g. book title: 45-47
 # https://example.com
 # [link]
 #Sam's Teach Yourself C++ in One Hour a Day
+#Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao

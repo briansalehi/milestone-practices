@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>address generic server</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+button.sticky {
+	position: sticky;
+	top: 1%;
+}
+
+img {
+	max-width: -moz-available;
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	z-index: 1;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/7.0.html">C</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.7.0.html">Network Programming</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/7.7.1.0.html">Sockets</a></li>
+<li class='breadcrumb-item active'>address generic server</li>
+</ol>
+<button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
+<h2>
+<a id="address-generic-server" class="anchor" aria-hidden="true" href="#address-generic-server">
+address generic server
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<hr />
+<h3>
+<a id="Source" class="anchor" aria-hidden="true" href="#Source">
+Source
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+  <cite>generic-server.c</cite>
+<pre class="line-numbers" >
+<code class="language-c">
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;unistd.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;sys/socket.h&gt;
+    #include &lt;netdb.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    
+    #define QUEUE_LENGTH 10
+    
+    void throw_exception(const char *msg)
+    {
+    	fprintf(stderr, &quot;%s\n&quot;, msg);
+    	exit(1);
+    }
+    
+    void print_address(const struct sockaddr *address)
+    {
+    	if (address == NULL) {
+    		printf(&quot;NULL\n&quot;);
+    		return;
+    	}
+    
+    	void *numeric_ip;
+    	char string_ip[INET6_ADDRSTRLEN+1];
+    	in_port_t port;
+    
+    	switch (address-&gt;sa_family) {
+    	case AF_INET:
+    		numeric_ip = &amp;((struct sockaddr_in *) address)-&gt;sin_addr;
+    		port = ntohs(((struct sockaddr_in *) address)-&gt;sin_port);
+    		break;
+    	case AF_INET6:
+    		numeric_ip = &amp;((struct sockaddr_in6 *) address)-&gt;sin6_addr;
+    		port = ntohs(((struct sockaddr_in6 *) address)-&gt;sin6_port);
+    		break;
+    	default:
+    		printf(&quot;unkown family\n&quot;);
+    		return;
+    	}
+    
+    	if (inet_ntop(address-&gt;sa_family, numeric_ip, string_ip, sizeof(string_ip)) == NULL) {
+    		printf(&quot;translation failed\n&quot;);
+    		return;
+    	}
+    
+    	printf(&quot;%s:[%d]\n&quot;, string_ip, port);
+    }
+    
+    int create_socket(const char *service)
+    {
+    	if (service == NULL)
+    		throw_exception(&quot;no service specified&quot;);
+    
+    	struct addrinfo filter;
+    	memset(&amp;filter, 0, sizeof(filter));
+    	filter.ai_flags = AI_PASSIVE;
+    	filter.ai_family = AF_UNSPEC;
+    	filter.ai_socktype = SOCK_STREAM;
+    	filter.ai_protocol = IPPROTO_TCP;
+    
+    	struct addrinfo *list;
+    	int err = getaddrinfo(NULL, service, &amp;filter, &amp;list);
+    	if (err != 0)
+    		throw_exception(gai_strerror(err));
+    
+    	int local_socket = -1;
+    	struct addrinfo *address;
+    	for (address = list; address != NULL; address = address-&gt;ai_next) {
+    		local_socket = socket(address-&gt;ai_family, address-&gt;ai_socktype, address-&gt;ai_protocol);
+    		if (local_socket &lt; 0)
+    			continue;
+    
+    		if ((bind(local_socket, (struct sockaddr *) address-&gt;ai_addr, address-&gt;ai_addrlen) == 0) &amp;&amp; (listen(local_socket, QUEUE_LENGTH) == 0) ) {
+    			printf(&quot;trying address: &quot;);
+    			print_address((struct sockaddr *) address-&gt;ai_addr);
+    			break;
+    		}
+    
+    		close(local_socket);
+    		local_socket = -1;
+    	}
+    	freeaddrinfo(list);
+    
+    	if (local_socket &lt; 0)
+    		throw_exception(&quot;failed to create socket&quot;);
+    
+    	return local_socket;
+    }
+    
+    int accept_client(const int local_socket)
+    {
+    	struct sockaddr_storage client_address;
+    	socklen_t client_addrsize = sizeof(client_address);
+    	memset(&amp;client_address, 0, client_addrsize);
+    
+    	int client_socket = -1;
+    	client_socket = accept(local_socket, (struct sockaddr *) &amp;client_address, &amp;client_addrsize);
+    	if (client_socket &lt; 0)
+    		throw_exception(&quot;failed to accept new client&quot;);
+    
+    	printf(&quot;client connected: &quot;);
+    	print_address((struct sockaddr *) &amp;client_address);
+    
+    	return client_socket;
+    }
+    
+    void echo_service(const int client_socket)
+    {
+    	const size_t buflen = 1024;
+    	char buffer[buflen+1];
+    	ssize_t received = recv(client_socket, buffer, buflen, 0);
+    	if (received &lt;= 0)
+    		throw_exception(&quot;failed to retrieve data&quot;);
+    
+    	buffer[received] = &apos;\0&apos;;
+    	printf(&quot;received %ld bytes: %s&quot;, received, buffer);
+    
+    	ssize_t transferred = send(client_socket, buffer, received, 0);
+    	if (transferred != received)
+    		throw_exception(&quot;failed to send data&quot;);
+    
+    	printf(&quot;sent %ld bytes\n&quot;, transferred);
+    }
+    
+    int main(int argc, char **argv)
+    {
+    	if (argc != 2)
+    		throw_exception(&quot;required parameters: &lt;service&gt;&quot;);
+    
+    	const char *service = argv[1];
+    
+    	int local_socket = create_socket(service);
+    	int client_socket = accept_client(local_socket);
+    	echo_service(client_socket);
+    
+    	return 0;
+    }
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
+Execution
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-bash">
+gcc -g -Wall -O0 -c -o ./generic-server.o ./generic-server.c
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+gcc -g -o ./generic-server.bin ./generic-server.o
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./generic-server.bin helix
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-c">
+trying address: 0.0.0.0:[10860]
+client connected: 127.0.0.1:[55856]
+received 26 bytes: Generic connection messagesent 26 bytes
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/ipv6-client">Previous Page</a></li>
+<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c/network-programming/sockets/generic-client">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x1F312;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x1F315;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+	console.log(dark);
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x1F315;';
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x1F312;';
+	}
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>
