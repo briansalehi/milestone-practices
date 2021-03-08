@@ -15,6 +15,7 @@ this-pointer.cxx
 sizeof.cxx
 struct.cxx
 union.cxx
+variant.cxx
 friend.cxx
 aggregation.cxx
 default-constructible.cxx

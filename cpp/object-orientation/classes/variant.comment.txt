@@ -1,0 +1,42 @@
+<p>One of the problems with the union is that it enables its content to be interpreted as any other data type supported by the <code>union</code>; for example:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		union SimpleUnion
+		{
+			int num;
+			double preciseNum;
+		};
+	</code>
+</pre>
+
+<p>You may instantiate this <code>union</code> for a <code>double</code>, yet use it as an integer:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		SimpleUnion u1;
+		u1.preciseNum = 3.14; // union stores a double
+		int num2 = u1.num; // works, but u1 contained a double!
+	</code>
+</pre>
+
+<p>C++17 provides the programmer with the <code>std::variant</code>, a typesafe alternative to the <code>union</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::variant<int, double> varSafe;
+		varSafe = 3.14; // variant stores double
+
+		double pi = std::get<double>(varSafe); // 3.14
+		double pi2 = std::get<1>(varsafe); // 3.14
+
+		std::get<char>(varSafe); // compile fails: no char in variant
+		std::get<2>(varSafe); // compile fails: variant with two types, not three
+
+		try {
+			std::get<int>(varSafe); // throws exception as variant stores double
+		} catch (std::bad_variant_access&) {
+			// exception handler code
+		}
+	</code>
+</pre>
