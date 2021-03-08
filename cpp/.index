@@ -3,7 +3,7 @@ fundamentals
 object-orientation
 templates
 stl
-exception
+exceptions
 memory-management
 multithreading
 gui
