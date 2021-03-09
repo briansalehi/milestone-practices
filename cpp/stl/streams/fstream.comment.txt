@@ -1,0 +1,106 @@
+<p><code>std:fstream</code> is a class that C++ provides for (relatively) platform-independent file access. <code>std::fstream</code> inherits from <code>std::ofstream</code> for writing a file and <code>std::ifstream</code> for reading one. In other words, std::fstream provides you with both read and write functionality.</p>
+
+<p>To use class <code>std::fstream</code> or its base classes, include header <code>&lt;fstream&gt;</code>.</p>
+
+<p>To use an <code>std::fstream</code>, <code>std::ofstream</code>, or <code>std::ifstream</code> class, you need to open a file using method <code>open()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::fstream myFile;
+		myFile.open("HelloFile.txt", std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
+
+		// check if open() succeeded
+		if (myFile.is_open()) {
+			// do reading or writing here
+			myFile.close();
+		}
+	</code>
+</pre>
+
+<p><code>open()</code> takes two arguments: The first is the path and name of the file being opened (if you don’t supply a path, it assumes the current directory settings for the application), whereas the second is the mode in which the file is being opened. The modes chosen allow the file to be created even if one exists (<code>std::ios_base::trunc</code>) and allow you to read and write into the file (<code>std::ios_base::in | std::ios_base::out</code>).</p>
+
+<p>Closing the stream using <code>close()</code> is essential to save the file.</p>
+
+<p>There is an alternative way of opening a file stream, which is via the constructor:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::fstream myFile("HelloFile.txt", std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
+	</code>
+</pre>
+
+<p>If you want to open a file for reading, use this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::ifstream myFile("HelloFile.txt", std::ios_base::in);
+	</code>
+</pre>
+
+<p>Irrespective of whether you use the constructor or the member method <code>open()</code>, it is recommended that you check for the successful opening of the file via <code>is_open()</code> before continuing to use the corresponding file stream object.</p>
+
+<p>The various modes in which a file stream can be opened are the following:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Object</th>
+			<th scope="col">Purpose</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>std::ios_base::app</code></td>
+			<td>Appends to the end of existing files rather than truncating them</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::ate</code></td>
+			<td>Places you at the end of the file, but you can write data  anywhere in the file</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::binary</code></td>
+			<td>Creates a binary file (default is text)</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::in</code></td>
+			<td>Opens file for read operations only</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::out</code></td>
+			<td>Opens file for write operations only</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>After you have opened a file stream, you can write to it using <code>operator&lt;&lt;</code></p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::ofstream myFile;
+		myFile.open("HelloFile.txt", std::ios_base::out);
+
+		if (myFile.is_open()) {
+			myFile << "My first text file!" << std::endl;
+			myFile.close();
+		}
+	</code>
+</pre>
+
+<p>To read a file, one can use <code>std::fstream</code> and open it using flag <code>std::ios_base::in</code> or use <code>std::ifstream</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::ifstream myFile;
+		myFile.open("HelloFile.txt", std::ios_base::in);
+		if (myFile.is_open())
+		{
+			std::string fileContents;
+			while (myFile.good()) {
+				std::getline(myFile, fileContents);
+			}
+			myFile.close();
+		} else {
+			std::cout << "open() failed: check if file is in right folder" << std::endl;
+		}
+	</code>
+</pre>

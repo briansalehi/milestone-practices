@@ -4,7 +4,7 @@ stream-manipulators
 sequential
 assotiative
 adaptive
-algorithms
 iterators
+algorithms
 function_object
 lambda

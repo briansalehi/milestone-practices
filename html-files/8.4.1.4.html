@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>(C++14) operator ""s</title>
+<title>Input Stream</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,100 +206,72 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.4.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.4.1.0.html">Strings</a></li>
-<li class='breadcrumb-item active'>(C++14) operator ""s</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.4.1.0.html">Streams</a></li>
+<li class='breadcrumb-item active'>Input Stream</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="(C++14)-operator-""s" class="anchor" aria-hidden="true" href="#(C++14)-operator-""s">
-(C++14) operator ""s
+<a id="Input-Stream" class="anchor" aria-hidden="true" href="#Input-Stream">
+Input Stream
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-**operators** are fully discussed in their own chapter, but there is a little useful operator used with string objects, called **string literal operator**.  
-Notice that when you use \0 character in a string you are actually breaking that string as they represent the end of strings.  
-Actually this character is a part of special character list and they can be parsed in your string to do tasks or make signs in a string.  
-To make special characters to look just as they are written, use **s** operator at the end of a string literal.
+<p><code>std::cin</code> is versatile and enables you to read input into the plain old data types, such as the <code>int</code>, <code>double</code>, and <code>char*</code>, and you can also read lines or characters from the screen using methods such as <code>getline()</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::string placehoder;
+		std::cin >> placeholder;
+	</code>
+</pre>
+
+<p>Just like <code>std::cin</code> allows you to write directly into an <code>int</code>, you can do the same with a C-style char array, too:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		char buffer[10] = {0}; // can contain max 10 chars
+		std::cin >> buffer; // Danger: user may enter more than 10 chars
+	</code>
+</pre>
+
+<p>When writing into a C-style string buffer, it is very important that you don’t exceed the bounds of the buffer to avoid a crash or a security vulnerability. So, a better way of reading into a C-style char buffer is this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cin.get(buffer, 9); // stop inserting at the 9th character
+	</code>
+</pre>
+
+<p><code>std::cin</code> stops insertion when it encounters the first white space.</p>
+
+<p>To allow the user to enter a complete line, including spaces, you need to use <code>std::getline()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::string name;
+		std::getline(std::cin, name);
+	</code>
+</pre>
 <hr />
 <h3>
-<a id="Source" class="anchor" aria-hidden="true" href="#Source">
-Source
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h3>
-  <cite>operator.cxx</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;algorithm&gt;
-    #include &lt;string&gt;
-    
-    int main()
-    {
-        using namespace std::string_literals;
-    
-        std::string simple(&quot;This string would be truncated \0 here by NULL character&quot;);
-        std::cout &lt;&lt; simple &lt;&lt; std::endl;
-    
-        // attention to the s letter at the end of string literal
-        std::string complete(&quot;This string would not be truncated \0 here thanks to \&quot;s\&quot; operator&quot;s);
-        std::cout &lt;&lt; complete &lt;&lt; std::endl;
-    
-        return 0;
-    }
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
-Execution
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-bash">
-g++ -Wall -g -o ./operator.o -c ./operator.cxx
-</code>
-</pre>
-<pre>
-<code class="language-bash">
-g++ -g -o ./operator.bin ./operator.o
-</code>
-</pre>
-<pre>
-<code class="language-bash">
-./operator.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-This string would be truncated
-This string would not be truncated  here thanks to "s" operator
-</code>
-</pre>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 27</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.1.3.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams/output-stream">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.4.1.5.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams/file-stream">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

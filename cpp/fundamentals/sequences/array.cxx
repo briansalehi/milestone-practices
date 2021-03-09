@@ -1,7 +1,15 @@
 int main()
 {
-    // static array initialization with 3 elements
-    int array[3] = {1,2,3};
+	// only constant literals can be used to define array length
+    const unsigned int length = 2;
+
+	// never leave an array uninitialized
+    int array[length] = {0};
+
+	// occupy array placeholders with the same type of array
+    array[0] = 10;
+    array[1] = 20;
+    array[2] = 30;
 
     return 0;
 }

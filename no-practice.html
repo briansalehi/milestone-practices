@@ -17,17 +17,22 @@
     <body>
         <h3>Nootbook Not Available</h3>
 		<script>
-		function darkmode(manual) {
-			const hours = new Date().getHours();
-			const isNight = !(hours > 6 && hours < 20);
-			var bodystyle = document.body;
-			if (isNight || manual) {
-				bodystyle.classList.add("dark-mode");
-			} else {
-				bodystyle.classList.remove("dark-mode");
+			function darkmode() {
+				var bodystyle = document.body;
+				var icon = document.getElementById('darkmode-icon');
+				const dark = sessionStorage.getItem('darkmode');
+
+				if (dark === 'true' || dark == 'undefined') {
+					bodystyle.classList.add("dark-mode");
+					sessionStorage.setItem('darkmode', true);
+					icon.innerHTML = '&#x1F312;';
+				} else {
+					sessionStorage.setItem('darkmode', false);
+					bodystyle.classList.remove("dark-mode");
+					icon.innerHTML = '&#x1F315;';
+				}
 			}
-		}
-		darkmode();
+			darkmode();
 		</script>
     </body>
 </html>

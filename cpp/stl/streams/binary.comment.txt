@@ -1,0 +1,1 @@
+<p>The actual process of writing to a binary file is not too different from what you have learned thus far. It is important to use <code>std::ios_base::binary</code> flag as a mask when opening the file.</p>

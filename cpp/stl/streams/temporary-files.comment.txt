@@ -1,3 +1,1 @@
-In many programs, you will need to generate temporary files.  
-Some books might suggest to use **tmpnam()** function, but it's depricated and dangerious!  
-Use **mkstemp()** function.
+<p>In many programs, you will need to generate temporary files. Some references might suggest to using <code>tmpnam()</code> function, but it's depricated and dangerious. Use <code>mkstemp()</code> instead.</p>

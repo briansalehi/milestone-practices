@@ -1,19 +1,18 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-using namespace std;
 
-int main ()
+int main()
 {
     int number = 10;
-    cout << "integer representation: " << number << endl;
+	std::cout << "Integer representation: " << number << std::endl;
 
-    stringstream convertable;
+	std::stringstream convertable;
     convertable << number;
 
-    string numeric;
+	std::string numeric;
     convertable >> numeric;
-    cout << "string representation: " << numeric << endl;
+	std::cout << "String representation: " << numeric << std::endl;
 
     return 0;
 }

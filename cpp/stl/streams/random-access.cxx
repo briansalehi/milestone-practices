@@ -1,7 +1,7 @@
-#include <iostream> // I/O
-#include <fstream> // fstream
-#include <string> // string
-#include <cstdlib> // exit
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
 
 int main()
 {

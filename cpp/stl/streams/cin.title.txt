@@ -1,1 +1,1 @@
-*std::cin* and *std::getline*
+Input Stream

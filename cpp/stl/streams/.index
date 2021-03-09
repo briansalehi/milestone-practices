@@ -4,7 +4,6 @@ sstream.cxx
 cout.cxx
 cin.cxx
 fstream.cxx
-write.cxx
 binary.cxx
 temporary-files.cxx
 random-access.cxx

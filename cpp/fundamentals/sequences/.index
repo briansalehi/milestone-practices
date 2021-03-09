@@ -4,7 +4,6 @@ charconv.cxx
 char.cxx
 cstring.cxx
 multidimensional.cxx
-store.cxx
 string.cxx
 string-view.cxx
 vector.cxx

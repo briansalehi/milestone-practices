@@ -1,2 +1,2 @@
-integer representation: 10
-string representation: 10
+Integer representation: 10
+String representation: 10

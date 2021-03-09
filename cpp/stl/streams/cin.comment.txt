@@ -1,0 +1,36 @@
+<p><code>std::cin</code> is versatile and enables you to read input into the plain old data types, such as the <code>int</code>, <code>double</code>, and <code>char*</code>, and you can also read lines or characters from the screen using methods such as <code>getline()</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::string placehoder;
+		std::cin >> placeholder;
+	</code>
+</pre>
+
+<p>Just like <code>std::cin</code> allows you to write directly into an <code>int</code>, you can do the same with a C-style char array, too:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		char buffer[10] = {0}; // can contain max 10 chars
+		std::cin >> buffer; // Danger: user may enter more than 10 chars
+	</code>
+</pre>
+
+<p>When writing into a C-style string buffer, it is very important that you don’t exceed the bounds of the buffer to avoid a crash or a security vulnerability. So, a better way of reading into a C-style char buffer is this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cin.get(buffer, 9); // stop inserting at the 9th character
+	</code>
+</pre>
+
+<p><code>std::cin</code> stops insertion when it encounters the first white space.</p>
+
+<p>To allow the user to enter a complete line, including spaces, you need to use <code>std::getline()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::string name;
+		std::getline(std::cin, name);
+	</code>
+</pre>

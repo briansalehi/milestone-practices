@@ -1,42 +1,47 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <string.h>
-using namespace std;
+#include <string_view>
 
-struct Human {
-    int age;
-    char name[30];
+struct Human
+{
+    unsigned int age;
+	const char* name;
 
-    Human () {};
-    Human (const char* iname, const int iage): age(iage) {
-        strcpy (name, iname);
-    };
+	Human() {};
+    Human(const char* iname, const unsigned int iage): age(iage), name(iname) {};
+
+	void whois() const
+	{
+		std::cout << name << " is " << age << " years old." << std::endl;
+	}
 };
 
-int main ()
+int main()
 {
-    ofstream wfile;
-    wfile.open ("file.temp", ios_base::out);
+	// write class data into file
+	std::ofstream wfile;
+    wfile.open("file.temp", std::ios_base::out);
 
     if (wfile.is_open()) {
-        Human worker ("Adam", 35);
-        wfile.write(reinterpret_cast <const char*> (&worker), sizeof(worker));
-        wfile.close ();
-
-        cout << "wrote object into file" << endl;
+        Human worker ("Brian", 25);
+		// dangerious!
+        wfile.write(reinterpret_cast<const char*>(&worker), sizeof(worker));
+        wfile.close();
+		std::cout << "Wrote object into file" << std::endl;
     }
 
-    ifstream rfile;
-    rfile.open ("file.temp", ios_base::in);
+	// read class data from file into object
+	std::ifstream rfile;
+    rfile.open("file.temp", std::ios_base::in);
 
     if (rfile.is_open()) {
         Human someone;
-        rfile.read ((char*)&someone, sizeof(someone));
-        rfile.close ();
+        rfile.read((char*)&someone, sizeof(someone));
+        rfile.close();
         
-        cout << "read object from file" << endl;
-        cout << someone.name << " is " << someone.age << " years old" << endl;
+		std::cout << "Read object from file" << std::endl;
+		someone.whois();
     }
 
     return 0;

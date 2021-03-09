@@ -1,0 +1,3 @@
+<p>One of the most useful utilities provided by C++ is class <code>std::stringstream</code> that enables you to perform a host of conversion activities.</p>
+
+<p>To use class <code>std::stringstream</code>, include header <code>&lt;sstream&gt;</code>.</p>

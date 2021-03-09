@@ -1,2 +1,6 @@
 Initialier lists can also hold multiple values and assign them onto
 an array or similar containers which we will discuss soon.
+
+**Note:** when arrays are declared and left uninitialized, they hold garbage data as their values.
+It is best practice to always initialize an array with zero. In case of initializing an array with
+an initializer list, all of its elements will be assigned to zero.
