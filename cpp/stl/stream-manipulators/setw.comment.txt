@@ -1,0 +1,13 @@
+<p>You can use manipulators such as <code>setw()</code> to set the width of the field in characters.</p> 
+
+<p>Any insertion made to the stream is right aligned in this specified width. Similarly, <code>setfill()</code> can be used to determine what character fills the empty area in such a situation, as demonstrated below:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cout << setw(35);
+		std::cout << "Hey - right aligned!" << std::endl;
+		std::cout << std::setw(35) << setfill('*');
+		std::cout << "Hey - right aligned!" << std::endl;
+		std::cout << "Hey - back to default!" << std::endl;
+	</code>
+</pre>

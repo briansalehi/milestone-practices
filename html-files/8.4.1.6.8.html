@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Stream Manipulators</title>
+<title>Sorting List</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,207 +205,119 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class='breadcrumb-item active'>Stream Manipulators</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.4.0.html">Standard Template Library</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.4.1.0.html">Sequential Containers</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.4.1.6.0.html">List</a></li>
+<li class='breadcrumb-item active'>Sorting List</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Stream-Manipulators" class="anchor" aria-hidden="true" href="#Stream-Manipulators">
-Stream Manipulators
+<a id="Sorting-List" class="anchor" aria-hidden="true" href="#Sorting-List">
+Sorting List
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>When using a stream class, you have the option of specifying <a href="/cpp/fundamentals/string-manipulators">manipulators</a> that perform specific actions for you. <code>std::endl</code> is one such manipulator that you have been using thus far to insert a newline character.</p>
-
-<p>Below table demonstrates a few other such manipulator functions and flags:</p>
-
-<table class="table table-dark">
-	<thead>
-		<tr>
-			<th scope="col">Output Manipulators</th>
-			<th scope="col">Purpose</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><code>std::endl</code></td>
-			<td>Inserts a newline character</td>
-		</tr>
-		<tr>
-			<td><code>std::ends</code></td>
-			<td>Inserts a null character</td>
-		</tr>
-		<tr>
-			<th scope="col">Radix Manipulators</th>
-			<th scope="col">Purpose</th>
-		</tr>
-		<tr>
-			<td><code>std::dec</code></td>
-			<td>Instructs stream to interpret input or display output in decimal</td>
-		</tr>
-		<tr>
-			<td><code>std::dex</code></td>
-			<td>Instructs stream to interpret input or display output in hexadecimal</td>
-		</tr>
-		<tr>
-			<td><code>std::oct</code></td>
-			<td>Instructs stream to interpret input or display output in octal</td>
-		</tr>
-		<tr>
-			<th scope="col">Floating Point</th>
-			<th scope="col">Representing Manipulators Purpose</th>
-		</tr>
-		<tr>
-			<td><code>std::fixed</code></td>
-			<td>Instructs stream to display in fixed point notation</td>
-		</tr>
-		<tr>
-			<td><code>std::scientific</code></td>
-			<td>Instructs stream to display in scientific notation</td>
-		</tr>
-		<tr>
-			<td><code>&lt;iomanip&gt;</code> header</td>
-			<td></td>
-		</tr>
-		<tr>
-			<th scope="col">Manipulators</th>
-			<th scope="col">Purpose</th>
-		</tr>
-		<tr>
-			<td><code>std::setprecision</code></td>
-			<td>Set decimal point precision as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setw</code></td>
-			<td>Set field width as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setfill</code></td>
-			<td>Set fill character as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setbase</code></td>
-			<td>Set the radix/base, akin to using <code>std::dec</code> , <code>std::hex</code> , or <code>std::oct</code> as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setiosflag</code></td>
-			<td>Set flags via a mask input parameter of type <code>std::ios_base::fmtflags</code></td>
-		</tr>
-		<tr>
-			<td><code>std::resetiosflag</code></td>
-			<td>Restore defaults for a particular type specified by that contained in <code>std::ios_base::fmtflags</code></td>
-		</tr>
-	</tbody>
-</table>
+There are some methods like **sort()** or **transport()** and other algorithmic functions, that might need you to create a function or object function (will be discussed later) to complete the task of it.  
+Imagine you want to sort a container, containing elements of type a special object you have created earlier. How the sort function should know how to sort this container? You decide! You create a predicate function (disscussed later) to complete the action based on a rational way of comparison used to sort your objects.
 <hr />
 <h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
+<a id="Source" class="anchor" aria-hidden="true" href="#Source">
+Source
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 27</li>
-</ul>
+  <cite>sort.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;list&gt;
+    
+    template &lt;typename C&gt;
+    void display(const C&amp; container) {
+        for (auto iterator = container.cbegin(); iterator != container.cend(); ++ iterator) {
+            std::cout &lt;&lt; *iterator &lt;&lt; &quot; &quot;;
+        }
+        std::cout &lt;&lt; std::endl;
+    }
+    
+    // inline function of sort
+    inline bool descending(const int&amp; lhs, const int&amp; rhs) { return (lhs &gt; rhs); }
+    inline bool ascending(const int&amp; lhs, const int&amp; rhs) { return (lhs &lt; rhs); }
+    
+    int main()
+    {
+        std::list&lt;int&gt; numbers{5,2,4,1,3};
+        std::list&lt;int&gt; integers(numbers);
+    	// template initialization is optional for functions, you can strip it
+        display&lt;std::list&lt;int&gt;&gt;(numbers);
+    
+        numbers.sort();
+        display&lt;std::list&lt;int&gt;&gt;(numbers);
+    
+        integers.sort(descending);
+        display&lt;std::list&lt;int&gt;&gt;(integers);
+    
+        integers.sort(ascending);
+        display&lt;std::list&lt;int&gt;&gt;(integers);
+    
+        return 0;
+    }
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
+Execution
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-bash">
+g++ -Wall -g -o ./sort.o -c ./sort.cxx
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+g++ -g -o ./sort.bin ./sort.o
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./sort.bin
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-cpp">
+5 2 4 1 3
+1 2 3 4 5
+5 4 3 2 1
+1 2 3 4 5
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.6.12.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.1.6.7.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.1.7.1.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.4.2.0.html">Next Page</a></li>
 </ul>
-<hr />
-<h3>
-<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
-Table of Content
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<div class="list-group list-group-root well" >
-<a href="/8.1.7.1.html" class="list-group-item">
-	1. append into the end of file
-	
-</a>
-<a href="/8.1.7.2.html" class="list-group-item">
-	2. binary files
-	
-</a>
-<a href="/8.1.7.3.html" class="list-group-item">
-	3. boolalpha flag
-	
-</a>
-<a href="/8.1.7.4.html" class="list-group-item">
-	4. *std::cin* and *std::getline*
-	
-</a>
-<a href="/8.1.7.5.html" class="list-group-item">
-	5. std::cout
-	
-</a>
-<a href="/8.1.7.6.html" class="list-group-item">
-	6. fill function
-	
-</a>
-<a href="/8.1.7.7.html" class="list-group-item">
-	7. fmtflags
-	
-</a>
-<a href="/8.1.7.8.html" class="list-group-item">
-	8. std::fstream
-	
-</a>
-<a href="/8.1.7.9.html" class="list-group-item">
-	9. std::hex flag
-	
-</a>
-<a href="/8.1.7.10.html" class="list-group-item">
-	10. I/O stream flags
-	
-</a>
-<a href="/8.1.7.11.html" class="list-group-item">
-	11. output stream manipulators
-	
-</a>
-<a href="/8.1.7.12.html" class="list-group-item">
-	12. precision function
-	
-</a>
-<a href="/8.1.7.13.html" class="list-group-item">
-	13. random access read-write
-	
-</a>
-<a href="/8.1.7.14.html" class="list-group-item">
-	14. setf function
-	
-</a>
-<a href="/8.1.7.15.html" class="list-group-item">
-	15. showbase flag
-	
-</a>
-<a href="/8.1.7.16.html" class="list-group-item">
-	16. showpoint flag
-	
-</a>
-<a href="/8.1.7.17.html" class="list-group-item">
-	17. std:stringstream
-	
-</a>
-<a href="/8.1.7.18.html" class="list-group-item">
-	18. temporary files
-	
-</a>
-<a href="/8.1.7.19.html" class="list-group-item">
-	19. field width
-	
-</a>
-</div>
 <script>
 function darkmode() {
 	var bodystyle = document.body;
@@ -457,6 +369,8 @@ function toggle_darkmode() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

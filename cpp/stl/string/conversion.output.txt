@@ -1,3 +1,0 @@
-original std::string: AbCdEfGhIjK
-converted to upper case: ABCDEFGHIJK
-converted to lower case: abcdefghijk

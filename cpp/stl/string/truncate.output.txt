@@ -1,5 +1,0 @@
-original string: Cxx programming language
-truncate 1: gramming language
-truncate 2: xx programming language
-truncate 3: 
-std::string is empty!

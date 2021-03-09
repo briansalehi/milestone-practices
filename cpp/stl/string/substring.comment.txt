@@ -1,1 +1,0 @@
-To find a sub-string in a string we can use **std::find** function which is a property of **algorithm** header file. We will discuss **algorithms** in next few chapters.

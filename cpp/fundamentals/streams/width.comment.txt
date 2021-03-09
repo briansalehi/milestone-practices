@@ -1,2 +1,0 @@
-To create a space and write some characters right-justified, we can use setw()
-function.

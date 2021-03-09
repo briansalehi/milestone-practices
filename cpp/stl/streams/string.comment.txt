@@ -1,0 +1,48 @@
+<p><code>std::string</code> can be initialized by string literals, paranthesis and initialization list. String objects can also be assigned to each other, copy constructor and move constructor are set properly to handle such assignments.</p>
+
+<code>operator&lt;&lt;</code> used when writing into a stream is called the <b>stream insertion operator</b>. You use it when writing to the display, file, and so on.
+
+<code>operator&gt;&gt;</code> used when writing a stream into a variable is called the <b>stream extraction operator</b>. You use it when reading input from the keyboard, file, and so on.
+
+<p>When using a stream class, you have the option of specifying <a href="/cpp/fundamentals/string-manipulators">manipulators</a> that perform specific actions for you. <code>std::endl</code> is one such manipulator that you have been using thus far to insert a newline character:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cout << "This lines ends here" << std::endl;
+	</code>
+</pre>
+
+<p>It is possible to ask <code>std::cout</code> to display an integer in hexadecimal or in octal notations.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cout << std::setiosflags(std::ios_base::hex|std::ios_base::showbase|std::ios_base::uppercase);
+		std::cout << std::resetiosflags(std::ios_base::hex|std::ios_base::showbase|std::ios_base::uppercase);
+		const double Pi = (double)22.0 / 7;
+		std::cout << std::setprecision(7) << "Pi = " << Pi << std::endl;
+		std::cout << std::fixed << "Fixed Pi = " << Pi << std::endl;
+		std::cout << std::scientific << "Scientific Pi = " << Pi << std::endl;
+	</code>
+</pre>
+
+More algorithms can be used on <code>std::string</code> to perform operations such as <a href="/cpp/stl/algorithms/transform">transforming</a>, <a href="/cpp/stl/algorithms/find">finding</a>, <a href="/cpp/stl/algorithms/sort">sorting</a>, <a href="/cpp/stl/algorithms/erase">truncating</a>, <a href="/cpp/stl/algorithms/replace">replacing</a>, <a href="/cpp/stl/algorithms/reverse">reversing</a> and <a href="/cpp/stl/algorithms/search">searching</a> which will be discussed later on <a href="/cpp/stl/algorithm">algorithms</a>.
+
+<p>One useful algorithm applied on strings are transformations:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+    std::string sample("AbCdEfGhIjK");
+    std::cout << "original std::string: " << sample << std::endl;
+
+    transform(sample.begin(), sample.end(), sample.begin(), ::toupper);
+    std::cout << "converted to upper case: " << sample << std::endl;
+
+    transform(sample.begin(), sample.end(), sample.begin(), ::tolower);
+    std::cout << "converted to lower case: " << sample << std::endl;
+	</code>
+</pre>
+
+**operators** are fully discussed in their own chapter, but there is a little useful operator used with string objects, called **string literal operator**.  
+Notice that when you use \0 character in a string you are actually breaking that string as they represent the end of strings.  
+Actually this character is a part of special character list and they can be parsed in your string to do tasks or make signs in a string.  
+To make special characters to look just as they are written, use **s** operator at the end of a string literal.

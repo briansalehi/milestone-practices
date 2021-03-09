@@ -1,0 +1,12 @@
+README.md
+boolalpha.cxx
+fill.cxx
+fmtflags.cxx
+hex.cxx
+ios.cxx
+output-manipulators.cxx
+precision.cxx
+setf.cxx
+showbase.cxx
+showpoint.cxx
+setw.cxx

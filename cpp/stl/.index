@@ -1,11 +1,10 @@
 README.md
-string
-array
+streams
+stream-manipulators
 sequential
 assotiative
 adaptive
-bitset
-iterators
-lambda
-function_object
 algorithms
+iterators
+function_object
+lambda

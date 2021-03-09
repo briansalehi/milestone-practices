@@ -1,2 +1,0 @@
-sample string: ABC
-reversed string: CBA

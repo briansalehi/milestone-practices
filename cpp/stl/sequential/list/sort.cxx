@@ -17,16 +17,17 @@ int main()
 {
     std::list<int> numbers{5,2,4,1,3};
     std::list<int> integers(numbers);
-    display(numbers);
+	// template initialization is optional for functions, you can strip it
+    display<std::list<int>>(numbers);
 
     numbers.sort();
-    display(numbers);
+    display<std::list<int>>(numbers);
 
     integers.sort(descending);
-    display(integers);
+    display<std::list<int>>(integers);
 
     integers.sort(ascending);
-    display(integers);
+    display<std::list<int>>(integers);
 
     return 0;
 }
