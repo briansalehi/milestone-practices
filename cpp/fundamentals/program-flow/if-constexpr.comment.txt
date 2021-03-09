@@ -1,0 +1,34 @@
+<p>This feature is similar to an <code>if-else</code> construct with the exception that the <code>if</code> condition is evaluated at compile time and the code in the <code>if</code> block (or the accompanying <code>else</code>) is compiled only if the condition is satisfied at compile time.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template <typename T>
+		void DisplayData(const T& data)
+		{
+			if constexpr (is_integral<T>::value)
+				cout << "Integral data: " << data << endl;
+			 else if constexpr (is_floating_point<T>::value)
+				cout << setprecision(15) << "Floating point data: " << data << endl;
+			 else
+				cout << "Unidentified data: " << data << endl;
+		}
+	</code>
+</pre>
+
+<p>Given <code>DisplayData(15)</code>, the C++17-compliant compiler would compile only the following line:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		cout << "Integral data: " << data << endl;
+	</code>
+</pre>
+
+<p>Given <code>DisplayData(“Hello World!”)</code>, the compiler would compile only the following, as the function has been invoked with a type that triggers the else block:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		cout << "Unidentified data: " << data << endl;
+	</code>
+</pre>
+
+<p>Combined with automatic return type deduction, introduced <a href="/cpp/fundamentals/functions/auto-return-value">Auto Return Value</a>, this is a powerful feature that can potentially allow a function to return values of different types depending on the path the compiler executes.</p>

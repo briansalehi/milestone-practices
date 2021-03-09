@@ -5,6 +5,7 @@ do_while.cxx
 for.cxx
 goto.cxx
 if.cxx
+if-constexpr.cxx
 nested.cxx
 range_based_for.cxx
 switch_case.cxx
