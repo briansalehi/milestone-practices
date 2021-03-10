@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Pointers and References</title>
+<title>Stream Manipulators</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,21 +205,116 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Memory Management</a></li>
-<li class='breadcrumb-item active'>Pointers and References</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
+<li class='breadcrumb-item active'>Stream Manipulators</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Pointers-and-References" class="anchor" aria-hidden="true" href="#Pointers-and-References">
-Pointers and References
+<a id="Stream-Manipulators" class="anchor" aria-hidden="true" href="#Stream-Manipulators">
+Stream Manipulators
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+<p>When using a stream class, you have the option of specifying <a href="/cpp/fundamentals/string-manipulators">manipulators</a> that perform specific actions for you. <code>std::endl</code> is one such manipulator that you have been using thus far to insert a newline character.</p>
+
+<p>Below table demonstrates a few other such manipulator functions and flags:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Output Manipulators</th>
+			<th scope="col">Purpose</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>std::endl</code></td>
+			<td>Inserts a newline character</td>
+		</tr>
+		<tr>
+			<td><code>std::ends</code></td>
+			<td>Inserts a null character</td>
+		</tr>
+		<tr>
+			<th scope="col">Radix Manipulators</th>
+			<th scope="col">Purpose</th>
+		</tr>
+		<tr>
+			<td><code>std::dec</code></td>
+			<td>Instructs stream to interpret input or display output in decimal</td>
+		</tr>
+		<tr>
+			<td><code>std::dex</code></td>
+			<td>Instructs stream to interpret input or display output in hexadecimal</td>
+		</tr>
+		<tr>
+			<td><code>std::oct</code></td>
+			<td>Instructs stream to interpret input or display output in octal</td>
+		</tr>
+		<tr>
+			<th scope="col">Floating Point</th>
+			<th scope="col">Representing Manipulators Purpose</th>
+		</tr>
+		<tr>
+			<td><code>std::fixed</code></td>
+			<td>Instructs stream to display in fixed point notation</td>
+		</tr>
+		<tr>
+			<td><code>std::scientific</code></td>
+			<td>Instructs stream to display in scientific notation</td>
+		</tr>
+		<tr>
+			<td><code>&lt;iomanip&gt;</code> header</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="col">Manipulators</th>
+			<th scope="col">Purpose</th>
+		</tr>
+		<tr>
+			<td><code>std::setprecision</code></td>
+			<td>Set decimal point precision as a parameter</td>
+		</tr>
+		<tr>
+			<td><code>std::setw</code></td>
+			<td>Set field width as a parameter</td>
+		</tr>
+		<tr>
+			<td><code>std::setfill</code></td>
+			<td>Set fill character as a parameter</td>
+		</tr>
+		<tr>
+			<td><code>std::setbase</code></td>
+			<td>Set the radix/base, akin to using <code>std::dec</code> , <code>std::hex</code> , or <code>std::oct</code> as a parameter</td>
+		</tr>
+		<tr>
+			<td><code>std::setiosflag</code></td>
+			<td>Set flags via a mask input parameter of type <code>std::ios_base::fmtflags</code></td>
+		</tr>
+		<tr>
+			<td><code>std::resetiosflag</code></td>
+			<td>Restore defaults for a particular type specified by that contained in <code>std::ios_base::fmtflags</code></td>
+		</tr>
+	</tbody>
+</table>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 27</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.1.4.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams/random-access">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.2.1.html">Next Page</a></li>
 </ul>
@@ -235,59 +330,47 @@ Table of Content
 </h3>
 <div class="list-group list-group-root well" >
 <a href="/8.5.2.1.html" class="list-group-item">
-	1. using const on pointers
+	1. boolalpha flag
 	
 </a>
 <a href="/8.5.2.2.html" class="list-group-item">
-	2. function pointer
+	2. fill function
 	
 </a>
 <a href="/8.5.2.3.html" class="list-group-item">
-	3. incrementing and decrementing pointers
+	3. fmtflags
 	
 </a>
 <a href="/8.5.2.4.html" class="list-group-item">
-	4. pointing to invalid memory
+	4. std::hex flag
 	
 </a>
 <a href="/8.5.2.5.html" class="list-group-item">
-	5. memory leakage
+	5. I/O stream flags
 	
 </a>
 <a href="/8.5.2.6.html" class="list-group-item">
-	6. pointers
+	6. output stream manipulators
 	
 </a>
 <a href="/8.5.2.7.html" class="list-group-item">
-	7. dynamic memory allocation using new & delete operators
+	7. precision function
 	
 </a>
 <a href="/8.5.2.8.html" class="list-group-item">
-	8. using nothrow
+	8. setf function
 	
 </a>
 <a href="/8.5.2.9.html" class="list-group-item">
-	9. passing parameters as pointers
+	9. showbase flag
 	
 </a>
 <a href="/8.5.2.10.html" class="list-group-item">
-	10. pointer
+	10. showpoint flag
 	
 </a>
 <a href="/8.5.2.11.html" class="list-group-item">
-	11. allocating array of a type dynamically
-	
-</a>
-<a href="/8.5.2.12.html" class="list-group-item">
-	12. references, substitution of pointers
-	
-</a>
-<a href="/8.5.2.13.html" class="list-group-item">
-	13. storing callable objects
-	
-</a>
-<a href="/8.5.2.14.html" class="list-group-item">
-	14. using try...catch
+	11. field width
 	
 </a>
 </div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Memory Management</title>
+<title>Standard Template Library</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,22 +205,35 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class='breadcrumb-item active'>Memory Management</li>
+<li class='breadcrumb-item active'>Standard Template Library</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Memory-Management" class="anchor" aria-hidden="true" href="#Memory-Management">
-Memory Management
+<a id="Standard-Template-Library" class="anchor" aria-hidden="true" href="#Standard-Template-Library">
+Standard Template Library
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.10.23.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.13.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.1.0.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -234,114 +247,478 @@ Table of Content
 </h3>
 <div class="list-group list-group-root well" >
 <a href="#8-5-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Casting Operators
-	<span class="badge badge-primary badge-pill">4</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Streams
+	<span class="badge badge-primary badge-pill">8</span>
 </a>
 <div class="list-group collapse" id="8-5-1-0">
-<a href="/8.5.1.1.html" class="list-group-item group-child">
-	1. static casting
+<a href="/cpp/stl/streams/string" class="list-group-item group-child">
+	1. String
 	
 </a>
-<a href="/8.5.1.2.html" class="list-group-item group-child">
-	2. dynamic casting
+<a href="/cpp/stl/streams/string-stream" class="list-group-item group-child">
+	2. String Stream
 	
 </a>
-<a href="/8.5.1.3.html" class="list-group-item group-child">
-	3. constant casting
+<a href="/cpp/stl/streams/output-stream" class="list-group-item group-child">
+	3. Output Stream
 	
 </a>
-<a href="/8.5.1.4.html" class="list-group-item group-child">
-	4. reinterpret casting
+<a href="/cpp/stl/streams/input-stream" class="list-group-item group-child">
+	4. Input Stream
+	
+</a>
+<a href="/cpp/stl/streams/file-stream" class="list-group-item group-child">
+	5. File Stream
+	
+</a>
+<a href="/cpp/stl/streams/binary-stream" class="list-group-item group-child">
+	6. Binary Stream
+	
+</a>
+<a href="/cpp/stl/streams/temporary-files" class="list-group-item group-child">
+	7. Temporary Files
+	
+</a>
+<a href="/cpp/stl/streams/random-access" class="list-group-item group-child">
+	8. Random Access
 	
 </a>
 </div>
 <a href="#8-5-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Pointers and References
-	<span class="badge badge-primary badge-pill">14</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Stream Manipulators
+	<span class="badge badge-primary badge-pill">11</span>
 </a>
 <div class="list-group collapse" id="8-5-2-0">
 <a href="/8.5.2.1.html" class="list-group-item group-child">
-	1. using const on pointers
+	1. boolalpha flag
 	
 </a>
 <a href="/8.5.2.2.html" class="list-group-item group-child">
-	2. function pointer
+	2. fill function
 	
 </a>
 <a href="/8.5.2.3.html" class="list-group-item group-child">
-	3. incrementing and decrementing pointers
+	3. fmtflags
 	
 </a>
 <a href="/8.5.2.4.html" class="list-group-item group-child">
-	4. pointing to invalid memory
+	4. std::hex flag
 	
 </a>
 <a href="/8.5.2.5.html" class="list-group-item group-child">
-	5. memory leakage
+	5. I/O stream flags
 	
 </a>
 <a href="/8.5.2.6.html" class="list-group-item group-child">
-	6. pointers
+	6. output stream manipulators
 	
 </a>
 <a href="/8.5.2.7.html" class="list-group-item group-child">
-	7. dynamic memory allocation using new & delete operators
+	7. precision function
 	
 </a>
 <a href="/8.5.2.8.html" class="list-group-item group-child">
-	8. using nothrow
+	8. setf function
 	
 </a>
 <a href="/8.5.2.9.html" class="list-group-item group-child">
-	9. passing parameters as pointers
+	9. showbase flag
 	
 </a>
 <a href="/8.5.2.10.html" class="list-group-item group-child">
-	10. pointer
+	10. showpoint flag
 	
 </a>
 <a href="/8.5.2.11.html" class="list-group-item group-child">
-	11. allocating array of a type dynamically
-	
-</a>
-<a href="/8.5.2.12.html" class="list-group-item group-child">
-	12. references, substitution of pointers
-	
-</a>
-<a href="/8.5.2.13.html" class="list-group-item group-child">
-	13. storing callable objects
-	
-</a>
-<a href="/8.5.2.14.html" class="list-group-item group-child">
-	14. using try...catch
+	11. field width
 	
 </a>
 </div>
 <a href="#8-5-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Smart Pointers
-	<span class="badge badge-primary badge-pill">3</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Sequential Containers
+	<span class="badge badge-primary badge-pill">22</span>
 </a>
 <div class="list-group collapse" id="8-5-3-0">
-<a href="/8.5.3.1.html" class="list-group-item group-child">
-	1. pointers ownership
+<a href="/cpp/stl/sequencial-containers/array" class="list-group-item group-child">
+	1. Array
+	<span class="badge badge-primary badge-pill">12</span>
+</a>
+<div class="list-group collapse" id="8-5-3-1-0">
+<a href="/8.5.3.1.1.html" class="list-group-item group-child">
+	1. array
 	
 </a>
-<a href="/8.5.3.2.html" class="list-group-item group-child">
-	2. std::unique_ptr
+<a href="/8.5.3.1.2.html" class="list-group-item group-child">
+	2. clear a container
 	
 </a>
-<a href="/8.5.3.3.html" class="list-group-item group-child">
-	3. std::shared_ptr
+<a href="/8.5.3.1.3.html" class="list-group-item group-child">
+	3. deque (pronounciation rythmes as *deck*)
+	
+</a>
+<a href="/8.5.3.1.4.html" class="list-group-item group-child">
+	4. measuring the distance of two elements
+	
+</a>
+<a href="/8.5.3.1.5.html" class="list-group-item group-child">
+	5. inserting element in the middle
+	
+</a>
+<a href="/8.5.3.1.6.html" class="list-group-item group-child">
+	6. vector instantiation
+	
+</a>
+<a href="/8.5.3.1.7.html" class="list-group-item group-child">
+	7. size and capacity of vector
+	
+</a>
+<a href="/8.5.3.1.8.html" class="list-group-item group-child">
+	8. inserting element at the end
+	
+</a>
+<a href="/8.5.3.1.9.html" class="list-group-item group-child">
+	9. remove an element from vector
+	
+</a>
+<a href="/8.5.3.1.10.html" class="list-group-item group-child">
+	10. reserving memory for vector
+	
+</a>
+<a href="/8.5.3.1.11.html" class="list-group-item group-child">
+	11. accessing vector elements using pointer semantics
+	
+</a>
+<a href="/8.5.3.1.12.html" class="list-group-item group-child">
+	12. accessing vector elements using array semantics
 	
 </a>
 </div>
+<a href="/cpp/stl/sequencial-containers/bitset" class="list-group-item group-child">
+	2. Bitset
+	<span class="badge badge-primary badge-pill">2</span>
+</a>
+<div class="list-group collapse" id="8-5-3-2-0">
+<a href="/cpp/stl/sequencial-containers/bitset/bitset" class="list-group-item group-child">
+	1. Bitset
+	
+</a>
+<a href="/cpp/stl/sequencial-containers/bitset/bit-vector" class="list-group-item group-child">
+	2. Bit Vector
+	
+</a>
+</div>
+<a href="/cpp/stl/sequencial-containers/vector" class="list-group-item group-child">
+	3. Vector
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="8-5-3-3-0">
+</div>
+<a href="/cpp/stl/sequencial-containers/deque" class="list-group-item group-child">
+	4. Deque
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="8-5-3-4-0">
+</div>
+<a href="/cpp/stl/sequencial-containers/list" class="list-group-item group-child">
+	5. List
+	<span class="badge badge-primary badge-pill">8</span>
+</a>
+<div class="list-group collapse" id="8-5-3-5-0">
+<a href="/8.5.3.5.1.html" class="list-group-item group-child">
+	1. std::forward_list
+	
+</a>
+<a href="/8.5.3.5.2.html" class="list-group-item group-child">
+	2. inserting elements in the middle of list
+	
+</a>
+<a href="/8.5.3.5.3.html" class="list-group-item group-child">
+	3. list instantiation
+	
+</a>
+<a href="/8.5.3.5.4.html" class="list-group-item group-child">
+	4. pushing elements into list
+	
+</a>
+<a href="/8.5.3.5.5.html" class="list-group-item group-child">
+	5. removing element from list
+	
+</a>
+<a href="/8.5.3.5.6.html" class="list-group-item group-child">
+	6. reversing list elements
+	
+</a>
+<a href="/8.5.3.5.7.html" class="list-group-item group-child">
+	7. sorting list comprising class
+	
+</a>
+<a href="/cpp/stl/sequencial-containers/list/sorting-list" class="list-group-item group-child">
+	8. Sorting List
+	
+</a>
+</div>
+</div>
 <a href="#8-5-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Move Semantics
-	<span class="badge badge-primary badge-pill">1</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>4. STL Associative Containers
+	<span class="badge badge-primary badge-pill">11</span>
 </a>
 <div class="list-group collapse" id="8-5-4-0">
-<a href="/8.5.4.1.html" class="list-group-item group-child">
-	1. std::move
+<a href="/8.5.4.1.0.html" class="list-group-item group-child">
+	1. the STL std::set and std::multiset
+	<span class="badge badge-primary badge-pill">5</span>
+</a>
+<div class="list-group collapse" id="8-5-4-1-0">
+<a href="/8.5.4.1.1.html" class="list-group-item group-child">
+	1. erasing elements from set
+	
+</a>
+<a href="/8.5.4.1.2.html" class="list-group-item group-child">
+	2. finding element in set
+	
+</a>
+<a href="/8.5.4.1.3.html" class="list-group-item group-child">
+	3. hash set implementation (std::unordred_set, std::unordered_multiset)
+	
+</a>
+<a href="/8.5.4.1.4.html" class="list-group-item group-child">
+	4. set insertion
+	
+</a>
+<a href="/8.5.4.1.5.html" class="list-group-item group-child">
+	5. set instantiation
+	
+</a>
+</div>
+<a href="/8.5.4.2.0.html" class="list-group-item group-child">
+	2. the STL std::map Classes
+	<span class="badge badge-primary badge-pill">6</span>
+</a>
+<div class="list-group collapse" id="8-5-4-2-0">
+<a href="/8.5.4.2.1.html" class="list-group-item group-child">
+	1. map instantiation
+	
+</a>
+<a href="/8.5.4.2.2.html" class="list-group-item group-child">
+	2. inserting element in map
+	
+</a>
+<a href="/8.5.4.2.3.html" class="list-group-item group-child">
+	3. erasing element in map
+	
+</a>
+<a href="/8.5.4.2.4.html" class="list-group-item group-child">
+	4. custom predicate for searching map
+	
+</a>
+<a href="/8.5.4.2.5.html" class="list-group-item group-child">
+	5. finding element in map
+	
+</a>
+<a href="/8.5.4.2.6.html" class="list-group-item group-child">
+	6. hash (unordered_map & unordered_multimap)
+	
+</a>
+</div>
+</div>
+<a href="#8-5-5-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>5. Adaptive Containers
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="8-5-5-0">
+<a href="/cpp/stl/adaptive-containers/stack" class="list-group-item group-child">
+	1. Stack
+	
+</a>
+<a href="/cpp/stl/adaptive-containers/queue" class="list-group-item group-child">
+	2. Queue
+	
+</a>
+<a href="/cpp/stl/adaptive-containers/priority-queue" class="list-group-item group-child">
+	3. Priority Queue
+	
+</a>
+</div>
+<a href="#8-5-6-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>6. Iterators
+	<span class="badge badge-primary badge-pill">5</span>
+</a>
+<div class="list-group collapse" id="8-5-6-0">
+<a href="/8.5.6.1.html" class="list-group-item group-child">
+	1. std::istream_iterator
+	
+</a>
+<a href="/8.5.6.2.html" class="list-group-item group-child">
+	2. std::ostream_iterator
+	
+</a>
+<a href="/8.5.6.3.html" class="list-group-item group-child">
+	3. std::front_insert_iterator
+	
+</a>
+<a href="/8.5.6.4.html" class="list-group-item group-child">
+	4. std::back_insert_iterator
+	
+</a>
+<a href="/8.5.6.5.html" class="list-group-item group-child">
+	5. std::reverse_iterator
+	
+</a>
+</div>
+<a href="#8-5-7-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>7. Algorithms
+	<span class="badge badge-primary badge-pill">26</span>
+</a>
+<div class="list-group collapse" id="8-5-7-0">
+<a href="/cpp/stl/algorithms/count" class="list-group-item group-child">
+	1. Count
+	
+</a>
+<a href="/cpp/stl/algorithms/search" class="list-group-item group-child">
+	2. Search
+	
+</a>
+<a href="/cpp/stl/algorithms/find" class="list-group-item group-child">
+	3. Find
+	
+</a>
+<a href="/8.5.7.4.html" class="list-group-item group-child">
+	4. 
+	
+</a>
+<a href="/8.5.7.5.html" class="list-group-item group-child">
+	5. 
+	
+</a>
+<a href="/8.5.7.6.html" class="list-group-item group-child">
+	6. 
+	
+</a>
+<a href="/cpp/stl/algorithms/fill" class="list-group-item group-child">
+	7. Fill
+	
+</a>
+<a href="/cpp/stl/algorithms/generate" class="list-group-item group-child">
+	8. Generate
+	
+</a>
+<a href="/cpp/stl/algorithms/for-each" class="list-group-item group-child">
+	9. For Each
+	
+</a>
+<a href="/cpp/stl/algorithms/transform" class="list-group-item group-child">
+	10. Transform
+	
+</a>
+<a href="/cpp/stl/algorithms/copy" class="list-group-item group-child">
+	11. Copy
+	
+</a>
+<a href="/cpp/stl/algorithms/remove" class="list-group-item group-child">
+	12. Remove
+	
+</a>
+<a href="/cpp/stl/algorithms/unique" class="list-group-item group-child">
+	13. Unique
+	
+</a>
+<a href="/cpp/stl/algorithms/replace" class="list-group-item group-child">
+	14. Replace
+	
+</a>
+<a href="/cpp/stl/algorithms/sort" class="list-group-item group-child">
+	15. Sort
+	
+</a>
+<a href="/cpp/stl/algorithms/partition" class="list-group-item group-child">
+	16. Partition
+	
+</a>
+<a href="/cpp/stl/algorithms/binary-search" class="list-group-item group-child">
+	17. Binary Search
+	
+</a>
+<a href="/cpp/stl/algorithms/bounds" class="list-group-item group-child">
+	18. Bounds
+	
+</a>
+<a href="/8.5.7.19.html" class="list-group-item group-child">
+	19. std::next_permutation
+	
+</a>
+<a href="/8.5.7.20.html" class="list-group-item group-child">
+	20. pair
+	
+</a>
+<a href="/8.5.7.21.html" class="list-group-item group-child">
+	21. regex
+	
+</a>
+<a href="/8.5.7.22.html" class="list-group-item group-child">
+	22. std::set_difference()
+	
+</a>
+<a href="/8.5.7.23.html" class="list-group-item group-child">
+	23. std::set_intersection()
+	
+</a>
+<a href="/8.5.7.24.html" class="list-group-item group-child">
+	24. std::set_union()
+	
+</a>
+<a href="/8.5.7.25.html" class="list-group-item group-child">
+	25. random_shuffle
+	
+</a>
+<a href="/8.5.7.26.html" class="list-group-item group-child">
+	26. tuple
+	
+</a>
+</div>
+<a href="#8-5-8-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>8. Function Objects
+	<span class="badge badge-primary badge-pill">4</span>
+</a>
+<div class="list-group collapse" id="8-5-8-0">
+<a href="/8.5.8.1.html" class="list-group-item group-child">
+	1. unary function object
+	
+</a>
+<a href="/8.5.8.2.html" class="list-group-item group-child">
+	2. unary predicate
+	
+</a>
+<a href="/8.5.8.3.html" class="list-group-item group-child">
+	3. binary function object
+	
+</a>
+<a href="/8.5.8.4.html" class="list-group-item group-child">
+	4. binary predicate
+	
+</a>
+</div>
+<a href="#8-5-9-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>9. Lambda Expressions
+	<span class="badge badge-primary badge-pill">5</span>
+</a>
+<div class="list-group collapse" id="8-5-9-0">
+<a href="/8.5.9.1.html" class="list-group-item group-child">
+	1. lambda function declaration
+	
+</a>
+<a href="/8.5.9.2.html" class="list-group-item group-child">
+	2. storing lambda functions
+	
+</a>
+<a href="/8.5.9.3.html" class="list-group-item group-child">
+	3. lambda as unary predicate
+	
+</a>
+<a href="/8.5.9.4.html" class="list-group-item group-child">
+	4. lambda as binary function
+	
+</a>
+<a href="/8.5.9.5.html" class="list-group-item group-child">
+	5. lambda as binary predicate
 	
 </a>
 </div>

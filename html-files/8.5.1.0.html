@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Casting Operators</title>
+<title>Streams</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,23 +205,80 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Memory Management</a></li>
-<li class='breadcrumb-item active'>Casting Operators</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
+<li class='breadcrumb-item active'>Streams</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Casting-Operators" class="anchor" aria-hidden="true" href="#Casting-Operators">
-Casting Operators
+<a id="Streams" class="anchor" aria-hidden="true" href="#Streams">
+Streams
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+<p>C++ streams are a generic implementation of read and write (in other words, input and output) logic that enables you to use certain consistent patterns toward reading or writing data. These patterns are consistent irrespective of whether you are reading data from the disk or the keyboard or whether you are writing to the display or back to the disk. You just need to use the right stream class, and the implementation within the class takes care of device- and OS-specific details.</p>
+
+<p>C++ provides you with a set of standard classes and headers that help you perform some important and frequent I/O operations. Below table is a list of classes that you use frequently:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Object</th>
+			<th scope="col">Purpose</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>std::cout</code></th>
+			<td>Standard output stream, typically redirected to the console</th>
+		</tr>
+		<tr>
+			<td><code>std::cin</code></th>
+			<td>Standard input stream, typically used to read data into variables</th>
+		</tr>
+		<tr>
+			<td><code>std::cerr</code></th>
+			<td>Standard output stream for errors</th>
+		</tr>
+		<tr>
+			<td><code>std::fstream</code></th>
+			<td>Input and output stream class for file operations; inherits from <code>std::ofstream</code> and <code>std::ifstream</code></th>
+		</tr>
+		<tr>
+			<td><code>std::ofstream</code></th>
+			<td>Output stream class for writing operations on file</th>
+		</tr>
+		<tr>
+			<td><code>std::ifstream</code></th>
+			<td>Input stream class for reading operations on file</th>
+		</tr>
+		<tr>
+			<td><code>std::stringstream</code></th>
+			<td>Input and output stream class for string operations; inherits from <code>std::istringstream</code> and <code>std::ostringstream</code>; typically used to perform conversions from (or to) string and other types</th>
+		</tr>
+	</tbody>
+</table>
+
+<p>Three streams of <code>std::cout</code>, <code>std::cin</code> and <code>std::cerr</code> are global objects of stream classes <code>std::ostream</code>, <code>std::istream</code>, and <code>std::ostream</code>, respectively. Being global objects, they’re initialized before <code>main()</code> starts.</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 27</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/memory-management">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.1.1.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams/string">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -234,20 +291,36 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/8.5.1.1.html" class="list-group-item">
-	1. static casting
+<a href="/cpp/stl/streams/string" class="list-group-item">
+	1. String
 	
 </a>
-<a href="/8.5.1.2.html" class="list-group-item">
-	2. dynamic casting
+<a href="/cpp/stl/streams/string-stream" class="list-group-item">
+	2. String Stream
 	
 </a>
-<a href="/8.5.1.3.html" class="list-group-item">
-	3. constant casting
+<a href="/cpp/stl/streams/output-stream" class="list-group-item">
+	3. Output Stream
 	
 </a>
-<a href="/8.5.1.4.html" class="list-group-item">
-	4. reinterpret casting
+<a href="/cpp/stl/streams/input-stream" class="list-group-item">
+	4. Input Stream
+	
+</a>
+<a href="/cpp/stl/streams/file-stream" class="list-group-item">
+	5. File Stream
+	
+</a>
+<a href="/cpp/stl/streams/binary-stream" class="list-group-item">
+	6. Binary Stream
+	
+</a>
+<a href="/cpp/stl/streams/temporary-files" class="list-group-item">
+	7. Temporary Files
+	
+</a>
+<a href="/cpp/stl/streams/random-access" class="list-group-item">
+	8. Random Access
 	
 </a>
 </div>

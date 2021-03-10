@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>switch case</title>
+<title>Lambda Functions</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,24 +206,71 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Program Flow Control</a></li>
-<li class='breadcrumb-item active'>switch case</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Functions</a></li>
+<li class='breadcrumb-item active'>Lambda Functions</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="switch-case" class="anchor" aria-hidden="true" href="#switch-case">
-switch case
+<a id="Lambda-Functions" class="anchor" aria-hidden="true" href="#Lambda-Functions">
+Lambda Functions
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-The objective of switch-case is to enable you to check a particular expression
-against a host of possible constants and possibly perform a different action
-for each of those different values. The new C++ keywords you would often find
-in such a construct are <b>switch</b>, <b>case</b>, <b>default</b>, and
-<b>break</b>.
+This section is just an introduction to a concept that’s not exactly easy for
+beginners. So, skim through it and try to learn the concept without being
+disappointed if you don’t grasp it all. Lambda functions are discussed in
+depth <a href="/cpp/">algorithms section</a>.
+
+The syntax of a lambda function is the following:
+<pre class="language-cpp line-numbers">
+	<code>
+		[optional parameters](parameter list){ statements; }
+	</code>
+</pre>
+
+Lambda functions were introduced in C++11 and help in the usage of STL
+algorithms to sort or process data. Typically, a sort function requires you to
+supply a binary predicate.
+
+This is a function that compares two arguments and returns true if one is less
+than the other, else false, thereby helping in deciding the order of elements
+in a sort operation.
+
+Such predicates are typically implemented as operators in a class, leading to
+a tedious bit of coding. Lambda functions can compact predicate definitions.
+
+You are already familiar with <b>vectors</b>. Though, we never used
+<b>for_each</b> and <b>sort</b> function, but don't worry, we will get there
+soon.
+
+<b>for_each</b> and <b>sort</b> functions gets three arguments, beginning of a
+container, end of a container and a function to pass elements of that
+container one by one.
+
+So, instead of passing the third argument with a function, instead we created
+a lambda function on the same line!
+
+Lambda functions are famous for their small size and simplicity.
+They are functions with no name! that is, they are anonymous functions.
+They are actually called where they are declared.
+But don't get too smart with lambda functions!
+They need to be simple and do one small task.  
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -234,36 +281,35 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>switch_case.cxx</cite>
+  <cite>lambda.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
+    #include &lt;algorithm&gt;
+    #include &lt;vector&gt;
+    
+    void display(std::vector&lt;int&gt;&amp; container) {
+    	// lambda function to display elements of a container
+        for_each(container.cbegin(), container.cend(), [](const int elem) { std::cout &lt;&lt; elem &lt;&lt; &quot; &quot;; });
+        std::cout &lt;&lt; std::endl;
+    }
     
     int main()
     {
-        enum traffic_light {
-            red = 1,
-            yellow,
-            green
-        };
+        std::vector&lt;int&gt; container;
     
-        int input;
-        std::cout &lt;&lt; &quot;Enter a number between 1-3 : &quot;;
-        std::cin &gt;&gt; input;
+        container.push_back(3);
+        container.push_back(5);
+        container.push_back(1);
+        container.push_back(2);
+        container.push_back(4);
     
-        switch (input) {
-            case red:
-                std::cout &lt;&lt; &quot;Light is red&quot; &lt;&lt; std::endl;
-                break;
-            case yellow:
-                std::cout &lt;&lt; &quot;Light is yellow&quot; &lt;&lt; std::endl;
-                break;
-            case green:
-                std::cout &lt;&lt; &quot;Light is green&quot; &lt;&lt; std::endl;
-                break;
-            default:
-                std::cout &lt;&lt; &quot;your input is not in valid range!&quot; &lt;&lt; std::endl;
-        }
+        display(container);
+    
+        // lambda function used to sort a container
+        sort(container.begin(), container.end(), [](int a, int b) { return(a &lt; b); });
+        
+        display(container);
     
         return 0;
     }
@@ -281,17 +327,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./switch_case.o -c ./switch_case.cxx
+g++ -Wall -g -o ./lambda.o -c ./lambda.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./switch_case.bin ./switch_case.o
+g++ -g -o ./lambda.bin ./lambda.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./switch_case.bin
+./lambda.bin
 </code>
 </pre>
 <hr />
@@ -306,13 +352,14 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-Enter a number between 1-3 : light is green
+3 5 1 2 4
+1 2 3 4 5
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.6.8.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/auto-return-value">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/program-flow/ternary">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/pointers-parameters">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

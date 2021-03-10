@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Editors</title>
+<title>MySQL</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,23 +205,40 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
-<li class='breadcrumb-item active'>Editors</li>
+<li class='breadcrumb-item active'>MySQL</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Editors" class="anchor" aria-hidden="true" href="#Editors">
-Editors
+<a id="MySQL" class="anchor" aria-hidden="true" href="#MySQL">
+MySQL
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Here you will review popular editors like Nano, Vim and Emacs.
+SQL is a freeform language. That means that you can include line breaks,
+spaces, and indentation without affecting the way the database interprets the
+code.
+
+In addition, SQL isn't case-sensitive. That means that you can use uppercase
+or lowercase or combination of both without affecting the way the database
+interprets the code.
+
+<h4>Coding Recommendations</h4>
+<ul>
+<li>Capitalize all keywords, and use lowercase for the other code in a SQL
+statement.</li>
+<li>Separate the words in names with underscores, as in invoice_number.</li>
+<li>Start each clause on a new line.</li>
+<li>Break long clauses into multiple lines and indent continued lines.</li>
+<li>Use <i>comments</i> only for portions of code that are difficult to
+understand. Then, make sure that the comments are correct and up-to-date.</li>
+</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/stream-processing/awk/introduction">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/editors/vim">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/1.8.1.0.html">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -235,110 +252,62 @@ Table of Content
 </h3>
 <div class="list-group list-group-root well" >
 <a href="#1-8-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Vim
-	<span class="badge badge-primary badge-pill">19</span>
+	<i class="glyphicon glyphicon-chevron-right"></i>1. 
+	<span class="badge badge-primary badge-pill">13</span>
 </a>
 <div class="list-group collapse" id="1-8-1-0">
-<a href="/linux/editors/vim/fundamentals" class="list-group-item group-child">
-	1. Fundamentals
-	<span class="badge badge-primary badge-pill">10</span>
-</a>
-<div class="list-group collapse" id="1-8-1-1-0">
-<a href="/linux/editors/vim/fundamentals/installation" class="list-group-item group-child">
-	1. Installation
+<a href="/1.8.1.1.html" class="list-group-item group-child">
+	1. Comments
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/documentation" class="list-group-item group-child">
-	2. Built-in Documentation
+<a href="/1.8.1.2.html" class="list-group-item group-child">
+	2. Create Database
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/factory-settings" class="list-group-item group-child">
-	3. Factory Settings
+<a href="/1.8.1.3.html" class="list-group-item group-child">
+	3. Use Database
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/prompts" class="list-group-item group-child">
-	4. Prompts
+<a href="/1.8.1.4.html" class="list-group-item group-child">
+	4. Create Table
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/versions" class="list-group-item group-child">
-	5. Versions
+<a href="/1.8.1.5.html" class="list-group-item group-child">
+	5. Add Column
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/gui" class="list-group-item group-child">
-	6. Textual and Graphical User Interface
+<a href="/1.8.1.6.html" class="list-group-item group-child">
+	6. Delete Column
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/reversing" class="list-group-item group-child">
-	7. Repeating and Reversing
+<a href="/1.8.1.7.html" class="list-group-item group-child">
+	7. Create Index
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/compound-commands" class="list-group-item group-child">
-	8. Compound Commands
+<a href="/1.8.1.8.html" class="list-group-item group-child">
+	8. Delete Index
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/notation" class="list-group-item group-child">
-	9. Notation
+<a href="/1.8.1.9.html" class="list-group-item group-child">
+	9. Query a Single Table
 	
 </a>
-<a href="/linux/editors/vim/fundamentals/count" class="list-group-item group-child">
-	10. Count
+<a href="/1.8.1.10.html" class="list-group-item group-child">
+	10. Join Tables
 	
 </a>
-</div>
-<a href="/linux/editors/vim/modes" class="list-group-item group-child">
-	2. Modes
-	<span class="badge badge-primary badge-pill">2</span>
-</a>
-<div class="list-group collapse" id="1-8-1-2-0">
-<a href="/linux/editors/vim/modes/normal-mode" class="list-group-item group-child">
-	1. Normal Mode
+<a href="/1.8.1.11.html" class="list-group-item group-child">
+	11. Add Row
 	
 </a>
-<a href="/linux/editors/vim/modes/operator-pending-mode" class="list-group-item group-child">
-	2. Operator-Pending Mode
+<a href="/1.8.1.12.html" class="list-group-item group-child">
+	12. Update Row
 	
 </a>
-</div>
-<a href="/linux/editors/vim/operators" class="list-group-item group-child">
-	3. Operators
-	<span class="badge badge-primary badge-pill">6</span>
-</a>
-<div class="list-group collapse" id="1-8-1-3-0">
-<a href="/linux/editors/vim/operators/undo" class="list-group-item group-child">
-	1. Undo Commands
+<a href="/1.8.1.13.html" class="list-group-item group-child">
+	13. Delete Row
 	
 </a>
-<a href="/linux/editors/vim/operators/delete-word" class="list-group-item group-child">
-	2. Delete a Word
-	
-</a>
-<a href="/linux/editors/vim/operators/dot-operator" class="list-group-item group-child">
-	3. Dot Operator
-	
-</a>
-<a href="/linux/editors/vim/operators/star-operator" class="list-group-item group-child">
-	4. Search Without Typing
-	
-</a>
-<a href="/linux/editors/vim/operators/arithmetic" class="list-group-item group-child">
-	5. Incrementing and Decrementing Operator
-	
-</a>
-<a href="/linux/editors/vim/operators/custom-operators" class="list-group-item group-child">
-	6. Custom Operators
-	
-</a>
-</div>
-<a href="/linux/editors/vim/motions" class="list-group-item group-child">
-	4. Motions
-	<span class="badge badge-primary badge-pill">1</span>
-</a>
-<div class="list-group collapse" id="1-8-1-4-0">
-<a href="/linux/editors/vim/motions/custom-motions" class="list-group-item group-child">
-	1. Custom Motions
-	
-</a>
-</div>
 </div>
 </div>
 <script>

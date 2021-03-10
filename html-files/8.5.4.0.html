@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Move Semantics</title>
+<title>STL Associative Containers</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,13 +205,13 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Memory Management</a></li>
-<li class='breadcrumb-item active'>Move Semantics</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
+<li class='breadcrumb-item active'>STL Associative Containers</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Move-Semantics" class="anchor" aria-hidden="true" href="#Move-Semantics">
-Move Semantics
+<a id="STL-Associative-Containers" class="anchor" aria-hidden="true" href="#STL-Associative-Containers">
+STL Associative Containers
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -219,9 +219,9 @@ Move Semantics
 </a>
 </h2>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.3.3.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/list/sorting-list">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.4.1.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.4.1.0.html">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -234,10 +234,62 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/8.5.4.1.html" class="list-group-item">
-	1. std::move
+<a href="#8-5-4-1-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>1. the STL std::set and std::multiset
+	<span class="badge badge-primary badge-pill">5</span>
+</a>
+<div class="list-group collapse" id="8-5-4-1-0">
+<a href="/8.5.4.1.1.html" class="list-group-item group-child">
+	1. erasing elements from set
 	
 </a>
+<a href="/8.5.4.1.2.html" class="list-group-item group-child">
+	2. finding element in set
+	
+</a>
+<a href="/8.5.4.1.3.html" class="list-group-item group-child">
+	3. hash set implementation (std::unordred_set, std::unordered_multiset)
+	
+</a>
+<a href="/8.5.4.1.4.html" class="list-group-item group-child">
+	4. set insertion
+	
+</a>
+<a href="/8.5.4.1.5.html" class="list-group-item group-child">
+	5. set instantiation
+	
+</a>
+</div>
+<a href="#8-5-4-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>2. the STL std::map Classes
+	<span class="badge badge-primary badge-pill">6</span>
+</a>
+<div class="list-group collapse" id="8-5-4-2-0">
+<a href="/8.5.4.2.1.html" class="list-group-item group-child">
+	1. map instantiation
+	
+</a>
+<a href="/8.5.4.2.2.html" class="list-group-item group-child">
+	2. inserting element in map
+	
+</a>
+<a href="/8.5.4.2.3.html" class="list-group-item group-child">
+	3. erasing element in map
+	
+</a>
+<a href="/8.5.4.2.4.html" class="list-group-item group-child">
+	4. custom predicate for searching map
+	
+</a>
+<a href="/8.5.4.2.5.html" class="list-group-item group-child">
+	5. finding element in map
+	
+</a>
+<a href="/8.5.4.2.6.html" class="list-group-item group-child">
+	6. hash (unordered_map & unordered_multimap)
+	
+</a>
+</div>
 </div>
 <script>
 function darkmode() {

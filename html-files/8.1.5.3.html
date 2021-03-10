@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Return Statements</title>
+<title>do...while</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,46 +206,22 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.5.0.html">Functions</a></li>
-<li class='breadcrumb-item active'>Return Statements</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.5.0.html">Program Flow Control</a></li>
+<li class='breadcrumb-item active'>do...while</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Return-Statements" class="anchor" aria-hidden="true" href="#Return-Statements">
-Return Statements
+<a id="do...while" class="anchor" aria-hidden="true" href="#do...while">
+do...while
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-When programming a function that does not need to return any value, specify
-the return type as <b>void</b>.
-
-As we discussed earlier, multiple return statements can be confusing as all
-programs are expected to be ended in their last line.
-
-Avoid multiple return statements, there is always a better way to do what you
-are going to do with multiple return statements.
-
-For example, in the following source code, isEven() could be substituted by:
-
-<pre class="language-cpp line-numbers">
-	<code>
-        bool isEven(int number)
-        {
-        	return (number % 2) == 0 ? true : false;
-        }
-	</code>
-</pre>
-
-Read more about <a href="/cpp/fundamentals/program-flow/ternary">Ternary operator</a>.
-
-You are not restricted to having only one return statement in your function
-definition.
-You can return from any point in the function, and multiple times if you want.
-Depending on the logic and the need of the application, this might or might
-not be poor programming practice.
+**do while** statement works just the way **while** does.  
+But it will at least do the job once before checking the  
+conditional statement.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -256,22 +232,17 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>return.cxx</cite>
+  <cite>do_while.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    bool isEven(const int number)
-    {
-    	if ((number % 2) == 0) {
-    		return true;
-    	} else {
-    		return false;
-    	}
-    }
-    
     int main()
     {
-    	isEven(2); // true
-    	isEven(3); // false
+        int counter = 0;
+    
+        do {
+            ++counter;
+        } while (counter &lt; 10);
+    
         return 0;
     }
 </code>
@@ -288,23 +259,38 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./return.o -c ./return.cxx
+g++ -Wall -g -o ./do_while.o -c ./do_while.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./return.bin ./return.o
+g++ -g -o ./do_while.bin ./do_while.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./return.bin
+./do_while.bin
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-cpp">
+
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/function-parameters">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.5.2.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/default-values">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.1.5.4.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

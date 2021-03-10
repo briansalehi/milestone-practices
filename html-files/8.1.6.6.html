@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>*if* statement</title>
+<title>Function Overloading</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,32 +206,66 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Program Flow Control</a></li>
-<li class='breadcrumb-item active'>*if* statement</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Functions</a></li>
+<li class='breadcrumb-item active'>Function Overloading</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="*if*-statement" class="anchor" aria-hidden="true" href="#*if*-statement">
-*if* statement
+<a id="Function-Overloading" class="anchor" aria-hidden="true" href="#Function-Overloading">
+Function Overloading
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-The main and most used statement for controlling the flow of  
-of a program is **if** statement.
+Functions with the same name and return type but with different parameters or
+set of parameters are said to be overloaded functions. Overloaded functions
+can be quite useful in applications where a function with a particular name
+that produces a certain type of output might need to be invoked with different
+sets of parameters. Say you need to be writing an application that computes
+the area of a circle and the area of a cylinder.
 
-**if** has its scope and variables declared in this scope are  
-immediately destroyed when program reaches to the end of  
-this scope.  
+The function that computes the area of a circle needs a parameter—the radius.
+The other function that computes the area of the cylinder needs the height of
+the cylinder in  addition to the radius of the cylinder. Both functions need
+to return the data of the same type, containing the area. So, C++ enables you
+to define two overloaded functions, both called Area, both returning double,
+but one that takes only the radius as input and another that takes the height
+and the radius as input parameters.
 
-Don't forget to explicitly specify this scope by curly braces,  
-{ }.  
-Though, **if** can be used without scope specifiers, it will  
-only read the first line after it. But expect your program to  
-misbehave in future when you forget to add scope specifiers  
-after you add an extra line and expecting **if** to read.
+As previously discussed, functions have the concept of <b>signature</b> which
+makes them distinguishable even if they have the same name!
+
+Consider following functions, all are of the same name but with different
+signatures:
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void function(int x);
+		void function(double x);
+		int function(int x);
+	</code>
+</pre>
+
+Don't forget that following two functions are identical when you use default
+argument values:
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void function();
+		void function(int x = 1);
+	</code>
+</pre>
+
+Function overloading has its own price too.
+For each function, there will be memory occupation, make function overloads as
+few as possible.
+Also, consider using default arguments for functions having same signature
+type but with different argument numbers.
+
+Overloading means defining two or more functions or operators that have the
+same name, but whose effect depends on the types of their actual arguments.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -242,26 +276,21 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>if.cxx</cite>
+  <cite>overloading.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
+    int function(int arg) {
+        return arg;
+    }
+    
+    double function(double arg) {
+        return arg;
+    }
     
     int main()
     {
-        int num1, num2;
-    
-        std::cout &lt;&lt; &quot;enter two numbers: &quot; &lt;&lt; std::endl;
-        std::cin &gt;&gt; num1 &gt;&gt; num2;
-    
-        // if...else statement
-        if (num1 &lt; num2)
-            std::cout &lt;&lt; num1 &lt;&lt; &quot; is lower than &quot; &lt;&lt; num2 &lt;&lt; std::endl;
-        else if (num2 &lt; num1)
-            std::cout &lt;&lt; num2 &lt;&lt; &quot; is lower than &quot; &lt;&lt; num1 &lt;&lt; std::endl;
-        else
-            std::cout &lt;&lt; num1 &lt;&lt; &quot; and &quot; &lt;&lt; num2 &lt;&lt; &quot; are equal!&quot; &lt;&lt; std::endl;
-    
+        function(1);
+        function(3.14);
         return 0;
     }
 </code>
@@ -278,39 +307,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./if.o -c ./if.cxx
+g++ -Wall -g -o ./overloading.o -c ./overloading.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./if.bin ./if.o
+g++ -g -o ./overloading.bin ./overloading.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./if.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-enter two numbers:
-2 is lower than 4
+./overloading.bin
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.6.5.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/recursive-functions">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.1.6.7.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/inline-functions">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

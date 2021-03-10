@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>multiple inheritance</title>
+<title>incrementing and decrementing pointers</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,21 +205,21 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.2.2.0.html">Inheritance</a></li>
-<li class='breadcrumb-item active'>multiple inheritance</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Memory Management</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.2.2.0.html">Pointers and References</a></li>
+<li class='breadcrumb-item active'>incrementing and decrementing pointers</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="multiple-inheritance" class="anchor" aria-hidden="true" href="#multiple-inheritance">
-multiple inheritance
+<a id="incrementing-and-decrementing-pointers" class="anchor" aria-hidden="true" href="#incrementing-and-decrementing-pointers">
+incrementing and decrementing pointers
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-A class can inherit from multiple classes. all of public members and methods in base classes are accessible to the derived class as usual.
+You can increment array's name to access to members of that array, but never forget that you need to decrement it to reach the first element again before using **delete** operator on that array.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -230,65 +230,28 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>multiple.cxx</cite>
+  <cite>increment&decrement.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    class Alpha {
-    public:
-        Alpha(int init): member{init} {}
-    
-        void display() {
-            std::cout &lt;&lt; &quot;Alpha Method Invoked&quot; &lt;&lt; std::endl;
-        }
-    
-        int get() {
-            return member;
-        }
-    
-    private:
-        int member;
-    };
-    
-    class Beta {
-    public:
-        Beta(int init): member{init} {}
-    
-        void display() {
-            std::cout &lt;&lt; &quot;Beta Method Invoked&quot; &lt;&lt; std::endl;
-        }
-    
-        int get() {
-            return member;
-        }
-    
-    private:
-        int member;
-    };
-    
-    class Compound: public Alpha, public Beta {
-    public:
-        Compound(): Alpha{10}, Beta{20} {
-            member = Alpha::get() + Beta::get();
-        }
-    
-        void display() {
-            std::cout &lt;&lt; &quot;Beta Method Invoked&quot; &lt;&lt; std::endl;
-            std::cout &lt;&lt; &quot;alpha: &quot; &lt;&lt; Alpha::get() &lt;&lt; std::endl;
-            std::cout &lt;&lt; &quot;beta: &quot; &lt;&lt; Beta::get() &lt;&lt; std::endl;
-            std::cout &lt;&lt; &quot;compund: &quot; &lt;&lt; member &lt;&lt; std::endl;
-        }
-    
-    private:
-        int member;
-    };
-    
     int main()
     {
-        Compound object;
-        object.display();
+        const size_t length = 3; // const unsigned int
+        int *numbers = new int[length];
     
+        // by summing a pointer you can access to different elements of array
+        for (size_t iterator = 0; iterator &lt; length; ++iterator) {
+            *(numbers + iterator) = iterator;
+        }
+    
+        for (size_t iterator = 0; iterator &lt; length; ++iterator) {
+            std::cout &lt;&lt; &quot;Number &quot; &lt;&lt; iterator &lt;&lt; &quot; : &quot; &lt;&lt; *numbers++ &lt;&lt; std::endl;
+        }
+    
+        // incremented pointer must be decremented and set to first block of its memory before deletion
+        numbers -= length;
+        delete [] numbers;
         return 0;
     }
 </code>
@@ -305,17 +268,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./multiple.o -c ./multiple.cxx
+g++ -Wall -g -o ./increment&decrement.o -c ./increment&decrement.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./multiple.bin ./multiple.o
+g++ -g -o ./increment&decrement.bin ./increment&decrement.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./multiple.bin
+./increment&decrement.bin
 </code>
 </pre>
 <hr />
@@ -330,10 +293,9 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-Beta Method Invoked
-alpha: 10
-beta: 20
-compund: 30
+Number 0 : 0
+Number 1 : 1
+Number 2 : 2
 </code>
 </pre>
 <ul class="pager">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>equality and inequality operator</title>
+<title>constant casting</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,22 +205,22 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.2.4.0.html">Operators</a></li>
-<li class='breadcrumb-item active'>equality and inequality operator</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Memory Management</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.2.4.0.html">Casting Operators</a></li>
+<li class='breadcrumb-item active'>constant casting</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="equality-and-inequality-operator" class="anchor" aria-hidden="true" href="#equality-and-inequality-operator">
-equality and inequality operator
+<a id="constant-casting" class="anchor" aria-hidden="true" href="#constant-casting">
+constant casting
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-We see that the operator equality checking **==** checks for equality of days, months and years. This is a correct logic when comparing two dates.  
-And notice how we used one operator to implement another.
+You can change value of a **constant parameter** by **const_cast** operator,
+only if the variable was not constant itself.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -231,39 +231,29 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>equality.cxx</cite>
+  <cite>const.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    class Date {
-    private:
-        int day, month, year;
-    
-    public:
-        Date(int d, int m, int y): day{d}, month{m}, year{y} {}
-    
-        bool operator == (const Date&amp; pair) {
-            return (day == pair.day &amp;&amp; month == pair.month &amp;&amp; year == pair.year);
-        }
-    
-        bool operator != (const Date&amp; pair) {
-            return !(this-&gt;operator== (pair));
-        }
-    };
+    void increment(const int *constant)
+    {
+        int* pointer = const_cast&lt;int *&gt;(constant);
+        (*pointer)++; // changes the value using a pointer to its memory address
+    }
     
     int main()
     {
-        Date today(17,8,2018);
-        Date holiday(17,8,2018);
+        const int unmodifiable = 1;
+        int modifiable = 1;
+        std::cout &lt;&lt; &quot;unmodifiable initial value:&quot; &lt;&lt; unmodifiable &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;modifiable initial value:&quot; &lt;&lt; modifiable &lt;&lt; std::endl;
     
-        if (today == holiday) {
-            std::cout &lt;&lt; &quot;today is holiday!&quot; &lt;&lt; std::endl;
-        }
-        else {
-            std::cout &lt;&lt; &quot;today we have a lot of work to do&quot; &lt;&lt; std::endl;
-        }
-            
+        increment(&amp;unmodifiable);
+        increment(&amp;modifiable);
+        std::cout &lt;&lt; &quot;unmodifiable final value:&quot; &lt;&lt; unmodifiable &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;modifiable final value:&quot; &lt;&lt; modifiable &lt;&lt; std::endl;
+    
         return 0;
     }
 </code>
@@ -280,17 +270,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./equality.o -c ./equality.cxx
+g++ -Wall -g -o ./const.o -c ./const.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./equality.bin ./equality.o
+g++ -g -o ./const.bin ./const.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./equality.bin
+./const.bin
 </code>
 </pre>
 <hr />
@@ -305,11 +295,14 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-today is holiday!
+unmodifiable initial value:1
+modifiable initial value:1
+unmodifiable final value:1
+modifiable final value:2
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operators/copy-assignment-operator">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.2.4.2.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.2.4.4.html">Next Page</a></li>
 </ul>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>while</title>
+<title>Reference Parameters</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,25 +206,23 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Program Flow Control</a></li>
-<li class='breadcrumb-item active'>while</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Functions</a></li>
+<li class='breadcrumb-item active'>Reference Parameters</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="while" class="anchor" aria-hidden="true" href="#while">
-while
+<a id="Reference-Parameters" class="anchor" aria-hidden="true" href="#Reference-Parameters">
+Reference Parameters
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-**while** loop is a state condition loop. meaning, when you  
-are trying to do something until a statement is true, you  
-can use while loop.  
-
-Imagine a situation when you don't know how many times you  
-should do something, but you know when to stop it!
+Passing an array as a function parameter is simply done by using the address of its first element.  
+You might already noticed that variables can also be passed to functions parameters by their addresses.  
+This way, it doesn't matter how big value is a variable holding, we just pass its address as a parameter.  
+using & character behind a variable's name, we access to the variable's address in memory.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -235,21 +233,20 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>while.cxx</cite>
+  <cite>reference.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
+    const double pi = 3.14159;
+    
+    void Area(double radius, double&amp; area)
+    {
+        area = pi * radius * radius;
+    }
     
     int main()
     {
-        int counter = 0;
-    
-        while (counter &lt; 10) {
-            ++counter;
-        }
-    
-        std::cout &lt;&lt; counter &lt;&lt; std::endl;
-    
+        double radius = 2, area = 0;
+        Area(radius, area);
         return 0;
     }
 </code>
@@ -266,38 +263,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./while.o -c ./while.cxx
+g++ -Wall -g -o ./reference.o -c ./reference.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./while.bin ./while.o
+g++ -g -o ./reference.bin ./reference.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./while.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-10
+./reference.bin
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/program-flow/ternary">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/pointers-parameters">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/streams">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/memory-management">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

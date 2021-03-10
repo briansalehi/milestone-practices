@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>static casting</title>
+<title>String</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,54 +205,54 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Memory Management</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.1.0.html">Casting Operators</a></li>
-<li class='breadcrumb-item active'>static casting</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.1.0.html">Streams</a></li>
+<li class='breadcrumb-item active'>String</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="static-casting" class="anchor" aria-hidden="true" href="#static-casting">
-static casting
+<a id="String" class="anchor" aria-hidden="true" href="#String">
+String
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Variable types can be casted to type of another,
-but you must be careful when you do it.  
-Suppose you have a type of **double**,
-you must not cast it to type **int** as its last 4 bytes will get lost!
+<p><code>std::string</code> can be initialized by string literals, paranthesis and initialization list. String objects can also be assigned to each other, copy constructor and move constructor are set properly to handle such assignments.</p>
 
-ref[6]
-Static casting is used when a conversion is made between two related types, for  
-example numbers to numbers or pointers to pointers.
+<pre class="language-cpp line-numbers">
+	<code>
+		std::string family = "C"; // initializing string by copy assignment operator
+		std::string language(family); // initializing by copy constructor
+		std::string postfix(2, '+'); // initialize by a character N times
+		language.append(postfix); // string concatanation by append method
+		std::cout << language << std::endl;
+	</code>
+</pre>
 
-The most common use is for conversions between numeric types. Some of these  
-conversions may involve the loss of information, for example a conversion from  
-a **double** to an **int**. This conversion is done by truncating the fractional  
-part (not rounding).
+<p>Algorithms can be used on <code>std::string</code> to perform operations such as <a href="/cpp/stl/algorithms/transform">transforming</a>, <a href="/cpp/stl/algorithms/find">finding</a>, <a href="/cpp/stl/algorithms/sort">sorting</a>, <a href="/cpp/stl/algorithms/erase">truncating</a>, <a href="/cpp/stl/algorithms/replace">replacing</a>, <a href="/cpp/stl/algorithms/reverse">reversing</a> and <a href="/cpp/stl/algorithms/search">searching</a> which will be discussed later on <a href="/cpp/stl/algorithm">algorithms</a>.</p>
 
-This type of casting is more verbose than the C-style and functional-style casts  
-shown earlier. But this form is appropriate, because it serves as a visible warning to  
-the programmer that a potentially unsafe operation is taking place.
+<p>One useful algorithm applied on strings are transformations:</p>
 
-Some older C++ compilers may not support the newer cast operators,  
-but then the traditional C-style and functional-style casts can be used instead.
-end[6]
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>6: 22</li>
-</ul>
+<pre class="language-cpp line-numbers">
+	<code>
+    std::string sample("AbCdEfGhIjK");
+    std::cout << "original std::string: " << sample << std::endl;
+
+    transform(sample.begin(), sample.end(), sample.begin(), ::toupper);
+    std::cout << "converted to upper case: " << sample << std::endl;
+
+    transform(sample.begin(), sample.end(), sample.begin(), ::tolower);
+    std::cout << "converted to lower case: " << sample << std::endl;
+	</code>
+</pre>
+
+<p>Operators are fully discussed in their own chapter <a href="/cpp/object-orientation/operators">operators</a>, but there is a little useful operator used with string objects, called <a href="/cpp/object-orientation/operators/string-literal-operator">string literal operator</a>.</p>  
+
+<p>Notice that when you use <mark>\0</mark> character in a null terminated string (C-style string) you are actually breaking that string as they represent the end of strings.</p>  
+
+<p>Actually this character is a part of special character list and they can be parsed in your string to do tasks or make signs in a string. To make special characters to look just as they are written, use <code>""s</code> operator at the end of a string literal.</p>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -263,19 +263,22 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>static.cxx</cite>
+  <cite>string.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
+    #include &lt;string&gt;
     
     int main()
     {
-        int integer = 2;
-        double number;
+        using namespace std::string_literals;
     
-        std::cout &lt;&lt; integer &lt;&lt; std::endl;
-        number = static_cast&lt;double&gt;(integer);
-        std::cout &lt;&lt; number &lt;&lt; std::endl;
+        std::string simple(&quot;This string would be truncated \0 here by NULL character&quot;);
+        std::cout &lt;&lt; simple &lt;&lt; std::endl;
+    
+        // note the &quot;&quot;s literal operator at the end of string literal
+        std::string complete(&quot;This string would not be truncated \0 here thanks to \&quot;\&quot;s literal operator&quot;s);
+        std::cout &lt;&lt; complete &lt;&lt; std::endl;
     
         return 0;
     }
@@ -293,17 +296,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./static.o -c ./static.cxx
+g++ -Wall -g -o ./string.o -c ./string.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./static.bin ./static.o
+g++ -g -o ./string.bin ./string.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./static.bin
+./string.bin
 </code>
 </pre>
 <hr />
@@ -318,14 +321,27 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-2
-2
+This string would be truncated
+This string would not be truncated  here thanks to ""s literal operator
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 27</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.1.0.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.1.2.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams/string-stream">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

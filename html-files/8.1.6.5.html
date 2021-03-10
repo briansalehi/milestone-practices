@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>*goto* statement (depricated)</title>
+<title>Recursive Functions</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,20 +206,39 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Program Flow Control</a></li>
-<li class='breadcrumb-item active'>*goto* statement (depricated)</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.6.0.html">Functions</a></li>
+<li class='breadcrumb-item active'>Recursive Functions</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="*goto*-statement-(depricated)" class="anchor" aria-hidden="true" href="#*goto*-statement-(depricated)">
-*goto* statement (depricated)
+<a id="Recursive-Functions" class="anchor" aria-hidden="true" href="#Recursive-Functions">
+Recursive Functions
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Want to use **goto** statement? don't!
+In certain cases, you can actually have a function call itself. Such a
+function is called a recursive function. Note that a recursive function should
+have a very clearly defined exit condition where it returns without invoking
+itself again.
+
+To use a function recursively, we must be sure we have a break condition in
+our function to break the recursion steps somewhere, unless you want to watch
+your system run out of memory! nothing dangerious will happen in that case as
+your operating system will stop your program's execution and throws an
+exception due to too much memory consumption.
+
+In the absence of an exit condition or in the event of a bug in the same, your
+program execution gets stuck at the recursive function that won’t stop
+invoking itself, and this eventually stops when the “stack overflows,” causing
+an application crash.
+
+Recursive functions are useful in many cases, but in powerful systems!
+
+You shouldn't use recursive functions in embedded systems as they consume a
+huge amount of memory.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -230,26 +249,28 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>goto.cxx</cite>
+  <cite>recursion.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
+    // recursive function
+    int Power(int base, int p)
+    {
+        if (p &lt; 2) {
+            return base;
+        }
+        
+        return base * Power (base, --p);
+    }
+    
     int main()
     {
-        char answer = &apos;n&apos;;
-    __global:
-        std::cout &lt;&lt; &quot;using goto statement is poor programming&quot; &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;would you like to still use it? (y/n)&quot;;
-        std::cin &gt;&gt; answer;
-        std::cout &lt;&lt; std::endl;
-    
-        // goto statement, do not use goto, it&apos;s poor programming
-        if (answer == &apos;y&apos;) {
-            goto __global;
-            std::cout &lt;&lt; &quot;good choice!&quot; &lt;&lt; std::endl;
-        }
-    
+        int base, exponent;
+        std::cout &lt;&lt; &quot;Enter base and exponent: &quot;;
+        std::cin &gt;&gt; base &gt;&gt; exponent;
+        std::cout &lt;&lt; base &lt;&lt; &quot; &quot; &lt;&lt; exponent &lt;&lt; std::endl;
+        std::cout &lt;&lt; Power(base, exponent) &lt;&lt; std::endl;
         return 0;
     }
 </code>
@@ -266,17 +287,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./goto.o -c ./goto.cxx
+g++ -Wall -g -o ./recursion.o -c ./recursion.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./goto.bin ./goto.o
+g++ -g -o ./recursion.bin ./recursion.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./goto.bin
+./recursion.bin < ./recursion.input.txt
 </code>
 </pre>
 <hr />
@@ -291,20 +312,14 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-using goto statement is poor programming
-would you like to still use it? (y/n)
-using goto statement is poor programming
-would you like to still use it? (y/n)
-using goto statement is poor programming
-would you like to still use it? (y/n)
-using goto statement is poor programming
-would you like to still use it? (y/n)
+Enter base and exponent: 2 10
+1024
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.6.4.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/default-values">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.1.6.6.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/function-overloading">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

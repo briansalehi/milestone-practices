@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Return Value Type Deduction</title>
+<title>nested conditions</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,41 +206,28 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.5.0.html">Functions</a></li>
-<li class='breadcrumb-item active'>Return Value Type Deduction</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.5.0.html">Program Flow Control</a></li>
+<li class='breadcrumb-item active'>nested conditions</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Return-Value-Type-Deduction" class="anchor" aria-hidden="true" href="#Return-Value-Type-Deduction">
-Return Value Type Deduction
+<a id="nested-conditions" class="anchor" aria-hidden="true" href="#nested-conditions">
+nested conditions
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-You are already familiar with type
-<a href="/cpp/fundamentals/object-types/auto">auto</a>.  
+There are many cases in which the flow of control  
+needs to be checked one after another. Nested  
+control statements can be used to achieve this goal.
 
-It lets you leave variable type deduction to the compiler that does so on the
-basis of the initialization value assigned to the variable. Starting with
-C++14, the same applies also to functions.
-
-Instead of specifying the return type, you would use auto and let the compiler
-deduce the return type for you on the basis of return values you program.
-
-But try not to be a lazy programmer, we already know that using explicit types
-make our programs easier to follow.
-
-When optimizing for speed, the compiler typically sees and utilizes
-opportunities to inline code where it would make sense and does it for
-you sometimes even in those cases where you have not explicitly requested it.
-
-Functions that rely on automatic return type deduction need to be defined
-(i.e., implemented) before they’re invoked. This is because the compiler needs
-to know a function’s return type at the point where it is used. If such a
-function has multiple return statements, they need to all deduce to the same
-type. Recursive calls need to follow at least one return statement.
+Don't get confused with nested scope specifiers.  
+Try to make this a habbit to write pairs of braces  
+when you need to open one. This way, even if you  
+forget about the pairs, you have already had closed  
+them right after you opened them.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -251,17 +238,31 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>auto.cxx</cite>
+  <cite>nested.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    auto sum(int a, int b)
-    {
-        return a + b;
-    }
+    #include &lt;iostream&gt;
     
     int main()
     {
-    	int result = sum(1, 2);
+        int num1, num2;
+    
+        std::cout &lt;&lt; &quot;Enter dividend and divisor: &quot;;
+        std::cin &gt;&gt; num1 &gt;&gt; num2;
+    
+        // nested conditioning
+        if (num1 &gt; num2) {
+            if (num2 != 0) {
+                std::cout &lt;&lt; (num1 / num2) &lt;&lt; std::endl;
+            }
+            else {
+                std::cout &lt;&lt; &quot;devide by 0 is illegal&quot; &lt;&lt; std::endl;
+            }
+        }
+        else {
+            std::cout &lt;&lt; &quot;first number should be bigger to make integer&quot; &lt;&lt; std::endl;
+        }
+    
         return 0;
     }
 </code>
@@ -278,23 +279,38 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./auto.o -c ./auto.cxx
+g++ -Wall -g -o ./nested.o -c ./nested.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./auto.bin ./auto.o
+g++ -g -o ./nested.bin ./nested.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./auto.bin
+./nested.bin
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-cpp">
+Enter dividend and divisor: 2
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/functions/inline-functions">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/program-flow/if-constexpr">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/functions/lambda-functions">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.1.5.9.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

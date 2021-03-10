@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>pointers</title>
+<title>output stream manipulators</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,28 +205,20 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Memory Management</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.2.0.html">Pointers and References</a></li>
-<li class='breadcrumb-item active'>pointers</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.2.0.html">Stream Manipulators</a></li>
+<li class='breadcrumb-item active'>output stream manipulators</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="pointers" class="anchor" aria-hidden="true" href="#pointers">
-pointers
+<a id="output-stream-manipulators" class="anchor" aria-hidden="true" href="#output-stream-manipulators">
+output stream manipulators
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Pointers are special variables holding memory addresses.  
-**notice** that pointers can be declared but point to nowhere in the memory.
-This can be dangerious when you want to use this pointer as your program may happen to access to an invalid memory and make your program to crash.  
-Always initialize pointers after declaration or temporarily set them to **nullptr**.
-This way your program can throw exception if an empty pointer was mistakenly used.
-These exceptions can be handled, exceptions will be discussed later.
-
-As pointers are themselves variables, they can point to nowhere which does not make them fool-proof. References instead, cannot point to an invalid memory address. references will be discussed soon.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -237,38 +229,9 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>memory.cxx</cite>
+  <cite>output-manipulators.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    
-    int main()
-    {
-        int number = 15;
-        int* pointer = nullptr; // pointer declaration
-        pointer = &amp;number; // referencing operator &amp; references to the memory of a variable
-    
-        /*
-    
-        int* wrong; // fails, pointer points to nowhere
-        wrong = 12345; // value gets lost, because there&apos;s no memory allocated for it in any specific size
-    
-        */
-    
-        std::cout &lt;&lt; &quot;number:\t&quot; &lt;&lt; number &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;&amp;number:\t&quot; &lt;&lt; std::hex &lt;&lt; &amp;number &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;pointer:\t&quot; &lt;&lt; pointer &lt;&lt; std::endl;
-    
-        // dereference operator * (actual value a pointer points to)
-        std::cout &lt;&lt; &quot;*pointer: &quot; &lt;&lt; std::dec &lt;&lt; *pointer &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;&amp;pointer:\t&quot; &lt;&lt; std::hex &lt;&lt; &amp;pointer &lt;&lt; std::endl;
-    
-        //  size of pointer
-        std::cout &lt;&lt; &quot;size of number:\t\t&quot; &lt;&lt; std::dec &lt;&lt; sizeof(number) &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;size of pointer:\t&quot; &lt;&lt; sizeof(pointer) &lt;&lt; std::endl;
-    
-        return 0;
-    }
 </code>
 </pre>
 <hr />
@@ -283,17 +246,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./memory.o -c ./memory.cxx
+g++ -Wall -g -o ./output-manipulators.o -c ./output-manipulators.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./memory.bin ./memory.o
+g++ -g -o ./output-manipulators.bin ./output-manipulators.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./memory.bin
+./output-manipulators.bin
 </code>
 </pre>
 <hr />
@@ -308,13 +271,7 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-number:	15
-&number:	0x7ffdab0f26dc
-pointer:	0x7ffdab0f26dc
-*pointer: 15
-&pointer:	0x7ffdab0f26e0
-size of number:		4
-size of pointer:	8
+
 </code>
 </pre>
 <ul class="pager">
