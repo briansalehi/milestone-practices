@@ -1,0 +1,76 @@
+<p>Queues are FIFO (first-in-first-out) systems where elements can be inserted behind the previous one, and the one inserted first gets removed first.</p>
+
+<p>This behavior of a queue is simulated in the generic STL container <code>std::queue</code>.</p>
+
+<p>To use class <code>std::queue</code>, include header <code>&lt;queue&gt;</code></p>
+
+<p><code>std::queue</code> is defined as:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;class elementType, class Container = deque&lt;Type&gt;&gt; class queue;
+	</code>
+</pre>
+
+<p>Here, <code>elementType</code> is the type of elements collected by the queue object. <code>Container</code> is the type of collection that the <code>std::queue</code> class uses to maintain its data. The <code>std::list</code>, <code>std::vector</code>, and <code>std::deque</code> are possible candidates for this template parameter, and the <code>std::deque</code> is the default.</p>
+
+<p>The simplest instantiation of a <code>std::queue</code> of integers would be the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::queue&lt;int&gt; numsInQ;
+	</code>
+</pre>
+
+<p>If you want to create a queue containing elements of type double inside a std::list (instead of a deque, which is default), use the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::queue&lt;double, list&lt;double&gt;&gt; dblsInQInList;
+	</code>
+</pre>
+
+<p>Just like a stack, a queue can also be instantiated as a copy of another queue:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::queue&lt;int&gt; copyQ(numsInQ);
+	</code>
+</pre>
+
+<p>The <code>std::queue</code>, like <code>std::stack</code>, also bases its implementation on an STL container such as the <code>std::vector</code>, <code>std::list</code>, or <code>std::deque</code>. The queue exposes only those member functions that implement the behavioral characteristics of a queue. Following Table explains the member functions using numsInQ, which previous samples demonstrate is a queue of integers.</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Function</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>push()</code></td>
+			<td>Inserts an element at the back of the queue: <code>numsInQ.push(10);</code></td>
+		</tr>
+		<tr>
+			<td><code>pop()</code></td>
+			<td>Removes the element at the front of the queue: <code>numsInQ.pop();</code></td>
+		</tr>
+		<tr>
+			<td><code>front()</code></td>
+			<td>Returns the reference to the element at the front of the queue: <code>numsInQ.front();</code></td>
+		</tr>
+		<tr>
+			<td><code>back()</code></td>
+			<td>Returns a reference to the element at the back of the queue: <code>numsInQ.back()</code></td>
+		</tr>
+		<tr>
+			<td><code>empty()</code></td>
+			<td>Tests whether the queue is empty; returns <code>bool</code>: <code>if (numsInQ.empty()) DoSomething();</code></td>
+		</tr>
+		<tr>
+			<td><code>size()</code></td>
+			<td>Returns the number of elements in the queue: <code>size_t numElements = numsInQ.size();</code></td>
+		</tr>
+	</tbody>
+</table>

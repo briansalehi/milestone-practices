@@ -1,0 +1,49 @@
+<p>Stacks are LIFO (last-in-first-out) systems where elements can be inserted or removed at the top of the container.</p>
+
+<p>This behavior of a stack of plates is simulated in the generic STL container <code>std::stack</code>.</p>
+
+<p>To use class <code>std::stack</code>, include header <code>&lt;stack&gt;</code></p>
+
+<p><code>std::stack</code> is defined by some implementations of STL as <code>template &lt;class elementType, class Container=std::deque<Type>> class std::stack;</code></p>
+
+<p>The parameter <code>elementType</code> is the type of object that is collected by the stack. The second template parameter <code>Container</code> is the stack’s default underlying container implementation class. <code>std::deque</code> is the default for the stack’s internal data storage and can be replaced by <code>std::vector</code> or the <code>std::list</code>. Thus, the instantiation of a stack of integers will look like:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::stack&lt;int&gt; numsInStack;
+		std::stack&lt;double, vector&lt;double&gt;&gt; doublesStackedInVec;
+	</code>
+</pre>
+
+<p>Following table explains the public member functions of the stack class and demonstrates their usage for a stack of integers.</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Function</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>push()</code></td>
+			<td>Inserts an element at the top of the stack: <code>numsInStack.push(25);</code></td>
+		</tr>
+		<tr>
+			<td><code>pop()</code></td>
+			<td>Removes the element at the top of the stack: <code>numsInStack.pop();</code></td>
+		</tr>
+		<tr>
+			<td><code>empty()</code></td>
+			<td>Tests whether the stack is empty; returns <code>bool</code>: <code>if (numsInStack.empty()) DoSomething();</code></td>
+		</tr>
+		<tr>
+			<td><code>size()</code></td>
+			<td>Returns the number of elements in the stack: <code>size_t numElements = numsInStack.size();</code></td>
+		</tr>
+		<tr>
+			<td><code>top()</code></td>
+			<td>Gets a reference to the topmost element in the stack: <code>numsInStack.top();</code></td>
+		</tr>
+	</tbody>
+</table>

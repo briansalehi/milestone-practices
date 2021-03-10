@@ -1,0 +1,29 @@
+<p>The <code>std::priority_queue</code> is different from the <code>std::queue</code> in that the element of the highest value (or the value deemed as highest by a binary predicate) is available at the front of the <code>std::queue</code> and <code>std::queue</code> operations are restricted to the front.</p>
+
+<p><code>std::priority_queue</code> class is defined as:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;class elementType, class Container=std::vector&lt;Type&gt;, class Compare=less&lt;typename Container::value_type&gt;&gt; class std::priority_queue
+	</code>
+</pre>
+
+<p>The simplest instantiation of a <code>std::priority_queue</code> of integers would be <code>std::priority_queue<int> numsInPrioQ;</code></p>
+
+<p>If you want to create a priority queue containing elements of type double inside a <code>std::deque</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		priority_queue&lt;int, std::deque&lt;int&gt;, std::greater&lt;int&gt;&gt; numsInDescendingQ;
+	</code>
+</pre>
+
+<p>Just like a <code>std::stack</code>, a <code>std::queue</code> can also be instantiated as a copy of another <code>std::queue</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::priority_queue&lt;int&gt; copyQ(numsInPrioQ);
+	</code>
+</pre>
+
+<p>The member functions <code>front()</code> and <code>back()</code>, available in the <code>std::queue</code>, are not available in the <code>std::priority_queue</code>. Following table introduces the member functions of a <code>std::priority_queue</code>.</p>

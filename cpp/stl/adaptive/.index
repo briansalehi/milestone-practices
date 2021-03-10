@@ -1,4 +1,4 @@
 README.md
-stack
-queue
-priority-queue
+stack.cxx
+queue.cxx
+priority_queue.cxx
