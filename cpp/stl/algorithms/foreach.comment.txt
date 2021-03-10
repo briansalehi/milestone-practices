@@ -1,0 +1,1 @@
+<p>The <code>for_each()</code> algorithm applies a specified unary function object to every element in the supplied range.</p>

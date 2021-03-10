@@ -15,7 +15,7 @@ int main()
 
     // count an element by value
     size_t amount = count(orderedNumbers.cbegin(), orderedNumbers.cend(), 4);
-    std::cout << "there are " << amount << " elements having value 4" << std::endl;
+    std::cout << "There are " << amount << " elements having value 4" << std::endl;
 
     // count by a predicate
     amount = count_if(
@@ -23,7 +23,7 @@ int main()
         , orderedNumbers.cend()
         , [](const int& element) { return ((element % 2) == 0); }
     );
-    std::cout << "there are " << amount << " even numbers" << std::endl;
+    std::cout << "There are " << amount << " even numbers" << std::endl;
 
     return 0;
 }

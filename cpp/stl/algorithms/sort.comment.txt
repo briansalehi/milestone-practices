@@ -1,0 +1,21 @@
+<p>You can use STL’s <code>sort()</code> algorithm to sort a container:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		sort(numsInVec.begin(), numsInVec.end()); // ascending order
+	</code>
+</pre>
+
+<p>This version of <code>sort()</code> uses <code>std::less&lt;&gt;</code> as a binary predicate that uses <code>operator&lt;</code> implemented by the type in the <code>std::vector</code>. You can supply your own predicate to change the sort order using an overloaded version:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		sort (
+			numsInVec.begin(),
+			numsInVec.end(),
+			[](int lhs, int rhs) { return (lhs > rhs); }
+		); // descending order
+	</code>
+</pre>
+
+<p><code>stable_sort()</code> ensures that the relative order of the sorted elements is maintained. Maintaining relative order comes at the cost of performance—a factor that needs to be kept in mind, especially if the relative ordering of elements is not essential.</p>

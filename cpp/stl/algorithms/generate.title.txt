@@ -1,1 +1,1 @@
-generate & generate_n
+Generate

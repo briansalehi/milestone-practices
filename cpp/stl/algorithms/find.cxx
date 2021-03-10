@@ -10,10 +10,11 @@ int main()
     // find by a value to search through container
     std::vector<int>::const_iterator found = find(numbers.cbegin(), numbers.cend(), item);
 
-    if (found != numbers.cend())
-        std::cout << "found " << *found << std::endl;
-    else
-        std::cout << "element not found" << std::endl;
+    if (found != numbers.cend()) {
+        std::cout << "Found " << *found << std::endl;
+	} else {
+        std::cout << "Element not found" << std::endl;
+	}
 
     // find_if using a predicate instead of value
     std::vector<int>::const_iterator position = find_if(
@@ -23,10 +24,9 @@ int main()
     );
 
     if (position != numbers.cend()) {
-        std::cout << "found " << *position << std::endl;
-    }
-    else {
-        std::cout << "element not found" << std::endl;
+        std::cout << "Found " << *position << std::endl;
+    } else {
+        std::cout << "Element not found" << std::endl;
     }
 
     return 0;

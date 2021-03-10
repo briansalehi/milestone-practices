@@ -1,0 +1,18 @@
+<p><code>fill()</code> is used to overwrite the elements in a range given the bounds of the range and the value to be inserted:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector<int> numsInVec(3);
+
+		// fill all elements in the container with value 9
+		fill(numsInVec.begin(), numsInVec.end(), 9);
+	</code>
+</pre>
+
+<p>As the name suggests, <code>fill_n()</code> resets a specified n number of values. It needs a starting position, a count, and the value to fill:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		fill_n(numsInVec.begin() + 3, /*count*/ 3, /*fill value*/ -9);
+	</code>
+</pre>

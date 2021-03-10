@@ -1,0 +1,11 @@
+<p>To search fast, STL provides you with <code>binary_search()</code> that is effective only on a sorted container:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bool elementFound = binary_search(numsInVec.begin(), numsInVec.end(), 2011);
+		if (elementFound)
+			std::cout << "Element found in the vector!" << std::endl;
+	</code>
+</pre>
+
+<p>Algorithms such as <code>binary_search()</code> are effective only in sorted containers. Use of this algorithm on an unsorted vector can have undesirable consequences.</p>

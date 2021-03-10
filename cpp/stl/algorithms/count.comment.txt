@@ -1,0 +1,23 @@
+<p><code>std::count()</code> helps you count the number of elements that match a value (tested via equality <code>operator==</code>):</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		size_t numZeroes = count(numsInVec.cbegin(), numsInVec.cend(), 0);
+	</code>
+</pre>
+
+<p><code>std::count_if()</code> helps you count the number of elements that fulfill a unary predicate supplied as a parameter (which can be a function object or a lambda expression):</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// Unary predicate:
+		template &lt;typename elementType&gt;
+		bool IsEven(const elementType& number)
+		{
+			return ((number % 2) == 0); // true, if even
+		}
+
+		// Use the count_if algorithm with the unary predicate IsEven:
+		size_t numEvenNums = count_if(numsInVec.cbegin(),  numsInVec.cend(), IsEven<int> );
+	</code>
+</pre>

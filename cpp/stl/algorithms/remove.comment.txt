@@ -1,0 +1,24 @@
+<p><code>remove()</code> deletes elements in a container that matches a specified value:</p>
+
+<pre class="language-cpp">
+	<code>
+		// Remove all instances of '0', resize vector using erase()
+		auto newEnd = remove(numsInVec.begin(), numsInVec.end(), 0);
+		numsInVec.erase(newEnd, numsInVec.end());
+	</code>
+</pre>
+
+<p><code>remove_if()</code> uses a unary predicate and removes from the container those elements for which the predicate evaluates to true:</p>
+
+<pre class="language-cpp">
+	<code>
+		// Remove all odd numbers from the vector using remove_if
+		newEnd = remove_if(
+			numsInVec.begin(),
+			numsInVec.end(),
+			[](int num) {return ((num % 2) == 1);}
+		); //predicate
+
+		numsInVec.erase(newEnd, numsInVec.end()); // resizing
+	</code>
+</pre>

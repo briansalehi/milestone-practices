@@ -1,0 +1,24 @@
+<p>The usage of <code>find()</code> follows this pattern:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto element = find(numsInVec.cbegin(), /* Start of range */ numsInVec.cend(), /* End of range */ numToFind); // Element to find
+
+		// Check if find() succeeded
+		if (element != numsInVec.cend()) {
+			std::cout &lt;&lt; "Result: Value found!" &lt;&lt; std::endl;
+		}
+	</code>
+</pre>
+
+<p><code>find_if()</code> is similar and requires you to supply a unary predicate (a unary function that returns true or false) as the third parameter.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto evenNum = find_if(numsInVec.cbegin(), /* Start of range */ numsInVec.cend(), /* End of range */ [](int element) { return (element % 2) == 0; } );
+
+		if (evenNum != numsInVec.cend()) {
+			std::cout &lt;&lt; "Result: Value found!" &lt;&lt; std::endl;
+		}
+	</code>
+</pre>

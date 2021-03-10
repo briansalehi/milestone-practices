@@ -1,0 +1,24 @@
+<p><code>replace()</code> and <code>replace_if()</code> are the STL algorithms that can replace elements in a collection that are equivalent to a supplied value or satisfy a given condition, respectively.</p> 
+
+<p>Yet the container numsInVec has not been resized yet. Elements have been deleted by the remove algorithms and other elements have been shifted forward, but the <code>size()</code> has remained unaltered, meaning there are values at the end of the vector. To resize the container (and this is important, else it has unwanted values at the end), you need to use the iterator returned by <code>remove()</code> or <code>remove_if()</code> in a subsequent call to <code>erase()</code>, as shown below.</p>
+
+<p><code>replace()</code> replaces elements based on the return value of the comparison <code>operator==</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		replace(numsInVec.begin(), numsInVec.end(), 5, 8);
+	</code>
+</pre>
+
+<p><code>replace_if()</code> expects a user-specified unary predicate that returns true for every value that needs to be replaced:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		replace_if(
+			numsInVec.begin(),
+			numsInVec.end(),
+			[](int element) {return ((element % 2) == 0); },
+			-1
+		);
+	</code>
+</pre>

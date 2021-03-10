@@ -1,0 +1,17 @@
+<p>Just as <code>fill()</code> and <code>fill_n()</code> functions fill the collection with a specific value, STL algorithms, such as <code>generate()</code> and <code>generate_n()</code>, are used to initialize collections using values returned by a unary function.</p>
+
+<p>You can use <code>generate()</code> to fill a range using the return value of a generator function:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		generate(numsInVec.begin(), numsInVec.end(), rand); // generator function
+	</code>
+</pre>
+
+<p><code>generate_n()</code> is similar to <code>generate()</code> except that you supply the number of elements to be assigned instead of the closing bound of a range:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		generate_n(numsInList.begin(), 5, rand);
+	</code>
+</pre>

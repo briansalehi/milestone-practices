@@ -1,0 +1,23 @@
+<p><code>std::partition()</code> helps partition an input range into two sections: one that satisfies a unary predicate and another that doesn’t:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bool IsEven (const int& num) // unary predicate
+		{
+			return ((num % 2) == 0);
+		}
+		...
+		partition(numsInVec.begin(), numsInVec.end(), IsEven);
+	</code>
+</pre>
+
+
+<p><code>std::partition()</code>, however, does not guarantee the relative order of elements within each partition. To maintain relative order, when that is important, you should use <code>std::stable_partition()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		stable_partition(numsInVec.begin(), numsInVec.end(), IsEven);
+	</code>
+</pre>
+
+<p><code>stable_partition()</code> is slower than <code>partition()</code>, and therefore you should use it only when the relative order of elements in the container is important.</p>

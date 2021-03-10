@@ -1,0 +1,8 @@
+<p>To remove adjacently placed repeating values, use algorithm <code>unique()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto newEnd = unique(numsInVec.begin(), numsInVec.end());
+		numsInVec.erase(newEnd, numsInVec.end()); // to resize
+	</code>
+</pre>

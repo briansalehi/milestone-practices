@@ -1,0 +1,32 @@
+<p><code>copy()</code> can assign the contents of a source range into a destination range in the forward direction:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto lastElement = copy(
+			numsInList.cbegin(), // start source range
+			numsInList.cend(), // end source range
+			numsInVec.begin()
+		); // start dest range
+	</code>
+</pre>
+
+<p><code>copy_if()</code> is an addition to the standard library starting with C++11 and copies an element when a unary predicate supplied by you returns true:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// copy odd numbers from list into vector
+		copy_if(
+			numsInList.cbegin(),
+			numsInList.cend(),
+			lastElement, // copy position in dest range
+			[](const ing element) { return ((element % 2) == 1); } );
+	</code>
+</pre>
+
+<p><code>copy_backward()</code> assigns the contents to the destination range in the backward direction:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		copy_backward(numsInList.cbegin(), numsInList.cend(), numsInVec.end());
+	</code>
+</pre>

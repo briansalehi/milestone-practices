@@ -1,0 +1,25 @@
+<p><code>search()</code> can be used to check if one range is contained in another:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto range = search(
+			numsInVec.cbegin(), /* Start range to search in */
+			numsInVec.cend(), /* End range to search in */
+			numsInList.cbegin(), /* start range to search */
+			numsInList.cend()
+		); // End range to search for
+	</code>
+</pre>
+
+<p><code>search_n()</code> can be used to check if n instances of a value placed consequently are to be found in a container:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto partialRange = search_n(
+			numsInVec.cbegin(), /* Start range */
+			numsInVec.cend(), /* End range */
+			3, /* num items to be searched for */
+			9
+		); // value to search for
+	</code>
+</pre>

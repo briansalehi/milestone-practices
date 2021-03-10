@@ -1,0 +1,16 @@
+<p>STL supplies functions, such as <code>lower_bound()</code> and <code>upper_bound()</code>, to assist in meeting that need:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;string&gt; names{ "John", "Brad", "jack", "sean", "Anna" };
+		names.sort();
+		auto minPos = std::lower_bound(names.begin(), names.end(), "Brad");
+		std::cout &lt;&lt; distance(names.begin (), minPos) &lt;&lt; std::endl;
+		auto maxPos = std::upper_bound(names.begin (), names.end (), "Brad");
+		std::cout &lt;&lt; std::distance(names.begin(), maxPos) &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>Why is it important to use functions such as <code>lower_bound()</code> or <code>upper_bound()</code> while inserting into a sorted range?</p>
+
+<p>These functions supply the first and the last positions, respectively, where an element can be inserted into a sorted collection without disturbing the sort.</p>

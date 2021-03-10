@@ -1,0 +1,28 @@
+<p><code>std::for_each()</code> and <code>std::transform()</code> are similar in that they both invoke a function object for every element in a source range. However, <code>std::transform()</code> has two versions. The first version accepts a unary function and is popularly used to convert a string to upper- or lowercase using functions <code>toupper()</code> or <code>tolower()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		string str("THIS is a TEst string!");
+		transform(
+			str.cbegin(), // start source range
+			str.cend(), // end source range
+			strLowerCaseCopy.begin(), // start destination range
+			::tolower
+		); // unary function
+	</code>
+</pre>
+
+<p>The second version accepts a binary function allowing <code>transform()</code> to process a pair of elements taken from two different ranges:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// sum elements from two vectors and store result in a deque
+		transform(
+			numsInVec1.cbegin(), // start of source range 1
+			numsInVec1.cend(), // end of source range 1
+			numsInVec2.cbegin(), // start of source range 2
+			sumInDeque.begin(), // store result in a deque
+			std::plus&lt;int&gt;()
+		); // binary function plus
+	</code>
+</pre>

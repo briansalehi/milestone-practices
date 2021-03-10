@@ -1,1 +1,1 @@
-STL Algorithms
+Algorithms
