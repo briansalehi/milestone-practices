@@ -4,12 +4,11 @@
 
 int main()
 {
-    // vector<bool> instantiations
-    std::vector<bool> bits;
-    std::vector<bool> bitFlags(5, true);
-    std::vector<bool> copyBits(bitFlags);
+    std::vector<bool> bits; // initializing with default constructor
+    std::vector<bool> bitFlags(5, true); // initializing 5 set bits
+    std::vector<bool> copyBits(bitFlags); // initializing by copy constructor
 
-    // vector<bool> operators
+    // dynamically resizing bitset
     bits.push_back(true);
     bits.push_back(false);
     bits.push_back(false);
@@ -17,13 +16,9 @@ int main()
 
     std::cout << "vector size: " << bits.size() << std::endl;
 
-    bits.flip();
+    bits.flip(); // similar to not operation on all bits
     std::cout << "fliped the bits: ";
-    for_each(
-        bits.cbegin()
-        , bits.cend()
-        , [](const bool& bit) { std::cout << bit; }
-    );
+    for_each(bits.cbegin(), bits.cend(), [](const bool& bit) { std::cout << bit; });
     std::cout << std::endl;
     
     return 0;

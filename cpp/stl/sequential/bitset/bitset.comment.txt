@@ -1,0 +1,115 @@
+<p>This template class requires you to supply one template parameter that contains the number of bits the instance of the class has to manage:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bitset <4> fourBits; // 4 bits initialized to 0000
+	</code>
+</pre>
+
+<p>You can also initialize the bitset to a bit sequence represented in a char* string literal:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bitset <5> fiveBits("10101"); // 5 bits 10101
+	</code>
+</pre>
+
+<p>Copying from one bitset while instantiating another is quite simple:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bitset <8> fiveBitsCopy(fiveBits);
+	</code>
+</pre>
+
+<p>The bitset class supplies member functions that help perform insertions into the  bitset, set or reset contents, read the bits, or write them into a stream. It also supplies operators that help display the contents of a bitset and perform bitwise logical operations among others.</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<td scope="col">Operator</td>
+			<td scope="col">Description</td>
+		</tr>
+	</thread>
+	<tbody>
+		<tr>
+			<td><code>operator&lt;&lt;</code></td>
+			<td>Inserts a text representation of the bit sequence into the output stream <code>std::cout &gt;&gt; fourBits;</code></td>
+		</tr>
+		<tr>
+			<td><code>operator&gt;&gt;</code></td>
+			<td>Inserts a string into the bitset object <code>"0101" &gt;&gt; fourBits;</code></td>
+		</tr>
+		<tr>
+			<td><code>operator&amp;</code></td>
+			<td>Performs a bitwise AND operation <code>std::bitset&lt;4&gt; result(fourBits1&amp; fourBits2);</code></td>
+		</tr>
+		<tr>
+			<td><code>operator|</code></td>
+			<td>Performs a bitwise OR operation <code>std::bitwise&lt;4&gt; result(fourBits1| fourBits2);</code></td>
+		</tr>
+		<tr>
+			<td><code>operator^</code></td>
+			<td>Performs a bitwise XOR operation <code>std::bitwise&lt;4&gt; result(fourBits1^ fourBits2);</code></td>
+		</tr>
+		<tr>
+			<td><code>operator~</code></td>
+			<td>Performs a bitwise NOT operation <code>std::bitwise&lt;4&gt; result(~fourBits1);</code></td>
+		</tr>
+		<tr>
+			<td><code>operator&lt;&lt;=</code></td>
+			<td>Performs a bitwise right shift <code>fourBits &gt;&gt;=(2);</code></td>
+		</tr>
+		<tr>
+			<td><code>operator&gt;&gt;=</code></td>
+			<td>Performs a bitwise left shift <code>fourBits&lt;&lt;=(2);</code></td>
+		</tr>
+		<tr>
+			<td><code>operator[N]</code></td>
+			<td>Returns a reference to the nth bit in the sequence <code>fourBits[2] = 0; bool bNum = fourBits[2];</code></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>To help manipulate the contents of a bitset, you can use the member functions as listed in the following table that can help you work with a bit, or with all the bits in a bitset.</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<td scope="col">Function</td>
+			<td scope="col">Description</td>
+		</tr>
+	</thread>
+	<tbody>
+		<tr>
+			<td><code>set()</code></td>
+			<td>Sets all bits in the sequence to 1</td>
+		</tr>
+		<tr>
+			<td><code>set(N, val=1)</code></td>
+			<td>Sets the N th bit with the value as specified in val (default 1) <code>fourBits.set(2, 0);</code></td>
+		</tr>
+		<tr>
+			<td><code>reset()</code></td>
+			<td>Resets all bits in the sequence to 0 <code>fourBits.reset();</code></td>
+		</tr>
+		<tr>
+			<td><code>reset(N)</code></td>
+			<td>Clears the N th bit <code>fourBits.reset(2);</code></td>
+		</tr>
+		<tr>
+			<td><code>flip()</code></td>
+			<td>Toggles all bits in the sequence <code>fourBits.flip();</code></td>
+		</tr>
+		<tr>
+			<td><code>size()</code></td>
+			<td>Returns the number of bits in the sequence <code>size_t numBits = fourBits.size();</code></td>
+		</tr>
+		<tr>
+			<td><code>count()</code></td>
+			<td>Returns the number of bits that are set <code>size_t numBitsSet = fourBits.count(); size_t numBitsReset = fourBits.size() - fourBits.count();</code></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>One disadvantage of STL bitset<> is its inability to resize itself dynamically. You can use the bitset only where the number of bits to be stored in the sequence is known at compile time.</p>

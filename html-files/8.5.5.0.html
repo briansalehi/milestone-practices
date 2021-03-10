@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Sequential Containers</title>
+<title>Adaptive Containers</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,12 +206,12 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class='breadcrumb-item active'>Sequential Containers</li>
+<li class='breadcrumb-item active'>Adaptive Containers</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Sequential-Containers" class="anchor" aria-hidden="true" href="#Sequential-Containers">
-Sequential Containers
+<a id="Adaptive-Containers" class="anchor" aria-hidden="true" href="#Adaptive-Containers">
+Adaptive Containers
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -229,12 +229,12 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 24</li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.2.11.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.4.2.6.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/array">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/adaptive-containers/stack">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -247,121 +247,33 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="#8-5-3-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Array
-	<span class="badge badge-primary badge-pill">12</span>
+<a href="#8-5-5-1-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Stack
+	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="8-5-3-1-0">
-<a href="/8.5.3.1.1.html" class="list-group-item group-child">
-	1. array
-	
-</a>
-<a href="/8.5.3.1.2.html" class="list-group-item group-child">
-	2. clear a container
-	
-</a>
-<a href="/8.5.3.1.3.html" class="list-group-item group-child">
-	3. deque (pronounciation rythmes as *deck*)
-	
-</a>
-<a href="/8.5.3.1.4.html" class="list-group-item group-child">
-	4. measuring the distance of two elements
-	
-</a>
-<a href="/8.5.3.1.5.html" class="list-group-item group-child">
-	5. inserting element in the middle
-	
-</a>
-<a href="/8.5.3.1.6.html" class="list-group-item group-child">
-	6. vector instantiation
-	
-</a>
-<a href="/8.5.3.1.7.html" class="list-group-item group-child">
-	7. size and capacity of vector
-	
-</a>
-<a href="/8.5.3.1.8.html" class="list-group-item group-child">
-	8. inserting element at the end
-	
-</a>
-<a href="/8.5.3.1.9.html" class="list-group-item group-child">
-	9. remove an element from vector
-	
-</a>
-<a href="/8.5.3.1.10.html" class="list-group-item group-child">
-	10. reserving memory for vector
-	
-</a>
-<a href="/8.5.3.1.11.html" class="list-group-item group-child">
-	11. accessing vector elements using pointer semantics
-	
-</a>
-<a href="/8.5.3.1.12.html" class="list-group-item group-child">
-	12. accessing vector elements using array semantics
+<div class="list-group collapse" id="8-5-5-1-0">
+<a href="/8.5.5.1.1.html" class="list-group-item group-child">
+	1. std::stack
 	
 </a>
 </div>
-<a href="#8-5-3-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Bitset
-	<span class="badge badge-primary badge-pill">2</span>
+<a href="#8-5-5-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Queue
+	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="8-5-3-2-0">
-<a href="/cpp/stl/sequencial-containers/bitset/bitset" class="list-group-item group-child">
-	1. Bitset
-	
-</a>
-<a href="/cpp/stl/sequencial-containers/bitset/bit-vector" class="list-group-item group-child">
-	2. Bit Vector
+<div class="list-group collapse" id="8-5-5-2-0">
+<a href="/8.5.5.2.1.html" class="list-group-item group-child">
+	1. std::queue
 	
 </a>
 </div>
-<a href="#8-5-3-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Vector
-	<span class="badge badge-primary badge-pill">0</span>
+<a href="#8-5-5-3-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Priority Queue
+	<span class="badge badge-primary badge-pill">1</span>
 </a>
-<div class="list-group collapse" id="8-5-3-3-0">
-</div>
-<a href="#8-5-3-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Deque
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="8-5-3-4-0">
-</div>
-<a href="#8-5-3-5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. List
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="8-5-3-5-0">
-<a href="/8.5.3.5.1.html" class="list-group-item group-child">
-	1. std::forward_list
-	
-</a>
-<a href="/8.5.3.5.2.html" class="list-group-item group-child">
-	2. inserting elements in the middle of list
-	
-</a>
-<a href="/8.5.3.5.3.html" class="list-group-item group-child">
-	3. list instantiation
-	
-</a>
-<a href="/8.5.3.5.4.html" class="list-group-item group-child">
-	4. pushing elements into list
-	
-</a>
-<a href="/8.5.3.5.5.html" class="list-group-item group-child">
-	5. removing element from list
-	
-</a>
-<a href="/8.5.3.5.6.html" class="list-group-item group-child">
-	6. reversing list elements
-	
-</a>
-<a href="/8.5.3.5.7.html" class="list-group-item group-child">
-	7. sorting list comprising class
-	
-</a>
-<a href="/cpp/stl/sequencial-containers/list/sorting-list" class="list-group-item group-child">
-	8. Sorting List
+<div class="list-group collapse" id="8-5-5-3-0">
+<a href="/8.5.5.3.1.html" class="list-group-item group-child">
+	1. std::priority_queue
 	
 </a>
 </div>
