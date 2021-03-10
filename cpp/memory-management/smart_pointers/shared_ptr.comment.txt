@@ -1,3 +1,3 @@
-Shared pointers, will copy the address and ownership of the pointed object.  
-This makes them useful when you want a few pointers point to one location.  
-**delete** operator will be called when the last pointer is destroyed.
+<p>When writing applications using multiple threads, evaluate using <code>std::shared_ptr</code> and <code>std::weak_ptr</code> supplied by C++11-compliant libraries. These facilitate thread-safe and reference-counted object sharing.</p>
+
+<p>Shared pointers, will copy the address and ownership of the pointed object. This makes them useful when you want a few pointers point to one location. <code>delete</code> operator will be called when the last pointer is destroyed.</p>

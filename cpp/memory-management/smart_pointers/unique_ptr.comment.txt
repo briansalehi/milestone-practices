@@ -1,0 +1,52 @@
+<p><code>std::unique_ptr</code> was introduced to C++ starting with C++11, and it is slightly different from <code>std::auto_ptr</code> in the sense that it does not allow copy or assignment.</p>
+
+<p>To use class <code>std::unique_ptr</code>, include header: <code>&lt;memory&gt;</code></p>
+
+<p>The <code>std::unique_ptr</code> is a simple smart pointer similar to what’s shown in below sample, but with a private copy constructor and assignment operator to disallow copy via passing as an argument to a function by value, or copy via assignment.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		void function(const std::unique_ptr<Base>& inBase)
+		{
+			inBase->method();
+		}
+
+		std::unique_ptr<Base> smartBase(new Base);
+		function(smartBase); // OK, as function accepts reference
+		std::unique_ptr<Base> copySmartBase;
+		copySmartBase = smartBase; // error: operator= is private
+	</code>
+</pre>
+
+<p>Below code demonstrates that the <code>std::unique_ptr</code> doesn’t support copy:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		copySmartBase = smartBase; // error: operator= is private
+	</code>
+</pre>
+
+<p>It however does support move semantics. Therefore, an option that would work is:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::unique_ptr<Base> sameBase(std::move(smartBase)); 
+		// smartBase is empty henceforth
+	</code>
+</pre>
+
+<p>If you were ever to write a lambda expression that would need to capture an <code>std::unique_ptr</code>, then you would use <code>std::move()</code> in your lambda capture.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::unique_ptr<char> alphabet(new char);
+		*alphabet = 's';
+		auto lambda = [capture = std::move(alphabet)]() { std::cout << *capture << std::endl; };
+
+		lambda();
+	</code>
+</pre>
+
+<p>It’s pretty apparent that the version of the smart pointer shipped with the C++ Standard Library is not going to meet every programmer’s requirements. This is precisely why there are many smart pointer libraries out there.</p>
+
+<p>Boost (<a href="www.boost.org">www.boost.org</a>) supplies you with some well-tested and well-documented smart pointer classes, among many other useful utility classes. You can find further information on Boost smart pointers and downloads at <a href="http://www.boost.org/libs/ smart_ptr/smart_ptr.htm">Boost smart pointers</a>.</p>

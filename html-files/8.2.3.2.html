@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>prevent overriding by final</title>
+<title>Shared Pointer</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,22 +205,36 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.2.3.0.html">Polymorphism</a></li>
-<li class='breadcrumb-item active'>prevent overriding by final</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Memory Management</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.2.3.0.html">Smart Pointers</a></li>
+<li class='breadcrumb-item active'>Shared Pointer</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="prevent-overriding-by-final" class="anchor" aria-hidden="true" href="#prevent-overriding-by-final">
-prevent overriding by final
+<a id="Shared-Pointer" class="anchor" aria-hidden="true" href="#Shared-Pointer">
+Shared Pointer
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-You were previously introduced to **final** keyword in inheriting classes, which made that class to be the last generation in hierarchy.  
-Here we can also use **final** keyword to prevent a method from being overriden by another class.
+<p>When writing applications using multiple threads, evaluate using <code>std::shared_ptr</code> and <code>std::weak_ptr</code> supplied by C++11-compliant libraries. These facilitate thread-safe and reference-counted object sharing.</p>
+
+<p>Shared pointers, will copy the address and ownership of the pointed object. This makes them useful when you want a few pointers point to one location. <code>delete</code> operator will be called when the last pointer is destroyed.</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 26</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -231,30 +245,23 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>final.cxx</cite>
+  <cite>shared_ptr.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    
-    class Base {
-    public:
-        virtual void method() {
-            std::cout &lt;&lt; &quot;Base Method Invoked&quot; &lt;&lt; std::endl;
-        }    
-    };
-    
-    class Derived: public Base {
-    public:
-        // method using final will no longer be available to be overriden by another class
-        void method() override final {
-            std::cout &lt;&lt; &quot;Derived Method Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
+    #include &lt;memory&gt;
     
     int main()
     {
-        Derived derived;
-        derived.method();
+    	{
+        std::shared_ptr&lt;int&gt; number(new int(3));
+        // now number and pointer both point to one location
+        std::shared_ptr&lt;int&gt; pointer = number;
+    	}
+    
+    	{
+    	std::shared_ptr&lt;int&gt; number = std::make_shared&lt;int&gt;(3);
+    	std::shared_ptr&lt;int&gt; pointer = number;
+    	}
     
         return 0;
     }
@@ -272,38 +279,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./final.o -c ./final.cxx
+g++ -Wall -g -o ./shared_ptr.o -c ./shared_ptr.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./final.bin ./final.o
+g++ -g -o ./shared_ptr.bin ./shared_ptr.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./final.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-Derived Method Invoked
+./shared_ptr.bin
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.2.3.1.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/memory-management/smart-pointers/unique-pointer">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.2.3.3.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.2.4.0.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

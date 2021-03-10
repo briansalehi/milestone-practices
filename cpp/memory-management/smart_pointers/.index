@@ -1,4 +1,3 @@
 README.md
-ownership.cxx
 unique_ptr.cxx
 shared_ptr.cxx
