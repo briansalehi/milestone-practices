@@ -1,1 +1,0 @@
-removing element from list

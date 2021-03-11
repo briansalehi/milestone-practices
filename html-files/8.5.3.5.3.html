@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>list instantiation</title>
+<title>Erasing from List</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -208,19 +208,55 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.3.5.0.html">List</a></li>
-<li class='breadcrumb-item active'>list instantiation</li>
+<li class='breadcrumb-item active'>Erasing from List</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="list-instantiation" class="anchor" aria-hidden="true" href="#list-instantiation">
-list instantiation
+<a id="Erasing-from-List" class="anchor" aria-hidden="true" href="#Erasing-from-List">
+Erasing from List
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-**std::list** containers can be initialized with different types, initializer list, another list object or iterators.
+<p>The list member function <code>erase()</code> comes in two overloaded forms; One that erases one element given an iterator that points to it and another that accepts a range and therefore erases a range of elements from the list:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;int&gt; linkInts{ 4, 3, 5, -1, 2017 };
+
+		// Store an iterator obtained in using insert()
+		auto val2 = linkInts.insert(linkInts.begin(), 2);
+
+		linkInts.erase(val2); // erase one element
+
+		linkInts.erase(linkInts.begin(), linkInts.end()); // erase a range
+	</code>
+</pre>
+
+<p>The shortest and simplest way to empty an STL container, such as a <code>std::list</code>, is to call member function <code>clear()</code></p>
+
+<pre class="language-cpp">
+	<code>
+		linkInts.clear();
+	</code>
+</pre>
+
+<p>The number of elements in a <code>std::list</code> can be determined using list method <code>size()</code>, very similar to that of a <code>std::vector</code>. This is a pattern applicable to all STL container classes.</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 18</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -231,28 +267,43 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>instantiation.cxx</cite>
+  <cite>erase.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;string&gt;
+    #include &lt;iostream&gt;
     #include &lt;list&gt;
+    
+    template &lt;typename C&gt;
+    void display(const C&amp; container) {
+        for (auto iterator = container.cbegin(); iterator != container.cend(); ++ iterator) {
+            std::cout &lt;&lt; *iterator &lt;&lt; &quot; &quot;;
+        }
+        std::cout &lt;&lt; std::endl;
+    }
     
     int main()
     {
-        // std::list with 10 elements
-        std::list&lt;int&gt; integers(10);
+        // there are two ways to remove elements
+        std::list&lt;int&gt; integers{1,2,3,4,5};
+        display(integers);
+    
+        // insert returns iterator, the position of inserted element
+        std::list&lt;int&gt;::iterator position = integers.insert(integers.cbegin(), 0);
+        display(integers);
         
-        // std::list with 5 elements all instantiated with value 3.14
-        std::list&lt;double&gt; pies(5, 3.14);
+        // type 1: erase by iterator
+        integers.erase(position);
+        display(integers);
     
-        // instantiating std::list with std::list initialization
-        std::list&lt;std::string&gt; messages{&quot;C++&quot;, &quot;programming&quot;};
+        // type 2: erase by range
+        integers.erase(integers.cbegin(), --integers.cend());
+        display(integers);
     
-        // initializing std::list with another one
-        std::list&lt;int&gt; copy(integers);
-    
-        // initializing std::list with iterators
-        std::list&lt;int&gt; numbers(copy.cbegin(), copy.cend());
+        // clear container
+        integers.clear();
+        if (integers.empty()) {
+            std::cout &lt;&lt; &quot;container empty&quot; &lt;&lt; std::endl;
+        }
     
         return 0;
     }
@@ -270,17 +321,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./instantiation.o -c ./instantiation.cxx
+g++ -Wall -g -o ./erase.o -c ./erase.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./instantiation.bin ./instantiation.o
+g++ -g -o ./erase.bin ./erase.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./instantiation.bin
+./erase.bin
 </code>
 </pre>
 <hr />
@@ -295,13 +346,17 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-
+1 2 3 4 5
+0 1 2 3 4 5
+1 2 3 4 5
+5
+container empty
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.3.5.2.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/list/inserting-into-list">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.3.5.4.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/list/sorting-list">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

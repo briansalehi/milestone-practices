@@ -1,1 +1,0 @@
-Elements can be inserted in the back and front of a list container using **push_back()** and **push_front()** methods.

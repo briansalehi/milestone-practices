@@ -1,1 +1,0 @@
-Elements' order of a container can be reversed with **reverse()** function.

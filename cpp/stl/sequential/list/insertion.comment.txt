@@ -1,1 +1,20 @@
-Elements can also be inserted by **insert()** method, which has a few overloaded versions.
+<p><code>std::list</code> is characterized by its capability to insert elements at the middle of the collection in constant time. The <code>list::insert()</code> member function is available in three forms:</p>
+
+<pre class="language-cpp">
+	<code>
+		iterator insert(iterator pos, const T& x)
+	</code>
+</pre>
+
+<pre class="language-cpp">
+	<code>
+		void insert(iterator pos, size_type n, const T& x)
+	</code>
+</pre>
+
+<pre class="language-cpp">
+	<code>
+		template &lt;class InputIterator&gt;
+		void insert(iterator pos, InputIterator f, InputIterator l)
+	</code>
+</pre>

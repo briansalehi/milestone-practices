@@ -1,9 +1,6 @@
 README.md
-forward_list.cxx
+initialization.cxx
 insertion.cxx
-instantiation.cxx
-push.cxx
-remove.cxx
-reverse.cxx
-sort_class.cxx
+erase.cxx
 sort.cxx
+forward_list.cxx

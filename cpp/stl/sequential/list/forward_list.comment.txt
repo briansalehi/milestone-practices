@@ -1,2 +1,19 @@
-**std::forward_list** is a container similar to **std::list** except that it only grows forward and top elements can be removed first.  
-This is a FIFO structure container.
+<p><code>std::forward_list</code> is a container similar to <code>std::list</code> except that it only grows forward and top elements can be removed first. This is a FIFO structure container or a singly linked list.</p>
+
+<p>To use a <code>std::forward_list</code>, you need to include header <forward_list>: <code>&lt;forwad_list&gt;</code></p>
+
+<p>The usage of the <code>std::forward_list</code> is similar to <code>std::list</code>, save for the fact that you can move iterators only in one direction and that you have a <code>push_front()</code> function to insert elements but no <code>push_back()</code>. Of course, you can always use <code>insert()</code> and its overloaded functions to insert an element at a given position.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		forward_list&lt;int&gt; flistIntegers{ 3, 4, 2, 2, 0 };
+
+		flistIntegers.push_front(1);
+
+		flistIntegers.remove(2);
+
+		flistIntegers.sort();
+	</code>
+</pre>
+
+<p>The advantage of the <code>std::forward_list</code> is that in being a singly linked list, its memory consumption is slightly lower than that of a <code>std::list</code> (as an element needs to know only the next element but not the previous one).</p>

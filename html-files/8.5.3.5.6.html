@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>reversing list elements</title>
+<title>Sorting List</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -208,19 +208,64 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.3.5.0.html">List</a></li>
-<li class='breadcrumb-item active'>reversing list elements</li>
+<li class='breadcrumb-item active'>Sorting List</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="reversing-list-elements" class="anchor" aria-hidden="true" href="#reversing-list-elements">
-reversing list elements
+<a id="Sorting-List" class="anchor" aria-hidden="true" href="#Sorting-List">
+Sorting List
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Elements' order of a container can be reversed with **reverse()** function.
+<p>The list function features <code>sort()</code> and <code>reverse()</code>, even though the STL supplies these as algorithms that will and do work on the list class.</p>
+
+<p>The member versions of these algorithms ensure that iterators pointing to elements in the list are not invalidated when the relative position of an element is disturbed.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;int&gt; linkInts{ 0, 1, 2, 3, 4, 5 };
+
+		linkInts.reverse();
+
+		linkInts.sort(); // sort in ascending order
+	</code>
+</pre>
+
+<p>Another version allows you to define your own sort priorities via a binary predicate function as a parameter:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bool SortPredicate_Descending(const int& lhs, const int& rhs)
+		{
+			// define criteria for list::sort: return true for desired order
+			return (lhs &gt; rhs);
+		} // Use predicate to sort a list:
+
+		linkInts.sort(SortPredicate_Descending);
+	</code>
+</pre>
+
+<p>Imagine you want to sort a container, containing elements of type a special object you have created earlier. How the sort function should know how to sort this container? You decide! You create a predicate function (disscussed later) to complete the action based on a rational way of comparison used to sort your objects.</p>
+
+<p>Implement <code>operator&lt;</code> within the class type that the list contains.</p>
+
+<p>Supply a sort binary predicate—a function that takes two values as input and returns a Boolean value indicating whether the first value is smaller than the second.</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 18</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -231,7 +276,7 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>reverse.cxx</cite>
+  <cite>sort.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
@@ -245,14 +290,25 @@ Source
         std::cout &lt;&lt; std::endl;
     }
     
+    // inline function of sort
+    inline bool descending(const int&amp; lhs, const int&amp; rhs) { return (lhs &gt; rhs); }
+    inline bool ascending(const int&amp; lhs, const int&amp; rhs) { return (lhs &lt; rhs); }
+    
     int main()
     {
-        std::list&lt;int&gt; numbers{1,2,3,4,5};
-        display(numbers);
+        std::list&lt;int&gt; numbers{5,2,4,1,3};
+        std::list&lt;int&gt; integers(numbers);
+    	// template initialization is optional for functions, you can strip it
+        display&lt;std::list&lt;int&gt;&gt;(numbers);
     
-        // reverse does not take any parameter(this is different than std::reverse)
-        numbers.reverse();
-        display(numbers);
+        numbers.sort();
+        display&lt;std::list&lt;int&gt;&gt;(numbers);
+    
+        integers.sort(descending);
+        display&lt;std::list&lt;int&gt;&gt;(integers);
+    
+        integers.sort(ascending);
+        display&lt;std::list&lt;int&gt;&gt;(integers);
     
         return 0;
     }
@@ -270,17 +326,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./reverse.o -c ./reverse.cxx
+g++ -Wall -g -o ./sort.o -c ./sort.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./reverse.bin ./reverse.o
+g++ -g -o ./sort.bin ./sort.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./reverse.bin
+./sort.bin
 </code>
 </pre>
 <hr />
@@ -295,8 +351,10 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
+5 2 4 1 3
 1 2 3 4 5
 5 4 3 2 1
+1 2 3 4 5
 </code>
 </pre>
 <ul class="pager">

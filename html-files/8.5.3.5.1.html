@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>std::forward_list</title>
+<title>List Initialization</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -208,20 +208,67 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.3.5.0.html">List</a></li>
-<li class='breadcrumb-item active'>std::forward_list</li>
+<li class='breadcrumb-item active'>List Initialization</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="std::forward_list" class="anchor" aria-hidden="true" href="#std::forward_list">
-std::forward_list
+<a id="List-Initialization" class="anchor" aria-hidden="true" href="#List-Initialization">
+List Initialization
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-**std::forward_list** is a container similar to **std::list** except that it only grows forward and top elements can be removed first.  
-This is a FIFO structure container.
+<p><code>std::list</code> containers can be initialized with different types, initializer list, another list object or iterators.</p>
+
+<p>the initialization of <code>std::list</code> would look like the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;int&gt; linkInts; // list containing integers
+		std::list&lt;float&gt; listFloats; // list containing floats
+	</code>
+</pre>
+
+<p>To declare an iterator that points to an element in the list, you would use <code>std::list&lt;int&gt;::const_iterator</code> elementInList;</p>
+
+<p>If you need an iterator that can be used to modify values or invoke non-const functions, you use iterator instead of <code>const_iterator</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// instantiate an empty list
+		std::list&lt;int&gt; linkInts;
+
+		// instantiate a list with 10 integers
+		std::list&lt;int&gt; listWith10Integers(10);
+
+		// instantiate a list with 4 integers, each value 99
+		list&lt;int&gt; listWith4IntegerEach99 (10, 99);
+
+		// create an exact copy of an existing list
+		list&lt;int&gt; listCopyAnother(listWith4IntegerEach99);
+
+		// a vector with 10 integers, each 2017
+		vector&lt;int&gt; vecIntegers(10, 2017);
+
+		// instantiate a list using values from another container
+		list&lt;int&gt; listContainsCopyOfAnother(vecIntegers.cbegin(), vecIntegers.cend());
+	</code>
+</pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 18</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -232,43 +279,29 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>forward_list.cxx</cite>
+  <cite>initialization.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;forward_list&gt;
-    
-    template &lt;typename C&gt;
-    void display(const C&amp; container) {
-        for (auto iterator = container.cbegin(); iterator != container.cend(); ++iterator) {
-            std::cout &lt;&lt; *iterator &lt;&lt; &quot; &quot;;
-        }
-        std::cout &lt;&lt; std::endl;
-    }
+    #include &lt;string&gt;
+    #include &lt;list&gt;
     
     int main()
     {
-        std::forward_list&lt;int&gt; integers;
-        integers.push_front(5);
-        integers.push_front(4);
-        integers.push_front(3);
-        integers.push_front(2);
-        integers.push_front(1);
-        integers.push_front(0);
-        display(integers);
-    
-        integers.pop_front();
-        display(integers);
-    
-        integers.remove(4);
-        display(integers);
-    
-        integers.clear();
-        display(integers);
-    
-        if(integers.empty())
-            std::cout &lt;&lt; &quot;container empty&quot; &lt;&lt; std::endl;
+        // std::list with 10 elements
+        std::list&lt;int&gt; integers(10);
         
+        // std::list with 5 elements all instantiated with value 3.14
+        std::list&lt;double&gt; pies(5, 3.14);
+    
+        // instantiating std::list with std::list initialization
+        std::list&lt;std::string&gt; messages{&quot;C++&quot;, &quot;programming&quot;};
+    
+        // initializing std::list with another one
+        std::list&lt;int&gt; copy(integers);
+    
+        // initializing std::list with iterators
+        std::list&lt;int&gt; numbers(copy.cbegin(), copy.cend());
+    
         return 0;
     }
 </code>
@@ -285,42 +318,23 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./forward_list.o -c ./forward_list.cxx
+g++ -Wall -g -o ./initialization.o -c ./initialization.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./forward_list.bin ./forward_list.o
+g++ -g -o ./initialization.bin ./initialization.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./forward_list.bin
-</code>
-</pre>
-<hr />
-<h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<pre>
-<code class="language-cpp">
-0 1 2 3 4 5
-1 2 3 4 5
-1 2 3 5
-
-container empty
+./initialization.bin
 </code>
 </pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/list">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.3.5.2.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/list/inserting-into-list">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

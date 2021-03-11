@@ -1,1 +1,0 @@
-**std::list** containers can be initialized with different types, initializer list, another list object or iterators.

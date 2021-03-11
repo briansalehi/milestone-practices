@@ -1,0 +1,24 @@
+<p>The list member function <code>erase()</code> comes in two overloaded forms; One that erases one element given an iterator that points to it and another that accepts a range and therefore erases a range of elements from the list:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;int&gt; linkInts{ 4, 3, 5, -1, 2017 };
+
+		// Store an iterator obtained in using insert()
+		auto val2 = linkInts.insert(linkInts.begin(), 2);
+
+		linkInts.erase(val2); // erase one element
+
+		linkInts.erase(linkInts.begin(), linkInts.end()); // erase a range
+	</code>
+</pre>
+
+<p>The shortest and simplest way to empty an STL container, such as a <code>std::list</code>, is to call member function <code>clear()</code></p>
+
+<pre class="language-cpp">
+	<code>
+		linkInts.clear();
+	</code>
+</pre>
+
+<p>The number of elements in a <code>std::list</code> can be determined using list method <code>size()</code>, very similar to that of a <code>std::vector</code>. This is a pattern applicable to all STL container classes.</p>

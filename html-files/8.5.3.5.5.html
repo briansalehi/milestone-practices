@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>removing element from list</title>
+<title>Forward List</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -208,19 +208,50 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.3.5.0.html">List</a></li>
-<li class='breadcrumb-item active'>removing element from list</li>
+<li class='breadcrumb-item active'>Forward List</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="removing-element-from-list" class="anchor" aria-hidden="true" href="#removing-element-from-list">
-removing element from list
+<a id="Forward-List" class="anchor" aria-hidden="true" href="#Forward-List">
+Forward List
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-To remove an element from **std::list** container, **erase()** method can be used.
+<p><code>std::forward_list</code> is a container similar to <code>std::list</code> except that it only grows forward and top elements can be removed first. This is a FIFO structure container or a singly linked list.</p>
+
+<p>To use a <code>std::forward_list</code>, you need to include header <forward_list>: <code>&lt;forwad_list&gt;</code></p>
+
+<p>The usage of the <code>std::forward_list</code> is similar to <code>std::list</code>, save for the fact that you can move iterators only in one direction and that you have a <code>push_front()</code> function to insert elements but no <code>push_back()</code>. Of course, you can always use <code>insert()</code> and its overloaded functions to insert an element at a given position.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		forward_list&lt;int&gt; flistIntegers{ 3, 4, 2, 2, 0 };
+
+		flistIntegers.push_front(1);
+
+		flistIntegers.remove(2);
+
+		flistIntegers.sort();
+	</code>
+</pre>
+
+<p>The advantage of the <code>std::forward_list</code> is that in being a singly linked list, its memory consumption is slightly lower than that of a <code>std::list</code> (as an element needs to know only the next element but not the previous one).</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 18</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -231,15 +262,15 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>remove.cxx</cite>
+  <cite>forward_list.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;list&gt;
+    #include &lt;forward_list&gt;
     
     template &lt;typename C&gt;
     void display(const C&amp; container) {
-        for (auto iterator = container.cbegin(); iterator != container.cend(); ++ iterator) {
+        for (auto iterator = container.cbegin(); iterator != container.cend(); ++iterator) {
             std::cout &lt;&lt; *iterator &lt;&lt; &quot; &quot;;
         }
         std::cout &lt;&lt; std::endl;
@@ -247,28 +278,27 @@ Source
     
     int main()
     {
-        // there are two ways to remove elements
-        std::list&lt;int&gt; integers{1,2,3,4,5};
+        std::forward_list&lt;int&gt; integers;
+        integers.push_front(5);
+        integers.push_front(4);
+        integers.push_front(3);
+        integers.push_front(2);
+        integers.push_front(1);
+        integers.push_front(0);
         display(integers);
     
-        // insert returns iterator, the position of inserted element
-        std::list&lt;int&gt;::iterator position = integers.insert(integers.cbegin(), 0);
-        display(integers);
-        
-        // type 1: erase by iterator
-        integers.erase(position);
+        integers.pop_front();
         display(integers);
     
-        // type 2: erase by range
-        integers.erase(integers.cbegin(), --integers.cend());
+        integers.remove(4);
         display(integers);
     
-        // clear container
         integers.clear();
-        if (integers.empty()) {
-            std::cout &lt;&lt; &quot;container empty&quot; &lt;&lt; std::endl;
-        }
+        display(integers);
     
+        if(integers.empty())
+            std::cout &lt;&lt; &quot;container empty&quot; &lt;&lt; std::endl;
+        
         return 0;
     }
 </code>
@@ -285,17 +315,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./remove.o -c ./remove.cxx
+g++ -Wall -g -o ./forward_list.o -c ./forward_list.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./remove.bin ./remove.o
+g++ -g -o ./forward_list.bin ./forward_list.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./remove.bin
+./forward_list.bin
 </code>
 </pre>
 <hr />
@@ -310,17 +340,17 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-1 2 3 4 5
 0 1 2 3 4 5
 1 2 3 4 5
-5
+1 2 3 5
+
 container empty
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.3.5.4.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/list/sorting-list">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.3.5.6.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/associative-containers">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

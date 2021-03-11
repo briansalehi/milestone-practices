@@ -16,12 +16,14 @@ inline bool ascending(const int& lhs, const int& rhs) { return (lhs < rhs); }
 int main()
 {
     std::list<int> numbers{5,2,4,1,3};
-    std::list<int> integers(numbers);
+
 	// template initialization is optional for functions, you can strip it
     display<std::list<int>>(numbers);
 
     numbers.sort();
     display<std::list<int>>(numbers);
+
+    std::list<int> integers(numbers);
 
     integers.sort(descending);
     display<std::list<int>>(integers);

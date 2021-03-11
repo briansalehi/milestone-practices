@@ -1,0 +1,36 @@
+<p><code>std::list</code> containers can be initialized with different types, initializer list, another list object or iterators.</p>
+
+<p>the initialization of <code>std::list</code> would look like the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;int&gt; linkInts; // list containing integers
+		std::list&lt;float&gt; listFloats; // list containing floats
+	</code>
+</pre>
+
+<p>To declare an iterator that points to an element in the list, you would use <code>std::list&lt;int&gt;::const_iterator</code> elementInList;</p>
+
+<p>If you need an iterator that can be used to modify values or invoke non-const functions, you use iterator instead of <code>const_iterator</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// instantiate an empty list
+		std::list&lt;int&gt; linkInts;
+
+		// instantiate a list with 10 integers
+		std::list&lt;int&gt; listWith10Integers(10);
+
+		// instantiate a list with 4 integers, each value 99
+		list&lt;int&gt; listWith4IntegerEach99 (10, 99);
+
+		// create an exact copy of an existing list
+		list&lt;int&gt; listCopyAnother(listWith4IntegerEach99);
+
+		// a vector with 10 integers, each 2017
+		vector&lt;int&gt; vecIntegers(10, 2017);
+
+		// instantiate a list using values from another container
+		list&lt;int&gt; listContainsCopyOfAnother(vecIntegers.cbegin(), vecIntegers.cend());
+	</code>
+</pre>

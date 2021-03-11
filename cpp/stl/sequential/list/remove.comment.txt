@@ -1,1 +1,0 @@
-To remove an element from **std::list** container, **erase()** method can be used.

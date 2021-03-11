@@ -1,2 +1,33 @@
-There are some methods like **sort()** or **transport()** and other algorithmic functions, that might need you to create a function or object function (will be discussed later) to complete the task of it.  
-Imagine you want to sort a container, containing elements of type a special object you have created earlier. How the sort function should know how to sort this container? You decide! You create a predicate function (disscussed later) to complete the action based on a rational way of comparison used to sort your objects.
+<p>The list function features <code>sort()</code> and <code>reverse()</code>, even though the STL supplies these as algorithms that will and do work on the list class.</p>
+
+<p>The member versions of these algorithms ensure that iterators pointing to elements in the list are not invalidated when the relative position of an element is disturbed.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::list&lt;int&gt; linkInts{ 0, 1, 2, 3, 4, 5 };
+
+		linkInts.reverse();
+
+		linkInts.sort(); // sort in ascending order
+	</code>
+</pre>
+
+<p>Another version allows you to define your own sort priorities via a binary predicate function as a parameter:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		bool SortPredicate_Descending(const int& lhs, const int& rhs)
+		{
+			// define criteria for list::sort: return true for desired order
+			return (lhs &gt; rhs);
+		} // Use predicate to sort a list:
+
+		linkInts.sort(SortPredicate_Descending);
+	</code>
+</pre>
+
+<p>Imagine you want to sort a container, containing elements of type a special object you have created earlier. How the sort function should know how to sort this container? You decide! You create a predicate function (disscussed later) to complete the action based on a rational way of comparison used to sort your objects.</p>
+
+<p>Implement <code>operator&lt;</code> within the class type that the list contains.</p>
+
+<p>Supply a sort binary predicate—a function that takes two values as input and returns a Boolean value indicating whether the first value is smaller than the second.</p>
