@@ -1,2 +1,49 @@
-We can only find an element in **std::map** container based on key.
-Though, there are non-standard (yet) functions to seek through maps by values, but here we only have this approach.
+<p>We can only find an element in <code>std::map</code> container based on key.</p>
+
+<p>Associative containers, such as <code>std::map</code> and <code>std::multimap</code>, feature a member function called <code>find()</code> that enables you to find a value given a key. The result of a <code>find()</code> operation is always an iterator:</p>
+
+<pre class="language-cpp">
+	<code>
+		multimap&lt;int, std::string&gt;::const_iterator pairFound = mapIntToStr.find(key);
+	</code>
+</pre>
+
+<p>You would first check this iterator for the success of <code>find()</code> and then use it to access the found value:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		if (pairFound != mapIntToStr.end()) {
+			std::cout &lt;&lt; "Key " &lt;&lt; pairFound-&gt;first &lt;&lt; " points to Value: ";
+			std::cout &lt;&lt; pairFound-&gt;second &lt;&lt; std::endl;
+		} else {
+			std::cout &lt;&lt; "Sorry, pair with key " &lt;&lt; key &lt;&lt; " not in map" &lt;&lt; std::endl;
+		}
+	</code>
+</pre>
+
+<p>Never use the result of a <code>find()</code> operation directly without checking the iterator returned for success.</p>
+
+<p>In the case of a <code>std::multiset</code> you would use <code>multiset::count()</code> to find the number of values corresponding to a key and increment the iterator to access those consequently placed values.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto pairFound = mmapIntToStr.find(key);
+
+		// Check if find() succeeded
+		if (pairFound != mmapIntToStr.end()) {
+			// Find the number of pairs that have the same supplied key
+			size_t numPairsInMap = mmapIntToStr.count(1000);
+
+			for(size_t counter = 0; counter &lt; numPairsInMap; ++ counter ) {
+				std::cout &lt;&lt; "Key: " &lt;&lt; pairFound-&gt;first; // key
+				std::cout &lt;&lt; ", Value [" &lt;&lt; counter &lt;&lt; "] = ";
+				std::cout &lt;&lt; pairFound->second &lt;&lt; std::endl; // value
+				++ pairFound;
+			 }
+		} else {
+			std::cout &lt;&lt; "Element not found in the multimap";
+		}
+	</code>
+</pre>
+
+

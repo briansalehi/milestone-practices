@@ -1,3 +1,17 @@
-**std::map** is a container like set, elements will be sorted when inserted into it.
-But it contains a pair of (key, value) instead of ony an element.  
-**std::map** is a template container, to initialize one, we need to specify key and value types.
+<p>Instantiating a map or multimap of an integer as key and a string as value requires a specialization of the template class <code>std::map</code> or <code>std::multimap</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::map&lt;keyType, valueType, Predicate=std::less&lt;keyType&gt;&gt; mapObj;
+		std::multimap&lt;keyType, valueType, Predicate=std::less&lt;keyType&gt;&gt; mmapObj;
+	</code>
+</pre>
+
+<p>Thus, the third template parameter is optional. When you supply only the key type and the value type, ignoring the third template parameter, <code>std::map</code> and <code>std::multimap</code> default to class <code>std::less&lt;&gt;</code> to define the sort criteria. Thus, a <code>std::map</code> or <code>std::multimap</code> that maps an integer to a string looks like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::map&lt;int, std::string&gt; mapIntToStr;
+		std::multimap&lt;int, std::string&gt; mmapIntToStr;
+	</code>
+</pre>

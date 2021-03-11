@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>erasing element in map</title>
+<title>Finding Element in Map</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,24 +206,82 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.4.0.html">STL Associative Containers</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.4.2.0.html">the STL std::map Classes</a></li>
-<li class='breadcrumb-item active'>erasing element in map</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.4.0.html">Associative Containers</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.4.2.0.html">Map</a></li>
+<li class='breadcrumb-item active'>Finding Element in Map</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="erasing-element-in-map" class="anchor" aria-hidden="true" href="#erasing-element-in-map">
-erasing element in map
+<a id="Finding-Element-in-Map" class="anchor" aria-hidden="true" href="#Finding-Element-in-Map">
+Finding Element in Map
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Erasing an element in a map container takes as much effort as it takes to erase an element from other containers.  
-Here two new methods we used, **lower_bound()** and **upper_bound()**.
-What makes them useful is that there might be multiple instances of a key in **std::multimap** container,
-we can access to the position of first and last instances of that key using these two methods.
+<p>We can only find an element in <code>std::map</code> container based on key.</p>
+
+<p>Associative containers, such as <code>std::map</code> and <code>std::multimap</code>, feature a member function called <code>find()</code> that enables you to find a value given a key. The result of a <code>find()</code> operation is always an iterator:</p>
+
+<pre class="language-cpp">
+	<code>
+		multimap&lt;int, std::string&gt;::const_iterator pairFound = mapIntToStr.find(key);
+	</code>
+</pre>
+
+<p>You would first check this iterator for the success of <code>find()</code> and then use it to access the found value:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		if (pairFound != mapIntToStr.end()) {
+			std::cout &lt;&lt; "Key " &lt;&lt; pairFound-&gt;first &lt;&lt; " points to Value: ";
+			std::cout &lt;&lt; pairFound-&gt;second &lt;&lt; std::endl;
+		} else {
+			std::cout &lt;&lt; "Sorry, pair with key " &lt;&lt; key &lt;&lt; " not in map" &lt;&lt; std::endl;
+		}
+	</code>
+</pre>
+
+<p>Never use the result of a <code>find()</code> operation directly without checking the iterator returned for success.</p>
+
+<p>In the case of a <code>std::multiset</code> you would use <code>multiset::count()</code> to find the number of values corresponding to a key and increment the iterator to access those consequently placed values.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto pairFound = mmapIntToStr.find(key);
+
+		// Check if find() succeeded
+		if (pairFound != mmapIntToStr.end()) {
+			// Find the number of pairs that have the same supplied key
+			size_t numPairsInMap = mmapIntToStr.count(1000);
+
+			for(size_t counter = 0; counter &lt; numPairsInMap; ++ counter ) {
+				std::cout &lt;&lt; "Key: " &lt;&lt; pairFound-&gt;first; // key
+				std::cout &lt;&lt; ", Value [" &lt;&lt; counter &lt;&lt; "] = ";
+				std::cout &lt;&lt; pairFound->second &lt;&lt; std::endl; // value
+				++ pairFound;
+			 }
+		} else {
+			std::cout &lt;&lt; "Element not found in the multimap";
+		}
+	</code>
+</pre>
+
+
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 20</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -234,7 +292,7 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>erase.cxx</cite>
+  <cite>find.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
@@ -256,21 +314,40 @@ Source
     
         map1.insert(std::map&lt;int, std::string&gt;::value_type(1, &quot;One&quot;));
         map1.insert(std::make_pair(2, &quot;Two&quot;));
-        map1.insert(std::pair &lt;int, std::string&gt;(3, &quot;Three&quot;));
+        map1.insert(std::pair&lt;int, std::string&gt;(3, &quot;Three&quot;));
         describe(map1);
     
-        map1.erase(3);
-        describe(map1);
+        // find position of corresponding key
+        std::map&lt;int, std::string&gt;::iterator position = map1.find(2);
+        // always check iterator for validity
+        if (position != map1.cend()) {
+            std::cout &lt;&lt; position-&gt;first &lt;&lt; &quot;-&gt;&quot; &lt;&lt; position-&gt;second &lt;&lt; std::endl;
+        }
+        else {
+            std::cout &lt;&lt; &quot;key not found&quot; &lt;&lt; std::endl;
+        }
     
         std::multimap&lt;int, std::string&gt; mmap1(map1.cbegin(), map1.cend());
         mmap1.insert(std::make_pair(4, &quot;firstFour&quot;));
         mmap1.insert(std::make_pair(4, &quot;secondFour&quot;));
         mmap1.insert(std::make_pair(4, &quot;thirdFour&quot;));
-        mmap1.insert(std::pair &lt;int, std::string&gt;(5, &quot;Five&quot;));
+        mmap1.insert(std::pair&lt;int, std::string&gt;(5, &quot;Five&quot;));
         describe(mmap1);
     
-        mmap1.erase(mmap1.lower_bound(4), mmap1.upper_bound(4));
-        describe(mmap1);
+        // find first position of corresponding key in std::multimap
+        position = mmap1.find(4);
+        if (position != mmap1.cend()) {
+            // count the key and iterate over all positions
+            const size_t limit = mmap1.count(4);
+            for (size_t i = 0; i &lt; limit; ++i) {
+                std::cout &lt;&lt; position-&gt;first &lt;&lt; &quot;-&gt;&quot; &lt;&lt; position-&gt;second &lt;&lt; std::endl;
+                // increment position after each iteration
+                ++ position;
+            }
+        }
+        else {
+            std::cout &lt;&lt; &quot;key not found&quot; &lt;&lt; std::endl;
+        }
     
         return 0;
     }
@@ -288,17 +365,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./erase.o -c ./erase.cxx
+g++ -Wall -g -o ./find.o -c ./find.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./erase.bin ./erase.o
+g++ -g -o ./find.bin ./find.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./erase.bin
+./find.bin
 </code>
 </pre>
 <hr />
@@ -314,15 +391,17 @@ Output
 <pre>
 <code class="language-cpp">
 1:One 2:Two 3:Three
-1:One 2:Two
-1:One 2:Two 4:firstFour 4:secondFour 4:thirdFour 5:Five
-1:One 2:Two 5:Five
+2->Two
+1:One 2:Two 3:Three 4:firstFour 4:secondFour 4:thirdFour 5:Five
+4->firstFour
+4->secondFour
+4->thirdFour
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.4.2.2.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/associative-containers/map/insertion-in-map">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.4.2.4.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/associative-containers/map/erase-from-map">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

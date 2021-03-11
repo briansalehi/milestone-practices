@@ -1,4 +1,41 @@
-Erasing an element in a map container takes as much effort as it takes to erase an element from other containers.  
-Here two new methods we used, **lower_bound()** and **upper_bound()**.
-What makes them useful is that there might be multiple instances of a key in **std::multimap** container,
-we can access to the position of first and last instances of that key using these two methods.
+<p>Erasing an element in a map container takes as much effort as it takes to erase an element from other containers.</p>  
+
+<p>The <code>std::map</code> and <code>std::multimap</code> feature a member function, <code>erase()</code>, which deletes an element from the container. The <code>erase()</code> is invoked with the key as the parameter to delete all pairs with a certain key:</p>
+
+<pre class="language-cpp">
+	<code>
+		mapObject.erase(key)
+	</code>
+</pre>
+
+<p>Another form of the <code>erase()</code> function allows the deletion of a particular element given an iterator that points to it:</p>
+
+<pre class="language-cpp">
+	<code>
+		mapObject.erase(element);
+	</code>
+</pre>
+
+<p>You can erase a range of elements from a map or a multimap using iterators that supply the bounds:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		multimap&lt;int, string&gt; mmapIntToStr;
+
+		mmapIntToStr.insert(make_pair(3, "Three"));
+		mmapIntToStr.insert(make_pair(45, "Forty Five"));
+		mmapIntToStr.insert(make_pair(-1, "Minus One"));
+		mmapIntToStr.insert(make_pair(1000, "Thousand"));
+		mmapIntToStr.insert(make_pair(-1, "Minus One"));
+		mmapIntToStr.insert(make_pair(1000, "Thousand"));
+
+		auto pair = mmapIntToStr.find(45);
+
+		if(pair != mmapIntToStr.end())
+			mmapIntToStr.erase(pair);
+
+		mmapIntToStr.erase(mmapIntToStr.lower_bound(1000), mmapIntToStr.upper_bound(1000));
+	</code>
+</pre>
+
+<p>What makes <code>lower_bound()</code> and <code>upper_bound()</code> useful is that there might be multiple instances of a key in <code>std::multimap</code> container, we can access to the position of first and last instances of that key using these two methods.</p>

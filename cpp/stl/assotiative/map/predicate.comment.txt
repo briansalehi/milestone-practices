@@ -1,2 +1,11 @@
-In simple terms, a **predicate** is a class that only holds an execution operator, **.operator()**.
-Therefore, that class will only operate as a function and we can pass it as a function pointer to parameters to do tasks like comparison for containers.
+<p>In simple terms, a predicate is a class that only holds an execution operator, <code>operator()</code>. Therefore, that class will only operate as a function and we can pass it as a function pointer to parameters to do tasks like comparison for containers.</p>
+
+<p>The <code>std::map</code> and <code>std::multimap</code> template definition includes a third parameter that accepts the sort predicate for the map to function correctly.</p>
+
+<pre class="language-cpp">
+	<code>
+		map&lt;keyType, valueType, Predicate&gt; mapObject;
+	</code>
+</pre>
+
+

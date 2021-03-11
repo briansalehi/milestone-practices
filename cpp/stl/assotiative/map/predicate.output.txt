@@ -4,4 +4,4 @@ Marie: +7 1832795346
 Peter: +1 3857641586
 
 enter a name to search(peter): case-sensitive search result: name not found
-case-insensitive search result: Peter: +1 3857641586
+case-insensitive search result: name not found

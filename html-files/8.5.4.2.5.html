@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>finding element in map</title>
+<title>Map Custom Predicate</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,22 +206,44 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.4.0.html">STL Associative Containers</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.4.2.0.html">the STL std::map Classes</a></li>
-<li class='breadcrumb-item active'>finding element in map</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.4.0.html">Associative Containers</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.4.2.0.html">Map</a></li>
+<li class='breadcrumb-item active'>Map Custom Predicate</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="finding-element-in-map" class="anchor" aria-hidden="true" href="#finding-element-in-map">
-finding element in map
+<a id="Map-Custom-Predicate" class="anchor" aria-hidden="true" href="#Map-Custom-Predicate">
+Map Custom Predicate
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-We can only find an element in **std::map** container based on key.
-Though, there are non-standard (yet) functions to seek through maps by values, but here we only have this approach.
+<p>In simple terms, a predicate is a class that only holds an execution operator, <code>operator()</code>. Therefore, that class will only operate as a function and we can pass it as a function pointer to parameters to do tasks like comparison for containers.</p>
+
+<p>The <code>std::map</code> and <code>std::multimap</code> template definition includes a third parameter that accepts the sort predicate for the map to function correctly.</p>
+
+<pre class="language-cpp">
+	<code>
+		map&lt;keyType, valueType, Predicate&gt; mapObject;
+	</code>
+</pre>
+
+
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 20</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -232,62 +254,67 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>find.cxx</cite>
+  <cite>predicate.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
+    #include &lt;algorithm&gt;
     #include &lt;string&gt;
     #include &lt;map&gt;
+    
+    // std::string sort predicate
+    struct ascending {
+        bool operator() (const std::string&amp; lhs, const std::string&amp; rhs) const {
+            std::string lname(lhs);
+            std::string rname(rhs);
+    
+            transform(lhs.cbegin(), lhs.cend(), lname.begin(), ::tolower);
+            transform(rhs.cbegin(), rhs.cend(), rname.begin(), ::tolower);
+            
+            return (lname &lt; rname);
+        }
+    };
     
     // display container information
     template &lt;typename D&gt;
     void describe(const D&amp; container) {
         for (auto iterator = container.cbegin(); iterator != container.cend(); ++iterator) {
-            std::cout &lt;&lt; iterator-&gt;first &lt;&lt; &quot;:&quot; &lt;&lt; iterator-&gt;second &lt;&lt; &quot; &quot;;
+            std::cout &lt;&lt; iterator-&gt;first &lt;&lt; &quot;: &quot; &lt;&lt; iterator-&gt;second &lt;&lt; std::endl;
         }
         std::cout &lt;&lt; std::endl;
     }
     
     int main()
     {
-        std::map&lt;int, std::string&gt; map1;
     
-        map1.insert(std::map&lt;int, std::string&gt;::value_type(1, &quot;One&quot;));
-        map1.insert(std::make_pair(2, &quot;Two&quot;));
-        map1.insert(std::pair&lt;int, std::string&gt;(3, &quot;Three&quot;));
+        // initialize a std::map with default sort predicate
+        std::map&lt;std::string, std::string&gt; map1;
+        map1.insert(std::make_pair(&quot;Peter&quot;, &quot;+1 3857641586&quot;));
+        map1.insert(std::make_pair(&quot;Brian&quot;, &quot;+33 7652493856&quot;));
+        map1.insert(std::make_pair(&quot;Hana&quot;, &quot;+12 4732854627&quot;));
+        map1.insert(std::make_pair(&quot;Marie&quot;, &quot;+7 1832795346&quot;));
         describe(map1);
     
-        // find position of corresponding key
-        std::map&lt;int, std::string&gt;::iterator position = map1.find(2);
-        // always check iterator for validity
-        if (position != map1.cend()) {
-            std::cout &lt;&lt; position-&gt;first &lt;&lt; &quot;-&gt;&quot; &lt;&lt; position-&gt;second &lt;&lt; std::endl;
-        }
-        else {
-            std::cout &lt;&lt; &quot;key not found&quot; &lt;&lt; std::endl;
-        }
+        // initialize a std::multimap with custom sort predicate
+        std::multimap&lt;std::string, std::string, ascending&gt; mmap2(map1.cbegin(), map1.cend());
     
-        std::multimap&lt;int, std::string&gt; mmap1(map1.cbegin(), map1.cend());
-        mmap1.insert(std::make_pair(4, &quot;firstFour&quot;));
-        mmap1.insert(std::make_pair(4, &quot;secondFour&quot;));
-        mmap1.insert(std::make_pair(4, &quot;thirdFour&quot;));
-        mmap1.insert(std::pair&lt;int, std::string&gt;(5, &quot;Five&quot;));
-        describe(mmap1);
+        std::string name;
+        std::cout &lt;&lt; &quot;enter a name to search(peter): &quot;;
+        std::cin &gt;&gt; name;
     
-        // find first position of corresponding key in std::multimap
-        position = mmap1.find(4);
-        if (position != mmap1.cend()) {
-            // count the key and iterate over all positions
-            const size_t limit = mmap1.count(4);
-            for (size_t i = 0; i &lt; limit; ++i) {
-                std::cout &lt;&lt; position-&gt;first &lt;&lt; &quot;-&gt;&quot; &lt;&lt; position-&gt;second &lt;&lt; std::endl;
-                // increment position after each iteration
-                ++ position;
-            }
-        }
-        else {
-            std::cout &lt;&lt; &quot;key not found&quot; &lt;&lt; std::endl;
-        }
+        // case-sensitive searching in map
+        std::map&lt;std::string, std::string&gt;::iterator position = map1.find(name);
+        if(position != map1.cend())
+            std::cout &lt;&lt; &quot;case-sensitive search result: &quot; &lt;&lt; position-&gt;first &lt;&lt; &quot;-&gt;&quot; &lt;&lt; position-&gt;second &lt;&lt; std::endl;
+        else
+            std::cout &lt;&lt; &quot;case-sensitive search result: name not found&quot; &lt;&lt; std::endl;
+    
+        // case-insensitive searching in std::multimap
+        position = mmap2.find(name);
+        if(position != mmap2.cend())
+            std::cout &lt;&lt; &quot;case-insensitive search result: &quot; &lt;&lt; position-&gt;first &lt;&lt; &quot;: &quot; &lt;&lt; position-&gt;second &lt;&lt; std::endl;
+        else
+            std::cout &lt;&lt; &quot;case-insensitive search result: name not found&quot; &lt;&lt; std::endl;
     
         return 0;
     }
@@ -305,17 +332,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./find.o -c ./find.cxx
+g++ -Wall -g -o ./predicate.o -c ./predicate.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./find.bin ./find.o
+g++ -g -o ./predicate.bin ./predicate.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./find.bin
+./predicate.bin
 </code>
 </pre>
 <hr />
@@ -330,18 +357,19 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-1:One 2:Two 3:Three
-2->Two
-1:One 2:Two 3:Three 4:firstFour 4:secondFour 4:thirdFour 5:Five
-4->firstFour
-4->secondFour
-4->thirdFour
+Brian: +33 7652493856
+Hana: +12 4732854627
+Marie: +7 1832795346
+Peter: +1 3857641586
+
+enter a name to search(peter): case-sensitive search result: name not found
+case-insensitive search result: name not found
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.4.2.4.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/associative-containers/map/erase-from-map">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.4.2.6.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/associative-containers/map/hash-map">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

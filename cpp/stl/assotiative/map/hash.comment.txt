@@ -1,1 +1,74 @@
-As the name suggests, **std::unordered_map** is a derived container of **std::map** working similarly in pairs of (key, value), except that it won't sort elements in insertion. Obviously it will not get any predicate as third template parameter.
+<p>As the name suggests, <code>std::unordered_map</code> is a derived container of <code>std::map</code> working similarly in pairs of (key, value), except that it won't sort elements in insertion. Obviously it will not get any predicate as third template parameter.</p>
+
+<p>The STL supports a hash map in the form of class <code>std::unordered_map</code>.</p>
+
+<p>To use class <code>std::unordered_map</code>, include header: <code>&lt;unordered_map&gt;</code></p>
+
+<p>The <code>std::unordered_map</code> promises average constant-time insertion and the removal and lookup of arbitrary elements in the container.</p>
+
+<p>A hash table can be viewed as a collection of key-value pairs, where given a key, the table can find a value. The difference between the hash table and a simple map is that a hash table stores key-value pairs in buckets, each bucket having an index that defines its relative position in the table (akin to an array). This index is decided by a hash-function that uses the key as input:</p>
+
+<pre class="language-cpp">
+	<code>
+		Index = HashFunction(key, TableSize);
+	</code>
+</pre>
+
+<p>When performing a <code>find()</code> given a key, <code>HashFunction()</code> is used once again to determine the position of the element and the table returns the value at the position, like an array would return an element stored within it. In cases where <code>HashFunction()</code> is not optimally programmed, more than one element would have the same Index, landing in the same bucket—that internally would be a list of elements. In such cases, called collisions, a search would be slower and not a constant any more.</p>
+
+<p><code>std::unordered_map</code> and <code>std::unordered_multimap</code> containers that implement hash tables are not too different from <code>std::map</code> and <code>std::multimap</code>, respectively. Instantiation, insertion, and find follow similar patterns:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// instantiate unordered_map of int to string:
+		unordered_map&lt;int, string&gt; umapIntToStr;
+
+		// insert()
+		umapIntToStr.insert(make_pair(1000, "Thousand"));
+
+		// find()
+		auto pairFound = umapIntToStr.find(1000);
+		std::cout &lt;&lt; pairFound-&gt;first &lt;&lt; " - " &lt;&lt; pairFound-&gt;second &lt;&lt; std::endl;
+
+		// find value using array semantics:
+		std::cout &lt;&lt; "umapIntToStr[1000] = " &lt;&lt; umapIntToStr[1000] &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>Yet, one important feature of an <code>std::unordered_map</code> is the availability of a hash function that is responsible for deciding the sorting order:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::unordered_map&lt;int, string&gt;::hasher hFn = umapIntToStr.hash_function();
+	</code>
+</pre>
+
+<p>You can view the priority assigned to a key by invoking the hash function for a key:</p>
+
+<pre class="language-cpp">
+	<code>
+		size_t hashingVal = hFn(1000);
+	</code>
+</pre>
+
+<p>As an <code>std::unordered_map</code> stores key-value pairs in buckets, it does an automatic load balancing when the number of elements in the map reach or tend to reach the number of buckets in the same:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cout &lt;&lt; "Load factor: " &lt;&lt; umapIntToStr.load_factor() &lt;&lt; std::endl;
+		std::cout &lt;&lt; "Max load factor = " &lt;&lt; umapIntToStr.max_load_factor() &lt;&lt; std::endl;
+		std::cout &lt;&lt; "Max bucket count = " &lt;&lt; umapIntToStr.max_bucket_count() &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p><code>load_factor()</code> is an indicator of the extent to which buckets in the unordered_map have been filled. When <code>load_factor()</code> exceeds <code>max_load_factor()</code> due to an insertion, the map reorganizes itself to increase the number of available buckets and rebuilds the hash table</p>
+
+<p><code>std::unordered_multimap</code> is similar to <code>std::unordered_map</code> except that it supports multiple pairs with the same key.</p>
+
+<p>Don’t rely on the order of elements in an <code>std::unordered_map</code> (hence the name) irrespective of the key. The order of an element relative to other elements in a map depends on many factors, including its key, order of insertion, and number of buckets to name a few.</p>
+
+<p>These containers are optimized for search performance and are not for you to rely on the order of elements when you iterate through them.</p>
+
+<p><code>std::unordered_map</code> supplies insertions and searches (in event of no collisions) that are almost constant time, independent of the number of elements contained. This, however, doesn’t necessarily make the <code>std::unordered_map</code> superior to the <code>std::map</code> that provides logarithmic complexity in all situations. The constant could be a lot longer, making the former slow in cases where the number of elements contained is small.</p>
+
+<p>It is important to base one’s decision on the type of container after performing certain benchmark tests that simulate usage in a real scenario.</p>

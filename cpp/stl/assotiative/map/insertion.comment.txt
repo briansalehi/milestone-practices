@@ -1,8 +1,45 @@
-Inserting elements into **std::map** container differs from previous containers we have practiced so far.  
-To do so, we can use one of the following approaches:
+<p>Inserting elements into <code>std::map</code> container differs from previous containers we have practiced so far.</p>  
 
-* using **.value_type(key, value)** method
-* using **make_pair(key, value)** function
-* using **pair<key type, value type>(key, value)** class
+<p>To do so, we can use one of the following approaches:</p>
 
-Each one is self-explanatory in practice.
+<ul>
+	<li>using <code>std::map&lt;type&gt;::value_type(key, value)</code> method</li>
+	<li>using <code>make_pair(key, value)</code> function</li>
+	<li>using <code>pair&lt;key type, value type&gt;(key, value)</code> class</li>
+</ul>
+
+<p>You can insert elements in both kinds of containers by using the insert member function:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::map&lt;int, std::string&gt; mapIntToStr1;
+		// insert pair of key and value using make_pair function
+		mapIntToStr.insert(make_pair(-1, "Minus One"));
+	</code>
+</pre>
+
+<p>As these two containers maintain elements in key-value pairs, you can also directly supply a <code>std::pair</code> initialized to the key and value to be inserted:</p>
+
+<pre class="language-cpp">
+	<code>
+		mapIntToStr.insert(std::pair&lt;int, std::string&gt;(1000, "One Thousand"));
+	</code>
+</pre>
+
+<p>Alternatively, you can use an array-like syntax to insert, which does appear quite user friendly and is supported via subscript <code>operator[]</code>:</p>
+
+<pre class="language-cpp">
+	<code>
+		mapIntToStr[1000000] = "One Million";
+	</code>
+</pre>
+
+<p>You can also instantiate a multimap as a copy of a map:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::multimap&lt;int, std::string&gt; mmapIntToStr(mapIntToStr.cbegin(), mapIntToStr.cend());
+	</code>
+</pre>
+
+
