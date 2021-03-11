@@ -1,1 +1,1 @@
-lambda as binary predicate
+Lambda as Binary Predicate

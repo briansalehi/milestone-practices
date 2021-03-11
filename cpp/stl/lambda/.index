@@ -1,5 +1,5 @@
 README.md
-lambda.cxx
+declaration.cxx
 unary_function.cxx
 unary_predicate.cxx
 binary_function.cxx

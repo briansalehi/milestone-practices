@@ -1,0 +1,133 @@
+<p>Lambda functions was introduced in C++ standard 11 and they are good substitutions of small functions that should be called once or twice in code. Never forget that lambda functions must be declared light weighted, or they will be a burden in runtime.</p>
+
+<p>This function object displays an object element on the screen using <code>std::cout</code> and is typically used in algorithms such as <code>std::for_each()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// Display every integer contained in a vector
+		for_each (
+			numsInVec.cbegin(), // Start of range
+			numsInVec.cend(), // End of range
+			DisplayElement&lt;int&gt;()
+		); // Unary function object
+	</code>
+</pre>
+
+<p>A lambda expression compacts the entire code including the definition of the function object into three lines:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// Display every integer contained in a vector using lambda exp.
+		for_each (
+			numsInVec.cbegin(), // Start of range
+			numsInVec.cend(), // End of range
+			[](const int& element) {
+				std::cout &lt;&lt; element &lt;&lt; ' ';
+			}
+		);
+	</code>
+</pre>
+
+<p>When the compiler sees the lambda expression, in this case</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		[](const int& element) {
+			std::cout &lt;&lt;
+			element &lt;&lt; ' ';
+		}
+	</code>
+</pre>
+
+<p>It automatically expands this expression into a representation that is similar to <code>struct</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		DisplayElement&lt;int&gt;:
+
+		struct NoName {
+			void operator() (const int& element) const  {
+				std::cout << element << ' ';
+			 }
+		};
+	</code>
+</pre>
+
+<p>Lambda Expressions are also called Lambda Functions.</p>
+
+<p>The lambda version of a unary <code>operator(Type)</code> that takes one parameter would be the following:</p>
+
+<pre class="language-cpp">
+	<code>
+		[](Type paramName) { /* lambda expression code here */ }
+	</code>
+</pre>
+
+<p>Note that you can pass the parameter by reference.</p>
+
+<pre class="language-cpp">
+	<code>
+		[](Type& paramName) { /* lambda expression code here */ }
+	</code>
+</pre>
+
+<p>A lambda expression always starts with square brackets and can be configured to take multiple state variables separated using commas in a capture list [...]:</p>
+
+<pre class="language-cpp">
+	<code>
+		[stateVar1, stateVar2](Type& param) { /* lambda code here */ }
+	</code>
+</pre>
+
+<p>If you want to ensure that these state variables are modified within a lambda, you add keyword mutable:</p>
+
+<pre class="language-cpp">
+	<code>
+		[stateVar1, stateVar2](Type& param) mutable { /* lambda code here */ }
+	</code>
+</pre>
+
+<p>Note that here, the variables supplied in the capture list [] are modifiable within the lambda, but changes do not take effect outside it. If you want to ensure that modifications made to the state variables within the lambda are valid outside it, too, then you use references:</p>
+
+<pre class="language-cpp">
+	<code>
+		[&stateVar1, &stateVar2](Type& param) { /* lambda code here */ }
+	</code>
+</pre>
+
+<p>Lambdas can take multiple input parameters, separated by commas:</p>
+
+<pre class="language-cpp">
+	<code>
+		[stateVar1, stateVar2](Type1& var1, Type2& var2) { /* lambda code here */ }
+	</code>
+</pre>
+
+<p>If you want to mention the return type and not leave the disambiguation to the compiler, you use -&gt;  as in the following:</p>
+
+<pre class="language-cpp">
+	<code>
+		[stateVar1, stateVar2](Type1 var1, Type2 var2) -&gt; ReturnType { return (value or expression); }
+	</code>
+</pre>
+
+<p>Finally, the compound statement <code>{}</code> can hold multiple statements, each separated by a <code>;</code> as shown here:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		[stateVar1, stateVar2](Type1 var1, Type2 var2) -&gt; ReturnType
+		{
+			Statement 1; 
+			Statement 2; 
+			return (value or expression); 
+		}
+	</code>
+</pre>
+
+<p>If you want to capture all variables, you use this syntax:</p>
+
+<pre class="language-cpp">
+	<code>
+		[=](Type& Param1, ... ) { ...expression ; }
+	</code>
+</pre>

@@ -9,8 +9,9 @@
 #include <map>
 
 std::function<void(const int&)> sort_elements = [](const int& element) { std::cout << element << " "; };
-std::function<void(const std::pair<int, std::string>&)> sort_pairs =
-[](const std::pair<int, std::string>& pair) { std::cout << pair.first << ": " << pair.second << std::endl; };
+std::function<void(const std::pair<int, std::string>&)> sort_pairs = [](const std::pair<int, std::string>& pair) {
+	std::cout << pair.first << ": " << pair.second << std::endl;
+};
 
 int main()
 {

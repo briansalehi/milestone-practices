@@ -1,1 +1,1 @@
-storing lambda functions
+Lambda as Unary Function

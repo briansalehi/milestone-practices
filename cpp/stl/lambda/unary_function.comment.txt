@@ -1,5 +1,1 @@
-**lambda** functions can be used as anonymous functions in the same line that
-needs to be invoked. But when we need to use the same lambda function over and
-over again, we should store them in a variable of type **std::function<>**
-template function, or to create a **function object** (discussed previously)
-or to use a regular function and then use it multiple times.
+<p>Lambda functions can be used as anonymous functions in the same line that needs to be invoked. But when we need to use the same lambda function over and over again, we should store them in a variable of type <code>std::function&lt;&gt;</code> template function, or to create a <i>function object</i> (discussed previously) or to use a regular function and then use it multiple times.</p>

@@ -1,1 +1,1 @@
-lambda as unary predicate
+Lambda as Unary Predicate

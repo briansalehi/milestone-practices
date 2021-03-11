@@ -1,0 +1,7 @@
+<p>A binary function takes two parameters and optionally returns a value. A lambda expression equivalent of the same would be:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		[...](Type1& param1Name, Type2& param2Name) { // lambda code here; }
+	</code>
+</pre>

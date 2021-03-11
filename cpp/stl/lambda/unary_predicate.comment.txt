@@ -1,1 +1,21 @@
-**lambda** functions are a subsitution of predicates.
+<p>A unary predicate is a unary expression that returns a bool, conveying true or false. Lambda expressions can return values, too. For example, the following code is a lambda expression that returns true for numbers that are even:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		[](int& num) { return ((num % 2) == 0); }
+	</code>
+</pre>
+
+<p>You can use a lambda expression that is a unary predicate in algorithms, such as <code>std::find_if()</code>, to find even numbers in a collection.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;int&gt; numsInVec{ 25, 101, 2017, -50 };
+
+		auto evenNum = find_if(numsInVec.cbegin(), numsInVec.cend(), [](const int& num){ return ((num % 2) == 0); } );
+
+		if (evenNum != numsInVec.cend()) {
+			std::cout &lt;&lt; "Even number in collection is: " &lt;&lt; *evenNum &lt;&lt; std::endl;
+		}
+	</code>
+</pre>
