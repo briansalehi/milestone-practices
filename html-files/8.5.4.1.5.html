@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>set instantiation</title>
+<title>Hash Set</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -207,22 +207,62 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.4.0.html">Associative Containers</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.4.1.0.html">the STL std::set and std::multiset</a></li>
-<li class='breadcrumb-item active'>set instantiation</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.4.1.0.html">Set</a></li>
+<li class='breadcrumb-item active'>Hash Set</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="set-instantiation" class="anchor" aria-hidden="true" href="#set-instantiation">
-set instantiation
+<a id="Hash-Set" class="anchor" aria-hidden="true" href="#Hash-Set">
+Hash Set
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Consider **std::set** containers just like **std::list** except that they have a longer write time due to the sorting process right after inserting each element in that container.  
-That is, each time you push an element back into this container, the element will not be put in the top position, but it will be put to the proper position to keep the container sorted.  
-The predicate function should be defined by you if elements are of type objects, you can also use predefined predicates like **std::less**, etc.
+<p>Programmers and mathematicians alike seek constant-time insertions and sort possibilities, and one of them uses a hash-based implementation, where a hash function is used to determine the sorting index. Elements inserted into a hash set are first evaluated by a hash function that generates a unique index, which is the index of the bucket they’re placed in.</p>
+
+<p>The hash set variant provided by STL since C++11 is the container class <code>std::unordered_set</code>.</p>
+
+<p>To use STL containers <code>std::unordered_set</code> or <code>std::unordered_multiset</code>, include <code>&lt;unordered_set&gt;</code></p>
+
+<p>The usage of this class doesn’t change too much in comparison to a <code>std::set</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// instantiation:
+		std::unordered_set&lt;int&gt; usetInt;
+
+		// insertion of an element
+		usetInt.insert(1000);
+
+		// find():
+		auto elementFound = usetInt.find(1000);
+		if (elementFound != usetInt.end())
+			std::cout &lt;&lt; *elementFound &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>Yet, one very important feature of an <code>std::unordered_set</code> is the availability of a hash function that is responsible for deciding the sorting order:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::unordered_set&lt;int>::hasher HFn = usetInt.hash_function();
+	</code>
+</pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 19</li>
+</ul>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -233,26 +273,31 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>instantiation.cxx</cite>
+  <cite>hash.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;set&gt;
+    #include &lt;iostream&gt;
+    #include &lt;unordered_set&gt;
     
-    // sort predicate must be a class of generic type
-    template &lt;typename D&gt;
-    struct descending {
-        bool operator() (const D&amp; lhs, const D&amp; rhs) const { return (lhs &lt; rhs); }
-    };
+    template &lt;typename C&gt;
+    void describe(const C&amp; container) {
+        for (auto iterator = container.cbegin(); iterator != container.cend(); ++iterator) {
+            std::cout &lt;&lt; *iterator &lt;&lt; &quot; &quot;;
+        }
+        std::cout &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;size: &quot; &lt;&lt; container.size() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;bucket: &quot; &lt;&lt; container.bucket_count() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;load factor: &quot; &lt;&lt; container.load_factor() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;max load factor: &quot; &lt;&lt; container.max_load_factor() &lt;&lt; std::endl &lt;&lt; std::endl;
+    }
     
     int main()
     {
-        // simple instantiation
-        std::set&lt;int&gt; integers;
-        std::multiset&lt;double&gt; doubles;
+        std::unordered_set&lt;int&gt; integers{1,2,3,4};
+        describe(integers);
     
-        // instantiating with sort predicate
-        std::set&lt;int, descending&lt;int&gt;&gt; sortedInt;
-        std::multiset&lt;double, descending&lt;double&gt;&gt; sortedDouble;
+        integers.insert(5);
+        describe(integers);
     
         return 0;
     }
@@ -270,17 +315,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./instantiation.o -c ./instantiation.cxx
+g++ -Wall -g -o ./hash.o -c ./hash.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./instantiation.bin ./instantiation.o
+g++ -g -o ./hash.bin ./hash.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./instantiation.bin
+./hash.bin
 </code>
 </pre>
 <hr />
@@ -295,11 +340,22 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
+4 3 2 1
+size: 4
+bucket: 5
+load factor: 0.8
+max load factor: 1
+
+5 4 3 2 1
+size: 5
+bucket: 5
+load factor: 1
+max load factor: 1
 
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.4.1.4.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/associative-containers/set/erasing-from-set">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/associative-containers/map">Next Page</a></li>
 </ul>

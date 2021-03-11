@@ -1,3 +1,50 @@
-Consider **std::set** containers just like **std::list** except that they have a longer write time due to the sorting process right after inserting each element in that container.  
-That is, each time you push an element back into this container, the element will not be put in the top position, but it will be put to the proper position to keep the container sorted.  
-The predicate function should be defined by you if elements are of type objects, you can also use predefined predicates like **std::less**, etc.
+<p>Consider <code>std::set</code> containers just like <code>std::list</code> except that they have a longer write time due to the sorting process right after inserting each element in that container. That is, each time you push an element back into this container, the element will not be put in the top position, but it will be put to the proper position to keep the container sorted.</p>  
+
+<p>The <code>std::set</code> and <code>std::multiset</code> are containers that facilitate a quick lookup of keys in a container that stores them. The difference between the <code>std::set</code> and the <code>std::multiset</code> is that the latter allows for duplicates whereas the former can store only unique values.</p>
+
+<p>To use class <code>std::set</code> or <code>std::multiset</code>, include header: <code>&lt;set&gt;</code></p>
+
+<p>Instantiating a set or multiset of a type requires a specialization of the template class <code>std::set</code> or <code>std::multiset</code></p>
+
+<pre class="language-cpp line-number">
+	<code>
+		std::set&lt;int&gt; setInts;
+		std::multiset&lt;int&gt; msetInts;
+	</code>
+</pre>
+
+<p>To declare an iterator that points to an element in the <code>std::set</code> or <code>std::multiset</code>, you would use this:</p>
+
+<pre class="language-cpp line-number">
+	<code>
+		std::set&lt;int&gt;::const_iterator element;
+		std::multiset&lt;int&gt;::const_iterator element;
+	</code>
+</pre>
+
+<p>If you need an iterator that can be used to modify values or invoke non-const functions, you would use iterator instead of <code>const_iterator</code>.</p>
+
+<p>Given that both <code>std::set</code> and <code>std::multiset</code> are containers that sort elements on insertion, they use a default predicate <code>std::less&lt;&gt;</code> when you don’t supply a sort criteria. This ensures that your set contains elements sorted in ascending order.</p>
+
+<p>You create a binary sort predicate by defining a class with <code>operator()</code> that takes two values of the type contained in the set as input and returns true depending on your criteria. One such sort predicate that sorts in descending order is the following:</p>
+
+<pre class="language-cpp line-number">
+	<code>
+		// used as a template parameter in set / multiset instantiation
+		template &lt;typename T&gt;
+		struct SortDescending
+		{
+			bool operator()(const T& lhs, const T& rhs) const { return (lhs &gt; rhs); }
+		};
+	</code>
+</pre>
+
+<p>You then supply this predicate in the set or multiset instantiation as follows:</p>
+
+<pre class="language-cpp line-number">
+	<code>
+		// a set and multiset of integers (using sort predicate)
+		set&lt;int, SortDescending&lt;int&gt;&gt; setInts;
+		multiset&lt;int, SortDescending&lt;int&gt;&gt; msetInts;
+	</code>
+</pre>

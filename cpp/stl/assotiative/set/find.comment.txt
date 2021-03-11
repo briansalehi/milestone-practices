@@ -1,4 +1,44 @@
-To find an element in a container, first a variable of type **constant iterator**
-needs to be declared and the return value of function **find()** be assigned to it.
-If you need to find more than one instance of an element, you can make the iterator non-constant
-and increment it in a loop until you hit the botton of the container.
+<p>To find an element in a container, first a variable of type <i>constant iterator</i> needs to be declared and the return value of function <code>find()</code> be assigned to it. If you need to find more than one instance of an element, you can make the iterator non-constant and increment it in a loop until you hit the botton of the container.</p>
+
+Use <code>multiset::count()</code> to find the number of elements in the <code>std::multiset</code> that have the same value as that supplied as an argument to this function.
+
+<pre class="language-cpp line-numbers">
+	<code>
+		auto elementFound = setInts.find(-1);
+
+		// Check if found...
+		if (elementFound != setInts.end())
+			std::cout &lt;&lt; "Element " &lt;&lt; *elementFound &lt;&lt; " found!" &lt;&lt; std::endl;
+		else
+			std::cout &lt;&lt; "Element not found in set!" &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>Associative containers such as <code>std::set</code> and <code>std::multiset</code> or <code>std::map</code> and <code>std::multimap</code> feature <code>erase()</code>—a member function that allows you to delete a value given a key:</p>
+
+<pre class="language-cpp">
+	<code>
+		setObject.erase(key);
+	</code>
+</pre>
+
+<p>Another form of the <code>erase()</code> function allows the deletion of a particular element given an iterator that points to it:</p>
+
+<pre class="language-cpp">
+	<code>
+		setObject.erase(element);
+	</code>
+</pre>
+
+
+<p>You can erase a range of elements from a <code>std::set</code> or a <code>std::multiset</code> using iterators that supply the bounds:</p>
+
+<pre class="language-cpp">
+	<code>
+		setObject.erase(iLowerBound, iUpperBound);
+	</code>
+</pre>
+
+<p>The STL <code>std::set</code> and <code>std::multiset</code> provide significant advantages in applications that need frequent lookups because their contents are sorted and therefore quicker to locate. However, to provide this advantage, the container needs to sort elements at insertion time. Thus, there is an overhead in inserting elements because elements are sorted—an overhead that might be a worthwhile compromise if you need to use features and functions such as <code>find()</code> often.</p>
+
+<p><code>find()</code> makes use of the internal binary tree structure. This sorted binary tree structure results in another implicit disadvantage over sequential containers such as the vector. In a <code>std::vector</code>, the element pointed to by an iterator (say, one returned by a <code>std::find()</code> operation) can be overwritten by a new value. In case of a <code>std::set</code>, however, elements are sorted by the <code>std::set</code> class according to their respective values, and therefore overwriting an element using an iterator should never be done, even if that were programmatically possible.</p>

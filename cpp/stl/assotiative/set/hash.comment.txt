@@ -1,1 +1,30 @@
-**this practice needs to be explained specifically**
+<p>Programmers and mathematicians alike seek constant-time insertions and sort possibilities, and one of them uses a hash-based implementation, where a hash function is used to determine the sorting index. Elements inserted into a hash set are first evaluated by a hash function that generates a unique index, which is the index of the bucket they’re placed in.</p>
+
+<p>The hash set variant provided by STL since C++11 is the container class <code>std::unordered_set</code>.</p>
+
+<p>To use STL containers <code>std::unordered_set</code> or <code>std::unordered_multiset</code>, include <code>&lt;unordered_set&gt;</code></p>
+
+<p>The usage of this class doesn’t change too much in comparison to a <code>std::set</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// instantiation:
+		std::unordered_set&lt;int&gt; usetInt;
+
+		// insertion of an element
+		usetInt.insert(1000);
+
+		// find():
+		auto elementFound = usetInt.find(1000);
+		if (elementFound != usetInt.end())
+			std::cout &lt;&lt; *elementFound &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>Yet, one very important feature of an <code>std::unordered_set</code> is the availability of a hash function that is responsible for deciding the sorting order:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::unordered_set&lt;int>::hasher HFn = usetInt.hash_function();
+	</code>
+</pre>
