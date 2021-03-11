@@ -410,7 +410,6 @@ function darkmode() {
 	var bodystyle = document.body;
 	var icon = document.getElementById('darkmode-icon');
 	const dark = sessionStorage.getItem('darkmode');
-	console.log(dark);
 
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.add("dark-mode");
@@ -428,7 +427,6 @@ function toggle_darkmode() {
 	var bodystyle = document.body;
 	var icon = document.getElementById('darkmode-icon');
 	const dark = sessionStorage.getItem('darkmode');
-	console.log(dark);
 
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
@@ -440,6 +438,30 @@ function toggle_darkmode() {
 		icon.innerHTML = '&#x1F312;';
 	}
 }
+function scrollDownListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "j") {
+        window.scrollBy(0, window.screen.height / 4)
+      }
+    }
+  )
+}
+
+function scrollUpListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "k") {
+        window.scrollBy(0, -(window.screen.height / 4))
+      }
+    }
+  )
+}
+
+scrollDownListener()
+scrollUpListener()
 </script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
