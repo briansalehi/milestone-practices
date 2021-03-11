@@ -1,0 +1,27 @@
+<p>Functions of type <code>f(x, y)</code> are particularly useful when they return a value based on the input supplied. Such binary functions can be used for a host of arithmetic activity that involves two operands, such as addition, multiplication, subtraction, and so on. A sample binary function that returns the multiple of input arguments can be written as follows:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename elementType&gt;
+		class Multiply
+		{
+		public:
+			elementType operator () (const elementType& elem1, const elementType& elem2)
+			{
+				return (elem1 * elem2);
+			}
+		};
+	</code>
+</pre>
+
+<p>Such binary functions are used in algorithms such as <code>std::transform()</code> where you can use it to multiply the contents of two containers.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;int&gt; multiplicands{ 0, 1, 2, 3, 4 };
+		std::vector&lt;int&gt; multipliers{ 100, 101, 102, 103, 104 };
+		std::vector&lt;int&gt; vecResult;
+		vecResult.resize(multipliers.size());
+		transform (multiplicands.begin(), multiplicands.end(), multipliers.begin(), vecResult.begin(), Multiply&lt;int&gt;() );
+	</code>
+</pre>

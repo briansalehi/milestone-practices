@@ -1,7 +1,73 @@
-Classes that contain only function operator are called function objects, as they
-can be only used when are called just like functions.  
-Functions objects have an advantage over lambda functions (discussed later),
-that which they can be used multiple times while lambda functions must be
-implemented where they should be called. Another advantage is that function
-objects can contain more lines of code while lambda functions are strongly
-recommended to be as short as possible.
+<p>Classes that contain only function operator <code>operator()</code> are called function objects, as they can be only used when are called just like functions. Function objects have an advantage over lambda functions (discussed later), that which they can be used multiple times while lambda functions must be implemented where they should be called. Another advantage is that function objects can contain more lines of code while lambda functions are strongly recommended to be as short as possible.</p>
+
+<p>A unary function can do something very simple—for example, display an element on the screen. This can be programmed as the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// A unary function
+		template &lt;typename elementType&gt;
+		void FuncDisplayElement(const elementType& element)
+		{
+			std::cout &lt;&lt; element &lt;&lt; ' ';
+		};
+	</code>
+</pre>
+
+<p>The same function can also have another representation in which the implementation of the function is actually contained by the <code>operator()</code> of a class or a struct:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// Struct that can behave as a unary function
+		template &lt;typename elementType&gt;
+		struct DisplayElement
+		{
+			void operator() (const elementType& element) const
+			{
+				std::cout &lt;&lt; element &lt;&lt; ' ';
+			}
+		};
+	</code>
+</pre>
+
+<p>Either of these implementations can be used with the STL algorithm <code>for_each()</code> to print the contents of a collection to the screen, an element at a time:</p>
+
+<pre class="language-cpp">
+	<code>
+		for_each (numsInVec.begin(), numsInVec.end(), DisplayElement<int>());
+	</code>
+</pre>
+
+<p>The real advantage of using a function object implemented in a struct becomes apparent when you are able to use the object of the struct to store information. This is something FuncDisplayElement cannot do the way a struct can because a struct can have member attributes in addition to operator(). A slightly modified version that makes use of member attributes is the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename elementType&gt;
+		struct DisplayElementKeepCount
+		{
+			int count;
+
+			DisplayElementKeepCount() // constructor
+			{
+				count = 0;
+			}
+
+			void operator() (const elementType& element)
+			{
+				++ count;
+				cout &lt;&lt; element &lt;&lt; ' ';
+			}
+		};
+	</code>
+</pre>
+
+<p>This count is made available via the public member attribute count.</p> 
+
+<p>The advantage of using such function objects that can also store state is shown in below sample:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		vector&lt;int&gt; numsInVec{ 22, 2017, -1, 999, 43, 901 };
+		DisplayElementKeepCount&lt;int&gt; result;
+		result = for_each (numsInVec.begin(), numsInVec.end(), DisplayElementKeepCount&lt;int&gt;() );
+	</code>
+</pre>

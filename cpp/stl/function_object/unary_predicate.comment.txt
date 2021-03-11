@@ -1,3 +1,5 @@
-When a function object returns **bool**, we call it a **predicate**.  
-Unary function objects that return bool are unary predicates.  
-Predicates are mostly used in sorting and comparison operations.
+<p>When a function object returns <code>bool</code>, we call it a <i>predicate</i>.</p>  
+
+<p>Unary function objects that return <code>bool</code> are <i>unary predicates</i>.</p>  
+
+<p>Unary predicates find application in a lot of STL algorithms such as <code>std::partition()</code> that can partition a range using the predicate, <code>stable_partition()</code> that does the same while keeping relative order of the elements partitioned, find functions such as <code>std::find_if()</code>, and functions that help erase elements such as <code>std::remove_if()</code> that erases elements in a range that satisfy the predicate.</p>

@@ -1,2 +1,19 @@
-Binary function objects that return **bool** are called **binary predicates**.  
-Binary predicates are useful in comparison operations.
+<p>Binary function objects that return <code>bool</code> are called <i>binary predicates</i>.</p>  
+
+<p>Such functions find application in STL functions such as std::sort().</p>
+
+<p>Such a predicate can be used in performing a case-insensitive sort on a <code>std::vector</code> of <code>std::string</code>, for instance:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		vector&lt;string&gt; names;
+		names.push_back("jim");
+		names.push_back("Jack");
+		names.push_back("Sam");
+		names.push_back("Anna");
+		sort(names.begin(), names.end());
+		sort(names.begin(), names.end(), CompareStringNoCase());
+	</code>
+</pre>
+
+<p>Binary predicates are required in a variety of STL algorithms. For example, <code>std::unique()</code> that erases duplicate neighboring elements, <code>std::sort()</code> that sorts, <code>std::stable_sort()</code> that sorts while maintaining relative order, and <code>std::transform()</code> that can perform an operation on two ranges are some of the STL algorithms that need a binary predicate.</p>

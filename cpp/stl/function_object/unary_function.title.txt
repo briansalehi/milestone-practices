@@ -1,1 +1,1 @@
-unary function object
+Unary Function Object

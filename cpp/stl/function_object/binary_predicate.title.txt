@@ -1,1 +1,1 @@
-binary predicate
+Binary Predicate
