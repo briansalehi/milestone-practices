@@ -1,0 +1,1 @@
+<p>A <code>std::vector</code> is a template class that needs to be instantiated in accordance with template instantiation techniques that are covered in <a href="/cpp/templates">template initialization</a>.</p>

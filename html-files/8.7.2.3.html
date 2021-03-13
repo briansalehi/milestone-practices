@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Vector Initialization</title>
+<title>QToolbar</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -205,22 +205,21 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.3.3.0.html">Vector</a></li>
-<li class='breadcrumb-item active'>Vector Initialization</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.7.0.html">Graphical User Interface</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.7.2.0.html">Windows</a></li>
+<li class='breadcrumb-item active'>QToolbar</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Vector-Initialization" class="anchor" aria-hidden="true" href="#Vector-Initialization">
-Vector Initialization
+<a id="QToolbar" class="anchor" aria-hidden="true" href="#QToolbar">
+QToolbar
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>A <code>std::vector</code> is a template class that needs to be instantiated in accordance with template instantiation techniques that are covered in <a href="/cpp/templates">template initialization</a>.</p>
+<p>Toolbars can be used similar to menus except that they are more accessible to users.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -232,7 +231,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 17</li>
+<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: chapter 4</li>
 </ul>
 <hr />
 <h3>
@@ -244,23 +243,109 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>initialization.cxx</cite>
+  <cite>toolbar.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;vector&gt;
+    #include &quot;toolbar-mainwindow.hpp&quot;
     
-    int main()
+    #include &lt;QApplication&gt;
+    
+    int main(int argc, char **argv)
     {
-    	std::vector&lt;int&gt; sample1 = {1,2,3,4,5}; // initialize by copy assignment operator=
-    	std::vector&lt;int&gt; sample2{1,2,3,4,5}; // initialize by list initialization
-    	std::vector&lt;int&gt; copy(sample2); // initialize by copy constructor
-    	std::vector&lt;int&gt; sample3;
-    	sample3.push_back(1);
-    	sample3.push_back(2);
-    	sample3.push_back(3);
-    
-    	return 0;
+    	QApplication app(argc, argv);
+    	QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);
+    	MainWindow mainWindow;
+    	mainWindow.show();
+    	return app.exec();
     }
+</code>
+</pre>
+  <cite>toolbar-mainwindow.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &quot;toolbar-mainwindow.hpp&quot;
+    
+    MainWindow::MainWindow()
+    {
+    	setWindowTitle(&quot;Toolbar Sample&quot;);
+    	resize(300, 100);
+    
+    	fileMenu = menuBar()-&gt;addMenu(&quot;&amp;File&quot;);
+    	helpMenu = menuBar()-&gt;addMenu(&quot;&amp;Help&quot;);
+    	toolbar = addToolBar(&quot;Editing Toolbar&quot;);
+    	toolbar-&gt;setMovable(true);
+    
+    	QPixmap newIcon (&quot;icons/new.png&quot;);
+    	QPixmap openIcon (&quot;icons/open.png&quot;);
+    	QPixmap quitIcon (&quot;icons/quit.png&quot;);
+    	QPixmap helpIcon (&quot;icons/help.png&quot;);
+    	QPixmap aboutIcon (&quot;icons/about.png&quot;);
+    
+    	newAction = new QAction(newIcon, &quot;&amp;New&quot;, this);
+    	newAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_N));
+    	openAction = new QAction(openIcon, &quot;&amp;Open&quot;, this);
+    	openAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
+    	quitAction = new QAction(quitIcon, &quot;&amp;Quit&quot;, this);
+    	quitAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
+    	helpAction = new QAction(helpIcon, &quot;&amp;Help&quot;, this);
+    	helpAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_H));
+    	aboutAction = new QAction(aboutIcon, &quot;&amp;About&quot;, this);
+    	aboutAction-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_A));
+    
+    	fileMenu-&gt;addAction(newAction);
+    	fileMenu-&gt;addAction(openAction);
+    	fileMenu-&gt;addSeparator();
+    	fileMenu-&gt;addAction(quitAction);
+    	helpMenu-&gt;addAction(helpAction);
+    	helpMenu-&gt;addSeparator();
+    	helpMenu-&gt;addAction(aboutAction);
+    
+    	newToolBarAction = toolbar-&gt;addAction(newIcon, &quot;&amp;New&quot;);
+    	openToolBarAction = toolbar-&gt;addAction(openIcon, &quot;&amp;Open&quot;);
+    
+    	QObject::connect(quitAction, &amp;QAction::triggered, this, &amp;QApplication::quit);
+    }
+</code>
+</pre>
+  <cite>toolbar-mainwindow.hpp</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #ifndef MAINWINDOW_H
+    #define MAINWINDOW_H
+    
+    #include &lt;QApplication&gt;
+    #include &lt;QMainWindow&gt;
+    #include &lt;QMenuBar&gt;
+    #include &lt;QMenu&gt;
+    #include &lt;QToolBar&gt;
+    #include &lt;QTableView&gt;
+    #include &lt;QAction&gt;
+    #include &lt;Qt&gt;
+    #include &lt;QtGui&gt;
+    #include &lt;QLabel&gt;
+    
+    class MainWindow : public QMainWindow {
+    
+    	Q_OBJECT
+    
+    public:
+    	MainWindow();
+    
+    private:
+    	QMenu *fileMenu;
+    	QMenu *helpMenu;
+    	QToolBar *toolbar;
+    
+    	QAction *newAction;
+    	QAction *openAction;
+    	QAction *quitAction;
+    	QAction *helpAction;
+    	QAction *aboutAction;
+    	QAction *newToolBarAction;
+    	QAction *openToolBarAction;
+    };
+    
+    #endif
 </code>
 </pre>
 <hr />
@@ -275,23 +360,59 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./initialization.o -c ./initialization.cxx
+qmake -project -nopwd -norecursive -o ./toolbar.pro ./toolbar.cxx ./toolbar-mainwindow.cxx ./toolbar-mainwindow.hpp
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./initialization.bin ./initialization.o
+sed -i '/TARGET/s/$/.bin/' ./toolbar.pro
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./initialization.bin
+sed -i '/TARGET/a QT += widgets' ./toolbar.pro
 </code>
 </pre>
+<pre>
+<code class="language-bash">
+sed -i '/^QT/,$s/\/[^ ]*\///g' ./toolbar.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+qmake -makefile -norecursive -o ./toolbar.make ./toolbar.pro
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/windows -f toolbar.make
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+make -C ./cpp/gui/windows -f toolbar.make clean
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./toolbar.bin
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<img class="img-responsive" src="/cpp/gui/windows/QToolbar.screenshot.png" alt="toolbar.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/windows/QToolbar.screenshot.png"'>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/vector">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/windows/QMenuBar">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/deque">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/layouts">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
