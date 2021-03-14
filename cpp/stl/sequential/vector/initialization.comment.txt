@@ -1,1 +1,61 @@
 <p>A <code>std::vector</code> is a template class that needs to be instantiated in accordance with template instantiation techniques that are covered in <a href="/cpp/templates">template initialization</a>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;int&gt; dynIntArray; // vector containing integers
+		std::vector&lt;float&gt; dynFloatArray; // vector containing floats
+		std::vector&lt;Base&gt; dynTunaArray; // vector containing Base class
+	</code>
+</pre>
+
+<p>To declare an iterator that points to an element in the list, you would use <code>std::vector<int>::const_iterator elementInVec;</code></p>
+
+<p>If you need an iterator that can be used to modify values or invoke non-const functions, you use <code>iterator</code> instead of <code>const_iterator</code>.</p>
+
+<o>Given that <code>std::vector</code> has a few overloaded constructors, you also have an option of instantiating a vector telling the number of elements it should start with and their initial values, or you can use a part of whole of one vector in instantiating another.</o>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// vector of integers
+		std::vector&lt;int&gt; integers;
+
+		// vector initialized using C++11 list initialization
+		std::vector&lt;int&gt; initVector{ 202, 2017, -1 };
+
+		// Instantiate a vector with 10 elements (it can still grow)
+		std::vector&lt;int&gt; tenElements(10);
+
+		// Instantiate a vector with 10 elements, each initialized to 90
+		std::vector&lt;int&gt; tenElemInit(10, 90);
+
+		// Initialize vector to the contents of another
+		std::vector&lt;int&gt; copyVector(tenElemInit);
+
+		// Vector initialized to 5 elements from another using iterators
+		std::vector&lt;int&gt; partialCopy(tenElements.cbegin(), tenElements.cbegin() + 5);
+	</code>
+</pre>
+
+<p>The <i>size</i> of a vector is the number of elements stored in a vector. The <i>capacity</i> of a vector is the total number of elements that can potentially be stored in the vector before it reallocates memory to accommodate more elements. Therefore, a vector’s <i>size</i> is less than or equal to its <i>capacity</i>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
+		std::cout &lt;&lt; "Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>A vector can cause some amount of performance problems when it needs to frequently reallocate the memory of the internal dynamic array. To a great extent, this problem can be addressed by using the member function <code>reserve(number)</code>. What <code>reserve()</code> essentially does is increase the amount of memory allocated for the vector’s internal array so as to accommodate the number of elements without needing to reallocate.</p> 
+
+<p>Depending on the type of the objects stored in the <code>std::vector</code>, reducing the number of reallocations also reduces the number of times the objects are copied and saves on performance.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;int&gt; integers(5);
+		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
+		std::cout &lt;&lt; ", Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
+		integers.push_back(666);
+		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
+		std::cout &lt;&lt; ", Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
+	</code>
+</pre>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Vector Initialization</title>
+<title>Removing from Vector</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -208,77 +208,25 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 5" accesskey="5" href="/8.5.3.3.0.html">Vector</a></li>
-<li class='breadcrumb-item active'>Vector Initialization</li>
+<li class='breadcrumb-item active'>Removing from Vector</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Vector-Initialization" class="anchor" aria-hidden="true" href="#Vector-Initialization">
-Vector Initialization
+<a id="Removing-from-Vector" class="anchor" aria-hidden="true" href="#Removing-from-Vector">
+Removing from Vector
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>A <code>std::vector</code> is a template class that needs to be instantiated in accordance with template instantiation techniques that are covered in <a href="/cpp/templates">template initialization</a>.</p>
+<p>Removal of an element from the <code>std::vector</code> using <code>pop_back()</code> takes constant time.</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		std::vector&lt;int&gt; dynIntArray; // vector containing integers
-		std::vector&lt;float&gt; dynFloatArray; // vector containing floats
-		std::vector&lt;Base&gt; dynTunaArray; // vector containing Base class
-	</code>
-</pre>
-
-<p>To declare an iterator that points to an element in the list, you would use <code>std::vector<int>::const_iterator elementInVec;</code></p>
-
-<p>If you need an iterator that can be used to modify values or invoke non-const functions, you use <code>iterator</code> instead of <code>const_iterator</code>.</p>
-
-<o>Given that <code>std::vector</code> has a few overloaded constructors, you also have an option of instantiating a vector telling the number of elements it should start with and their initial values, or you can use a part of whole of one vector in instantiating another.</o>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		// vector of integers
 		std::vector&lt;int&gt; integers;
-
-		// vector initialized using C++11 list initialization
-		std::vector&lt;int&gt; initVector{ 202, 2017, -1 };
-
-		// Instantiate a vector with 10 elements (it can still grow)
-		std::vector&lt;int&gt; tenElements(10);
-
-		// Instantiate a vector with 10 elements, each initialized to 90
-		std::vector&lt;int&gt; tenElemInit(10, 90);
-
-		// Initialize vector to the contents of another
-		std::vector&lt;int&gt; copyVector(tenElemInit);
-
-		// Vector initialized to 5 elements from another using iterators
-		std::vector&lt;int&gt; partialCopy(tenElements.cbegin(), tenElements.cbegin() + 5);
-	</code>
-</pre>
-
-<p>The <i>size</i> of a vector is the number of elements stored in a vector. The <i>capacity</i> of a vector is the total number of elements that can potentially be stored in the vector before it reallocates memory to accommodate more elements. Therefore, a vector’s <i>size</i> is less than or equal to its <i>capacity</i>.</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
-		std::cout &lt;&lt; "Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
-	</code>
-</pre>
-
-<p>A vector can cause some amount of performance problems when it needs to frequently reallocate the memory of the internal dynamic array. To a great extent, this problem can be addressed by using the member function <code>reserve(number)</code>. What <code>reserve()</code> essentially does is increase the amount of memory allocated for the vector’s internal array so as to accommodate the number of elements without needing to reallocate.</p> 
-
-<p>Depending on the type of the objects stored in the <code>std::vector</code>, reducing the number of reallocations also reduces the number of times the objects are copied and saves on performance.</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::vector&lt;int&gt; integers(5);
-		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
-		std::cout &lt;&lt; ", Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
-		integers.push_back(666);
-		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
-		std::cout &lt;&lt; ", Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
+		integers.push_back(50);
+		integers.pop_back();
 	</code>
 </pre>
 <hr />
@@ -295,9 +243,9 @@ References
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 17</li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/vector">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/vector/inserting-into-vector">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/vector/inserting-into-vector">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/deque">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
