@@ -1,8 +1,7 @@
-# 04.06.01 bitset
-
-```cxx
 #include <iostream>
+#include <algorithm>
 #include <bitset>
+#include <vector>
 
 int main()
 {
@@ -34,49 +33,22 @@ int main()
     std::cout << "count 1s operator:\t" << stringBits.count() << std::endl; // count, number of set bits
     std::cout << "count 0s operator:\t" << (stringBits.size() - stringBits.count()) << std::endl; // count, number of 0 bits
     
-    return 0;
+	// dynamic bitset
+    std::vector<bool> bits; // initializing with default constructor
+    std::vector<bool> bitFlags(5, true); // initializing 5 set bits
+
+    // dynamically resizing bitset
+    bits.push_back(true);
+    bits.push_back(false);
+    bits.push_back(false);
+    bits.push_back(true);
+
+    std::cout << "vector size: " << bits.size() << std::endl;
+
+    bits.flip(); // similar to not operation on all bits
+    std::cout << "fliped the bits: ";
+    for_each(bits.cbegin(), bits.cend(), [](const bool& bit) { std::cout << bit; });
+    std::cout << std::endl;
+
+	return 0;
 }
-
-```
-
-## Output
-
-```txt
-bits:	0011 1001
-and:	0001
-or:	1011
-xor:	1010
-not:	1100
-left shift:	1100
-right shift:	0001
-bit[2]:	1
-set operator:	1111
-set(1):	1011
-reset operator:	0000
-reset(1):	1001
-flip operator:	1100
-size operator:	4
-count 1s operator:	2
-count 0s operator:	2
-```
-
-## Comments
-
-no comments
-
-### Quick Access
-
-<div class="previous_page pagination">
-
-#### &#8592; Previous Page
-
-* [04.06. STL Bit Flags by std::bitset](./../../04.more_stl/06.bitset/README.md)
-
-</div>
-<div class="next_page pagination">
-
-#### &#8594; Next Page
-
-* [04.06.02. vector\<bool\> &lpar;C++14&rpar;](./../../04.more_stl/06.bitset/02.vector.md)
-
-</div>

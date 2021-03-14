@@ -1,9 +1,9 @@
 README.md
-streams
-stream-manipulators
 sequential
 assotiative
 adaptive
+streams
+stream-manipulators
 iterators
 algorithms
 function_object

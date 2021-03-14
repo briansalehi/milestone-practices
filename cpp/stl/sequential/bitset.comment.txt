@@ -2,15 +2,15 @@
 
 <pre class="language-cpp line-numbers">
 	<code>
-		bitset <4> fourBits; // 4 bits initialized to 0000
+		std::bitset&lt;4&gt; fourBits; // 4 bits initialized to 0000
 	</code>
 </pre>
 
-<p>You can also initialize the bitset to a bit sequence represented in a char* string literal:</p>
+<p>You can also initialize the <code>std::bitset</code> to a bit sequence represented in a <code>char*</code> string literal:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		bitset <5> fiveBits("10101"); // 5 bits 10101
+		std::bitset&lt;5&gt; fiveBits("10101"); // 5 bits 10101
 	</code>
 </pre>
 
@@ -18,11 +18,11 @@
 
 <pre class="language-cpp line-numbers">
 	<code>
-		bitset <8> fiveBitsCopy(fiveBits);
+		std::bitset&lt;8&gt; fiveBitsCopy(fiveBits);
 	</code>
 </pre>
 
-<p>The bitset class supplies member functions that help perform insertions into the  bitset, set or reset contents, read the bits, or write them into a stream. It also supplies operators that help display the contents of a bitset and perform bitwise logical operations among others.</p>
+<p>The <code>std::bitset</code> class supplies member functions that help perform insertions into the bitset, set or reset contents, read the bits, or write them into a stream. It also supplies operators that help display the contents of a <code>std::bitset</code> and perform bitwise logical operations among others.</p>
 
 <table class="table table-dark">
 	<thead>
@@ -112,4 +112,39 @@
 	</tbody>
 </table>
 
-<p>One disadvantage of STL bitset<> is its inability to resize itself dynamically. You can use the bitset only where the number of bits to be stored in the sequence is known at compile time.</p>
+<p>One disadvantage of <code>bitset&lt;&gt;</code> is its inability to resize itself dynamically. You can use the <code>std::bitset</code> only where the number of bits to be stored in the sequence is known at compile time.</p>
+
+<p>STL supplies the programmer with a class <code>std::vector&lt;bool&gt;</code> (also called bit_vector in some implementations of STL) that overcomes this shortcoming.</p>
+
+<p>The <code>vector&lt;bool&gt;</code> is a partial specialization of the <code>std::vector</code> and is intended for storing boolean data. This class is able to dynamically size itself. Therefore, the programmer does not need to know the number of boolean flags to be stored at  compile time.</p>
+
+<p>To use class <code>std::vector&lt;bool&gt;</code>, include header: <code>&lt;vector&gt;</code></p>
+
+<p>Instantiating a <code>std::vector&lt;bool&gt;</code> is similar to a vector, with some convenient overloads:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;bool&gt; boolFlags1;
+	</code>
+</pre>
+
+<p>You can also create an object as a copy of another:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;bool&gt; boolFlags2Copy(boolFlags2);
+	</code>
+</pre>
+
+<p>The <code>std::vector&lt;bool&gt;</code> features the function <code>flip()</code> that toggles the state of the Boolean values in the sequence, similar to the function of <code>std::bitset<>::flip()</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::vector&lt;bool&gt; boolFlags(3);
+		boolFlags[0] = true;
+		boolFlags[1] = true;
+		boolFlags[2] = false;
+		boolFlags.push_back(true);
+		boolFlags.flip();
+	</code>
+</pre>

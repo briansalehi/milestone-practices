@@ -14,3 +14,5 @@ flip operator:	1100
 size operator:	4
 count 1s operator:	2
 count 0s operator:	2
+vector size: 4
+fliped the bits: 0110

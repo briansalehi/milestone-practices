@@ -1,2 +1,0 @@
-vector size: 4
-fliped the bits: 0110

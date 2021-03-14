@@ -1,6 +1,7 @@
 README.md
+string.cxx
 array
-bitset
 vector.cxx
 deque.cxx
 list
+bitset.cxx
