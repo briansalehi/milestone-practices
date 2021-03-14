@@ -1,9 +1,0 @@
-<p>Removal of an element from the <code>std::vector</code> using <code>pop_back()</code> takes constant time.</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::vector&lt;int&gt; integers;
-		integers.push_back(50);
-		integers.pop_back();
-	</code>
-</pre>
