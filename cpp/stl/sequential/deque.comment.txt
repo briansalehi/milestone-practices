@@ -1,0 +1,33 @@
+<p><code>std::deque</code> (pronunciation rhymes with deck) is an STL dynamic array class quite similar in properties to that of the <code>std::vector</code> except that it allows for the insertion and removal of elements at the front and back of the array. You would instantiate a <code>std::deque</code> of integers like this:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::deque&lt;int&gt; intDeque;
+	</code>
+</pre>
+
+<p>To use a <code>std::deque</code>, include header <code>&lt;deque&gt;</code>.</p>
+
+<p><code>std::deque</code> is similar to the <code>std::vector</code> in that it supports element insertions and deletions at the back via the <code>push_back()</code> and <code>pop_back()</code> functions. Just like the <code>std::vector</code>, the <code>std::deque</code> also allows you to access it using array semantics via <code>operator[]</code>. <code>std::deque</code> is different from the <code>std::vector</code> in that it also enables you to insert elements at the front using <code>push_front()</code> and remove from the front using <code>pop_front()</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::deque&lt;int&gt; intDeque;
+		intDeque.push_back(3);
+		intDeque.push_front(2);
+		intDeque.pop_front();
+		intDeque.pop_back();
+	</code>
+</pre>
+
+<p>When you need to empty an STL container such as a <code>std::vector</code> or a <code>std::deque</code>, that is, delete all elements contained in it, you would use member function <code>clear()</code>.</p>
+
+<p>Note that both <code>std::vector</code> and <code>std::deque</code> also feature a member function called <code>empty()</code> that returns true when the container is empty.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		intDeque.clear();
+		if (intDeque.empty())
+			std::cout &lt;&lt; "The container is now empty" &lt;&lt; std::endl;
+	</code>
+</pre>
