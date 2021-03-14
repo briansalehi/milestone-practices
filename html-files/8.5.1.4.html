@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Input Stream</title>
+<title>Deque</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,53 +206,50 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.1.0.html">Streams</a></li>
-<li class='breadcrumb-item active'>Input Stream</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.1.0.html">Sequential Containers</a></li>
+<li class='breadcrumb-item active'>Deque</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Input-Stream" class="anchor" aria-hidden="true" href="#Input-Stream">
-Input Stream
+<a id="Deque" class="anchor" aria-hidden="true" href="#Deque">
+Deque
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p><code>std::cin</code> is versatile and enables you to read input into the plain old data types, such as the <code>int</code>, <code>double</code>, and <code>char*</code>, and you can also read lines or characters from the screen using methods such as <code>getline()</code>.</p>
+<p><code>std::deque</code> (pronunciation rhymes with deck) is an STL dynamic array class quite similar in properties to that of the <code>std::vector</code> except that it allows for the insertion and removal of elements at the front and back of the array. You would instantiate a <code>std::deque</code> of integers like this:</p>
 
-<pre class="language-cpp line-numbers">
+<pre class="language-cpp">
 	<code>
-		std::string placehoder;
-		std::cin >> placeholder;
+		std::deque&lt;int&gt; intDeque;
 	</code>
 </pre>
 
-<p>Just like <code>std::cin</code> allows you to write directly into an <code>int</code>, you can do the same with a C-style char array, too:</p>
+<p>To use a <code>std::deque</code>, include header <code>&lt;deque&gt;</code>.</p>
+
+<p><code>std::deque</code> is similar to the <code>std::vector</code> in that it supports element insertions and deletions at the back via the <code>push_back()</code> and <code>pop_back()</code> functions. Just like the <code>std::vector</code>, the <code>std::deque</code> also allows you to access it using array semantics via <code>operator[]</code>. <code>std::deque</code> is different from the <code>std::vector</code> in that it also enables you to insert elements at the front using <code>push_front()</code> and remove from the front using <code>pop_front()</code>.</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		char buffer[10] = {0}; // can contain max 10 chars
-		std::cin >> buffer; // Danger: user may enter more than 10 chars
+		std::deque&lt;int&gt; intDeque;
+		intDeque.push_back(3);
+		intDeque.push_front(2);
+		intDeque.pop_front();
+		intDeque.pop_back();
 	</code>
 </pre>
 
-<p>When writing into a C-style string buffer, it is very important that you don’t exceed the bounds of the buffer to avoid a crash or a security vulnerability. So, a better way of reading into a C-style char buffer is this:</p>
+<p>When you need to empty an STL container such as a <code>std::vector</code> or a <code>std::deque</code>, that is, delete all elements contained in it, you would use member function <code>clear()</code>.</p>
+
+<p>Note that both <code>std::vector</code> and <code>std::deque</code> also feature a member function called <code>empty()</code> that returns true when the container is empty.</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		std::cin.get(buffer, 9); // stop inserting at the 9th character
-	</code>
-</pre>
-
-<p><code>std::cin</code> stops insertion when it encounters the first white space.</p>
-
-<p>To allow the user to enter a complete line, including spaces, you need to use <code>std::getline()</code>:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::string name;
-		std::getline(std::cin, name);
+		intDeque.clear();
+		if (intDeque.empty())
+			std::cout &lt;&lt; "The container is now empty" &lt;&lt; std::endl;
 	</code>
 </pre>
 <hr />
@@ -266,12 +263,12 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 27</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 17</li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams/output-stream">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/vector">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams/file-stream">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/list">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -311,7 +308,8 @@ function scrollDownListener() {
     "keydown",
     function(event) {
       if (event.key == "j") {
-        window.scrollBy(0, window.screen.height / 4)
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: screen_height, behavior: 'smooth'})
       }
     }
   )
@@ -322,7 +320,8 @@ function scrollUpListener() {
     "keydown",
     function(event) {
       if (event.key == "k") {
-        window.scrollBy(0, -(window.screen.height / 4))
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: -screen_height, behavior: 'smooth'})
       }
     }
   )

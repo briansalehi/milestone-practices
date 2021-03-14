@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Queue</title>
+<title>fill function</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,108 +206,23 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.5.0.html">Adaptive Containers</a></li>
-<li class='breadcrumb-item active'>Queue</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.5.0.html">Stream Manipulators</a></li>
+<li class='breadcrumb-item active'>fill function</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Queue" class="anchor" aria-hidden="true" href="#Queue">
-Queue
+<a id="fill-function" class="anchor" aria-hidden="true" href="#fill-function">
+fill function
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>Queues are FIFO (first-in-first-out) systems where elements can be inserted behind the previous one, and the one inserted first gets removed first.</p>
-
-<p>This behavior of a queue is simulated in the generic STL container <code>std::queue</code>.</p>
-
-<p>To use class <code>std::queue</code>, include header <code>&lt;queue&gt;</code></p>
-
-<p><code>std::queue</code> is defined as:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		template &lt;class elementType, class Container = deque&lt;Type&gt;&gt; class queue;
-	</code>
-</pre>
-
-<p>Here, <code>elementType</code> is the type of elements collected by the queue object. <code>Container</code> is the type of collection that the <code>std::queue</code> class uses to maintain its data. The <code>std::list</code>, <code>std::vector</code>, and <code>std::deque</code> are possible candidates for this template parameter, and the <code>std::deque</code> is the default.</p>
-
-<p>The simplest instantiation of a <code>std::queue</code> of integers would be the following:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::queue&lt;int&gt; numsInQ;
-	</code>
-</pre>
-
-<p>If you want to create a queue containing elements of type double inside a std::list (instead of a deque, which is default), use the following:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::queue&lt;double, list&lt;double&gt;&gt; dblsInQInList;
-	</code>
-</pre>
-
-<p>Just like a stack, a queue can also be instantiated as a copy of another queue:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::queue&lt;int&gt; copyQ(numsInQ);
-	</code>
-</pre>
-
-<p>The <code>std::queue</code>, like <code>std::stack</code>, also bases its implementation on an STL container such as the <code>std::vector</code>, <code>std::list</code>, or <code>std::deque</code>. The queue exposes only those member functions that implement the behavioral characteristics of a queue. Following Table explains the member functions using numsInQ, which previous samples demonstrate is a queue of integers.</p>
-
-<table class="table table-dark">
-	<thead>
-		<tr>
-			<th scope="col">Function</th>
-			<th scope="col">Description</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><code>push()</code></td>
-			<td>Inserts an element at the back of the queue: <code>numsInQ.push(10);</code></td>
-		</tr>
-		<tr>
-			<td><code>pop()</code></td>
-			<td>Removes the element at the front of the queue: <code>numsInQ.pop();</code></td>
-		</tr>
-		<tr>
-			<td><code>front()</code></td>
-			<td>Returns the reference to the element at the front of the queue: <code>numsInQ.front();</code></td>
-		</tr>
-		<tr>
-			<td><code>back()</code></td>
-			<td>Returns a reference to the element at the back of the queue: <code>numsInQ.back()</code></td>
-		</tr>
-		<tr>
-			<td><code>empty()</code></td>
-			<td>Tests whether the queue is empty; returns <code>bool</code>: <code>if (numsInQ.empty()) DoSomething();</code></td>
-		</tr>
-		<tr>
-			<td><code>size()</code></td>
-			<td>Returns the number of elements in the queue: <code>size_t numElements = numsInQ.size();</code></td>
-		</tr>
-	</tbody>
-</table>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 24</li>
-</ul>
+**width(N)** function will leave **N** character spaces empty in output stream to be filled by
+next characters.  
+This can be used when you want your users to see how many numbers should they fill in the blank
+space.
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -318,44 +233,24 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>queue.cxx</cite>
+  <cite>fill.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;vector&gt;
-    #include &lt;queue&gt;
+    #include &lt;string&gt;
     
     int main()
     {
-        // initialization
-        std::queue&lt;int&gt; queueOfInts;
-        std::queue&lt;double&gt; queueOfDoubles;
-        std::queue&lt;int, std::vector&lt;int&gt;&gt; queueOfVectorInts;
-        std::queue&lt;int&gt; queueOfCopy(queueOfInts);
+        std::string phone = &quot;+10123456789&quot;;
+        std::cout.fill(&apos;*&apos;);
     
-        // instantiation
-        std::queue&lt;int&gt; people;
-        people.push(1);
-        people.push(2);
-        people.push(3);
-    
-        // queue size
-        std::cout &lt;&lt; &quot;queue size: &quot; &lt;&lt; people.size() &lt;&lt; std::endl;
-    
-        // back of queue
-        std::cout &lt;&lt; &quot;last back element: &quot; &lt;&lt; people.back() &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;last front element: &quot; &lt;&lt; people.front() &lt;&lt; std::endl;
-    
-        // display elements
-        while (people.size() != 0) {
-            std::cout &lt;&lt; &quot;element: &quot; &lt;&lt; people.front() &lt;&lt; std::endl;
-            // remove top element
-            people.pop();
+        std::cout &lt;&lt; &quot;A verification code has been sent to &quot;;
+        std::cout.width(7);
+        // loops and iterators will be discussed later
+        for (std::string::const_iterator iterator = phone.cend()-3; iterator != phone.cend(); ++iterator) {
+            std::cout &lt;&lt; *iterator;
         }
-    
-        if (people.empty()) {
-            std::cout &lt;&lt; &quot;queue is empty&quot; &lt;&lt; std::endl;
-        }
+        std::cout &lt;&lt; std::endl;
     
         return 0;
     }
@@ -373,17 +268,17 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./queue.o -c ./queue.cxx
+g++ -Wall -g -o ./fill.o -c ./fill.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./queue.bin ./queue.o
+g++ -g -o ./fill.bin ./fill.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./queue.bin
+./fill.bin
 </code>
 </pre>
 <hr />
@@ -398,19 +293,13 @@ Output
 </h3>
 <pre>
 <code class="language-cpp">
-queue size: 3
-last back element: 3
-last front element: 1
-element: 1
-element: 2
-element: 3
-queue is empty
+A verification code has been sent to ******789
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/adaptive-containers/stack">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.5.1.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/adaptive-containers/priority-queue">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.5.3.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -450,7 +339,8 @@ function scrollDownListener() {
     "keydown",
     function(event) {
       if (event.key == "j") {
-        window.scrollBy(0, window.screen.height / 4)
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: screen_height, behavior: 'smooth'})
       }
     }
   )
@@ -461,7 +351,8 @@ function scrollUpListener() {
     "keydown",
     function(event) {
       if (event.key == "k") {
-        window.scrollBy(0, -(window.screen.height / 4))
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: -screen_height, behavior: 'smooth'})
       }
     }
   )

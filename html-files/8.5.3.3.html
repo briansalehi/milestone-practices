@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Vector</title>
+<title>Priority Queue</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -206,172 +206,48 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Sequential Containers</a></li>
-<li class='breadcrumb-item active'>Vector</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.5.3.0.html">Adaptive Containers</a></li>
+<li class='breadcrumb-item active'>Priority Queue</li>
 </ol>
 <button id='darkmode-icon' class='btn pull-right sticky' onclick='toggle_darkmode()' title='ALT + SHIFT + N' accesskey='N'>&#x1F315;</button>
 <h2>
-<a id="Vector" class="anchor" aria-hidden="true" href="#Vector">
-Vector
+<a id="Priority-Queue" class="anchor" aria-hidden="true" href="#Priority-Queue">
+Priority Queue
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p><code>std::vector</code> is a template class that supplies generic functionality of a dynamic array and features the following characteristics:</p>
+<p>The <code>std::priority_queue</code> is different from the <code>std::queue</code> in that the element of the highest value (or the value deemed as highest by a binary predicate) is available at the front of the <code>std::queue</code> and <code>std::queue</code> operations are restricted to the front.</p>
 
-<p>Addition of elements to the end of the array in constant time; that is, the time needed to insert at the end is not dependent on the size of the array. Ditto for removal of an element at the end.</p>
-
-<p>The time required for the insertion or removal of elements at the middle is directly proportional to the number of elements behind the element being removed.</p>
-
-<p>The number of elements held is dynamic, and the vector class manages the  memory usage.</p>
-
-<p>To use class <code>std::vector</code>, include header: <code>&lt;vector&gt;</code></p>
-
-<p>A <code>std::vector</code> is a template class that needs to be instantiated in accordance with template instantiation techniques that are covered in <a href="/cpp/templates">template initialization</a>.</p>
+<p><code>std::priority_queue</code> class is defined as:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		std::vector&lt;int&gt; dynIntArray; // vector containing integers
-		std::vector&lt;float&gt; dynFloatArray; // vector containing floats
-		std::vector&lt;Base&gt; dynTunaArray; // vector containing Base class
+		template &lt;class elementType, class Container=std::vector&lt;Type&gt;, class Compare=less&lt;typename Container::value_type&gt;&gt; class std::priority_queue
 	</code>
 </pre>
 
-<p>To declare an iterator that points to an element in the list, you would use <code>std::vector<int>::const_iterator elementInVec;</code></p>
+<p>The simplest instantiation of a <code>std::priority_queue</code> of integers would be <code>std::priority_queue<int> numsInPrioQ;</code></p>
 
-<p>If you need an iterator that can be used to modify values or invoke non-const functions, you use <code>iterator</code> instead of <code>const_iterator</code>.</p>
-
-<o>Given that <code>std::vector</code> has a few overloaded constructors, you also have an option of instantiating a vector telling the number of elements it should start with and their initial values, or you can use a part of whole of one vector in instantiating another.</o>
+<p>If you want to create a priority queue containing elements of type double inside a <code>std::deque</code>:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		// vector of integers
-		std::vector&lt;int&gt; integers;
-
-		// vector initialized using C++11 list initialization
-		std::vector&lt;int&gt; initVector{ 202, 2017, -1 };
-
-		// Instantiate a vector with 10 elements (it can still grow)
-		std::vector&lt;int&gt; tenElements(10);
-
-		// Instantiate a vector with 10 elements, each initialized to 90
-		std::vector&lt;int&gt; tenElemInit(10, 90);
-
-		// Initialize vector to the contents of another
-		std::vector&lt;int&gt; copyVector(tenElemInit);
-
-		// Vector initialized to 5 elements from another using iterators
-		std::vector&lt;int&gt; partialCopy(tenElements.cbegin(), tenElements.cbegin() + 5);
+		priority_queue&lt;int, std::deque&lt;int&gt;, std::greater&lt;int&gt;&gt; numsInDescendingQ;
 	</code>
 </pre>
 
-<p>The <i>size</i> of a vector is the number of elements stored in a vector. The <i>capacity</i> of a vector is the total number of elements that can potentially be stored in the vector before it reallocates memory to accommodate more elements. Therefore, a vector’s <i>size</i> is less than or equal to its <i>capacity</i>.</p>
+<p>Just like a <code>std::stack</code>, a <code>std::queue</code> can also be instantiated as a copy of another <code>std::queue</code>:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
-		std::cout &lt;&lt; "Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
+		std::priority_queue&lt;int&gt; copyQ(numsInPrioQ);
 	</code>
 </pre>
 
-<p>A vector can cause some amount of performance problems when it needs to frequently reallocate the memory of the internal dynamic array. To a great extent, this problem can be addressed by using the member function <code>reserve(number)</code>. What <code>reserve()</code> essentially does is increase the amount of memory allocated for the vector’s internal array so as to accommodate the number of elements without needing to reallocate.</p> 
-
-<p>Depending on the type of the objects stored in the <code>std::vector</code>, reducing the number of reallocations also reduces the number of times the objects are copied and saves on performance.</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::vector&lt;int&gt; integers(5);
-		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
-		std::cout &lt;&lt; ", Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
-		integers.push_back(666);
-		std::cout &lt;&lt; "Size: " &lt;&lt; integers.size();
-		std::cout &lt;&lt; ", Capacity: " &lt;&lt; integers.capacity() &lt;&lt; std::endl;
-	</code>
-</pre>
-
-<p>Insertion in a vector happens at the end of the array, and elements are “pushed” into its back using the member function <code>push_back()</code>:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		// declare a vector of type int
-		std::vector&lt;int&gt; integers;
-
-		// Insert sample integers into the vector:
-		integers.push_back(50);
-		integers.push_back(1);
-
-		std::cout &lt;&lt; integers.size() &lt;&lt; " Elements" &lt;&lt; std::endl;
-	</code>
-</pre>
-
-<p>C++11 features initializer lists via class <code>std::initialize_list&lt;&gt;</code> that, when  supported, enables you to instantiate and initialize elements in a container like you would in a static array. <code>std::vector</code>, like most containers, supports List Initialization allowing you to instantiate a vector with elements in one line:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::vector&lt;int&gt; integers = {50, 1, 987, 1001};
-		// alternatively:
-		std::vector&lt;int&gt; vecMoreIntegers{50, 1, 987, 1001};
-	</code>
-</pre>
-
-<p>Many STL containers, including <code>std::vector</code>, feature an <code>insert()</code> function with many overloads.</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		// insert an element at the beginning
-		integers.insert(integers.begin(), 25);
-
-		// Insert 2 elements of value 45 at the end
-		integers.insert(integers.end(), 2, 45);
-
-		// Another vector containing 2 elements of value 30
-		std::vector&lt;int&gt; another(2, 30);
-
-		// Insert two elements from another container in position [1]
-		integers.insert(integers.begin() + 1, another.begin(), another.end());
-	</code>
-</pre>
-
-<p>Although <code>vector::insert()</code> is a versatile function, <code>push_back()</code> should be your preferred way of adding elements to a vector. This is because <code>insert()</code> is an inefficient way to add elements to the vector (when adding in a position that is not the end of the sequence) because adding elements in the beginning or the middle makes the vector class shift all subsequent elements backward (after making space for the last ones at the end). Thus, depending on the type of the objects contained in the sequence, the cost of this shift operation can be significant in terms of the copy constructor or copy assignment operator invoked. In our little sample, the vector contains objects of type <code>int</code> that are relatively inexpensive to move around. This might not be the case in many other uses of the <code>std::vector</code> class.</p>
-
-<p>If your container needs to have very frequent insertions in the middle, you should ideally choose the <code>std::list</code></p>
-
-<p>Elements in a <code>std::vector</code> can be accessed using the following methods:</p>
-
-<ul>
-	<li>via array semantics using the subscript <code>operator[]</code></li>
-	<li>using the member function <code>at()</code>, or using iterators.</li>
-</ul>
-
-<p>Accessing elements in a <code>std::vector</code> using <code>operator[]</code> is fraught with the same dangers as accessing elements in an <code>array</code>; that is, you should not cross the bounds of the container. If you use the subscript <code>operator[]</code> to access elements in a <code>std::vector</code> at a position that is beyond its bounds, the result of the operation will be undefined (anything could happen, possibly an access violation).</p>
-
-<p>A safer alternative is to use the <code>at()</code> member function:</p>
-
-<p><code>at()</code> performs a runtime check against the <code>size()</code> of the container and throws an exception if you cross the boundaries (which you shouldn’t anyway). You can also access elements in a <code>std::vector</code> using pointer-like semantics by the use of iterators:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::vector&lt;int&gt; integers{ 50, 1, 987, 1001 };
-		std::vector&lt;int&gt;::const_iterator element = integers.cbegin();
-		while (element != integers.end()) {
-			size_t index = std::distance(integers.cbegin(), element);
-			std::cout &lt;&lt; index &lt;&lt; " is: " &lt;&lt; *element &lt;&lt; std::endl;
-			++element;
-		}
-	</code>
-</pre>
-
-<p>Removal of an element from the <code>std::vector</code> using <code>pop_back()</code> takes constant time.</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::vector&lt;int&gt; integers;
-		integers.push_back(50);
-		integers.pop_back();
-	</code>
-</pre>
+<p>The member functions <code>front()</code> and <code>back()</code>, available in the <code>std::queue</code>, are not available in the <code>std::priority_queue</code>. Following table introduces the member functions of a <code>std::priority_queue</code>.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -383,12 +259,111 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 17</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 24</li>
 </ul>
+<hr />
+<h3>
+<a id="Source" class="anchor" aria-hidden="true" href="#Source">
+Source
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+  <cite>priority_queue.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;functional&gt;
+    #include &lt;iostream&gt;
+    #include &lt;vector&gt;
+    #include &lt;queue&gt;
+    
+    int main()
+    {
+        // initialization
+        std::priority_queue&lt;int&gt; queueOfInts;
+        std::priority_queue&lt;double&gt; queueOfDoubles;
+        std::priority_queue&lt;int, std::vector&lt;int&gt;&gt; queueOfVectorInts;
+        std::priority_queue&lt;int, std::vector&lt;int&gt;, std::greater&lt;int&gt;&gt; priority_queueWithPredicate;
+        std::priority_queue&lt;int&gt; queueOfCopy(queueOfInts);
+    
+        // instantiation, unordered values
+        std::priority_queue&lt;int&gt; people;
+        people.push(2);
+        people.push(1);
+        people.push(3);
+    
+        // priority_queue size
+        std::cout &lt;&lt; &quot;priority queue size: &quot; &lt;&lt; people.size() &lt;&lt; std::endl;
+    
+        // back of priority_queue
+        std::cout &lt;&lt; &quot;front element: &quot; &lt;&lt; people.top() &lt;&lt; std::endl;
+    
+        // display elements
+        while (! people.empty()) {
+            std::cout &lt;&lt; &quot;element: &quot; &lt;&lt; people.top() &lt;&lt; std::endl;
+            // remove top element
+            people.pop();
+        }
+    
+        if (people.empty()) {
+            std::cout &lt;&lt; &quot;priority queue is empty&quot; &lt;&lt; std::endl;
+        }
+    
+        return 0;
+    }
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Execution" class="anchor" aria-hidden="true" href="#Execution">
+Execution
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-bash">
+g++ -Wall -g -o ./priority_queue.o -c ./priority_queue.cxx
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+g++ -g -o ./priority_queue.bin ./priority_queue.o
+</code>
+</pre>
+<pre>
+<code class="language-bash">
+./priority_queue.bin
+</code>
+</pre>
+<hr />
+<h3>
+<a id="Output" class="anchor" aria-hidden="true" href="#Output">
+Output
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<pre>
+<code class="language-cpp">
+priority queue size: 3
+front element: 3
+element: 3
+element: 2
+element: 1
+priority queue is empty
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/sequencial-containers/bitset/bit-vector">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/adaptive-containers/queue">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers/deque">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -428,7 +403,8 @@ function scrollDownListener() {
     "keydown",
     function(event) {
       if (event.key == "j") {
-        window.scrollBy(0, window.screen.height / 4)
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: screen_height, behavior: 'smooth'})
       }
     }
   )
@@ -439,7 +415,8 @@ function scrollUpListener() {
     "keydown",
     function(event) {
       if (event.key == "k") {
-        window.scrollBy(0, -(window.screen.height / 4))
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: -screen_height, behavior: 'smooth'})
       }
     }
   )

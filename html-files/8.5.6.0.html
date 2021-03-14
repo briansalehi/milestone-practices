@@ -219,7 +219,7 @@ Iterators
 </a>
 </h2>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/adaptive-containers/priority-queue">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.5.11.html">Previous Page</a></li>
 <li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.5.6.1.html">Next Page</a></li>
 </ul>
@@ -293,7 +293,8 @@ function scrollDownListener() {
     "keydown",
     function(event) {
       if (event.key == "j") {
-        window.scrollBy(0, window.screen.height / 4)
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: screen_height, behavior: 'smooth'})
       }
     }
   )
@@ -304,7 +305,8 @@ function scrollUpListener() {
     "keydown",
     function(event) {
       if (event.key == "k") {
-        window.scrollBy(0, -(window.screen.height / 4))
+        var screen_height = window.screen.height / 4;
+        window.scrollTo({top: -screen_height, behavior: 'smooth'})
       }
     }
   )
