@@ -1,0 +1,133 @@
+Classes form part of your model's logical view.
+
+![4x1-diagram-logical-view.png]
+
+<p>At its simplest terms, a class in UML is drawn as a rectangle split into up to three sections. The top section contains the name of the class, the middle section contains the attributes or information that the class contains, and the final section contains the operations that represent the behavior that the class exhibits. The attributes and operations sections are optional.</p>
+
+![class-uml-notation.png]
+
+<p>If the attributes and operations sections are not shown, it does not necessarily imply that they are empty, just that the diagram is perhaps easier to understand with that information hidden.</p>
+
+<p>A class selectively reveal its operations and data to other classes by using visibility.</p>
+
+<p>There are four different types of visibility that can be applied to the elements of a UML model.</p>
+
+![four-visibility-classifications.png]
+
+<p>Typically these visibility characteristics will be used to control access to both attributes, operations, and sometimes even classes.</p>
+
+<p>Starting with the most accessible of visibility characteristics, <b>public</b> visibility is specified using the plus (<b>+</b>) symbol before the associated attribute or operation, as shown in the following figure.</p>
+
+![public-visibilitiy-diagram.png]
+
+<p>Declare an attribute or operation public if you want it to be accessible directly by any other class.</p>
+
+<p><b>Protected</b> attributes and operations are specified using the hash (<b>#</b>) symbol and are more visible to the rest of your system than private attributes and operations, but are less visible than public.</p>
+
+![protected-visibility-diagram.png]
+
+<p><b>Package</b> visibility, specified with a tilde (<b>~</b>), when applied to attributes and operations, sits in between protected and private.</p>
+
+![package-visibility-diagram.png]
+
+<p><b>Private</b> visibility is the most tightly constrained type of visibility classification, and it is shown by adding a minus (<b>-</b>) symbol before the attribute or operation.</p>
+
+![private-visibility-diagram.png]
+
+<p>A class's attributes are the pieces of information that represent the state of an object. These attributes can be represented on a class diagram either by placing them inside their section of the class box—known as inline attributes —or by association with another class.</p>
+
+![inline-and-associative-attributes-diagram.png]
+
+<p>An attribute's name can be any set of characters, but no two attributes in the same class can have the same name.</p>
+
+<p>In the previous diagram, the <code>name</code> attribute is declared as <i>private</i> (indicated by the minus (-) sign at the beginning of the signature) and after the colon, the <i>type</i> is specified as being of the class <code>String</code>. The associated entries attribute is also <i>private</i>, and because of that association, it represents a number of instances of the <code>BlogEntry</code> class.</p>
+
+<p>If the <code>BlogAccount</code> class in previous diagram was going to be implemented as a Java class, then the source code would look something like that shown in the following example:</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class BlogAccount
+		{
+		   // The two inline attributes from previous diagram
+		   private String name;
+		   private URL publicURL;
+		 
+		   // The single attribute by association, given the name 'entries'
+		   BlogEntries[] entries;
+		 
+		   // ...
+
+		}
+	</code>
+</pre>
+
+<p>Sometimes an attribute will represent more than one object. In fact, an attribute could represent any number of objects of its type; in software, this is like declaring that an attribute is an array. <b>Multiplicity</b> allows you to specify that an attribute actually represents a collection of objects, and it can be applied to both inline and attributes by association.</p>
+
+![multiplicity-diagram.png]
+
+<p>A <b>*</b> at the <code>BlogEntry</code> class end of the association indicates that any number of <code>BlogEntry</code> objects will be stored in the entries attribute within the <code>BlogAccount</code> class. The <b>1</b> specified at the other end of the association indicates that each <code>BlogEntry</code> object in the entries attribute is associated with one and only one <code>BlogAccount</code> object.</p>
+
+<p>The <code>unique</code> property dictates that no two <code>Trackback</code> objects within the array should be the same.</p>
+
+<p>By default, all attributes with multiplicity are <code>unique</code>.</p>
+
+<p>If you want to specify that duplicates are allowed, then you need to use the <code>not unique</code> property, as used on the comments attribute in the <code>BlogEntry</code> class.</p>
+
+<p>The <code>ordered</code> property is used in this case to indicate that each of the <code>Comment</code> objects is stored in a set order.</p>
+
+<p>If you don't care about the order in which objects are stored within an attribute that has multiplicity, then simply leave out the <code>ordered</code> property.</p>
+
+<p>If an attribute has the <code>readOnly</code> property applied, as shown in the following diagram, then the value of the attribute cannot be changed once its initial value has been set.</p>
+
+![readonly-property-in-diagram.png]
+
+<p>If the <code>ContentManagementSystem</code> class were to be implemented in Java source code, then the <code>createdBy</code> attribute would be translated into a <code>final</code> attribute.</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class ContentManagementSystem
+		{
+		   private final String createdBy = "Adam Cook Software Corp.";
+		}
+	</code>
+</pre>
+
+<p>When attributes are shown as <b>associations</b>, as is the case in below figure, the diagram quickly becomes busy.</p>
+
+![inline-vs-association-attributes.png]
+
+<p>The diagram is neater and easier to manage with more room for other information when the attributes are specified <b>inline</b> with the class box.</p>
+
+![inline-attributes-sample-diagram.png]
+
+<p>Choosing whether an attribute should be shown <b>inline</b> or as an <b>association</b> is really a question of what the focus of the diagram should be.</p>
+
+<p>Operations in UML are specified on a class diagram with a signature that is at minimum made up of a visibility property, a name, a pair of parentheses in which any parameters that are needed for the operation to do its job can be supplied, and a return type.</p>
+
+![operation-in-diagram.png]
+
+<p><b>Parameters</b> are used to specify the information provided to an operation to allow it to complete its job. For example, the <code>addEntry(..)</code> operation needs to be supplied with the <code>BlogEntry</code> that is to be added to the account.</p>
+
+![operation-parameters-in-diagram.png]
+
+<p>More than one parameter can be passed to an operation by splitting the parameters with a comma.</p>
+
+![multiple-parameters-separated-by-comma.png]
+
+<p>A return type is specified after a colon at the end of an operation's signature and specifies the type of object that will be returned by the operation.</p>
+
+![return-type-of-operation-in-diagram.png]
+
+<p>A constructor creates and returns a new instance of the class that it is specified in, therefore, it does not need to explicitly declare any return type.</p>
+
+![constructor-in-a-class-diagram.png]
+
+<p>Sometimes you want all of the objects in a particular class to share the same copy of an attribute or operation. When this happens, a class's attributes and operations are associated with the class itself and have a lifetime beyond that of the any objects that are instantiated from the class. This is where <code>static</code> attributes and operations become useful.</p>
+
+<p>The <code>accountCounter</code> attribute needs to be incremented every time a new <code>BlogAccount</code> is created. The <code>accountCounter</code> attribute is declared <code>static</code> because the same copy needs to be shared between all of the instances of the <code>BlogAccount</code> class.</p>
+
+<p>An attribute or operation is made static in UML by underlining it.</p>
+
+![static-attribute-underlined-in-class-diagram.png]
+
+<p>Another great example of when <code>static</code> attributes and operations are used when you want to apply the <i>Singleton design pattern</i>. In a nutshell, the Singleton design pattern ensures that <b>one and only one</b> object of a particular class is ever constructed during the lifetime of your system. To ensure that only one object is ever constructed, typical implementations of the Singleton pattern keep an internal <code>static</code> reference to the single allowed object instance, and access to that instance is controlled using a static operation. To learn more about the Singleton pattern, check out <a href="/java/design-patterns/singleton">Singleton design pattern</a>.</p>
