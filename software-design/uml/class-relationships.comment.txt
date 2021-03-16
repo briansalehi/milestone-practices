@@ -1,0 +1,224 @@
+<p><b>Abstract</b> classes help you to partly declare a class's behavior, allowing other classes to complete the missing—abstract—bits of behavior as they see fit.</p>
+
+<p><b>Interfaces</b> take abstract classes one stage further by specifying only the needed operations of a class but without any operation implementations.</p>
+
+<p>Two classes that are strongly dependent on one another are said to be tightly coupled.</p>
+
+<p><i>Tight coupling</i> is usually, but not always, a bad thing; therefore, the stronger the relationship, the more careful you need to be.</p>
+
+<p>UML offers five different types of class relationship:</p>
+
+![class-relationship-types.png]
+
+<p>A <b>dependency</b> between two classes declares that a class needs to know about another class to use objects of that class.</p>
+
+![dependency-relationship-diagram.png]
+
+<p>The <code>UserInterface</code> is dependent on the <code>BlogEntry</code> class because it will need to read the contents of a blog's entries to display them to the user.</p>
+
+<p>The <code>UserInterface</code> and <code>BlogEntry</code> classes simply work together at the times when the user interface wants to display the contents of a blog entry.</p>
+
+<p>Although <b>dependency</b> simply allows one class to use objects of another class, <b>association</b> means that a class will actually contain a reference to an object, or objects, of the other class in the form of an <i>attribute</i>.</p>
+
+<p><b>Association</b> is shown using a simple line connecting two classes.</p>
+
+![association-relationship-diagram.png]
+
+<p>The <code>BlogAccount</code> class is optionally associated with zero or more objects of the <code>BlogEntry</code> class.</p>
+
+<p><b>Navigability</b> is often applied to an <b>association</b> relationship to describe which class contains the attribute that supports the relationship.</p>
+
+<p>If you take previous diagram as it currently stands and implement the <b>association</b> between the two classes in Java, then you would get something like the following code:</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class BlogAccount {
+		 
+		   // Attribute introduced thanks to the association with the BlogEntry class
+		   private BlogEntry[] entries;
+		 
+		   // ... Other Attributes and Methods declared here ...
+		}
+		 
+		public class BlogEntry {
+		 
+		   // Attribute introduced thanks to the association with the Blog class
+		   private BlogAccount blog;
+		 
+		   // ... Other Attributes and Methods declared here ...
+		}
+	</code>
+</pre>
+
+<p>In our system, it makes more sense to be able to ask a blog account what entries it contains, rather than asking the entry what blog account it belongs to. In this case, we use <b>navigability</b> to ensure that the <code>BlogAccount</code> class gets the <b>association</b> introduced attribute.</p>
+
+![navigability-arrow-in-class-diagram.png]
+
+<p>With <b>navigability</b> applied, only the <code>BlogAccount</code> class contains an <b>association</b> introduced attribute.</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class BlogAccount {
+		 
+		   // Attribute introduced thanks to the association with the BlogEntry class
+		   private BlogEntry[] entries;
+		 
+		   // ... Other Attributes and Methods declared here ...
+		}
+		 
+		public class BlogEntry
+		{
+		   // The blog attribute has been removed as it is not necessary for the
+		   // BlogEntry to know about the BlogAccount that it belongs to.
+		 
+		   // ... Other Attributes and Methods declared here ...
+		}
+	</code>
+</pre>
+
+<p>Sometimes an <b>association</b> itself introduces new classes. <b>Association</b> classes are particularly useful in complex cases when you want to show that a class is related to two classes because those two classes have a relationship with each other.</p>
+
+![two-classes-associated-in-class-diagram.png]
+
+<p>One method of implementing the <code>BlogEntry</code> to <code>BlogAccount</code> relationship and the <b>associated</b> <code>Category</code> class in Java:</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class BlogAccount {
+		   private String name;
+		   private Category[] categories;
+		   private BlogEntry[] entries;
+		}
+		 
+		public class Category {
+		   private String name;
+		}
+		 
+		public class BlogEntry {
+		   private String name;
+		   private Category[] categories
+		}
+	</code>
+</pre>
+
+<p>Moving one step on from association, we encounter the aggregation relationship. Aggregation is really just a stronger version of association and is used to indicate that a class actually owns but may share objects of another class.</p>
+
+<p><b>Aggregation</b> is shown by using an empty diamond arrowhead next to the owning class.</p>
+
+<p>An <b>aggregation</b> relationship can show that an Author owns a collection of blogs:</p>
+
+![aggregation-relationship-diagram.png]
+
+<p>The Java code implementation for an <b>aggregation</b> relationship is exactly the same as the implementation for an <b>association</b> relationship; it results in the introduction of an attribute.</p>
+
+<p>Moving one step further down the class relationship line, <b>composition</b> is an even stronger relationship than <b>aggregation</b>, although they work in very similar ways. <b>Composition</b> is shown using a closed, or filled, diamond arrowhead.</p>
+
+![composition-relationship-diagram.png]
+
+<p>Similar to <b>aggregation</b>, the Java code implementation for a <b>composition</b> relationship results only in the introduction of an attribute.</p>
+
+<p><b>Generalization</b> (Otherwise Known as Inheritance) is used to describe a class that is a type of another class.</p>
+
+<p>If you find yourself saying that the class is a type of another class, then you might want to consider using <b>generalization</b> instead.</p>
+
+<p>In UML, the <b>generalization</b> arrow is used to show that a class is a type of another class.</p>
+
+![generalization-relationship-diagram.png]
+
+<p><b>Multiple inheritance</b> or <b>multiple generalization</b> in the official UML terminology—occurs when a class inherits from two or more parent classes.</p>
+
+![multiple-generalization-diagram.png]
+
+<p>There are three types of <b>constraint</b> that can be applied to class members using <i>OCL</i>:</p>
+
+<ol>
+	<li>Invariants</li>
+	<p>An invariant is a constraint that must always be true; otherwise the system is in an invalid state. Invariants are defined on class attributes.</p>
+
+	<li>Preconditions</li>
+	<p>A precondition is a constraint that is defined on a method and is checked before the method executes. Preconditions are frequently used to validate input parameters to a method.</p>
+
+	<li>Postconditions</li>
+	<p>A postcondition is also defined on a method and is checked after the method executes. Postconditions are frequently used to describe how values were changed by a method.</p>
+</ol>
+
+<p><b>Constraints</b> are specified using either the <i>OCL statement</i> in curly brackets next to the class member or in a separate note.</p>
+
+![constraints-in-diagram.png]
+
+<p>Using regular operations, the Store class needs to know how to store and retrieve a collection of articles:</p>
+
+![implemented-operations-in-concrete-classes.png]
+
+<p>To indicate that the implementation of the <code>store(..)</code> and <code>retrieve(..)</code> operations is to be left to subclasses by declaring those operations as <b>abstract</b>, write their signatures in <i>italics</i>.</p>
+
+![abstract-operations-in-a-class-diagram.png]
+
+<p>If any part of a class is declared abstract, then the class itself also needs to be declared as abstract by writing its name in italics.</p>
+
+![abstract-class-diagram.png]
+
+<p>Now that the <code>store(..)</code> and <code>retrieve(..)</code> operations on the <code>Store</code> class are declared as <b>abstract</b>, they do not have to have any methods implemented.</p>
+
+<p>An <b>abstract</b> class cannot be instantiated into an object because it has pieces missing. The <code>Store</code> class might implement the <code>store(..)</code> and <code>retrieve(..)</code> operations but because it is <b>abstract</b>, children who inherit from the <code>Store</code> class will have to implement or declare abstract the <code>Store</code> class's abstract operations.</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public abstract class Store {
+		   public abstract void store(Article[] articles);
+		   public abstract Article[] retrieve(  );
+		}
+	</code>
+</pre>
+
+![a-class-inheriting-from-an-abstract-class.png]
+
+<p>In UML, an interface can be shown as a <b>stereotyped class notation</b> or by using its own <b>ball notation</b>.</p>
+
+![stereotype-and-ball-notation-of-interfaces.png]
+
+<p>If you are using the <b>ball interface notation</b>, then you realize an interface by associating it with a class.</p>
+
+![ball-notation-implementation-sample.png]
+
+<p>If you have used the <b>stereotype notation</b> for your interface, then a new arrow is needed to show that this is a realization relationship.</p>
+
+![stereotype-notation-interface-implementation-sample.png]
+
+<p>Both previous figures would have resulted in the same Java code being generated.</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public interface EmailSystem
+		{
+		   public void send(Message message));
+		}
+		 
+		public class SMTPMailSystem implements EmailSystem
+		{
+		   public void send(Message message)   {
+			  // Implement the interactions with an SMTP server to send the message
+		   }
+		  
+		   // ... Implementations of the other operations on the Guitarist class ...
+		}
+	</code>
+</pre>
+
+<p>If a class realizes an interface but does not implement all of the operations that the interface specifies, then that class needs to be declared <b>abstract</b>.</p>
+
+![half-implemented-interface.png]
+
+<p>Because the <code>SMTPMailSystem</code> class does not implement the <code>send(..)</code> operation as specified by the <code>EmailSystem</code> interface, it needs to be declared abstract.</p>
+
+<p>A <b>template</b> in UML is shown by providing an extra box with a dashed border to the top right of the regular class box.</p>
+
+![template-initialization-in-diagram.png]
+
+<p>You can bind a template's parameters to a specific set of classes in one of two ways. First, you can subclass the template, binding the parameters as you go.</p>
+
+![binding-template-parameters.png]
+
+<p>The real power of <b>templates</b> is much more obvious when you use the second approach to template parameter binding—binding at runtime. You bind at runtime when a template is told the type of parameters it will have as it is constructed into an object.</p>
+
+<p><b>Runtime template binding</b> is about objects rather than classes; therefore, a new type of diagram is needed: the object diagram. Object diagrams use classes to show some of the important ways they are used as your system runs.</p>
