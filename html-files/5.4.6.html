@@ -14,6 +14,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
+html body {
+	font-size: 16px !important;
+}
+
 a,
 a:hover,
 a:focus {
@@ -218,29 +222,17 @@ Actors
 </svg>
 </a>
 </h2>
-An actor is drawn in UML notation using either a "stick man" or a stereotyped
-box (see <a htef="/software-design/uml/sterotypes">Stereotypes</a>) and is
-labeled with an appropriate name, as shown in the following figure.
+<p>An actor is drawn in UML notation using either a "stick man" or a stereotyped box (see <a htef="/software-design/uml/sterotypes">Stereotypes</a>) and is labeled with an appropriate name, as shown in the following figure.</p>
 
 <img class="img-responsive" src="/software-design/uml/actor-sample.png" alt="actor sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/actor-sample.png"'>
 
-Above figure captures the Administrator role as it is described in Requirement
-A.1 of a weblog content management system (CMS) which shall allow an
-administrator to create a new blog account, provided the personal details of
-the new blogger are verified using the author credentials database.
+<p>Above figure captures the Administrator role as it is described in Requirement A.1 of a weblog content management system (CMS) which shall allow an administrator to create a new blog account, provided the personal details of the new blogger are verified using the author credentials database.</p>
 
-The requirement's description indicates that the Administrator interacts with
-the system to create a new blogger's account. The Administratorinteracts with
-the system and is not part of the system; therefore, the Administrator is
-defined as an actor.
+<p>The requirement's description indicates that the Administrator interacts with the system to create a new blogger's account. The Administratorinteracts with the system and is not part of the system; therefore, the Administrator is defined as an actor.</p>
 
-When going through the process of capturing all of the actors that interact
-with your system, you will find that some actors are related to each other, as
-shown in the following figure.
+<p>When going through the process of capturing all of the actors that interact with your system, you will find that some actors are related to each other, as shown in the following figure.</p>
 
-The Administrator actor is really a special kind of system user. To show that
-an administrator can do whatever a regular user can do (with some extra
-additions), a generalization arrow is used.
+<p>The Administrator actor is really a special kind of system user. To show that an administrator can do whatever a regular user can do (with some extra additions), a generalization arrow is used.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -252,7 +244,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0: chapter 2</li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 2</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/stereotypes">Previous Page</a></li>

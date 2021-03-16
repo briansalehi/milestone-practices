@@ -14,6 +14,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
+html body {
+	font-size: 16px !important;
+}
+
 a,
 a:hover,
 a:focus {
@@ -218,43 +222,27 @@ Views
 </svg>
 </a>
 </h2>
-There are a number of ways to break up your UML model diagrams into
-perspectives or views that capture a particular facet of your system.
+<p>There are a number of ways to break up your UML model diagrams into perspectives or views that capture a particular facet of your system.</p>
 
 <img class="img-responsive" src="/software-design/uml/philippe-kruchten-4-plus-1-view-model.png" alt="philippe kruchten 4 plus 1 view model" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/philippe-kruchten-4-plus-1-view-model.png"'>
 
-The 4+1 view model breaks down a model into a set of views, each capturing a
-specific aspect of your system:
+<p>The 4+1 view model breaks down a model into a set of views, each capturing a specific aspect of your system:</p>
 
 <ul>
-<li>Logical view</li>
-Describes the abstract descriptions of a system's parts. Used to model what a
-system is made up of and how the parts interact with each other. The types of
-UML diagrams that typically make up this view include class, object, state
-machine, and interaction diagrams.
+	<li><b>Logical view</b></li>
+	<p>Describes the abstract descriptions of a system's parts. Used to model what a system is made up of and how the parts interact with each other. The types of UML diagrams that typically make up this view include class, object, state machine, and interaction diagrams.</p>
 
-<li>Process view</li>
-Describes the processes within your system. It is particularly helpful when
-visualizing what must happen within your system. This view typically contains
-activity diagrams.
+	<li><b>Process view</b></li>
+	<p>Describes the processes within your system. It is particularly helpful when visualizing what must happen within your system. This view typically contains activity diagrams.</p>
 
-<li>Development view</li>
-Describes how your system's parts are organized into modules and components.
-It is very useful to manage layers within your system's architecture. This
-view typically contains package and component diagrams.
+	<li><b>Development view</b></li>
+	<p>Describes how your system's parts are organized into modules and components.  It is very useful to manage layers within your system's architecture. This view typically contains package and component diagrams.</p>
 
-<li>Physical view</li>
-Describes how the system's design, as described in the three previous views,
-is then brought to life as a set of real-world entities. The diagrams in this
-view show how the abstract parts map into the final deployed system. This view
-typically contains deployment diagrams.
+	<li><b>Physical view</b></li>
+	<p>Describes how the system's design, as described in the three previous views, is then brought to life as a set of real-world entities. The diagrams in this view show how the abstract parts map into the final deployed system. This view typically contains deployment diagrams.</p>
 
-<li>Use case view </li>
-Describes the functionality of the system being modeled from the perspective
-of the outside world. This view is needed to describe what the system is
-supposed to do. All of the other views rely on the use case view to guide
-them—that's why the model is called 4+1. This view typically contains use case
-diagrams, descriptions, and overview diagrams.
+	<li><b>Use case view</b></li>
+	<p>Describes the functionality of the system being modeled from the perspective of the outside world. This view is needed to describe what the system is supposed to do. All of the other views rely on the use case view to guide them—that's why the model is called 4+1. This view typically contains use case diagrams, descriptions, and overview diagrams.</p>
 </ul>
 <hr />
 <h3>
@@ -267,7 +255,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0: chapter 2</li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 2</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/diagrams">Previous Page</a></li>
