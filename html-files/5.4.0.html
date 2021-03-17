@@ -14,10 +14,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
-html body {
-	font-size: 16px !important;
-}
-
 img {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -86,10 +82,10 @@ img {
 	z-index: 1;
 	border-radius: 0px;
 	text-align: center;
+	font-size: 18px;
 }
 
 .dropbtn {
-  padding: 14px;
   font-size: 14px;
   border: none;
 }
@@ -257,8 +253,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 	  &#x2699;
   </button>
   <div class="dropdown-content" id="dropdown-content">
-    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">D</button>
-    <button id="changefont-icon" class="btn dropdown-item" onclick="change_font()" title="ALT + SHIFT + I" accesskey="I">F</button>
+    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
+    <button id="changefont-icon" class="btn dropdown-item" onclick="toggle_font()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
   </div>
 </div>
 <h2>
@@ -424,11 +420,11 @@ function darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.add("dark-mode");
 		sessionStorage.setItem('darkmode', true);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x2600;';
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F315;';
+		icon.innerHTML = '&#x2600;';
 	}
 }
 darkmode();
@@ -441,12 +437,12 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F315;';
+		icon.innerHTML = '&#x2600;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);
 		bodystyle.classList.add("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x2600;';
 		toggle_settings();
 	}
 }
@@ -493,6 +489,55 @@ function toggle_settings() {
 	}
 }
 toggle_settings();
+var minimum_fontsize=1;
+var maximum_fontsize=3;
+var current_fontsize=2;
+var fontsize_growth = "upward";
+
+function zoominLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s += 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function zoomoutLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s -= 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function toggle_font() {
+	if (fontsize_growth == "downward") {
+		zoomoutLetter();
+		--current_fontsize;
+		if (current_fontsize == minimum_fontsize) {
+			fontsize_growth = "upward";
+		}
+	} else {
+		zoominLetter();
+		++current_fontsize;
+		if (current_fontsize == maximum_fontsize) {
+			fontsize_growth = "downward";
+		}
+	}
+	console.log(current_fontsize);
+}
 </script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
