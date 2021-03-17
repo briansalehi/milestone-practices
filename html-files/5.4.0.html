@@ -86,7 +86,6 @@ img {
 	z-index: 1;
 	border-radius: 0px;
 	text-align: center;
-	line-height: 1px;
 }
 
 .dropbtn {
@@ -443,10 +442,12 @@ function toggle_darkmode() {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
 		icon.innerHTML = '&#x1F315;';
+		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);
 		bodystyle.classList.add("dark-mode");
 		icon.innerHTML = '&#x1F312;';
+		toggle_settings();
 	}
 }
 var current_position = 0;
