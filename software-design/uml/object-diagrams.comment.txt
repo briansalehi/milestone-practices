@@ -1,0 +1,43 @@
+<p>In addition to <i>class diagrams</i>, <b>object diagrams</b> help you capture the logical view of your model.</p>
+
+![logical-view-diagram.png]
+
+<p>The Logical View of your model contains the abstract descriptions of your system's parts, including which objects exist within your system at runtime.</p>
+
+<p>An object is shown with a rectangle, just like a <i>class</i>, but to show that this is an <i>instance</i> of a class rather than the <i>class</i> itself, the title is underlined.</p>
+
+![class-instance-diagram.png]
+
+<p>If you happen to know the class that this object instantiates, then you can also add the class name to the object name.</p>
+
+![object-type.png]
+
+<p>There is one final type of <i>object</i> that you might want to use on your object diagrams—the <b>anonymous object</b>.</p>
+
+![anonymous-object.png]
+
+<p><b>Anonymous objects</b> are typically useful when the name of the object is not important within the context that it is being used.</p>
+
+<p><i>Objects</i> on their own are not very interesting or helpful. To really show how your <i>objects</i> will work together in a particular runtime configuration, you need to tie those <i>objects</i> together using <b>links</b>.</p>
+
+<p><i>Links</i> are shown using a line between the two <i>objects</i> that are being linked.</p>
+
+![links-diagram.png]
+
+<p><i>Links</i> between objects on an <i>object diagram</i> show that the two objects can communicate with each other. However, you can't just link any two objects together. If you create a <i>link</i> between two objects, there must be a corresponding association between the classes.</p>
+
+<p>The only additional piece of information that you can optionally add to a link is a label that indicates the purpose of the link.</p>
+
+![link-label.png]
+
+<p>If you wanted to show that an entry must be associated with a category when it is contained within a <i>blog account</i>, you need to add some OCL to the original class diagram. OCL is covered in more depth in <a href="/software-design/uml/ocl">OCL</a>.</p>
+
+![link-constraint.png]
+
+<p>With the constraints applied to the class diagram in previous figure, the possible options for an object diagram based on these classes is reduced to something that makes much more sense.</p>
+
+![constraint-view-simplified.png]
+
+<p>To model that the ListOfThings template's E parameter is to be bound at runtime to a particular class, all you need to do is add the parameter binding details to the end of the object's class description.</p>
+
+![template-initialization.png]

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Unified Modeling Language</title>
+<title>Object Diagrams</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -246,7 +246,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">Software Design</a></li>
-<li class='breadcrumb-item active'>Unified Modeling Language</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.4.0.html">Unified Modeling Language</a></li>
+<li class='breadcrumb-item active'>Object Diagrams</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -258,93 +259,57 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Unified-Modeling-Language" class="anchor" aria-hidden="true" href="#Unified-Modeling-Language">
-Unified Modeling Language
+<a id="Object-Diagrams" class="anchor" aria-hidden="true" href="#Object-Diagrams">
+Object Diagrams
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>The Unified Modeling Language (UML) is the standard modeling language for software and systems development.</p>
+<p>In addition to <i>class diagrams</i>, <b>object diagrams</b> help you capture the logical view of your model.</p>
 
-<p>There are just too many details that can be misinterpreted or forgotten when developing a complex system without some help. This is where modeling and of course UML comes in.</p>
+<img class="img-responsive" src="/software-design/uml/logical-view-diagram.png" alt="logical view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/logical-view-diagram.png"'>
 
-<p>When you model a system, you abstract away any details that are irrelevant or potentially confusing. Your model is a simplification of the real system, so it allows the design and viability of a system to be understood, evaluated, and criticized quicker than if you had to dig through the actual system itself.</p>
+<p>The Logical View of your model contains the abstract descriptions of your system's parts, including which objects exist within your system at runtime.</p>
 
-<p>To effectively model a system, you need one very important thing: a language with which the model can be described. And here's where UML comes in.</p>
+<p>An object is shown with a rectangle, just like a <i>class</i>, but to show that this is an <i>instance</i> of a class rather than the <i>class</i> itself, the title is underlined.</p>
 
-<p>A modeling language can be made up of pseudo-code, actual code, pictures, diagrams, or long passages of description; in fact, it's pretty much anything that helps you describe your system.</p>
+<img class="img-responsive" src="/software-design/uml/class-instance-diagram.png" alt="class instance diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/class-instance-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/class-definition-sample-in-uml.png" alt="class definition sample in uml" loading="lazy" onerror='this.onerror=null; this.src="software-design/class-definition-sample-in-uml.png"'>
+<p>If you happen to know the class that this object instantiates, then you can also add the class name to the object name.</p>
 
-<p>There are references to the UML meta-model and profiles throughout notebooks. A more complete description of what the UML meta-model contains and why it is useful is available in <a href="/software-design/uml/meta-model">meta-model</a>.</p>
+<img class="img-responsive" src="/software-design/uml/object-type.png" alt="object type" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/object-type.png"'>
 
-<p>For now, just think of the UML meta-model as the description of what each element of notation means and a profile as a customization of that description for a specific domain (i.e., banking).</p>
+<p>There is one final type of <i>object</i> that you might want to use on your object diagrams—the <b>anonymous object</b>.</p>
 
-<p>The descriptions of what the notation means are called the semantics of the language and are captured in a language's meta-model.</p>
+<img class="img-responsive" src="/software-design/uml/anonymous-object.png" alt="anonymous object" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/anonymous-object.png"'>
 
-<p>A modeling language can be anything that contains a notation (a way of expressing the model) and a description of what that notation means (a meta-model).</p>
+<p><b>Anonymous objects</b> are typically useful when the name of the object is not important within the context that it is being used.</p>
 
-<p>Every approach to modeling has different advantages and disadvantages, but UML has six main advantages:</p>
+<p><i>Objects</i> on their own are not very interesting or helpful. To really show how your <i>objects</i> will work together in a particular runtime configuration, you need to tie those <i>objects</i> together using <b>links</b>.</p>
 
-<ul>
-	<li><i>It's a formal language</i></li>
-	<p>Each element of the language has a strongly defined meaning, so you can be confident that when you model a particular facet of your system it will not be misunderstood.</p>
+<p><i>Links</i> are shown using a line between the two <i>objects</i> that are being linked.</p>
 
-	<li><i>It's concise</i></li>
-	<p>The entire language is made up of simple and straightforward notation.</p>
+<img class="img-responsive" src="/software-design/uml/links-diagram.png" alt="links diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/links-diagram.png"'>
 
-	<li><i>It's comprehensive</i></li>
-	<p>It describes all important aspects of a system.</p>
+<p><i>Links</i> between objects on an <i>object diagram</i> show that the two objects can communicate with each other. However, you can't just link any two objects together. If you create a <i>link</i> between two objects, there must be a corresponding association between the classes.</p>
 
-	<li><i>It's scaleable</i></li>
-	<p>Where needed, the language is formal enough to handle massive system modeling projects, but it also scales down to small projects, avoiding overkill.</p>
+<p>The only additional piece of information that you can optionally add to a link is a label that indicates the purpose of the link.</p>
 
-	<li><i>It's built on lessons learned</i></li>
-	<p>UML is the culmination of best practices in the object-oriented community during the past 15 years.</p>
+<img class="img-responsive" src="/software-design/uml/link-label.png" alt="link label" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/link-label.png"'>
 
-	<li><i>It's the standard</i></li>
-	<p>UML is controlled by an open standards group with active contributions from a worldwide group of vendors and academics, which fends off "vendor lock-in." The standard ensures UML's transformability and interoperability, which means you aren't tied to a particular product.</p>
-</ul>
+<p>If you wanted to show that an entry must be associated with a category when it is contained within a <i>blog account</i>, you need to add some OCL to the original class diagram. OCL is covered in more depth in <a href="/software-design/uml/ocl">OCL</a>.</p>
 
-<h4>What's wrong with using software source code as your model?</h4>
+<img class="img-responsive" src="/software-design/uml/link-constraint.png" alt="link constraint" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/link-constraint.png"'>
 
-<p>The source code focuses only on the software itself and ignores the rest of the system. Even though the code is a complete and (generally) unambiguous definition of what the software will do, the source code alone simply cannot tell you how the software is to be used and by whom, nor how it is to be deployed; the bigger picture is missing entirely if all you have is the source code.</p>
+<p>With the constraints applied to the class diagram in previous figure, the possible options for an object diagram based on these classes is reduced to something that makes much more sense.</p>
 
-<p>As well as ignoring the bigger picture of your system, software code presents a problem in that you need to use other techniques to explain your system to other people. You have to understand code to read code, but source code is the language for software developers and is not for other stakeholders, such as customers and system designers. Those people will want to focus just on requirements or perhaps see how the components of your system work together to fulfill those requirements. Because source code is buried in the details of how the software works, it cannot provide the higher level abstract views of your system that are suitable for these types of stakeholders.</p>
+<img class="img-responsive" src="/software-design/uml/constraint-view-simplified.png" alt="constraint view simplified" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/constraint-view-simplified.png"'>
 
-<p>Now imagine that you have implemented your system using a variety of software languages. The problem just gets worse. It is simply impractical to ask all the stakeholders in your system to learn each of these implementation languages before they can understand your system.</p>
+<p>To model that the ListOfThings template's E parameter is to be bound at runtime to a particular class, all you need to do is add the parameter binding details to the end of the object's class description.</p>
 
-<p>All of these problems boil down to the fact that source code provides only one level of abstraction: the software implementation level. Unfortunately, this root problem makes software source code a poor modeling language.</p>
-
-<p>At the opposite end of the spectrum from complete and precise source code models are informal languages. Informal languages do not have a formally defined notation; there are no hard and fast rules as to what a particular notation can mean, although sometimes there are guidelines.</p>
-
-<p>A good example of an informal language is natural language. Natural language—the language that you're reading in this text—is notoriously ambiguous in its meaning.</p>
-
-<p>Natural language is flexible and verbose, which happens to be great for conversation but is a real problem when it comes to systems modeling.</p>
-
-<p>This ambiguity tends to result in the, "No, that's not what I meant!" syndrome, where you've described something as clearly as possible, but the person that you are conveying the design to has misunderstood your meaning.</p>
-
-<p>As with the natural language model, all of the details are present in the following picture, but without a definition of what the boxes, connections, and labels mean, you can't be sure about your interpretation (or mine!).</p>
-
-<img class="img-responsive" src="/software-design/natural-language-modeling-sample.png" alt="natural language modeling sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/natural-language-modeling-sample.png"'>
-
-<p>So, why does any of this matter if your team has a home-grown modeling technique it's been using for years and you all understand what each other means? If you ever have to show your design to external stakeholders, they might become frustrated trying to understand your home-grown symbols, when you could have used a standard notation they already know. It also means you don't have to learn a new modeling technique every time you switch jobs!</p>
-
-<p>Unfortunately, informal languages will always suffer from the dual problem of verbosity and ambiguity, and this is why they are a poor—and sometimes extremely dangerous—technique for modeling systems.</p>
-
-<p>Although natural language is dangerously ambiguous, it is still one of the best techniques for capturing requirements, as you will see when you learn about use cases.</p>
-
-<p>To effectively model a system—avoiding verbosity, confusion, ambiguity, and unnecessary details—you need a formal modeling language .</p>
-
-<p>The modeling language's notation should be small enough to be learned easily and must have an unambiguous definition of the notation's meaning. UML is just such a formal modeling language.</p>
-
-<p>Following picture is an example of a structure expressed in UML. For now, don't worry too much about the notation or its meaning; at this point, the UML diagram is meant to be used only as a comparison to the informal pictorial and natural language models shown previously.</p>
-
-<img class="img-responsive" src="/software-design/formal-language-diagram-sample.png" alt="formal language diagram sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/formal-language-diagram-sample.png"'>
-
-<p>The best thing about having modeled the system using UML is that the notation in the above picture has a specific and defined meaning. If you were to take this diagram to any other stakeholder in your system, provided he knows UML, the design would be clearly understood. This is the advantage of using formal languages for modeling.</p>
+<img class="img-responsive" src="/software-design/uml/template-initialization.png" alt="template initialization" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/template-initialization.png"'>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -356,67 +321,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton</li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 6</li>
 </ul>
-<hr />
-<h3>
-<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
-Table of Content
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<div class="list-group list-group-root well" >
-<a href="/software-design/uml/history" class="list-group-item">
-	1. History
-	
-</a>
-<a href="/software-design/uml/usage" class="list-group-item">
-	2. Degrees of UML
-	
-</a>
-<a href="/software-design/uml/diagrams" class="list-group-item">
-	3. Diagrams
-	
-</a>
-<a href="/software-design/uml/views" class="list-group-item">
-	4. Views
-	
-</a>
-<a href="/software-design/uml/stereotypes" class="list-group-item">
-	5. Notes and Stereotypes
-	
-</a>
-<a href="/software-design/uml/actors" class="list-group-item">
-	6. Actors
-	
-</a>
-<a href="/software-design/uml/use-case" class="list-group-item">
-	7. Use Case
-	
-</a>
-<a href="/software-design/uml/activity-diagrams" class="list-group-item">
-	8. Activity Diagrams
-	
-</a>
-<a href="/software-design/uml/class-diagrams" class="list-group-item">
-	9. Class Diagrams
-	
-</a>
-<a href="/software-design/uml/class-relationships" class="list-group-item">
-	10. Class Relationships
-	
-</a>
-<a href="/software-design/uml/object-diagrams" class="list-group-item">
-	11. Object Diagrams
-	
-</a>
-</div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/unit-testing/code-design">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/history">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/class-relationships">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
