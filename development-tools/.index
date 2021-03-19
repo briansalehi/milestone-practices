@@ -1,6 +1,7 @@
 README.md
-editors
+vim
 doxygen
 git
+make
 cmake
 docker
