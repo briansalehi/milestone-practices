@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Doxygen</title>
+<title>Initialization</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -246,7 +246,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Development Tools</a></li>
-<li class='breadcrumb-item active'>Doxygen</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.5.0.html">CMake</a></li>
+<li class='breadcrumb-item active'>Initialization</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -258,30 +259,65 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Doxygen" class="anchor" aria-hidden="true" href="#Doxygen">
-Doxygen
+<a id="Initialization" class="anchor" aria-hidden="true" href="#Initialization">
+Initialization
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/vim/motions/custom-motions">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/git">Next Page</a></li>
-</ul>
+<p>Without a build system, a project is just a collection of files. CMake brings some order to this, starting with a human-readable file called <i>CMakeLists.txt</i> that defines what should be built and how, what tests to run and what package(s) to create. This file is a platform independent description of the whole project, which CMake then turns into platform specific build tool project files.</p>
+
+<p>A fundamental part of CMake is the concept of a project having both a <i>source directory</i> and a <i>binary directory</i>. The source directory is where the <i>CMakeLists.txt</i> file is located and the project’s source files and all other files needed for the build are organized under that location.</p>
+
+<p>The <i>binary directory</i> is where everything produced by the build is created. It is often also called the <i>build directory</i>.</p>
+
+<p><i>Executables</i>, <i>libraries</i>, <i>test output</i> and <i>packages</i> are all created within the build directory.</p>
+
+<p>CMake also creates a special file called <i>CMakeCache.txt</i> in the build directory to store various information for reuse on subsequent runs.</p>
+
+<p>When a developer commences work on a project, they must decide where they want their build directory to be in relation to their source directory. There are essentially two approaches: <b>in-source</b> and <b>out-of-source</b> builds. It is possible, though discouraged, for the source and build directories to be the same. The more preferable arrangement is for the source and build directories to be different, which is called an <b>out-of-source</b> build.</p>
+
+<p>Once the choice of directory structure has been made, the developer runs <i>CMake</i>, which reads in the <i>CMakeLists.txt</i> file and creates project files in the build directory. The developer selects the type of project file to be created by choosing a particular project file generator.</p>
+
+<p>The most basic way to run CMake is via the <code>cmake</code> command line utility. The simplest way to invoke it is to change to the build directory and pass options to cmake for the generator type and location of the source tree. For example:</p>
+
+<pre class="language-bash">
+	<code>
+		mkdir build
+		cd build
+		cmake -G "Unix Makefiles" ../source
+	</code>
+</pre>
+
+<p>While developers will typically invoke their selected build tool directly in day-to-day development, invoking it via the <code>cmake</code> command as shown above can be more useful in scripts driving an automated build. Using this approach, a simple scripted build might look something like this:</p>
+
+<pre class="language-bash">
+	<code>
+		mkdir build
+		cd build
+		cmake -G "Unix Makefiles" ../source
+		cmake --build . --config Release --target MyApp
+	</code>
+</pre>
 <hr />
 <h3>
-<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
-Table of Content
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h3>
-<div class="list-group list-group-root well" >
-</div>
+<ul class="list-group">
+<li class='list-group-item'>Professional CMake: A Practical Guide, 8th Edition - Craig Scott: chapter 2</li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/cmake/installation">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/cmake/building-executable">Next Page</a></li>
+</ul>
 <script>
 function darkmode() {
 	var bodystyle = document.body;
@@ -425,6 +461,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

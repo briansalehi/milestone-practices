@@ -1,2 +1,6 @@
 README.md
-installation.sh
+installation.cmake
+initialization.cmake
+building.cmake
+variables.cmake
+flow-control.cmake

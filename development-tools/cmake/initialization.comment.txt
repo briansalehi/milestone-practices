@@ -1,0 +1,34 @@
+<p>Without a build system, a project is just a collection of files. CMake brings some order to this, starting with a human-readable file called <i>CMakeLists.txt</i> that defines what should be built and how, what tests to run and what package(s) to create. This file is a platform independent description of the whole project, which CMake then turns into platform specific build tool project files.</p>
+
+<p>A fundamental part of CMake is the concept of a project having both a <i>source directory</i> and a <i>binary directory</i>. The source directory is where the <i>CMakeLists.txt</i> file is located and the project’s source files and all other files needed for the build are organized under that location.</p>
+
+<p>The <i>binary directory</i> is where everything produced by the build is created. It is often also called the <i>build directory</i>.</p>
+
+<p><i>Executables</i>, <i>libraries</i>, <i>test output</i> and <i>packages</i> are all created within the build directory.</p>
+
+<p>CMake also creates a special file called <i>CMakeCache.txt</i> in the build directory to store various information for reuse on subsequent runs.</p>
+
+<p>When a developer commences work on a project, they must decide where they want their build directory to be in relation to their source directory. There are essentially two approaches: <b>in-source</b> and <b>out-of-source</b> builds. It is possible, though discouraged, for the source and build directories to be the same. The more preferable arrangement is for the source and build directories to be different, which is called an <b>out-of-source</b> build.</p>
+
+<p>Once the choice of directory structure has been made, the developer runs <i>CMake</i>, which reads in the <i>CMakeLists.txt</i> file and creates project files in the build directory. The developer selects the type of project file to be created by choosing a particular project file generator.</p>
+
+<p>The most basic way to run CMake is via the <code>cmake</code> command line utility. The simplest way to invoke it is to change to the build directory and pass options to cmake for the generator type and location of the source tree. For example:</p>
+
+<pre class="language-bash">
+	<code>
+		mkdir build
+		cd build
+		cmake -G "Unix Makefiles" ../source
+	</code>
+</pre>
+
+<p>While developers will typically invoke their selected build tool directly in day-to-day development, invoking it via the <code>cmake</code> command as shown above can be more useful in scripts driving an automated build. Using this approach, a simple scripted build might look something like this:</p>
+
+<pre class="language-bash">
+	<code>
+		mkdir build
+		cd build
+		cmake -G "Unix Makefiles" ../source
+		cmake --build . --config Release --target MyApp
+	</code>
+</pre>
