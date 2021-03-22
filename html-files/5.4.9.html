@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Class Relationships</title>
+<title>Class Diagrams</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -71,7 +71,7 @@ img {
 	color: #bdc0c4;
 }
 .sticky {
-	position: sticky;
+	position: sticky !important;
 	top: 1%;
 }
 
@@ -247,7 +247,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.4.0.html">Unified Modeling Language</a></li>
-<li class='breadcrumb-item active'>Class Relationships</li>
+<li class='breadcrumb-item active'>Class Diagrams</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -259,238 +259,147 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Class-Relationships" class="anchor" aria-hidden="true" href="#Class-Relationships">
-Class Relationships
+<a id="Class-Diagrams" class="anchor" aria-hidden="true" href="#Class-Diagrams">
+Class Diagrams
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p><b>Abstract</b> classes help you to partly declare a class's behavior, allowing other classes to complete the missing—abstract—bits of behavior as they see fit.</p>
+Classes form part of your model's logical view.
 
-<p><b>Interfaces</b> take abstract classes one stage further by specifying only the needed operations of a class but without any operation implementations.</p>
+<img class="img-responsive" src="/software-design/uml/4x1-diagram-logical-view.png" alt="4x1 diagram logical view" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/4x1-diagram-logical-view.png"'>
 
-<p>Two classes that are strongly dependent on one another are said to be tightly coupled.</p>
+<p>At its simplest terms, a class in UML is drawn as a rectangle split into up to three sections. The top section contains the name of the class, the middle section contains the attributes or information that the class contains, and the final section contains the operations that represent the behavior that the class exhibits. The attributes and operations sections are optional.</p>
 
-<p><i>Tight coupling</i> is usually, but not always, a bad thing; therefore, the stronger the relationship, the more careful you need to be.</p>
+<img class="img-responsive" src="/software-design/uml/class-uml-notation.png" alt="class uml notation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/class-uml-notation.png"'>
 
-<p>UML offers five different types of class relationship:</p>
+<p>If the attributes and operations sections are not shown, it does not necessarily imply that they are empty, just that the diagram is perhaps easier to understand with that information hidden.</p>
 
-<img class="img-responsive" src="/software-design/uml/class-relationship-types.png" alt="class relationship types" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/class-relationship-types.png"'>
+<p>A class selectively reveal its operations and data to other classes by using visibility.</p>
 
-<p>A <b>dependency</b> between two classes declares that a class needs to know about another class to use objects of that class.</p>
+<p>There are four different types of visibility that can be applied to the elements of a UML model.</p>
 
-<img class="img-responsive" src="/software-design/uml/dependency-relationship-diagram.png" alt="dependency relationship diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/dependency-relationship-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/four-visibility-classifications.png" alt="four visibility classifications" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/four-visibility-classifications.png"'>
 
-<p>The <code>UserInterface</code> is dependent on the <code>BlogEntry</code> class because it will need to read the contents of a blog's entries to display them to the user.</p>
+<p>Typically these visibility characteristics will be used to control access to both attributes, operations, and sometimes even classes.</p>
 
-<p>The <code>UserInterface</code> and <code>BlogEntry</code> classes simply work together at the times when the user interface wants to display the contents of a blog entry.</p>
+<p>Starting with the most accessible of visibility characteristics, <b>public</b> visibility is specified using the plus (<b>+</b>) symbol before the associated attribute or operation, as shown in the following figure.</p>
 
-<p>Although <b>dependency</b> simply allows one class to use objects of another class, <b>association</b> means that a class will actually contain a reference to an object, or objects, of the other class in the form of an <i>attribute</i>.</p>
+<img class="img-responsive" src="/software-design/uml/public-visibilitiy-diagram.png" alt="public visibilitiy diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/public-visibilitiy-diagram.png"'>
 
-<p><b>Association</b> is shown using a simple line connecting two classes.</p>
+<p>Declare an attribute or operation public if you want it to be accessible directly by any other class.</p>
 
-<img class="img-responsive" src="/software-design/uml/association-relationship-diagram.png" alt="association relationship diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/association-relationship-diagram.png"'>
+<p><b>Protected</b> attributes and operations are specified using the hash (<b>#</b>) symbol and are more visible to the rest of your system than private attributes and operations, but are less visible than public.</p>
 
-<p>The <code>BlogAccount</code> class is optionally associated with zero or more objects of the <code>BlogEntry</code> class.</p>
+<img class="img-responsive" src="/software-design/uml/protected-visibility-diagram.png" alt="protected visibility diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/protected-visibility-diagram.png"'>
 
-<p><b>Navigability</b> is often applied to an <b>association</b> relationship to describe which class contains the attribute that supports the relationship.</p>
+<p><b>Package</b> visibility, specified with a tilde (<b>~</b>), when applied to attributes and operations, sits in between protected and private.</p>
 
-<p>If you take previous diagram as it currently stands and implement the <b>association</b> between the two classes in Java, then you would get something like the following code:</p>
+<img class="img-responsive" src="/software-design/uml/package-visibility-diagram.png" alt="package visibility diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/package-visibility-diagram.png"'>
 
-<pre class="language-java line-numbers">
-	<code>
-		public class BlogAccount {
-		 
-		   // Attribute introduced thanks to the association with the BlogEntry class
-		   private BlogEntry[] entries;
-		 
-		   // ... Other Attributes and Methods declared here ...
-		}
-		 
-		public class BlogEntry {
-		 
-		   // Attribute introduced thanks to the association with the Blog class
-		   private BlogAccount blog;
-		 
-		   // ... Other Attributes and Methods declared here ...
-		}
-	</code>
-</pre>
+<p><b>Private</b> visibility is the most tightly constrained type of visibility classification, and it is shown by adding a minus (<b>-</b>) symbol before the attribute or operation.</p>
 
-<p>In our system, it makes more sense to be able to ask a blog account what entries it contains, rather than asking the entry what blog account it belongs to. In this case, we use <b>navigability</b> to ensure that the <code>BlogAccount</code> class gets the <b>association</b> introduced attribute.</p>
+<img class="img-responsive" src="/software-design/uml/private-visibility-diagram.png" alt="private visibility diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/private-visibility-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/uml/navigability-arrow-in-class-diagram.png" alt="navigability arrow in class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/navigability-arrow-in-class-diagram.png"'>
+<p>A class's attributes are the pieces of information that represent the state of an object. These attributes can be represented on a class diagram either by placing them inside their section of the class box—known as inline attributes —or by association with another class.</p>
 
-<p>With <b>navigability</b> applied, only the <code>BlogAccount</code> class contains an <b>association</b> introduced attribute.</p>
+<img class="img-responsive" src="/software-design/uml/inline-and-associative-attributes-diagram.png" alt="inline and associative attributes diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/inline-and-associative-attributes-diagram.png"'>
+
+<p>An attribute's name can be any set of characters, but no two attributes in the same class can have the same name.</p>
+
+<p>In the previous diagram, the <code>name</code> attribute is declared as <i>private</i> (indicated by the minus (-) sign at the beginning of the signature) and after the colon, the <i>type</i> is specified as being of the class <code>String</code>. The associated entries attribute is also <i>private</i>, and because of that association, it represents a number of instances of the <code>BlogEntry</code> class.</p>
+
+<p>If the <code>BlogAccount</code> class in previous diagram was going to be implemented as a Java class, then the source code would look something like that shown in the following example:</p>
 
 <pre class="language-java line-numbers">
 	<code>
-		public class BlogAccount {
-		 
-		   // Attribute introduced thanks to the association with the BlogEntry class
-		   private BlogEntry[] entries;
-		 
-		   // ... Other Attributes and Methods declared here ...
-		}
-		 
-		public class BlogEntry
+		public class BlogAccount
 		{
-		   // The blog attribute has been removed as it is not necessary for the
-		   // BlogEntry to know about the BlogAccount that it belongs to.
+		   // The two inline attributes from previous diagram
+		   private String name;
+		   private URL publicURL;
 		 
-		   // ... Other Attributes and Methods declared here ...
+		   // The single attribute by association, given the name 'entries'
+		   BlogEntries[] entries;
+		 
+		   // ...
+
 		}
 	</code>
 </pre>
 
-<p>Sometimes an <b>association</b> itself introduces new classes. <b>Association</b> classes are particularly useful in complex cases when you want to show that a class is related to two classes because those two classes have a relationship with each other.</p>
+<p>Sometimes an attribute will represent more than one object. In fact, an attribute could represent any number of objects of its type; in software, this is like declaring that an attribute is an array. <b>Multiplicity</b> allows you to specify that an attribute actually represents a collection of objects, and it can be applied to both inline and attributes by association.</p>
 
-<img class="img-responsive" src="/software-design/uml/two-classes-associated-in-class-diagram.png" alt="two classes associated in class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/two-classes-associated-in-class-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/multiplicity-diagram.png" alt="multiplicity diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiplicity-diagram.png"'>
 
-<p>One method of implementing the <code>BlogEntry</code> to <code>BlogAccount</code> relationship and the <b>associated</b> <code>Category</code> class in Java:</p>
+<p>A <b>*</b> at the <code>BlogEntry</code> class end of the association indicates that any number of <code>BlogEntry</code> objects will be stored in the entries attribute within the <code>BlogAccount</code> class. The <b>1</b> specified at the other end of the association indicates that each <code>BlogEntry</code> object in the entries attribute is associated with one and only one <code>BlogAccount</code> object.</p>
 
-<pre class="language-java line-numbers">
-	<code>
-		public class BlogAccount {
-		   private String name;
-		   private Category[] categories;
-		   private BlogEntry[] entries;
-		}
-		 
-		public class Category {
-		   private String name;
-		}
-		 
-		public class BlogEntry {
-		   private String name;
-		   private Category[] categories
-		}
-	</code>
-</pre>
+<p>The <code>unique</code> property dictates that no two <code>Trackback</code> objects within the array should be the same.</p>
 
-<p>Moving one step on from association, we encounter the aggregation relationship. Aggregation is really just a stronger version of association and is used to indicate that a class actually owns but may share objects of another class.</p>
+<p>By default, all attributes with multiplicity are <code>unique</code>.</p>
 
-<p><b>Aggregation</b> is shown by using an empty diamond arrowhead next to the owning class.</p>
+<p>If you want to specify that duplicates are allowed, then you need to use the <code>not unique</code> property, as used on the comments attribute in the <code>BlogEntry</code> class.</p>
 
-<p>An <b>aggregation</b> relationship can show that an Author owns a collection of blogs:</p>
+<p>The <code>ordered</code> property is used in this case to indicate that each of the <code>Comment</code> objects is stored in a set order.</p>
 
-<img class="img-responsive" src="/software-design/uml/aggregation-relationship-diagram.png" alt="aggregation relationship diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/aggregation-relationship-diagram.png"'>
+<p>If you don't care about the order in which objects are stored within an attribute that has multiplicity, then simply leave out the <code>ordered</code> property.</p>
 
-<p>The Java code implementation for an <b>aggregation</b> relationship is exactly the same as the implementation for an <b>association</b> relationship; it results in the introduction of an attribute.</p>
+<p>If an attribute has the <code>readOnly</code> property applied, as shown in the following diagram, then the value of the attribute cannot be changed once its initial value has been set.</p>
 
-<p>Moving one step further down the class relationship line, <b>composition</b> is an even stronger relationship than <b>aggregation</b>, although they work in very similar ways. <b>Composition</b> is shown using a closed, or filled, diamond arrowhead.</p>
+<img class="img-responsive" src="/software-design/uml/readonly-property-in-diagram.png" alt="readonly property in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/readonly-property-in-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/uml/composition-relationship-diagram.png" alt="composition relationship diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/composition-relationship-diagram.png"'>
-
-<p>Similar to <b>aggregation</b>, the Java code implementation for a <b>composition</b> relationship results only in the introduction of an attribute.</p>
-
-<p><b>Generalization</b> (Otherwise Known as Inheritance) is used to describe a class that is a type of another class.</p>
-
-<p>If you find yourself saying that the class is a type of another class, then you might want to consider using <b>generalization</b> instead.</p>
-
-<p>In UML, the <b>generalization</b> arrow is used to show that a class is a type of another class.</p>
-
-<img class="img-responsive" src="/software-design/uml/generalization-relationship-diagram.png" alt="generalization relationship diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/generalization-relationship-diagram.png"'>
-
-<p><b>Multiple inheritance</b> or <b>multiple generalization</b> in the official UML terminology—occurs when a class inherits from two or more parent classes.</p>
-
-<img class="img-responsive" src="/software-design/uml/multiple-generalization-diagram.png" alt="multiple generalization diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiple-generalization-diagram.png"'>
-
-<p>There are three types of <b>constraint</b> that can be applied to class members using <i>OCL</i>:</p>
-
-<ol>
-	<li>Invariants</li>
-	<p>An invariant is a constraint that must always be true; otherwise the system is in an invalid state. Invariants are defined on class attributes.</p>
-
-	<li>Preconditions</li>
-	<p>A precondition is a constraint that is defined on a method and is checked before the method executes. Preconditions are frequently used to validate input parameters to a method.</p>
-
-	<li>Postconditions</li>
-	<p>A postcondition is also defined on a method and is checked after the method executes. Postconditions are frequently used to describe how values were changed by a method.</p>
-</ol>
-
-<p><b>Constraints</b> are specified using either the <i>OCL statement</i> in curly brackets next to the class member or in a separate note.</p>
-
-<img class="img-responsive" src="/software-design/uml/constraints-in-diagram.png" alt="constraints in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/constraints-in-diagram.png"'>
-
-<p>Using regular operations, the Store class needs to know how to store and retrieve a collection of articles:</p>
-
-<img class="img-responsive" src="/software-design/uml/implemented-operations-in-concrete-classes.png" alt="implemented operations in concrete classes" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/implemented-operations-in-concrete-classes.png"'>
-
-<p>To indicate that the implementation of the <code>store(..)</code> and <code>retrieve(..)</code> operations is to be left to subclasses by declaring those operations as <b>abstract</b>, write their signatures in <i>italics</i>.</p>
-
-<img class="img-responsive" src="/software-design/uml/abstract-operations-in-a-class-diagram.png" alt="abstract operations in a class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/abstract-operations-in-a-class-diagram.png"'>
-
-<p>If any part of a class is declared abstract, then the class itself also needs to be declared as abstract by writing its name in italics.</p>
-
-<img class="img-responsive" src="/software-design/uml/abstract-class-diagram.png" alt="abstract class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/abstract-class-diagram.png"'>
-
-<p>Now that the <code>store(..)</code> and <code>retrieve(..)</code> operations on the <code>Store</code> class are declared as <b>abstract</b>, they do not have to have any methods implemented.</p>
-
-<p>An <b>abstract</b> class cannot be instantiated into an object because it has pieces missing. The <code>Store</code> class might implement the <code>store(..)</code> and <code>retrieve(..)</code> operations but because it is <b>abstract</b>, children who inherit from the <code>Store</code> class will have to implement or declare abstract the <code>Store</code> class's abstract operations.</p>
+<p>If the <code>ContentManagementSystem</code> class were to be implemented in Java source code, then the <code>createdBy</code> attribute would be translated into a <code>final</code> attribute.</p>
 
 <pre class="language-java line-numbers">
 	<code>
-		public abstract class Store {
-		   public abstract void store(Article[] articles);
-		   public abstract Article[] retrieve(  );
-		}
-	</code>
-</pre>
-
-<img class="img-responsive" src="/software-design/uml/a-class-inheriting-from-an-abstract-class.png" alt="a class inheriting from an abstract class" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/a-class-inheriting-from-an-abstract-class.png"'>
-
-<p>In UML, an interface can be shown as a <b>stereotyped class notation</b> or by using its own <b>ball notation</b>.</p>
-
-<img class="img-responsive" src="/software-design/uml/stereotype-and-ball-notation-of-interfaces.png" alt="stereotype and ball notation of interfaces" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/stereotype-and-ball-notation-of-interfaces.png"'>
-
-<p>If you are using the <b>ball interface notation</b>, then you realize an interface by associating it with a class.</p>
-
-<img class="img-responsive" src="/software-design/uml/ball-notation-implementation-sample.png" alt="ball notation implementation sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/ball-notation-implementation-sample.png"'>
-
-<p>If you have used the <b>stereotype notation</b> for your interface, then a new arrow is needed to show that this is a realization relationship.</p>
-
-<img class="img-responsive" src="/software-design/uml/stereotype-notation-interface-implementation-sample.png" alt="stereotype notation interface implementation sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/stereotype-notation-interface-implementation-sample.png"'>
-
-<p>Both previous figures would have resulted in the same Java code being generated.</p>
-
-<pre class="language-java line-numbers">
-	<code>
-		public interface EmailSystem
+		public class ContentManagementSystem
 		{
-		   public void send(Message message));
-		}
-		 
-		public class SMTPMailSystem implements EmailSystem
-		{
-		   public void send(Message message)   {
-			  // Implement the interactions with an SMTP server to send the message
-		   }
-		  
-		   // ... Implementations of the other operations on the Guitarist class ...
+		   private final String createdBy = "Adam Cook Software Corp.";
 		}
 	</code>
 </pre>
 
-<p>If a class realizes an interface but does not implement all of the operations that the interface specifies, then that class needs to be declared <b>abstract</b>.</p>
+<p>When attributes are shown as <b>associations</b>, as is the case in below figure, the diagram quickly becomes busy.</p>
 
-<img class="img-responsive" src="/software-design/uml/half-implemented-interface.png" alt="half implemented interface" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/half-implemented-interface.png"'>
+<img class="img-responsive" src="/software-design/uml/inline-vs-association-attributes.png" alt="inline vs association attributes" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/inline-vs-association-attributes.png"'>
 
-<p>Because the <code>SMTPMailSystem</code> class does not implement the <code>send(..)</code> operation as specified by the <code>EmailSystem</code> interface, it needs to be declared abstract.</p>
+<p>The diagram is neater and easier to manage with more room for other information when the attributes are specified <b>inline</b> with the class box.</p>
 
-<p>A <b>template</b> in UML is shown by providing an extra box with a dashed border to the top right of the regular class box.</p>
+<img class="img-responsive" src="/software-design/uml/inline-attributes-sample-diagram.png" alt="inline attributes sample diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/inline-attributes-sample-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/uml/template-initialization-in-diagram.png" alt="template initialization in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/template-initialization-in-diagram.png"'>
+<p>Choosing whether an attribute should be shown <b>inline</b> or as an <b>association</b> is really a question of what the focus of the diagram should be.</p>
 
-<p>You can bind a template's parameters to a specific set of classes in one of two ways. First, you can subclass the template, binding the parameters as you go.</p>
+<p>Operations in UML are specified on a class diagram with a signature that is at minimum made up of a visibility property, a name, a pair of parentheses in which any parameters that are needed for the operation to do its job can be supplied, and a return type.</p>
 
-<img class="img-responsive" src="/software-design/uml/binding-template-parameters.png" alt="binding template parameters" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/binding-template-parameters.png"'>
+<img class="img-responsive" src="/software-design/uml/operation-in-diagram.png" alt="operation in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/operation-in-diagram.png"'>
 
-<p>The real power of <b>templates</b> is much more obvious when you use the second approach to template parameter binding—binding at runtime. You bind at runtime when a template is told the type of parameters it will have as it is constructed into an object.</p>
+<p><b>Parameters</b> are used to specify the information provided to an operation to allow it to complete its job. For example, the <code>addEntry(..)</code> operation needs to be supplied with the <code>BlogEntry</code> that is to be added to the account.</p>
 
-<p><b>Runtime template binding</b> is about objects rather than classes; therefore, a new type of diagram is needed: the object diagram. Object diagrams use classes to show some of the important ways they are used as your system runs.</p>
+<img class="img-responsive" src="/software-design/uml/operation-parameters-in-diagram.png" alt="operation parameters in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/operation-parameters-in-diagram.png"'>
+
+<p>More than one parameter can be passed to an operation by splitting the parameters with a comma.</p>
+
+<img class="img-responsive" src="/software-design/uml/multiple-parameters-separated-by-comma.png" alt="multiple parameters separated by comma" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiple-parameters-separated-by-comma.png"'>
+
+<p>A return type is specified after a colon at the end of an operation's signature and specifies the type of object that will be returned by the operation.</p>
+
+<img class="img-responsive" src="/software-design/uml/return-type-of-operation-in-diagram.png" alt="return type of operation in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/return-type-of-operation-in-diagram.png"'>
+
+<p>A constructor creates and returns a new instance of the class that it is specified in, therefore, it does not need to explicitly declare any return type.</p>
+
+<img class="img-responsive" src="/software-design/uml/constructor-in-a-class-diagram.png" alt="constructor in a class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/constructor-in-a-class-diagram.png"'>
+
+<p>Sometimes you want all of the objects in a particular class to share the same copy of an attribute or operation. When this happens, a class's attributes and operations are associated with the class itself and have a lifetime beyond that of the any objects that are instantiated from the class. This is where <code>static</code> attributes and operations become useful.</p>
+
+<p>The <code>accountCounter</code> attribute needs to be incremented every time a new <code>BlogAccount</code> is created. The <code>accountCounter</code> attribute is declared <code>static</code> because the same copy needs to be shared between all of the instances of the <code>BlogAccount</code> class.</p>
+
+<p>An attribute or operation is made static in UML by underlining it.</p>
+
+<img class="img-responsive" src="/software-design/uml/static-attribute-underlined-in-class-diagram.png" alt="static attribute underlined in class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/static-attribute-underlined-in-class-diagram.png"'>
+
+<p>Another great example of when <code>static</code> attributes and operations are used when you want to apply the <i>Singleton design pattern</i>. In a nutshell, the Singleton design pattern ensures that <b>one and only one</b> object of a particular class is ever constructed during the lifetime of your system. To ensure that only one object is ever constructed, typical implementations of the Singleton pattern keep an internal <code>static</code> reference to the single allowed object instance, and access to that instance is controlled using a static operation. To learn more about the Singleton pattern, check out <a href="/java/design-patterns/singleton">Singleton design pattern</a>.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -502,12 +411,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 5</li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 4</li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/class-diagrams">Previous Page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/activity-diagrams">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/class-relationships">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

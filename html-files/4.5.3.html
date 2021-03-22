@@ -428,7 +428,7 @@ Building Executable
 
 <ul>
 	<li><b>PRIVATE</b></li>
-	<p>Private dependencies specify that library <b>A</b> uses library <code>B</code> in its own internal implementation. Anything else that links to library <b>A</b> doesn’t need to know about <b>B</b> because it is an internal implementation detail of <b>A</b>.</p>
+	<p>Private dependencies specify that library <b>A</b> uses library <b>B</b> in its own internal implementation. Anything else that links to library <b>A</b> doesn’t need to know about <b>B</b> because it is an internal implementation detail of <b>A</b>.</p>
 
 	<li><b>PUBLIC</b></li>
 	<p>Public dependencies specify that not only does library <b>A</b> use library <b>B</b> internally, it also uses <b>B</b> in its interface. This means that <b>A</b> cannot be used without <b>B</b>, so anything that uses <b>A</b> will also have a direct dependency on <b>B</b>. An example of this would be a function defined in library <b>A</b> which has at least one parameter of a type defined and implemented in library <b>B</b>, so code cannot call the function from <b>A</b> without providing a parameter whose type comes from <b>B</b>.</p>

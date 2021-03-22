@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Class Diagrams</title>
+<title>Activity Diagrams</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -71,7 +71,7 @@ img {
 	color: #bdc0c4;
 }
 .sticky {
-	position: sticky;
+	position: sticky !important;
 	top: 1%;
 }
 
@@ -247,7 +247,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.4.0.html">Unified Modeling Language</a></li>
-<li class='breadcrumb-item active'>Class Diagrams</li>
+<li class='breadcrumb-item active'>Activity Diagrams</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -259,147 +259,314 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Class-Diagrams" class="anchor" aria-hidden="true" href="#Class-Diagrams">
-Class Diagrams
+<a id="Activity-Diagrams" class="anchor" aria-hidden="true" href="#Activity-Diagrams">
+Activity Diagrams
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Classes form part of your model's logical view.
+<p><i>Use cases</i> show what your system should do. <i>Activity diagrams</i> allow you to specify how your system will accomplish its goals.</p>
 
-<img class="img-responsive" src="/software-design/uml/4x1-diagram-logical-view.png" alt="4x1 diagram logical view" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/4x1-diagram-logical-view.png"'>
+<p>Activity diagrams show high-level actions chained together to represent a process occurring in your system. For example, you can use an activity diagram to model the steps involved with creating a blog account.</p>
 
-<p>At its simplest terms, a class in UML is drawn as a rectangle split into up to three sections. The top section contains the name of the class, the middle section contains the attributes or information that the class contains, and the final section contains the operations that represent the behavior that the class exhibits. The attributes and operations sections are optional.</p>
+<p>Activity diagrams are the only UML diagram in the process view of your system's model.</p>
 
-<img class="img-responsive" src="/software-design/uml/class-uml-notation.png" alt="class uml notation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/class-uml-notation.png"'>
+<img class="img-responsive" src="/software-design/uml/process-view-diagram.png" alt="process view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/process-view-diagram.png"'>
 
-<p>If the attributes and operations sections are not shown, it does not necessarily imply that they are empty, just that the diagram is perhaps easier to understand with that information hidden.</p>
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Use Case Name</th>
+			<th scope="col" colspan="2">Create a new Blog Account</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Related Requirements</td>
+			<td colspan="2">Requirement A</td>
+		</tr>
+		<tr>
+			<td>Goal in Context</td>
+			<td colspan="2">A new or existing author requests a new blog account from the Administrator</td>
+		</tr>
+		<tr>
+			<td>Preconditions</td>
+			<td colspan="2">The system is limited to recognized authors and so the author needs to have appropriate proof of identity</td>
+		</tr>
+		<tr>
+			<td>Successful End Condition</td>
+			<td colspan="2">A new blog account is created for the author</td>
+		</tr>
+		<tr>
+			<td>Failed End Condition</td>
+			<td colspan="2">The application for a new blog account is rejected</td>
+		</tr>
+		<tr>
+			<td>Primary Actors</td>
+			<td colspan="2">Administrator</td>
+		</tr>
+		<tr>
+			<td>Secondary Actors</td>
+			<td colspan="2">Author Credentials Database</td>
+		</tr>
+		<tr>
+			<td>Trigger</td>
+			<td colspan="2">The administrator asks the Content Management System to create a new blog account</td>
+		</tr>
+		<tr>
+			<th scope="col">Main Flow</th>
+			<th scope="col">Step</th>
+			<th scope="col">Action</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td>1</td>
+			<td>The Administrator asks the system to create a new blog account</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>2</td>
+			<td>The Administrator selects an account type</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>3</td>
+			<td>The Administrator enters the author's details</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>4</td>
+			<td>The author's details are verified using Author Credentials Database</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>5</td>
+			<td>The new blog account is created</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>6</td>
+			<td>A summary of the new blog account's details are emailed to the author</td>
+		</tr>
+		<tr>
+			<th scope="col">Extensions</th>
+			<th scope="col">Step</th>
+			<th scope="col">Branching Action</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td>4.1</td>
+			<td>The Author Credential Database does not verify the author's details</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>4.2</td>
+			<td>The author's new blog account application is rejected</td>
+		</tr>
+	</tbody>
+</table>
 
-<p>A class selectively reveal its operations and data to other classes by using visibility.</p>
+<p>The <b>Main Flow</b> and <b>Extension</b> sections describe steps in the <i>blog account</i> creation process.</p>
 
-<p>There are four different types of visibility that can be applied to the elements of a UML model.</p>
+<p>An <i>activity diagram</i> is useful here because it helps you to better visualize a use case's steps (compared to the table notation in the use case description), especially the branching steps that depend on whether the <i>author</i> is verified.</p>
 
-<img class="img-responsive" src="/software-design/uml/four-visibility-classifications.png" alt="four visibility classifications" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/four-visibility-classifications.png"'>
+<p>In the following figure, the activity is launched by the initial node, which is drawn as a filled circle. The initial node simply marks the start of the activity. At the other end of the diagram, the activity final node, drawn as two concentric circles with a filled inner circle, marks the end of the activity.</p>
 
-<p>Typically these visibility characteristics will be used to control access to both attributes, operations, and sometimes even classes.</p>
+<img class="img-responsive" src="/software-design/uml/activity-nodes-diagram.png" alt="activity nodes diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/activity-nodes-diagram.png"'>
 
-<p>Starting with the most accessible of visibility characteristics, <b>public</b> visibility is specified using the plus (<b>+</b>) symbol before the associated attribute or operation, as shown in the following figure.</p>
+<p>In between the <i>initial node</i> and the activity <i>final node</i> are <b>actions</b>, which are drawn as rounded rectangles. Actions are the important steps that take place in the overall activity</p>
 
-<img class="img-responsive" src="/software-design/uml/public-visibilitiy-diagram.png" alt="public visibilitiy diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/public-visibilitiy-diagram.png"'>
+<p>An action could be a behavior performed, a computation, or any key step in the process.</p>
 
-<p>Declare an attribute or operation public if you want it to be accessible directly by any other class.</p>
+<p>The flow of the activity is shown using arrowed lines called <b>edges</b> or paths.</p>
 
-<p><b>Protected</b> attributes and operations are specified using the hash (<b>#</b>) symbol and are more visible to the rest of your system than private attributes and operations, but are less visible than public.</p>
+<p>The arrowhead on an activity edge shows the direction of flow from one action to the next. A line going into a node is called an <b>incoming edge</b>, and a line exiting a node is called an <b>outgoing edge</b>. Edges string the actions together to determine the overall activity flow.</p>
 
-<img class="img-responsive" src="/software-design/uml/protected-visibility-diagram.png" alt="protected visibility diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/protected-visibility-diagram.png"'>
+<p>The first diamond-shaped node is called a <b>decision</b>, analogous to an if-else statement in code.</p>
 
-<p><b>Package</b> visibility, specified with a tilde (<b>~</b>), when applied to attributes and operations, sits in between protected and private.</p>
+<p>The second diamond-shaped node is called a <b>merge</b>. A merge node combines the edges starting from a decision node, marking the end of the conditional behavior.</p>
 
-<img class="img-responsive" src="/software-design/uml/package-visibility-diagram.png" alt="package visibility diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/package-visibility-diagram.png"'>
+<p><b>Actions</b> are active steps in the completion of a process. An action can be a calculation, such as <i>Calculate Tax</i>, or a task, such as <i>Verify Author's Details</i>.</p>
 
-<p><b>Private</b> visibility is the most tightly constrained type of visibility classification, and it is shown by adding a minus (<b>-</b>) symbol before the attribute or operation.</p>
+<p>The word <b>activity</b> is often mistakenly used instead of <b>action</b> to describe a step in an <i>activity diagram</i>, but they are not the same. An <i>activity</i> is the process being modeled, such as washing a car. An <i>action</i> is a step in the overall activity, such as <i>Lather</i>, <i>Rinse</i>, and <i>Dry</i>.</p>
 
-<img class="img-responsive" src="/software-design/uml/private-visibility-diagram.png" alt="private visibility diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/private-visibility-diagram.png"'>
+<p>The <i>actions</i> in this simple car-washing <i>activity</i> are shown in the following figure.</p>
 
-<p>A class's attributes are the pieces of information that represent the state of an object. These attributes can be represented on a class diagram either by placing them inside their section of the class box—known as inline attributes —or by association with another class.</p>
+<img class="img-responsive" src="/software-design/uml/actions-sample-in-activity.png" alt="actions sample in activity" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/actions-sample-in-activity.png"'>
 
-<img class="img-responsive" src="/software-design/uml/inline-and-associative-attributes-diagram.png" alt="inline and associative attributes diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/inline-and-associative-attributes-diagram.png"'>
+<p>The entire <i>activity</i> is enclosed within the rounded rectangle called an <b>activity frame</b>.</p>
 
-<p>An attribute's name can be any set of characters, but no two attributes in the same class can have the same name.</p>
+<p>The <i>activity frame</i> is used to contain an activity's <i>actions</i> and is useful when you want to show more than one <i>activity</i> on the same diagram. Write the name of the <i>activity</i> in the upper left corner.</p>
 
-<p>In the previous diagram, the <code>name</code> attribute is declared as <i>private</i> (indicated by the minus (-) sign at the beginning of the signature) and after the colon, the <i>type</i> is specified as being of the class <code>String</code>. The associated entries attribute is also <i>private</i>, and because of that association, it represents a number of instances of the <code>BlogEntry</code> class.</p>
+<p>The <i>activity frame</i> is optional and is often left out of an <i>activity diagram</i>, as shown in the alternative Wash Car activity:</p>
 
-<p>If the <code>BlogAccount</code> class in previous diagram was going to be implemented as a Java class, then the source code would look something like that shown in the following example:</p>
+<img class="img-responsive" src="/software-design/uml/activity-diagram-without-a-frame.png" alt="activity diagram without a frame" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/activity-diagram-without-a-frame.png"'>
 
-<pre class="language-java line-numbers">
-	<code>
-		public class BlogAccount
-		{
-		   // The two inline attributes from previous diagram
-		   private String name;
-		   private URL publicURL;
-		 
-		   // The single attribute by association, given the name 'entries'
-		   BlogEntries[] entries;
-		 
-		   // ...
+<p>Although you lose the name of the <i>activity</i> being displayed on the diagram itself, it is often more convenient to leave out the <i>activity frame</i> when constructing a simple <i>activity diagram</i>.</p>
 
-		}
-	</code>
-</pre>
+<p><b>Decisions</b> are used when you want to execute a different sequence of <i>actions</i> depending on a condition. Decisions are drawn as diamond-shaped nodes with one incoming edge and multiple outgoing edges.</p>
 
-<p>Sometimes an attribute will represent more than one object. In fact, an attribute could represent any number of objects of its type; in software, this is like declaring that an attribute is an array. <b>Multiplicity</b> allows you to specify that an attribute actually represents a collection of objects, and it can be applied to both inline and attributes by association.</p>
+<img class="img-responsive" src="/software-design/uml/decision-diagram.png" alt="decision diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/decision-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/uml/multiplicity-diagram.png" alt="multiplicity diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiplicity-diagram.png"'>
+<p>Each branched edge contains a <i>guard condition</i> written in brackets. <b>Guard conditions</b> determine which edge is taken after a decision node.</p>
 
-<p>A <b>*</b> at the <code>BlogEntry</code> class end of the association indicates that any number of <code>BlogEntry</code> objects will be stored in the entries attribute within the <code>BlogAccount</code> class. The <b>1</b> specified at the other end of the association indicates that each <code>BlogEntry</code> object in the entries attribute is associated with one and only one <code>BlogAccount</code> object.</p>
+<p>The <i>branched flows</i> join together at a <i>merge node</i>, which marks the end of the conditional behavior started at the decision node. Merges are also shown with diamond-shaped nodes, but they have multiple incoming edges and one outgoing edge.</p>
 
-<p>The <code>unique</code> property dictates that no two <code>Trackback</code> objects within the array should be the same.</p>
+<img class="img-responsive" src="/software-design/uml/merge-node-diagram.png" alt="merge node diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/merge-node-diagram.png"'>
 
-<p>By default, all attributes with multiplicity are <code>unique</code>.</p>
+<p>In UML 1.x, it was common to see multiple edges starting at a decision node flow directly into an action. This meant the flows were merged implicitly. As of UML 2.0, when multiple edges lead directly into an action, all incoming flows are waited on before proceeding. But this doesn't make sense because only one edge is followed out of a decision node. You can avoid confusing your reader by explicitly showing merge nodes.</p>
 
-<p>If you want to specify that duplicates are allowed, then you need to use the <code>not unique</code> property, as used on the comments attribute in the <code>BlogEntry</code> class.</p>
+<img class="img-responsive" src="/software-design/uml/merge-node-history.png" alt="merge node history" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/merge-node-history.png"'>
 
-<p>The <code>ordered</code> property is used in this case to indicate that each of the <code>Comment</code> objects is stored in a set order.</p>
+<p>You represent <b>parallel actions</b> in <i>activity diagrams</i> by using <b>forks</b> and <b>joins</b>.</p>
 
-<p>If you don't care about the order in which objects are stored within an attribute that has multiplicity, then simply leave out the <code>ordered</code> property.</p>
+<img class="img-responsive" src="/software-design/uml/parallel-activities.png" alt="parallel activities" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/parallel-activities.png"'>
 
-<p>If an attribute has the <code>readOnly</code> property applied, as shown in the following diagram, then the value of the attribute cannot be changed once its initial value has been set.</p>
+<p>In a detailed design model, you can use <i>forks</i> to represent multiple processes or multiple threads in a program. Following figure completes the <i>activity diagram</i> for the computer assembly workflow.</p>
 
-<img class="img-responsive" src="/software-design/uml/readonly-property-in-diagram.png" alt="readonly property in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/readonly-property-in-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/multiple-threads-diagram.png" alt="multiple threads diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiple-threads-diagram.png"'>
 
-<p>If the <code>ContentManagementSystem</code> class were to be implemented in Java source code, then the <code>createdBy</code> attribute would be translated into a <code>final</code> attribute.</p>
+<p>When <i>actions</i> occur in parallel, it doesn't necessarily mean they will finish at the same time. In fact, one task will most likely finish before the other. However, the join prevents the flow from continuing past the join until all incoming flows are complete. For example, in the following figure the action immediately after the join, <i>Install Motherboard</i>, executes only after both the <i>Prepare Case</i> and <i>Prepare Motherboard</i> actions finish.</p>
 
-<pre class="language-java line-numbers">
-	<code>
-		public class ContentManagementSystem
-		{
-		   private final String createdBy = "Adam Cook Software Corp.";
-		}
-	</code>
-</pre>
+<p><b>Time events</b> are drawn with an hourglass symbol.</p>
 
-<p>When attributes are shown as <b>associations</b>, as is the case in below figure, the diagram quickly becomes busy.</p>
+<p>Following figure shows how to use a <i>time event</i> to model a wait period. The text next to the hourglass—Wait 3 Days—shows the amount of time to wait. The incoming edge to the time event means that the time event is activated once. The bill is sent only once—not every three days.</p>
 
-<img class="img-responsive" src="/software-design/uml/inline-vs-association-attributes.png" alt="inline vs association attributes" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/inline-vs-association-attributes.png"'>
+<img class="img-responsive" src="/software-design/uml/hourglass-diagram.png" alt="hourglass diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/hourglass-diagram.png"'>
 
-<p>The diagram is neater and easier to manage with more room for other information when the attributes are specified <b>inline</b> with the class box.</p>
+<p>A <i>time event</i> with no incoming flows is a recurring time event, meaning it's activated with the frequency in the text next to the hourglass.</p>
 
-<img class="img-responsive" src="/software-design/uml/inline-attributes-sample-diagram.png" alt="inline attributes sample diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/inline-attributes-sample-diagram.png"'>
+<p>In this figure, the progress bar is updated every second.</p>
 
-<p>Choosing whether an attribute should be shown <b>inline</b> or as an <b>association</b> is really a question of what the focus of the diagram should be.</p>
+<img class="img-responsive" src="/software-design/uml/recurring-time-event.png" alt="recurring time event" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/recurring-time-event.png"'>
 
-<p>Operations in UML are specified on a class diagram with a signature that is at minimum made up of a visibility property, a name, a pair of parentheses in which any parameters that are needed for the operation to do its job can be supplied, and a return type.</p>
+<p>A <b>time event</b> is an alternate way to start an <i>activity</i>. Use this notation to model an activity that is launched periodically.</p>
 
-<img class="img-responsive" src="/software-design/uml/operation-in-diagram.png" alt="operation in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/operation-in-diagram.png"'>
+<p>As detail is added to your <i>activity diagram</i>, the diagram may become too big, or the same sequence of actions may occur more than once. When this happens, you can improve readability by providing details of an action in a separate diagram, allowing the higher level diagram to remain less cluttered.</p>
 
-<p><b>Parameters</b> are used to specify the information provided to an operation to allow it to complete its job. For example, the <code>addEntry(..)</code> operation needs to be supplied with the <code>BlogEntry</code> that is to be added to the account.</p>
+<img class="img-responsive" src="/software-design/uml/fork-diagram.png" alt="fork diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/fork-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/uml/operation-parameters-in-diagram.png" alt="operation parameters in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/operation-parameters-in-diagram.png"'>
+<p>The Prepare Motherboard node in previous diagram invokes the <i>Prepare Motherboard</i> activity in next diagram.</p>
 
-<p>More than one parameter can be passed to an operation by splitting the parameters with a comma.</p>
+<img class="img-responsive" src="/software-design/uml/prepare-motherboard-sample.png" alt="prepare motherboard sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/prepare-motherboard-sample.png"'>
 
-<img class="img-responsive" src="/software-design/uml/multiple-parameters-separated-by-comma.png" alt="multiple parameters separated by comma" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiple-parameters-separated-by-comma.png"'>
+<p>You associate a call activity node with the activity it invokes by giving them the same name.</p>
 
-<p>A return type is specified after a colon at the end of an operation's signature and specifies the type of object that will be returned by the operation.</p>
+<p>The <i>Prepare Motherboard</i> activity diagram has its own <i>initial</i> and activity <i>final</i> nodes.</p>
 
-<img class="img-responsive" src="/software-design/uml/return-type-of-operation-in-diagram.png" alt="return type of operation in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/return-type-of-operation-in-diagram.png"'>
+<p>Although it's acceptable to omit the activity frame for top-level activities, you should always show it for invoked activities.</p>
 
-<p>A constructor creates and returns a new instance of the class that it is specified in, therefore, it does not need to explicitly declare any return type.</p>
+<p><i>Activity diagrams</i> offer a variety of ways to model <b>objects</b> in your processes.</p>
 
-<img class="img-responsive" src="/software-design/uml/constructor-in-a-class-diagram.png" alt="constructor in a class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/constructor-in-a-class-diagram.png"'>
+<p><b>Objects</b> don't have to be software objects. For example, in a non-automated computer assembly activity, an object node may be used to represent a physical work order that starts the process.</p>
 
-<p>Sometimes you want all of the objects in a particular class to share the same copy of an attribute or operation. When this happens, a class's attributes and operations are associated with the class itself and have a lifetime beyond that of the any objects that are instantiated from the class. This is where <code>static</code> attributes and operations become useful.</p>
+<p>In <i>activity diagrams</i>, you can use object nodes to show data flowing through an <i>activity</i>. An <b>object node</b> represents an <i>object</i> that is available at a particular point in the <i>activity</i>, and can be used to show that the object is used, created, or modified by any of its surrounding <i>actions</i>.</p>
 
-<p>The <code>accountCounter</code> attribute needs to be incremented every time a new <code>BlogAccount</code> is created. The <code>accountCounter</code> attribute is declared <code>static</code> because the same copy needs to be shared between all of the instances of the <code>BlogAccount</code> class.</p>
+<p>An <i>object node</i> is drawn with a rectangle, as shown in the order approval process in the following diagram. The <i>Order</i> object node draws attention to the fact that the <i>Order</i> object flows from the <i>Receive Order Request</i> action to the <i>Approve Payment</i> action.</p>
 
-<p>An attribute or operation is made static in UML by underlining it.</p>
+<img class="img-responsive" src="/software-design/uml/object-node-diagram.png" alt="object node diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/object-node-diagram.png"'>
 
-<img class="img-responsive" src="/software-design/uml/static-attribute-underlined-in-class-diagram.png" alt="static attribute underlined in class diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/static-attribute-underlined-in-class-diagram.png"'>
+<p>Next diagram shows a different perspective on the previous activity using <i>pins</i>. <b>Pins</b> show that an object is input to or output from an action.</p>
 
-<p>Another great example of when <code>static</code> attributes and operations are used when you want to apply the <i>Singleton design pattern</i>. In a nutshell, the Singleton design pattern ensures that <b>one and only one</b> object of a particular class is ever constructed during the lifetime of your system. To ensure that only one object is ever constructed, typical implementations of the Singleton pattern keep an internal <code>static</code> reference to the single allowed object instance, and access to that instance is controlled using a static operation. To learn more about the Singleton pattern, check out <a href="/java/design-patterns/singleton">Singleton design pattern</a>.</p>
+<img class="img-responsive" src="/software-design/uml/pins-in-activity-diagrams.png" alt="pins in activity diagrams" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/pins-in-activity-diagrams.png"'>
+
+<p>An <i>input pin</i> means that the specified object is input to an action. An <i>output pin</i> means that the specified object is output from an action.</p>
+
+<p>In next diagram, an <i>Order</i> object is input to the <i>Approve Payment</i> action and an <i>Order</i> object is output from the <i>Receive Order Request</i> action.</p>
+
+<img class="img-responsive" src="/software-design/uml/order-sample-with-nodes.png" alt="order sample with nodes" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/order-sample-with-nodes.png"'>
+
+<p>If the <i>Approve Payment</i> action needs only parts of the <i>Order</i> object—not the whole object—you can use a <i>transformation</i> to show which parts are needed. <b>Transformations</b> allow you to show how the output from one action provides the input to another action.</p>
+
+<img class="img-responsive" src="/software-design/uml/transformation-diagram.png" alt="transformation diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/transformation-diagram.png"'>
+
+<p>You can also show an object changing state as it flows through an <i>activity</i>. Next figure shows that the <i>Order</i> object's state is pending before <i>Approve Payment</i> and changes to approved afterward. The state is shown in brackets.</p>
+
+<img class="img-responsive" src="/software-design/uml/pending-diagram.png" alt="pending diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/pending-diagram.png"'>
+
+<p>In addition to acting as inputs to and outputs from <i>actions</i>, <i>object nodes</i> can be inputs to and outputs from an <i>activity</i>. Activity inputs and outputs are drawn as object nodes straddling the boundary of the <i>activity frame</i>. This notation is useful for emphasizing that the entire activity requires input and provides output.</p>
+
+<p><i>Activities</i> may involve interactions with external people, systems, or processes. For example, when authorizing a credit card payment, you need to verify the card by interacting with an approval service provided by the credit card company. In <i>activity diagrams</i>, <b>signals</b> represent interactions with external participants.</p>
+
+<p>A <b>receive signal</b> has the effect of waking up an action in your <i>activity diagram</i>. The recipient of the signal knows how to react to the signal and expects that a signal will arrive at some time but doesn't know exactly when. <b>Send signals</b> are signals sent to an external participant. When that external person or system receives the message, it probably does something in response, but that isn't modeled in your activity diagram.</p>
+
+<img class="img-responsive" src="/software-design/uml/approve-payment-sample-diagram.png" alt="approve payment sample diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/approve-payment-sample-diagram.png"'>
+
+<p>Next diagram refines the steps in previous diagram to show that the <i>credit card approval</i> action requires interaction with external software.</p>
+
+<img class="img-responsive" src="/software-design/uml/signals-diagram.png" alt="signals diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/signals-diagram.png"'>
+
+<p><i>Signals</i> are sent asynchronously, meaning the activity does not wait for the response but moves immediately to the next action after the signal is sent.</p>
+
+<p>Notice that combining send and receive signals results in behavior similar to a synchronous call, or a call that waits for a response. It's common to combine send and receive signals in activity diagrams because you often need a response to the signal you sent.</p>
+
+<p>When you see a receive <i>signal</i> node with no incoming flows, it means that the node is always waiting for a signal when its containing activity is active. In the case of next diagram, the activity is launched every time an account request signal is received.</p>
+
+<img class="img-responsive" src="/software-design/uml/always-waiting-signal-diagram.png" alt="always waiting signal diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/always-waiting-signal-diagram.png"'>
+
+<p>The simplest and most common way to start an activity is with a single initial node.</p>
+
+<p>There are other ways to represent the start of an activity that have special meanings:</p>
+
+<ul>
+	<li>The activity starts by receiving input data</li>
+	<li>The activity starts in response to a time event</li>
+	<li>The activity starts as a result of being woken up by a signal</li>
+</ul>
+
+<p>To specify that an activity starts as a result of being woken up by a signal, use a <i>receive signal node</i> instead of an <i>initial node</i>. Inside the receive signal, node you specify what type of event starts the activity.</p>
+
+<img class="img-responsive" src="/software-design/uml/always-waiting-signal-diagram.png" alt="always waiting signal diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/always-waiting-signal-diagram.png"'>
+
+<p>The <b>end nodes</b> in this page haven't been very interesting so far; in fact, they haven't acted as much more than end markers. In the real world, you can encounter more complex endings to processes, including flows that can be interrupted and flows that end without terminating the overall activity.</p>
+
+<img class="img-responsive" src="/software-design/uml/always-waiting-signal-diagram.png" alt="always waiting signal diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/always-waiting-signal-diagram.png"'>
+
+<p>Sometimes you need to model that a process can be terminated by an <i>event</i>. This could happen if you have a long running process that can be interrupted by the user. Or, in the <i>CMS order handling activity</i>, you may need to account for an order being canceled. You can show <i>interruptions</i> with <b>interruption regions</b></p>
+
+<p>Draw an <i>interruption</i> region with a dashed, rounded rectangle surrounding the actions that can be interrupted along with the event that can cause the interruption.</p>
+
+<p>The interrupting event is followed by a line that looks like a lightning bolt. Next figure extends previous diagram to account for the possibility that an order might be canceled.</p>
+
+<img class="img-responsive" src="/software-design/uml/dashed-line-ending-node.png" alt="dashed line ending node" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/dashed-line-ending-node.png"'>
+
+<p>Sometimes you'll see <i>activity diagrams</i> with multiple activity final nodes instead of multiple flows into a single activity final node. This is legal and can help detangle lines in a diagram that has many branches. But <i>activity diagrams</i> are usually easier to understand if they contain a single activity final node.</p>
+
+<p>A new feature of UML 2.0 is the ability to show that a flow dies without ending the whole activity. A flow <i>final node</i> terminates its own path—not the whole activity. It is shown as a circle with an X through it.</p>
+
+<img class="img-responsive" src="/software-design/uml/not-ending-flow.png" alt="not ending flow" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/not-ending-flow.png"'>
+
+<p>Be careful when using a flow final node after a <i>fork</i>. As soon as the activity final node is reached, all other actions in the activity (including the ones before the final node) terminate. If you want all forked actions to run to completion, make sure to add a join.</p>
+
+<p><i>Activities</i> may involve different <i>participants</i>, such as different groups or roles in an organization or system.</p>
+
+<p>You use <b>partitions</b> to show which participant is responsible for which actions.</p>
+
+<p><i>Partitions</i> divide the diagram into columns or rows (depending on the orientation of your activity diagram) and contain actions that are carried out by a responsible group. The columns or rows are sometimes referred to as swimlanes.</p>
+
+<img class="img-responsive" src="/software-design/uml/partitions-diagram.png" alt="partitions diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/partitions-diagram.png"'>
+
+<p>You can also show responsibility by using <b>annotations</b>. Notice that there are no swimlanes; instead, the name of the responsible party is put in parentheses in the node. This notation typically makes your diagram more compact, but it shows the participants less clearly than swimlanes.</p>
+
+<img class="img-responsive" src="/software-design/uml/no-partitions-diagram.png" alt="no partitions diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/no-partitions-diagram.png"'>
+
+<p>If your activity diagram has a lot of actions, you can end up with long, crossing lines, which make the diagram hard to read. This is where <b>connectors</b> can help you out.</p>
+
+<p><i>Connectors</i> help untangle your diagrams, connecting edges with symbols instead of explicit lines. A <i>connector</i> is drawn as a circle with its name written inside. <i>Connectors</i> are typically given single character names. In Next figure, the <i>connector</i> name is <code>n</code>.</p>
+
+<p><i>Connectors</i> come in pairs: one has an incoming edge and the other has an outgoing edge. The second connector picks up where the first connector left off.</p>
+
+<img class="img-responsive" src="/software-design/uml/connectors-diagram.png" alt="connectors diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/connectors-diagram.png"'>
+
+<p>Be careful with connectors! if you use too many different connectors in one diagram, the reader may have a hard time pairing them.</p>
+
+<p><b>Expansion regions</b> show that actions in a region are performed for each item in an input collection. For example, an <i>expansion region</i> could be used to model a software function that takes a list of files as input and searches each file for a search term.</p>
+
+<p>Draw an expansion region as a large rounded rectangle with dashed lines and four aligned boxes on either side. The four boxes represent input and output collections (but they don't imply that the collection size is four).</p>
+
+<img class="img-responsive" src="/software-design/uml/expansion-region-diagram.png" alt="expansion region diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/expansion-region-diagram.png"'>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -411,12 +578,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 4</li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: chapter 3</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/use-case">Previous Page</a></li>
-<li class="top"><a title="Shortcut: ALT + SHIFT + T" accesskey="T" href="/">Home</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/class-relationships">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/class-diagrams">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -561,7 +727,6 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {
