@@ -267,261 +267,462 @@ Variables
 </svg>
 </a>
 </h2>
-A normal variable can be defined in a CMakeLists.txt file as follows:
+<p>A normal variable can be defined in a <i>CMakeLists.txt</i> file as follows:</p>
 
-set(varName value... [PARENT_SCOPE])
+<pre class="language-cmake">
+	<code>
+		set(varName value... [PARENT_SCOPE])
+	</code>
+</pre>
 
-The name of the variable, varName, can contain letters, numbers and underscores, with letters being case-sensitive. The name may also contain the characters ./-+ but these are rarely seen in practice.
-Other characters are also possible via indirect means, but again, these are not typically seen in normal use.
+<p>The name of the variable, <code>varName</code>, can contain letters, numbers and underscores, with letters being case-sensitive. The name may also contain the characters ./-+ but these are rarely seen in practice. Other characters are also possible via indirect means, but again, these are not typically seen in normal use.</p>
 
-CMake treats all variables as strings.
+<p>CMake treats all variables as strings.</p>
 
-If multiple values are given, the values will be joined together with a semicolon separating each value - the resultant string is how CMake represents lists. The following should help to demonstrate the behavior.
+<p>If multiple values are given, the values will be joined together with a semicolon separating each value - the resultant string is how CMake represents <b>lists</b>. The following should help to demonstrate the behavior.</p>
 
-set(myVar a b c) # myVar = "a;b;c" set(myVar a;b;c) # myVar = "a;b;c" set(myVar "a b c") # myVar = "a b c" set(myVar a b;c) # myVar = "a;b;c" set(myVar a "b c") # myVar = "a;b c"
+<pre class="language-cmake">
+	<code>
+		set(myVar a b c)   # myVar = "a;b;c"
+		set(myVar a;b;c)   # myVar = "a;b;c"
+		set(myVar "a b c") # myVar = "a b c"
+		set(myVar a b;c)   # myVar = "a;b;c"
+		set(myVar a "b c") # myVar = "a;b c"
+	</code>
+</pre>
 
-The value of a variable is obtained with ${myVar}, which can be used anywhere a string or variable is expected.
+<p>The value of a variable is obtained with <code>${myVar}</code>, which can be used anywhere a <i>string</i> or <i>variable</i> is expected.</p>
 
-In addition, CMake doesn’t require variables to be defined before using them. Use of an undefined variable simply results in an empty string being substituted with no error or warning, much like Unix shell scripts.
+<p>In addition, CMake doesn’t require variables to be defined before using them. Use of an undefined variable simply results in an empty string being substituted with no error or warning, much like Unix shell scripts.</p>
 
-are not restricted to being a single line
+<pre class="language-cmake">
+	<code>
+		set(myVar "goes here")
+		set(multiLine "First line ${myVar} Second line with a \"quoted\" word")
+	</code>
+</pre>
 
-set(myVar "goes here") set(multiLine "First line ${myVar} Second line with a \"quoted\" word")
+<p>If using CMake 3.0 or later, an alternative to quotes is to use the lua-inspired bracket syntax where the start of the content is marked by <code>[=[</code> and the end with <code>]=]</code>. Any number of <code>=</code> characters can appear between the square brackets, including none at all, but the same number of <code>=</code> characters must be used at the start and the end. If the opening brackets are immediately followed by a newline character, that first newline is ignored, but subsequent newlines are not. Furthermore, no further transformation of the bracketed content is performed (i.e. no variable substitution or escaping).</p>
 
-If using CMake 3.0 or later, an alternative to quotes is to use the lua-inspired bracket syntax where the start of the content is marked by [=[ and the end with ]=]. Any number of = characters can appear between the square brackets, including none at all, but the same number of = characters must be used at the start and the end. If the opening brackets are immediately followed by a newline character, that first newline is ignored, but subsequent newlines are not. Furthermore, no further transformation of the bracketed content is performed (i.e. no variable substitution or escaping).
+<pre class="language-cmake">
+	<code>
+		# Simple multi-line content with bracket syntax,
+		# no = needed between the square bracket markers
+		set(multiLine [[ First line Second line ]])
 
-# Simple multi-line content with bracket syntax, # no = needed between the square bracket markers set(multiLine [[ First line Second line ]]) # Bracket syntax prevents unwanted substitution set(shellScript [=[ #!/bin/bash [[ -n "${USER}" ]] && echo "Have USER" ]=]) # Equivalent code without bracket syntax set(shellScript "#!/bin/bash [[ -n \"\${USER}\" ]] && echo \"Have USER\" ")
+		# Bracket syntax prevents unwanted substitution
+		set(shellScript [=[
+			#!/bin/bash
 
-The flexibility to use any number of = characters between the [ and ] markers also means embedded square brackets do not get misinterpreted as markers.
+			[[ -n "${USER}" ]] && echo "Have USER"
+		]=])
 
-A variable can be unset either by calling unset() or by calling set() with no value for the named variable. The following are equivalent, with no error or warning if myVar does not already exist:
+		# Equivalent code without bracket syntax
+		set(shellScript
+			"#!/bin/bash
+			[[ -n \"\${USER}\" ]] && echo \"Have USER\"
+		")
+	</code>
+</pre>
 
-set(myVar) unset(myVar)
+<p>The flexibility to use any number of <code>=</code> characters between the <code>[</code> and <code>]</code> markers also means embedded square brackets do not get misinterpreted as markers.</p>
 
-In addition to variables defined by the project for its own use, the behavior of many of CMake’s commands can be influenced by the value of specific variables at the time the command is called.
+<p>A variable can be unset either by calling <code>unset()</code> or by calling <code>set()</code> with no value for the named variable. The following are equivalent, with no error or warning if <code>myVar</code> does not already exist:</p>
 
-The value of an environment variable is obtained using the special form $ENV{varName} and this can be used anywhere a regular ${varName} form can be used.
+<pre class="language-cmake">
+	<code>
+		set(myVar) unset(myVar)
+	</code>
+</pre>
 
-Setting an environment variable can be done in the same way as an ordinary variable, except with ENV{varName} instead of just varName as the variable to set. For example:
+<p>In addition to variables defined by the project for its own use, the behavior of many of CMake’s commands can be influenced by the value of specific variables at the time the command is called.</p>
 
-set(ENV{PATH} "$ENV{PATH}:/opt/myDir")
+<p>The value of an environment variable is obtained using the special form <code>$ENV{varName}</code> and this can be used anywhere a regular <code>${varName}</code> form can be used.</p>
 
-As soon as the CMake run is finished, the change to the environment variable is lost.
+<p>Setting an environment variable can be done in the same way as an ordinary variable, except with <code>ENV{varName}</code> instead of just <code>varName</code> as the variable to set. For example:</p>
 
-Therefore, setting environment variables within the CMakeLists.txt file like this is rarely useful.
+<pre class="language-cmake">
+	<code>
+		set(ENV{PATH} "$ENV{PATH}:/opt/myDir")
+	</code>
+</pre>
 
-Unlike normal variables which have a lifetime limited to the processing of the CMakeLists.txt file, cache variables are stored in the special file called CMakeCache.txt in the build directory and they persist between CMake runs. Once set, cache variables remain set until something explicitly removes them from the cache. The value of a cache variable is retrieved in exactly the same way as a normal variable (i.e. with the ${myVar} form), but the set() command is different when used to set a cache variable:
+<p>As soon as the CMake run is finished, the change to the environment variable is lost.</p>
 
-set(varName value... CACHE type "docstring" [FORCE])
+<p>Therefore, setting environment variables within the <i>CMakeLists.txt</i> file like this is rarely useful.</p>
 
-Cache variables have more information attached to them than a normal variable, including a nominal type and a documentation string. Both must be provided when setting a cache variable, although the docstring can be empty.
+<p>Unlike normal variables which have a lifetime limited to the processing of the <i>CMakeLists.txt</i> file, cache variables are stored in the special file called <i>CMakeCache.txt</i> in the build directory and they persist between CMake runs. Once set, cache variables remain set until something explicitly removes them from the cache. The value of a cache variable is retrieved in exactly the same way as a normal variable (i.e. with the <code>${myVar}</code> form), but the <code>set()</code> command is different when used to set a cache variable:</p>
 
-CMake will always treat the variable as a string during processing, the type is just to improve the user experience in GUI tools. The type must be one of the following:
+<pre class="language-cmake">
+	<code>
+		set(varName value... CACHE type "docstring" [FORCE])
+	</code>
+</pre>
 
-BOOL
+<p>Cache variables have more information attached to them than a normal variable, including a nominal type and a documentation string. Both must be provided when setting a cache variable, although the docstring can be empty.</p>
 
-FILEPATH
+<p>CMake will always treat the variable as a string during processing, the type is just to improve the user experience in GUI tools. The type must be one of the following:</p>
 
-PATH
+<ul>
+	<li><b>BOOL</b></li>
+	<li><b>FILEPATH</b></li>
+	<li><b>PATH</b></li>
+	<li><b>STRING</b></li>
+	<li><b>INTERNAL</b></li>
+</ul>
 
-STRING
+<p>Setting a boolean cache variable is such a common need that CMake provides a separate command expressly for that purpose. Rather than the somewhat verbose <code>set()</code> command, developers can use <code>option()</code> instead:</p>
 
-INTERNAL
+<pre class="language-cmake">
+	<code>
+		option(optVar helpString [initialValue])
+	</code>
+</pre>
 
-Setting a boolean cache variable is such a common need that CMake provides a separate command expressly for that purpose. Rather than the somewhat verbose set() command, developers can use option() instead:
+<p>If <i>initialValue</i> is omitted, the default value <b>OFF</b> will be used.</p>
 
-option(optVar helpString [initialValue])
+<p>For reference, the above is equivalent to:</p>
 
-If initialValue is omitted, the default value OFF will be used.
+<pre class="language-cmake">
+	<code>
+		set(optVar initialValue CACHE BOOL helpString)
+	</code>
+</pre>
 
-For reference, the above is equivalent to:
+<p>An important difference between normal and cache variables is that the <code>set()</code> command will only overwrite a cache variable if the <code>FORCE</code> keyword is present, unlike normal variables where the <code>set()</code> command will always overwrite a pre-existing value.</p>
 
-set(optVar initialValue CACHE BOOL helpString)
+<p>It is possible to have a normal variable and a cache variable with the same name but holding different values. In such cases, CMake will retrieve the normal variable’s value rather than the cache variable when using <code>${myVar}</code>, or put another way, normal variables take precedence over cache variables. The exception to this is that when setting a cache variable’s value, if that cache variable did not exist before the call to <code>set()</code> or if the <code>FORCE</code> option was used, then any normal variable in the current scope is effectively removed. Note that this unfortunately means it is possible to get different behavior between the first and subsequent CMake runs, since in the first run, the cache variable won’t exist, but in subsequent runs it will. Therefore, in the first run, a normal variable would be hidden, but in subsequent runs it would not.</p>
 
-An important difference between normal and cache variables is that the set() command will only overwrite a cache variable if the FORCE keyword is present, unlike normal variables where the set() command will always overwrite a pre-existing value.
+<pre class="language-cmake">
+	<code>
+		set(myVar foo) # Local myVar
 
-It is possible to have a normal variable and a cache variable with the same name but holding different values. In such cases, CMake will retrieve the normal variable’s value rather than the cache variable when using ${myVar}, or put another way, normal variables take precedence over cache variables. The exception to this is that when setting a cache variable’s value, if that cache variable did not exist before the call to set() or if the FORCE option was used, then any normal variable in the current scope is effectively removed. Note that this unfortunately means it is possible to get different behavior between the first and subsequent CMake runs, since in the first run, the cache variable won’t exist, but in subsequent runs it will. Therefore, in the first run, a normal variable would be hidden, but in subsequent runs it would not.
+		set(result ${myVar}) # result = foo
 
-set(myVar foo) # Local myVar set(result ${myVar}) # result = foo set(myVar bar CACHE STRING “”) # Cache myVar set(result ${myVar}) # First run: result = bar   # Subsequent runs: result = foo set(myVar fred) set(result ${myVar}) # result = fred
+		set(myVar bar CACHE STRING “”) # Cache myVar
 
-Loosely speaking, the resultant behavior is that ${myVar} will retrieve the last value that was assigned to myVar, regardless of whether it was a normal variable or a cache variable.
+		set(result ${myVar}) # First run: result = bar
+		# Subsequent runs: result = foo
 
-Different parts of the build can be turned on or off, paths to external packages can be set, flags for compilers and linkers can be modified and so on.
+		set(myVar fred)
+		set(result ${myVar}) # result = fred
+	</code>
+</pre>
 
-There are two primary ways developers can do this, either from the cmake command line or using a GUI tool.
+<p>Loosely speaking, the resultant behavior is that <code>${myVar}</code> will retrieve the last value that was assigned to <code>myVar</code>, regardless of whether it was a normal variable or a cache variable.</p>
 
-CMake allows cache variables to be manipulated directly via command line options passed to cmake.
-The primary workhorse is the -D option, which is used to define the value of a cache variable.
+<p>Different parts of the build can be turned on or off, paths to external packages can be set, flags for compilers and linkers can be modified and so on.</p>
 
-cmake -D myVar:type=someValue ...
+<p>There are two primary ways developers can do this, either from the cmake command line or using a GUI tool.</p>
 
-The behavior is essentially as though the variable was being assigned using the set() command with the CACHE and FORCE options.
+<p>CMake allows cache variables to be manipulated directly via command line options passed to cmake. The primary workhorse is the <code>-D</code> option, which is used to define the value of a cache variable.</p>
 
-The command line option only needs to be given once, since it is stored in the cache for subsequent runs and therefore does not need to be provided every time cmake is run. Multiple -D options can be provided to set more than one variable at a time on the cmake command line.
+<pre class="language-cmake">
+	<code>
+		cmake -D myVar:type=someValue ...
+	</code>
+</pre>
 
-Cache variables defined on the command line have an empty docstring.
+<p>The behavior is essentially as though the variable was being assigned using the <code>set()</code> command with the <code>CACHE</code> and <code>FORCE</code> options.</p>
 
-The type can also be omitted, in which case the variable is given a special type that is similar to INTERNAL. The following shows various examples of setting cache variables via the command line.
+<p>The command line option only needs to be given once, since it is stored in the cache for subsequent runs and therefore does not need to be provided every time cmake is run. Multiple <code>-D</code> options can be provided to set more than one variable at a time on the cmake command line.</p>
 
-cmake -D foo:BOOL=ON ...
-cmake -D "bar:STRING=This contains spaces" ...
-cmake -D hideMe=mysteryValue ...
-cmake -D helpers:FILEPATH=subdir/helpers.txt ...
-cmake -D helpDir:PATH=/opt/helpThings ...
+<p>Cache variables defined on the command line have an empty docstring.</p>
 
-It is also possible to remove variables from the cache with the -U option
+<p>The type can also be omitted, in which case the variable is given a special type that is similar to <code>INTERNAL</code>. The following shows various examples of setting cache variables via the command line.</p>
 
-. Note that the -U option supports * and ? wildcards, but care needs to be taken to avoid deleting more than was intended and leaving the cache in an unbuildable state.
+<pre class="language-cmake">
+	<code>
+		cmake -D foo:BOOL=ON ...
+		cmake -D "bar:STRING=This contains spaces" ...
+		cmake -D hideMe=mysteryValue ...
+		cmake -D helpers:FILEPATH=subdir/helpers.txt ...
+		cmake -D helpDir:PATH=/opt/helpThings ...
+	</code>
+</pre>
 
-cmake -U 'help*' -U foo ...
+<p>It is also possible to remove variables from the cache with the <code>-U</code> option. Note that the <code>-U</code> option supports <code>*</code> and <code>?</code> wildcards, but care needs to be taken to avoid deleting more than was intended and leaving the cache in an unbuildable state.</p>
 
-CMake provides two equivalent GUI tools, cmake-gui and ccmake
+<pre class="language-cmake">
+	<code>
+		cmake -U 'help*' -U foo ...
+	</code>
+</pre>
 
-cmake-gui is a fully functional GUI application supported on all major desktop platforms, whereas ccmake uses a curses-based interface which can be used in text-only environments such as over a ssh connection.
+<p>CMake provides two equivalent GUI tools, <code>cmake-gui</code> and <code>ccmake</code></p>
 
-Booleans are shown as a checkbox, files and paths have a browse filesystem button and strings are usually presented as a text line edit. As a special case, cache variables of type STRING can be given a set of values to show in a combobox in CMake GUI instead of showing a simple text entry widget.
+<p><code>cmake-gui</code> is a fully functional GUI application supported on all major desktop platforms, whereas <code>ccmake</code> uses a curses-based interface which can be used in text-only environments such as over a ssh connection.</p>
 
-This is achieved by setting a cache variable’s STRINGS property
+<p><i>Booleans</i> are shown as a checkbox, files and paths have a browse filesystem button and <i>strings</i> are usually presented as a text line edit. As a special case, cache variables of type <code>STRING</code> can be given a set of values to show in a combobox in CMake GUI instead of showing a simple text entry widget.</p>
 
-set(trafficLight Green CACHE STRING "Status of something") set_property(CACHE trafficLight PROPERTY STRINGS Red Orange Green)
+<p>This is achieved by setting a cache variable’s <code>STRINGS</code> property</p>
 
-Cache variables can also have a property marking them as advanced or not. This too only affects the way the variable is displayed in cmake-gui, it does not in any way affect how CMake uses the variable during processing.
+<pre class="language-cmake">
+	<code>
+		set(trafficLight Green CACHE STRING "Status of something") set_property(CACHE trafficLight PROPERTY STRINGS Red Orange Green)
+	</code>
+</pre>
 
-Variables can be marked as advanced with the mark_as_advanced() command within the CMakeLists.txt file:
+<p>Cache variables can also have a property marking them as advanced or not. This too only affects the way the variable is displayed in <code>cmake-gui</code>, it does not in any way affect how CMake uses the variable during processing.</p>
 
-mark_as_advanced([CLEAR|FORCE] var1 [var2...])
+<p>Variables can be marked as advanced with the <code>mark_as_advanced()</code> command within the <i>CMakeLists.txt</i> file:</p>
 
-The CLEAR keyword ensures the variables are not marked as advanced, while the FORCE keyword ensures the variables are marked advanced. Without either keyword, the variables will only be marked as advanced if they don’t already have an advanced/non-advanced state set.
+<pre class="language-cmake">
+	<code>
+		mark_as_advanced([CLEAR|FORCE] var1 [var2...])
+	</code>
+</pre>
 
-As projects get more complicated or when investigating unexpected behavior, it can be useful to print out diagnostic messages and variable values during a CMake run. This is generally achieved using the message() command.
+<p>The <code>CLEAR</code> keyword ensures the variables are not marked as advanced, while the <code>FORCE</code> keyword ensures the variables are marked advanced. Without either keyword, the variables will only be marked as advanced if they don’t already have an advanced/non-advanced state set.</p>
 
-message([mode] msg1 [msg2]...)
+<p>As projects get more complicated or when investigating unexpected behavior, it can be useful to print out diagnostic messages and variable values during a CMake run. This is generally achieved using the <code>message()</code> command.</p>
 
-set(myVar HiThere) message("The value of myVar = ${myVar}")
+<pre class="language-cmake">
+	<code>
+		message([mode] msg1 [msg2]...)
 
-The message() command accepts an optional mode keyword which affects how the message is output and in some cases halts the build with an error. Recognized mode values are:
+		set(myVar HiThere)
+		message("The value of myVar = ${myVar}")
+	</code>
+</pre>
 
-STATUS
+<p>The <code>message()</code> command accepts an optional mode keyword which affects how the message is output and in some cases halts the build with an error. Recognized mode values are:</p>
 
-Incidental information. Messages will normally be preceded by two hyphens.
+<ul>
+	<li><b>STATUS</b></li>
+	<p>Incidental information. Messages will normally be preceded by two hyphens.</p>
 
-WARNING
+	<li><b>WARNING</b></li>
+	<p>CMake warning, usually shown highlighted in red where supported</p>
 
-CMake warning, usually shown highlighted in red where supported
+	<li><b>AUTHOR_WARNING</b></li>
+	<p>Like <code>WARNING</code>, but only shown if developer warnings are enabled (requires the <code>-Wdev</code> option on the cmake command line). Projects do not often use this particular type of message.</p>
 
-AUTHOR_WARNING
+	<li><b>SEND_ERROR</b></li>
+	<p>Indicates an error message which will be shown highlighted in red, where supported. Processing will continue until the configure stage completes, but generation will not be performed.</p>
 
-Like WARNING, but only shown if developer warnings are enabled (requires the -Wdev option on the cmake command line). Projects do not often use this particular type of message.
+	<li><b>FATAL_ERROR</b></li>
+	<p>Denotes a hard error. The message will be printed and processing will stop immediately.</p>
 
-SEND_ERROR
+	<li><b>DEPRECATION</b></li>
+	<p>Special category used to log a deprecation message. If the <code>CMAKE_ERROR_DEPRECATED</code> variable is defined to a boolean true value, the message will be treated as an error. If <code>CMAKE_WARN_DEPRECATED</code> is defined to a boolean true, the message will be treated as a warning. If neither variable is defined, the message will not be shown.</p>
+</ul>
 
-Indicates an error message which will be shown highlighted in red, where supported. Processing will continue until the configure stage completes, but generation will not be performed.
+<p>If no mode keyword is provided, then the message is considered to be important information and is logged without any modification. It should be noted, however, that logging with a <code>STATUS</code> mode is not the same as logging a message with no mode keyword at all. When using a <code>STATUS</code> mode, the message will be printed correctly ordered with other CMake messages and will be preceded by two hyphens, whereas without any mode keyword, no leading hyphens are prepended and it is not unusual for the message to appear out of order relative to other messages which did include a mode keyword.</p>
 
-FATAL_ERROR
+<p>The other mechanism CMake provides for helping debug usage of variables is the <code>variable_watch()</code> command. This is intended for more complex projects where it may not be clear how a variable ended up with a particular value. When a variable is watched, all attempts to read or modify it are logged.</p>
 
-Denotes a hard error. The message will be printed and processing will stop immediately.
+<pre class="language-cmake">
+	<code>
+		variable_watch(myVar [command])
+	</code>
+</pre>
 
-DEPRECATION
+<p>a command can be given which will be executed every time the variable is read or modified. The command is expected to be the name of a CMake function or macro and it will be passed the following arguments: <i>variable name</i>, <i>type of access</i>, the <i>variable’s value</i>, <i>the name of the current list file</i> and the <i>list file stack</i></p>
 
-Special category used to log a deprecation message. If the CMAKE_ERROR_DEPRECATED variable is defined to a boolean true value, the message will be treated as an error. If CMAKE_WARN_DEPRECATED is defined to a boolean true, the message will be treated as a warning. If neither variable is defined, the message will not be shown.
+<p>Specifying a command with <code>variable_watch()</code> would be very uncommon though.</p>
 
-If no mode keyword is provided, then the message is considered to be important information and is logged without any modification. It should be noted, however, that logging with a STATUS mode is not the same as logging a message with no mode keyword at all. When using a STATUS mode, the message will be printed correctly ordered with other CMake messages and will be preceded by two hyphens, whereas without any mode keyword, no leading hyphens are prepended and it is not unusual for the message to appear out of order relative to other messages which did include a mode keyword.
+<p>the <code>string()</code> command, which provides a wide range of useful string handling functionality.</p>
 
-The other mechanism CMake provides for helping debug usage of variables is the variable_watch() command. This is intended for more complex projects where it may not be clear how a variable ended up with a particular value. When a variable is watched, all attempts to read or modify it are logged.
+<p>The first argument to <code>string()</code> defines the operation to be performed and subsequent arguments depend on the operation being requested. These arguments will generally require at least one input string and since CMake commands cannot return a value, an output variable for the result of the operation. In the material below, this output variable will generally be named <code>outVar</code>.</p>
 
-variable_watch(myVar [command])
+<pre class="language-cmake">
+	<code>
+		string(FIND inputString subString outVar [REVERSE])
+		set(longStr abcdefabcdef)
+		set(shortBit def)
+		string(FIND ${longStr} ${shortBit} fwdIndex)
+		string(FIND ${longStr} ${shortBit} revIndex REVERSE)
+		message("fwdIndex = ${fwdIndex}, revIndex = ${revIndex}")
+	</code>
+</pre>
 
-a command can be given which will be executed every time the variable is read or modified. The command is expected to be the name of a CMake function or macro
+<p>Replacing a simple substring follows a similar pattern:</p>
 
-and it will be passed the following arguments: variable name, type of access, the variable’s value, the name of the current list file and the list file stack
+<pre class="language-cmake">
+	<code>
+		string(REPLACE matchString replaceWith outVar input [input...])
+	</code>
+</pre>
 
-Specifying a command with variable_watch() would be very uncommon though.
+<p>Regular expressions are also well supported by the <code>REGEX</code> operation, with a few different variants available as determined by the second argument:</p>
 
-the string() command, which provides a wide range of useful string handling functionality.
+<pre class="language-cmake">
+	<code>
+		string(REGEX MATCH regex outVar input [input...])
+		string(REGEX MATCHALL regex outVar input [input...])
+		string(REGEX REPLACE regex replaceWith outVar input [input...])
+	</code>
+</pre>
 
-The first argument to string() defines the operation to be performed and subsequent arguments depend on the operation being requested. These arguments will generally require at least one input string and since CMake commands cannot return a value, an output variable for the result of the operation. In the material below, this output variable will generally be named outVar.
+<p>The following examples demonstrate the required syntax:</p>
 
-string(FIND inputString subString outVar [REVERSE])
+<pre class="language-cmake">
+	<code>
+		set(longStr abcdefabcdef)
+		string(REGEX MATCHALL "[ace]" matchVar ${longStr})
+		string(REGEX REPLACE "([de])" "X\\1Y" replVar ${longStr})
+		message("matchVar = ${matchVar}")
+		message("replVar = ${replVar}")
+	</code>
+</pre>
 
-set(longStr abcdefabcdef) set(shortBit def) string(FIND ${longStr} ${shortBit} fwdIndex) string(FIND ${longStr} ${shortBit} revIndex REVERSE) message("fwdIndex = ${fwdIndex}, revIndex = ${revIndex}")
+<p>The resultant output of the above is:</p>
 
-Replacing a simple substring follows a similar pattern:
+<pre class="language-cmake">
+	<code>
+		matchVar = a;c;e;a;c;e
+		replVar = abcXdYXeYfabcXdYXeYf
+	</code>
+</pre>
 
-string(REPLACE matchString replaceWith outVar input [input...])
+<p>Extracting a substring is also possible:</p>
 
-Regular expressions are also well supported by the REGEX operation, with a few different variants available as determined by the second argument:
+<pre class="language-cmake">
+	<code>
+		string(SUBSTRING input index length outVar)
+	</code>
+</pre>
 
-string(REGEX MATCH regex outVar input [input...]) string(REGEX MATCHALL regex outVar input [input...]) string(REGEX REPLACE regex replaceWith outVar input [input...])
+<p>String length can be trivially obtained and strings can easily be converted to upper or lower case. It is also straightforward to strip whitespace from the start and end of a string. The syntax for these operations all share the same form:</p>
 
-The following examples demonstrate the required syntax:
+<pre class="language-cmake">
+	<code>
+		string(LENGTH input outVar)
+		string(TOLOWER input outVar)
+		string(TOUPPER input outVar)
+		string(STRIP input outVar)
+	</code>
+</pre>
 
-set(longStr abcdefabcdef) string(REGEX MATCHALL "[ace]" matchVar ${longStr}) string(REGEX REPLACE "([de])" "X\\1Y" replVar ${longStr}) message("matchVar = ${matchVar}") message("replVar = ${replVar}")
+<p>CMake provides other operations, such as string comparison, hashing, timestamps and more, but their use is less common in everyday CMake projects. The interested reader should consult the CMake reference documentation for the <code>string()</code> command for full details.</p>
 
-The resultant output of the above is:
+<p>Ultimately, lists are just a single string with list items separated by semicolons, which can make it less convenient to manipulate individual list items. CMake provides the <code>list()</code> command to facilitate such tasks.</p>
 
-matchVar = a;c;e;a;c;e replVar = abcXdYXeYfabcXdYXeYf
+<pre class="language-cmake">
+	<code>
+		list(LENGTH listVar outVar)
+		list(GET listVar index [index...] outVar)
 
-Extracting a substring is also possible:
+		# Example
+		set(myList a b c) # Creates the list "a;b;c"
 
-string(SUBSTRING input index length outVar)
+		list(LENGTH myList len)
+		message("length = ${len}")
 
-String length can be trivially obtained and strings can easily be converted to upper or lower case. It is also straightforward to strip whitespace from the start and end of a string. The syntax for these operations all share the same form:
+		list(GET myList 2 1 letters)
+		message("letters = ${letters}")
+	</code>
+</pre>
 
-string(LENGTH input outVar) string(TOLOWER input outVar) string(TOUPPER input outVar) string(STRIP input outVar)
+<p>The output of the above example would be:</p>
 
-CMake provides other operations, such as string comparison, hashing, timestamps and more, but their use is less common in everyday CMake projects. The interested reader should consult the CMake reference documentation for the string() command for full details.
+<pre class="language-bash">
+	<code>
+		length = 3
+		letters = c;b
+	</code>
+</pre>
 
-Ultimately, lists are just a single string with list items separated by semicolons, which can make it less convenient to manipulate individual list items. CMake provides the list() command to facilitate such tasks.
+<p>Appending and inserting items is also a common task:</p>
 
-list(LENGTH listVar outVar) list(GET listVar index [index...] outVar)
+<pre class="language-cmake">
+	<code>
+		list(APPEND listVar item [item...])
+		list(INSERT listVar index item [item...])
+	</code>
+</pre>
 
-# Example set(myList a b c) # Creates the list "a;b;c" list(LENGTH myList len) message("length = ${len}") list(GET myList 2 1 letters) message("letters = ${letters}")
+<p>Unlike the <code>LENGTH</code> and <code>GET</code> cases, <code>APPEND</code> and <code>INSERT</code> act directly on the <code>listVar</code> and modify it in-place, as demonstrated by the following example:</p>
 
-The output of the above example would be:
+<pre class="language-cmake">
+	<code>
+		set(myList a b c)
+		list(APPEND myList d e f)
+		message("myList (first) = ${myList}")
+		list(INSERT myList 2 X Y Z)
+		message("myList (second) = ${myList}")
+	</code>
+</pre>
 
-length = 3 letters = c;b
+<p>Which gives the following output:</p>
 
-Appending and inserting items is also a common task:
+<pre class="language-bash">
+	<code>
+		myList (first) = a;b;c;d;e;f
+		myList (second) = a;b;X;Y;Z;c;d;e;f
+	</code>
+</pre>
 
-list(APPEND listVar item [item...]) list(INSERT listVar index item [item...])
+<p>Finding a particular item in the list follows the expected pattern:</p>
 
-Unlike the LENGTH and GET cases, APPEND and INSERT act directly on the listVar and modify it in-place, as demonstrated by the following example:
+<pre class="language-cmake">
+	<code>
+		list(FIND myList value outVar)
 
-set(myList a b c) list(APPEND myList d e f) message("myList (first) = ${myList}") list(INSERT myList 2 X Y Z) message("myList (second) = ${myList}")
+		# Example
+		set(myList a b c d e)
+		list(FIND myList d index)
+		message("index = ${index}")
+	</code>
+</pre>
 
-Which gives the following output:
+<p>Expected output:</p>
 
-myList (first) = a;b;c;d;e;f myList (second) = a;b;X;Y;Z;c;d;e;f
+<pre class="language-bash">
+	<code>
+		index = 3
+	</code>
+</pre>
 
-Finding a particular item in the list follows the expected pattern:
+<p>Three operations are provided for removing items, all of which modify the list directly:</p>
 
-list(FIND myList value outVar)
+<pre class="language-cmake">
+	<code>
+		list(REMOVE_ITEM myList value [value...])
+		list(REMOVE_AT myList index [index...])
+		list(REMOVE_DUPLICATES myList)
+	</code>
+</pre>
 
-# Example set(myList a b c d e) list(FIND myList d index) message("index = ${index}")
+<p>List items can also be reordered with <code>REVERSE</code> or <code>SORT</code> operations (sorting is alphabetical):</p>
 
-Expected output:
-index = 3
+<pre class="language-cmake">
+	<code>
+		list(REVERSE myList)
+		list(SORT myList)
+	</code>
+</pre>
 
-Three operations are provided for removing items, all of which modify the list directly:
-list(REMOVE_ITEM myList value [value...]) list(REMOVE_AT myList index [index...]) list(REMOVE_DUPLICATES myList)
+<p>For all list operations which take an index as input, the index can be negative to indicate counting starts from the end of the list instead of the start.</p>
 
-List items can also be reordered with REVERSE or SORT operations (sorting is alphabetical):
-list(REVERSE myList) list(SORT myList)
+<p>One other common form of variable manipulation is math computation. CMake provides the <code>math()</code> command for performing basic mathematical evaluation:</p>
 
-For all list operations which take an index as input, the index can be negative to indicate counting starts from the end of the list instead of the start.
+<pre class="language-cmake">
+	<code>
+		math(EXPR outVar mathExpr)
+	</code>
+</pre>
 
-One other common form of variable manipulation is math computation. CMake provides the math() command for performing basic mathematical evaluation:
+<p>The expression may use any of the following operators which all have the same meaning as they would in C code: <code>+ - * / % | &amp; ^ ~ &lt;&lt; &gt;&gt; * / %</code>.</p>
 
-math(EXPR outVar mathExpr)
+<p>Parentheses are also supported and have their usual mathematical meaning.</p>
 
-The expression may use any of the following operators which all have the same meaning as they would in C code: + - * / % | & ^ ~ << >> * / %.
+<pre class="language-cmake">
+	<code>
+		set(x 3) set(y 7)
+		math(EXPR z "(${x}+${y}) / 2")
+		message("result = ${z}")
+	</code>
+</pre>
 
-Parentheses are also supported and have their usual mathematical meaning.
+<p>Expected output:</p>
 
-set(x 3) set(y 7) math(EXPR z "(${x}+${y}) / 2") message("result = ${z}")
-
-Expected output:
-result = 5
+<pre class="language-bash">
+	<code>
+		result = 5
+	</code>
+</pre>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -533,7 +734,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Professional CMake_ A Practical Guide - Craig Scott: chapter 5</li>
+<li class='list-group-item'>Professional CMake: A Practical Guide, 8th Edition - Craig Scott: chapter 5</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/cmake/building-executable">Previous Page</a></li>
