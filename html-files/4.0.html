@@ -396,7 +396,7 @@ Table of Content
 </div>
 <a href="#4-3-0" class="list-group-item" data-toggle="collapse">
 	<i class="glyphicon glyphicon-chevron-right"></i>3. Git
-	<span class="badge badge-primary badge-pill">2</span>
+	<span class="badge badge-primary badge-pill">3</span>
 </a>
 <div class="list-group collapse" id="4-3-0">
 <a href="/development-tools/git/installation" class="list-group-item group-child">
@@ -407,9 +407,13 @@ Table of Content
 	2. Git Vocabulary
 	
 </a>
+<a href="/development-tools/git/references" class="list-group-item group-child">
+	3. References
+	
+</a>
 </div>
 <a href="#4-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. 
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Make
 	<span class="badge badge-primary badge-pill">0</span>
 </a>
 <div class="list-group collapse" id="4-4-0">
@@ -460,7 +464,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -473,7 +477,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);
