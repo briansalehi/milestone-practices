@@ -1,3 +1,15 @@
+<p>To initialize a project, use <code>git init</code>.</p>
+
+<p>To include files and directories in Git history, just add them using <code>git add &lt;file ...&gt;</code>.</p>
+
+<p>Before initializing a project, you should set the default branch name by <code>git config</code> command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git config --global init.defaultBranch &lt;name&gt;
+	</code>
+</pre>
+
 <p>When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.</p>
 
 <pre class="language-bash command-line" data-host="milestone">
