@@ -1,4 +1,1 @@
-Git is almost ready to be installed on Linux systems with one command and just
-a download step on Windows.
-
-<a href="https://git-scm.com/downloads">Installation Page</a>
+<p>Git is available on package manager of many Linux distributions including <i>apt</i>, <i>yum</i>, <i>dnf</i>, <i>pacman</i> and more. Source installation and more methods are specified in more detail in official <a href="https://git-scm.com/downloads">Git Installation</a> page.</p>

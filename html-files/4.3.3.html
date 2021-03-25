@@ -268,6 +268,347 @@ Branches
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>To create a new branch and switch to it at the same time, you can run the <code>git checkout</code> command with the <code>-b</code> switch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout -b iss53
+		git checkout master
+		git checkout -b hotfix
+		vim index.html
+		git commit -a -m 'Fix broken email address'
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/hotfix-branch.png" alt="hotfix branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/hotfix-branch.png"'>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge hotfix
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/master-fast-forwarded-to-hotfix.png" alt="master fast forwarded to hotfix" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/master-fast-forwarded-to-hotfix.png"'>
+
+<p>Delete the <code>hotfix</code> branch, because you no longer need it.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -d hotfix
+	</code>
+</pre>
+
+<p>Check out the branch you wish to merge into and then run the <code>git merge</code> command.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge iss53
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/snapshots-to-merge-into.png" alt="snapshots to merge into" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/snapshots-to-merge-into.png"'>
+
+<p>Instead of just moving the branch pointer forward, Git creates a new <b>snapshot</b> that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a <b>merge commit</b>, and is special in that it has more than one parent.</p>
+
+<p>You can delete the branch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -d iss53
+	</code>
+</pre>
+
+<p>Occasionally, this process doesn’t go smoothly!</p>
+
+<p>If your fix for <code>issue #53</code> modified the same part of a file as the <code>hotfix</code> branch, you’ll get a merge conflict that looks something like this:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git merge iss53
+	</code>
+</pre>
+
+<p>Git adds standard conflict-resolution markers to the files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
+		&lt;div id="footer"&gt;contact : email.support@github.com&lt;/div&gt;
+		=======
+		&lt;div id="footer"&gt; please contact us at support@github.com
+		&lt;/div&gt;
+		&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+	</code>
+</pre>
+
+<p>In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.</p>
+
+<p>If you want to use a graphical tool to resolve these issues, you can run <code>git mergetool</code>, which fires up an appropriate visual merge tool and walks you through the conflicts:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git mergetool
+	</code>
+</pre>
+
+<p>If you’re happy with that, and you verify that everything that had conflicts has been staged, you can type <code>git commit</code> to finalize the merge commit.</p>
+
+<p>The <code>git branch</code> command does more than just create and delete branches. If you run it with no arguments, you get a simple listing of your current branches:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch
+	</code>
+</pre>
+
+<p>To see the last commit on each branch, you can run:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -v
+	</code>
+</pre>
+
+<p>The useful <code>--merged</code> and <code>--no-merged</code> options can filter this list to branches that you have or have not yet merged into the branch you’re currently on. To see which branches are already merged into the branch you’re on, you can run:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch --merged
+	</code>
+</pre>
+
+<p>Branches on this list without the <code>*</code> in front of them are generally fine to delete with <code>git branch -d</code></p>
+
+<p>Rename the branch locally with the <code>git branch --move</code> command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch --move bad-branch-name corrected-branch-name
+	</code>
+</pre>
+
+<p>To let others see the corrected branch on the remote, push it:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push --set-upstream origin corrected-branch-name
+	</code>
+</pre>
+
+<p>The corrected branch is available on the remote. However the bad branch is also still present on the remote. You can delete the bad branch from the remote:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin --delete bad-branch-name
+	</code>
+</pre>
+
+<p>Rename your local master branch into main with the following command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch --move master main
+	</code>
+</pre>
+
+<p>To let others see the new main branch, you need to push it to the remote.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push --set-upstream origin main
+	</code>
+</pre>
+
+<p>Other collaborators will continue to use the master branch as the base of their work, until you make some further changes.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin --delete master
+	</code>
+</pre>
+
+<p>Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references explicitly with <code>git ls-remote &lt;remote&gt;</code>, or <code>git remote show &lt;remote&gt;</code> for remote branches as well as more information.</p>
+
+<p>Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.</p>
+
+<p>As long as you stay out of contact with your <i>origin server</i>, your <code>origin/master</code> pointer doesn’t move.</p>
+
+<img class="img-responsive" src="/development-tools/git/remote-branch-behind.png" alt="remote branch behind" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/remote-branch-behind.png"'>
+
+<p>To synchronize your work with a given remote, you run a <code>git fetch &lt;remote&gt;</code> command.</p>
+
+<img class="img-responsive" src="/development-tools/git/fetching-updates-from-remote.png" alt="fetching updates from remote" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fetching-updates-from-remote.png"'>
+
+<p>If you have a branch named <code>serverfix</code> that you want to work on with others, you can push it up the same way you pushed your first branch. Run <code>git push &lt;remote&gt; &lt;branch&gt;</code>:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin serverfix
+	</code>
+</pre>
+
+<p>Git automatically expands the <code>serverfix</code> branchname out to <code>refs/heads/serverfix:refs/heads/serverfix</code>, which means, <i>“Take my serverfix local branch and push it toupdate the remote’s serverfix branch.”</i></p>
+
+<p>The next time one of your collaborators fetches from the server, they will get a reference to where the server’s version of <code>serverfix</code> is under the remote branch <code>origin/serverfix</code>:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git fetch origin
+	</code>
+</pre>
+
+<p>It’s important to note that when you do a fetch that brings down new <b>remote-tracking</b> branches, you don’t automatically have local, editable copies of them. In other words, in this case, you don’t have a new <code>serverfix</code> branch — you have only an <code>origin/serverfix</code> pointer that you can’t modify.</p>
+
+<p>To merge this work into your current working branch, you can run <code>git merge origin/serverfix</code>. If you want your own <code>serverfix</code> branch that you can work on, you can base it off your <b>remote-tracking</b> branch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout -b serverfix origin/serverfix
+	</code>
+</pre>
+
+<p><b>Tracking</b> branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type git pull, Git automatically knows which server to fetch from and which branch to merge in.</p>
+
+<p>When you clone a repository, it generally automatically creates a master branch that tracks <code>origin/master</code>. However, you can set up other tracking branches if you wish — ones that track branches on other remotes, or don’t track the <b>master</b> branch. The simple case is the example you just saw, running <code>git checkout -b &lt;branch&gt; &lt;remote&gt;/&lt;branch&gt;</code>. This is a common enough operation that Git provides the <code>--track</code> shorthand:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout --track origin/serverfix
+		git fetch --all; git branch -vv
+	</code>
+</pre>
+
+<p>Set up a local branch with a different name than the remote branch, you can easily use the first version with a different local branch name:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout -b sf origin/serverfix
+	</code>
+</pre>
+
+<p>Now, your local branch <code>sf</code> will automatically pull from <code>origin/serverfix</code>.</p>
+
+<p>If you already have a local branch and want to set it to a remote branch you just pulled down, or want to change the <code>upstream</code> branch you’re tracking, you can use the <code>-u</code> or <code>--set-upstream-to</code> option to git branch to explicitly set it at any time.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -u origin/serverfix
+	</code>
+</pre>
+
+<p>If you want to see what <b>tracking</b> branches you have set up, you can use the <code>-vv</code> option to <code>git branch</code>.</p>
+
+<p>There is a command called <code>git pull</code> which is essentially a <code>git fetch</code> immediately followed by a <code>git merge</code> in most cases.</p>
+
+<p>Generally it’s better to simply use the <code>fetch</code> and <code>merge</code> commands explicitly as the magic of <code>git pull</code> can often be confusing.</p>
+
+<p>You can delete a remote branch using the <code>--delete</code> option to <code>git push</code>.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin --delete serverfix
+	</code>
+</pre>
+
+<p>In Git, there are two main ways to integrate changes from one branch into another: the <b>merge</b> and the <b>rebase</b>.</p>
+
+<img class="img-responsive" src="/development-tools/git/simple-diverge-history.png" alt="simple diverge history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/simple-diverge-history.png"'>
+
+<p>The easiest way to integrate the branches, as we’ve already covered, is the <code>merge</code> command.</p>
+
+<img class="img-responsive" src="/development-tools/git/integrating-diverged-history.png" alt="integrating diverged history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/integrating-diverged-history.png"'>
+
+<p>However, there is another way: you can take the patch of the change that was introduced in <code>C4</code> and reapply it on top of <code>C3</code>.</p>
+
+<p>In Git, this is called <b>rebasing</b>. With the <code>rebase</code> command, you can take all the changes that were committed on one branch and replay them on a different branch.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout experiment
+		git rebase master
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/rebasing-history.png" alt="rebasing history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-history.png"'>
+
+<p>At this point, you can go back to the master branch and do a <code>fast-forward merge</code>.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge experiment
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/fast-forwarding-master-branch.png" alt="fast forwarding master branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fast-forwarding-master-branch.png"'>
+
+<p>You can also have your rebase replay on something other than the rebase target branch</p>
+
+<p>For example, You branched a topic branch (server) to add some server-side functionality to your project, and made a commit. Then, you branched off that to make the client-side changes (client) and committed a few times. Finally, you went back to your server branch and did a few more commits.</p>
+
+<img class="img-responsive" src="/development-tools/git/client-server-history.png" alt="client server history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/client-server-history.png"'>
+
+<p>You can take the changes on client that aren’t on server (C8 and C9) and replay them on your master branch by using the --onto option of git rebase:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git rebase --onto master server client
+	</code>
+</pre>
+
+<p>This basically says, “Take the clientbranch, figure out the patches since it diverged from the server branch, and replay these patches in the client branch as if it was based directly off the master branch instead.” It’s a bit complex, but the result is pretty cool.</p>
+
+<img class="img-responsive" src="/development-tools/git/rebasing-master-to-client.png" alt="rebasing master to client" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-master-to-client.png"'>
+
+<p>Now you can <b>fast-forward</b> your master branch</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge client
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/fast-forwarding-master-after-rebase.png" alt="fast forwarding master after rebase" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fast-forwarding-master-after-rebase.png"'>
+
+<p>You can rebase the server branch onto the master branch without having to check it out first by running <code>git rebase &lt;basebranch&gt; &lt;topicbranch&gt;</code> — which checks out the topic branch (in this case, server) for you and replays it onto the base branch (master):</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git rebase master server
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/rebasing-server-branch.png" alt="rebasing server branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-server-branch.png"'>
+
+<p>Then, you can <b>fast-forward</b> the base branch (master):</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge server
+		git branch -d client
+		git branch -d server
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/final-commit-history.png" alt="final commit history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/final-commit-history.png"'>
+
+<p>If you pull down work that was rewritten and rebase it on top of the new commits from your partner, Git can often successfully figure out what is uniquely yours and apply them back on top of the new branch.</p>
+
+<img class="img-responsive" src="/development-tools/git/force-pushed-rebase.png" alt="force pushed rebase" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/force-pushed-rebase.png"'>
+
+<p>You can also simplify this by running a <code>git pull --rebase</code> instead of a normal <code>git pull</code>. Or you could do it manually with a <code>git fetch</code> followed by a <code>git rebase teamone/master</code> in this case.</p>
+
+<p>If you are using <code>git pull</code> and want to make <code>--rebase</code> the default, you can set the <code>pull.rebase</code> config value with something like.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git config --global pull.rebase true
+	</code>
+</pre>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
