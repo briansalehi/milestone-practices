@@ -1,321 +1,339 @@
-Pro Git, 2nd Edition
-Ben Straub, Scott Chacon
+<p>A <b>remote repository</b> is generally a bare repository — a Git repository that has no working directory. Because the repository is only used as a collaboration point, there is no reason to have a snapshot checked out on disk; it’s just the Git data. In the simplest terms, a <b>bare repository</b> is the contents of your project’s <code>.git</code> directory and nothing else.</p>
 
-Git on the Server
+<p>Git can use four distinct protocols to transfer data:<i> Local</i>,<i> HTTP</i>, <i>Secure Shell (SSH)</i> and<i> Git</i>.</p>
 
-*****
+<p>The most basic is the <b>Local</b> protocol, in which the remote repository is in another directory on the same host. This is often used if everyone on your team has access to a shared filesystem</p>
 
-A remote repository is generally a bare repository — a Git repository that has no working directory. Because the repository is only used as a collaboration point, there is no reason to have a snapshot checked out on disk; it’s just the Git data. In the simplest terms, a bare repository is the contents of your project’s .git directory and nothing else.
+<p>If you have a shared mounted filesystem, then you can <code>clone</code>, <code>push</code> to, and <code>pull</code> from a local file-based repository. To clone a repository like this, or to add one as a remote to an existing project, use the <i>path</i> to the repository as the URL. For example, to clone a local repository, you can run something like this:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git clone /srv/git/project.gitOr you can do this:
+		git clone file:///srv/git/project.git
+	</code>
+</pre>
 
-Git can use four distinct protocols to transfer data: Local, HTTP, Secure Shell (SSH) and Git.
+<p>Git operates slightly differently if you explicitly specify <code>file://</code> at the beginning of the URL. If you just specify the path, Git tries to use hardlinks or directly copy the files it needs. If you specify <code>file://</code>, Git fires up the processes that it normally uses to transfer data over a network, which is generally much less efficient. The main reason to specify the <code>file://</code> prefix is if you want a clean copy of the repository with extraneous references or objects left out.</p>
 
-*****
+<p>To add a <b>local repository</b> to an existing Git project, you can run something like this:</p>
 
-The most basic is the Local protocol, in which the remote repository is in another directory on the same host. This is often used if everyone on your team has access to a shared filesystem
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git remote add local_proj /srv/git/project.git
+	</code>
+</pre>
 
-*****
+<p>Git can communicate over HTTP using two different modes. Prior to Git <code>v1.6.6</code>, there was only one way it could do this which was very simple and generally read-only. In version <code>v1.6.6</code>, a new, smarter protocol was introduced that involved Git being able to intelligently negotiate data transfer in a manner similar to how it does over SSH. The newer version is often referred to as the Smart HTTP protocol and the older way as Dumb HTTP.</p>
 
-If you have a shared mounted filesystem, then you can clone, push to, and pull from a local file-based repository. To clone a repository like this, or to add one as a remote to an existing project, use the path to the repository as the URL. For example, to clone a local repository, you can run something like this:
-$ git clone /srv/git/project.gitOr you can do this:
-$ git clone file:///srv/git/project.git
+<p>Smart HTTP operates very similarly to the SSH or Git protocols but runs over standard HTTPS ports and can use various HTTP authentication mechanisms, meaning it’s often easier on the user than something like SSH, since you can use things like <i>username/password</i> authentication rather than having to set up SSH keys.</p>
 
-*****
+<p>It has probably become the most popular way to use Git now, since it can be set up to both serve anonymously like the <code>git://</code> protocol, and can also be pushed over with authentication and encryption like the SSH protocol. Instead of having to set up different URLs for these things, you can now use a single URL for both. If you try to <code>push</code> and the repository requires authentication (which it normally should), the server can prompt for a <i>username</i> and <i>password</i>. The same goes for read access.</p>
 
-Git operates slightly differently if you explicitly specify file:// at the beginning of the URL. If you just specify the path, Git tries to use hardlinks or directly copy the files it needs. If you specify file://, Git fires up the processes that it normally uses to transfer data over a network, which is generally much less efficient. The main reason to specify the file:// prefix is if you want a clean copy of the repository with extraneous references or objects left out
+<p>If the server does not respond with a Git HTTP smart service, the Git client will try to fall back to the simpler Dumb HTTP protocol. The Dumb protocol expects the bare Git repository to be served like normal files from the web server. The beauty of Dumb HTTP is the simplicity of setting it up. Basically, all you have to do is put a bare Git repository under your HTTP document root and set up a specific <code>post-update</code> hook, and you’re done (See <a href="/development-tools/git/hooks">Hooks</a>). At that point, anyone who can access the web server under which you put the repository can also clone your repository. To allow read access to your repository over HTTP, do something like this:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		cd /var/www/htdocs/
+		git clone --bare /path/to/git_project gitproject.git
+		cd gitproject.git
+		mv hooks/post-update.sample hooks/post-update
+		chmod a+x hooks/post-update
+	</code>
+</pre>
 
-To add a local repository to an existing Git project, you can run something like this:
-$ git remote add local_proj /srv/git/project.git
+<p>That’s all. The <code>post-update</code> hook that comes with Git by default runs the appropriate command <code>git update-server-info</code> to make HTTP fetching and cloning work properly. This command is run when you <code>push</code> to this repository (overSSH perhaps); then, other people can clone via something like:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git clone https://example.com/gitproject.git
+	</code>
+</pre>
 
-Git can communicate over HTTP using two different modes. Prior to Git 1.6.6, there was only one way it could do this which was very simple and generally read-only. In version 1.6.6, a new, smarter protocol was introduced that involved Git being able to intelligently negotiate data transfer in a manner similar to how it does over SSH.
+<p>In this particular case, we’re using the <code>/var/www/htdocs</code> path that is common for Apache setups, but you can use any static web server — just put the bare repository in its path. The Git data is served as basic static files (see <a href="/development-tools/git/internals">Git Internals</a> chapter for details about exactly how it’s served).</p>
 
-*****
+<p>Generally you would either choose to run a read/write Smart HTTP server or simply have the files accessible as read-only in the Dumb manner. It’s rare to run a mix of the two services.</p>
 
-The newer version is often referred to as the Smart HTTP protocol and the older way as Dumb HTTP.
+<p>Git over HTTPS can be a little more tricky to set up compared to SSH on some servers. Other than that, there is very little advantage that other protocols have over Smart HTTP for serving Git content.</p>
 
-*****
+<p>To clone a Git repository over SSH, you can specify an <code>ssh://</code> URL like this:</p>
 
-Smart HTTP operates very similarly to the SSH or Git protocols but runs over standard HTTPS ports and can use various HTTP authentication mechanisms, meaning it’s often easier on the user than something like SSH, since you can use things like username/password authentication rather than having to set up SSH keys.
-It has probably become the most popular way to use Git now, since it can be set up to both serve anonymously like the git:// protocol, and can also be pushed over with authentication and encryption like the SSH protocol. Instead of having to set up different URLs for these things, you can now use a single URL for both. If you try to push and the repository requires authentication (which it normally should), the server can prompt for a username and password. The same goes for read access.
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git clone ssh://[user@]server/project.git
+	</code>
+</pre>
 
-*****
+<p>Or you can use the shorter scp-like syntax for the SSH protocol:</p>
 
-If the server does not respond with a Git HTTP smart service, the Git client will try to fall back to the simpler Dumb HTTP protocol. The Dumb protocol expects the bare Git repository to be served like normal files from the web server. The beauty of Dumb HTTP is the simplicity of setting it up. Basically, all you have to do is put a bare Git repository under your HTTP document root and set up a specific post-update hook, and you’re done (See Git Hooks). At that point, anyone who can access the web server under which you put the repository can also clone your repository. To allow read access to your repository over HTTP, do something like this:
-$ cd /var/www/htdocs/
-$ git clone --bare /path/to/git_project gitproject.git
-$ cd gitproject.git
-$ mv hooks/post-update.sample hooks/post-update
-$ chmod a+x hooks/post-updateThat’s all. The post-update hook that comes with Git by default runs the appropriate command (git update-server-info) to make HTTP fetching and cloning work properly. This command is run when you push to this repository (overSSH perhaps); then, other people can clone via something like:
-$ git clone https://example.com/gitproject.git
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git clone [user@]server:project.git
+	</code>
+</pre>
 
-*****
+<p>In both cases above, if you don’t specify the optional username, Git assumes the user you’re currently logged in as.</p>
 
-In this particular case, we’re using the /var/www/htdocs path that is common for Apache setups, but you can use any static web server — just put the bare repository in its path. The Git data is served as basic static files (see the Git Internals chapter for details about exactly how it’s served).
+<p>In order for a repository to be served over the Git protocol, you must create a <code>git-daemon-export-ok</code> file — the daemon won’t serve a repository without that file in it — but, other than that, there is no security. Either the Git repository is available for everyone to clone, or it isn’t. This means that there is generally no pushing over this protocol. You can enable push access but, given the lack of authentication, anyone on the internet who finds your project’s URL could push to that project. Suffice it to say that this is rare.</p>
 
-*****
+<p>The Git protocol is often the fastest network transfer protocol available. If you’re serving a lot of traffic for a public project or serving a very large project that doesn’t require user authentication for read access, it’s likely that you’ll want to set up a Git daemon to serve your project. It uses the same data-transfer mechanism as the SSH protocol but without the encryption and authentication overhead.</p>
 
-Generally you would either choose to run a read/write Smart HTTP server or simply have the files accessible as read-only in the Dumb manner. It’s rare to run a mix of the two services.
+<p>Generally, you’ll pair it with SSH or HTTPS access for the few developers who have push (write) access and have everyone else use <code>git://</code> for read-only access. It’s also probably the most difficult protocol to set up. It must run its own daemon, which requires xinetd or systemd configuration or the like, which isn’t always a walk in the park. It also requires firewall access to port <code>9418</code>, which isn’t a standard port that corporate firewalls always allow. Behind big corporate firewalls, this obscure port is commonly blocked.</p>
 
-*****
+<p>In order to initially set up any Git server, you have to export an existing repository into a new bare repository — a repository that doesn’t contain a working directory.</p>
 
-Git over HTTPS can be a little more tricky to set up compared to SSH on some servers. Other than that, there is very little advantage that other protocols have over Smart HTTP for serving Git content.
+<p>In order to clone your repository to create a new bare repository, you run the clone command with the <code>--bare</code> option. By convention, bare repository directory names end with the suffix <code>.git</code>, like so:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone" data-output="2,3">
+	<code>
+		git clone --bare my_project my_project.git
+		Cloning into bare repository 'my_project.git'...
+		done.
+	</code>
+</pre>
 
-To clone a Git repository over SSH, you can specify an ssh:// URL like this:
-$ git clone ssh://[user@]server/project.gitOr you can use the shorter scp-like syntax for the SSH protocol:
-$ git clone [user@]server:project.gitIn both cases above, if you don’t specify the optional username, Git assumes the user you’re currently logged in as.
+<p>This is roughly equivalent to something like:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		cp -Rf my_project/.git my_project.git
+	</code>
+</pre>
 
-In order for a repository to be served over the Git protocol, you must create a git-daemon-export-ok file — the daemon won’t serve a repository without that file in it — but, other than that, there is no security. Either the Git repository is available for everyone to clone, or it isn’t. This means that there is generally no pushing over this protocol. You can enable push access but, given the lack of authentication, anyone on the internet who finds your project’s URL could push to that project. Suffice it to say that this is rare.
+<p>Now that you have a bare copy of your repository, all you need to do is put it on a server and set up your protocols. Let’s say you’ve set up a server called <i>git.example.com</i> to which you have SSH access, and you want to store all your Git repositories under the <code>/srv/git</code> directory. Assuming that <code>/srv/git</code> exists on that server, you can set up your new repository by copying your bare repository over:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		scp -r my_project.git user@git.example.com:/srv/git
+	</code>
+</pre>
 
-The Git protocol is often the fastest network transfer protocol available. If you’re serving a lot of traffic for a public project or serving a very large project that doesn’t require user authentication for read access, it’s likely that you’ll want to set up a Git daemon to serve your project. It uses the same data-transfer mechanism as the SSH protocol but without the encryption and authentication overhead.
+<p>At this point, other users who have SSH-based read access to the /srv/git directory on that server can clone your repository by running:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git clone user@git.example.com:/srv/git/my_project.git
+	</code>
+</pre>
 
-Generally, you’ll pair it with SSH or HTTPS access for the few developers who have push (write) access and have everyone else use git:// for read-only access. It’s also probably the most difficult protocol to set up. It must run its own daemon, which requires xinetd or systemd configuration or the like, which isn’t always a walk in the park. It also requires firewall access to port 9418, which isn’t a standard port that corporate firewalls always allow. Behind big corporate firewalls, this obscure port is commonly blocked.
+<p>If a user SSHs into a server and has write access to the <code>/srv/git/my_project.git</code> directory, they will also automatically have push access.</p>
 
-*****
+<p>Git will automatically add group write permissions to a repository properly if you run the git init command with the <code>--shared</code> option. Note that by running this command, you will not destroy any commits, refs, etc. in the process.</p>
 
-In order to initially set up any Git server, you have to export an existing repository into a new bare repository — a repository that doesn’t contain a working directory.
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		ssh user@git.example.com
+		cd /srv/git/my_project.git
+		git init --bare --shared
+	</code>
+</pre>
 
-*****
+<p>If you have a server to which all your developers already have SSH access, it’s generally easiest to set up your first repository there, because you have to do almost no work. If you want more complex access control type permissions on your repositories, you can handle them with the normal filesystem permissions of your server’s operating system.</p>
 
-In order to clone your repository to create a new bare repository, you run the clone command with the --bare option. By convention, bare repository directory names end with the suffix .git, like so:
-$ git clone --bare my_project my_project.git
-Cloning into bare repository 'my_project.git'...
-done.
+<p>If you want to place your repositories on a server that doesn’t have accounts for everyone on your team for whom you want to grant write access, then you must set up SSH access for them. We assume that if you have a server with which to do this, you already have an SSH server installed, and that’s how you’re accessing the server.</p>
 
-*****
+<p>There are a few ways you can give access to everyone on your team. The first is to set up accounts for everybody, which is straightforward but can be cumbersome. You may not want to run <code>adduser</code> (or the possible alternative useradd) and have to set temporary passwords for every new user. A second method is to create a single 'git' user account on the machine, ask every user who is to have write access to send you an SSH public key, and add that key to the <code>~/.ssh/authorized_keys</code> file of that new 'git' account. At that point, everyone will be able to access that machine via the 'git' account. This doesn’t affect the commit data in any way — the SSH user you connect as doesn’t affect the commits you’ve recorded. Another way to do it is to have your SSH server authenticate from an LDAP server or some other centralized authentication source that you may already have set up.</p>
 
-This is roughly equivalent to something like:
-$ cp -Rf my_project/.git my_project.git
+<p>Let’s walk through setting up SSH access on the server side.</p>
 
-*****
+<p>You can easily restrict the git user account to only Git-related activities with a limited shell tool called <code>git-shell</code> that comes with Git. If you set this as the git user account’s login shell, then that account can’t have normal shell access to your server. To use this, specify <code>git-shell</code> instead of bash or csh for that account’s login shell. To do so, you must first add the full pathname of the <code>git-shell</code> command to <code>/etc/shells</code> if it’s not already there.</p>
 
-Now that you have a bare copy of your repository, all you need to do is put it on a server and set up your protocols. Let’s say you’ve set up a server called git.example.com to which you have SSH access, and you want to store all your Git repositories under the /srv/git directory. Assuming that /srv/git exists on that server, you can set up your new repository by copying your bare repository over:
-$ scp -r my_project.git user@git.example.com:/srv/git
+<p>Now you can edit the shell for a user using <code>chsh &lt;username&gt; -s &lt;shell&gt;</code>:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo chsh git -s $(which git-shell)
+	</code>
+</pre>
 
-At this point, other users who have SSH-based read access to the /srv/git directory on that server can clone your repository by running:
-$ git clone user@git.example.com:/srv/git/my_project.git
+<p>Now, the git user can still use the SSH connection to push and pull Git repositories but can’t shell onto the machine. If you try, you’ll see a login rejection like this:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone" data-output="2-4">
+	<code>
+		ssh git@gitserver
+		fatal: Interactive git shell is not enabled.
+		hint: ~/git-shell-commands should exist and have read and execute access.
+		Connection to gitserver closed.
+	</code>
+</pre>
 
-If a user SSHs into a server and has write access to the /srv/git/my_project.git directory, they will also automatically have push access.
+<p>At this point, users are still able to use SSH port forwarding to access any host the git server is able to reach. If you want to prevent that, you can edit the <i>authorized_keys</i> file and prepend the following options to each key you’d like to restrict: <code>no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty</code></p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone" data-output="2">
+	<code>
+		cat ~/.ssh/authorized_keys
+		no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCB007n...
+	</code>
+</pre>
 
-Git will automatically addgroup write permissions to a repository properly if you run the git init command with the --shared option. Note that by running this command, you will not destroy any commits, refs, etc. in the process.
-$ ssh user@git.example.com
-$ cd /srv/git/my_project.git
-$ git init --bare --shared
+<p>Now Git network commands will still work just fine but the users won’t be able to get a shell. As the output states, you can also set up a directory in the git user’s home directory that customizes the <code>git-shell</code> command a bit. For instance, you can restrict the Git commands that the server will accept or you can customize the message that users see if they try to SSH in like that. Run git help shell for more information on customizing the shell.</p>
 
-*****
+<p>Next we’ll set up a daemon serving repositories using the “Git” protocol. This is a common choice for fast, unauthenticated access to your Git data. Remember that since this is not an authenticated service, anything you serve over this protocol is public within its network.</p>
 
-If you have a server to which all your developers already have SSH access, it’s generally easiest to set up your first repository there, because you have to do almost no work
+<p>Basically, you need to run this command in a daemonized manner:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git daemon --reuseaddr --base-path=/srv/git/ /srv/git/
+	</code>
+</pre>
 
-). If you want more complex access control type permissions on your repositories, you can handle them with the normal filesystem permissions of your server’s operating system.
+<p>The <code>--reuseaddr</code> option allows the server to restart without waiting for old connections to time out, while the <code>--base-path</code> option allows people to clone projects without specifying the entire path, and the path at the end tells the Git daemon where to look for repositories to export. If you’re running a firewall, you’ll also need to punch a hole in it at port <code>9418</code> on the box you’re setting this up on.</p>
 
-*****
+<p>Since systemd is the most common init system among modern Linux distributions, you can use it for that purpose. Simply place a file in /etc/systemd/system/git-daemon.service with these contents:</p>
 
-If you want to place your repositories on a server that doesn’t have accounts for everyone on your team for whom you want to grant write access, then you must set up SSH access for them. We assume that if you have a server with which to do this, you already have an SSH server installed, and that’s how you’re accessing the server.
+<pre class="language-bash">
+	<code>
+		[Unit]
+		Description=Start Git Daemon
 
-*****
+		[Service]
+		ExecStart=/usr/bin/git daemon --reuseaddr --base-path=/srv/git/ /srv/git/
 
-There are a few ways you can give access to everyone on your team. The first is to set up accounts for everybody, which is straightforward but can be cumbersome.
+		Restart=always
+		RestartSec=500ms
 
-*****
+		StandardOutput=syslog
+		StandardError=syslog
+		SyslogIdentifier=git-daemon
 
-You may not want to run adduser (or the possible alternative useradd) and have to set temporary passwords for every new user.
-A second method is to create a single 'git' user account on the machine, ask every user who is to have write access to send you an SSH public key, and add that key to the ~/.ssh/authorized_keys file of that new 'git' account. At that point, everyone will be able to access that machine via the 'git' account. This doesn’t affect the commit data in any way — the SSH user you connect as doesn’t affect the commits you’ve recorded.
-Another way to do it is to have your SSH server authenticate from an LDAP server or some other centralized authentication source that you may already have set up.
+		User=git
+		Group=git
 
-*****
+		[Install]
+		WantedBy=multi-user.target
+	</code>
+</pre>
 
-Let’s walk through setting up SSH access on the server side.
+<p>Finally, you’ll run <code>systemctl enable git-daemon</code> to automatically start the service on boot, and can start and stop the service with, respectively, <code>systemctl start git-daemon</code> and <code>systemctl stop git-daemon</code>.</p>
 
-*****
+<p>Next, you have to tell Git which repositories to allow unauthenticated Git server-based access to. You can do this in each repository by creating a file named <code>git-daemon-export-ok</code>.</p>
 
-You can easily restrict the git user account to only Git-related activities with a limited shell tool called git-shell that comes with Git. If you set this as the git user account’s login shell, then that account can’t have normal shell access to your server. To use this, specify git-shell instead of bash or csh for that account’s login shell. To do so, you must first add the full pathname of the git-shell command to /etc/shells if it’s not already there
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		cd /path/to/project.git
+		touch git-daemon-export-ok
+	</code>
+</pre>
 
-*****
+<p>The presence of that file tells Git that it’s OK to serve this project without authentication.</p>
 
-Now you can edit the shell for a user using chsh <username> -s <shell>:
-$ sudo chsh git -s $(which git-shell)
+<p>Setting up <b>Smart HTTP</b> is basically just enabling a <b>CGI</b> script that is provided with Git called <code>git-http-backend</code> on the server. This CGI will read the path and headers sent by a git fetch or git push to an HTTP URL and determine if the client can communicate over HTTP (which is true for any client since version 1.6.6). If the CGI sees that the client is smart, it will communicate smartly with it; otherwise it will fall back to the dumb behavior (so it is backward compatible for reads with older clients).</p>
 
-*****
+<p>We’ll set this up with Apache as the CGI server. If you don’t have Apache setup, you can do so on a Linux box with something like this:</p>
 
-Now, the git user can still use the SSH connection to push and pull Git repositories but can’t shell onto the machine. If you try, you’ll see a login rejection like this:
-$ ssh git@gitserver
-fatal: Interactive git shell is not enabled.
-hint: ~/git-shell-commands should exist and have read and execute access.
-Connection to gitserver closed.
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo apt-get install apache2 apache2-utils
+		a2enmod cgi alias env
+	</code>
+</pre>
 
-*****
+<p>This also enables the mod_cgi, mod_alias, and mod_env modules, which are all needed for this to work properly.</p>
+<p>You’ll also need to set the Unix user group of the /srv/git directories to www-data so your web server can read- and write-access the repositories, because the Apache instance running the CGI script will (by default) be running as that user:</p>
 
-At this point, users are still able to use SSH port forwarding to access any host the git server is able to reach. If you want to prevent that, you can edit the authorized_keys file and prepend the following options to each key you’d like to restrict:
-no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-ptyThe result should look like this:
-$ cat ~/.ssh/authorized_keys
-no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa
-AAAAB3NzaC1yc2EAAAADAQABAAABAQCB007n
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		chgrp -R www-data /srv/g
+	</code>
+</pre>
 
-*****
+<p>Next we need to add some things to the Apache configuration to run the git-http-backend as the handler for anything coming into the /git path of your web server.</p>
 
-Now Git network commands will still work just fine but the users won’t be able to get a shell. As the output states, you can also set up a directory in the git user’s home directory that customizes the git-shell command a bit. For instance, you can restrict the Git commands that the server will accept or you can customize the message that users see if they try to SSH in like that. Run git help shell for more information on customizing the shell.
+<pre class="language-bash">
+	<code>
+		SetEnv GIT_PROJECT_ROOT /srv/git
+		SetEnv GIT_HTTP_EXPORT_ALL
+		ScriptAlias /git/ /usr/lib/git-core/git-http-backend/
+	</code>
+</pre>
 
-*****
+<p>If you leave out <code>GIT_HTTP_EXPORT_ALL</code> environment variable, then Git will only serve to unauthenticated clients the repositories with the <code>git-daemon-export-ok</code> file in them, just like the Git daemon did.</p>
 
-Git Daemon
+<p>Finally you’ll want to tell Apache to allow requests to <code>git-http-backend</code> and make writes be authenticated somehow, possibly with an Auth block like this:</p>
 
-*****
+<pre class="language-bash">
+	<code>
+		&lt;Files "git-http-backend"&gt;
+			AuthType Basic
+			AuthName "Git Access"
+			AuthUserFile /srv/git/.htpasswd
+			Require expr !(%{QUERY_STRING} -strmatch '*service=git-receive-pack*' || %{REQUEST_URI} =~ m#/git-receive-pack$#)
+			Require valid-user
+		&lt;/Files&gt;
+	</code>
+</pre>
 
-Next we’ll set up a daemon serving repositories using the “Git” protocol. This is a common choice for fast, unauthenticated access to your Git data. Remember that since this is not an authenticated service, anything you serve over this protocol is public within its network.
+<p>That will require you to create a <code>.htpasswd</code> file containing the passwords of all the valid users. Here is an example of adding a “brian” user to the file:</p>
 
-*****
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		htpasswd -c /srv/git/.htpasswd brian
+	</code>
+</pre>
 
-Basically, you need to run this command in a daemonized manner:
-$ git daemon --reuseaddr --base-path=/srv/git/ /srv/git/
+<p>There are tons of ways to have Apache authenticate users, you’ll have to choose and implement one of them. This is just the simplest example we could come up with. You’ll also almost certainly want to set this up over SSL so all this data isencrypted.</p>
 
-*****
+<p>We don’t want to go too far down the rabbit hole of Apache configuration specifics, since you could well be using a different server or have different authentication needs. The idea is that Git comes with a CGI called <code>git-http-backend</code> that when invoked will do all the negotiation to send and receive data over HTTP. It does not implement any authentication itself, but that can easily be controlled at the layer of the web server that invokes it. You can do this with nearly any CGI-capable web server, so go with the one that you know best.</p>
 
-The --reuseaddr option allows the server to restart without waiting for old connections to time out, while the --base-path option allows people to clone projects without specifying the entire path, and the path at the end tells the Git daemon where to look for repositories to export. If you’re running a firewall, you’ll also need to punch a hole in it at port 9418 on the box you’re setting this up on.
-
-*****
-
-Since systemd is the most common init system among modern Linux distributions, you can use it for that purpose. Simply place a file in /etc/systemd/system/git-daemon.service with these contents:
-[Unit]
-Description=Start Git Daemon
-
-[Service]
-ExecStart=/usr/bin/git daemon --reuseaddr --base-path=/srv/git/ /srv/git/
-
-Restart=always
-RestartSec=500ms
-
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=git-daemon
-
-User=git
-Group=git
-
-[Install]
-WantedBy=multi-user.target
-
-*****
-
-Finally, you’ll run systemctl enable git-daemon to automatically start the service on boot, and can start and stop the service with, respectively, systemctl start git-daemon and systemctl stop git-daemon.
-
-*****
-
-Next, you have to tell Git which repositories to allow unauthenticated Git server-based access to. You can do this in each repository by creating a file named git-daemon-export-ok.
-$ cd /path/to/project.git
-$ touch git-daemon-export-okThe presence of that file tells Git that it’s OK to serve this project without authentication.
-
-*****
-
-Smart HTTP
-
-*****
-
-Setting up Smart HTTP is basically just enabling a CGI script that is provided with Git called git-http-backend on the server. This CGI will read the path and headers sent by a git fetch or git push to an HTTP URL and determine if the client can communicate over HTTP (which is true for any client since version 1.6.6). If the CGI sees that the client is smart, it will communicate smartly with it; otherwise it will fall back to the dumb behavior (so it is backward compatible for reads with older clients).
-
-*****
-
-We’ll set this up with Apache as the CGI server. If you don’t have Apache setup, you can do so on a Linux box with something like this:
-$ sudo apt-get install apache2 apache2-utils
-$ a2enmod cgi alias envThis also enables the mod_cgi, mod_alias, and mod_env modules, which are all needed for this to work properly.
-You’ll also need to set the Unix user group of the /srv/git directories to www-data so your web server can read- and write-access the repositories, because the Apache instance running the CGI script will (by default) be running as that user:
-$ chgrp -R www-data /srv/g
-
-*****
-
-Next we need to add some things to the Apache configuration to run the git-http-backend as the handler for anything coming into the /git path of your web server.
-SetEnv GIT_PROJECT_ROOT /srv/git
-SetEnv GIT_HTTP_EXPORT_ALL
-ScriptAlias /git/ /usr/lib/git-core/git-http-backend/If you leave out GIT_HTTP_EXPORT_ALL environment variable, then Git will only serve to unauthenticated clients the repositories with the git-daemon-export-ok file in them, just like the Git daemon did.
-Finally you’ll want to tell Apache to allow requests to git-http-backend and make writes be authenticated somehow, possibly with an Auth block like this:
-<Files "git-http-backend">
-    AuthType Basic
-    AuthName "Git Access"
-    AuthUserFile /srv/git/.htpasswd
-    Require expr !(%{QUERY_STRING} -strmatch '*service=git-receive-pack*' || %{REQUEST_URI} =~ m#/git-receive-pack$#)
-    Require valid-user
-</Files>That will require you to create a .htpasswd file containing the passwords of all the valid users. Here is an example of adding a “schacon” user to the file:
-$ htpasswd -c /srv/git/.htpasswd schaconThere are tons of ways to have Apache authenticate users, you’ll have to choose and implement one of them. This is just the simplest example we could come up with. You’ll also almost certainly want to set this up over SSL so all this data isencrypted.
-
-*****
-
-We don’t want to go too far down the rabbit hole of Apache configuration specifics, since you could well be using a different server or have different authentication needs. The idea is that Git comes with a CGI called git-http-backend that when invoked will do all the negotiation to send and receive data over HTTP. It does not implement any authentication itself, but that can easily be controlled at the layer of the web server that invokes it. You can do this with nearly any CGI-capable web server, so go with the one that you know best.
-
-*****
-
-Now that you have basic read/write and read-only access to your project, you may want to set up a simple web-based visualizer. Git comes with a CGI script called GitWeb that is sometimes used for this.
-
-*****
-
-Figure 49. The GitWeb web-based user interface
-
-*****
-
-If you want to check out what GitWeb would look like for your project, Git comes with a command to fire up a temporary instance if you have a lightweight web server on your system like lighttpd or webrick. On Linux machines, lighttpd is often installed, so you may be able to get it to run by typing git instaweb in your project directory.
-
-*****
-
-To start instaweb with a non-lighttpd handler, you can run it with the --httpd option.
-$ git instaweb --httpd=webrick
-
-*****
-
-That starts up an HTTPD server on port 1234 and then automatically starts a web browser that opens on that page. It’s pretty easy on your part. When you’re done and want to shut down the server, you can run the same command with the --stop option:
-$ git instaweb --httpd=webrick --stop
-
-*****
-
-If you want to run the web interface on a server all the time for your team or for an open source project you’re hosting, you’ll need to set up the CGI script to be served by your normal web server. Some Linux distributions have a gitweb package that you may be able to install via apt or dnf, so you may want to try that first. We’ll walk through installing GitWeb manually very quickly. First, you need to get the Git source code, which GitWeb comes with, and generate the custom CGI script:
-$ git clone git://git.kernel.org/pub/scm/git/git.git
-$ cd git/
-$ make GITWEB_PROJECTROOT="/srv/git" prefix=/usr gitweb
-    SUBDIR gitweb
-    SUBDIR ../
-make[2]: `GIT-VERSION-FILE' is up to date.
-    GEN gitweb.cgi
-    GEN static/gitweb.js
-$ sudo cp -Rf gitweb /var/www/Notice that you have to tell the command where to find your Git repositories with the GITWEB_PROJECTROOT variable. Now, you need to make Apache use CGI for that script, for which you can add a VirtualHost:
-<VirtualHost *:80>
-    ServerName gitserver
-    DocumentRoot /var/www/gitweb
-    <Directory /var/www/gitweb>
-        Options +ExecCGI +FollowSymLinks +SymLinksIfOwnerMatch
-        AllowOverride All
-        order allow,deny
-        Allow from all
-        AddHandler cgi-script cgi
-        DirectoryIndex gitweb.cgi
-    </Directory>
-</VirtualHost>Again, GitWeb can be served with any CGI or Perl capable web server; if you prefer to use something else, it shouldn’t be difficult to set up. At this point, you should be able to visit http://gitserver/ to view your repositories online.
+<p>Now that you have basic read/write and read-only access to your project, you may want to set up a simple web-based visualizer. Git comes with a CGI script called GitWeb that is sometimes used for this.</p>
 
 ![git-one-web.png]
-*****
 
-GitWeb is pretty simplistic though. If you’re looking for a modern, fully featured Git server, there are several open source solutions out there that you can install instead. As GitLab is one of the popular ones
+<p>If you want to check out what GitWeb would look like for your project, Git comes with a command to fire up a temporary instance if you have a lightweight web server on your system like lighttpd or webrick. On Linux machines, lighttpd is often installed, so you may be able to get it to run by typing git instaweb in your project directory.</p>
 
-*****
+<p>To start instaweb with a non-lighttpd handler, you can run it with the --httpd option.</p>
 
-This is harder than the GitWeb option and will require more maintenance, but it is a fully featured option.
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git instaweb --httpd=webrick
+	</code>
+</pre>
 
---
-Reading books with ReadEra
-https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
+<p>That starts up an HTTPD server on port <code>1234</code> and then automatically starts a web browser that opens on that page. It’s pretty easy on your part. When you’re done and want to shut down the server, you can run the same command with the <code>--stop</code> option:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git instaweb --httpd=webrick --stop
+	</code>
+</pre>
+
+<p>If you want to run the web interface on a server all the time for your team or for an open source project you’re hosting, you’ll need to set up the CGI script to be served by your normal web server. Some Linux distributions have a gitweb package that you may be able to install via apt or dnf, so you may want to try that first. We’ll walk through installing GitWeb manually very quickly. First, you need to get the Git source code, which GitWeb comes with, and generate the custom CGI script:</p>
+
+<pre class="language-bash command-line" data-host="milestone" data-output="4-8">
+	<code>
+		git clone git://git.kernel.org/pub/scm/git/git.git
+		cd git/
+		make GITWEB_PROJECTROOT="/srv/git" prefix=/usr gitweb
+			SUBDIR gitweb
+			SUBDIR ../
+		make[2]: `GIT-VERSION-FILE' is up to date.
+			GEN gitweb.cgi
+			GEN static/gitweb.js
+		sudo cp -Rf gitweb /var/www/
+	</code>
+</pre>
+
+<p>Notice that you have to tell the command where to find your Git repositories with the <code>GITWEB_PROJECTROOT</code> variable. Now, you need to make Apache use CGI for that script, for which you can add a VirtualHost:</p>
+
+<pre class="language-bash">
+	<code>
+		&lt;VirtualHost *:80&gt;
+			ServerName gitserver
+			DocumentRoot /var/www/gitweb
+			&lt;Directory /var/www/gitweb&gt;
+				Options +ExecCGI +FollowSymLinks +SymLinksIfOwnerMatch
+				AllowOverride All
+				order allow,deny
+				Allow from all
+				AddHandler cgi-script cgi
+				DirectoryIndex gitweb.cgi
+			&lt;/Directory&gt;
+		&lt;/VirtualHost&gt;
+	</code>
+</pre>
+
+<p>Again, GitWeb can be served with any CGI or Perl capable web server; if you prefer to use something else, it shouldn’t be difficult to set up. At this point, you should be able to visit <code>http://gitserver/</code> to view your repositories online.</p>
+
+<p>GitWeb is pretty simplistic though. If you’re looking for a modern, fully featured Git server, there are several open source solutions out there that you can install instead. As GitLab is one of the popular ones</p>
+
+<p>This is harder than the GitWeb option and will require more maintenance, but it is a fully featured option.</p>
