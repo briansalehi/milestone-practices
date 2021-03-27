@@ -268,6 +268,7 @@ Abstraction
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>Information can be classified into at least two categories: data that we don’t mind the public knowing and data that is private. C++ enables you to model class attributes and methods as public or private. Public class members can be used by anyone in possession of an object of the class. Private class members can be used only within the class (or its “friends”). C++ keywords public and private help you as the designer of a class decide what parts of a class can be invoked from outside it, for instance, from main(), and what cannot.</p>
 
 <p>While allowing you to design a class as a container that encapsulates data and methods that operate on that data, C++ empowers you to decide what information remains unreachable to the outside world (that is, unavailable outside the class) via keyword private. At the same time, you have the possibility to allow controlled access to even information declared private via methods that you have declared as public. Thus your implementation of a class can abstract member information that classes and functions outside this class don’t need to have access to.</p>
@@ -397,7 +398,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -410,7 +411,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

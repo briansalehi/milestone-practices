@@ -268,6 +268,7 @@ Output Stream
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p><code>operator&lt;&lt;</code> used when writing into a stream is called the <b>stream insertion operator</b>. You use it when writing to the display, file, and so on.</p>
 
 <p><code>operator&gt;&gt;</code> used when writing a stream into a variable is called the <b>stream extraction operator</b>. You use it when reading input from the keyboard, file, and so on.</p>
@@ -431,7 +432,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -444,7 +445,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

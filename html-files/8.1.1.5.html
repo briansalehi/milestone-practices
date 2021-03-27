@@ -268,6 +268,7 @@ Name Space
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>Global variables present many problems in large software systems because they can be accessed and possibly modified anywhere in the program. They also can lead to programming errors, since an important global variable may be hidden by a local variable of the same name. As a result, it is best to avoid global variables. We may not be able to avoid globals entirely, however.</p>
 
 <p>A namespace is a mechanism that allows a group of related names to be defined in one place. This helps organize global objects into natural groups and minimizes the problems of globals.</p>
@@ -286,7 +287,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Professional C++: page 8</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: page 8</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
 </ul>
 <hr />
 <h3>
@@ -403,7 +405,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -416,7 +418,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

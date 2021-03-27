@@ -268,6 +268,7 @@ Unary Function Object
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>Classes that contain only function operator <code>operator()</code> are called function objects, as they can be only used when are called just like functions. Function objects have an advantage over lambda functions (discussed later), that which they can be used multiple times while lambda functions must be implemented where they should be called. Another advantage is that function objects can contain more lines of code while lambda functions are strongly recommended to be as short as possible.</p>
 
 <p>A unary function can do something very simple—for example, display an element on the screen. This can be programmed as the following:</p>
@@ -464,7 +465,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -477,7 +478,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

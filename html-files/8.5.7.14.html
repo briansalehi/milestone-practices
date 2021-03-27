@@ -268,6 +268,7 @@ Replace
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p><code>replace()</code> and <code>replace_if()</code> are the STL algorithms that can replace elements in a collection that are equivalent to a supplied value or satisfy a given condition, respectively.</p> 
 
 <p>Yet the container numsInVec has not been resized yet. Elements have been deleted by the remove algorithms and other elements have been shifted forward, but the <code>size()</code> has remained unaltered, meaning there are values at the end of the vector. To resize the container (and this is important, else it has unwanted values at the end), you need to use the iterator returned by <code>remove()</code> or <code>remove_if()</code> in a subsequent call to <code>erase()</code>, as shown below.</p>
@@ -406,7 +407,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -419,7 +420,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

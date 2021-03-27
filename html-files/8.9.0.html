@@ -266,6 +266,7 @@ General Purpose GPU Programming
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 This section covers famous parallel programming libraries including
 CUDA and OpenCL or maybe even OpenGL.
 Try not to skim and code all the pages by yourself.
@@ -294,6 +295,12 @@ Table of Content
 	
 </a>
 </div>
+<a href="#8-9-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>2. 
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="8-9-2-0">
+</div>
 </div>
 <script>
 function darkmode() {
@@ -308,7 +315,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -321,7 +328,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

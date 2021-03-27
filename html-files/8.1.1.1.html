@@ -268,6 +268,7 @@ Preprocessor Directives
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>As the name suggests, a preprocessor is a tool that runs before the actual compilation starts. Preprocessor directives are commands to the preprocessor and always start with a pound sign #.</p>
 
 <p>The following table shows some of the most common preprocessor directives.</p>
@@ -331,8 +332,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Professional C++: page 5</li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: page 5</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
 </ul>
 <hr />
 <h3>
@@ -427,7 +428,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -440,7 +441,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

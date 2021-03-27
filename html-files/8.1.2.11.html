@@ -268,6 +268,7 @@ global enumerations
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>in previous practice, enumeration was introduced by class expression, though, inherited by C, in C++ enumerations can also be declared by only <i>enum</i> keyword. Though, there is a big difference between <i>enum</i> and <i>enum class</i> declared enumerations.</p>
 
 <p>Enumeration members defined by <i>enum</i> are visible globally, but enumberation members defined by <i>enum class</i> are scoped (next practice) and their scope must be specified before use. Generally, it's best practice to avoid globals.</p>
@@ -354,7 +355,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -367,7 +368,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

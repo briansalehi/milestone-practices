@@ -265,6 +265,7 @@ C
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>This section is not intended to be a tutorial, but a series of notebooks which help you learn more C programming language effectively.</p>
 
 <p>This section is contained of notebooks, each of which discussing one particular topic in C programming language. You can use them as daily practice to warm your hands up on coding in C. All of topics are written as simple as possible and most of them are based on C standards, So they should be easily compiled on your system using the compiler of your interest, e.g. GCC, Clang.</p>
@@ -446,7 +447,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -459,7 +460,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

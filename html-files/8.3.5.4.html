@@ -268,6 +268,7 @@ Custom Exception
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>All existing exception handlers that <code>catch(const std::exception&)</code> and work for <code>bad_alloc</code>, <code>bad_cast</code> and the like will automatically scale up to catch your new exception class as well because it has the base class in common with them.</p>
 
 <p><code>virtual const char* what() const throw()</code> it ends with <code>throw()</code>, which means that this function itself is not expected to throw an exception. A very important and relevant restriction on a class that is used as an exception object. If you still insert a throw within this function, you can expect a compiler warning.</p>
@@ -396,7 +397,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -409,7 +410,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

@@ -268,6 +268,7 @@ Exception Lookup
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>Where an exception is thrown, using <code>throw</code>, the compiler inserts a dynamic lookup for a compatible <code>catch(Type)</code> that can handle this exception. The exception handling logic first checks if the line throwing the exception is within a try block. If so, it seeks the <code>catch(Type)</code> that can handle the exception of this Type. If the <code>throw</code> statement is not within a try block or if there is no compatible <code>catch()</code> for the exception type, the exception handling logic seeks the same in the calling function. So, the exception handling logic climbs the stack, one calling function after another, seeking a suitable <code>catch(Type)</code> that can handle the exception. At each step in the stack unwinding procedure, the variables local to that function are destroyed in reverse sequence of their construction.</p>
 
 
@@ -384,7 +385,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -397,7 +398,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

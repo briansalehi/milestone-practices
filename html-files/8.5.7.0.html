@@ -267,6 +267,7 @@ Algorithms
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>An important part of the Standard Template Library (STL) is a set of generic functions, supplied by the header &lt;algorithm&gt;, that help  manipulate or work with the contents of a container.</p>
 
 <p>Although most algorithms work via iterators on containers, not all algorithms necessarily work on containers and hence not all algorithms need iterators. Some, such as <code>swap()</code>, simply accept a pair of values to swap them. Similarly, <code>min()</code> and <code>max()</code> work directly on values, too.</p>
@@ -488,6 +489,10 @@ Mutating algorithms are those that change the contents or the order of the seque
 		</tr>
 	</tbody>
 </table>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.6.5.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/algorithms/count">Next Page</a></li>
+</ul>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -500,10 +505,6 @@ References
 </h3>
 <ul class="list-group">
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 23</li>
-</ul>
-<ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.5.6.5.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/algorithms/count">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -634,7 +635,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -647,7 +648,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

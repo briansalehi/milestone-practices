@@ -1,4 +1,4 @@
-#C++ Primer Plus
 #C++ Primer Plus, 6th Edition - Stephen Prata
-#Sam's Teach Yourself C++ in One Hour a Day
+Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski
+#Professional C++, 4th Edition - Marc Gregoire
 #Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao

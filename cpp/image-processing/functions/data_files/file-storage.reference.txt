@@ -8,5 +8,6 @@
 # e.g. book title: 45 # only page 45
 # e.g. https://example.com
 # [link]
+#Professional C++, 4th Edition - Marc Gregoire
 #Sam's Teach Yourself C++ in One Hour a Day
 #Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao

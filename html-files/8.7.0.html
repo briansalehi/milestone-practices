@@ -266,8 +266,13 @@ Graphical User Interface
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-warning" role="progressbar" style="width: 66%; background-color: #ffc107 !important;" aria-valuenow="2" aria-valuemin="1" aria-valuemax="3">Medium</div></div></div>
 <p>This section holds essential parts of Qt framework to practice.</p>
 <p>Try to write code by yourself and see the results.</p>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.6.3.3.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/fundamentals">Next Page</a></li>
+</ul>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -280,10 +285,6 @@ References
 </h3>
 <ul class="list-group">
 <li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka</li>
-</ul>
-<ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.6.3.3.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/fundamentals">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -476,7 +477,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -489,7 +490,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

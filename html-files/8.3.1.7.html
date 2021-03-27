@@ -268,6 +268,7 @@ Copy Constructor
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>When you pass a variable by value to a function, that function will copy that value and assigns that to its parameter. That is, after invoking that function, you will have two of those values on memory. This also happens when you pass an object to a function by values. Classes do not have any idea how to copy their members into new location by themselves. So that's out job to make sure an object will be copied properly when it's passed to a function.</p>
 
 <p>The copy constructor is an overloaded constructor that you supply. It is invoked by the compiler every time an object of the class is copied.</p>
@@ -488,7 +489,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -501,7 +502,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

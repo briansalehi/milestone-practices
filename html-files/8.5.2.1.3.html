@@ -269,6 +269,7 @@ Finding Element in Set
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>To find an element in a container, first a variable of type <i>constant iterator</i> needs to be declared and the return value of function <code>find()</code> be assigned to it. If you need to find more than one instance of an element, you can make the iterator non-constant and increment it in a loop until you hit the botton of the container.</p>
 
 Use <code>multiset::count()</code> to find the number of elements in the <code>std::multiset</code> that have the same value as that supplied as an argument to this function.
@@ -427,7 +428,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -440,7 +441,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

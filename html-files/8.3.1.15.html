@@ -268,6 +268,7 @@ Structure
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>Structures are just the same as classes in C++.</p>  
 
 <p><i>struct</i> is a keyword from the days of C, and for all practical purposes it is treated by a C++ compiler similarly to a class. The exceptions are applicable to the access specifiers (public and private) when the programmer has not specified any. Unless specified, members in a struct are public by default (private for a class), and unless specified, a struct features public inheritance from a base struct (private for a class).</p> 
@@ -419,7 +420,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -432,7 +433,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

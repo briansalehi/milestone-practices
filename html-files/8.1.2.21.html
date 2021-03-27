@@ -268,6 +268,7 @@ typeinfo
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p>Using <i>implicit<i> type declaration makes your code readable for sure, but it won't hide the fact that you need to know what kind of types you are using in your program. Type deductions also make it even harder when variable types are complex.</p>  
 
 <p>To find a variable's type, you can you <i>typeid()</i> object in <i>ypeinfo</i> header file, and use <i>name()</i> method to show the type name. Also using <i>before()</i> method clarifies which type precedes the other.</p>
@@ -397,7 +398,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -410,7 +411,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

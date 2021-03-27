@@ -1,14 +1,10 @@
-Like many programming languages, creating and running a C++ program requires
-several steps.
-First, we create a C++ source file into which we enter the lines of our
-program.
-After we save this file, we then run a program, called a compiler, which
-generates a machine-code interpretation of this program.
-Another program, called a linker (which is typically invoked automatically by
-the compiler), includes any required library code functions needed and
-produces the final machine-executable file.
+<p>Like many programming languages, creating and running a C++ program requires several steps.</p>
 
-Compilation process is done in the following steps:
+<p>First, we create a C++ source file into which we enter the lines of our program. After we save this file, we then run a program, called a compiler, which generates a machine-code interpretation of this program.</p>
+
+<p>Another program, called a linker (which is typically invoked automatically by the compiler), includes any required library code functions needed and produces the final machine-executable file.</p>
+
+<p>Compilation process is done in the following steps:</p>
 
 <ul>
 <li><b>source code</b>: the language syntax we deal with, and what we have to

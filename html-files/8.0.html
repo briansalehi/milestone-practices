@@ -270,6 +270,10 @@ C++
 <p>This repository is contained of notebooks, each of which discussing one particular topic in Cxx language. You can use them as daily practices to warm your hands up on coding in Cxx. All of topics are written as simple as possible and most of them are based on Cxx standards, So they should be easily compiled on your system.</p>
 
 <p><b>NOTE:</b> As this repository is growing, non-standard sections are added to expand the topics covered in this practical repository and not all sections work with standard Cxx headers, e.g. General Purpose GPU Programming (GPGPU), Image Processing, Network Programming, GUI Development, etc.</p>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/udp-client">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals">Next Page</a></li>
+</ul>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -283,10 +287,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
-</ul>
-<ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/udp-client">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals">Next Page</a></li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
 </ul>
 <hr />
 <h3>
@@ -1678,6 +1679,12 @@ Table of Content
 	
 </a>
 </div>
+<a href="/cpp/gpgpu/cuda" class="list-group-item group-child">
+	2. 
+	<span class="badge badge-primary badge-pill">0</span>
+</a>
+<div class="list-group collapse" id="8-9-2-0">
+</div>
 </div>
 </div>
 <script>
@@ -1693,7 +1700,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -1706,7 +1713,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);

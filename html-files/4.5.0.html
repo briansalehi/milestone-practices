@@ -266,6 +266,7 @@ CMake
 </svg>
 </a>
 </h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-warning" role="progressbar" style="width: 66%; background-color: #ffc107 !important;" aria-valuenow="2" aria-valuemin="1" aria-valuemax="3">Medium</div></div></div>
 <p><b>CMake</b> is a suite of tools which covers everything from setting up a build right through to producing packages ready for distribution. Not only does it cover the process from start to end, it also supports a wide range of platforms, tools and languages. When working with CMake, it helps to understand its view of the world. Loosely speaking, the start to end process according to CMake looks something like this:</p>
 
 <img class="img-responsive" src="/development-tools/cmake-functionality-structure.png" alt="cmake functionality structure" loading="lazy" onerror='this.onerror=null; this.src="development-tools/cmake-functionality-structure.png"'>
@@ -286,7 +287,7 @@ References
 <li class='list-group-item'>Mastering CMake, Edition 3.1 - Ken Martin, Bill Hoffman (2015)</li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/4.4.0.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/make">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/cmake/installation">Next Page</a></li>
 </ul>
 <hr />
@@ -334,7 +335,7 @@ function darkmode() {
 	} else {
 		sessionStorage.setItem('darkmode', false);
 		bodystyle.classList.remove("dark-mode");
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 	}
 }
 darkmode();
@@ -347,7 +348,7 @@ function toggle_darkmode() {
 	if (dark === 'true' || dark == 'undefined') {
 		bodystyle.classList.remove("dark-mode");
 		sessionStorage.setItem('darkmode', false);
-		icon.innerHTML = '&#x1F312;';
+		icon.innerHTML = '&#x263d;';
 		toggle_settings();
 	} else {
 		sessionStorage.setItem('darkmode', true);
