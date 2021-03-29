@@ -1,0 +1,173 @@
+<h4>Updating Debian-based systems</h4>
+
+<p>Some updates require that the system be rebooted before they can take effect. By default, Ubuntu systems don't automatically reboot after an update is installed. If you keep it that way, you'll see a message about it when you log in to the system. But if you prefer, you can set Ubuntu to automatically reboot after it automatically updates itself.</p>
+
+<p>Go into the <i>/etc/apt/apt.conf.d</i> directory and open the <i>50unattended-upgrades</i> file in your favorite text editor.</p>
+
+<pre class="language-bash">
+	<code>
+		//Unattended-Upgrade::Automatic-Reboot "false";
+	</code>
+<pre>
+
+<p>Uncomment the line by removing the leading slashes, and change <code>false</code> to <code>true</code>. If you'd rather have the machine reboot at a specific time, scroll down to Where you'll see this line of code:</p>
+
+<pre class="language-bash">
+	<code>
+		//Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+	</code>
+</pre>
+
+<p>There's that old, basic precept that thou shalt not install system updates on a production system without first testing them on a test system. Any operating system vendor can occasionally supply you with problematic updates, and that has included Ubuntu. Ubuntu's automatic update feature is in direct opposition to that basic precept. If automatic updates have been enabled, disabling them is quite easy, if you choose to do so:</p>
+
+<p>To disable automatic updates, just go into the <i>/etc/apt/apt.conf.d</i> directory and open the <i>20auto-upgrades</i> file in your favorite text editor. What you'll see is this:</p>
+
+<pre class="language-bash">
+	<code>
+		APT::Periodic::Update-Package-Lists "1";
+		APT::Periodic::Unattended-Upgrade "1";
+	</code>
+</pre>
+
+<p>Change the parameter for that second line to 0, so that the file will now look like this:</p>
+
+<pre class="language-bash">
+	<code>
+		APT::Periodic::Update-Package-Lists "1";
+		APT::Periodic::Unattended-Upgrade "0";
+	</code>
+</pre>
+
+<p>Now, the system will still check for updates and show a message at the login screen when any are available, but it won't automatically install them. And of course, it should go without saying that you need to check your systems on a regular basis to see if updates are available. If you do prefer to leave automatic updates enabled, be sure to either enable automatic rebooting or to log in to the system at least a couple of times a week to see if it needs to be rebooted.</p>
+
+<p>If you want to see if there are any security-related updates available, but don't want to see any non-security updates, use the unattended-upgrade command, like so:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo unattended-upgrade --dry-run -d
+	</code>
+</pre>
+
+<p>To manually install the security-related updates without installing non-security updates, just run the following line of code:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo unattended-upgrade -d
+	</code>
+</pre>
+
+<p>Also, if you're running a non-Ubuntu flavor of Debian, which would include Raspbian for the Raspberry Pi, you can give it the same functionality as Ubuntu by installing the unattended-upgrades package.</p>
+
+<h4>Updating Red Hat 7-based systems</h4>
+
+<p>With Red Hat-based systems, which include CentOS and Oracle Linux, there's no automatic update mechanism that you can set up during installation. So, with the default configuration, you'll need to perform updates yourself</p>
+
+<p>To update a Red Hat 7-based system, just run this one command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo yum upgrade
+	</code>
+</pre>
+
+<p>You might just want to see security-related updates:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo yum updateinfo list updates security
+	</code>
+</pre>
+
+<p>If the only thing you want to install is just the security updates, run the following command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo yum upgrade --security
+	</code>
+</pre>
+
+To automatically update a CentOS system, install and enable <code>yum-cron</code>:
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo yum install yum-cron
+		sudo systemctl enable --now yum-cron
+	</code>
+</pre>
+
+<p>To configure it, go into the <i>/etc/yum</i> directory, and edit the <i>yum-cron.conf</i> file.</p>
+
+<p>This lists the various types of upgrades we can do. The last line shows that we're set to update everything.</p>
+
+<p>Let's say that you only want security updates to get applied automatically. Just change the last line to the following:</p>
+
+<pre class="language-bash">
+	<code>
+		update_cmd = security
+	</code>
+</pre>
+
+<p>If you want the updates to get automatically installed, change the <cde>apply_updates</cde> parameter to yes.</p>
+
+<p>Note that unlike Ubuntu, there's no setting to make the system automatically reboot itself after an update.</p>
+
+<p><code>theemail_to =line</code> is set to send messages to the root user account. If you want to receive messages at your own account, just change it here.</p>
+
+<p>To see the messages, you'll need to install a mail reader program, if one isn't already installed. (It hasn't been installed if you chose Minimal installation when you installed the operating system.) Your best bet is to install mutt, like so:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo yum install mutt
+	</code>
+</pre>
+
+<p>As with all operating systems, certain updates will require that the system be restarted.</p>
+
+<p>You need to make sure that <code>needs-restarting</code> is installed on your system.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo yum install yum-utils
+	</code>
+</pre>
+
+<p>Once the package is installed, there are three ways to use <code>needs-restarting</code>. If you just run the command without any option switches, you'll see the services that need to be restarted and the packages that require you to reboot the machine. You can also use the <code>-s</code> or <code>-r</code> options, as shown here:</p>
+
+<p>This shows the services that need to be restarted, and the reason why the system might need to be rebooted.</p>
+<pre class="language-cpp">
+	<code>
+		sudo needs-restarting
+	</code>
+</pre>
+
+<p>This only shows the services that need to be restarted.</p>
+<pre class="language-cpp">
+	<code>
+		sudo needs-restarting -s
+	</code>
+</pre>
+
+<p>This only shows the reasons why the system needs to be rebooted.</p>
+<pre class="language-cpp">
+	<code>
+		sudo needs-restarting -r
+	</code>
+</pre>
+
+<h4>Updating Red Hat 8-based systems</h4>
+
+<p>The main functional difference between yum and dnf is that dnf has a different automatic update mechanism. Instead of installing the yum-cron package, you'll now install the dnf-automatic package, like so:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo dnf install dnf-automatic
+	</code>
+</pre>
+
+<p>In the <i>/etc/dnf</i> directory, you'll see the automatic.conf file, which you'll configure the same way as you did the <i>yum-cron.conf</i> file for CentOS 7. Instead of working as a cron job, as the old <code>yum-cron</code> did, <code>dnf-automatic</code> works with a systemd timer. When you first install <i>dnf-automatic</i>, the timer is disabled. Enable it and start it by running the following line of code:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		sudo systemctl enable --now dnf-automatic.timer
+	</code>
+</pre>
