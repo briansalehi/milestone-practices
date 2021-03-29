@@ -7,6 +7,7 @@
 # e.g. book title: 45-47 # pages 45 through 47, pages must be separated by - to be meaningful to script
 # e.g. book title: 45 # only page 45
 # e.g. https://example.com
+#Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski
 # [link]
 #Professional C++, 4th Edition - Marc Gregoire
 #Sam's Teach Yourself C++ in One Hour a Day

@@ -6,6 +6,7 @@
 # e.g. book title: 45,46
 # e.g. book title: 45-47
 # https://example.com
+#Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski
 # [link]
 #Professional C++, 4th Edition - Marc Gregoire
 #Sam's Teach Yourself C++ in One Hour a Day
