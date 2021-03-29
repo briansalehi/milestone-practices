@@ -1,1 +1,15 @@
-Assertion function is defined in **assert.h** header file which evaluates the expression in its parameters then asserts if the expression is true else it will fail.
+<p>Although it is good to test every code path immediately after programming, it might be physically impossible for very large applications. What is possible, though, is to check for valid expressions or variable values. The assert macro enables you to do just that. To use assert you include <assert.h> and the syntax is as follows:</p>
+
+<pre class="language-cpp">
+	<code>
+		assert(expression that evaluates to true or false);
+	</code>
+</pre>
+
+<p>Assertion function is defined in <code>assert.h</code> header file which evaluates the expression in its parameters then asserts if the expression is true else it will fail.</p>
+
+<p><code>assert()</code> is typically disabled in <b>release modes</b> and provides you with an error message or information only in the <b>debug build</b> of most development environments.</p>
+
+<p>Additionally, some environments have implemented <code>assert()</code> as a function, not as a macro.</p>
+
+<p>As <code>assert()</code> does not make it to the <b>release build</b>, it is important to ensure that checks that are critical to the functioning of your application (for example, the return value of a dynamic_cast operation) are still performed using an if-statement. An <code>assert()</code> assists you in problem detection; it’s not something to replace pointer checks necessary in the code.</p>

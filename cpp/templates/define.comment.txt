@@ -1,5 +1,41 @@
-**Macro** is a kind of variable having no type, where its value
-will be substituted anywhere it is specified in **compile time**.  
-That is, macros are just a simple string substitution approach,
-mostly useful in embedded development where there is a limited
-amount of memory to hold all of the variables.
+<p><b>Macro</b> is a kind of variable having no type, where its value will be substituted anywhere it is specified in <b>compile time</b>. That is, macros are just a simple string substitution approach, mostly useful in embedded development where there is a limited amount of memory to hold all of the variables.</p>
+
+<p>The syntax of using <code>#define</code> to compose a constant is simple:</p>
+
+<pre class="language-cpp">
+	<code>
+		#define identifier value
+	</code>
+</pre>
+
+<p>Note that macros are not type sensitive and macro functions can therefore cause problems.</p>
+
+<p>Macros enable you to reuse certain utility functions irrespective of the type of variables you are dealing with. Consider the following line:</p>
+
+<pre class="language-cpp">
+	<code>
+		#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+	</code>
+</pre>
+
+<p>You can use this macro function <code>MIN</code> on integers:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::cout &lt;&lt; MIN(25, 101) &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>But you can reuse the same on <code>double</code>, too:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::cout &lt;&lt; MIN(0.1, 0.2) &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>These macro functions get expanded inline before compilation and hence the performance of a simple macro is superior to that of an ordinary function call doing the same task. This is because the function call requires the creation of a call stack, passing arguments, and so on—administrative overload that often takes more CPU time than the calculation of MIN itself.</p>
+
+<p>Yet, macros do not support any form of type safety, and that is a major disadvantage.</p> 
+
+<p>Additionally, debugging a complicated macro is not easy either. If you need the ability to program generic functions that are type independent, yet type safe, you program a <a href="/cpp/templates/template-function">template function</a> instead of a <a href="/cpp/templates/macro-function">macro function</a>.</p>

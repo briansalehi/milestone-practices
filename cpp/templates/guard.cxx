@@ -1,11 +1,7 @@
-#ifndef _IOSTREAM_
-#define _IOSTREAM_
-#include <iostream>
+#include "guard.hpp"
 
 int main()
 {
-    std::cout << "macros are here" << std::endl;
+	display();
     return 0;
 }
-
-#endif

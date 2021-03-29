@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>validate expression using assert macro</title>
+<title>Define Macro</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -247,7 +247,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.4.0.html">Macros and Templates</a></li>
-<li class='breadcrumb-item active'>validate expression using assert macro</li>
+<li class='breadcrumb-item active'>Define Macro</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -259,8 +259,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="validate-expression-using-assert-macro" class="anchor" aria-hidden="true" href="#validate-expression-using-assert-macro">
-validate expression using assert macro
+<a id="Define-Macro" class="anchor" aria-hidden="true" href="#Define-Macro">
+Define Macro
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -268,7 +268,51 @@ validate expression using assert macro
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Assertion function is defined in **assert.h** header file which evaluates the expression in its parameters then asserts if the expression is true else it will fail.
+<p><b>Macro</b> is a kind of variable having no type, where its value will be substituted anywhere it is specified in <b>compile time</b>. That is, macros are just a simple string substitution approach, mostly useful in embedded development where there is a limited amount of memory to hold all of the variables.</p>
+
+<p>The syntax of using <code>#define</code> to compose a constant is simple:</p>
+
+<pre class="language-cpp">
+	<code>
+		#define identifier value
+	</code>
+</pre>
+
+<p>C++ programmers typically declare their classes and functions in <i>.hpp</i> files called header files. The respective functions are defined in <i>.cpp</i> files that include the header files using the <code>#include &lt;header&gt;</code> preprocessor directive. If one header file—let’s call it <i>class1.h</i>—declares a class that has another class declared in <i>class2.h</i> as a member, then <i>class1.h</i> needs to include <i>class2.h</i>. If the design were complicated, and the other class required the former as well, then <i>class2.h</i> would include <i>class1.h</i>, too!</p>
+
+<p>For the preprocessor however, two header files that include each other is a problem of recursive nature. To avoid this problem, you can use macros in conjunction with preprocessor directives <code>#ifndef</code> and <code>#endif</code>.</p>
+
+<p>Note that macros are not type sensitive and macro functions can therefore cause problems.</p>
+
+<p>Macros enable you to reuse certain utility functions irrespective of the type of variables you are dealing with. Consider the following line:</p>
+
+<pre class="language-cpp">
+	<code>
+		#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+	</code>
+</pre>
+
+<p>You can use this macro function <code>MIN</code> on integers:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::cout &lt;&lt; MIN(25, 101) &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>But you can reuse the same on <code>double</code>, too:</p>
+
+<pre class="language-cpp">
+	<code>
+		std::cout &lt;&lt; MIN(0.1, 0.2) &lt;&lt; std::endl;
+	</code>
+</pre>
+
+<p>These macro functions get expanded inline before compilation and hence the performance of a simple macro is superior to that of an ordinary function call doing the same task. This is because the function call requires the creation of a call stack, passing arguments, and so on—administrative overload that often takes more CPU time than the calculation of MIN itself.</p>
+
+<p>Yet, macros do not support any form of type safety, and that is a major disadvantage.</p> 
+
+<p>Additionally, debugging a complicated macro is not easy either. If you need the ability to program generic functions that are type independent, yet type safe, you program a <a href="/cpp/templates/template-function">template function</a> instead of a <a href="/cpp/templates/macro-function">macro function</a>.</p>
 <hr />
 <h3>
 <a id="Source" class="anchor" aria-hidden="true" href="#Source">
@@ -279,20 +323,15 @@ Source
 </svg>
 </a>
 </h3>
-  <cite>assert.cxx</cite>
+  <cite>define.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;assert.h&gt;
+    // macro, preprocessor
+    #define AGE 23
     
     int main()
     {
-        // assign nullptr to array and see how assertion fails
-        char* array = new char[25];
-        // array = nullptr;
-        assert(array != nullptr);
-    
-        delete [] array;
+        int myage = AGE;
         return 0;
     }
 </code>
@@ -309,37 +348,37 @@ Execution
 </h3>
 <pre>
 <code class="language-bash">
-g++ -Wall -g -o ./assert.o -c ./assert.cxx
+g++ -Wall -g -o ./define.o -c ./define.cxx
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-g++ -g -o ./assert.bin ./assert.o
+g++ -g -o ./define.bin ./define.o
 </code>
 </pre>
 <pre>
 <code class="language-bash">
-./assert.bin
+./define.bin
 </code>
 </pre>
 <hr />
 <h3>
-<a id="Output" class="anchor" aria-hidden="true" href="#Output">
-Output
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h3>
-<pre>
-<code class="language-cpp">
-
-</code>
-</pre>
+<ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 14</li>
+</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/templates">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.4.2.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/templates/assert">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

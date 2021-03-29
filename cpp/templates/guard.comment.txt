@@ -1,1 +1,3 @@
-**define** macro is usually used in header files and libraries to prevent multiple inclusion of a header file.  
+<p>C++ programmers typically declare their classes and functions in <i>.hpp</i> files called header files. The respective functions are defined in <i>.cpp</i> files that include the header files using the <code>#include &lt;header&gt;</code> preprocessor directive. If one header file—let’s call it <i>class1.h</i>—declares a class that has another class declared in <i>class2.h</i> as a member, then <i>class1.h</i> needs to include <i>class2.h</i>. If the design were complicated, and the other class required the former as well, then <i>class2.h</i> would include <i>class1.h</i>, too!</p>
+
+<p>For the preprocessor however, two header files that include each other is a problem of recursive nature. To avoid this problem, you can use macros in conjunction with preprocessor directives <code>#ifndef</code> and <code>#endif</code>.</p>

@@ -1,13 +1,13 @@
 README.md
+define.cxx
+guard.cxx guard.hpp
 assert.cxx
 static-assert.cxx
 auto-return.cxx
 class.cxx
 default.cxx
-define.cxx
-function.cxx
-functions.cxx
-guard.cxx
+template-function.cxx
+macro-function.cxx
 multiple.cxx
 special.cxx
 tuples.cxx

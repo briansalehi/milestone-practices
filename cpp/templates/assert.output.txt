@@ -1,1 +1,1 @@
-
+assert.bin: ./cpp/templates/assert.cxx:6: int main(): Assertion `array != nullptr' failed.
