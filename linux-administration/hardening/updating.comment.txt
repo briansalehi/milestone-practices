@@ -8,7 +8,7 @@
 	<code>
 		//Unattended-Upgrade::Automatic-Reboot "false";
 	</code>
-<pre>
+</pre>
 
 <p>Uncomment the line by removing the leading slashes, and change <code>false</code> to <code>true</code>. If you'd rather have the machine reboot at a specific time, scroll down to Where you'll see this line of code:</p>
 
@@ -40,7 +40,7 @@
 
 <p>Now, the system will still check for updates and show a message at the login screen when any are available, but it won't automatically install them. And of course, it should go without saying that you need to check your systems on a regular basis to see if updates are available. If you do prefer to leave automatic updates enabled, be sure to either enable automatic rebooting or to log in to the system at least a couple of times a week to see if it needs to be rebooted.</p>
 
-<p>If you want to see if there are any security-related updates available, but don't want to see any non-security updates, use the unattended-upgrade command, like so:</p>
+<p>If you want to see if there are any security-related updates available, but don't want to see any non-security updates, use the <code>unattended-upgrade</code> command, like so:</p>
 
 <pre class="language-bash command-line" data-host="milestone">
 	<code>
@@ -56,7 +56,7 @@
 	</code>
 </pre>
 
-<p>Also, if you're running a non-Ubuntu flavor of Debian, which would include Raspbian for the Raspberry Pi, you can give it the same functionality as Ubuntu by installing the unattended-upgrades package.</p>
+<p>Also, if you're running a non-Ubuntu flavor of Debian, which would include Raspbian for the Raspberry Pi, you can give it the same functionality as Ubuntu by installing the <i>unattended-upgrades</i> package.</p>
 
 <h4>Updating Red Hat 7-based systems</h4>
 
@@ -107,7 +107,7 @@ To automatically update a CentOS system, install and enable <code>yum-cron</code
 	</code>
 </pre>
 
-<p>If you want the updates to get automatically installed, change the <cde>apply_updates</cde> parameter to yes.</p>
+<p>If you want the updates to get automatically installed, change the <code>apply_updates</code> parameter to yes.</p>
 
 <p>Note that unlike Ubuntu, there's no setting to make the system automatically reboot itself after an update.</p>
 
@@ -156,7 +156,7 @@ To automatically update a CentOS system, install and enable <code>yum-cron</code
 
 <h4>Updating Red Hat 8-based systems</h4>
 
-<p>The main functional difference between yum and dnf is that dnf has a different automatic update mechanism. Instead of installing the yum-cron package, you'll now install the dnf-automatic package, like so:</p>
+<p>The main functional difference between yum and dnf is that dnf has a different automatic update mechanism. Instead of installing the <code>yum-cron</code> package, you'll now install the <i>dnf-automatic</i> package, like so:</p>
 
 <pre class="language-bash command-line" data-host="milestone">
 	<code>
