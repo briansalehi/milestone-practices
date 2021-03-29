@@ -219,3 +219,5 @@ Mutating algorithms are those that change the contents or the order of the seque
 		</tr>
 	</tbody>
 </table>
+
+<p>Clearly, your application might have requirements that can be satisfied by more than one STL container. There is a selection to be made, and this selection is important because a wrong choice could result in performance issues and scalability bottlenecks. Therefore, it is important to evaluate the advantages and disadvantages of the containers before selecting one.</p>

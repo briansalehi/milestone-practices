@@ -267,6 +267,24 @@ Standard Template Library
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p><b>Containers</b> are STL classes that are used to store data. STL supplies two types of container classes:</p>
+
+<ul>
+	<li><a href="/cpp/stl/sequencial-containers">Sequential containers</a></li>
+	<li><a href="/cpp/stl/associative-containers">Associative containers</a></li>
+</ul>
+
+<p>In addition to these STL also provides classes called <a href="/cpp/stl/adaptive-containers">container adapters</a> that are variants of the same with reduced functionality to support a specific purpose.</p>
+
+<p><b>Complexity</b> is an indication of the performance of the container with relation to the number of elements contained by it. Therefore, when we speak of constant complexity, as in the case of <code>std::unordered_map</code>, we mean that the performance of the container is unrelated to the number of elements contained by it. Such a container would need as much time to perform on a thousand elements as it would on a million.</p>
+
+<p><b>Logarithmic</b> complexity as is the case with <code>std::map</code> indicates that the performance is proportional to the logarithm of the number of elements contained in it. Such a container would take twice as long in processing a million elements as it would in processing a thousand.</p>
+
+<p><b>Linear</b> complexity means that the performance is proportional to the number of elements. Such a container would be a thousand times slower in processing a million elements than it would be in processing a thousand.</p>
+
+<p>For a given container, the complexities may be different for differing operations. That is, the element insertion complexity may be constant but search complexity linear. Therefore, an understanding of how a container may perform in addition to the functionality it will be used with is key to choosing the right container.</p>
+
+<p>The <b>sort criteria</b> of STL containers can be customized by programming <a href="/cpp/stl/function-object/binary-predicate">predicate functions</a>.</p>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.13.html">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers">Next Page</a></li>
@@ -282,6 +300,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
 </ul>
 <hr />

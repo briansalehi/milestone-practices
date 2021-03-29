@@ -268,6 +268,14 @@ Adaptive Containers
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p><b>Container adapters</b> are variants of sequential and <b>associative containers</b> that have limited functionality and are intended to fulfill a particular purpose. The main adapter classes are:</p>
+
+<ul>
+	<li><code>std::stack</code><p>Stores elements in a LIFO (last-in-first-out) fashion, allowing  elements to be inserted (pushed) and removed (popped) at the top.</p></li>
+	<li><code>std::queue</code><p>Stores elements in FIFO (first-in-first-out) fashion, allowing the first element to be removed in the order they’re inserted.</p></li>
+	<li><code>std::priority_queue</code><p>Stores elements in a sorted order, such that the one whose value is evaluated to be the highest is always first in the queue.</p></li>
+</ul>
+
 <p>The Standard Template Library (STL) features containers that adapt others to simulate stack and queue behavior. Such containers that internally use another and present a distinct behavior are called adaptive containers.</p>
 
 <p>Stacks and queues are like arrays or lists but present a restriction on how elements are inserted, accessed, and removed.</p>
@@ -286,6 +294,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: chapter 24</li>
 </ul>
 <hr />
