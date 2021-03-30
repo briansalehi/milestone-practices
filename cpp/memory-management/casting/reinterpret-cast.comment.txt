@@ -1,0 +1,18 @@
+There are times when you need to do implementation-dependent casts like moving a memory address in an integer type. To do so, use **reinterpret_cast** operator.
+
+reinterpret_cast is the closest a C++ casting operator gets to the C-style cast. 
+It really does allow the programmer to cast one object type to another, regardless of whether or not the types are related; that is, it forces a reinterpretation of type using a syntax as seen in the following sample:
+
+*****
+
+Base* objBase = new Base ();
+Unrelated* notRelated = reinterpret_cast<Unrelated*>(objBase);
+// The code above compiles, but is not good programming!
+
+*****
+
+This cast actually forces the compiler to accept situations that static_cast would normally not permit. It finds usage in certain low-level applications (such as drivers, for example) where data needs to be converted to a simple type that an API—Application Program Interface—can accept (for example, some OS-level APIs require data to be sent as a BYTE array, that is, unsigned char*):
+
+*****
+
+As far as possible, you should refrain from using reinterpret_ cast in your applications because it allows you to instruct the compiler to treat type X as an unrelated type Y, which does not look like good design or implementation.

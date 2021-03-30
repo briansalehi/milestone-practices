@@ -1,2 +1,0 @@
-You can change value of a **constant parameter** by **const_cast** operator,
-only if the variable was not constant itself.

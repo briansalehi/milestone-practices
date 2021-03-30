@@ -1,0 +1,47 @@
+You can change value of a **constant parameter** by **const_cast** operator, only if the variable was not constant itself.
+
+const_cast enables you to turn off the const access modifier to an object. If you are wondering why this cast is necessary at all, you are probably right in doing so. In an ideal situation where programmers write their classes correctly, they remember to use the const keyword frequently and in the right places. The practical world is unfortunately way too different, and code like following is prevalent:
+
+*****
+
+class SomeClass { public:
+ // ...
+ void DisplayMembers(); //problem - display function isn't const };
+
+*****
+
+So, when you program a function such as
+
+*****
+
+void DisplayAllData (const SomeClass& object) {  object.DisplayMembers (); // Compile failure  // reason: call to a non-const member using a const reference }
+
+*****
+
+You are evidently correct in passing object as a const reference. After all, a display function should be read-only and should not be allowed to call non-const member  functions—that is, should not be allowed to call a function that can change the state of the object. However, the implementation of DisplayMembers(), which also ought to be const, unfortunately is not. Now, so long as SomeClass belongs to you and the source code is in your control, you can make corrective changes to DisplayMembers(). In many cases, however, it might belong to a third-party library, and making changes to it is not possible. In situations such as these, const_cast is your savior.
+
+*****
+
+The syntax for invoking DisplayMembers() in such a scenario is
+
+*****
+
+void DisplayAllData (const SomeClass& object) {  SomeClass& refData = const_cast<SomeClass&>(object);
+ refData.DisplayMembers(); // Allowed!
+}
+
+*****
+
+Note that using const_cast to invoke non-const functions should be a last resort. 
+In general, keep in mind that using const_cast to modify a const object can also result in undefined behavior.
+
+*****
+
+Note that const_cast can also be used with pointers:
+
+*****
+
+void DisplayAllData (const SomeClass* data) {  // data->DisplayMembers(); Error: attempt to invoke a non-const function!
+ SomeClass* pCastedData = const_cast<SomeClass*>(data);
+ pCastedData->DisplayMembers(); // Allowed!
+}

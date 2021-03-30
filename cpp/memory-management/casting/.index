@@ -1,5 +1,5 @@
 README.md
-static.cxx
-dynamic.cxx
-const.cxx
-reinterpret.cxx
+static-cast.cxx
+dynamic-cast.cxx
+const-cast.cxx
+reinterpret-cast.cxx
