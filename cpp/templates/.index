@@ -1,14 +1,13 @@
 README.md
 define.cxx
 guard.cxx guard.hpp
+template-initialization.cxx
+multiple-template-parameters.cxx
+default-template-parameter.cxx
+template-specialization.cxx
+variadic-templates.cxx
+static-members.cxx
 assert.cxx
 static-assert.cxx
-auto-return.cxx
-class.cxx
-default.cxx
-template-function.cxx
+auto-return-type.cxx
 macro-function.cxx
-multiple.cxx
-special.cxx
-tuples.cxx
-variadic.cxx

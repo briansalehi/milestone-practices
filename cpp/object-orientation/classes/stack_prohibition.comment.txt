@@ -39,7 +39,7 @@
 	</code>
 </pre>
 
-<p>If you see a memory leak there, you are not mistaken. As the destructor is not accessible from main, you cannot do a delete, either. What class MonsterDB needs to support is a public static member function that would destroy the instance (a class member would have access to the private destructor):</p>
+<p>If you see a memory leak there, you are not mistaken. As the destructor is not accessible from main, you cannot do a delete, either. What class <code>MonsterDB</code> needs to support is a public static member function that would destroy the instance (a class member would have access to the private destructor):</p>
 
 <pre class="language-cpp line-numbers">
 	<code>

@@ -1,0 +1,23 @@
+<p>A <b>template class</b> is a blueprint of a class, and therefore doesn’t truly exist for the compiler before it has been used in one form or another. That is, as far as the compiler is concerned, a template class you define but don’t consume is code that is simply ignored. However, once you instantiate a template class, like <code>HoldsPair</code>, by supplying template arguments like this:</p>
+
+<pre class="language-cpp">
+	<code>
+		HoldsPair&lt;int, double&gt; pairIntDbl;
+	</code>
+</pre>
+
+<p>You are instructing the compiler to create a class for you using the template and instantiate it for the types specified as template arguments (<code>int</code> and <code>double</code> in this case).</p> 
+
+<p>Thus, in the case of templates, instantiation is the act or process of creating a specific type using one or more template arguments.</p>
+
+<p>On the other hand, there may be situations that require you to explicitly define a (different) behavior of a template when instantiated with a specific type. This is where you specialize a template (or behavior thereof) for that type. A specialization of template class <code>HoldsPair</code> when instantiated with template parameters both of type int would look like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template&lt;&gt;
+		class HoldsPair&lt;int, int&gt;
+		{
+			// implementation code here
+		};
+	</code>
+</pre>

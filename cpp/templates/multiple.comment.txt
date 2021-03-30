@@ -1,1 +1,0 @@
-**Templates** can get two or more types to be defined.

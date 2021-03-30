@@ -1,0 +1,23 @@
+<p><b>Variadic templates</b> are a way to support dynamic parameter length. Meaning that a function can have 2, 3 or more parameters each time we call it. There are two parts of a variadic template, one accepts multiple parameters and another only accepts two parameters. The execution will reach to second one when there are no more parameters to parse.</p>
+
+<p><b>Variable templates</b> or <b>variadic templates</b> have been part of C++ since C++14, released in 2014.</p>
+
+<p>C++14 supplies you with an operator that would tell the number of template arguments passed in a call to a variable template.</p>
+
+<pre class="language-cpp line-numbers" data-lines="">
+	<code>
+		template &lt;typename T, typename ...Rest&gt;
+		struct Variadic
+		{
+			//...
+		}
+
+		template &lt;typename T
+		int arrNums[sizeof...(Rest)];
+		// length of array evaluated using sizeof...() at compile time
+	</code>
+</pre>
+
+<p>You must not confuse <code>sizeof...()</code> with <code>sizeof(Type)</code>. The latter returns the size of a type, while the former returns the number of template arguments sent to a <b>variadic template</b>.</p>
+
+The support of variable templates has also ushered in standard support for tuples.

@@ -1,0 +1,22 @@
+<p>We could modify the previous version of <code>HoldsPair&lt;...&gt;</code> to declare int as the <b>default template parameter type</b>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename T1=int, typename T2=int&gt;
+		class HoldsPair
+		{
+			// ... method declarations
+		};
+	</code>
+</pre>
+
+<p>This is similar in construction to functions that define <a href="/cpp/fundamentals/functions/default-input-parameter">default input parameter</a> values except for the fact that, in this case, we define default types.</p>
+
+<p>The second usage of HoldsPair can thus be compacted to:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// Pair an int with an int (default type)
+		HoldsPair&lt;&gt; pairInts(6, 500);
+	</code>
+</pre>

@@ -1,0 +1,86 @@
+<p><b>Macros</b> can substitute function bodies but they have no types, meaning it's just a string substitution. But <b>templates</b> are great substituions of macros because not only they generate function bodies in compile-time but they also check the types used in functions.</p>
+
+<p>The keyword <code>template</code> marks the start of a template declaration and is followed by the template parameter list. This parameter list contains the keyword <code>typename</code> that defines the template parameter <code>objType</code>, making it a placeholder for the type of the object that the template is being instantiated for.</p>
+
+<p>Let’s analyze a sample template declaration that is the equivalent of the previously discussed macro <code>MAX</code> that returns the greater of two supplied parameters:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename objType&gt;
+		const objType& GetMax(const objType& value1, const objType& value2)
+		{
+			if (value1 &gt; value2)
+				return value1;
+			 else
+				return value2;
+		}
+
+		int main()
+		{
+			int num1 = 25;
+			int num2 = 40;
+			int maxVal = GetMax&lt;int&gt;(num1, num2);
+			
+			double double1 = 1.1;
+			double double2 = 1.001;
+			double maxVal = GetMax&lt;double&gt;(double1, double2);
+		}
+	</code>
+</pre>
+
+<p>The preceding code leads to the compiler generating two versions of the template function <code>GetMax</code>, which can be visualized as the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		const int& GetMax(const int& value1, const int& value2)
+		{
+			//...
+		}
+
+		const double& GetMax(const double& value1, const double& value2)
+		{
+			// ...
+		}
+	</code>
+</pre>
+
+<p>Not only are these template functions reusable (just like their macro counterparts), but they’re easier to program and maintain and are type-safe!</p>
+
+<p><b>Template functions</b> don’t necessarily need an accompanying type specifier. So, the following function call works perfectly well:</p>
+
+<pre class="language-cpp">
+	<code>
+		int maxVal = GetMax(num1, num2);
+	</code>
+</pre>
+
+<p>Compilers in this case are intelligent enough to understand that the <b>template function</b> is being invoked for the integer type. With <b>template classes</b>, however, you need to explicitly specify type.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename T&gt;
+		class HoldVarTypeT
+		{
+		public:
+			void setValue(const T& newValue)
+			{
+				value = newValue;
+			}
+
+			T& getValue()
+			{
+				return value;
+			}
+
+		private:
+			T value;
+		};
+
+		int main()
+		{
+			HoldVarTypeT variable&lt;int&gt;;
+			variable.setValue(2);
+			int value = variable.getValue();
+		}
+	</code>
+</pre>

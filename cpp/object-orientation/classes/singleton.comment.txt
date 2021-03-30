@@ -8,13 +8,13 @@
 
 <p>Individually they are non-copyable thanks to the private copy constructors, but what you ideally need is a class President that has one, and only one, real-world  manifestation—that is, there is only one object and creation of additional ones is  prohibited.</p>
 
-<p>When the keyword static is used on a class’s data member, it ensures that the member is shared across all instances.</p>
+<p>When the keyword <code>static</code> is used on a class’s data member, it ensures that the member is shared across all instances.</p>
 
-<p>When static is used on a local variable declared within the scope of a function, it ensures that the variable retains its value between function calls.</p>
+<p>When <code>static</code> is used on a local variable declared within the scope of a function, it ensures that the variable retains its value between function calls.</p>
 
-<p>When static is used on a member function—a method—the method is shared across all instances of the class.</p>
+<p>When <code>static</code> is used on a member function—a method—the method is shared across all instances of the class.</p>
 
-<p>Keyword static is an essential ingredient in creating a singleton class as demonstrated as in the source section.</p>
+<p>Keyword <code>static</code> is an essential ingredient in creating a singleton class as demonstrated as in the source section.</p>
 
 <p>Declaring <i>default constructor</i>, <i>copy constructor</i> and <i>assignment operator</i> as private methods of a class, which prevent an object to be created, assigned or be copied, makes a <i>singleton object</i>.</p>
 

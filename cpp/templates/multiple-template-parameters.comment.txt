@@ -1,0 +1,35 @@
+<p>The <b>template parameter list</b> can be expanded to declare multiple parameters separated by a comma. So, if you want to declare a generic class that holds a pair of objects that can be of differing types, you can do so using the construct as shown in the following sample:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename T1, typename T2&gt;
+		class HoldsPair
+		{
+		public:
+			 // Constructor that initializes member variables
+			HoldsPair(const T1& val1, const T2& val2)
+			{
+				value1 = val1;
+				value2 = val2;
+			}
+
+			// ... Other member functions
+
+		private:
+			T1 value1;
+			T2 value2;
+		};
+	</code>
+</pre>
+
+<p>We can use this class to hold two objects of the same type or of different types as you can see here:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// A template instantiation that pairs an int with a double
+		HoldsPair&lt;int, double&gt; pairIntDouble(6, 1.99);
+
+		// A template instantiation that pairs an int with an int
+		HoldsPair&lt;int, int&gt; pairIntDouble(6, 500);
+	</code>
+</pre>
