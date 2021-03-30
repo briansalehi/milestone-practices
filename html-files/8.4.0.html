@@ -11,6 +11,7 @@
 <!-- prims plugin styles -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
@@ -287,7 +288,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'>no page specified</span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 14</span></li>
 </ul>
 <hr />
 <h3>
@@ -308,48 +309,44 @@ Table of Content
 	2. Multiple Inclusion Guard
 	
 </a>
-<a href="/cpp/templates/assert" class="list-group-item">
-	3. Assert
-	
-</a>
-<a href="/8.4.4.html" class="list-group-item">
-	4. static_assert
-	
-</a>
-<a href="/8.4.5.html" class="list-group-item">
-	5. auto return type
-	
-</a>
-<a href="/8.4.6.html" class="list-group-item">
-	6. template classes
-	
-</a>
-<a href="/8.4.7.html" class="list-group-item">
-	7. template default parameter
-	
-</a>
-<a href="/cpp/templates/template-function" class="list-group-item">
-	8. template functions
-	
-</a>
 <a href="/cpp/templates/macro-function" class="list-group-item">
-	9. macro functions
+	3. Macro Functions
 	
 </a>
-<a href="/8.4.10.html" class="list-group-item">
-	10. template with multiple parameters
+<a href="/cpp/templates/template-initialization" class="list-group-item">
+	4. Template Initialization
 	
 </a>
-<a href="/8.4.11.html" class="list-group-item">
-	11. template specialization
+<a href="/cpp/templates/multiple-template-parameters" class="list-group-item">
+	5. Multiple Template Parameters
 	
 </a>
-<a href="/8.4.12.html" class="list-group-item">
-	12. *tuples*
+<a href="/cpp/templates/default-template-parameters" class="list-group-item">
+	6. Default Template Parameters
 	
 </a>
-<a href="/8.4.13.html" class="list-group-item">
-	13. variable or variadic templates
+<a href="/cpp/templates/auto-return-type" class="list-group-item">
+	7. Auto Return Type
+	
+</a>
+<a href="/cpp/templates/template-specialization" class="list-group-item">
+	8. Template Specialization
+	
+</a>
+<a href="/cpp/templates/variadic-templates" class="list-group-item">
+	9. Variadic Templates
+	
+</a>
+<a href="/cpp/templates/template-class-static-members" class="list-group-item">
+	10. Template Class Static Members
+	
+</a>
+<a href="/cpp/templates/assert" class="list-group-item">
+	11. Assert
+	
+</a>
+<a href="/cpp/templates/static-assert" class="list-group-item">
+	12. Static Assert
 	
 </a>
 </div>
@@ -492,6 +489,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>

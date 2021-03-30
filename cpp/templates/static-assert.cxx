@@ -1,6 +1,6 @@
 template <typename T>
-class Base {
-public:
+struct Base
+{
     Base() {
         // assert, if expression is true! that is, let it go if it's true
         static_assert(sizeof(T) == sizeof(int), "type must be int");
@@ -9,15 +9,6 @@ public:
 
 int main()
 {
-    /*
-        Due to automatic compilation of programs
-        in this documentation, all programs must be
-        successfully compiled.
-        Therefore, to see how static_assert stops
-        compilation of this sample, manually change
-        type int to type char and then recompile.
-    */
-
-    Base<int> sample;
+    Base<int> object;
     return 0;
 }

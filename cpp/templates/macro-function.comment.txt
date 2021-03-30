@@ -1,10 +1,9 @@
-Be careful using macro functions, you might easily make mistakes.  
-Keep in mind that macros are only compile-time string substitutions in your code.  
-Let's say we have this function:
+<p>Be careful using macro functions, you might easily make mistakes. Keep in mind that macros are only compile-time string substitutions in your code. Let's say we have this function:</p>
 
-```cxx
-#define SQUARED(x) (x * x)
-```
+<pre class="language-cpp">
+	<code>
+		#define SQUARED(x) (x * x)
+	</code>
+</pre>
 
-If you set x as 3+2, compiler will see this as (3+2 * 3+2). considering mathematical precedence, 2*3 will be first evaluated.  
-So to make sure your macro functions work as they supposed to, surround them with parenthesis.
+<p>If you set <code>x</code> as <code>3+2</code>, compiler will see this as <code>(3+2 * 3+2)</code>. considering mathematical precedence, <code>2*3</code> will be first evaluated. So to make sure your macro functions work as they supposed to, surround them with parenthesis.</p>

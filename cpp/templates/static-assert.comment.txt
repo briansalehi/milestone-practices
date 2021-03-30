@@ -1,1 +1,9 @@
-**static assert** works just like **assert** function that we previously practiced. But it evaluate the expression in compile-time and compiler will give an error when the expression does not meet the requirements.
+<p>This feature introduced since C++11 that enables you to block compilation if certain checks are not fulfilled. Weird as this might sound, it’s useful with template classes. For example, you might want to ensure that your template class is not instantiated for an integer! <code>static_assert()</code> is a compile-time assert that can display a custom message on your development environment (or console):</p>
+
+<pre class="language-cpp">
+	<code>
+		static_assert(expression being validated, "Error message when check fails");
+	</code>
+</pre>
+
+<p>To ensure that your template class cannot be instantiated for type <code>int</code>, you can use <code>static_assert()</code> with <code>sizeof(T)</code>, comparing it against <code>sizeof(int)</code> and displaying an error message if the inequality check fails:</p>
