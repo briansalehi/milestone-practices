@@ -5,6 +5,7 @@ object-orientation
 templates
 stl
 multithreading
+reference.txt
 gui
 image-processing
 gpgpu
