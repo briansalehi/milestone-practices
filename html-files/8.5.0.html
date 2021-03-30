@@ -11,6 +11,7 @@
 <!-- prims plugin styles -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
@@ -303,7 +304,7 @@ Standard Template Library
 		</tr>
 		<tr>
 			<td><code>std::vector</code></td>
-			<td><p>Quick (constant time) Insertion at the end.</p><p>Array-like access.</p></td>
+			<td><p>Quick (constant time) insertion at the end.</p><p>Array-like access.</p></td>
 			<td><p>Resizing can result in performance loss.</p><p>Search time is proportional to the number of elements in the container.</p><p>Insertion only at the end.</p></td>
 		</tr>
 		<tr>
@@ -349,7 +350,7 @@ Standard Template Library
 		<tr>
 			<td><code>std::map</code></td>
 			<td><p>Key-value pairs container that offers search performance proportional to the logarithm of number of elements in the container and hence often significantly faster than sequential containers.</p></td>
-			<td><p>Elements pairs) are sorted on insertion, hence insertion will be slower than in a sequential container of pairs.</p></td>
+			<td><p>Elements (pairs) are sorted on insertion, hence insertion will be slower than in a sequential container of pairs.</p></td>
 		</tr>
 		<tr>
 			<td><code>std::unordered_map</code></td>
@@ -363,13 +364,13 @@ Standard Template Library
 		</tr>
 		<tr>
 			<td><code>std::unordered_multimap</code></td>
-			<td><p>To be selected over <code>std::multimap</code> when need a key-value pairs container where keys can be nonunique.</p><p>Allows constant average time insertion, search and removal of elements, independent of the size of the container.</p></td>
+			<td><p>To be selected over <code>std::unordered_map</code> when need a key-value pairs container where keys can be nonunique.</p><p>Allows constant average time insertion, search and removal of elements, independent of the size of the container.</p></td>
 			<td><p></p></td>
 		</tr>
 	</tbody>
 </table>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.13.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/templates/static-assert">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/sequencial-containers">Next Page</a></li>
 </ul>
 <hr />
@@ -383,9 +384,9 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
-<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
 </ul>
 <hr />
 <h3>
@@ -988,6 +989,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>

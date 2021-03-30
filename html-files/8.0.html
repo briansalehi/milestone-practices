@@ -11,6 +11,7 @@
 <!-- prims plugin styles -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
@@ -285,9 +286,9 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao</li>
-<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
-<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'>no page specified</span></li>
 </ul>
 <hr />
 <h3>
@@ -592,8 +593,8 @@ Table of Content
 	3. Return Statements
 	
 </a>
-<a href="/cpp/fundamentals/functions/default-values" class="list-group-item group-child">
-	4. Default Values
+<a href="/cpp/fundamentals/functions/default-input-parameter" class="list-group-item group-child">
+	4. Default Input Parameter
 	
 </a>
 <a href="/cpp/fundamentals/functions/recursive-functions" class="list-group-item group-child">
@@ -988,59 +989,55 @@ Table of Content
 </div>
 <a href="#8-4-0" class="list-group-item" data-toggle="collapse">
 	<i class="glyphicon glyphicon-chevron-right"></i>4. Macros and Templates
-	<span class="badge badge-primary badge-pill">13</span>
+	<span class="badge badge-primary badge-pill">12</span>
 </a>
 <div class="list-group collapse" id="8-4-0">
-<a href="/8.4.1.html" class="list-group-item group-child">
-	1. validate expression using assert macro
+<a href="/cpp/templates/define-macro" class="list-group-item group-child">
+	1. Define Macro
 	
 </a>
-<a href="/8.4.2.html" class="list-group-item group-child">
-	2. static_assert
+<a href="/cpp/templates/multiple-inclusion-guard" class="list-group-item group-child">
+	2. Multiple Inclusion Guard
 	
 </a>
-<a href="/8.4.3.html" class="list-group-item group-child">
-	3. auto return type
+<a href="/cpp/templates/macro-function" class="list-group-item group-child">
+	3. Macro Functions
 	
 </a>
-<a href="/8.4.4.html" class="list-group-item group-child">
-	4. template classes
+<a href="/cpp/templates/template-initialization" class="list-group-item group-child">
+	4. Template Initialization
 	
 </a>
-<a href="/8.4.5.html" class="list-group-item group-child">
-	5. template default parameter
+<a href="/cpp/templates/multiple-template-parameters" class="list-group-item group-child">
+	5. Multiple Template Parameters
 	
 </a>
-<a href="/8.4.6.html" class="list-group-item group-child">
-	6. define macro
+<a href="/cpp/templates/default-template-parameters" class="list-group-item group-child">
+	6. Default Template Parameters
 	
 </a>
-<a href="/8.4.7.html" class="list-group-item group-child">
-	7. template functions
+<a href="/cpp/templates/auto-return-type" class="list-group-item group-child">
+	7. Auto Return Type
 	
 </a>
-<a href="/8.4.8.html" class="list-group-item group-child">
-	8. macro functions
+<a href="/cpp/templates/template-specialization" class="list-group-item group-child">
+	8. Template Specialization
 	
 </a>
-<a href="/8.4.9.html" class="list-group-item group-child">
-	9. multiple inclusion guard
+<a href="/cpp/templates/variadic-templates" class="list-group-item group-child">
+	9. Variadic Templates
 	
 </a>
-<a href="/8.4.10.html" class="list-group-item group-child">
-	10. template with multiple parameters
+<a href="/cpp/templates/template-class-static-members" class="list-group-item group-child">
+	10. Template Class Static Members
 	
 </a>
-<a href="/8.4.11.html" class="list-group-item group-child">
-	11. template specialization
+<a href="/cpp/templates/assert" class="list-group-item group-child">
+	11. Assert
 	
 </a>
-<a href="/8.4.12.html" class="list-group-item group-child">
-	12. *tuples*
-	
-</a>
-<a href="/8.4.13.html" class="list-group-item group-child">
-	13. variable or variadic templates
+<a href="/cpp/templates/static-assert" class="list-group-item group-child">
+	12. Static Assert
 	
 </a>
 </div>
@@ -1179,7 +1176,7 @@ Table of Content
 	
 </a>
 </div>
-<a href="/8.5.6.0.html" class="list-group-item group-child">
+<a href="/cpp/stl/iterators" class="list-group-item group-child">
 	6. Iterators
 	<span class="badge badge-primary badge-pill">5</span>
 </a>
@@ -1826,6 +1823,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>

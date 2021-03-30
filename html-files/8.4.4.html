@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Multiple Template Parameters</title>
+<title>Template Initialization</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -11,6 +11,7 @@
 <!-- prims plugin styles -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
 <style>
@@ -247,7 +248,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.4.0.html">Macros and Templates</a></li>
-<li class='breadcrumb-item active'>Multiple Template Parameters</li>
+<li class='breadcrumb-item active'>Template Initialization</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -259,8 +260,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Multiple-Template-Parameters" class="anchor" aria-hidden="true" href="#Multiple-Template-Parameters">
-Multiple Template Parameters
+<a id="Template-Initialization" class="anchor" aria-hidden="true" href="#Template-Initialization">
+Template Initialization
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -268,39 +269,90 @@ Multiple Template Parameters
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>The <b>template parameter list</b> can be expanded to declare multiple parameters separated by a comma. So, if you want to declare a generic class that holds a pair of objects that can be of differing types, you can do so using the construct as shown in the following sample:</p>
+<p><b>Macros</b> can substitute function bodies but they have no types, meaning it's just a string substitution. But <b>templates</b> are great substituions of macros because not only they generate function bodies in compile-time but they also check the types used in functions.</p>
+
+<p>The keyword <code>template</code> marks the start of a template declaration and is followed by the template parameter list. This parameter list contains the keyword <code>typename</code> that defines the template parameter <code>objType</code>, making it a placeholder for the type of the object that the template is being instantiated for.</p>
+
+<p>Let’s analyze a sample template declaration that is the equivalent of the previously discussed macro <code>MAX</code> that returns the greater of two supplied parameters:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		template &lt;typename T1, typename T2&gt;
-		class HoldsPair
+		template &lt;typename objType&gt;
+		const objType& GetMax(const objType& value1, const objType& value2)
 		{
-		public:
-			 // Constructor that initializes member variables
-			HoldsPair(const T1& val1, const T2& val2)
-			{
-				value1 = val1;
-				value2 = val2;
-			}
+			if (value1 &gt; value2)
+				return value1;
+			 else
+				return value2;
+		}
 
-			// ... Other member functions
-
-		private:
-			T1 value1;
-			T2 value2;
-		};
+		int main()
+		{
+			int num1 = 25;
+			int num2 = 40;
+			int maxVal = GetMax&lt;int&gt;(num1, num2);
+			
+			double double1 = 1.1;
+			double double2 = 1.001;
+			double maxVal = GetMax&lt;double&gt;(double1, double2);
+		}
 	</code>
 </pre>
 
-<p>We can use this class to hold two objects of the same type or of different types as you can see here:</p>
+<p>The preceding code leads to the compiler generating two versions of the template function <code>GetMax</code>, which can be visualized as the following:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		// A template instantiation that pairs an int with a double
-		HoldsPair&lt;int, double&gt; pairIntDouble(6, 1.99);
+		const int& GetMax(const int& value1, const int& value2)
+		{
+			//...
+		}
 
-		// A template instantiation that pairs an int with an int
-		HoldsPair&lt;int, int&gt; pairIntDouble(6, 500);
+		const double& GetMax(const double& value1, const double& value2)
+		{
+			// ...
+		}
+	</code>
+</pre>
+
+<p>Not only are these template functions reusable (just like their macro counterparts), but they’re easier to program and maintain and are type-safe!</p>
+
+<p><b>Template functions</b> don’t necessarily need an accompanying type specifier. So, the following function call works perfectly well:</p>
+
+<pre class="language-cpp">
+	<code>
+		int maxVal = GetMax(num1, num2);
+	</code>
+</pre>
+
+<p>Compilers in this case are intelligent enough to understand that the <b>template function</b> is being invoked for the integer type. With <b>template classes</b>, however, you need to explicitly specify type.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		template &lt;typename T&gt;
+		class HoldVarTypeT
+		{
+		public:
+			void setValue(const T& newValue)
+			{
+				value = newValue;
+			}
+
+			T& getValue()
+			{
+				return value;
+			}
+
+		private:
+			T value;
+		};
+
+		int main()
+		{
+			HoldVarTypeT variable&lt;int&gt;;
+			variable.setValue(2);
+			int value = variable.getValue();
+		}
 	</code>
 </pre>
 <hr />
@@ -314,11 +366,12 @@ References
 </a>
 </h3>
 <ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 14</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/templates/template-initialization">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/templates/default-template-parameters">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/templates/macro-function">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/templates/multiple-template-parameters">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -459,6 +512,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
