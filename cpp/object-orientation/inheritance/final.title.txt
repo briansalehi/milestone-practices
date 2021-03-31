@@ -1,1 +1,1 @@
-final inheritance
+Final Inheritance

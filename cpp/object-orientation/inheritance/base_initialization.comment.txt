@@ -1,1 +1,0 @@
-Notice how we did initialize *Base* class in *Derived* constructor's initialization list.

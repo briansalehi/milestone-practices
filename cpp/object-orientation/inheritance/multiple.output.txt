@@ -1,4 +1,0 @@
-Beta Method Invoked
-alpha: 10
-beta: 20
-compund: 30

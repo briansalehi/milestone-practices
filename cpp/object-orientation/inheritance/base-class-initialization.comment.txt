@@ -1,0 +1,25 @@
+<p>What if a base class were to contain an overloaded constructor that requires arguments at the time of instantiation? The clue lies in using <b>initialization lists</b> and in invoking the appropriate base class constructor via the constructor of the derived class as shown in the following code:</p>
+
+<pre class="language-cpp line-numbers" data-line="10">
+	<code>
+		class Base
+		{
+		public:
+			Base(int someNumber) // overloaded constructor
+			{
+				// Use someNumber
+			}
+		};
+
+		Class Derived: public Base
+		{
+		public:
+			Derived(): Base(25) // instantiate Base with argument 25
+			{
+				// derived class constructor code
+			}
+		};
+	</code>
+</pre>
+
+<p>To ensure maximum security, if the derived classes don’t need to access a base class attribute, remember to mark the attribute <code>private</code>.</p>

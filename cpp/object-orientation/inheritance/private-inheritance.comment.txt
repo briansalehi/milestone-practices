@@ -1,0 +1,21 @@
+<p>When <code>Derived</code> class inherits from <code>Base</code> class privately, all of the public members and methods of <code>Base</code> class are only accessibly to the <code>Derived</code> class and not only the next generations of <code>Derived</code> class. Don't forget that private members of <code>Base</code> class will stay private to anyone even <code>Derived</code> class.</p>
+
+<p><b>Private inheritance</b> differs from <b>public inheritance</b> (which is what you have seen up to now) in that the keyword <code>private</code> is used in the line where the derived class declares its inheritance from a base class:</p>
+
+<pre class="language-cpp line-number" data-line="6">
+	<code>
+		class Base
+		{
+			// ... base class members and methods
+		};
+
+		class Derived: private Base // private inheritance
+		{
+			// ... derived class members and methods
+		};
+	</code>
+</pre>
+
+<p><b>Private inheritance</b> of the base class means that all public members and attributes of the base class are private (that is, inaccessible) to anyone with an instance of the derived class. In other words, even public members and methods of class <code>Base</code> can only be consumed by class <code>Derived</code>, but not by anyone else in possession of an instance of <code>Derived</code>.</p>
+
+<p>Thus, for the world outside the inheritance hierarchy, <b>private inheritance</b> essentially does not imply an "<b>is-a</b>" relationship (imagine a tuna that can’t swim!). As private inheritance allows base class attributes and methods to be consumed only by the subclass that derives from it, this relationship is also called a “<b>has-a</b>” relationship. There are a few examples of private inheritance in some things you see around you in daily life.</p>

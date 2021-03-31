@@ -1,0 +1,63 @@
+<p>All public members and methods of base classes are visible to derived classes in <code>protected</code> inheritance, but not outside of inheritance chain.</p>
+
+<p><b>Protected inheritance</b> differs from <b>public inheritance</b> in that the keyword <code>protected</code> is used in the line where the derived class declares its inheritance from a base class:</p>
+
+<pre class="language-cpp line-numbers" data-line="6">
+	<code>
+		class Base
+		{
+			// ... base class members and methods
+		};
+
+		class Derived: protected Base // protected inheritance
+		{
+			// ... derived class members and methods
+		};
+	</code>
+</pre>
+
+<p><b>Protected inheritance</b> is similar to <b>private inheritance</b> in the following ways:</p>
+
+<ul>
+	<li>It also signifies a <b>has-a</b> relationship.</li>
+	<li>It also lets the derived class access all public and protected members of <code>Base</code>.</li>
+	<li>Those outside the inheritance hierarchy with an instance of <code>Derived</code> cannot access public members of <code>Base</code>.</li>
+</ul>
+
+<p>Yet, <b>protected inheritance</b> is a bit different when it comes to the derived class being inherited from:</p>
+
+<pre class="language-cpp line-numbers" data-line="1">
+	<code>
+		class Derived2: protected Derived
+		{
+			// can access public & protected members of Base
+		};
+	</code>
+</pre>
+
+<p><b>Protected inheritance hierarchy</b> allows the subclass of the subclass (that is, <code>Derived2</code>) access to public and protected members of the <code>Base</code>. This would not be possible if the inheritance between <code>Derived</code> and <code>Base</code> were <code>private</code>.</p>
+
+<p>Use private or protected inheritance only when you have to.</p>
+
+<p>In most cases where <b>private inheritance</b> is used, such as that of the <code>Car</code> and the <code>Motor</code>, the base class could have as well been a member attribute of the class <code>Car</code> instead of being a super-class. By inheriting from class <code>Motor</code>, you have essentially restricted your <code>Car</code> to having only one motor, for no significant gain over having an instance of class <code>Motor</code> as a private member.</p>
+
+<p>Having an instance of <code>Motor</code> as a private member instead of inheriting from it is called <b>composition</b> or <b>aggregation</b>. Such a class <code>Car</code> looks like this:</p>
+
+<pre class="language-cpp line-numbers" data-line="4">
+	<code>
+		class Car
+		{
+		private:
+			Motor heartOfCar;
+		public:
+			void Move()
+			{
+				heartOfCar.SwitchIgnition();
+				heartOfCar.PumpFuel();
+				heartOfCar.FireCylinders();
+			}
+		};
+	</code>
+</pre>
+
+<p>This can be good design as it enables you to easily add more motors as member attributes to an existing <code>Car</code> class without changing its inheritance hierarchy or its design with respect to its clients.</p>

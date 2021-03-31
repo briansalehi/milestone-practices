@@ -1,2 +1,5 @@
-Constructors are the first methods invoked when an object is created and destructors are the last methods invoked before an object cease to exist.  
-When an object is created, constructors of its parents are first invoked from top to bottom and in the time of destruction, destructors are invoked from bottom to top. Actually the *Base* class has the first constructor and last destructor being invoked.
+<p><b>Constructors</b> are the first methods invoked when an object is created and destructors are the last methods invoked before an object cease to exist. When an object is created, constructors of its parents are first invoked from top to bottom and in the time of destruction, destructors are invoked from bottom to top.</p>
+
+<p>Thankfully, the instantiation sequence is standardized. <code>Base</code> class objects are instantiated before the <code>Derived</code> class. So, the <code>Base</code> part of <code>Derived</code> is constructed first, so that member attributes—especially the <code>protected</code> and <code>public</code> ones contained in class <code>Base</code>—are ready for consumption when class <code>Derived</code> is instantiated.</p>
+
+<p>Within the instantiation of class <code>Base</code> and class <code>Derived</code>, the member attributes (such as <code>int Base::state</code>) are instantiated before the constructor <code>Base::Base()</code> is invoked, ensuring that member attributes are ready before the constructor works with them. The same applies to <code>Derived::Derived()</code>.</p>

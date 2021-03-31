@@ -1,11 +1,9 @@
 README.md
-base_initialization.cxx
-final.cxx
-multiple.cxx
+base-class-initialization.cxx
 override.cxx
 ordering.cxx
-private.cxx
-protected_access.cxx
-protected.cxx
-public.cxx
+private-inheritance.cxx
+protected-inheritance.cxx
 slicing.cxx
+multiple-inheritance.cxx
+final.cxx

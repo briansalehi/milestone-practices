@@ -1,0 +1,6 @@
+Alpha Constructor Invoked
+Beta Constructor Invoked
+Compound Constructor Invoked
+Compound Destructor Invoked
+Beta Destructor Invoked
+Alpha Destructor Invoked

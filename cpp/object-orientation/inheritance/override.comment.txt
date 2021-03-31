@@ -1,2 +1,97 @@
-When methods of *Base* class and *Derived* class have the same name, the derived method will override the base method.  
-To specifically invoke the overriden method of base class, you can use resolution operator :: to access that method.
+<p>If a class Derived implements the same functions with the same return values and <b>signatures</b> as in a class <code>Base</code> it inherits from, it effectively overrides that method in class <code>Base</code> as shown in the following code:</p>
+
+<pre class="language-cpp line-numbers" data-line="4-7,13-16">
+	<code>
+		class Base
+		{
+		public:
+			void DoSomething()
+			{
+				// implementation code… Does something
+			}
+		};
+
+		class Derived : public Base
+		{
+		public:
+			void DoSomething()
+			{
+				// implementation code… Does something else
+			}
+		};
+	</code>
+</pre>
+
+<p>Thus, if method <code>DoSomething()</code> were to be invoked using an instance of <code>Derived</code>, then it would not invoke the functionality in class <code>Base</code>.</p>
+
+<p>If you want to be invoke <code>Base::DoSomething()</code> via main(), you need to use the <b>scope resolution operator</b> <code>::</code> in the following syntax:</p>
+
+<pre class="language-cpp">
+	<code>
+		object.Base::DoSomething(); // invokes Base::DoSomething() using instance of Derived
+	</code>
+</pre>
+
+<p>Typically, <code>Base::DoSomething()</code> would contain a generic implementation of method applicable to all derived classes. If your specialized implementations in <code>Derived:DoSomething()</code> need to reuse the base class’s generic implementation of <code>Base::DoSomething()</code>, you use the scope resolution operator <code>::</code> as shown in the following code:</p>
+
+<pre class="language-cpp line-numbers" data-line="9">
+	<code>
+		class Derived: public Base
+		{
+			public:
+				Derived(): Base(true) {}
+
+				void DoSomething()
+				{
+					std::cout &lt;&lt; "Derived" &lt;&lt; std::endl;
+					Base::DoSomething(); // invoke base class function using operator::
+				}
+		};
+	</code>
+</pre>
+
+<p>Overriding can take an extreme form where <code>Derived::DoSomething()</code> can potentially hide all overloaded versions of <code>Base::DoSomething()</code> available, even causing compilation failure when the overloaded ones are used (hence, called hidden). So, if you want to invoke the <code>Base::DoSomething(bool)</code> function via an instance of <code>Derived</code>, you have the following solutions:</p>
+
+<ul>
+	<li><b>Solution 1</b>: Use the <b>scope resolution operator</b> in <code>main()</code>:</li>
+	<pre class="language-cpp">
+		<code>
+			object.Base::DoSomething();
+		</code>
+	</pre>
+
+	<li><b>Solution 2</b>: Use keyword <code>using</code> in class <code>Derived</code> to unhide <code>DoSomething()</code> in class <code>Base</code>:</li>
+	<pre class="language-cpp line-numbers" data-line="4">
+		<code>
+			class Derived: public Base
+			{
+			public:
+				using Base::DoSomething; // unhide all DoSomething() methods in class Base
+
+				void DoSomething()
+				{
+					std::cout &lt;&lt; "Derived" &lt;&lt; std::endl;
+				}
+			};
+		</code>
+	</pre>
+
+	<li><b>Solution 3</b>: Override all overloaded variants of <code>DoSomething()</code> in class <code>Derived</code> (invoke  methods of <code>Base::DoSomething(...)</code> via <code>Derived::Base(...)</code> if you want):</li>
+	<pre class="language-cpp line-numbers" data-line="6">
+		<code>
+			class Derived: public Base
+			{
+			public:
+				void DoSomething(bool task)
+				{
+					Base::DoSomething(task);
+				}
+
+				void DoSomething()
+				{
+					std::cout &lt;&lt; "Derived" &lt;&lt; std::endl;
+				}
+			};
+		</code>
+	</pre>
+</ul>

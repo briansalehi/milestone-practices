@@ -1,0 +1,12 @@
+<p>C++ allows a class to derive from two or more base classes:</p>
+
+<pre class="language-cpp line-numbers" data-line="1">
+	<code>
+		class Derived: access-specifier Base1, access-specifier Base2
+		{
+			// class members
+		};
+	</code>
+</pre>
+
+<p>It essentially does nothing more than inherit from the three classes. All of public and protected members and methods in base classes are accessible to the derived class as usual.</p>

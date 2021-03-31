@@ -1,7 +1,6 @@
 #include <iostream>
 
-class Top {
-public:
+struct Top {
     Top() {
         std::cout << "Top Constructor Invoked" << std::endl;
     }
@@ -11,8 +10,7 @@ public:
     }
 };
 
-class Middle: public Top {
-public:
+struct Middle: public Top {
     Middle() {
         std::cout << "Middle Constructor Invoked" << std::endl;
     }
@@ -22,8 +20,7 @@ public:
     }
 };
 
-class Bottom: public Middle {
-public:
+struct Bottom: public Middle {
     Bottom() {
         std::cout << "Bottom Constructor Invoked" << std::endl;
     }
@@ -36,6 +33,5 @@ public:
 int main()
 {
     Bottom object;
-        
     return 0;
 }

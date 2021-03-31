@@ -1,1 +1,18 @@
-Using **final** keyword, we can prevent a class from being derived again.
+<p>Starting with C++11, compilers support specifier <code>final</code>. It is used to ensure that a class declared as <code>final</code> cannot be used as a base class.</p>
+
+<pre class="language-cpp line-numbers" data-line="7">
+	<code>
+		struct Base
+		{
+			Base() {}
+		};
+
+		// Derived class can not be derived anymore
+		struct Derived final: public Base
+		{
+			Derived() {}
+		};
+	</code>
+</pre>
+
+<p>In addition to classes, <code>final</code> can also be used on member functions in controlling polymorphic behavior. This is discussed in <a href="/cpp/object-oriented/polymorphism">Polymorphism</a> section.</p>

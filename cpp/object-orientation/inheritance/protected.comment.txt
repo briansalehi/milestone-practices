@@ -1,1 +1,0 @@
-all public members and methods of base classes are visible to derived classes in **protected** inheritance, but not outside of inheritance chain.

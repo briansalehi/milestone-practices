@@ -269,9 +269,38 @@ Inheritance
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p><b>Inheritance</b> is a powerful way to reuse attributes and is a stepping stone towards polymorphism.</p>
+
+<p>This is the general syntax of C++ derivation.</p>
+
+<pre class="language-cpp line-numbers" data-line="6">
+	<code>
+		class Base
+		{
+			// ... base class members
+		};
+
+		class Derived: access-specifier Base
+		{
+			// ... derived class members
+		};
+	</code>
+</pre>
+
+<p>The <i>access-specifier</i> can be one of <code>public</code> (most frequently used) where a “derived class <b>is a</b> base class” relationship; <code>private</code> or <code>protected</code> for a “derived class <b>has a</b> base class” relationship.</p>
+
+<p>When reading about inheritance, you will come across terms such as inherits from or derives from, which essentially mean the same.</p>
+
+<p>Similarly, the base class is also called the super class. The class that derives from the base, also known as the derived class, can be called the subclass.</p>
+
+<p><code>protected</code>, like <code>public</code> and <code>private</code>, is also an access specifier. When you declare a class attribute or function as <code>protected</code>, you are effectively making it accessible to classes that derive (and <b>friends</b>), yet simultaneously making it inaccessible to everyone else outside the class, including <code>main()</code>.</p>
+
+<p><code>protected</code> is the access specifier you should use if you want a certain attribute in a base class to be accessible to classes that derive from this base.</p>
+
+<p>This is an important aspect of object-oriented programming, combining data <i>abstraction</i> and <i>inheritance</i>, in ensuring that derived classes can safely inherit base class attributes that cannot be tampered with by anyone outside this hierarchical system.</p>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/initializer-list-parameter">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.1.html">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/inheritance/base-class-initialization">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -286,7 +315,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'>no page specified</span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 10</span></li>
 </ul>
 <hr />
 <h3>
@@ -299,44 +328,36 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/8.3.2.1.html" class="list-group-item">
-	1. base class initialization
+<a href="/cpp/object-orientation/inheritance/base-class-initialization" class="list-group-item">
+	1. Base Class Initialization
 	
 </a>
-<a href="/8.3.2.2.html" class="list-group-item">
-	2. final inheritance
+<a href="/cpp/object-orientation/inheritance/override" class="list-group-item">
+	2. Overriding Base Methods
 	
 </a>
-<a href="/8.3.2.3.html" class="list-group-item">
-	3. multiple inheritance
+<a href="/cpp/object-orientation/inheritance/order-of-construction" class="list-group-item">
+	3. Order of Construction and Destruction
 	
 </a>
-<a href="/8.3.2.4.html" class="list-group-item">
-	4. overriding methods
+<a href="/cpp/object-orientation/inheritance/private-inheritance" class="list-group-item">
+	4. Private Inheritance
 	
 </a>
-<a href="/8.3.2.5.html" class="list-group-item">
-	5. order of constructors and destructors
+<a href="/cpp/object-orientation/inheritance/protected-inheritance" class="list-group-item">
+	5. Protected Inheritance
 	
 </a>
-<a href="/8.3.2.6.html" class="list-group-item">
-	6. private inheritance
+<a href="/cpp/object-orientation/inheritance/slicing" class="list-group-item">
+	6. Slicing
 	
 </a>
-<a href="/8.3.2.7.html" class="list-group-item">
-	7. protected access specifier
+<a href="/cpp/object-orientation/inheritance/multiple-inheritance" class="list-group-item">
+	7. Multiple Inheritance
 	
 </a>
-<a href="/8.3.2.8.html" class="list-group-item">
-	8. protected inheritance
-	
-</a>
-<a href="/8.3.2.9.html" class="list-group-item">
-	9. public inheritance
-	
-</a>
-<a href="/8.3.2.10.html" class="list-group-item">
-	10. slicing derived classes
+<a href="/cpp/object-orientation/inheritance/final-inheritance" class="list-group-item">
+	8. Final Inheritance
 	
 </a>
 </div>

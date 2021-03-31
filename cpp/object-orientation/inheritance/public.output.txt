@@ -1,4 +1,0 @@
-Base Constructor Invoked
-base member: 0
-Derived Constructor Invoked
-derived member: 1

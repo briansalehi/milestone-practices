@@ -1,30 +1,35 @@
 #include <iostream>
 
-class Base {
-public:
-    void method() {
+struct Base
+{
+    virtual void DoSomething()
+	{
         std::cout << "Base Method Invoked" << std::endl;
     }    
 };
 
-class Derived: public Base {
-public:
-    void another_method() {
+struct Derived: public Base
+{
+    virtual void DoSomething()
+	{
         std::cout << "Derived Method Invoked" << std::endl;
     }
 };
 
-void display(Base sliced) {
-    sliced.method();
-    /*
-    sliced.another_method(); // Derived was sliced and lost another_method
-    */
+void callByValue(Base sliced)
+{
+    sliced.DoSomething(); // Derived was sliced
+}
+
+void callByReference(Base& notSliced)
+{
+	notSliced.DoSomething();
 }
 
 int main()
 {
     Derived sample;
-    display(sample);
-    
+    callByValue(sample); // Derived sliced when passed by value
+	callByReference(sample); // no slicing when Derived passed by reference
     return 0;
 }
