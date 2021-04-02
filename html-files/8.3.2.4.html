@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>overriding methods</title>
+<title>Private Inheritance</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Inheritance</a></li>
-<li class='breadcrumb-item active'>overriding methods</li>
+<li class='breadcrumb-item active'>Private Inheritance</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="overriding-methods" class="anchor" aria-hidden="true" href="#overriding-methods">
-overriding methods
+<a id="Private-Inheritance" class="anchor" aria-hidden="true" href="#Private-Inheritance">
+Private Inheritance
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,69 +270,89 @@ overriding methods
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-When methods of *Base* class and *Derived* class have the same name, the derived method will override the base method.  
-To specifically invoke the overriden method of base class, you can use resolution operator :: to access that method.
+<p>When <code>Derived</code> class inherits from <code>Base</code> class privately, all of the public members and methods of <code>Base</code> class are only accessibly to the <code>Derived</code> class and not only the next generations of <code>Derived</code> class. Don't forget that private members of <code>Base</code> class will stay private to anyone even <code>Derived</code> class.</p>
+
+<p><b>Private inheritance</b> differs from <b>public inheritance</b> (which is what you have seen up to now) in that the keyword <code>private</code> is used in the line where the derived class declares its inheritance from a base class:</p>
+
+<pre class="language-cpp line-number" data-line="6">
+	<code>
+		class Base
+		{
+			// ... base class members and methods
+		};
+
+		class Derived: private Base // private inheritance
+		{
+			// ... derived class members and methods
+		};
+	</code>
+</pre>
+
+<p><b>Private inheritance</b> of the base class means that all public members and attributes of the base class are private (that is, inaccessible) to anyone with an instance of the derived class. In other words, even public members and methods of class <code>Base</code> can only be consumed by class <code>Derived</code>, but not by anyone else in possession of an instance of <code>Derived</code>.</p>
+
+<p>Thus, for the world outside the inheritance hierarchy, <b>private inheritance</b> essentially does not imply an "<b>is-a</b>" relationship (imagine a tuna that can’t swim!). As private inheritance allows base class attributes and methods to be consumed only by the subclass that derives from it, this relationship is also called a “<b>has-a</b>” relationship. There are a few examples of private inheritance in some things you see around you in daily life.</p>
 <hr />
-  <cite>override.cxx</cite>
+  <cite>private-inheritance.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    class Base {
+    class Engine {
     public:
-        Base() {
-            std::cout &lt;&lt; &quot;Base Constructor Invoked&quot; &lt;&lt; std::endl;
+        void ignite(bool state) {
+            if (state) {
+                std::cout &lt;&lt; &quot;Firing up the engine&quot; &lt;&lt; std::endl;
+            }
+            else {
+                std::cout &lt;&lt; &quot;Shutting down the engine&quot; &lt;&lt; std::endl;
+            }
         }
-    
-        // overriden get, there&apos;s a similar get in derived class that hides this get
-        void get() {
-            std::cout &lt;&lt; &quot;Base Class Method Invoked&quot; &lt;&lt; std::endl;
-        }    
     };
     
-    class Derived: public Base {
+    class Car: private Engine {
     public:
-        Derived() {
-            std::cout &lt;&lt; &quot;Derived Constructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    
-        // overrides base get
-        void get() {
-            std::cout &lt;&lt; &quot;Derived Class Method Invoked&quot; &lt;&lt; std::endl;
-    
-            // I. scope resolution operator to invoke overriden method from derived scope
-            Base::get();
+        void move() {
+            ignite(true);
         }
     };
     
     int main()
     {
-        Derived derived;
-        derived.get();
+        Car lemo;
+        lemo.move();
+        /*
+        lemo.ignite(true); // inaccessible
+        */
     
-        // II. scope resolution operator to invoke overriden method from derived object
-        derived.Base::get();
-        
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-9'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -o ./override.o -c ./override.cxx
-g++ -g -o ./override.bin ./override.o
-./override.bin
-Base Constructor Invoked
-Derived Constructor Invoked
-Derived Class Method Invoked
-Base Class Method Invoked
-Base Class Method Invoked
+g++ -Wall -g -o ./private-inheritance.o -c ./private-inheritance.cxx
+g++ -g -o ./private-inheritance.bin ./private-inheritance.o
+./private-inheritance.bin
+Firing up the engine
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 10</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.2.3.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.5.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/inheritance/order-of-construction">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/inheritance/protected-inheritance">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

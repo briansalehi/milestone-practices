@@ -268,8 +268,16 @@ Object Orientation
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>Object-oriented programming is based on four important aspects:</p> 
+
+<ul>
+	<li>Encapsulation</li>
+	<li>Abstraction</li>
+	<li>Inheritance</li>
+	<li>Polymorphism</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.2.4.4.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/memory-management/casting/reinterpret-cast">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes">Next Page</a></li>
 </ul>
 <hr />
@@ -285,7 +293,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'>no page specified</span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 9</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 9 through 12</span></li>
 </ul>
 <hr />
 <h3>
@@ -394,47 +402,39 @@ Table of Content
 </div>
 <a href="#8-3-2-0" class="list-group-item" data-toggle="collapse">
 	<i class="glyphicon glyphicon-chevron-right"></i>2. Inheritance
-	<span class="badge badge-primary badge-pill">10</span>
+	<span class="badge badge-primary badge-pill">8</span>
 </a>
 <div class="list-group collapse" id="8-3-2-0">
-<a href="/8.3.2.1.html" class="list-group-item group-child">
-	1. base class initialization
+<a href="/cpp/object-orientation/inheritance/base-class-initialization" class="list-group-item group-child">
+	1. Base Class Initialization
 	
 </a>
-<a href="/8.3.2.2.html" class="list-group-item group-child">
-	2. final inheritance
+<a href="/cpp/object-orientation/inheritance/override" class="list-group-item group-child">
+	2. Overriding Base Methods
 	
 </a>
-<a href="/8.3.2.3.html" class="list-group-item group-child">
-	3. multiple inheritance
+<a href="/cpp/object-orientation/inheritance/order-of-construction" class="list-group-item group-child">
+	3. Order of Construction and Destruction
 	
 </a>
-<a href="/8.3.2.4.html" class="list-group-item group-child">
-	4. overriding methods
+<a href="/cpp/object-orientation/inheritance/private-inheritance" class="list-group-item group-child">
+	4. Private Inheritance
 	
 </a>
-<a href="/8.3.2.5.html" class="list-group-item group-child">
-	5. order of constructors and destructors
+<a href="/cpp/object-orientation/inheritance/protected-inheritance" class="list-group-item group-child">
+	5. Protected Inheritance
 	
 </a>
-<a href="/8.3.2.6.html" class="list-group-item group-child">
-	6. private inheritance
+<a href="/cpp/object-orientation/inheritance/slicing" class="list-group-item group-child">
+	6. Slicing
 	
 </a>
-<a href="/8.3.2.7.html" class="list-group-item group-child">
-	7. protected access specifier
+<a href="/cpp/object-orientation/inheritance/multiple-inheritance" class="list-group-item group-child">
+	7. Multiple Inheritance
 	
 </a>
-<a href="/8.3.2.8.html" class="list-group-item group-child">
-	8. protected inheritance
-	
-</a>
-<a href="/8.3.2.9.html" class="list-group-item group-child">
-	9. public inheritance
-	
-</a>
-<a href="/8.3.2.10.html" class="list-group-item group-child">
-	10. slicing derived classes
+<a href="/cpp/object-orientation/inheritance/final-inheritance" class="list-group-item group-child">
+	8. Final Inheritance
 	
 </a>
 </div>
@@ -473,15 +473,15 @@ Table of Content
 </a>
 </div>
 <a href="#8-3-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Operators
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Operator Overloading
 	<span class="badge badge-primary badge-pill">11</span>
 </a>
 <div class="list-group collapse" id="8-3-4-0">
-<a href="/cpp/object-orientation/operators/assignment-operator" class="list-group-item group-child">
+<a href="/cpp/object-orientation/operator-overloading/assignment-operator" class="list-group-item group-child">
 	1. Assignment Operator
 	
 </a>
-<a href="/cpp/object-orientation/operators/copy-assignment-operator" class="list-group-item group-child">
+<a href="/cpp/object-orientation/operator-overloading/copy-assignment-operator" class="list-group-item group-child">
 	2. Copy Assignment Operator
 	
 </a>
@@ -505,7 +505,7 @@ Table of Content
 	7. inequality
 	
 </a>
-<a href="/cpp/object-orientation/operators/string-literal-operator" class="list-group-item group-child">
+<a href="/cpp/object-orientation/operator-overloading/string-literal-operator" class="list-group-item group-child">
 	8. user defined literals
 	
 </a>

@@ -270,27 +270,63 @@ Static Cast
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Variable types can be casted to type of another,
-but you must be careful when you do it.  
-Suppose you have a type of **double**,
-you must not cast it to type **int** as its last 4 bytes will get lost!
+<p>Variable types can be casted to type of another, but you must be careful when you do it. Suppose you have a type of <code>double</code>, you must not cast it to type <code>int</code> as its last 4 bytes will get lost!</p>
 
-ref[6]
-Static casting is used when a conversion is made between two related types, for  
-example numbers to numbers or pointers to pointers.
+<p>Static casting is used when a conversion is made between two related types, for  example numbers to numbers or pointers to pointers. The most common use is for conversions between numeric types. Some of these conversions may involve the loss of information, for example a conversion from a <code>double</code> to an <code>int</code>. This conversion is done by truncating the fractional part (not rounding).</p>
 
-The most common use is for conversions between numeric types. Some of these  
-conversions may involve the loss of information, for example a conversion from  
-a **double** to an **int**. This conversion is done by truncating the fractional  
-part (not rounding).
+<p>This type of casting is more verbose than the C-style and functional-style casts shown earlier. But this form is appropriate, because it serves as a visible warning to the programmer that a potentially unsafe operation is taking place.</p>
 
-This type of casting is more verbose than the C-style and functional-style casts  
-shown earlier. But this form is appropriate, because it serves as a visible warning to  
-the programmer that a potentially unsafe operation is taking place.
+<p>Some older C++ compilers may not support the newer cast operators, only then the traditional C-style and functional-style casts should be used instead.</p>
 
-Some older C++ compilers may not support the newer cast operators,  
-but then the traditional C-style and functional-style casts can be used instead.
-end[6]
+static_cast is a mechanism that can be used to convert pointers between related types, and perform explicit type conversions for standard data types that would otherwise happen automatically or implicitly. As far as pointers go, static_cast implements a basic compile-time check to ensure that the pointer is being cast to a related type. This is an improvement over a C-style cast that allows a pointer to one object to be cast to an absolutely unrelated type without any complaint. Using static_cast, a pointer can be upcasted to the base type, or can be downcasted to the derived type, as the following code-sample indicates.
+
+*****
+
+Base* objBase = new Derived ();
+Derived* objDer = static_cast<Derived*>(objBase); // ok!
+// class Unrelated is not related to Base Unrelated* notRelated = static_cast<Unrelated*>(objBase); // Error // The cast is not permitted as types are unrelated
+
+*****
+
+Casting a Derived* to a Base* is called upcasting and can be done without any explicit casting operator:
+
+*****
+
+Derived objDerived;
+Base* objBase = &objDerived; // ok!
+
+*****
+
+Casting a Base* to a Derived* is called downcasting and cannot be done without usage of explicit casting operators:
+
+*****
+
+Derived objDerived;
+Base* objBase = &objDerived; // Upcast ->  ok!
+
+*****
+
+Derived* objDer = objBase; // Error: Downcast needs explicit cast
+
+*****
+
+However, note that static_cast verifies only that the pointer types are related. It does not perform any runtime checks. So, with static_cast, a programmer could still get away with this bug:
+
+*****
+
+Base* objBase = new Base();
+Derived* objDer = static_cast<Derived*>(objBase); // Still no errors!
+
+*****
+
+Here, objDer actually points to a partial Derived object because the object being pointed to is actually a Base() type. Because static_cast performs only a compile-time check of verifying that the types in question are related and does not perform a runtime check, a call to objDer -> DerivedFunction() would get compiled, but probably result in unexpected behavior during runtime.
+
+Apart from helping in upcasting or downcasting, static_cast can, in many cases, help make implicit casts explicit and bring them to the attention of the programmer or reader:
+
+*****
+
+double Pi = 3.14159265;
+int num = static_cast<int>(Pi); // Making an otherwise implicit cast, explicit
 <hr />
   <cite>static-cast.cxx</cite>
 <pre class="line-numbers" >
