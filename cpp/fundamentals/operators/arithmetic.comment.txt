@@ -1,11 +1,9 @@
-You can perform an arithmetic operation between two operands by using + for
-addition, – for subtraction, * for multiplication, / for division, and % for
-modulo operation.
+<p>You can perform an <b>arithmetic operation</b> between two operands by using <code>+</code> for addition, <code>–</code> for subtraction, <code>*</code> for multiplication, <code>/</code> for division, and <code>%</code> for modulo operation.</p>
 
 <ul>
-<li>Multiplication: *</li>
-<li>Division: \</li>
-<li>Subtraction: -</li>
-<li>Addition: +</li>
-<li>Modulus: %</li>
+	<li>Multiplication: <code>*</code></li>
+	<li>Division: <code>\</code></li>
+	<li>Subtraction: <code>-</code></li>
+	<li>Addition: <code>+</code></li>
+	<li>Modulus: <code>%</code></li>
 </ul>

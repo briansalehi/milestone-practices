@@ -1,4 +1,0 @@
-Passing an array as a function parameter is simply done by using the address of its first element.  
-You might already noticed that variables can also be passed to functions parameters by their addresses.  
-This way, it doesn't matter how big value is a variable holding, we just pass its address as a parameter.  
-using & character behind a variable's name, we access to the variable's address in memory.

@@ -1,5 +1,1 @@
-Logical operators differ from bitwise operators which we will discuss in next few pages.
-
-1 && 1 equals to 1 or true as boolean  
-but  
-1 & 1 equals to 2 or binary 10
+Logical operators differ from bitwise operators which logical operators only return <code>true</code> or <code>false</code>. <code>1 &amp;&amp; 1</code> equals to <code>1</code> or <code>true</code> as boolean but <code>1 & 1</code> equals to decimal <code>2</code> or binary <code>10</code>.

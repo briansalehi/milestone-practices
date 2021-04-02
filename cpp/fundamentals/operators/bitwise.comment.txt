@@ -1,1 +1,1 @@
-As mentioned in last practice, bitwise operators are different than logical ones.  
+<p>Note that <b>bitwise operators</b> are different than <b>logical operators</b>.</p>  

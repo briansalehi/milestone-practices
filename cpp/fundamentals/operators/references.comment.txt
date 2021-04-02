@@ -1,30 +1,25 @@
-A reference is an alias for a variable. When you declare a reference, you need
-to initialize it to a variable. Thus, the reference variable is just a
-different way to access the data stored in the variable being referenced.
+<p>A <b>reference</b> is an alias for a variable. When you declare a reference, you need to initialize it to a variable. Thus, the reference variable is just a different way to access the data stored in the variable being referenced.</p>
 
-You would declare a reference using the reference operator (&amp;) as seen in the
-following statement:
+<p>You would declare a reference using the reference <code>operator&amp;</code> as seen in the following statement:</p>
 
 <pre class="language-cpp">
 	<code>
 		VarType original = Value;
-		VarType&amp; ReferenceVariable = original;
+		VarType& ReferenceVariable = original;
 	</code>
 </pre>
 
-References enable you to work with the memory location they are initialized
-to. This makes references particularly useful when programming functions.
+<p>References enable you to work with the memory location they are initialized to. This makes references particularly useful when programming functions.</p>
 
-It would be ideal if we could avoid or eliminate the copy steps, enabling the function to work directly on the data in the caller’s stack. References enable you to do just that.
-A version of the function without the copy step looks like this:
+<p>It would be ideal if we could avoid or eliminate the copy steps, enabling the function to work directly on the data in the caller’s stack. References enable you to do just that. A version of the function without the copy step looks like this:</p>
 
 <pre class="language-cpp">
 	<code>
-		ReturnType DoSomething(Type&amp; parameter); // note the reference&amp;
+		ReturnType DoSomething(Type& parameter); // note the reference&amp;
 	</code>
 </pre>
 
-This function would be invoked as the following:
+<p>This function would be invoked as the following:</p>
 
 <pre class="language-cpp">
 	<code>
@@ -32,21 +27,16 @@ This function would be invoked as the following:
 	</code>
 </pre>
 
-As the argument is being passed by reference, Parameter is not a copy of
-argument rather an alias of the latter, much like Ref in Listing 8.17.
-Additionally, a function that accepts a parameter as a reference can
-optionally return values using reference  parameters.
+<p>As the argument is being passed by reference, parameter is not a copy of argument rather an alias of the latter. Additionally, a function that accepts a parameter as a reference can optionally return values using reference parameters.</p>
 
-You might need to have references that are not allowed to change the value of
-the  original variable being aliased. Using const when declaring such
-references is the way to achieve that:
+<p>You might need to have references that are not allowed to change the value of the original variable being aliased. Using <code>const</code> when declaring such references is the way to achieve that:</p>
 
-<pre class="language-cpp">
+<pre class="language-cpp line-numbers">
 	<code>
 		int original = 30;
-		const int&amp; constRef = original;
+		const int& constRef = original;
 		constRef = 40; // Not allowed: constRef can’t change value in original int&amp;
 		ref2 = constRef; // Not allowed: ref2 is not const
-		const int&amp; constRef2 = constRef; // OK
+		const int& constRef2 = constRef; // OK
 	</code>
 </pre>

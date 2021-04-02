@@ -1,16 +1,10 @@
-To program an application that is able to optimally consume memory resources
-on the basis of the needs of the user, you need to use dynamic memory
-allocation.
+<p>To program an application that is able to optimally consume memory resources on the basis of the needs of the user, you need to use <b>dynamic memory allocation</b>.</p>
 
-C++ supplies you two operators, new and delete, to help you better manage the
-memory consumption of your application.
+<p>C++ supplies you two operators, <code>new</code> and <code>delete</code>, to help you better manage the memory consumption of your application.</p>
 
-You use new to allocate new memory blocks. The most frequently used form of
-new returns a pointer to the requested memory if successful or else throws an
-exception.
+<p>You use <code>new</code> to allocate new memory blocks. The most frequently used form of <code>new</code> returns a pointer to the requested memory if successful or else throws an <a href="/cpp/object-orientation/exception">exception</a>.</p>
 
-When using new, you need to specify the data type for which the memory is
-being  allocated:
+<p>When using <code>new</code>, you need to specify the data type for which the memory is being allocated:</p>
 
 <pre class="language-cpp">
 	<code>
@@ -18,8 +12,7 @@ being  allocated:
 	</code>
 </pre>
 
-You can also specify the number of elements you want to allocate that memory
-for (when you need to allocate memory for more than one element):
+<p>You can also specify the number of elements you want to allocate that memory for (when you need to allocate memory for more than one element):</p>
 
 <pre class="language-cpp">
 	<code>
@@ -27,8 +20,7 @@ for (when you need to allocate memory for more than one element):
 	</code>
 </pre>
 
-Every allocation using new needs to be eventually released using an equal and
-opposite de-allocation via delete:
+<p>Every allocation using <code>new</code> needs to be eventually released using an equal and opposite deallocation via <code>delete</code>:</p>
 
 <pre class="language-cpp">
 	<code>
@@ -37,7 +29,7 @@ opposite de-allocation via delete:
 	</code>
 </pre>
 
-This rule also applies when you request memory for multiple elements:
+<p>This rule also applies when you request memory for multiple elements:</p>
 
 <pre class="language-cpp">
 	<code>
@@ -46,17 +38,11 @@ This rule also applies when you request memory for multiple elements:
 	</code>
 </pre>
 
-Operators <b>new</b> and <b>delete</b> allocate memory from the free store. 
-The free store is a memory abstraction in the form of a pool of memory
-where your application can allocate (that is, reserve) memory from and
-deallocate (that is, release) memory to.
+<p>Operators <code>new</code> and <code>delete</code> allocate memory from the <b>free store</b>. The free store is a memory abstraction in the form of a pool of memory where your application can allocate (that is, reserve) memory from and deallocate (that is, release) memory to.</p>
 
-The address contained in the pointer is incremented or decremented by the
-sizeof the type being pointed to (and not necessarily a byte). This way, the
-compiler ensures that the pointer never points to the middle or end of data
-placed in the memory; it only points to the beginning.
+<p>The address contained in the pointer is incremented or decremented by the <code>sizeof</code> the type being pointed to (and not necessarily a byte). This way, the compiler ensures that the pointer never points to the middle or end of data placed in the memory; it only points to the beginning.</p>
 
-If a pointer has been declared as
+<p>If a pointer has been declared as</p>
 
 <pre class="language-cpp">
 	<code>
@@ -65,7 +51,7 @@ If a pointer has been declared as
 	</code>
 </pre>
 
-Would mean that <i>pType</i> contains (and hence points to)
+<p>Would mean that <code>pType</code> contains (and hence points to)</p>
 
 <pre class="language-cpp">
 	<code>
@@ -73,104 +59,63 @@ Would mean that <i>pType</i> contains (and hence points to)
 	</code>
 </pre>
 
-Pointers are variables, too, and hence the const keyword that is relevant to
-variables is relevant to pointers as well. However, pointers are a special
-kind of variable as they contain a memory address and are used to modify
-memory at that address. Thus, when it comes to pointers and constants, you
-have the following combinations:
+<p><b>Pointers</b> are variables, too, and hence the <code>const</code> keyword that is relevant to variables is relevant to pointers as well. However, pointers are a special kind of variable as they contain a memory address and are used to modify memory at that address. Thus, when it comes to pointers and constants, you have the following combinations:</p>
 
 <ul>
-<li>The address contained in the pointer is constant and cannot be changed, yet
-the data at that address can be changed</li>
+	<li>The address contained in the pointer is constant and cannot be changed, yet the data at that address can be changed.</li>
+	<pre class="language-cpp line-numbers">
+		<code>
+			int daysInMonth = 30;
+			int* const pDaysInMonth = &daysInMonth;
+			*pDaysInMonth = 31; // OK! Data pointed to can be changed
+			int daysInLunarMonth = 28;
+			pDaysInMonth = &daysInLunarMonth; // Not OK! Cannot change address!
+		</code>
+	</pre>
 
-<pre class="language-cpp">
-	<code>
-		int daysInMonth = 30;
-		int* const pDaysInMonth = &daysInMonth;
-		*pDaysInMonth = 31; // OK! Data pointed to can be changed
-		int daysInLunarMonth = 28;
-		pDaysInMonth = &daysInLunarMonth; // Not OK! Cannot change address!
-	</code>
-</pre>
+	<li>Data pointed to is constant and cannot be changed, yet the address contained in the pointer can be changed—that is, the pointer can also point elsewhere.</li>
+	<pre class="language-cpp line-numbers">
+		<code>
+			int hoursInDay = 24;
+			const int* pointsToInt = &hoursInDay;
+			int monthsInYear = 12;
+			pointsToInt = &monthsInYear; // OK!
+			*pointsToInt = 13; // Not OK! Cannot change data being pointed to
+			int* newPointer = pointsToInt; // Not OK! Cannot assign const to non-const
+		</code>
+	</pre>
 
-<li>Data pointed to is constant and cannot be changed, yet the address
-contained in the pointer can be changed—that is, the pointer can also point
-elsewhere</li>
-
-<pre class="language-cpp">
-	<code>
-		int hoursInDay = 24;
-		const int* pointsToInt = &hoursInDay;
-		int monthsInYear = 12;
-		pointsToInt = &monthsInYear; // OK!
-		*pointsToInt = 13; // Not OK! Cannot change data being pointed to
-		int* newPointer = pointsToInt; // Not OK! Cannot assign const to non-const
-	</code>
-</pre>
-
-<li>Both the address contained in the pointer and the value being pointed to are
-constant and cannot be changed (most restrictive variant):</li>
-
-<pre class="language-cpp">
-	<code>
-		int hoursInDay = 24;
-		const int* const pHoursInDay = &hoursInDay;
-		*pHoursInDay = 25; // Not OK! Cannot change data being pointed to
-		int daysInMonth = 30;
-		pHoursInDay = &daysInMonth; // Not OK! Cannot change address
-	</code>
-</pre>
+	<li>Both the address contained in the pointer and the value being pointed to are constant and cannot be changed (most restrictive variant).</li>
+	<pre class="language-cpp line-numbers">
+		<code>
+			int hoursInDay = 24;
+			const int* const pHoursInDay = &hoursInDay;
+			*pHoursInDay = 25; // Not OK! Cannot change data being pointed to
+			int daysInMonth = 30;
+			pHoursInDay = &daysInMonth; // Not OK! Cannot change address
+		</code>
+	</pre>
 </ul>
 
-It is important to remember that pointers that are allocated dynamically using
-operator new still need to be released using operator delete, even if you
-accessed data using syntax com-monly used with static arrays.
+<p>It is important to remember that pointers that are allocated dynamically using operator <code>new</code> still need to be released using operator <code>delete</code>, even if you accessed data using syntax commonly used with static arrays.</p>
 
-If you forget this, your application leaks memory, and that’s bad.
+<p>If you forget this, your application <b>leaks memory</b>, and that’s bad.</p>
 
 <h4>Common Programming Mistakes When Using Pointers</h4>
 
-Memory Leaks This is probably one of the most frequent problems with C++
-applications: The longer they run, the larger the amount of memory they
-consume and the slower the system gets.
+<p>Memory Leaks This is probably one of the most frequent problems with C++ applications: The longer they run, the larger the amount of memory they consume and the slower the system gets.</p>
 
-This typically happens when the programmer did not ensure that his application
-releases memory allocated dynamically using new with a matching call to delete
-after the block of memory is no longer required.
+<p>This typically happens when the programmer did not ensure that his application releases memory allocated dynamically using <code>new</code> with a matching call to <code>delete</code> after the block of memory is no longer required.</p>
 
-When Pointers Don’t Point to Valid Memory Locations When you dereference a
-pointer using operator (*) to access the pointed value, you need to be sure
-that the pointer contains a valid memory location, or else your program will
-either crash or misbehave. Logical as this may seem, invalid pointers are
-quite a common reason for application crashes. Pointers can be invalid for a
-range of reasons, primarily due to poor programming and memory management.
+<p>When you dereference a pointer using <code>operator*</code> to access the pointed value, you need to be sure that the pointer contains a valid memory location, or else your program will either crash or misbehave. Logical as this may seem, invalid pointers are quite a common reason for application crashes. Pointers can be invalid for a range of reasons, primarily due to poor programming and memory management.</p>
 
-Dangling Pointers (Also Called Stray or Wild Pointers) Note that any valid
-pointer is invalid after it has been released using delete. In other words To
-avoid this problem, some programmers follow the convention of assigning NULL
-to a pointer when initializing it or after it has been deleted. They also
-always check a pointer for validity (by comparing against NULL) before
-dereferencing it using operator (*).
+<p>Note that any valid pointer is invalid after it has been released using <code>delete</code>. In other words To avoid this problem, some programmers follow the convention of assigning <code>nullptr</code> to a pointer when initializing it or after it has been deleted. They also always check a pointer for validity (by comparing against <code>nullptr</code>) before dereferencing it using <code>operator*</code>.</p>
 
-Checking Whether Allocation Request Using new Succeeded In our code to this
-point, we have assumed that new will return a valid pointer to a block of
-memory. Indeed, new usually succeeds unless the application asks for an
-unusually large amount of memory or if the system is in such a critical state
-that it has no memory to spare. There are applications that need to make
-requests for large chunks of memory (for example, database applications).
-Additionally, it is good to not simply assume that memory allocation requests
-will always be successful. C++ provides you with two  possible methods to
-ensure that your pointer is valid before you use it. The default method—one
-that we have been using thus far uses exceptions wherein unsuccessful
-allocations result in an exception of the type <b>std::bad_alloc</b> to be
-thrown.
-An excep-tion results in the execution of your application being disrupted, and
-unless you have programmed an exception handler, your application ends rather
-unelegantly with an error message "unhandled exception."
+<p>In our code to this point, we have assumed that <code>new</code> will return a valid pointer to a block of memory. Indeed, <code>new</code> usually succeeds unless the application asks for an unusually large amount of memory or if the system is in such a critical state that it has no memory to spare. There are applications that need to make requests for large chunks of memory (for example, database applications). Additionally, it is good to not simply assume that memory allocation requests will always be successful. C++ provides you with two possible methods to ensure that your pointer is valid before you use it.</p>
 
-For those who don’t want to rely on exceptions, there is a variant of new
-called <b>new(nothrow)</b>.
-This variant does not throw an exception when allocation
-requests fail, rather it results in the operator new returning NULL. The
-pointer being assigned,  therefore, can be checked for validity against NULL
-before it is used.
+<ul>
+	<li>The default method, one that we have been using thus far uses exceptions wherein unsuccessful allocations result in an exception of the type <code>std::bad_alloc</code> to be thrown.</li>
+	<li>An exception results in the execution of your application being disrupted, and unless you have programmed an exception handler, your application ends rather unelegantly with an error message "unhandled exception."</li>
+</ul>
+
+<p>For those who don’t want to rely on <b>exceptions</b>, there is a variant of new called <code>new(nothrow)</code>. This variant does not throw an exception when allocation requests fail, rather it results in the operator <code>new</code> returning <code>nullptr</code>. The pointer being assigned, therefore, can be checked for validity against <code>nullptr</code> before it is used.</p>
