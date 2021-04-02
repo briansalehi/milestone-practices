@@ -1,1 +1,1 @@
-<p>Some types might look so long that it's worth making an abbreviation for them. You can create an alias for any type you want by usign <i>typedef</i> keyword. It's a convention to use trailing <i>_t</i> in type names, but again, it's just a matter of your taste.</p>
+<p>Some types might look so long that it's worth making an abbreviation for them. You can create an alias for any type you want by usign <code>typedef</code> keyword.</p>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>*auto* keyword</title>
+<title>Auto Type Deduction</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.2.0.html">Memory Objects</a></li>
-<li class='breadcrumb-item active'>*auto* keyword</li>
+<li class='breadcrumb-item active'>Auto Type Deduction</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,32 +261,18 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="*auto*-keyword" class="anchor" aria-hidden="true" href="#*auto*-keyword">
-*auto* keyword
+<a id="Auto-Type-Deduction" class="anchor" aria-hidden="true" href="#Auto-Type-Deduction">
+Auto Type Deduction
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p><i>auto</i> type is a way to let compiler deduce a type and replace it in compile type. Using auto requires you to initialize the variable for the compiler that uses this initial value in deciding what the variable type can be.</p>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p><code>auto</code> type is a way to let compiler deduce a type and replace it in compile type. Using auto requires you to initialize the variable for the compiler that uses this initial value in deciding what the variable type can be. When you don’t initialize a variable of type <code>auto</code>, you get a compile error.</p>
 
-<p>When you don’t initialize a variable of type auto, you get a compile error.</p>
-
-<p>Using auto type sometimes makes your code shorter, specially when it comes to iterators, which will be discussed later. But just like anything in your daily life, type <i>auto</i> has its cons too. Your code might look easier to read by using type <i>auto</i>, but be aware that using too many <i>auto</i> types will make types hard to guess and soon your program will look confusing, as all types are no longer explicitely visible! Personally, I prefer using explicit types wherever possible, even if they make my code longer, at least I won't end up guessing my variable types.</p>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
-</ul>
+<p>Using <code>auto</code> type sometimes makes your code shorter, specially when it comes to <a href="/cpp/stl/iterators">iterators</a>, which will be discussed later. But just like anything in your daily life, type <code>auto</code> has its cons too. Your code might look easier to read, but be aware that using too many <code>auto</code> types will make types hard to guess and soon your program will look confusing, as all types are no longer explicitely visible! Personally, I prefer using explicit types wherever possible, even if they make my code longer, at least I won't end up guessing my variable types.</p>
 <hr />
   <cite>auto.cxx</cite>
 <pre class="line-numbers" >
@@ -308,6 +294,19 @@ g++ -g -o ./auto.bin ./auto.o
 ./auto.bin
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/memory-objects/storage">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/memory-objects/arguments">Next Page</a></li>

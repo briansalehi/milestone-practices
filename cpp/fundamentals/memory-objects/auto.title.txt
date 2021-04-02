@@ -1,1 +1,1 @@
-*auto* keyword
+Auto Type Deduction

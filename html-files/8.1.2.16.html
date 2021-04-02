@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>list initialization</title>
+<title>List Initialization</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.2.0.html">Memory Objects</a></li>
-<li class='breadcrumb-item active'>list initialization</li>
+<li class='breadcrumb-item active'>List Initialization</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="list-initialization" class="anchor" aria-hidden="true" href="#list-initialization">
-list initialization
+<a id="List-Initialization" class="anchor" aria-hidden="true" href="#List-Initialization">
+List Initialization
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,27 +270,24 @@ list initialization
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Avoid Narrowing Conversion Errors by Using List Initialization.</p>
+<p>Avoid <b>narrowing conversion</b> errors by using <b>list initialization</b>.</p>
 
-<p>When you initialize a variable of a smaller integer type (say, short) using another of a larger type (say, an int), you are risking a narrowing conversion error, because the  compiler has to fit data stored in a type that can potentially hold much larger numbers into a type that doesn’t have the same capacity (that is, is narrower).</p>
+<p>When you initialize a variable of a smaller integer type (say, <code>short</code>) using another of a larger type (say, an <code>int</code>), you are risking a narrowing conversion error, because the  compiler has to fit data stored in a type that can potentially hold much larger numbers into a type that doesn’t have the same capacity (that is, is narrower).</p>
 
-<p>Narrowing isn’t restricted to conversions between integer types only. You may face  narrowing errors if you initialize a float using a double, a float (or double) using an int, or an int using a float. Some compilers may warn, but this warning will not cause an error that stops compilation. In such cases, you may be confronted by bugs that occur infrequently and at execution time.</p>
+<p>Narrowing isn’t restricted to conversions between integer types only. You may face narrowing errors if you initialize a <code>float</code> using a <code>double</code>, a <code>float</code> (or <code>double</code>) using an <code>int</code>, or an int using a <code>float</code>. Some compilers may warn, but this warning will not cause an error that stops compilation. In such cases, you may be confronted by bugs that occur infrequently and at execution time.</p>
 
-<p>To avoid this problem, C++11 recommends list initialization techniques that prevent  narrowing. To use this feature, insert initialization values/variables within braces {…}.</p>
+<p>To avoid this problem, C++11 recommends <b>list initialization</b> techniques that prevent narrowing. To use this feature, insert initialization values/variables within braces {…}.</p>
 
 <p>There are two types of initialization that use braced initializer lists:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		// Copy list initialization
-		T obj = {arg1, arg2, ...};
-
-		// Direct list initialization
-		T obj{arg1, arg2, ...};
+		T obj = {arg1, arg2, ...}; // Copy list initialization
+		T obj{arg1, arg2, ...}; // Direct list initialization
 	</code>
 </pre>
 
-<p>In combination with auto type deduction, there is an important difference between copy and direct list initialization introduced with C++17.</p>
+<p>In combination with <code>auto</code> type deduction, there is an important difference between <b>copy</b> and <b>direct list initialization</b> introduced with C++17.</p>
 
 <p>Starting with C++17, you have the following results:</p>
 
@@ -306,7 +303,7 @@ list initialization
 	</code>
 </pre>
 
-<p>Note that for copy list initialization, all the elements in the braced initializer must be of the same type. For example, the following does not compile:</p>
+<p>Note that for <b>copy list initialization</b>, all the elements in the braced initializer must be of the same type. For example, the following does not compile:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -314,7 +311,7 @@ list initialization
 	</code>
 </pre>
 
-<p>In earlier versions of the standard (C++11/14), both copy and direct list initialization deduce an initializer_list&lt;&gt; :</p>
+<p>In earlier versions of the standard (C++11/14), both copy and <b>direct list initialization</b> deduce an <code>initializer_list&lt;&gt;</code>:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -329,7 +326,7 @@ list initialization
 </pre>
 <hr />
   <cite>initialization.cxx</cite>
-<pre class="line-numbers" >
+<pre class="line-numbers" data-line='9,10'>
 <code class="language-cpp">
     #include &lt;iostream&gt;
     

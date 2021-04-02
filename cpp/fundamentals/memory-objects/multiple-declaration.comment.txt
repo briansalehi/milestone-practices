@@ -1,1 +1,1 @@
-<p>You may come across C++ code wherein a variable name is prefixed with characters that explain the type of the variable. This convention is called the Hungarian notation.</p>
+<p>You may come across C++ code wherein a variable name is prefixed with characters that explain the type of the variable. This convention is called the <b>Hungarian notation</b>. Using this notation is strongly adiveced against.</p>

@@ -1,3 +1,3 @@
-<p>in previous practice, enumeration was introduced by class expression, though, inherited by C, in C++ enumerations can also be declared by only <i>enum</i> keyword. Though, there is a big difference between <i>enum</i> and <i>enum class</i> declared enumerations.</p>
+<p>In previous practice, <b>enumeration</b> was introduced by <code>class</code> expression, though, inherited by C, in C++ enumerations can also be declared by only <code>enum</code> keyword. Though, there is a big difference between <code>enum</code> and <code>enum class</code> declared enumerations.</p>
 
-<p>Enumeration members defined by <i>enum</i> are visible globally, but enumberation members defined by <i>enum class</i> are scoped (next practice) and their scope must be specified before use. Generally, it's best practice to avoid globals.</p>
+<p>Enumeration members defined by <code>enum</code> are visible globally, but enumberation members defined by <code>enum class</code> are scoped (next practice) and their scope must be specified before use. Generally, it's best practice to avoid globals.</p>

@@ -1,0 +1,1 @@
+<p><b>Structured bindings</b> were introduced in C++17. The variable being assigned by a structure must always be of type <code>auto</code>.</p>

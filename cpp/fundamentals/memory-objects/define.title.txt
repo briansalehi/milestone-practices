@@ -1,1 +1,1 @@
-*define* keyword
+Define Macro

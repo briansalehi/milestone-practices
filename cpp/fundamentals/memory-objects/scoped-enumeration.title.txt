@@ -1,1 +1,1 @@
-scoped enumeration
+Scoped Enumeration

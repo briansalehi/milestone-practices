@@ -1,1 +1,1 @@
-scoped-enumerations
+scoped-enumeration

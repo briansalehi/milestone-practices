@@ -1,1 +1,1 @@
-structured binding (C++17)
+Structured Binding

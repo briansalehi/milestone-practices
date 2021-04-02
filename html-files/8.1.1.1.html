@@ -248,7 +248,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.1.0.html">Anatomy of C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.1.0.html">Prerequisites</a></li>
 <li class='breadcrumb-item active'>Preprocessor Directives</li>
 </ol>
 <div class="dropdown pull-right sticky">
@@ -270,9 +270,9 @@ Preprocessor Directives
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>As the name suggests, a preprocessor is a tool that runs before the actual compilation starts. Preprocessor directives are commands to the preprocessor and always start with a pound sign #.</p>
+<p>As the name suggests, a <b>preprocessor</b> is a tool that runs before the actual compilation starts. <b>Preprocessor directives</b> are commands to the preprocessor and always start with a pound sign <code>#</code>.</p>
 
-<p>The following table shows some of the most common preprocessor directives.</p>
+<p>The following table shows some of the most common preprocessor directives:</p>
 
 <table class="table table-dark">
 	<thead>
@@ -296,7 +296,7 @@ Preprocessor Directives
 		<tr>
 			<th scope="row">3</th>
 			<td>#ifndef [key] #endif</td>
-			<td>Code within the ifdef or ifndef locks are condition- ally included or omitted based on whether the specified key has been defined with #define .</td>
+			<td>Code within the ifdef or ifndef locks are conditionally included or omitted based on whether the specified key has been defined with #define .</td>
 		</tr>
 		<tr>
 			<th scope="row">4</th>
@@ -324,22 +324,22 @@ Preprocessor Directives
 </code></pre>
 <hr />
   <cite>preprocessor.cxx</cite>
-<pre class="line-numbers" >
+<pre class="line-numbers" data-line='3,5,10,15'>
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
     #define SAMPLE_H
     
     #ifdef SAMPLE_H
-    void function()
-    {
-    	std::cout &lt;&lt; &quot;defined&quot; &lt;&lt; std::endl;
-    }
+    	void function()
+    	{
+    		std::cout &lt;&lt; &quot;defined&quot; &lt;&lt; std::endl;
+    	}
     #else
-    void function()
-    {
-    	std::cout &lt;&lt; &quot;undefined&quot; &lt;&lt; std::endl;
-    }
+    	void function()
+    	{
+    		std::cout &lt;&lt; &quot;undefined&quot; &lt;&lt; std::endl;
+    	}
     #endif
     
     int main()
@@ -369,12 +369,13 @@ References
 </a>
 </h3>
 <ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'>no page specified</span></li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'> page 5</span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 1</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/anatomy">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/anatomy/main">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/prerequisites">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/prerequisites/main">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

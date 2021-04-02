@@ -248,7 +248,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.1.0.html">Anatomy of C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.1.0.html">Prerequisites</a></li>
 <li class='breadcrumb-item active'>Standard Streams</li>
 </ol>
 <div class="dropdown pull-right sticky">
@@ -270,9 +270,9 @@ Standard Streams
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Instead of saying that my program prints something on display, we should say that my program sends something to the output stream. Somehow, it's more impressive!</p>
+<p>Instead of saying that my program "<i>prints something</i>" on display, we should say that my program "<i>sends something to the output stream</i>". Somehow, it's more impressive!</p>
 
-<p>Some might argue about using "\n" over std::endl as newline. Well, the only big difference is that <b>std::endl</b> promises to flush the output stream. It means that the program will wait until newline character is printed. It is possible on some systems in some circumstances a prompt might not be displayed until after you enter the information being prompted for. Personally, I use "\n" when I'm printing a string in output stream and use <b>std::endl</b> otherwise.</p>
+<p>Some might argue about using <code>\n</code> over <code>std::endl</code> as newline. Well, the only big difference is that <code>std::endl</code> promises to flush the output stream. It means that the program will wait until newline character is printed. It is possible on some systems in some circumstances a prompt might not be displayed until after you enter the information being prompted for. Personally, I use <code>\n</code> when I'm printing a string in output stream and use <code>std::endl</code> otherwise.</p>
 <hr />
   <cite>iostream.cxx</cite>
 <pre class="line-numbers" >
@@ -299,9 +299,9 @@ Standard Streams
 <code>
 g++ -Wall -g -o ./iostream.o -c ./iostream.cxx
 g++ -g -o ./iostream.bin ./iostream.o
-./iostream.bin
+./iostream.bin < ./iostream.input.txt
 Enter your name: 
-your name is: 
+your name is: Brian
 </code>
 </pre>
 <hr />
@@ -318,8 +318,8 @@ References
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'>no page specified</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/anatomy/namespace">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/anatomy/getline">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/prerequisites/namespace">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/prerequisites/getline">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

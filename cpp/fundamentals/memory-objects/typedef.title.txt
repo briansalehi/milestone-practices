@@ -1,1 +1,1 @@
-*typedef* keyword
+Type Alias

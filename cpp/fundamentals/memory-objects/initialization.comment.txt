@@ -1,24 +1,21 @@
-<p>Avoid Narrowing Conversion Errors by Using List Initialization.</p>
+<p>Avoid <b>narrowing conversion</b> errors by using <b>list initialization</b>.</p>
 
-<p>When you initialize a variable of a smaller integer type (say, short) using another of a larger type (say, an int), you are risking a narrowing conversion error, because the  compiler has to fit data stored in a type that can potentially hold much larger numbers into a type that doesn’t have the same capacity (that is, is narrower).</p>
+<p>When you initialize a variable of a smaller integer type (say, <code>short</code>) using another of a larger type (say, an <code>int</code>), you are risking a narrowing conversion error, because the  compiler has to fit data stored in a type that can potentially hold much larger numbers into a type that doesn’t have the same capacity (that is, is narrower).</p>
 
-<p>Narrowing isn’t restricted to conversions between integer types only. You may face  narrowing errors if you initialize a float using a double, a float (or double) using an int, or an int using a float. Some compilers may warn, but this warning will not cause an error that stops compilation. In such cases, you may be confronted by bugs that occur infrequently and at execution time.</p>
+<p>Narrowing isn’t restricted to conversions between integer types only. You may face narrowing errors if you initialize a <code>float</code> using a <code>double</code>, a <code>float</code> (or <code>double</code>) using an <code>int</code>, or an int using a <code>float</code>. Some compilers may warn, but this warning will not cause an error that stops compilation. In such cases, you may be confronted by bugs that occur infrequently and at execution time.</p>
 
-<p>To avoid this problem, C++11 recommends list initialization techniques that prevent  narrowing. To use this feature, insert initialization values/variables within braces {…}.</p>
+<p>To avoid this problem, C++11 recommends <b>list initialization</b> techniques that prevent narrowing. To use this feature, insert initialization values/variables within braces {…}.</p>
 
 <p>There are two types of initialization that use braced initializer lists:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		// Copy list initialization
-		T obj = {arg1, arg2, ...};
-
-		// Direct list initialization
-		T obj{arg1, arg2, ...};
+		T obj = {arg1, arg2, ...}; // Copy list initialization
+		T obj{arg1, arg2, ...}; // Direct list initialization
 	</code>
 </pre>
 
-<p>In combination with auto type deduction, there is an important difference between copy and direct list initialization introduced with C++17.</p>
+<p>In combination with <code>auto</code> type deduction, there is an important difference between <b>copy</b> and <b>direct list initialization</b> introduced with C++17.</p>
 
 <p>Starting with C++17, you have the following results:</p>
 
@@ -34,7 +31,7 @@
 	</code>
 </pre>
 
-<p>Note that for copy list initialization, all the elements in the braced initializer must be of the same type. For example, the following does not compile:</p>
+<p>Note that for <b>copy list initialization</b>, all the elements in the braced initializer must be of the same type. For example, the following does not compile:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
@@ -42,7 +39,7 @@
 	</code>
 </pre>
 
-<p>In earlier versions of the standard (C++11/14), both copy and direct list initialization deduce an initializer_list&lt;&gt; :</p>
+<p>In earlier versions of the standard (C++11/14), both copy and <b>direct list initialization</b> deduce an <code>initializer_list&lt;&gt;</code>:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>

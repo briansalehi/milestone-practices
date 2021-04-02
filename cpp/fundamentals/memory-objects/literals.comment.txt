@@ -8,3 +8,5 @@
 		double pi = 3.141'592'653'59; // 3.14159265359
 	</code>
 </pre>
+
+<p>There are a few different constants in C++ which numbers, raw strings (string literals) are one of those constants called <b>literals</b>. Literals are R-values and have no memory address.</p>

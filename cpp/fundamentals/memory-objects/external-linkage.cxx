@@ -1,16 +1,10 @@
+#include "external-linkage-usage.hpp"
+
 // global scope, external linkage, definition because of initialization
 extern int number = 3;
 
 int main()
 {
+	display();
     return 0;
 }
-
-/* file2
-
-// global scope, external linkage, no definition because of use
-extern int number;
-
-// use number here...
-
-*/

@@ -1,6 +1,6 @@
-<p>As the name suggests, a preprocessor is a tool that runs before the actual compilation starts. Preprocessor directives are commands to the preprocessor and always start with a pound sign #.</p>
+<p>As the name suggests, a <b>preprocessor</b> is a tool that runs before the actual compilation starts. <b>Preprocessor directives</b> are commands to the preprocessor and always start with a pound sign <code>#</code>.</p>
 
-<p>The following table shows some of the most common preprocessor directives.</p>
+<p>The following table shows some of the most common preprocessor directives:</p>
 
 <table class="table table-dark">
 	<thead>
@@ -24,7 +24,7 @@
 		<tr>
 			<th scope="row">3</th>
 			<td>#ifndef [key] #endif</td>
-			<td>Code within the ifdef or ifndef locks are condition- ally included or omitted based on whether the specified key has been defined with #define .</td>
+			<td>Code within the ifdef or ifndef locks are conditionally included or omitted based on whether the specified key has been defined with #define .</td>
 		</tr>
 		<tr>
 			<th scope="row">4</th>

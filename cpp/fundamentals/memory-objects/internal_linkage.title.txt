@@ -1,1 +1,1 @@
-internal linkage
+Internal Linkage Global Variables

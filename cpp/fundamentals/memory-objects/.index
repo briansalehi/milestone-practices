@@ -13,7 +13,7 @@ global-enumeration.cxx
 global.cxx
 no_linkage.cxx
 internal_linkage.cxx
-external-linkage.cxx
+external-linkage.cxx external-linkage-usage.cxx external-linkage-usage.hpp
 initialization.cxx
 overflow.cxx
 sizeof.cxx
