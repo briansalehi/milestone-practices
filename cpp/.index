@@ -9,3 +9,5 @@ documentation.txt
 gui
 image-processing
 gpgpu
+boost
+network_programming
