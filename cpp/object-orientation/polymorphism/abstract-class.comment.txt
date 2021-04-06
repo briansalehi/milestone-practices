@@ -1,0 +1,29 @@
+**pure virtual functions** are the virtual methods in a base class that are only declared and assigned to 0. That is, they are only declared, and not implemented.  
+This way, when inheriting that class, virtual methods must be implemented again, otherwise compiler throws an error.
+
+A base class that cannot be instantiated is called an abstract base class. Such a base class fulfills only one purpose, that of being derived from. C++ allows you to create an abstract base class using pure virtual functions.
+
+*****
+
+A virtual method is said to be pure virtual when it has a declaration as shown in the  following:
+
+*****
+
+class AbstractBase { public:
+ virtual void DoSomething() = 0; // pure virtual method };
+
+*****
+
+This declaration essentially tells the compiler that DoSomething() needs to be imple-mented and by the class that derives from AbstractBase:
+
+*****
+
+class Derived: public AbstractBase { public:
+ void DoSomething() // pure virtual fn. must be implemented  { cout << "Implemented virtual function" << endl;
+ } };
+
+*****
+
+Abstract Base Classes are often simply called ABCs.
+
+

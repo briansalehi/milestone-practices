@@ -10,3 +10,21 @@ When we create this structure and inherit those classes as usual,
 We will see that for each Middle class there will be an invokation of Top class.
 That is, Top class's constructor will be called 3 times here.  
 This is called the **Diamond Problem** and we fix this problem by virtually inheriting Top class.
+
+Problems caused in an inheritance hierarchy containing two or more base classes that inherit from a common base, which results in the need for ambiguity resolution in the absence of virtual inheritance, is called the Diamond Problem.
+
+*****
+
+The virtual keyword in C++ often is used in different contexts for different purposes.
+
+*****
+
+Here is a summary:
+
+*****
+
+A function declared virtual means that an existing overriding  function in a derived class is invoked.
+An inheritance relationship declared using keyword virtual between classes Derived1 and Derived2 that inherits from class Base means that another class Derived3 that inherits from Derived1 and Derived2 still results in the creation of only one instance of Base during instantiation of type Derived3.
+Thus the same keyword virtual is used to implement two  different concepts.
+
+

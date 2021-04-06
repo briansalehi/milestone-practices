@@ -1,2 +1,39 @@
 You were previously introduced to overriding functions.  
 We can use **override** keyword on overriding methods to be 100 percent sure they will be overriden.
+
+Our versions of base class Fish have featured a virtual function called Swim() as seen in the following code:
+--
+modify text
+
+*****
+
+class Fish { public:
+ virtual void Swim()  { cout << "Fish swims!" << endl;
+ } };
+
+*****
+
+Assume that derived class Tuna were to define a function Swim() but with a slightly  different signature—one using const inserted unintentionally by a programmer who wants to override Fish::Swim():
+
+*****
+
+class Tuna:public Fish { public:
+ void Swim() const  { cout << "Tuna swims!" << endl;
+ } };
+
+*****
+
+This function Tuna::Swim() actually does not override Fish::Swim(). The signatures are different thanks to the presence of const in Tuna::Swim(). Compilation succeeds, however, and the programmer may falsely believe that he has successfully overridden the function Swim() in class Tuna. C++11 and beyond give the programmer a specifier override that is used to verify whether the function being overridden has been declared as virtual by the base class:
+
+*****
+
+class Tuna:public Fish { public:
+ void Swim() const override // Error: no virtual fn with this sig in Fish  { cout << "Tuna swims!" << endl;
+ } };
+
+*****
+
+Thus, override supplies a powerful way of expressing the explicit intention to override a base class virtual function, thereby getting the compiler to check whether  ■ The base class function is virtual.
+ ■ The signature of the base class virtual function exactly matches the signature of the derived class function declared to override.
+
+

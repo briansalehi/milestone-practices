@@ -1,2 +1,0 @@
-**pure virtual functions** are the virtual methods in a base class that are only declared and assigned to 0. That is, they are only declared, and not implemented.  
-This way, when inheriting that class, virtual methods must be implemented again, otherwise compiler throws an error.

@@ -1,2 +1,6 @@
 You were previously introduced to **final** keyword in inheriting classes, which made that class to be the last generation in hierarchy.  
 Here we can also use **final** keyword to prevent a method from being overriden by another class.
+
+Specifier final, introduced in C++11, was first presented to you in Lesson 10. A class declared as final cannot be used as a base class. Similarly, a virtual function declared as final cannot be overridden in a derived class.
+
+

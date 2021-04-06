@@ -1,8 +1,7 @@
 README.md
-diamond.cxx
-final.cxx
-override.cxx
-pure.cxx
-virtual_cconstructor.cxx
-virtual.cxx
 virtual_destructor.cxx
+abstract-class.cxx
+diamond.cxx
+override.cxx
+final.cxx
+virtual_cconstructor.cxx

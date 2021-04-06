@@ -1,2 +1,125 @@
-When creating an instance of an object with **new** operator,
-derived class's destructor will no be invoked when base classes destructor is not virtual.
+<p>What happens when a function calls operator <code>delete</code> using a pointer of type <code>Base*</code> that actually points to an instance of type <code>Derived</code>?</p>
+
+<p>This flaw means that the destructor of a deriving class that has been instantiated on the free store using <code>new</code> would not be invoked if <code>delete</code> is called using a pointer of type <code>Base*</code>. This can result in resources not being released, memory leaks, and so on and is a problem that is not to be taken lightly.</p>
+
+<p>When using pointers to objects of class types, always declare the base class destructor as <code>virtual</code>:</p>
+
+<pre class="language-cpp line-numbers" data-line="3">
+	<code>
+		struct Base
+		{
+			virtual ~Base() {} // virtual destructor
+		};
+	</code>
+</pre>
+
+<p>This ensures that one with a pointer <code>Base*</code> cannot invoke <code>delete</code> in a way that instances of the deriving classes are not correctly destroyed.</p>
+
+<p>Consider a class <code>Base</code> that declared N virtual functions:</p>
+
+<pre class="language-cpp line-numbers" data-line="3,8,15">
+	<code>
+		struct Base
+		{
+			virtual void Func1()
+			{
+				// Func1 implementation
+			}
+
+			virtual void Func2()
+			{
+				// Func2 implementation
+			}
+
+			// .. so on and so forth
+
+			virtual void FuncN()
+			{
+				// FuncN implementation
+			}
+		};
+	</code>
+</pre>
+
+<p>class <code>Derived</code> that inherits from <code>Base</code> overrides <code>Base::Func2()</code>, exposing the other virtual functions directly from class <code>Base</code>:</p>
+
+<pre class="language-cpp line-numbers" data-line="3,9,11">
+	<code>
+		struct Derived: public Base
+		{
+			virtual void Func1()
+			{
+				// Func2 overrides
+				Base::Func2()
+			}
+
+			// no implementation for Func2()
+
+			virtual void FuncN()
+			{
+				// FuncN implementation
+			}
+		};
+	</code>
+</pre>
+
+<p>The compiler sees an inheritance hierarchy and understands that the <code>Base</code> defines certain virtual functions that have been overridden in <code>Derived</code>. What the compiler now does is to create a table called the <b>Virtual Function Table</b> (VFT) for every class that implements a <b>virtual function</b> or derived class that <b>overrides</b> it. In other words, classes <code>Base</code> and <code>Derived</code> get an instance of their own <b>Virtual Function Table</b>. When an object of these classes is instantiated, a hidden pointer (let’s call it <b>VFT*</b>) is initialized to the respective <b>VFT</b>. The <b>Virtual Function Table</b> can be visualized as a <i>static array</i> containing function pointers, each pointing to the <b>virtual function</b> (or override) of interest.</p>
+
+![virtual-function-table.jpg]
+
+<p>Thus, each table is comprised of function pointers, each pointing to the <b>available implementation</b> of a virtual function. In the case of class <code>Derived</code>, all except one function pointer in its <b>VFT</b> point to local implementations of the virtual method in <b>Derived</b>.</p> 
+
+<p><code>Derived</code> has not overridden <code>Base::Func2()</code>, and hence that function pointer points to the implementation in class <code>Base</code>.</p>
+
+<p>This is how <b>Virtual Function Tables</b> help the implementation of (subtype) polymorphism in C++.</p>
+
+<p>The proof of existence of a hidden <b>Virtual Function Table</b> pointer is demonstrated in next code sample, which compares the sizeof two identical classes; one that has virtual functions and another that doesn’t.</p>
+
+<pre class="language-cpp line-numbers" data-line="15">
+	<code>
+		#include <iostream>  
+
+		class Regular  
+		{  
+		public:
+			void DoSomething(){}  
+
+		private:
+			int a, b;
+		};
+
+		class Polymorphic
+		{  
+		public:
+			virtual void DoSomething(){}  
+
+		private:
+			int a, b;
+		};
+
+		int main()  
+		{  
+			std::cout &lt;&lt; "sizeof(Regular) = " &lt;&lt; sizeof(SimpleClass) &lt;&lt; std::endl;
+			std::cout &lt;&lt; "sizeof(Polymorphic) = " &lt;&lt; sizeof(Base) &lt;&lt; std::endl;
+			return 0;
+		}
+	</code>
+</pre>
+
+<cite>Output Using 32-Bit Compiler</cite>
+
+<pre class="language-bash command-line">
+	<code>
+		sizeof(Regular) = 8
+		sizeof(Polymorphic) = 12
+	</code>
+</pre>
+
+<cite>Output Using 64-Bit Compiler</cite>
+
+<pre class="language-bash command-line">
+	<code>
+		sizeof(SimpleClass) = 8
+		sizeof(Base) = 16
+	</code>
+</pre>
