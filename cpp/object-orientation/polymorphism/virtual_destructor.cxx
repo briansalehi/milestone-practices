@@ -1,28 +1,36 @@
 #include <iostream>
 
-class Base {
+class Base
+{
 public:
-    Base() {
+    Base()
+	{
         std::cout << "Base Constructor Invoked" << std::endl;
     }
     
-    virtual ~Base() {
+    virtual ~Base()
+	{
         std::cout << "Base Destructor Invoked" << std::endl;
     }
 };
 
-class Derived: public Base {
+class Derived: public Base
+{
 public:
-    Derived() {
+    Derived()
+	{
         std::cout << "Derived Constructor Invoked" << std::endl;
     }
+
     // derived destructor won't be invoked when base destructor is not virtual
-    ~Derived() {
+    ~Derived()
+	{
         std::cout << "Derived Destructor Invoked" << std::endl;
     }
 };
 
-void eraser(Base* object) {
+void eraser(Base* object)
+{
     if (object) {
         delete object;
     }

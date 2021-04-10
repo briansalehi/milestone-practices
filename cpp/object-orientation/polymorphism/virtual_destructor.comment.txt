@@ -108,7 +108,7 @@
 
 <cite>Output Using 32-Bit Compiler</cite>
 
-<pre class="language-bash command-line">
+<pre class="language-bash">
 	<code>
 		sizeof(Regular) = 8
 		sizeof(Polymorphic) = 12
@@ -117,7 +117,7 @@
 
 <cite>Output Using 64-Bit Compiler</cite>
 
-<pre class="language-bash command-line">
+<pre class="language-bash">
 	<code>
 		sizeof(SimpleClass) = 8
 		sizeof(Base) = 16

@@ -380,7 +380,7 @@ Virtual Destructors
 
 <cite>Output Using 32-Bit Compiler</cite>
 
-<pre class="language-bash command-line">
+<pre class="language-bash">
 	<code>
 		sizeof(Regular) = 8
 		sizeof(Polymorphic) = 12
@@ -389,7 +389,7 @@ Virtual Destructors
 
 <cite>Output Using 64-Bit Compiler</cite>
 
-<pre class="language-bash command-line">
+<pre class="language-bash">
 	<code>
 		sizeof(SimpleClass) = 8
 		sizeof(Base) = 16
@@ -397,33 +397,41 @@ Virtual Destructors
 </pre>
 <hr />
   <cite>virtual_destructor.cxx</cite>
-<pre class="line-numbers" >
+<pre class="line-numbers" data-line='11'>
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    class Base {
+    class Base
+    {
     public:
-        Base() {
+        Base()
+    	{
             std::cout &lt;&lt; &quot;Base Constructor Invoked&quot; &lt;&lt; std::endl;
         }
         
-        virtual ~Base() {
+        virtual ~Base()
+    	{
             std::cout &lt;&lt; &quot;Base Destructor Invoked&quot; &lt;&lt; std::endl;
         }
     };
     
-    class Derived: public Base {
+    class Derived: public Base
+    {
     public:
-        Derived() {
+        Derived()
+    	{
             std::cout &lt;&lt; &quot;Derived Constructor Invoked&quot; &lt;&lt; std::endl;
         }
+    
         // derived destructor won&apos;t be invoked when base destructor is not virtual
-        ~Derived() {
+        ~Derived()
+    	{
             std::cout &lt;&lt; &quot;Derived Destructor Invoked&quot; &lt;&lt; std::endl;
         }
     };
     
-    void eraser(Base* object) {
+    void eraser(Base* object)
+    {
         if (object) {
             delete object;
         }

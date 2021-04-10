@@ -1,2 +1,123 @@
-Virtual constructors cannot be implemented by using **virtual** keyword.  
-But we can simulate it.
+<p>It is technically impossible in C++ to have <b>virtual copy constructors</b>. Yet, such a feature would help you create a collection (for example, a static array) of type <code>Base*</code>, each element being a specialization of that type:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Base* pBase[3];
+		Basees[0] = new Derive1();
+		Basees[1] = new Derive2();
+		...
+		Basees[N-1] = new DeriveN();
+	</code>
+</pre>
+
+<p>Then assigning it into another array of the same type, where the <b>virtual copy constructor</b> ensures a deep copy of the derived class objects as well, ensures that <code>Derived</code> classes are copied as they are, even though the <b>copy constructor</b> is operating on type <code>Base*</code>.</p>
+
+<p><b>Virtual copy constructors</b> are not possible because the <code>virtual</code> keyword in context of <code>Base</code> class methods being overridden by implementations available in the derived class are about polymorphic behavior generated at runtime. Constructors, on the other hand, are not polymorphic in nature as they can construct only a fixed type, and hence C++ does not allow usage of the <b>virtual copy constructors</b>.</p>
+
+<p>Having said that, there is a nice workaround in the form of defining your own clone function that allows you to do just that:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		class Base
+		{
+		public:
+			virtual Base* Clone() const = 0; // pure virtual function
+		};
+
+		class Derived: public Base
+		{
+		};
+	</code>
+</pre>
+
+<p>Thus, virtual function <code>Clone</code> is a simulated <b>virtual copy constructor</b> that needs to be explicitly invoked.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		#include <iostream>  
+		 
+		class Base  
+		{  
+		public:
+			virtual Base* Clone() = 0;
+			virtual void DoSomething() = 0;
+			virtual ~Base() {};
+		};
+
+		class Alpha : public Base 
+		{ 
+		public:
+			Base* Clone() override 
+			{ 
+				return new Alpha(*this);
+			} 
+
+			void DoSomething() override final 
+			{ 
+				std::cout << "Alpha Method Invoked" << std::endl;
+			} 
+		};
+
+class Gama final : public Alpha 
+{ 
+public:
+	Base* Clone() override 
+	{ 
+		return new Gama(*this);
+	} 
+
+	// Cannot override Alpha::DoSomething as it is "final" in Alpha 
+};
+
+class Beta final: public Base
+public:
+	Alpha * Clone() const // virtual clone function
+	{
+		return new Alpha(*this); // return new Alpha that is a copy of this
+	}
+
+	// ... other members
+
+	Base* Clone() override 
+	{ 
+		return new Beta(*this);
+	} 
+
+	void DoSomething() override final 
+	{ 
+		std::cout << "Beta Method Invoked" << std::endl;
+	} 
+};
+
+int main(int argc, char** argv) 
+{ 
+	const int ARRAY_SIZE = 4;
+
+	Base* myBasees[ARRAY_SIZE] = {NULL};
+	myBasees[0] = new Alpha();
+	myBasees[1] = new Beta();
+	myBasees[2] = new Gama();
+	myBasees[3] = new Beta();
+
+	Base* myNewBasees[ARRAY_SIZE];
+	for (int index = 0; index < ARRAY_SIZE; ++index) 
+	myNewBasees[index] = myBasees[index]->Clone();
+	 
+	 
+	// invoke a virtual method to check  
+	for (int index = 0; index < ARRAY_SIZE; ++index)  
+	myNewBasees[index]->Swim();
+	 
+	 
+	// memory cleanup  
+	for (int index = 0; index < ARRAY_SIZE; ++index)  
+	{  
+	delete myBasees[index];
+	 
+	delete myNewBasees[index];
+	 
+	}  
+ 
+return 0;
+ 
+}
