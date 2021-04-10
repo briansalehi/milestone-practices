@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Catching Exceptions</title>
+<title>Virtual Destructors</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Exception Handling</a></li>
-<li class='breadcrumb-item active'>Catching Exceptions</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Polymorphism</a></li>
+<li class='breadcrumb-item active'>Virtual Destructors</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Catching-Exceptions" class="anchor" aria-hidden="true" href="#Catching-Exceptions">
-Catching Exceptions
+<a id="Virtual-Destructors" class="anchor" aria-hidden="true" href="#Virtual-Destructors">
+Virtual Destructors
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,72 +270,192 @@ Catching Exceptions
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>To make statements exception safe, you enclose them within a <code>try</code> block and handle the exceptions that emerge out of the try block in the <code>catch</code> block:</p>
+<p>What happens when a function calls operator <code>delete</code> using a pointer of type <code>Base*</code> that actually points to an instance of type <code>Derived</code>?</p>
 
-<pre class="language-cpp line-numbers">
+<p>This flaw means that the destructor of a deriving class that has been instantiated on the free store using <code>new</code> would not be invoked if <code>delete</code> is called using a pointer of type <code>Base*</code>. This can result in resources not being released, memory leaks, and so on and is a problem that is not to be taken lightly.</p>
+
+<p>When using pointers to objects of class types, always declare the base class destructor as <code>virtual</code>:</p>
+
+<pre class="language-cpp line-numbers" data-line="3">
 	<code>
-		void SomeFunc()
+		struct Base
 		{
-			try {
-				int* numPtr = new int;
-				*numPtr = 999;
-				delete numPtr;
-			 } catch(...) { // ... catches all exceptions
-				std::cout << "Exception in SomeFunc(), quitting" << std::endl;
-			 }
+			virtual ~Base() {} // virtual destructor
+		};
+	</code>
+</pre>
+
+<p>This ensures that one with a pointer <code>Base*</code> cannot invoke <code>delete</code> in a way that instances of the deriving classes are not correctly destroyed.</p>
+
+<p>Consider a class <code>Base</code> that declared N virtual functions:</p>
+
+<pre class="language-cpp line-numbers" data-line="3,8,15">
+	<code>
+		struct Base
+		{
+			virtual void Func1()
+			{
+				// Func1 implementation
+			}
+
+			virtual void Func2()
+			{
+				// Func2 implementation
+			}
+
+			// .. so on and so forth
+
+			virtual void FuncN()
+			{
+				// FuncN implementation
+			}
+		};
+	</code>
+</pre>
+
+<p>class <code>Derived</code> that inherits from <code>Base</code> overrides <code>Base::Func2()</code>, exposing the other virtual functions directly from class <code>Base</code>:</p>
+
+<pre class="language-cpp line-numbers" data-line="3,9,11">
+	<code>
+		struct Derived: public Base
+		{
+			virtual void Func1()
+			{
+				// Func2 overrides
+				Base::Func2()
+			}
+
+			// no implementation for Func2()
+
+			virtual void FuncN()
+			{
+				// FuncN implementation
+			}
+		};
+	</code>
+</pre>
+
+<p>The compiler sees an inheritance hierarchy and understands that the <code>Base</code> defines certain virtual functions that have been overridden in <code>Derived</code>. What the compiler now does is to create a table called the <b>Virtual Function Table</b> (VFT) for every class that implements a <b>virtual function</b> or derived class that <b>overrides</b> it. In other words, classes <code>Base</code> and <code>Derived</code> get an instance of their own <b>Virtual Function Table</b>. When an object of these classes is instantiated, a hidden pointer (let’s call it <b>VFT*</b>) is initialized to the respective <b>VFT</b>. The <b>Virtual Function Table</b> can be visualized as a <i>static array</i> containing function pointers, each pointing to the <b>virtual function</b> (or override) of interest.</p>
+
+<img class="img-responsive" src="/cpp/object-orientation/polymorphism/virtual-function-table.jpg" alt="virtual function table" loading="lazy" onerror='this.onerror=null; this.src="cpp/object-orientation/polymorphism/virtual-function-table.jpg"'>
+
+<p>Thus, each table is comprised of function pointers, each pointing to the <b>available implementation</b> of a virtual function. In the case of class <code>Derived</code>, all except one function pointer in its <b>VFT</b> point to local implementations of the virtual method in <b>Derived</b>.</p> 
+
+<p><code>Derived</code> has not overridden <code>Base::Func2()</code>, and hence that function pointer points to the implementation in class <code>Base</code>.</p>
+
+<p>This is how <b>Virtual Function Tables</b> help the implementation of (subtype) polymorphism in C++.</p>
+
+<p>The proof of existence of a hidden <b>Virtual Function Table</b> pointer is demonstrated in next code sample, which compares the sizeof two identical classes; one that has virtual functions and another that doesn’t.</p>
+
+<pre class="language-cpp line-numbers" data-line="15">
+	<code>
+		#include <iostream>  
+
+		class Regular  
+		{  
+		public:
+			void DoSomething(){}  
+
+		private:
+			int a, b;
+		};
+
+		class Polymorphic
+		{  
+		public:
+			virtual void DoSomething(){}  
+
+		private:
+			int a, b;
+		};
+
+		int main()  
+		{  
+			std::cout &lt;&lt; "sizeof(Regular) = " &lt;&lt; sizeof(SimpleClass) &lt;&lt; std::endl;
+			std::cout &lt;&lt; "sizeof(Polymorphic) = " &lt;&lt; sizeof(Base) &lt;&lt; std::endl;
+			return 0;
 		}
 	</code>
 </pre>
 
-<p>In general, you can insert as many <code>catch()</code> blocks as you like, one after another, depending on the exceptions you expect and those that would help.</p>
+<cite>Output Using 32-Bit Compiler</cite>
 
-<p><code>catch(...)</code> as demonstrated earlier catches all those exception types that have not been explicitly caught by other catch statements.</p>
-
-<p>It is possible for you to throw an exception of your own choosing.</p>
-
-<pre class="language-cpp line-numbers">
+<pre class="language-bash">
 	<code>
-		void DoSomething()
-		{
-			if(something_unwanted)
-				throw object;
-		}
+		sizeof(Regular) = 8
+		sizeof(Polymorphic) = 12
+	</code>
+</pre>
+
+<cite>Output Using 64-Bit Compiler</cite>
+
+<pre class="language-bash">
+	<code>
+		sizeof(SimpleClass) = 8
+		sizeof(Base) = 16
 	</code>
 </pre>
 <hr />
-  <cite>catch.cxx</cite>
-<pre class="line-numbers" >
+  <cite>virtual_destructor.cxx</cite>
+<pre class="line-numbers" data-line='11'>
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    int main()
+    class Base
     {
-    	std::cout &lt;&lt; &quot;How much memory do you need? &quot;;
-    
-        try {
-            int size;
-    		std::cin &gt;&gt; size; // type -1 to see the error
-    		std::cout &lt;&lt; size &lt;&lt; std::endl;
-            
-            char* letter = new char[size];
-            delete [] letter;
-        }
-        catch (...) { // ... means catch all exceptions
-    		std::cout &lt;&lt; &quot;Exception caught&quot; &lt;&lt; std::endl;
+    public:
+        Base()
+    	{
+            std::cout &lt;&lt; &quot;Base Constructor Invoked&quot; &lt;&lt; std::endl;
         }
         
+        virtual ~Base()
+    	{
+            std::cout &lt;&lt; &quot;Base Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
+    
+    class Derived: public Base
+    {
+    public:
+        Derived()
+    	{
+            std::cout &lt;&lt; &quot;Derived Constructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    
+        // derived destructor won&apos;t be invoked when base destructor is not virtual
+        ~Derived()
+    	{
+            std::cout &lt;&lt; &quot;Derived Destructor Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
+    
+    void eraser(Base* object)
+    {
+        if (object) {
+            delete object;
+        }
+    }
+    
+    int main()
+    {
+        Derived* object = new Derived;
+        eraser(object);
+    
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
 <code>
-g++ -Wall -g -o ./catch.o -c ./catch.cxx
-g++ -g -o ./catch.bin ./catch.o
-./catch.bin < ./catch.input.txt
-How much memory do you need? -1
-Exception caught
+g++ -Wall -g -o ./virtual_destructor.o -c ./virtual_destructor.cxx
+g++ -g -o ./virtual_destructor.bin ./virtual_destructor.o
+./virtual_destructor.bin
+Base Constructor Invoked
+Derived Constructor Invoked
+Derived Destructor Invoked
+Base Destructor Invoked
 </code>
 </pre>
 <hr />
@@ -349,11 +469,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 28</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 11 page 310</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/exceptions">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/exceptions/exception-class">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/polymorphism">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.5.2.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

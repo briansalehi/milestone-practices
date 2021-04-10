@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Protected Inheritance</title>
+<title>function operator</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Inheritance</a></li>
-<li class='breadcrumb-item active'>Protected Inheritance</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Operator Overloading</a></li>
+<li class='breadcrumb-item active'>function operator</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Protected-Inheritance" class="anchor" aria-hidden="true" href="#Protected-Inheritance">
-Protected Inheritance
+<a id="function-operator" class="anchor" aria-hidden="true" href="#function-operator">
+function operator
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,85 +270,41 @@ Protected Inheritance
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>All public members and methods of base classes are visible to derived classes in <code>protected</code> inheritance, but not outside of inheritance chain.</p>
-
-<p><b>Protected inheritance</b> differs from <b>public inheritance</b> in that the keyword <code>protected</code> is used in the line where the derived class declares its inheritance from a base class:</p>
-
-<pre class="language-cpp line-numbers" data-line="6">
-	<code>
-		class Base
-		{
-			// ... base class members and methods
-		};
-
-		class Derived: protected Base // protected inheritance
-		{
-			// ... derived class members and methods
-		};
-	</code>
-</pre>
-
-<p><b>Protected inheritance</b> is similar to <b>private inheritance</b> in the following ways:</p>
-
-<ul>
-	<li>It also signifies a <b>has-a</b> relationship.</li>
-	<li>It also lets the derived class access all public and protected members of <code>Base</code>.</li>
-	<li>Those outside the inheritance hierarchy with an instance of <code>Derived</code> cannot access public members of <code>Base</code>.</li>
-</ul>
-
-<p>Yet, <b>protected inheritance</b> is a bit different when it comes to the derived class being inherited from:</p>
-
-<pre class="language-cpp line-numbers" data-line="1">
-	<code>
-		class Derived2: protected Derived
-		{
-			// can access public & protected members of Base
-		};
-	</code>
-</pre>
-
-<p><b>Protected inheritance hierarchy</b> allows the subclass of the subclass (that is, <code>Derived2</code>) access to public and protected members of the <code>Base</code>. This would not be possible if the inheritance between <code>Derived</code> and <code>Base</code> were <code>private</code>.</p>
-
-<p>Use private or protected inheritance only when you have to.</p>
-
-<p>In most cases where <b>private inheritance</b> is used, such as that of the <code>Car</code> and the <code>Motor</code>, the base class could have as well been a member attribute of the class <code>Car</code> instead of being a super-class. By inheriting from class <code>Motor</code>, you have essentially restricted your <code>Car</code> to having only one motor, for no significant gain over having an instance of class <code>Motor</code> as a private member.</p>
-
-<p>Having an instance of <code>Motor</code> as a private member instead of inheriting from it is called <b>composition</b> or <b>aggregation</b>. Such a class <code>Car</code> looks like this:</p>
-
-<pre class="language-cpp line-numbers" data-line="4">
-	<code>
-		class Car
-		{
-		private:
-			Motor heartOfCar;
-		public:
-			void Move()
-			{
-				heartOfCar.SwitchIgnition();
-				heartOfCar.PumpFuel();
-				heartOfCar.FireCylinders();
-			}
-		};
-	</code>
-</pre>
-
-<p>This can be good design as it enables you to easily add more motors as member attributes to an existing <code>Car</code> class without changing its inheritance hierarchy or its design with respect to its clients.</p>
+Using **const** as many as possible is a best practice. be generous using in it.  
+operator **()** can be overloaded to make an object act like a function. Why an object might need this feature is totally up to you.
 <hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 10</span></li>
-</ul>
+  <cite>function.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    
+    class Message {
+    public:
+        void operator() (const std::string&amp; msg) const {
+            std::cout &lt;&lt; msg &lt;&lt; std::endl;
+        }
+    };
+    
+    int main()
+    {
+        Message msg;
+        msg(&quot;Cxx programming&quot;);
+    }
+</code>
+</pre>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<code>
+g++ -Wall -g -o ./function.o -c ./function.cxx
+g++ -g -o ./function.bin ./function.o
+./function.bin
+Cxx programming
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/inheritance/private-inheritance">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/inheritance/slicing">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.2.4.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.6.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title><i>this</i> Pointer</title>
+<title>std::variant</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.1.0.html">Classes and Objects</a></li>
-<li class='breadcrumb-item active'><i>this</i> Pointer</li>
+<li class='breadcrumb-item active'>std::variant</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="<i>this</i>-Pointer" class="anchor" aria-hidden="true" href="#<i>this</i>-Pointer">
-<i>this</i> Pointer
+<a id="std::variant" class="anchor" aria-hidden="true" href="#std::variant">
+std::variant
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,45 +270,93 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>An important concept in C++, this is a reserved keyword applicable within the scope of a class and contains the address of the object. In other words, the value of this is <i>&object</i>.</p>
+<p>One of the problems with the union is that it enables its content to be interpreted as any other data type supported by the <code>union</code>; for example:</p>
 
-<p>Note that the <i>this</i> pointer is not sent to class methods declared as static functions, as static functions are not connected to an instance of the class. Instead they are shared by all instances. To use an instance variable in a static function, you would explicitly declare a parameter and send <i>this</i> pointer as an argument.</p>
+<pre class="language-cpp line-numbers">
+	<code>
+		union SimpleUnion
+		{
+			int num;
+			double preciseNum;
+		};
+	</code>
+</pre>
+
+<p>You may instantiate this <code>union</code> for a <code>double</code>, yet use it as an integer:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		SimpleUnion u1;
+		u1.preciseNum = 3.14; // union stores a double
+		int num2 = u1.num; // works, but u1 contained a double!
+	</code>
+</pre>
+
+<p>C++17 provides the programmer with the <code>std::variant</code>, a typesafe alternative to the <code>union</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::variant<int, double> varSafe;
+		varSafe = 3.14; // variant stores double
+
+		double pi = std::get<double>(varSafe); // 3.14
+		double pi2 = std::get<1>(varsafe); // 3.14
+
+		std::get<char>(varSafe); // compile fails: no char in variant
+		std::get<2>(varSafe); // compile fails: variant with two types, not three
+
+		try {
+			std::get<int>(varSafe); // throws exception as variant stores double
+		} catch (std::bad_variant_access&) {
+			// exception handler code
+		}
+	</code>
+</pre>
 <hr />
-  <cite>this-pointer.cxx</cite>
+  <cite>variant.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    
-    class Sample
-    {
-    private:
-    	int number;
-    public:
-    	Sample(int number) : number(number) {};
-    	int getNumber() { return number; }
-    	Sample* makeInstance() { return this; }
-    };
+    #include &lt;variant&gt;
     
     int main()
     {
-    	Sample object(10);
-    	Sample* instance = object.makeInstance(); // object itself is return
+    	std::variant&lt;int, double&gt; var{3.14};
     
-    	std::cout &lt;&lt; &quot;object: &quot; &lt;&lt; object.getNumber() &lt;&lt; std::endl;
-    	std::cout &lt;&lt; &quot;instance: &quot; &lt;&lt; instance-&gt;getNumber() &lt;&lt; std::endl;
+    	// invalid attemt to access to index 0
+    	try {
+    		std::cout &lt;&lt; std::get&lt;0&gt;(var) &lt;&lt; std::endl;
+    	} catch (std::bad_variant_access&amp; exp) {
+    		std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
+    	}
+    
+    	// attemt to access to index 1
+    	try {
+    		std::cout &lt;&lt; std::get&lt;1&gt;(var) &lt;&lt; std::endl;
+    	} catch (std::bad_variant_access&amp; exp) {
+    		std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
+    	}
+    
+    	// attemt to access to double by type
+    	try {
+    		std::cout &lt;&lt; std::get&lt;double&gt;(var) &lt;&lt; std::endl;
+    	} catch (std::bad_variant_access&amp; exp) {
+    		std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
+    	}
     
     	return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
 <code>
-g++ -Wall -g -o ./this-pointer.o -c ./this-pointer.cxx
-g++ -g -o ./this-pointer.bin ./this-pointer.o
-./this-pointer.bin
-object: 10
-instance: 10
+g++ -Wall -g -std=c++17 -o ./variant.o -c ./variant.cxx
+g++ -g -o ./variant.bin ./variant.o
+./variant.bin
+std::get: wrong index for variant
+3.14
+3.14
 </code>
 </pre>
 <hr />
@@ -322,12 +370,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>C++ Primer Plus: <span style='color: red'></span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 8: <span style='color: red'></span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 29</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/stack-prohibition">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/sizeof-a-class">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/union">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/initialization-aggregation">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

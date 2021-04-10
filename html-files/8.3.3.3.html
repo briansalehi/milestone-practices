@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>diamond problem</title>
+<title>Singleton</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.3.0.html">Polymorphism</a></li>
-<li class='breadcrumb-item active'>diamond problem</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.3.0.html">Object Decoration</a></li>
+<li class='breadcrumb-item active'>Singleton</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="diamond-problem" class="anchor" aria-hidden="true" href="#diamond-problem">
-diamond problem
+<a id="Singleton" class="anchor" aria-hidden="true" href="#Singleton">
+Singleton
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,127 +270,105 @@ diamond problem
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Imagine the hierarchy of inheriting classes look like a diamond.  
+<p>The class President discussed earlier is good, but it has a shortcoming: It cannot help creation of multiple presidents via instantiation of multiple objects:</p>
 
-```txt
-    Top  
-Middle1 Middle2 Middle3  
-    Bottom
-```
+<pre class="language-cpp">
+	<code>
+		President One, Two, Three;
+	</code>
+</pre>
 
-When we create this structure and inherit those classes as usual,
-We will see that for each Middle class there will be an invokation of Top class.
-That is, Top class's constructor will be called 3 times here.  
-This is called the **Diamond Problem** and we fix this problem by virtually inheriting Top class.
+<p>Individually they are non-copyable thanks to the private copy constructors, but what you ideally need is a class President that has one, and only one, real-world  manifestation—that is, there is only one object and creation of additional ones is  prohibited.</p>
 
-Problems caused in an inheritance hierarchy containing two or more base classes that inherit from a common base, which results in the need for ambiguity resolution in the absence of virtual inheritance, is called the Diamond Problem.
+<p>When the keyword <code>static</code> is used on a class’s data member, it ensures that the member is shared across all instances.</p>
 
-*****
+<p>When <code>static</code> is used on a local variable declared within the scope of a function, it ensures that the variable retains its value between function calls.</p>
 
-The virtual keyword in C++ often is used in different contexts for different purposes.
+<p>When <code>static</code> is used on a member function—a method—the method is shared across all instances of the class.</p>
 
-*****
+<p>Keyword <code>static</code> is an essential ingredient in creating a singleton class as demonstrated as in the source section.</p>
 
-Here is a summary:
+<p>Declaring <i>default constructor</i>, <i>copy constructor</i> and <i>assignment operator</i> as private methods of a class, which prevent an object to be created, assigned or be copied, makes a <i>singleton object</i>.</p>
 
-*****
+<p>Don't forget that due to not having access to default constructor in order to create an instance object, you must declare a <i>static</i> method in the class to create one object for you.</p>
 
-A function declared virtual means that an existing overriding  function in a derived class is invoked.
-An inheritance relationship declared using keyword virtual between classes Derived1 and Derived2 that inherits from class Base means that another class Derived3 that inherits from Derived1 and Derived2 still results in the creation of only one instance of Base during instantiation of type Derived3.
-Thus the same keyword virtual is used to implement two  different concepts.
+<p>Use the singleton pattern only where absolutely necessary, keeping future growth of the application and its features in perspective. Note that the very feature that it restricts creation of multiple instances can become an architectural bottleneck when a use case comes up that needs multiple instances of the class.</p>
 
+<p>For example, if our project were to change from modeling a nation to modeling the United Nations, which is currently represented by 193 member nations, each with its own president, clearly we would have an architectural problem given a singleton class President that would permit the existence of only one instance.</p>
 
 <hr />
-  <cite>diamond.cxx</cite>
+  <cite>singleton.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
+    #include &lt;string&gt;
     
-    class Top {
+    class President {
+    private:
+        std::string name;
+        President() {}; // private default constructor
+        President(const President&amp; copy); // private copy constructor
+        President&amp; operator= (const President&amp; asign); // private copy assignment operator
+    
     public:
-        Top() {
-            std::cout &lt;&lt; &quot;Top Constructor Invoked&quot; &lt;&lt; std::endl;
-        }
-        
-        ~Top() {
-            std::cout &lt;&lt; &quot;Top Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
-    
-    // comment virtual to see what would happen
-    class Middle1: public virtual Top {
-    public:
-        Middle1() {
-            std::cout &lt;&lt; &quot;Middle1 Constructor Invoked&quot; &lt;&lt; std::endl;
+        // in classes, static makes a member to be shared across all instances of objects
+        static President&amp; get_instance() {
+            static President candidate;
+            return candidate;
         }
     
-        ~Middle1() {
-            std::cout &lt;&lt; &quot;Middle1 Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
-    
-    // virtual base class in the diamond problem makes base class to invoke once
-    class Middle2: public virtual Top {
-    public:
-        Middle2() {
-            std::cout &lt;&lt; &quot;Middle2 Constructor Invoked&quot; &lt;&lt; std::endl;
+        void introduce() {
+            std::cout &lt;&lt; &quot;current president: &quot; &lt;&lt; name &lt;&lt; std::endl;
         }
     
-        ~Middle2() {
-            std::cout &lt;&lt; &quot;Middle2 Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
-    
-    class Middle3: public virtual Top {
-    public:
-        Middle3() {
-            std::cout &lt;&lt; &quot;Middle3 Constructor Invoked&quot; &lt;&lt; std::endl;
+        void set_candidate(std::string president) {
+            name = president;
         }
     
-        ~Middle3() {
-            std::cout &lt;&lt; &quot;Middle3 Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
-    
-    class Bottom: public Middle1, public Middle2, public Middle3 {
-    public:
-        Bottom() {
-            std::cout &lt;&lt; &quot;Bottom Constructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    
-        ~Bottom() {
-            std::cout &lt;&lt; &quot;Bottom Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
+        ~President() {}
     };
     
     int main()
     {
-        Bottom last;
+        President&amp; US = President::get_instance();
+        US.set_candidate(&quot;Donald Trump&quot;);
+        US.introduce();
+    
+        /*
+        President RU; // cannot make private object
+        President IT = US; // cannot assign private object
+        */
+    
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-14'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -o ./diamond.o -c ./diamond.cxx
-g++ -g -o ./diamond.bin ./diamond.o
-./diamond.bin
-Top Constructor Invoked
-Middle1 Constructor Invoked
-Middle2 Constructor Invoked
-Middle3 Constructor Invoked
-Bottom Constructor Invoked
-Bottom Destructor Invoked
-Middle3 Destructor Invoked
-Middle2 Destructor Invoked
-Middle1 Destructor Invoked
-Top Destructor Invoked
+g++ -Wall -g -o ./singleton.o -c ./singleton.cxx
+g++ -g -o ./singleton.bin ./singleton.o
+./singleton.bin
+current president: Donald Trump
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus: <span style='color: red'></span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7: <span style='color: red'></span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.3.2.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.3.4.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/object-decoration/non-copyable-objects">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/object-decoration/stack-prohibition">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

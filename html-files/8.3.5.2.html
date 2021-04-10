@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Exception Class</title>
+<title>pure virtual function</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Exception Handling</a></li>
-<li class='breadcrumb-item active'>Exception Class</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Polymorphism</a></li>
+<li class='breadcrumb-item active'>pure virtual function</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Exception-Class" class="anchor" aria-hidden="true" href="#Exception-Class">
-Exception Class
+<a id="pure-virtual-function" class="anchor" aria-hidden="true" href="#pure-virtual-function">
+pure virtual function
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,73 +270,74 @@ Exception Class
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>You can throw an exception of whatever type you want. However, there is a benefit in inheriting from <code>std::exception</code>.</p>
-<p><code>std::exception</code> is the base class for the following important exceptions:</p>
+**pure virtual functions** are the virtual methods in a base class that are only declared and assigned to 0. That is, they are only declared, and not implemented.  
+This way, when inheriting that class, virtual methods must be implemented again, otherwise compiler throws an error.
 
-<ul>
-	<li><code>bad_alloc</code>: Thrown when a request for memory using new fails
-	<li><code>bad_cast</code>: Thrown by dynamic_cast when you try to cast a wrong type (a type that has no inheritance relation)
-	<li><code>ios_base::failure</code>: Thrown by the functions and methods in the iostream library
-</ul>
+A base class that cannot be instantiated is called an abstract base class. Such a base class fulfills only one purpose, that of being derived from. C++ allows you to create an abstract base class using pure virtual functions.
 
-<p>Class <code>std::exception</code> that is the base class supports a very useful and important virtual method <code>what()</code> that gives a more descriptive reason on the nature of the problem causing the exception.</p>
+*****
 
-<p>You can make use of <code>std::exception</code> being a base class for many exceptions types and create one <code>catch(const exception&)</code> that can catch all exceptions that have <code>std::exception</code> as base.</p>
+A virtual method is said to be pure virtual when it has a declaration as shown in the  following:
+
+*****
+
+class AbstractBase { public:
+ virtual void DoSomething() = 0; // pure virtual method };
+
+*****
+
+This declaration essentially tells the compiler that DoSomething() needs to be imple-mented and by the class that derives from AbstractBase:
+
+*****
+
+class Derived: public AbstractBase { public:
+ void DoSomething() // pure virtual fn. must be implemented  { cout << "Implemented virtual function" << endl;
+ } };
+
+*****
+
+Abstract Base Classes are often simply called ABCs.
+
+
 <hr />
-  <cite>exception.cxx</cite>
+  <cite>abstract-class.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;exception&gt;
+    
+    class Base {
+    public:
+        virtual void show() = 0;
+    };
+    
+    class Derived: public Base {
+    public:
+        // derived method must be implemented due to pure virtual function of base class
+        void show() {
+            std::cout &lt;&lt; &quot;Derived Method Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
     
     int main()
     {
-    	std::cout &lt;&lt; &quot;Enter array length: &quot;;
-        
-        try {
-            int length = 0;
-    		std::cin &gt;&gt; length;
-    		std::cout &lt;&lt; length &lt;&lt; std::endl;
-    
-            int* numbers = new int[length];
-            delete [] numbers;
-    		std::cout &lt;&lt; &quot;Deallocated array&quot; &lt;&lt; std::endl;
-        } catch (std::bad_alloc&amp; exp) { // specific exception object
-    		std::cout &lt;&lt; &quot;Bad Allocation: &quot; &lt;&lt; exp.what() &lt;&lt; std::endl;
-    	} catch (std::exception&amp; exp) { // exception base class will catch all exceptions
-    		std::cout &lt;&lt; &quot;Exception: &quot; &lt;&lt; exp.what() &lt;&lt; std::endl;
-        }
-    
+        Derived object;
+        object.show();
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -o ./exception.o -c ./exception.cxx
-g++ -g -o ./exception.bin ./exception.o
-./exception.bin < ./exception.input.txt
-Enter array length: -1
-Bad Allocation: std::bad_array_new_length
+g++ -Wall -g -o ./abstract-class.o -c ./abstract-class.cxx
+g++ -g -o ./abstract-class.bin ./abstract-class.o
+./abstract-class.bin
+Derived Method Invoked
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 28</span></li>
-</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/exceptions/try-catch">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/exceptions/exception-lookup">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/polymorphism/virtual-destructor">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.5.3.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

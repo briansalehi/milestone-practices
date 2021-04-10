@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Non-Copyable Objects</title>
+<title><i>this</i> Pointer</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.1.0.html">Classes and Objects</a></li>
-<li class='breadcrumb-item active'>Non-Copyable Objects</li>
+<li class='breadcrumb-item active'><i>this</i> Pointer</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Non-Copyable-Objects" class="anchor" aria-hidden="true" href="#Non-Copyable-Objects">
-Non-Copyable Objects
+<a id="<i>this</i>-Pointer" class="anchor" aria-hidden="true" href="#<i>this</i>-Pointer">
+<i>this</i> Pointer
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,89 +270,45 @@ Non-Copyable Objects
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Beyond modeling a certain constitution, you might be programming an operating system and need to model one local area network, one processor, and so on. You need to ensure that certain resources cannot be copied or duplicated. If you don’t declare a copy constructor, the C++ compiler inserts a default public copy constructor for you. This ruins your design and threatens your implementation.</p>
+<p>An important concept in C++, this is a reserved keyword applicable within the scope of a class and contains the address of the object. In other words, the value of this is <i>&object</i>.</p>
 
-<p>You would ensure that your class cannot be copied by declaring a private copy constructor.</p>
-
-<p>Thus, the solution is the following:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		class President
-		{
-		private:
-			President(const President&); // private copy constructor
-			President& operator= (const President&); // private copy assignment operator
-			// … other attributes
-		};
-	</code>
-</pre>
-
-<p>There is no need for implementation of the private copy constructor or assignment  operator. Just declaring them as private is adequate and sufficient toward fulfilling your goal of ensuring non-copyable objects of class President.</p>
-
-<p>Declaring <i>copy constructor</i> and <i>copy assignment operator</i> as private methods, will prevent an object from being copied. This way, you can make sure an object will not be passed by value to function arguments or it will not be returned by value from functions. This makes us sure that our object will not be too memory consuming.</p>
+<p>Note that the <i>this</i> pointer is not sent to class methods declared as static functions, as static functions are not connected to an instance of the class. Instead they are shared by all instances. To use an instance variable in a static function, you would explicitly declare a parameter and send <i>this</i> pointer as an argument.</p>
 <hr />
-  <cite>non_copyable.cxx</cite>
+  <cite>this-pointer.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
     
-    class Message {
+    class Sample
+    {
     private:
-        char* message;
-        // avoid object to be copied
-        Message(const Message&amp; copy); // private copy constructor
-        Message&amp; operator= (const Message&amp; asign); // private copy assignment operator
-    
+    	int number;
     public:
-        Message(const char* raw) {
-            std::cout &lt;&lt; &quot;Overloaded Constructor Invoked&quot; &lt;&lt; std::endl;
-            message = nullptr;
-            message = new char[strlen(raw)+1];
-            strcpy(message, raw);
-        }
-    
-        void show() {
-            std::cout &lt;&lt; &quot;message: &quot; &lt;&lt; message &lt;&lt; std::endl;
-        }
-    
-        int length() {
-            return strlen(message);
-        }
-    
-        ~Message() {
-            std::cout &lt;&lt; &quot;Distructor Invoked&quot; &lt;&lt; std::endl;
-            delete [] message;
-        }
+    	Sample(int number) : number(number) {};
+    	int getNumber() { return number; }
+    	Sample* makeInstance() { return this; }
     };
-    
-    void get_info(Message tmp) {
-        tmp.show();
-    }
     
     int main()
     {
-        Message msg(&quot;Cxx Programming&quot;);
-        msg.show();
+    	Sample object(10);
+    	Sample* instance = object.makeInstance(); // object itself is return
     
-        /*
-        get_info(msg); // cannot make a copy
-        */
-        
-        return 0;
+    	std::cout &lt;&lt; &quot;object: &quot; &lt;&lt; object.getNumber() &lt;&lt; std::endl;
+    	std::cout &lt;&lt; &quot;instance: &quot; &lt;&lt; instance-&gt;getNumber() &lt;&lt; std::endl;
+    
+    	return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
-g++ -Wall -g -o ./non_copyable.o -c ./non_copyable.cxx
-g++ -g -o ./non_copyable.bin ./non_copyable.o
-./non_copyable.bin
-Overloaded Constructor Invoked
-message: Cxx Programming
-Distructor Invoked
+g++ -Wall -g -o ./this-pointer.o -c ./this-pointer.cxx
+g++ -g -o ./this-pointer.bin ./this-pointer.o
+./this-pointer.bin
+object: 10
+instance: 10
 </code>
 </pre>
 <hr />
@@ -367,11 +323,11 @@ References
 </h3>
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus: <span style='color: red'></span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7: <span style='color: red'></span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 8: <span style='color: red'></span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/move-constructor">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/singleton">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/implicit-type-conversion">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/sizeof-a-class">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

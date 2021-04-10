@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Stack Prohibition</title>
+<title>Union</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.1.0.html">Classes and Objects</a></li>
-<li class='breadcrumb-item active'>Stack Prohibition</li>
+<li class='breadcrumb-item active'>Union</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,80 +261,122 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Stack-Prohibition" class="anchor" aria-hidden="true" href="#Stack-Prohibition">
-Stack Prohibition
+<a id="Union" class="anchor" aria-hidden="true" href="#Union">
+Union
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>Space on the stack is often limited. If you are writing a database that may contain terabytes of data in its internal structures, you might want to ensure that a client of this class cannot instantiate it on the stack; instead it is forced to create instances only on the free store. The key to ensuring this is declaring the destructor private:</p>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>A union is a special class type where only one of the non-static data members is active at a time. Thus, a union can accommodate multiple data members, just like a class can, with the exception that only one of them can actually be used.</p>
+
+<p>A union is declared using keyword union, followed by the name of the union and its data members within braces:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		class MonsterDB
+		union UnionName
 		{
-		private:
-			~MonsterDB(); // private destructor
-			//... members that consume a huge amount of data
+			Type1 member1;
+			Type2 member2;
+			…  TypeN memberN;
 		};
 	</code>
 </pre>
 
-<p>Declaring a private destructor ensures that one is not allowed to create an instance like this:</p>
+<p>You would instantiate and use a union like this:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		int main()
-		{
-			MonsterDB myDatabase; // compile error
-			// … more code
-			return 0;
-		}
+		UnionName unionObject;
+		unionObject.member2 = value; // choose member2 as the active member
 	</code>
 </pre>
 
-<p>This instance, if successfully constructed, would be on the stack. All objects on the stack get popped when the stack is unwound and therefore the compiler would need to compile and invoke the destructor ~MonsterDB() at the end of main(). However, this destructor is private and therefore inaccessible, resulting in a compile failure.</p>
+<p>Similar to the struct, the members of a union are public by default. Unlike a struct, however, unions cannot be used in inheritance hierarchies.</p>
 
-<p>Declaring <i>destructor</i> as a private method, prevents an object from being created on the stack, but can only be available on the heap. That is, object cannot be created on compile-time, but it can be created on run-time.</p>
+<p>Additionally, the sizeof() a union is always fixed as the size of the largest member contained in the union—even if that member were inactive in an instance of the union.</p>
 
-<pre class="language-cpp line-numbers">
-	<code>
-		int main()
-		{
-			MonsterDB* myDatabase = new MonsterDB(); // no error
-			// … more code
-			return 0;
-		}
-	</code>
+<p>Often a union is used as a member of a struct to model a complex data type. In some implementations, the ability of a union to interpret the fixed memory space as another type is used for type conversions or memory reinterpretation—a practice that is controversial and not necessary given alternatives.</p>
+
+<p>C++17 is expected to introduce a typesafe alternative to a union called <a href="/cpp/object-oriented/classes/variant">variant</a>.</p>
+
+<p>Unions too, are classes in C++ and their members are public by default unless otherwise is specified.</p>  
+
+<p>Unions can be used in complex types as we did here in this practice.</p>  
+
+<p>They have the same concept as they have in C. Only one member of a union can be occupied at a time.</p>
+<hr />
+  <cite>union.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    
+    union simpleType {
+        int number;
+        char character;
+    };
+    
+    struct complexType {
+        enum Type {
+            Int,
+            Char
+        } type;
+    
+        union Value {
+            int number;
+            char character;
+        } value;
+    };
+    
+    void displayType(const complexType&amp; ctype) {
+        switch (ctype.type) {
+            case complexType::Int:
+                std::cout &lt;&lt; &quot;value is a number: &quot; &lt;&lt; ctype.value.number &lt;&lt; std::endl;
+                break;
+            case complexType::Char:
+                std::cout &lt;&lt; &quot;value is a character: &quot; &lt;&lt; ctype.value.character &lt;&lt; std::endl;
+                break;
+            default:
+                std::cout &lt;&lt; &quot;unknown character&quot; &lt;&lt; std::endl;
+        };
+    }
+    
+    int main()
+    {
+        simpleType u1, u2;
+        u1.number = 10;
+        u2.character = &apos;F&apos;;
+    
+        std::cout &lt;&lt; &quot;size of &quot; &lt;&lt; u1.number &lt;&lt; &quot; simple integer &quot; &lt;&lt; sizeof(u1) &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;size of &quot; &lt;&lt; u2.character &lt;&lt; &quot; simple character &quot; &lt;&lt; sizeof(u2) &lt;&lt; std::endl;
+    
+        complexType t1, t2;
+        t1.type = complexType::Int;
+        t1.value.number = 20;
+    
+        t2.type = complexType::Char;
+        t2.value.character = &apos;M&apos;;
+    
+        displayType(t1);
+        displayType(t2);
+    
+        return 0;
+    }
+</code>
 </pre>
-
-<p>If you see a memory leak there, you are not mistaken. As the destructor is not accessible from main, you cannot do a delete, either. What class <code>MonsterDB</code> needs to support is a public static member function that would destroy the instance (a class member would have access to the private destructor):</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		class MonsterDB
-		{
-		private:
-			~MonsterDB(); // private destructor
-			//... members that consume a huge amount of data
-
-		public:
-			void destroyInstance(MonsterDB& object)
-			{
-				delete object;
-			}
-		};
-
-		int main()
-		{
-			MonsterDB* myDatabase = new MonsterDB();
-			delete myDatabase; // error: cannot access destructor
-			MonsterDB::destroyInstance(myDatabase); // properly deallocate memory
-			return 0;
-		}
-	</code>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
+<code>
+g++ -Wall -g -o ./union.o -c ./union.cxx
+g++ -g -o ./union.bin ./union.o
+./union.bin
+size of 10 simple integer 4
+size of F simple character 4
+value is a number: 20
+value is a character: M
+</code>
 </pre>
 <hr />
 <h3>
@@ -350,44 +392,9 @@ References
 <li class='list-group-item'>C++ Primer Plus: <span style='color: red'></span></li>
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7: <span style='color: red'></span></li>
 </ul>
-<hr />
-  <cite>stack_prohibition.cxx</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    class Database {
-    private:
-        // private destructor, prohibits instantiation on stack
-        ~Database() {}
-    
-    public:
-        static void destruct(Database* object) {
-            delete object;
-        }
-    };
-    
-    int main()
-    {
-        /*
-        Database db; // on stack
-        */
-    
-        Database* db = new Database; // on heap
-        Database::destruct(db);
-        return 0;
-    }
-</code>
-</pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
-<code>
-g++ -Wall -g -o ./stack_prohibition.o -c ./stack_prohibition.cxx
-g++ -g -o ./stack_prohibition.bin ./stack_prohibition.o
-./stack_prohibition.bin
-</code>
-</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/singleton">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/this-pointer">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/sizeof-a-class">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/variant">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

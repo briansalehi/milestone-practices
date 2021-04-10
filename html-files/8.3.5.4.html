@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Custom Exception</title>
+<title>intention to override</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Exception Handling</a></li>
-<li class='breadcrumb-item active'>Custom Exception</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Polymorphism</a></li>
+<li class='breadcrumb-item active'>intention to override</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Custom-Exception" class="anchor" aria-hidden="true" href="#Custom-Exception">
-Custom Exception
+<a id="intention-to-override" class="anchor" aria-hidden="true" href="#intention-to-override">
+intention to override
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,50 +270,70 @@ Custom Exception
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>All existing exception handlers that <code>catch(const std::exception&)</code> and work for <code>bad_alloc</code>, <code>bad_cast</code> and the like will automatically scale up to catch your new exception class as well because it has the base class in common with them.</p>
+You were previously introduced to overriding functions.  
+We can use **override** keyword on overriding methods to be 100 percent sure they will be overriden.
 
-<p><code>virtual const char* what() const throw()</code> it ends with <code>throw()</code>, which means that this function itself is not expected to throw an exception. A very important and relevant restriction on a class that is used as an exception object. If you still insert a throw within this function, you can expect a compiler warning.</p>
+Our versions of base class Fish have featured a virtual function called Swim() as seen in the following code:
+--
+modify text
 
-<p>If a function ends with <code>throw(int)</code>, it means that the function is expected to throw an exception of type <code>int</code>.</p>
+*****
+
+class Fish { public:
+ virtual void Swim()  { cout << "Fish swims!" << endl;
+ } };
+
+*****
+
+Assume that derived class Tuna were to define a function Swim() but with a slightly  different signature—one using const inserted unintentionally by a programmer who wants to override Fish::Swim():
+
+*****
+
+class Tuna:public Fish { public:
+ void Swim() const  { cout << "Tuna swims!" << endl;
+ } };
+
+*****
+
+This function Tuna::Swim() actually does not override Fish::Swim(). The signatures are different thanks to the presence of const in Tuna::Swim(). Compilation succeeds, however, and the programmer may falsely believe that he has successfully overridden the function Swim() in class Tuna. C++11 and beyond give the programmer a specifier override that is used to verify whether the function being overridden has been declared as virtual by the base class:
+
+*****
+
+class Tuna:public Fish { public:
+ void Swim() const override // Error: no virtual fn with this sig in Fish  { cout << "Tuna swims!" << endl;
+ } };
+
+*****
+
+Thus, override supplies a powerful way of expressing the explicit intention to override a base class virtual function, thereby getting the compiler to check whether  ■ The base class function is virtual.
+ ■ The signature of the base class virtual function exactly matches the signature of the derived class function declared to override.
+
+
 <hr />
-  <cite>custom.cxx</cite>
+  <cite>override.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;exception&gt;
     #include &lt;iostream&gt;
-    #include &lt;string&gt;
     
-    class CustomException : public std::exception
-    {
-    private:
-    	std::string description;
-    
+    class Base {
     public:
-        CustomException(const char* reason): description(reason) {}
+        virtual void method() {
+            std::cout &lt;&lt; &quot;Base Method Invoked&quot; &lt;&lt; std::endl;
+        }    
+    };
     
-        virtual const char* what() const throw()
-    	{
-            return description.c_str();
+    class Derived: public Base {
+    public:
+        // override makes sure method will override
+        void method() override {
+            std::cout &lt;&lt; &quot;Derived Method Invoked&quot; &lt;&lt; std::endl;
         }
     };
     
-    const double divide(const int&amp; dividen, const int&amp; divisor)
-    {
-        if (divisor == 0) {
-            throw CustomException(&quot;dividing by zero is a crime&quot;);
-    	}
-    
-        return (dividen / divisor);
-    }
-    
     int main()
     {
-        try {
-    		std::cout &lt;&lt; divide(1, 0) &lt;&lt; std::endl;
-        }
-        catch (const CustomException&amp; exp) {
-    		std::cout &lt;&lt; &quot;Exception: &quot; &lt;&lt; exp.what() &lt;&lt; std::endl;
-        }
+        Derived derived;
+        derived.method();
     
         return 0;
     }
@@ -322,28 +342,15 @@ Custom Exception
   <cite>Build and Run</cite>
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -o ./custom.o -c ./custom.cxx
-g++ -g -o ./custom.bin ./custom.o
-./custom.bin
-Exception: dividing by zero is a crime
+g++ -Wall -g -o ./override.o -c ./override.cxx
+g++ -g -o ./override.bin ./override.o
+./override.bin
+Derived Method Invoked
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 28</span></li>
-</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/exceptions/exception-lookup">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/templates">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.5.3.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.5.5.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

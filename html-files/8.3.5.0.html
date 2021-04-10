@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Exception Handling</title>
+<title>Polymorphism</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,7 +248,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class='breadcrumb-item active'>Exception Handling</li>
+<li class='breadcrumb-item active'>Polymorphism</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -260,8 +260,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Exception-Handling" class="anchor" aria-hidden="true" href="#Exception-Handling">
-Exception Handling
+<a id="Polymorphism" class="anchor" aria-hidden="true" href="#Polymorphism">
+Polymorphism
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -269,12 +269,83 @@ Exception Handling
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Exceptions disrupt the normal flow of your application.</p>
+<p><b>Polymorphism</b> is that feature of object-oriented languages that allows objects of different types to be treated similarly.</p>
 
-<p>Handling exceptions helps you avoid those “Access Violation” or “Unhandled Exception” screens or emails.</p>
+<p>In “<a href="/cpp/object-orientation/inheritance">Implementing Inheritance</a>” you found out how <code>Derived</code> classes inherit public methods of <code>Base</code> classes. It is, however, possible that <code>Derived</code> classes provide their own <code>Base::DoSomething()</code> methods to make themselves different than each other. Yet, as each of them is also a <code>Base</code>, if a user with an instance of <code>Derived</code> uses the base class type to invoke <code>Base::DoSomething()</code>, he ends up executing only the generic part <code>Base::DoSomething()</code> and not <code>Derived::DoSomething()</code>, even though that base class instance <code>Base</code> is a part of a <code>Derived</code>.</p>
+
+<p>When you are programming, you should program your classes correctly and create inheritance hierarchies that make sense, keeping the design and purpose of the application in perspective.</p>
+
+<pre class="language-cpp line-numbers" data-line="6-9,16-19,22,25,32,33">
+	<code>
+		#include &lt;iostream&gt;  
+
+		class Base  
+		{  
+		public:
+			void DoSomething()  
+			{  
+				std::cout &lt;&lt; "Base Method Invoked" &lt;&lt; std::endl;
+			} 
+		};
+
+		class Derived: public Base 
+		{ 
+		public:
+			// override Base::DoSomething 
+			void DoSomething() 
+			{ 
+				std::cout &lt;&lt; "Derived Method Invoked" &lt;&lt; std::endl;
+			} 
+		};
+
+		void function(Base& instance) 
+		{ 
+			// calling Base::DoSomething 
+			instance.DoSomething();
+		} 
+
+		int main() 
+		{ 
+			Derived object;
+			object.DoSomething(); // calling Derived::DoSomething 
+			function(object); // sending Derived as Base 
+			return 0;
+		}
+	</code>
+</pre>
+
+<p>This sample code will result:</p>
+
+<pre class="language-bash">
+	<code>
+		Base Method Invoked
+	</code>
+</pre>
+
+<p><code>DoSomething(Base&)</code> doesn’t care if the object sent was a Derived, handles it as a Base, and invokes <code>Base::DoSomething()</code>.</p>
+
+<p>What we would ideally expect is that an object of type <code>Derived</code> behaves like a <code>Derived</code> even if the method invoked is <code>Base::DoSomething()</code>. In other words, when <code>object.DoSomething()</code> is invoked, we expect it to execute <code>Derived::DoSomething()</code>. Such polymorphic behavior where an object of known type class <code>Base</code> can behave as its actual type; namely, class Derived, can be implemented by making <code>Base::DoSomething()</code> a <code>virtual</code> function.</p>
+
+<p>Use of keyword <code>virtual</code> means that the compiler ensures that any overriding variant of the requested <code>Base</code> class method is invoked.</p>
+
+<pre class="language-cpp line-numbers" data-line="3">
+	<code>
+		struct Base
+		{
+			virtual ReturnType FunctionName(Parameter List);
+		};
+
+		struct Derived: public Base
+		{
+			ReturnType FunctionName(Parameter List);
+		};
+	</code>
+</pre>
+
+<p>Treating different classes as a common type Base, yet ensuring that the right implementation of DoSomething() supplied by the <code>Derived</code> types is executed defines <b>Polymorphism</b>.</p>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.4.11.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/exceptions/try-catch">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/inheritance/final-inheritance">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/polymorphism/virtual-destructor">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -289,7 +360,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'></span></li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'></span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 28</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'></span></li>
 </ul>
 <hr />
 <h3>
@@ -302,20 +373,28 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/cpp/object-orientation/exceptions/try-catch" class="list-group-item">
-	1. Catching Exceptions
+<a href="/cpp/object-orientation/polymorphism/virtual-destructor" class="list-group-item">
+	1. Virtual Destructors
 	
 </a>
-<a href="/cpp/object-orientation/exceptions/exception-class" class="list-group-item">
-	2. Exception Class
+<a href="/8.3.5.2.html" class="list-group-item">
+	2. pure virtual function
 	
 </a>
-<a href="/cpp/object-orientation/exceptions/exception-lookup" class="list-group-item">
-	3. Exception Lookup
+<a href="/8.3.5.3.html" class="list-group-item">
+	3. diamond problem
 	
 </a>
-<a href="/cpp/object-orientation/exceptions/custom-exception" class="list-group-item">
-	4. Custom Exception
+<a href="/8.3.5.4.html" class="list-group-item">
+	4. intention to override
+	
+</a>
+<a href="/8.3.5.5.html" class="list-group-item">
+	5. prevent overriding by final
+	
+</a>
+<a href="/8.3.5.6.html" class="list-group-item">
+	6. virtual copy constructor
 	
 </a>
 </div>

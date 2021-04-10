@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Move Constructor</title>
+<title>Implicit Type Conversion</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.1.0.html">Classes and Objects</a></li>
-<li class='breadcrumb-item active'>Move Constructor</li>
+<li class='breadcrumb-item active'>Implicit Type Conversion</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Move-Constructor" class="anchor" aria-hidden="true" href="#Move-Constructor">
-Move Constructor
+<a id="Implicit-Type-Conversion" class="anchor" aria-hidden="true" href="#Implicit-Type-Conversion">
+Implicit Type Conversion
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,126 +270,133 @@ Move Constructor
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Move semantics are helpful when there's a big object which we cannot afford having another copy of it. In this situation when there's not enough memory to just have a few copies of an object, we need to directly move those objects when they are passed as arguments or they are returned from functions.</p>
+<p><b>Single-argument</b> constructors are used to convert different types into the object.</p>
 
-<p>To make <i>move semantics</i> happen, we need to declare a <i>move constructor</i>, the way we declared a copy constructor. Instead, here we have two & operators meaning the move operator. And there's another difference between move constructor and a copy constructor, and that's we set the source members to NULL after we moved them to the destination. This way, source will no longer exist, and the object is moved to the destination. No extra memory occupied. To make sure object is moved we also use <i>std::move()</i> function.</p>
+<p>Constructors can be overloaded, that is, they may take one or more parameters. This feature is often used to convert one type to another. Let’s consider a class <code>Human</code> that features an overloaded constructor that accepts an integer.</p>
 
-<p>The syntax of a move constructor is:</p>
-
-<pre class="language-cpp line-numbers">
+<pre class="language-cpp line-numbers" data-line="5">
 	<code>
-		// move constructor
-		MyString(MyString&& moveSource)
+		class Human
 		{
-			if(moveSource.buffer != NULL)
-			{
-				buffer = moveSource.buffer;
-				// take ownership i.e. 'move'
-				moveSource.buffer = NULL;
-				// set the move source to NULL
-			}
+			int age;
+		public:
+			Human(int humansAge): age(humansAge) {}
+		};
+
+		// Function that takes a Human as a parameter
+		void DoSomething(Human person)
+		{
+			std::cout &lt;&lt; "Human sent did something" &lt;&lt; std::endl;
 		}
 	</code>
 </pre>
 
-<p>When a move constructor is programmed, the compiler automatically opts for the same for “moving” the temporary resource and hence avoiding a deep-copy step. With the move constructor implemented, the comment should be appropriately changed to the following:</p>
+<p>This constructor allows a conversion:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		MyString sayHelloAgain(Copy(sayHello)); // invokes 1x copy, 1x move constructors
+		Human kid(10); // convert int into a Human
+		DoSomething(kid);
 	</code>
 </pre>
 
-<p>The move constructor is usually implemented with the move assignment operator, which is discussed in greater detail in <a href="/cpp/object-orientation/operators/move-assignment-operator">move assignment operator</a>.</p>
+<p>Such converting constructors allow implicit conversions:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Human anotherKid = 11; // int converted to Human
+		DoSomething(10); // 10 converted to Human!
+	</code>
+</pre>
+
+<p>We declared <code>DoSomething(Human person)</code> as a function that accepts a parameter of type <code>Human</code> and does not accept an <code>int</code>!</p>
+
+<p>So, why did that line work?</p>
+<p>The compiler knows that class <code>Human</code> supports a constructor that accepts an integer and performed an implicit conversion for you—it created an object of type <code>Human</code> using the integer you supplied and sent it as an argument to the function.</p>
+
+<p>To avoid implicit conversions, use keyword <code>explicit</code> at the time of declaring the constructor:</p>
+
+<pre class="language-cpp line-numbers" data-line="5">
+	<code>
+		class Human
+		{
+			int age;
+		public:
+			explicit Human(int humansAge): age(humansAge) {}
+		};
+	</code>
+</pre>
+
+<p>Using <code>explicit</code> is not a prerequisite but in many cases a good programming practice. The following sample demonstrates a version of class <code>Human</code> that does not permit implicit conversions.</p>
+
+<p>The problem of implicit conversions and avoiding them using keyword <code>explicit</code> applies to operators too. Remember to note the usage of <code>explicit</code> when programming conversion operators introduced to you in <a href="/cpp/object-oriented/operator-verloading">operator overloading</a>.</p>
+
+<p>One important motive to use <code>explicit</code> conversion over implicit is, simply, compile-time errors are better than run-time errors!</p>
 <hr />
-  <cite>move_constructor.cxx</cite>
+  <cite>implicit-conversion.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;cstring&gt;
     
-    class Base {
+    class Implicit {
     public:
-        Base(const char* input) {
-            std::cout &lt;&lt; &quot;Constructor Invoked&quot; &lt;&lt; std::endl;
-            member = nullptr;
+        Implicit(): number{0} {};
+        Implicit(const int&amp; input): number(input) {};
     
-            if (input != nullptr) {
-                member = new char[strlen(input)+1];
-                strcpy(member, input);
-                std::cout &lt;&lt; &quot;member address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;member &lt;&lt; std::endl;
-            }
-        };
-    
-        Base(const Base&amp; base) {
-            std::cout &lt;&lt; &quot;Copy Constructor Invoked&quot; &lt;&lt; std::endl;
-    
-            if (base.member != nullptr) {
-                member = new char[strlen(base.member)+1];
-                strcpy(member, base.member);
-                std::cout &lt;&lt; &quot;copied member address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;member &lt;&lt; std::endl;
-            }
-        };
-    
-        Base(const Base&amp;&amp; base) {
-            std::cout &lt;&lt; &quot;Move Constructor Invoked&quot; &lt;&lt; std::endl;
-    
-            if (base.member) {
-                member = new char[strlen(base.member)+1];
-                strcpy(member, base.member);
-                std::cout &lt;&lt; &quot;rvalue address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;base.member &lt;&lt; std::endl;
-                std::cout &lt;&lt; &quot;lvalue address: &quot; &lt;&lt; std::hex &lt;&lt; &amp;member &lt;&lt; std::endl;
-            }
-        };
-    
-        ~Base() {
-            std::cout &lt;&lt; &quot;Destructor Invoked&quot; &lt;&lt; std::endl;
-            if (member != nullptr) {
-                delete [] member;
-            }
-        };
+        void show() {
+            std::cout &lt;&lt; &quot;implicit: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        }
     
     private:
-        char* member;
+        int number;
     };
     
-    Base copyObject(Base&amp;base) {
-    	return base;
-    }
+    class Explicit {
+    public:
+        Explicit(): number{0} {};
+        explicit Explicit(const int&amp; input): number{input} {};
     
-    Base moveObject(Base&amp; base) {
-        return std::move(base);
-    }
+        void show() {
+            std::cout &lt;&lt; &quot;explicit: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        }
+    
+    private:
+        int number;
+    };
     
     int main()
     {
-    	try {
-    		Base object(&quot;using move semantics&quot;);
-    		Base concrete = copyObject(object);
-    		Base reference = moveObject(object);
-    	} catch (std::exception&amp; exp) {
-    		std::cerr &lt;&lt; exp.what() &lt;&lt; std::endl;
-    	}
+        Implicit num1;
+        num1 = 2;
+        num1.show();
+    
+        Implicit num2;
+        num2 = 3.14;
+        num2.show();
+    
+        Explicit num3(4);
+        // num3 = 5; // not authorized
+        num3.show();
+    
+        /*
+        Explicit num4;
+        num4 = 5.6; // not authorized
+        num4.show();
+        */
+    
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-14'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
 <code>
-g++ -Wall -g -o ./move_constructor.o -c ./move_constructor.cxx
-g++ -g -o ./move_constructor.bin ./move_constructor.o
-./move_constructor.bin
-Constructor Invoked
-member address: 0x7fff2c918748
-Copy Constructor Invoked
-copied member address: 0x7fff2c918750
-Move Constructor Invoked
-rvalue address: 0x7fff2c918748
-lvalue address: 0x7fff2c918758
-Destructor Invoked
-Destructor Invoked
-Destructor Invoked
+g++ -Wall -g -o ./implicit-conversion.o -c ./implicit-conversion.cxx
+g++ -g -o ./implicit-conversion.bin ./implicit-conversion.o
+./implicit-conversion.bin
+implicit: 2
+implicit: 3
+explicit: 4
 </code>
 </pre>
 <hr />
@@ -407,8 +414,8 @@ References
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7: <span style='color: red'></span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/implicit-type-conversion">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/non-copyable-objects">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/destructor">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/this-pointer">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Order of Construction and Destruction</title>
+<title>equality and inequality operator</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Inheritance</a></li>
-<li class='breadcrumb-item active'>Order of Construction and Destruction</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Operator Overloading</a></li>
+<li class='breadcrumb-item active'>equality and inequality operator</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Order-of-Construction-and-Destruction" class="anchor" aria-hidden="true" href="#Order-of-Construction-and-Destruction">
-Order of Construction and Destruction
+<a id="equality-and-inequality-operator" class="anchor" aria-hidden="true" href="#equality-and-inequality-operator">
+equality and inequality operator
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,84 +270,58 @@ Order of Construction and Destruction
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p><b>Constructors</b> are the first methods invoked when an object is created and destructors are the last methods invoked before an object cease to exist. When an object is created, constructors of its parents are first invoked from top to bottom and in the time of destruction, destructors are invoked from bottom to top.</p>
-
-<p>Thankfully, the instantiation sequence is standardized. <code>Base</code> class objects are instantiated before the <code>Derived</code> class. So, the <code>Base</code> part of <code>Derived</code> is constructed first, so that member attributes—especially the <code>protected</code> and <code>public</code> ones contained in class <code>Base</code>—are ready for consumption when class <code>Derived</code> is instantiated.</p>
-
-<p>Within the instantiation of class <code>Base</code> and class <code>Derived</code>, the member attributes (such as <code>int Base::state</code>) are instantiated before the constructor <code>Base::Base()</code> is invoked, ensuring that member attributes are ready before the constructor works with them. The same applies to <code>Derived::Derived()</code>.</p>
+We see that the operator equality checking **==** checks for equality of days, months and years. This is a correct logic when comparing two dates.  
+And notice how we used one operator to implement another.
 <hr />
-  <cite>ordering.cxx</cite>
+  <cite>equality.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
-    struct Top {
-        Top() {
-            std::cout &lt;&lt; &quot;Top Constructor Invoked&quot; &lt;&lt; std::endl;
+    class Date {
+    private:
+        int day, month, year;
+    
+    public:
+        Date(int d, int m, int y): day{d}, month{m}, year{y} {}
+    
+        bool operator == (const Date&amp; pair) {
+            return (day == pair.day &amp;&amp; month == pair.month &amp;&amp; year == pair.year);
         }
     
-        ~Top() {
-            std::cout &lt;&lt; &quot;Top Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
-    
-    struct Middle: public Top {
-        Middle() {
-            std::cout &lt;&lt; &quot;Middle Constructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    
-        ~Middle() {
-            std::cout &lt;&lt; &quot;Middle Destructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    };
-    
-    struct Bottom: public Middle {
-        Bottom() {
-            std::cout &lt;&lt; &quot;Bottom Constructor Invoked&quot; &lt;&lt; std::endl;
-        }
-    
-        ~Bottom() {
-            std::cout &lt;&lt; &quot;Bottom Destructor Invoked&quot; &lt;&lt; std::endl;
+        bool operator != (const Date&amp; pair) {
+            return !(this-&gt;operator== (pair));
         }
     };
     
     int main()
     {
-        Bottom object;
+        Date today(17,8,2018);
+        Date holiday(17,8,2018);
+    
+        if (today == holiday) {
+            std::cout &lt;&lt; &quot;today is holiday!&quot; &lt;&lt; std::endl;
+        }
+        else {
+            std::cout &lt;&lt; &quot;today we have a lot of work to do&quot; &lt;&lt; std::endl;
+        }
+            
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-10'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -o ./ordering.o -c ./ordering.cxx
-g++ -g -o ./ordering.bin ./ordering.o
-./ordering.bin
-Top Constructor Invoked
-Middle Constructor Invoked
-Bottom Constructor Invoked
-Bottom Destructor Invoked
-Middle Destructor Invoked
-Top Destructor Invoked
+g++ -Wall -g -o ./equality.o -c ./equality.cxx
+g++ -g -o ./equality.bin ./equality.o
+./equality.bin
+today is holiday!
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 10</span></li>
-</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/inheritance/override">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/inheritance/private-inheritance">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operator-overloading/copy-assignment-operator">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.4.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

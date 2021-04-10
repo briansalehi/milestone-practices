@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Overriding Base Methods</title>
+<title>Copy Assignment Operator</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Inheritance</a></li>
-<li class='breadcrumb-item active'>Overriding Base Methods</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Operator Overloading</a></li>
+<li class='breadcrumb-item active'>Copy Assignment Operator</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Overriding-Base-Methods" class="anchor" aria-hidden="true" href="#Overriding-Base-Methods">
-Overriding Base Methods
+<a id="Copy-Assignment-Operator" class="anchor" aria-hidden="true" href="#Copy-Assignment-Operator">
+Copy Assignment Operator
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,119 +270,77 @@ Overriding Base Methods
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>If a class Derived implements the same functions with the same return values and <b>signatures</b> as in a class <code>Base</code> it inherits from, it effectively overrides that method in class <code>Base</code> as shown in the following code:</p>
+The process of copying a C style string is done by assignment operator and a few functions in **cstring** header file.  
+There are some small tips to consider:  
 
-<pre class="language-cpp line-numbers" data-line="4-7,13-16">
-	<code>
-		class Base
-		{
-		public:
-			void DoSomething()
-			{
-				// implementation code… Does something
-			}
-		};
-
-		class Derived : public Base
-		{
-		public:
-			void DoSomething()
-			{
-				// implementation code… Does something else
-			}
-		};
-	</code>
-</pre>
-
-<p>Thus, if method <code>DoSomething()</code> were to be invoked using an instance of <code>Derived</code>, then it would not invoke the functionality in class <code>Base</code>.</p>
-
-<p>If you want to be invoke <code>Base::DoSomething()</code> via main(), you need to use the <b>scope resolution operator</b> <code>::</code> in the following syntax:</p>
-
-<pre class="language-cpp">
-	<code>
-		object.Base::DoSomething(); // invokes Base::DoSomething() using instance of Derived
-	</code>
-</pre>
-
-<p>Typically, <code>Base::DoSomething()</code> would contain a generic implementation of method applicable to all derived classes. If your specialized implementations in <code>Derived:DoSomething()</code> need to reuse the base class’s generic implementation of <code>Base::DoSomething()</code>, you use the scope resolution operator <code>::</code> as shown in the following code:</p>
-
-<pre class="language-cpp line-numbers" data-line="9">
-	<code>
-		class Derived: public Base
-		{
-			public:
-				Derived(): Base(true) {}
-
-				void DoSomething()
-				{
-					std::cout &lt;&lt; "Derived" &lt;&lt; std::endl;
-					Base::DoSomething(); // invoke base class function using operator::
-				}
-		};
-	</code>
-</pre>
-
-<p>Overriding can take an extreme form where <code>Derived::DoSomething()</code> can potentially hide all overloaded versions of <code>Base::DoSomething()</code> available, even causing compilation failure when the overloaded ones are used (hence, called hidden). So, if you want to invoke the <code>Base::DoSomething(bool)</code> function via an instance of <code>Derived</code>, you have the following solutions:</p>
-
-<ul>
-	<li><b>Solution 1</b>: Use the <b>scope resolution operator</b> in <code>main()</code>:</li>
-	<pre class="language-cpp">
-		<code>
-			object.Base::DoSomething();
-		</code>
-	</pre>
-
-	<li><b>Solution 2</b>: Use keyword <code>using</code> in class <code>Derived</code> to unhide <code>DoSomething()</code> in class <code>Base</code>:</li>
-	<pre class="language-cpp line-numbers" data-line="4">
-		<code>
-			class Derived: public Base
-			{
-			public:
-				using Base::DoSomething; // unhide all DoSomething() methods in class Base
-
-				void DoSomething()
-				{
-					std::cout &lt;&lt; "Derived" &lt;&lt; std::endl;
-				}
-			};
-		</code>
-	</pre>
-
-	<li><b>Solution 3</b>: Override all overloaded variants of <code>DoSomething()</code> in class <code>Derived</code> (invoke  methods of <code>Base::DoSomething(...)</code> via <code>Derived::Base(...)</code> if you want):</li>
-	<pre class="language-cpp line-numbers" data-line="6">
-		<code>
-			class Derived: public Base
-			{
-			public:
-				void DoSomething(bool task)
-				{
-					Base::DoSomething(task);
-				}
-
-				void DoSomething()
-				{
-					std::cout &lt;&lt; "Derived" &lt;&lt; std::endl;
-				}
-			};
-		</code>
-	</pre>
-</ul>
+* always check for pointer validity before modification
+* always delete a declared block of memory in destructor
+* use **const** keyword as many as possible
 <hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 10</span></li>
-</ul>
+  <cite>copy.cxx</cite>
+<pre class="line-numbers" >
+<code class="language-cpp">
+    #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    #include &lt;cstring&gt;
+    
+    class Message {
+    public:
+        Message(const char* msg): text(nullptr) {
+            text = new char[strlen(msg)+1];
+            strcpy(text, msg);
+        }
+    
+        Message&amp; operator= (const Message&amp; pair) {
+            if ((this != &amp;pair) &amp;&amp; (pair.text != nullptr)) {
+                if (text != nullptr) {
+                    delete [] text;
+                }
+                
+                text = new char[strlen(pair.text)+1];
+                strcpy(text, pair.text);
+            }
+    
+            return *this;
+        }
+    
+        operator const char*() {
+            return text;
+        }
+    
+        ~Message() {
+            delete [] text;
+        }
+    
+    private:
+        char* text;
+    };
+    
+    int main()
+    {
+        Message msg1(&quot;first message&quot;);
+        Message msg2(&quot;second message&quot;);
+        std::cout &lt;&lt; msg1 &lt;&lt; std::endl;
+        msg1 = msg2;
+        std::cout &lt;&lt; msg1 &lt;&lt; std::endl;
+    
+        return 0;
+    }
+</code>
+</pre>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
+<code>
+g++ -Wall -g -o ./copy.o -c ./copy.cxx
+g++ -g -o ./copy.bin ./copy.o
+./copy.bin
+first message
+second message
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/inheritance/base-class-initialization">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/inheritance/order-of-construction">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operator-overloading/assignment-operator">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.3.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

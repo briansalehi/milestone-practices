@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>std::variant</title>
+<title>prevent overriding by final</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,8 +248,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.1.0.html">Classes and Objects</a></li>
-<li class='breadcrumb-item active'>std::variant</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.5.0.html">Polymorphism</a></li>
+<li class='breadcrumb-item active'>prevent overriding by final</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="std::variant" class="anchor" aria-hidden="true" href="#std::variant">
-std::variant
+<a id="prevent-overriding-by-final" class="anchor" aria-hidden="true" href="#prevent-overriding-by-final">
+prevent overriding by final
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,111 +270,54 @@ std::variant
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>One of the problems with the union is that it enables its content to be interpreted as any other data type supported by the <code>union</code>; for example:</p>
+You were previously introduced to **final** keyword in inheriting classes, which made that class to be the last generation in hierarchy.  
+Here we can also use **final** keyword to prevent a method from being overriden by another class.
 
-<pre class="language-cpp line-numbers">
-	<code>
-		union SimpleUnion
-		{
-			int num;
-			double preciseNum;
-		};
-	</code>
-</pre>
+Specifier final, introduced in C++11, was first presented to you in Lesson 10. A class declared as final cannot be used as a base class. Similarly, a virtual function declared as final cannot be overridden in a derived class.
 
-<p>You may instantiate this <code>union</code> for a <code>double</code>, yet use it as an integer:</p>
 
-<pre class="language-cpp line-numbers">
-	<code>
-		SimpleUnion u1;
-		u1.preciseNum = 3.14; // union stores a double
-		int num2 = u1.num; // works, but u1 contained a double!
-	</code>
-</pre>
-
-<p>C++17 provides the programmer with the <code>std::variant</code>, a typesafe alternative to the <code>union</code>:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		std::variant<int, double> varSafe;
-		varSafe = 3.14; // variant stores double
-
-		double pi = std::get<double>(varSafe); // 3.14
-		double pi2 = std::get<1>(varsafe); // 3.14
-
-		std::get<char>(varSafe); // compile fails: no char in variant
-		std::get<2>(varSafe); // compile fails: variant with two types, not three
-
-		try {
-			std::get<int>(varSafe); // throws exception as variant stores double
-		} catch (std::bad_variant_access&) {
-			// exception handler code
-		}
-	</code>
-</pre>
 <hr />
-  <cite>variant.cxx</cite>
+  <cite>final.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
-    #include &lt;variant&gt;
+    
+    class Base {
+    public:
+        virtual void method() {
+            std::cout &lt;&lt; &quot;Base Method Invoked&quot; &lt;&lt; std::endl;
+        }    
+    };
+    
+    class Derived: public Base {
+    public:
+        // method using final will no longer be available to be overriden by another class
+        void method() override final {
+            std::cout &lt;&lt; &quot;Derived Method Invoked&quot; &lt;&lt; std::endl;
+        }
+    };
     
     int main()
     {
-    	std::variant&lt;int, double&gt; var{3.14};
+        Derived derived;
+        derived.method();
     
-    	// invalid attemt to access to index 0
-    	try {
-    		std::cout &lt;&lt; std::get&lt;0&gt;(var) &lt;&lt; std::endl;
-    	} catch (std::bad_variant_access&amp; exp) {
-    		std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
-    	}
-    
-    	// attemt to access to index 1
-    	try {
-    		std::cout &lt;&lt; std::get&lt;1&gt;(var) &lt;&lt; std::endl;
-    	} catch (std::bad_variant_access&amp; exp) {
-    		std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
-    	}
-    
-    	// attemt to access to double by type
-    	try {
-    		std::cout &lt;&lt; std::get&lt;double&gt;(var) &lt;&lt; std::endl;
-    	} catch (std::bad_variant_access&amp; exp) {
-    		std::cout &lt;&lt; exp.what() &lt;&lt; std::endl;
-    	}
-    
-    	return 0;
+        return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -std=c++17 -o ./variant.o -c ./variant.cxx
-g++ -g -o ./variant.bin ./variant.o
-./variant.bin
-std::get: wrong index for variant
-3.14
-3.14
+g++ -Wall -g -o ./final.o -c ./final.cxx
+g++ -g -o ./final.bin ./final.o
+./final.bin
+Derived Method Invoked
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 29</span></li>
-</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/union">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/friends">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.5.4.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.5.6.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
