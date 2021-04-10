@@ -270,11 +270,11 @@ Implicit Type Conversion
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Single-argument constructors are used to convert different types into the object.</p>
+<p><b>Single-argument</b> constructors are used to convert different types into the object.</p>
 
-<p>Constructors can be overloaded, that is, they may take one or more parameters. This feature is often used to convert one type to another. Let’s consider a class Human that features an overloaded constructor that accepts an integer.</p>
+<p>Constructors can be overloaded, that is, they may take one or more parameters. This feature is often used to convert one type to another. Let’s consider a class <code>Human</code> that features an overloaded constructor that accepts an integer.</p>
 
-<pre class="language-cpp line-numbers">
+<pre class="language-cpp line-numbers" data-line="5">
 	<code>
 		class Human
 		{
@@ -286,7 +286,7 @@ Implicit Type Conversion
 		// Function that takes a Human as a parameter
 		void DoSomething(Human person)
 		{
-			std::cout << "Human sent did something" << std::endl;
+			std::cout &lt;&lt; "Human sent did something" &lt;&lt; std::endl;
 		}
 	</code>
 </pre>
@@ -295,7 +295,7 @@ Implicit Type Conversion
 
 <pre class="language-cpp line-numbers">
 	<code>
-		Human kid(10); // convert integer in to a Human
+		Human kid(10); // convert int into a Human
 		DoSomething(kid);
 	</code>
 </pre>
@@ -309,14 +309,14 @@ Implicit Type Conversion
 	</code>
 </pre>
 
-<p>We declared <i>DoSomething(Human person)</i> as a function that accepts a parameter of type <i>Human</i> and does not accept an <i>int</i>!</p>
+<p>We declared <code>DoSomething(Human person)</code> as a function that accepts a parameter of type <code>Human</code> and does not accept an <code>int</code>!</p>
 
 <p>So, why did that line work?</p>
-<p>The compiler knows that class Human supports a constructor that accepts an integer and performed an implicit conversion for you—it created an object of type Human using the integer you supplied and sent it as an argument to the function.</p>
+<p>The compiler knows that class <code>Human</code> supports a constructor that accepts an integer and performed an implicit conversion for you—it created an object of type <code>Human</code> using the integer you supplied and sent it as an argument to the function.</p>
 
-<p>To avoid implicit conversions, use keyword <i>explicit</i> at the time of declaring the constructor:</p>
+<p>To avoid implicit conversions, use keyword <code>explicit</code> at the time of declaring the constructor:</p>
 
-<pre class="language-cpp line-numbers">
+<pre class="language-cpp line-numbers" data-line="5">
 	<code>
 		class Human
 		{
@@ -327,11 +327,11 @@ Implicit Type Conversion
 	</code>
 </pre>
 
-<p>Using explicit is not a prerequisite but in many cases a good programming practice. The following sample in Listing 9.12 demonstrates a version of class Human that does not permit implicit conversions.</p>
+<p>Using <code>explicit</code> is not a prerequisite but in many cases a good programming practice. The following sample demonstrates a version of class <code>Human</code> that does not permit implicit conversions.</p>
 
-<p>The problem of implicit conversions and avoiding them using keyword <i>explicit</i> applies to operators too. Remember to note the usage of explicit when programming conversion operators introduced to you in <a href="/cpp/object-oriented/operators">operators</a>.</p>
+<p>The problem of implicit conversions and avoiding them using keyword <code>explicit</code> applies to operators too. Remember to note the usage of <code>explicit</code> when programming conversion operators introduced to you in <a href="/cpp/object-oriented/operator-verloading">Operator Overloading</a>.</p>
 
-<p>One important motive to use explicit conversion over implicit is, simply, compile-time errors are better than run-time errors!</p>
+<p>One important motive to use <code>explicit</code> conversion over implicit is, simply, compile-time errors are better than run-time errors!</p>
 <hr />
   <cite>implicit-conversion.cxx</cite>
 <pre class="line-numbers" >
@@ -414,8 +414,8 @@ References
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day: chapter 7: <span style='color: red'></span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/copy-constructor">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/move-constructor">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/classes/destructor">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/this-pointer">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

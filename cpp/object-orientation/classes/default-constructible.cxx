@@ -1,13 +1,15 @@
 #include <iostream>
 
-class Base {
+class Base
+{
 public:
     Base() = default; // use default constructor
     Base(int input): member{input} {}; // overloaded copy constructors cannot be defaulted
     Base(Base& base) = default; // use default copy constructor
     Base& operator= (const Base& base) = default; // use default copy assignment
 
-    void show() {
+    void show()
+	{
         std::cout << "member: " << member << std::endl;
     }
 
@@ -15,7 +17,8 @@ private:
     int member;
 };
 
-void make_copy(Base base) {
+void make_copy(Base base)
+{
     base.show();
 }
 

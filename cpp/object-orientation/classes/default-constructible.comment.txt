@@ -1,3 +1,3 @@
-<p><b>default</b> keyword can be used to let the compiler generate specified methods automatically just the way it creates a default constructor when you don't declare one.</p>
+<p><code>default</code> keyword can be used to let the compiler generate specified methods automatically just the way it creates a <b>default constructor</b> when you don't declare one.</p>
 
-<p><b>Note</b> that some methods cannot be defaulted, such as overloaded copy constructors, overloaded + operator and etc.</p>
+<p><b>Note</b> that some methods cannot be defaulted, such as <b>overloaded copy constructors</b>, overloaded <code>operator+</code> and etc.</p>

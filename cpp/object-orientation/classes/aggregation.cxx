@@ -1,11 +1,12 @@
-class Aggregate1 {
+class Aggregate1
+{
 public:
     const char* name;
     int number;
 };
 
-struct Aggregate2 {
-public:
+struct Aggregate2
+{
     int length;
     int array[3];
 };

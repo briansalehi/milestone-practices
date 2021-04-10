@@ -1,5 +1,3 @@
-<p>You declare a class using the keyword class followed by the name of the class, followed by a statement block {…} that encloses a set of member attributes and member functions within curly braces, and finally terminated by a semicolon ‘;’.</p>
-
 <p>Encapsulation, which is the ability to logically group data and functions that work using it, is an important property of object-oriented programming.</p>
 <p>In simple words, encapsulation means putting all sorts of data and types together to make a meaningful block of bigger data.</p>  
 

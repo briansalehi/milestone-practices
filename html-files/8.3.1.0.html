@@ -269,519 +269,7 @@ Classes and Objects
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-C++ in One Hour a Day
-
-You declare a class using the keyword class followed by the name of the class, followed by a statement block {…} that encloses a set of member attributes and member functions within curly braces, and finally terminated by a semicolon ‘;’.
-
-*****
-
-Encapsulation, which is the ability to logically group data and functions that work using it, is an important property of object-oriented programming.
-
-*****
-
-You may often encounter the term method—these are essentially functions that are members of a class.
-
-*****
-
-A class is like a blueprint, and declaring a class alone has no effect on the execution of a program. The real-world avatar of a class at program execution time is an object. To use the features of a class, you typically create an instance of that class, called an object. You use that object to access its member methods and attributes.
-
-*****
-
-Creating an object of type class Human is similar to creating an instance of another type, say double:
-
-*****
-
-double pi= 3.1415; // a variable of type double
-
-*****
-
-Human firstMan; // firstMan: an object of class Human
-
-*****
-
-Alternatively, you would dynamically create an instance of class Human using new as you would for another type, say an int:
-
-*****
-
-int* pointsToNum = new int; // an integer allocated dynamically
-
-*****
-
-delete pointsToNum; // de-allocating memory when done using
-
-*****
-
-Human* firstWoman = new Human(); // dynamically allocated Human
-
-*****
-
-delete firstWoman; // de-allocating memory
-
-*****
-
-As the class declaration demonstrates, firstMan has attributes such as dateOfBirth that can be accessed using the dot operator (.):
-
-*****
-
-firstMan.dateOfBirth = "1970";
-
-*****
-
-This is because attribute dateOfBirth belongs to class Human, being a part of its blueprint as seen in the class declaration.
-
-*****
-
-Ditto for methods such as IntroduceSelf():
-
-*****
-
-firstMan.IntroduceSelf();
-
-*****
-
-If you have a pointer firstWoman to an instance of class Human, you can either use the pointer operator ( -> ) to access members, as explained in the next section, or use the indirection operator (*) to reference the object following the dot operator.
-
-*****
-
-Human* firstWoman = new Human();
-
-*****
-
-(*firstWoman).IntroduceSelf();
-
-*****
-
-If an object has been instantiated on the free store using new or if you have a pointer to an object, then you use the pointer operator ( -> ) to access the member attributes and functions:
-
-*****
-
-Human* firstWoman = new Human();
-
-*****
-
-firstWoman->dateOfBirth = "1970";
-
-*****
-
-firstWoman->IntroduceSelf();
-
-*****
-
-delete firstWoman;
-
-*****
-
-Information can be classified into at least two categories: data that we don’t mind the public knowing and data that is private.
-
-*****
-
-C++ enables you to model class attributes and methods as public or private. Public class members can be used by anyone in possession of an object of the class. Private class
-
-*****
-
-members can be used only within the class (or its “friends”). C++ keywords public and private help you as the designer of a class decide what parts of a class can be invoked from outside it, for instance, from main(), and what cannot.
-
-*****
-
-While allowing you to design a class as a container that encapsulates data and methods that operate on that data, C++ empowers you to decide what information remains unreachable to the outside world (that is, unavailable outside the class) via keyword private. At the same time, you have the possibility to allow controlled access to even information declared private via methods that you have declared as public. Thus your implementation of a class can abstract member information that classes and functions outside this class don’t need to have access to.
-
-*****
-
-Abstraction is an important concept in object-oriented languages. It empowers  programmers to decide what attributes of a class need to remain known only to the class and its members with nobody outside it (with the exception of those declared as its “friends”) having access to it.
-
-*****
-
-A constructor is a special function (or method) invoked during the instantiation of aclass to construct an object. Just like functions, constructors can also be overloaded.
-
-*****
-
-A constructor is a special function that takes the name of the class and returns no value.
-
-*****
-
-So, class Human would have a constructor that is declared like this:
-class Human { public:
- Human(); // declaration of a constructor };
-
-*****
-
-This constructor can be implemented either inline within the class or externally outside the class declaration.
-
-*****
-
-An implementation (also called definition) inside the class looks like this:
-class Human { public:
- Human()  { // constructor code here  } };
-
-*****
-
-A variant enabling you to define the constructor outside the class’ declaration looks like this:
-class Human { public:
- Human(); // constructor declaration };
-// constructor implementation (definition) Human::Human() {  // constructor code here }
-
-*****
-
-:: is called the scope resolution operator. For example, Human::dateOfBirth is referring to variable dateOfBirth declared within the scope of class Human. ::dateOfBirth, on the other hand would refer to another variable dateOfBirth in a global scope.
-
-*****
-
-A constructor that is invoked without arguments is called the default constructor. Programming a default constructor is optional.
-
-*****
-
-If you don’t program any constructor, as seen in Listing 9.1, the compiler creates one for you (that constructs member attributes but does not initialize Plain Old Data types such as int to any specific non-zero value).
-
-*****
-
-Constructors can be overloaded just like functions. We can therefore write a constructor that requires Human to be instantiated with a name as a parameter, for example:
-If you don’t program any constructor, as seen in Listing 9.1, the compiler creates one for you (that constructs member attributes but does not initialize Plain Old Data types such as int to any specific non-zero value).
-class Human { public:
- Human()  { // default constructor code here  }  Human(string humansName)  { // overloaded constructor code here  } };
-
-*****
-
-You can choose to not implement the default constructor to enforce object instantiation with certain minimal parameters as
-
-*****
-
-There is no default constructor available, and given the presence of an overloaded constructor, the C++ compiler does not generate a default constructor for you.
-
-*****
-
-This models a real-world scenario quite well, don’t you think? You were named at birth; people are allowed to know your name, but nobody (except you) has the authority to change it.
-
-*****
-
-Note that a default constructor is one that can be instantiated without arguments, and not necessarily one that doesn’t take parameters. So, this constructor with two parameters, both with default values, is a default constructor:
-
-*****
-
-class Human { private:
- string name;
- int age;
-public:
- // default values for both parameters  Human(string humansName = "Adam", int humansAge = 25)  { name = humansName;
-age = humansAge;
-cout << "Overloaded constructor creates ";
-cout << name << " of age " << age;
- } };
-
-*****
-
-The reason is that class Human can still be instantiated without arguments:
-
-*****
-
-Human adam; // Human takes default name "Adam", age 25 NOTE
-
-*****
-
-Another way to initialize members is by using initialization lists.
-
-*****
-
-class Human { private:
- string name;
- int age;
-
-*****
-
-public:
- // two parameters to initialize members age and name  Human(string humansName, int humansAge) :name(humansName), age(humansAge)  { cout << "Constructed a human called " << name;
-cout << ", " << age << " years old" << endl;
- } // ... other class members };
-
-*****
-
-Thus, the initialization list is characterized by a colon (:) following the parameter  declaration contained in parentheses (…), followed by an individual member variable and the value it is initialized to. This initialization value can be a parameter such as  humansName or can even be a fixed value. Initialization lists can also be useful in  invoking base class constructors with specific arguments.
-
-*****
-
-It is possible to define a constructor as a constant expression too, using keyword constexpr. In special cases where such a construct would be useful from a performance point of view, you would use it at the constructor declaration.
-
-*****
-
-class Sample { const char* someString;
-public:
- constexpr Sample(const char* input)  :someString(input)  { // constructor code } };
-
-*****
-
-Destructor A destructor, like a constructor, is a special function, too. A constructor is invoked at object instantiation, and a destructor is automatically invoked when an object is destroyed.
-
-*****
-
-The destructor looks like a function that takes the name of the class, yet has a tilde (~) preceding it. So, class Human would have a destructor that is declared like this:
-
-*****
-
-class Human {  ~Human(); // declaration of a destructor };
-
-*****
-
-This destructor can either be implemented inline in the class or externally outside the class declaration. An implementation or definition inside the class looks like this:
-
-*****
-
-class Human { public:
- ~Human()  { // destructor code here  } };
-
-*****
-
-A variant enabling you to define the destructor outside the class’s declaration looks like this:
-
-*****
-
-class Human { public:
- ~Human(); // destructor declaration };
-// destructor definition (implementation) Human::~Human() {  // destructor code here }
-
-*****
-
-A destructor is always invoked when an object of a class is destroyed when it goes out of scope or is deleted via delete. This property makes a destructor the ideal place to reset variables and release dynamically allocated memory and other resources.
-
-*****
-
-A destructor cannot be overloaded. A class can have only one destructor. If you forget to implement a destructor, the compiler creates and invokes a dummy destructor, that is, an empty one (that does no cleanup of dynamically allocated memory).
-
-*****
-
-Classes such as MyString, shown in Listing 9.7, contain a pointer member buffer that points to dynamically allocated memory, allocated in the constructor using new and deallocated in the destructor using delete[]. When an object of this class is copied, the pointer member is copied, but not the pointed memory, resulting in two objects pointing to the same dynamically allocated buffer in memory. When an object is destructed, delete[] deallocates the memory, thereby invalidating the pointer copy held by the other object. Such copies are shallow and are a threat to the stability of the program
-
-*****
-
-The copy constructor is an overloaded constructor that you supply. It is invoked by the compiler every time an object of the class is copied.
-
-*****
-
-The declaration syntax of a copy constructor for class MyString is the following:
-class MyString {  MyString(const MyString& copySource); // copy constructor };
-MyString::MyString(const MyString& copySource) {  // Copy constructor implementation code }
-
-*****
-
-Thus, a copy constructor takes an object of the same class by reference as a parameter. 
-This parameter is an alias of the source object and is the handle you have in writing your custom copy code. You would use the copy constructor to ensure a deep copy of all buf-fers in the source
-
-*****
-
-Using const in the copy constructor declaration ensures that the copy constructor does not modify the source object being referred to.
-
-*****
-
-Additionally, the parameter in the copy constructor is passed by reference as a necessity. If this weren’t a reference, the copy constructor would itself invoke a copy, thus invoking itself again and so on till the system runs out of memory.
-
-*****
-
-always program a copy constructor and copy assignment operator when your class contains raw pointer members (char* and the like).
-
-*****
-
-evaluate avoiding implicit conversions by using keyword explicit in declaring constructors.
-
-*****
-
-There are cases where objects are subjected to copy steps automatically, due to the nature of the language and its needs.
-
-*****
-
-Consider the following:
-class MyString {  // pick implementation from Listing 9.9 };
-MyString Copy(MyString& source) // function {  MyString copyForReturn(source.GetString()); // create copy  return copyForReturn; // return by value invokes copy constructor }
-
-*****
-
-int main() {  MyString sayHello ("Hello World of C++");
- MyString sayHelloAgain(Copy(sayHello)); // invokes 2x copy constructor  return 0;
-}
-
-*****
-
-As the comment indicates, in the instantiation of sayHelloAgain, the copy constructor was invoked twice, thus a deep copy was performed twice because of our call to function Copy(sayHello) that returns a MyString by value. However, this value returned is very temporary and is not available outside this expression. So, the copy constructor invoked in good faith by the C++ compiler is a burden on performance. This impact becomes sig-nificant if our class were to contain objects of great size.
-
-*****
-
-To avoid this performance bottleneck, versions of C++ starting with C++11 feature a move constructor in addition to a copy constructor.
-
-*****
-
-The syntax of a move constructor is // move constructor MyString(MyString&& moveSource) {  if(moveSource.buffer != NULL)  { buffer = moveSource.buffer; // take ownership i.e. 'move' moveSource.buffer = NULL; // set the move source to NULL  } }
-
-*****
-
-When a move constructor is programmed, the compiler automatically opts for the same for “moving” the temporary resource and hence avoiding a deep-copy step. With the move constructor implemented, the comment should be appropriately changed to the fol-lowing:
-MyString sayHelloAgain(Copy(sayHello)); // invokes 1x copy, 1x move constructors
-
-*****
-
-The move constructor is usually implemented with the move assignment operator, which is discussed in greater detail in Lesson 12.
-
-*****
-
-Beyond modeling a certain constitution, you might be programming an operating system and need to model one local area network, one processor, and so on. You need to ensure that certain resources cannot be copied or duplicated. If you don’t declare a copy constructor, the C++ compiler inserts a default public copy constructor for you. This ruins your design and threatens your implementa-tion.
-
-*****
-
-You would ensure that your class cannot be copied by declaring a private copy con-structor.
-
-*****
-
-Thus, the solution is the following:
-class President { private:
- President(const President&); // private copy constructor  President& operator= (const President&); // private copy assignment operator  // … other attributes };
-
-*****
-
-There is no need for implementation of the private copy constructor or assignment  operator. Just declaring them as private is adequate and sufficient toward fulfilling your goal of ensuring non-copyable objects of class President.
-
-*****
-
-Singleton
-
-*****
-
-class President discussed earlier is good, but it has a shortcoming: It cannot help creation of multiple presidents via instantiation of multiple objects:
-President One, Two, Three;
-
-*****
-
-Individually they are non-copyable thanks to the private copy constructors, but what you ideally need is a class President that has one, and only one, real-world  manifestation—that is, there is only one object and creation of additional ones is  prohibited.
-
-*****
-
-When the keyword static is used on a class’s data member, it ensures that the member is shared across all instances.
-
-*****
-
-When static is used on a local variable declared within the scope of a function, it ensures that the variable retains its value between function calls.
-
-*****
-
-When static is used on a member function—a method—the method is shared across all instances of the class.
-
-*****
-
-Keyword static is an essential ingredient in creating a singleton class as demonstrated by Listing 9.10.
-
-*****
-
-Use the singleton pattern only where absolutely necessary, keeping future growth of the application and its features in per-spective. Note that the very feature that it restricts creation of multiple instances can become an architectural bottleneck when a use case comes up that needs multiple instances of the class.
-
-*****
-
-For example, if our project were to change from modeling a nation to modeling the United Nations, which is currently represented by 193 member nations, each with its own president, clearly we would have an architectural problem given a singleton class President that would permit the existence of only one instance.
-
-*****
-
-Prohibits Instantiation on the Stack
-
-*****
-
-Space on the stack is often limited. If you are writing a database that may contain tera-bytes of data in its internal structures, you might want to ensure that a client of this class cannot instantiate it on the stack; instead it is forced to create instances only on the free store. The key to ensuring this is declaring the destructor private:
-
-*****
-
-class MonsterDB { private:
- ~MonsterDB(); // private destructor  //... members that consume a huge amount of data };
-
-*****
-
-Declaring a private destructor ensures that one is not allowed to create an instance like this:
-int main() {  MonsterDB myDatabase; // compile error  // … more code  return 0;
-}
-
-*****
-
-This instance, if successfully constructed, would be on the stack. All objects on the stack get popped when the stack is unwound and therefore the compiler would need to compile and invoke the destructor ~MonsterDB() at the end of main(). However, this destructor is private and therefore inaccessible, resulting in a compile failure.
-
-*****
-
-A private destructor would not stop you from instantiating on the heap:
-int main() {  MonsterDB* myDatabase = new MonsterDB(); // no error  // … more code  return 0;
-}
-
-*****
-
-If you see a memory leak there, you are not mistaken. As the destructor is not accessible from main, you cannot do a delete, either. What class MonsterDB needs to support is a public static member function that would destroy the instance (a class member would have access to the private destructor). See Listing 9.11.
-
-*****
-
-Using Constructors to Convert Types
-
-*****
-
-constructors can be overloaded, that is, they may take one or more parameters. This feature is often used to convert one type to another. 
-Let’s consider a class Human that features an overloaded constructor that accepts an integer.
-
-*****
-
-class Human {  int age;
-public:
- Human(int humansAge): age(humansAge) {} };
-// Function that takes a Human as a parameter void DoSomething(Human person) {  cout << "Human sent did something" << endl;
- return;
-}
-
-*****
-
-This constructor allows a conversion:
- Human kid(10); // convert integer in to a Human  DoSomething(kid);
-
-*****
-
-Such converting constructors allow implicit conversions:
-
-*****
-
-Human anotherKid = 11; // int converted to Human DoSomething(10); // 10 converted to Human!
-
-*****
-
-We declared DoSomething(Human person) as a function that accepts a parameter of type Human and does not accept an int!
-
-*****
-
-So, why did that line work?
-
-*****
-
-The compiler knows that class Human supports a constructor that accepts an integer and per-formed an implicit conversion for you—it created an object of type Human using the integer you supplied and sent it as an argu-ment to the function.
-
-*****
-
-To avoid implicit conversions, use keyword explicit at the time of declaring the constructor:
-class Human {  int age;
-public:
- explicit Human(int humansAge): age(humansAge) {} };
-
-*****
-
-Using explicit is not a prerequisite but in many cases a good programming practice. The following sample in Listing 9.12 dem-onstrates a version of class Human that does not permit implicit conversions.
-
-*****
-
-The problem of implicit conversions and avoiding them using keyword explicit applies to operators too. Remember to note the usage of explicit when programming conversion operators introduced to you in Lesson 12.
-
-*****
-
-this Pointer
-
-*****
-
-An important concept in C++, this is a reserved keyword applicable within the scope of a class and contains the address of the object. In other words, the value of this is &object.
-
-*****
-
-Note that the this pointer is not sent to class methods declared as static as static functions are not connected to an instance of the class. Instead they are shared by all instances.
-
-*****
-
-To use an instance variable in a static function, you would explic-itly declare a parameter and send this pointer as an argument.
-
-*****
-
-Operator sizeof(), covered in Lesson 3, “Using Variables, Declaring Constants,” is used to determine the memory requirement
+<p>You declare a class using the keyword <code>class</code> followed by the name of the class, followed by a statement block <code>{…}</code> that encloses a set of <b>member attributes</b> and <b>member functions</b> within curly braces, and finally terminated by a semicolon <code>;</code>.</p>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes/encapsulation">Next Page</a></li>
@@ -799,7 +287,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'></span></li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'></span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'></span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 9</span></li>
 </ul>
 <hr />
 <h3>
@@ -820,84 +308,60 @@ Table of Content
 	2. Abstraction
 	
 </a>
+<a href="/cpp/object-orientation/classes/structure" class="list-group-item">
+	3. Structure
+	
+</a>
 <a href="/cpp/object-orientation/classes/constructor" class="list-group-item">
-	3. Constructor
+	4. Constructor
 	
 </a>
 <a href="/cpp/object-orientation/classes/constructor-initialization-list" class="list-group-item">
-	4. Constructor Initialization List
-	
-</a>
-<a href="/cpp/object-orientation/classes/constant-expression-classes" class="list-group-item">
-	5. Constant Expression Classes
-	
-</a>
-<a href="/cpp/object-orientation/classes/destructor" class="list-group-item">
-	6. Destructor
+	5. Constructor Initialization List
 	
 </a>
 <a href="/cpp/object-orientation/classes/copy-constructor" class="list-group-item">
-	7. Copy Constructor
-	
-</a>
-<a href="/cpp/object-orientation/classes/implicit-type-conversion" class="list-group-item">
-	8. Implicit Type Conversion
+	6. Copy Constructor
 	
 </a>
 <a href="/cpp/object-orientation/classes/move-constructor" class="list-group-item">
-	9. Move Constructor
+	7. Move Constructor
 	
 </a>
-<a href="/cpp/object-orientation/classes/non-copyable-objects" class="list-group-item">
-	10. Non-Copyable Objects
+<a href="/cpp/object-orientation/classes/destructor" class="list-group-item">
+	8. Destructor
 	
 </a>
-<a href="/cpp/object-orientation/classes/singleton" class="list-group-item">
-	11. Singleton
-	
-</a>
-<a href="/cpp/object-orientation/classes/stack-prohibition" class="list-group-item">
-	12. Stack Prohibition
+<a href="/cpp/object-orientation/classes/implicit-type-conversion" class="list-group-item">
+	9. Implicit Type Conversion
 	
 </a>
 <a href="/cpp/object-orientation/classes/this-pointer" class="list-group-item">
-	13. <i>this</i> Pointer
+	10. <i>this</i> Pointer
 	
 </a>
 <a href="/cpp/object-orientation/classes/sizeof-a-class" class="list-group-item">
-	14. Size of A Class
-	
-</a>
-<a href="/cpp/object-orientation/classes/structure" class="list-group-item">
-	15. Structure
+	11. Size of A Class
 	
 </a>
 <a href="/cpp/object-orientation/classes/union" class="list-group-item">
-	16. Union
+	12. Union
 	
 </a>
 <a href="/cpp/object-orientation/classes/variant" class="list-group-item">
-	17. std::variant
-	
-</a>
-<a href="/cpp/object-orientation/classes/friends" class="list-group-item">
-	18. Friends
+	13. std::variant
 	
 </a>
 <a href="/cpp/object-orientation/classes/initialization-aggregation" class="list-group-item">
-	19. Initialization Aggregation
+	14. Initialization Aggregation
 	
 </a>
 <a href="/cpp/object-orientation/classes/default-constructible" class="list-group-item">
-	20. Default Constructible
+	15. Default Constructible
 	
 </a>
 <a href="/cpp/object-orientation/classes/delete-expression" class="list-group-item">
-	21. Delete Expression
-	
-</a>
-<a href="/cpp/object-orientation/classes/initializer-list-parameter" class="list-group-item">
-	22. Initializer List Parameter
+	16. Delete Expression
 	
 </a>
 </div>
