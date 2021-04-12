@@ -270,20 +270,61 @@ array
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Initialier lists can also hold multiple values and assign them onto
-an array or similar containers which we will discuss soon.
+<p><b>Arrays</b> must be initialized the moment they are created.</p>
 
-**Note:** when arrays are declared and left uninitialized, they hold garbage data as their values.
-It is best practice to always initialize an array with zero. In case of initializing an array with
-an initializer list, all of its elements will be assigned to zero.
+<pre class="language-cpp">
+	<code>
+		int myArray[3] = {0};
+	</code>
+</pre>
+
+<p>You can even drop the <code>0</code> as follows:</p>
+
+<pre class="language-cpp">
+	<code>
+		int myArray[3] = {};
+	</code>
+</pre>
+
+<p>An array can also be initialized with an <b>initializer list</b>, in which case the compiler can deduce the size of the array automatically. For example:</p> 
+
+<pre class="language-cpp">
+	<code>
+		int myArray[] = {1, 2, 3, 4}; // The compiler creates an array of 4 elements
+	</code>
+</pre>
+
+<p><b>Initialier lists</b> can also hold multiple values and assign them onto an array or similar containers which we will discuss soon.</p>
+
+<p><b>Note:</b> when arrays are declared and left uninitialized, they hold garbage data as their values. It is best practice to always initialize an array with zero. In case of initializing an array with an initializer list, all of its elements will be assigned to zero.</p>
+
+<p>If you do specify the size of the array, and the <b>initializer list</b> has less elements than the given size, the remaining elements are set to <code>0</code>.</p>
+
+<p>To get the size of a stack-based C-style array, you can use the C++17 <code>std::size()</code> function (requires <code>&lt;array&gt;</code>). For example:</p> 
+
+<pre class="language-cpp">
+	<code>
+		unsigned int arraySize = std::size(myArray);
+	</code>
+</pre>
+
+<p>If your compiler is not yet C++17 compliant, the old trick to get the size of a stack-based C-style array is to use the <code>sizeof()</code> operator. The <code>sizeof()</code> operator returns the size of its argument in bytes. To get the number of elements in a stack-based array, you divide the size in bytes of the array by the size in bytes of the first element. For example:</p> 
+
+<pre class="language-cpp">
+	<code>
+			unsigned int arraySize = sizeof(myArray) / sizeof(myArray[0]);
+	</code>
+</pre>
 <hr />
   <cite>array.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
+    #include &lt;array&gt;
+    
     int main()
     {
     	// only constant literals can be used to define array length
-        const unsigned int length = 2;
+        const unsigned int length = 3;
     
     	// never leave an array uninitialized
         int array[length] = {0};
@@ -293,17 +334,19 @@ an initializer list, all of its elements will be assigned to zero.
         array[1] = 20;
         array[2] = 30;
     
+    	// get the size of an array using new c++17 function
+    	int array_size = std::size(array);
+    
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
 <code>
-g++ -Wall -g -o ./array.o -c ./array.cxx
+g++ -std=c++17 -Wall -Wno-unused-variable -g -o ./array.o -c ./array.cxx
 g++ -g -o ./array.bin ./array.o
 ./array.bin
-
 </code>
 </pre>
 <hr />
