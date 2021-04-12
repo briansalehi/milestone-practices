@@ -270,25 +270,20 @@ Creating Threads
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-To create threads, you must first include **thread** and **mutex** header files.
+<p>To create threads, you must first include <code>&lt;thread&gt;</code> and <code>&lt;mutex&gt;</code> header files.</p>
 
-This program basically does nothing but printing a string into the output stream.
+<p>This program basically does nothing but printing a string nto the output stream.</p>
 
-To write data in stdout stream, we must use *std::cout* which is not thread-safe, so we need to
-write a mutex to lock the thread, so that we are sure no other threads are writing to stdout
-in the same time.  
-To do that, we need to use a global variable named *cout_mtx* or any name of your interest.  
-Then we use it to lock each thread before writing data to the output stream.
+<p>To write data in <code>stdout</code> stream, we must use <code>std::cout</code> which is not <b>thread-safe</b>, so we need to write a <b>mutex</b> to lock the <b>thread</b>, so that we are sure no other threads are writing to <code>stdout</code> in the same time. To do that, we need to use a global variable named <code>cout_mtx</code> or any name of your interest. Then we use it to lock each thread before writing data to the output stream.</p>
 
-To create a thread, we define a thread object and pass a pointer to function as its first parameter.  
-We can also pass parameters to the worker by passing them in thread parameters as you will see in next practice.
+<p>To create a <b>thread</b>, we define a <code>thread</code> object and pass a pointer to function as its first parameter. We can also pass parameters to the worker by passing them in <code>thread</code> parameters as you will see in next practice.</p>
 
-After creating threads, we should use join method to make threads wait for each other after they complete their operations.
+<p>After creating threads, we should use join method to make threads wait for each other after they complete their operations.</p>
 
-To compile your code, you must use **-lpthread** linker option to make thread functions to work.
+<p>To compile your code, you must use <code>-lpthread</code> linker option to make thread functions to work.</p>
 <hr />
   <cite>threads.cxx</cite>
-<pre class="line-numbers" >
+<pre class="line-numbers" data-line='2,3,6,9,11,16-19,21-24'>
 <code class="language-cpp">
     #include &lt;iostream&gt;
     #include &lt;thread&gt;
@@ -323,7 +318,7 @@ To compile your code, you must use **-lpthread** linker option to make thread fu
 <pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
 <code>
 g++ -Wall -g -o ./threads.o -c ./threads.cxx
-g++ -g -o ./threads.bin ./threads.o
+g++ -lpthread -g -o ./threads.bin ./threads.o
 ./threads.bin
 starting thread
 starting thread
@@ -331,6 +326,19 @@ starting thread
 starting thread
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Mastering C++ Multithreading: Write robust, concurrent, and parallel applications - Maya Posch: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/multithreading/threads">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.6.1.2.html">Next Page</a></li>

@@ -1,4 +1,4 @@
-<p>Your application code always runs in a thread. A thread is a synchronous execution entity where statements in a thread run one after another. The code inside <code>main()</code> is considered to execute the main thread of the application. In this main thread, you can create new threads that can run in parallel. Such applications that are comprised of one or more threads running in parallel in addition to the main thread are called <i>multithreaded applications</i>.</p>
+<p>Your application code always runs in a <b>thread</b>. A <b>thread</b> is a synchronous execution entity where statements in a thread run one after another. The code inside <code>main()</code> is considered to execute the main thread of the application. In this main thread, you can create new threads that can run in parallel. Such applications that are comprised of one or more threads running in parallel in addition to the main thread are called <i>multithreaded applications</i>.</p>
 
 <p>The OS dictates how threads are to be created, and you can create threads directly by calling those APIs supplied by the OS.</p>
 

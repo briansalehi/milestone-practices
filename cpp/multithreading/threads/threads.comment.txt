@@ -1,16 +1,11 @@
-To create threads, you must first include **thread** and **mutex** header files.
+<p>To create threads, you must first include <code>&lt;thread&gt;</code> and <code>&lt;mutex&gt;</code> header files.</p>
 
-This program basically does nothing but printing a string into the output stream.
+<p>This program basically does nothing but printing a string nto the output stream.</p>
 
-To write data in stdout stream, we must use *std::cout* which is not thread-safe, so we need to
-write a mutex to lock the thread, so that we are sure no other threads are writing to stdout
-in the same time.  
-To do that, we need to use a global variable named *cout_mtx* or any name of your interest.  
-Then we use it to lock each thread before writing data to the output stream.
+<p>To write data in <code>stdout</code> stream, we must use <code>std::cout</code> which is not <b>thread-safe</b>, so we need to write a <b>mutex</b> to lock the <b>thread</b>, so that we are sure no other threads are writing to <code>stdout</code> in the same time. To do that, we need to use a global variable named <code>cout_mtx</code> or any name of your interest. Then we use it to lock each thread before writing data to the output stream.</p>
 
-To create a thread, we define a thread object and pass a pointer to function as its first parameter.  
-We can also pass parameters to the worker by passing them in thread parameters as you will see in next practice.
+<p>To create a <b>thread</b>, we define a <code>thread</code> object and pass a pointer to function as its first parameter. We can also pass parameters to the worker by passing them in <code>thread</code> parameters as you will see in next practice.</p>
 
-After creating threads, we should use join method to make threads wait for each other after they complete their operations.
+<p>After creating threads, we should use join method to make threads wait for each other after they complete their operations.</p>
 
-To compile your code, you must use **-lpthread** linker option to make thread functions to work.
+<p>To compile your code, you must use <code>-lpthread</code> linker option to make thread functions to work.</p>

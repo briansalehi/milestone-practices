@@ -1,4 +1,3 @@
-We used **chrono** header file to access to time functions.  
-There's only one extra line in this program which needs to be explained.  
-**std::this_thread::sleep_for()** function gets a time object of type **std::chrono::seconds()** which specifies acurate 1 second duration to the system.  
-This way we made all threads to sleep for 1 second. We need timing for future use.
+<p>Of note here is the use of the <code>thread_local</code> keyword. What this means is that even though it is defined as a static variable, its scope will be limited to the thread using it. Every thread will thus create its own generator instance, which is important when using the random number API in the STL.</p>
+
+<p>We used <code>&lt;chrono&gt;</code> header file to access to time functions. There's only one extra line in this program which needs to be explained. <code>std::this_thread::sleep_for()</code> function gets a time object of type <code>std::chrono::seconds()</code> which specifies acurate 1 second duration to the system. This way we made all threads to sleep for 1 second. We need timing for future use.</p>
