@@ -3,10 +3,7 @@
 
 int main()
 {
-    std::array<int, 5> numbers = {1,2,3,4,5};
-    for (int number : numbers) {
-        std::cout << number << std::endl;
-    }
-
+	std::array<int, 3> arr = {9, 8, 7};
+	std::cout << "Array size = " << arr.size() << std::endl;
     return 0;
 }

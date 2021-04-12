@@ -271,8 +271,11 @@ array
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-There is a substitution for C array in C++ 11 and that is **array<type, length>** template class in **array** header file.  
-C++ array class has consistency and is more secure over C array and should be used when C arrays are needed.
+<p>There is a substitution for C-style arrays in C++11 and that is <code>array&lt;type, length&gt;</code> template class in <code>&lt;array&gt;</code> header file. <code>std::array</code> class has consistency and is more secure over C-style array and should be used when arrays are needed.</p>
+
+<p>There are a number of advantages to using <code>std::arrays</code> instead of C-style arrays. They always know their own size, are not automatically cast to a pointer to avoid certain types of bugs, and have iterators to easily loop over the elements.</p>
+
+<p>The following example demonstrates how to use the array container. The use of angle brackets after array, as in <code>array&lt;int, 3&gt;</code>, will become clear during the discussion of templates.</p>
 <hr />
   <cite>array.cxx</cite>
 <pre class="line-numbers" >
@@ -282,26 +285,19 @@ C++ array class has consistency and is more secure over C array and should be us
     
     int main()
     {
-        std::array&lt;int, 5&gt; numbers = {1,2,3,4,5};
-        for (int number : numbers) {
-            std::cout &lt;&lt; number &lt;&lt; std::endl;
-        }
-    
+    	std::array&lt;int, 3&gt; arr = {9, 8, 7};
+    	std::cout &lt;&lt; &quot;Array size = &quot; &lt;&lt; arr.size() &lt;&lt; std::endl;
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-9'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
 g++ -Wall -g -o ./array.o -c ./array.cxx
 g++ -g -o ./array.bin ./array.o
 ./array.bin
-1
-2
-3
-4
-5
+Array size = 3
 </code>
 </pre>
 <ul class="pager">

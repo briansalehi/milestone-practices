@@ -1,1 +1,5 @@
 <p><b>Structured bindings</b> were introduced in C++17. The variable being assigned by a structure must always be of type <code>auto</code>.</p>
+
+<p>Note that you have to use the <code>auto</code> keyword for structured bindings. You cannot, for example, specify <code>int</code> instead of <code>auto</code>.</p>
+
+<p>Structured bindings also work with structures if all non-static members are <code>public</code>.</p>
