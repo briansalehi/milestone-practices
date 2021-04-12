@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>switch case</title>
+<title>Switch Case Statement</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.5.0.html">Program Flow Control</a></li>
-<li class='breadcrumb-item active'>switch case</li>
+<li class='breadcrumb-item active'>Switch Case Statement</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="switch-case" class="anchor" aria-hidden="true" href="#switch-case">
-switch case
+<a id="Switch-Case-Statement" class="anchor" aria-hidden="true" href="#Switch-Case-Statement">
+Switch Case Statement
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,41 +270,54 @@ switch case
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-The objective of switch-case is to enable you to check a particular expression
-against a host of possible constants and possibly perform a different action
-for each of those different values. The new C++ keywords you would often find
-in such a construct are <b>switch</b>, <b>case</b>, <b>default</b>, and
-<b>break</b>.
+<p>The objective of <code>switch</code>-<code>case</code> is to enable you to check a particular expression against a host of possible constants and possibly perform a different action for each of those different values. The new C++ keywords you would often find in such a construct are <code>switch</code>, <code>case</code>, <code>default</code>, and <code>break</code>.</p>
+
+<p>Just as for <code>if</code> statements, C++17 adds support for initializers to <code>switch</code> statements.</p>
+
+<pre class="language-cpp">
+	<code>
+		switch (&lt;initializer&gt; ; &lt;expression&gt;) { &lt;body&gt; }
+	</code>
+</pre>
+
+<p><b>Fallthrough</b> can be a source of bugs, for example if you accidentally forget a <code>break</code> statement. Because of this, compilers might give a warning if a fallthrough is detected in a <code>switch</code> statement, unless the <code>case</code> is empty as in the following example. Starting with C++17, you can tell the compiler that a fallthrough is intentional using the <code>[[fallthrough]]</code> attribute.</p>
 <hr />
   <cite>switch_case.cxx</cite>
-<pre class="line-numbers" >
+<pre class="line-numbers" data-line='20,25'>
 <code class="language-cpp">
-    #include &lt;iostream&gt;
+    enum class TrafficLight
+    {
+    	red,
+    	yellow,
+    	green,
+    	blink
+    };
+    
+    enum class TrafficState
+    {
+    	stop,
+    	caution,
+    	go
+    };
     
     int main()
     {
-        enum traffic_light {
-            red = 1,
-            yellow,
-            green
-        };
+    	TrafficState state;
     
-        int input;
-        std::cout &lt;&lt; &quot;Enter a number between 1-3 : &quot;;
-        std::cin &gt;&gt; input;
-    
-        switch (input) {
-            case red:
-                std::cout &lt;&lt; &quot;Light is red&quot; &lt;&lt; std::endl;
+        switch (TrafficLight light = TrafficLight::blink ; light) {
+    		case TrafficLight::red:
+    			state = TrafficState::stop;
                 break;
-            case yellow:
-                std::cout &lt;&lt; &quot;Light is yellow&quot; &lt;&lt; std::endl;
+    		case TrafficLight::blink:
+    			[[fallthrough]]
+    		case TrafficLight::yellow:
+    			state = TrafficState::caution;
                 break;
-            case green:
-                std::cout &lt;&lt; &quot;Light is green&quot; &lt;&lt; std::endl;
+    		case TrafficLight::green:
+    			state = TrafficState::go;
                 break;
             default:
-                std::cout &lt;&lt; &quot;your input is not in valid range!&quot; &lt;&lt; std::endl;
+    			state = TrafficState::caution;
         }
     
         return 0;
@@ -312,27 +325,13 @@ in such a construct are <b>switch</b>, <b>case</b>, <b>default</b>, and
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
 <code>
-g++ -Wall -g -o ./switch_case.o -c ./switch_case.cxx
+g++ -std=c++17 -Wall -g -o ./switch_case.o -c ./switch_case.cxx
 g++ -g -o ./switch_case.bin ./switch_case.o
 ./switch_case.bin
-Enter a number between 1-3 : light is green
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'></span></li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.5.9.html">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/program-flow/ternary">Next Page</a></li>

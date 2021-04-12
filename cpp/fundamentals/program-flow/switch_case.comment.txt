@@ -1,5 +1,11 @@
-The objective of switch-case is to enable you to check a particular expression
-against a host of possible constants and possibly perform a different action
-for each of those different values. The new C++ keywords you would often find
-in such a construct are <b>switch</b>, <b>case</b>, <b>default</b>, and
-<b>break</b>.
+<p>The objective of <code>switch</code>-<code>case</code> is to enable you to check a particular expression against a host of possible constants and possibly perform a different action for each of those different values. The new C++ keywords you would often find in such a construct are <code>switch</code>, <code>case</code>, <code>default</code>, and <code>break</code>.</p>
+
+<p>Just as for <code>if</code> statements, C++17 adds support for initializers to <code>switch</code> statements.</p>
+
+<pre class="language-cpp">
+	<code>
+		switch (&lt;initializer&gt; ; &lt;expression&gt;) { &lt;body&gt; }
+	</code>
+</pre>
+
+<p><b>Fallthrough</b> can be a source of bugs, for example if you accidentally forget a <code>break</code> statement. Because of this, compilers might give a warning if a fallthrough is detected in a <code>switch</code> statement, unless the <code>case</code> is empty as in the following example. Starting with C++17, you can tell the compiler that a fallthrough is intentional using the <code>[[fallthrough]]</code> attribute.</p>

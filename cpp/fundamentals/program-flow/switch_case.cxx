@@ -1,29 +1,36 @@
-#include <iostream>
+enum class TrafficLight
+{
+	red,
+	yellow,
+	green,
+	blink
+};
+
+enum class TrafficState
+{
+	stop,
+	caution,
+	go
+};
 
 int main()
 {
-    enum traffic_light {
-        red = 1,
-        yellow,
-        green
-    };
+	TrafficState state;
 
-    int input;
-    std::cout << "Enter a number between 1-3 : ";
-    std::cin >> input;
-
-    switch (input) {
-        case red:
-            std::cout << "Light is red" << std::endl;
+    switch (TrafficLight light = TrafficLight::blink ; light) {
+		case TrafficLight::red:
+			state = TrafficState::stop;
             break;
-        case yellow:
-            std::cout << "Light is yellow" << std::endl;
+		case TrafficLight::blink:
+			[[fallthrough]]
+		case TrafficLight::yellow:
+			state = TrafficState::caution;
             break;
-        case green:
-            std::cout << "Light is green" << std::endl;
+		case TrafficLight::green:
+			state = TrafficState::go;
             break;
         default:
-            std::cout << "your input is not in valid range!" << std::endl;
+			state = TrafficState::caution;
     }
 
     return 0;
