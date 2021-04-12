@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>*if* statement</title>
+<title>If Statement</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -249,7 +249,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.1.0.html">Fundamentals</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.1.5.0.html">Program Flow Control</a></li>
-<li class='breadcrumb-item active'>*if* statement</li>
+<li class='breadcrumb-item active'>If Statement</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -261,8 +261,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="*if*-statement" class="anchor" aria-hidden="true" href="#*if*-statement">
-*if* statement
+<a id="If-Statement" class="anchor" aria-hidden="true" href="#If-Statement">
+If Statement
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -270,67 +270,47 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-The main and most used statement for controlling the flow of  
-of a program is **if** statement.
+<p>The main and most used statement for controlling the flow of of a program is <code>if</code> statement.</p>
 
-**if** has its scope and variables declared in this scope are  
-immediately destroyed when program reaches to the end of  
-this scope.  
+<p><code>if</code> has its scope and variables declared in this scope are immediately destroyed when program reaches to the end of this scope.</p>  
 
-Don't forget to explicitly specify this scope by curly braces,  
-{ }.  
-Though, **if** can be used without scope specifiers, it will  
-only read the first line after it. But expect your program to  
-misbehave in future when you forget to add scope specifiers  
-after you add an extra line and expecting **if** to read.
+<p>Don't forget to explicitly specify this scope by curly braces <code>{ }</code>. Though, <code>if</code> can be used without scope specifiers, it will only read the first line after it. But expect your program to misbehave in future when you forget to add scope specifiers after you add an extra line and expecting <code>if</code> to read.</p>
+
+<p>C++17 allows you to include an initializer inside an <code>if</code> statement.</p>
+
+<pre class="language-cpp">
+	<code>
+		if (&lt;initializer&gt; ; &lt;conditional_expression&gt;) { &lt;body&gt; }
+	</code>
+</pre>
 <hr />
-  <cite>if.cxx</cite>
+  <cite>if-statement.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
     #include &lt;iostream&gt;
     
     int main()
     {
-        int num1, num2;
-    
-        std::cout &lt;&lt; &quot;enter two numbers: &quot; &lt;&lt; std::endl;
-        std::cin &gt;&gt; num1 &gt;&gt; num2;
-    
-        // if...else statement
-        if (num1 &lt; num2)
-            std::cout &lt;&lt; num1 &lt;&lt; &quot; is lower than &quot; &lt;&lt; num2 &lt;&lt; std::endl;
-        else if (num2 &lt; num1)
-            std::cout &lt;&lt; num2 &lt;&lt; &quot; is lower than &quot; &lt;&lt; num1 &lt;&lt; std::endl;
-        else
-            std::cout &lt;&lt; num1 &lt;&lt; &quot; and &quot; &lt;&lt; num2 &lt;&lt; &quot; are equal!&quot; &lt;&lt; std::endl;
+    	// since stdc++17
+        if (bool condition = true ; condition) {
+    		std::cout &lt;&lt; &quot;Condition evaluated true&quot; &lt;&lt; std::endl;
+    	} else {
+    		std::cout &lt;&lt; &quot;Condition evaluated false&quot; &lt;&lt; std::endl;
+    	}
     
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-g++ -Wall -g -o ./if.o -c ./if.cxx
-g++ -g -o ./if.bin ./if.o
-./if.bin
-enter two numbers: 
-2 is lower than 4
+g++ -std=c++17 -Wall -g -o ./if-statement.o -c ./if-statement.cxx
+g++ -g -o ./if-statement.bin ./if-statement.o
+./if-statement.bin
+Condition evaluated true
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'></span></li>
-</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.1.5.5.html">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/program-flow/if-constexpr">Next Page</a></li>

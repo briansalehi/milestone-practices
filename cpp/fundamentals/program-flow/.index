@@ -4,7 +4,7 @@ break.cxx
 do_while.cxx
 for.cxx
 goto.cxx
-if.cxx
+if-statement.cxx
 if-constexpr.cxx
 nested.cxx
 range_based_for.cxx

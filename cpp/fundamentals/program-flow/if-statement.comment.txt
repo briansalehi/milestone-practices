@@ -1,0 +1,13 @@
+<p>The main and most used statement for controlling the flow of of a program is <code>if</code> statement.</p>
+
+<p><code>if</code> has its scope and variables declared in this scope are immediately destroyed when program reaches to the end of this scope.</p>  
+
+<p>Don't forget to explicitly specify this scope by curly braces <code>{ }</code>. Though, <code>if</code> can be used without scope specifiers, it will only read the first line after it. But expect your program to misbehave in future when you forget to add scope specifiers after you add an extra line and expecting <code>if</code> to read.</p>
+
+<p>C++17 allows you to include an initializer inside an <code>if</code> statement.</p>
+
+<pre class="language-cpp">
+	<code>
+		if (&lt;initializer&gt; ; &lt;conditional_expression&gt;) { &lt;body&gt; }
+	</code>
+</pre>

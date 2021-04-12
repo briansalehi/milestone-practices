@@ -1,2 +1,0 @@
-enter two numbers: 
-2 is lower than 4
