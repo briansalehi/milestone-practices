@@ -1,0 +1,6 @@
+<p>Further details are available at:</p>
+
+<ul>
+	<li><b>Manual Pages:</b> <code>man git</code></li>
+	<li><b>Official Git Documentation:</b> <a href="https://git-scm.com/docs">git-scm.com/docs</a></li>
+</ul>
