@@ -308,7 +308,7 @@ Also notice how we used **std::this_thread::get_id()** function in *worker* func
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
 g++ -Wall -g -o ./move-thread.o -c ./move-thread.cxx
-g++ -g -o ./move-thread.bin ./move-thread.o
+g++ -lpthread -g -o ./move-thread.bin ./move-thread.o
 ./move-thread.bin
 running thread 140024860063296
 </code>

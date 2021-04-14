@@ -304,7 +304,7 @@ It is similar to **std::function**, except that it transfers its results to a **
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
 g++ -Wall -g -o ./packaged-task.o -c ./packaged-task.cxx
-g++ -g -o ./packaged-task.bin ./packaged-task.o
+g++ -lpthread -g -o ./packaged-task.bin ./packaged-task.o
 ./packaged-task.bin
 thread suspended for 100 milliseconds
 </code>

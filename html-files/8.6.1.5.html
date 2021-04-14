@@ -313,7 +313,7 @@ We can take advantage of **std::swap()** function in standard library and swap t
 <pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
 <code>
 g++ -Wall -g -o ./swap.o -c ./swap.cxx
-g++ -g -o ./swap.bin ./swap.o
+g++ -lpthread -g -o ./swap.bin ./swap.o
 ./swap.bin
 thread 1: 140715511952960
 thread 2: 140715503560256

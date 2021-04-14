@@ -304,7 +304,7 @@ With the lock guard, however, we do not have to worry about such details, which 
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./lock-guard.o -c ./lock-guard.cxx
-g++ -g -o ./lock-guard.bin ./lock-guard.o
+g++ -lpthread -g -o ./lock-guard.bin ./lock-guard.o
 ./lock-guard.bin
 thread id: 140171873568320
 thread id: 140171865175616

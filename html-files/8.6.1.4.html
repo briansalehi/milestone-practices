@@ -313,7 +313,7 @@ Any returned value from workers to thread constructors are ignored. unless we us
 <pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
 <code>
 g++ -Wall -g -o ./parameters.o -c ./parameters.cxx
-g++ -g -o ./parameters.bin ./parameters.o
+g++ -lpthread -g -o ./parameters.bin ./parameters.o
 ./parameters.bin
 starting thread 1
 starting thread 4

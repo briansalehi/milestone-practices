@@ -1,1 +1,2 @@
+#Practical Git: Confident Git Through Practice - Johan Abildskov
 Pro Git, 2nd Edition - Bem Straub, Scott Chacon:: chapter 8

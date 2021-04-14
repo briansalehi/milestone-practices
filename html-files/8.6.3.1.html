@@ -301,7 +301,7 @@ Once the future finishes, it obtains the resulting value and stores it in a vari
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./future-async.o -c ./future-async.cxx
-g++ -g -o ./future-async.bin ./future-async.o
+g++ -lpthread -g -o ./future-async.bin ./future-async.o
 ./future-async.bin
 thread 1: 139635431859776
 thread 2: 139635423467072

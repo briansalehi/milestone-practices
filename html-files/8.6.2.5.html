@@ -305,7 +305,7 @@ try_lock_for
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./try-lock-for.o -c ./try-lock-for.cxx
-g++ -g -o ./try-lock-for.bin ./try-lock-for.o
+g++ -lpthread -g -o ./try-lock-for.bin ./try-lock-for.o
 ./try-lock-for.bin
 thread id: 140056480654912thread id: 
 140056472262208

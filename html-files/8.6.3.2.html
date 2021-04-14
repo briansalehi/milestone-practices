@@ -300,7 +300,7 @@ std::future - std::promise
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
 g++ -Wall -g -o ./future-promise.o -c ./future-promise.cxx
-g++ -g -o ./future-promise.bin ./future-promise.o
+g++ -lpthread -g -o ./future-promise.bin ./future-promise.o
 ./future-promise.bin
 thread value: 1
 </code>

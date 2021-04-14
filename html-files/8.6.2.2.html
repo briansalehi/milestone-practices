@@ -309,7 +309,7 @@ A potential complication hereby is that the maximum number of times that a recur
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./recursive-mutex.o -c ./recursive-mutex.cxx
-g++ -g -o ./recursive-mutex.bin ./recursive-mutex.o
+g++ -lpthread -g -o ./recursive-mutex.bin ./recursive-mutex.o
 ./recursive-mutex.bin
 thread id: 139820531717696
 thread id: 139820523324992

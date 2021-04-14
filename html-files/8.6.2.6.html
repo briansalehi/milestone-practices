@@ -314,7 +314,7 @@ std::unique_lock<std::mutex> lock3(m3, std::adopt_lock);
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./unique-lock.o -c ./unique-lock.cxx
-g++ -g -o ./unique-lock.bin ./unique-lock.o
+g++ -lpthread -g -o ./unique-lock.bin ./unique-lock.o
 ./unique-lock.bin
 thread id: 140679299630656
 thread id: 140679291237952

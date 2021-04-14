@@ -306,7 +306,7 @@ It differs from a lock guard in that it is a wrapper for not one, but multiple m
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./scoped-lock.o -c ./scoped-lock.cxx
-g++ -g -o ./scoped-lock.bin ./scoped-lock.o
+g++ -lpthread -g -o ./scoped-lock.bin ./scoped-lock.o
 ./scoped-lock.bin
 thread id: 139869175187008
 thread id: 139869166794304

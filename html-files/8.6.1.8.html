@@ -312,7 +312,7 @@ Should this program give any output? no! threads are detached from the main thre
 <pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
 <code>
 g++ -Wall -g -o ./detach.o -c ./detach.cxx
-g++ -g -o ./detach.bin ./detach.o
+g++ -lpthread -g -o ./detach.bin ./detach.o
 ./detach.bin
 thread 140226085189184 sleep cycle 1
 thread 140226076796480 sleep cycle 1

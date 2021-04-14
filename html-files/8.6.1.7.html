@@ -317,7 +317,7 @@ Notice that to get the value of milli seconds you need to call the **count()** f
 <pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
 g++ -Wall -g -o ./high-resolution-clock.o -c ./high-resolution-clock.cxx
-g++ -g -o ./high-resolution-clock.bin ./high-resolution-clock.o
+g++ -lpthread -g -o ./high-resolution-clock.bin ./high-resolution-clock.o
 ./high-resolution-clock.bin
 elapsed time for thread 140130675983936: 1000.07
 elapsed time for thread 140130667591232: 1000.06
