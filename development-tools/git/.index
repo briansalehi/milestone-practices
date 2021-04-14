@@ -1,8 +1,9 @@
 README.md
 installation.sh
+configuration.sh
 initialization.sh
 branching.sh
-collaboration.sh
+workflows.sh
 tools.sh
 migration.sh
 customization.sh

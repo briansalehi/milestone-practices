@@ -1,0 +1,52 @@
+<p>Git comes with a tool called <code>git config</code> that lets you get and set configuration variables. These variables can be stored in three different places:</p>
+
+<ul>
+	<li><code>[path]/etc/gitconfig</code> file: If you pass the option <code>--system</code> to <code>git config</code>, it reads and writes from this file specifically.</li>
+	<li><code>~/.gitconfig</code> or <code>~/.config/git/config</code> file: You can make Git read and write to this file specifically by passing the <code>--global</code> option</li>
+	<li><code>config</code> file in the Git directory (that is, <code>.git/config</code>): You can force Git to read from and write to this file with the <code>--local</code> option, but that is in fact the default.</li>
+</ul>
+
+<p>Each level overrides values in the previous level.</p>
+
+<p>You can view all of your settings and where they are coming from using:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git config --list --show-origin
+	</code>
+</pre>
+
+<p>The first thing you should do when you install Git is to set your <b>user name</b> and <b>email address</b>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git config --global user.name "John Doe"
+		git config --global user.email johndoe@example.com
+	</code>
+</pre>
+
+<p>Now that your identity is set up, you can configure the default text editor that will be used when Git needs you to type in a message. If not configured, Git uses your system’s default editor.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git config --global core.editor emacs
+	</code>
+</pre>
+
+<p>By default Git will create a branch called <code>master</code> when you create a new repository with <code>git init</code>. From Git version 2.28 onwards, you can set a different name for the initial branch. To set main as the default branch name do:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git config --global init.defaultBranch main
+	</code>
+</pre>
+
+<p>If you ever need help while using Git, there are three equivalent ways to get the comprehensive <b>manual page</b> (manpage) help for any of the Git commands:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git help &lt;verb&gt;
+		git &lt;verb&gt; --help
+		man git-&lt;verb&gt;
+	</code>
+</pre>

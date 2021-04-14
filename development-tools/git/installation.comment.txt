@@ -1,1 +1,26 @@
-<p>Git is available on package manager of many Linux distributions including <i>apt</i>, <i>yum</i>, <i>dnf</i>, <i>pacman</i> and more. Source installation and more methods are specified in more detail in official <a href="https://git-scm.com/downloads">Git Installation</a> page.</p>
+<p>Git is available on package manager of many Linux distributions including <i>apt</i>, <i>yum</i>, <i>dnf</i>, <i>pacman</i> and more. Source and Microsoft Windows executables are also available in the official <a href="https://git-scm.com/downloads">Git Installation</a> page.</p>
+
+<p>If you do want to install Git from source, you need to have the following libraries that Git depends on: <b>autotools</b>, <b>curl</b>, <b>zlib</b>, <b>openssl</b>, <b>expat</b>, and <b>libiconv</b>.</p>
+
+<p>You can get it via the <i>kernel.org</i> site, at <a href="https://www.kernel.org/pub/software/scm/git">https://www.kernel.org/pub/software/scm/git</a>, or the mirror on the GitHub website, at <a href="https://github.com/git/git/releases">https://github.com/git/git/releases</a>. It’s generally a little clearer what the</p>
+
+<p>Then, compile and install:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		tar -zxf git-2.8.0.tar.gz
+		cd git-2.8.0
+		make configure
+		./configure --prefix=/usr
+		make all doc info
+		sudo make install install-doc install-html install-info
+	</code>
+</pre>
+
+<p>After this is done, you can also get Git via Git itself for updates:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git clone git://git.kernel.org/pub/scm/git/git.git
+	</code>
+</pre>

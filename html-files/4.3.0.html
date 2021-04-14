@@ -268,6 +268,27 @@ Git
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p><b>Version Control</b> is a system that records changes to a file or set of files over time so that you can recall specific versions later. It allows you to revert selected files back to a previous state, revert the entire project back to a previous state, compare changes over time, see who last modified something that might be causing a problem, who introduced an issue and when, and if you screw things up or lose files, you can easily recover.</p>
+
+<p><b>Git</b> has three main states that your files can reside in:</p>
+
+<ul>
+	<li><b>modified</b></li>
+	<li><b>staged</b></li>
+	<li><b>committed</b></li>
+</ul>
+
+<p>This leads us to the three main sections of a Git project: the <b>working tree</b>, the <b>staging area</b>, and the <b>Git directory</b>.</p>
+
+<img class="img-responsive" src="/development-tools/git-areas.png" alt="git areas" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git-areas.png"'>
+
+<p>The <b>working tree</b> is a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify.</p>
+
+<p>The <b>staging area</b> is a file, generally contained in your Git directory, that stores information about what will go into your next commit. Its technical name in Git parlance is the “<b>index</b>”, but the phrase “<b>staging area</b>” works just as well.</p>
+
+<p>The <b>Git directory</b> is where Git stores the metadata and object database for your project. This is the most important part of Git, and it is what is copied when you clone a repository from another computer.</p>
+
+<p>If a particular version of a file is in the Git directory, it’s considered <b>committed</b>. If it has been modified and was added to the <b>staging area</b>, it is <b>staged</b>. And if it was changed since it was checked out but has not been staged, it is <b>modified</b>.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -301,40 +322,44 @@ Table of Content
 	1. Installation
 	
 </a>
+<a href="/development-tools/git/initial-configuration" class="list-group-item">
+	2. Initial Configuration
+	
+</a>
 <a href="/development-tools/git/initialization" class="list-group-item">
-	2. Initialization
+	3. Initialization
 	
 </a>
 <a href="/development-tools/git/branches" class="list-group-item">
-	3. Branches
+	4. Branches
 	
 </a>
-<a href="/development-tools/git/collaboration" class="list-group-item">
-	4. Collaboration in Git
+<a href="/development-tools/git/workflows" class="list-group-item">
+	5. Workflows
 	
 </a>
 <a href="/development-tools/git/git-tools" class="list-group-item">
-	5. Git Tools
+	6. Git Tools
 	
 </a>
 <a href="/development-tools/git/migrating-to-git" class="list-group-item">
-	6. Migrating to Git
+	7. Migrating to Git
 	
 </a>
 <a href="/development-tools/git/customization" class="list-group-item">
-	7. Customization
+	8. Customization
 	
 </a>
 <a href="/development-tools/git/git-server" class="list-group-item">
-	8. Git Server
+	9. Git Server
 	
 </a>
 <a href="/development-tools/git/git-internals" class="list-group-item">
-	9. Git Internals
+	10. Git Internals
 	
 </a>
-<a href="/development-tools/git/references" class="list-group-item">
-	10. References
+<a href="/development-tools/git/documentations" class="list-group-item">
+	11. Documentations
 	
 </a>
 </div>

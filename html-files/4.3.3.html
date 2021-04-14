@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Branches</title>
+<title>Initialization</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -248,7 +248,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Development Tools</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.3.0.html">Git</a></li>
-<li class='breadcrumb-item active'>Branches</li>
+<li class='breadcrumb-item active'>Initialization</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -260,8 +260,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Branches" class="anchor" aria-hidden="true" href="#Branches">
-Branches
+<a id="Initialization" class="anchor" aria-hidden="true" href="#Initialization">
+Initialization
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -269,345 +269,609 @@ Branches
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>To create a new branch and switch to it at the same time, you can run the <code>git checkout</code> command with the <code>-b</code> switch:</p>
+<p>You typically obtain a Git repository in one of two ways:</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<ul>
+	<li>You can take a local directory that is currently not under version control, and turn it into a Git repository</li> 
+	<p>or</p>
+	<li>You can clone an existing Git repository from elsewhere.</li>
+</ul>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout -b iss53
-		git checkout master
-		git checkout -b hotfix
-		vim index.html
-		git commit -a -m 'Fix broken email address'
+		cd /home/user/my_project
+		git init
+	</code>
+<pre>
+
+<p>If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git add *.c$ git add LICENSE
+		git commit -m 'Initial project version'
+	</code>
+<pre>
+
+<p>If you want to get a copy of an existing Git repository — for example, a project you’d like to contribute to — the command you need is <code>git clone</code>.</p>
+
+<p>For example, if you want to clone the Git linkable library called <code>libgit2</code>, you can do so like this:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git clone https://github.com/libgit2/libgit2
+	</code>
+<pre>
+
+<p>If you want to clone the repository into a directory named something other than <code>libgit2</code>, you can specify the new directory name as an additional argument:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git clone https://github.com/libgit2/libgit2 mylibgit
+	</code>
+<pre>
+
+<p>Git has a number of different transfer protocols you can use. The previous example uses the <code>https://</code> protocol, but you may also see <code>git://</code> or <code>user@server:path/to/repo.git</code>, which uses the SSH transfer protocol.</p>
+
+<p>Getting each file in your working directory can be in one of two states: <code>tracked</code> or <code>untracked</code>. Tracked files are files that were in the last snapshot; they can be <b>unmodified</b>, <b>modified</b>, or <b>staged</b>. In short, <b>tracked files</b> are files that Git knows about.</p>
+
+<p>Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area.</p>
+
+<img class="img-responsive" src="/development-tools/git/file-life-cycle.png" alt="file life cycle" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/file-life-cycle.png"'>
+
+<p>The main tool you use to determine which files are in which state is the <code>git status</code> command.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git status
+	</code>
+<pre>
+
+<p>In order to begin tracking a new file, you use the command <code>git add</code>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git add README
+	</code>
+<pre>
+
+<p>If you run <code>git status -s</code> or <code>git status --short</code> you get a far more simplified output from the command:</p>
+
+<p>Often, you’ll have a class of files that you don’t want Git to automatically add or even show you as being <b>untracked</b>. These are generally automatically generated files such as log files or files produced by your build system. In such cases, you can create a file listing patterns to match them named <code>.gitignore</code>.</p>
+
+<p>The rules for the patterns you can put in the .gitignore file are as follows:</p>
+
+<ul>
+	<li>Blank lines or lines starting with <code>#</code> are ignored.</li> 
+	<li>Standard <b>glob patterns</b> work, and will be applied recursively throughout the entire working tree.</li> 
+	<li>You can start patterns with a forward slash (<code>/</code>) to avoid recursivity.</li> 
+	<li>You can end patterns with a forward slash (<code>/</code>) to specify a directory.</li> 
+	<li>You can negate a pattern by starting it with an exclamation point (<code>!</code>).</li>
+</ul>
+
+<p>Glob patterns are like simplified regular expressions that shells use. An asterisk (<code>*</code>) matches zero or more characters; <code>[abc]</code> matches any character inside the brackets (in this case a, b, or c); a question mark (<code>?</code>) matches a single character; and brackets enclosing characters separated by a hyphen (<code>[0-9]</code>) matches any character between them (in this case 0 through 9). You can also use two asterisks to match nested directories; <code>a/**/z</code> would match <code>a/z</code>, <code>a/b/z</code>, <code>a/b/c/z</code>, and so on.</p>
+
+<p>Here is another example <code>.gitignore</code> file:</p>
+
+<pre class="language-bash">
+	<code>
+		# ignore all .a files
+		*.a
+
+		# but do track lib.a, even though you're ignoring .a files above
+		!lib.a
+
+		# only ignore the TODO file in the current directory, not subdir/TODO
+		/TODO
+
+		# ignore all files in any directory named build
+		build/
+
+		# ignore doc/notes.txt, but not doc/server/arch.txt
+		doc/*.txt
+
+		# ignore all .pdf files in the doc/ directory and any of its subdirectories
+		doc/**/*.pdf
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/hotfix-branch.png" alt="hotfix branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/hotfix-branch.png"'>
+<p>To see what you’ve changed but not yet staged, type <code>git diff</code> with no other arguments.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>If you want to see what you’ve staged that will go into your next commit, you can use <code>git diff --staged</code> or <code>git diff --cached</code> (--staged and --cached are synonyms):</p>
+
+<p>The simplest way to commit is to type <code>git commit</code>:</p>
+
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git checkout master
-		git merge hotfix
+		git commit
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/master-fast-forwarded-to-hotfix.png" alt="master fast forwarded to hotfix" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/master-fast-forwarded-to-hotfix.png"'>
+<p>Doing so launches your editor of choice. Alternatively, you can type your <b>commit message</b> inline with the commit command by specifying it after a <code>-m</code> flag, like this:</p>
 
-<p>Delete the <code>hotfix</code> branch, because you no longer need it.</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git branch -d hotfix
+		git commit -m "Story 182: fix benchmarks for speed"
 	</code>
 </pre>
 
-<p>Check out the branch you wish to merge into and then run the <code>git merge</code> command.</p>
+<p>Adding the <code>-a</code> option to the <code>git commit</code> command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the git add part:</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git checkout master
-		git merge iss53
+		git commit -a -m 'Add new benchmarks'
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/snapshots-to-merge-into.png" alt="snapshots to merge into" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/snapshots-to-merge-into.png"'>
+<p>To remove a file from Git, you have to remove it from your tracked files (more accurately, remove it from your staging area) and then commit. The <code>git rm</code> command does that, and also removes the file from your working directory so you don’t see it as an untracked file the next time around.</p>
 
-<p>Instead of just moving the branch pointer forward, Git creates a new <b>snapshot</b> that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a <b>merge commit</b>, and is special in that it has more than one parent.</p>
+<p>If you simply remove the file from your working directory, it shows up under the “<b>Changes not staged for commit</b>”</p>
 
-<p>You can delete the branch:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git branch -d iss53
+		rm PROJECTS.md
 	</code>
 </pre>
 
-<p>Occasionally, this process doesn’t go smoothly!</p>
+<p>Then, if you run <code>git rm</code>, it stages the file’s removal:</p>
 
-<p>If your fix for <code>issue #53</code> modified the same part of a file as the <code>hotfix</code> branch, you’ll get a merge conflict that looks something like this:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git merge iss53
+		git rm PROJECTS.md
 	</code>
 </pre>
 
-<p>Git adds standard conflict-resolution markers to the files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:</p>
+<p>The next time you commit, the file will be gone and no longer tracked. If you modified the file or had already added it to the staging area, you must force the removal with the <code>-f</code> option.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>Another useful thing you may want to do is to keep the file in your <b>working tree</b> but remove it from your <b>staging area</b>. In other words, you may want to keep the file on your hard drive but not have Git track it anymore. This is particularly useful if you forgot to add something to your <code>.gitignore</code> file and accidentally staged it.</p>
+
+<p>To do this, use the <code>--cached</code> option:</p>
+
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
-		&lt;div id="footer"&gt;contact : email.support@github.com&lt;/div&gt;
-		=======
-		&lt;div id="footer"&gt; please contact us at support@github.com
-		&lt;/div&gt;
-		&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+		git rm --cached README
 	</code>
 </pre>
 
-<p>In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.</p>
+<p>You can pass files, directories, and file-glob patterns to the <code>git rm</code> command. That means you can do things such as:</p>
 
-<p>If you want to use a graphical tool to resolve these issues, you can run <code>git mergetool</code>, which fires up an appropriate visual merge tool and walks you through the conflicts:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git mergetool
+		git rm log/\*.logNote
 	</code>
 </pre>
 
-<p>If you’re happy with that, and you verify that everything that had conflicts has been staged, you can type <code>git commit</code> to finalize the merge commit.</p>
+<p>The backslash (<code>\</code>) in front of the <code>*</code>. This is necessary because Git does its own filename expansion in addition to your shell’s filename expansion.</p>
 
-<p>The <code>git branch</code> command does more than just create and delete branches. If you run it with no arguments, you get a simple listing of your current branches:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git branch
+		git rm \*~
 	</code>
 </pre>
 
-<p>To see the last commit on each branch, you can run:</p>
+<p>This command removes all files whose names end with a <code>~</code>.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>If you want to rename a file in Git, you can run something like:</p>
+
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git branch -v
+		git mv file_from file_to
 	</code>
 </pre>
 
-<p>The useful <code>--merged</code> and <code>--no-merged</code> options can filter this list to branches that you have or have not yet merged into the branch you’re currently on. To see which branches are already merged into the branch you’re on, you can run:</p>
+<p>This is equivalent to running something like this:</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user">
 	<code>
-		git branch --merged
+		mv README.md README
+		git rm README.md
+		git add README
 	</code>
 </pre>
 
-<p>Branches on this list without the <code>*</code> in front of them are generally fine to delete with <code>git branch -d</code></p>
+<p>When you run git log in this project, you should get output that looks something like this:</p>
 
-<p>Rename the branch locally with the <code>git branch --move</code> command:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-host="milestone" data-user="user" data-output="2-6">
 	<code>
-		git branch --move bad-branch-name corrected-branch-name
+		git log
+		commit ca82a6dff817ec66f44342007202690a93763949
+		Author: Scott Chacon <schacon@gee-mail.com>
+		Date:   Mon Mar 17 21:52:11 2008 -0700
+
+			Change version number
 	</code>
 </pre>
 
-<p>To let others see the corrected branch on the remote, push it:</p>
+<p>By default, with no arguments, <code>git log</code> lists the commits made in that repository in reverse chronological order; that is, the most recent commits show up first.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>Huge number and variety of options to the <code>git log</code> command are available to show you exactly what you’re looking for.</p>
+
+<p>One of the more helpful options is <code>-p</code> or <code>--patch</code>, which shows the difference (the patch output) introduced in each commit.</p>
+
+<p>You can also limit the number of log entries displayed, such as using <code>-2</code> to show only the last two entries.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git push --set-upstream origin corrected-branch-name
+		git log -p -2
 	</code>
 </pre>
 
-<p>The corrected branch is available on the remote. However the bad branch is also still present on the remote. You can delete the bad branch from the remote:</p>
+<p>This option displays the same information but with a <code>diff</code> directly following each entry. This is very helpful for code review or to quickly browse what happened during a series of commits that a collaborator has added.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>You can also use a series of summarizing options with <code>git log</code>. For example, if you want to see some abbreviated stats for each commit, you can use the <code>--stat</code> option:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git push origin --delete bad-branch-name
+		git log --stat
 	</code>
 </pre>
 
-<p>Rename your local master branch into main with the following command:</p>
+<p>Another really useful option is <code>--pretty</code>. This option changes the log output to formats other than the default. A few prebuilt option values are available for you to use. The <b>oneline</b> value for this option prints each commit on a single line, which is useful if you’re looking at a lot of commits. In addition, the short, full, and fuller values show the output in roughly the same format but with less or more information, respectively:</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git branch --move master main
+		git log --pretty=oneline
 	</code>
 </pre>
 
-<p>To let others see the new main branch, you need to push it to the remote.</p>
+<p>The most interesting option value is <b>format</b>, which allows you to specify your own log output format. This is especially useful when you’re generating output for machine parsing — because you specify the format explicitly, you know it won’t change with updates to Git:</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git push --set-upstream origin main
+		git log --pretty=format:"%h - %an, %ar : %s"
 	</code>
 </pre>
 
-<p>Other collaborators will continue to use the master branch as the base of their work, until you make some further changes.</p>
+<h4>Specifier Description of Output</h4>
 
-<pre class="language-bash command-line" data-host="milestone">
+<ul>
+	<li>%H: Commit hash</li>
+	<li>%h: Abbreviated commit hash</li>
+	<li>%T: Tree hash</li>
+	<li>%t: Abbreviated tree hash</li>
+	<li>%P: Parent hashes</li>
+	<li>%p: Abbreviated parent hashes</li>
+	<li>%an: Author name</li>
+	<li>%ae: Author email</li>
+	<li>%ad: Author date (format respects the --date=option)</li>
+	<li>%ar: Author date, relative</li>
+	<li>%cn: Committer name</li>
+	<li>%ce: Committer email</li>
+	<li>%cd: Committer date</li>
+	<li>%cr: Committer date, relative</li>
+	<li>%s: Subject</li>
+</ul>
+
+<p>The <b>author</b> is the person who originally wrote the work, whereas the <b>committer</b> is the person who last applied the work. So, if you send in a patch to a project and one of the core members applies the patch, both of you get credit — you as the author, and the core member as the committer.</p></p>
+
+<p>The <b>oneline</b> and <b>format</b> option values are particularly useful with another log option called <code>--graph</code>. This option adds a nice little ASCII graph showing your branch and merge history:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git push origin --delete master
+		git log --pretty=format:"%h %s" --graph
 	</code>
 </pre>
 
-<p>Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references explicitly with <code>git ls-remote &lt;remote&gt;</code>, or <code>git remote show &lt;remote&gt;</code> for remote branches as well as more information.</p>
+<h4>Option Description</h4>
 
-<p>Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.</p>
+<ul>
+	<li><code>-p</code> Show the patch introduced with each commit.</li>
+	<li><code>--stat</code> Show statistics for files modified in each commit.</li>
+	<li><code>--shortstat</code> Display only the changed/inserti ons/deletions line from the --stat command.</li>
+	<li><code>--name-only</code> Show the list of files modified af ter the commit information.</li>
+	<li><code>--name-status</code> Show the list of files affected with added/modified/deleted information as well.</li>
+	<li><code>--abbrev-commit</code> Show only the first few characters of the SHA-1 checksum instead of all 40.</li>
+	<li><code>--relative-date</code> Display the date in a relative for mat (for example, “2 weeks ago”) instead of using the full date format.</li>
+	<li><code>--graph</code> Display an ASCII graph of the branch and merge history beside the log output.</li>
+	<li><code>--pretty</code> Show commits in an alternate for mat. Option values include oneline, short, full, fuller, and format (where you specify your own format).</li>
+	<li><code>--oneline</code> Shorthand for --pretty=oneline --abbrev-commit used together.</li>
+</ul>
 
-<p>As long as you stay out of contact with your <i>origin server</i>, your <code>origin/master</code> pointer doesn’t move.</p>
+<p>The time-limiting options such as <code>--since</code> and <code>--until</code> are very useful. For example, this command gets the list of commits made in the last two weeks:</p>
 
-<img class="img-responsive" src="/development-tools/git/remote-branch-behind.png" alt="remote branch behind" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/remote-branch-behind.png"'>
-
-<p>To synchronize your work with a given remote, you run a <code>git fetch &lt;remote&gt;</code> command.</p>
-
-<img class="img-responsive" src="/development-tools/git/fetching-updates-from-remote.png" alt="fetching updates from remote" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fetching-updates-from-remote.png"'>
-
-<p>If you have a branch named <code>serverfix</code> that you want to work on with others, you can push it up the same way you pushed your first branch. Run <code>git push &lt;remote&gt; &lt;branch&gt;</code>:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git push origin serverfix
+		git log --since=2.weeks
 	</code>
 </pre>
 
-<p>Git automatically expands the <code>serverfix</code> branchname out to <code>refs/heads/serverfix:refs/heads/serverfix</code>, which means, <i>“Take my serverfix local branch and push it toupdate the remote’s serverfix branch.”</i></p>
+<p>This command works with lots of formats — you can specify a specific date like "<i>2008-01-15</i>", or a relative date such as "<i>2 years 1 day 3 minutes ago</i>".</p>
 
-<p>The next time one of your collaborators fetches from the server, they will get a reference to where the server’s version of <code>serverfix</code> is under the remote branch <code>origin/serverfix</code>:</p>
+<p>You can also filter the list to commits that match some search criteria. The <code>--author</code> option allows you to filter on a specific author, and the <code>--grep</code> option lets you search for keywords in the commit messages.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>Another really helpful filter is the <code>-S</code> option (colloquially referred to as Git’s “pickaxe” option), which takes a string and shows only those commits that changed the number of occurrences of that string. For instance, if you wanted to find the last commit that added or removed a reference to a specific function, you could call:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git fetch origin
+		git log -S function_name
 	</code>
 </pre>
 
-<p>It’s important to note that when you do a fetch that brings down new <b>remote-tracking</b> branches, you don’t automatically have local, editable copies of them. In other words, in this case, you don’t have a new <code>serverfix</code> branch — you have only an <code>origin/serverfix</code> pointer that you can’t modify.</p>
+<p>If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files. This is always the last option and is generally preceded by double dashes (<code>--</code>) to separate the paths from the options:</p>
 
-<p>To merge this work into your current working branch, you can run <code>git merge origin/serverfix</code>. If you want your own <code>serverfix</code> branch that you can work on, you can base it off your <b>remote-tracking</b> branch:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout -b serverfix origin/serverfix
+		git log -- path/to/file
 	</code>
 </pre>
 
-<p><b>Tracking</b> branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type git pull, Git automatically knows which server to fetch from and which branch to merge in.</p>
+<p>In Options to limit the output of git log we’ll list these and a few other common options for your reference.</p>
 
-<p>When you clone a repository, it generally automatically creates a master branch that tracks <code>origin/master</code>. However, you can set up other tracking branches if you wish — ones that track branches on other remotes, or don’t track the <b>master</b> branch. The simple case is the example you just saw, running <code>git checkout -b &lt;branch&gt; &lt;remote&gt;/&lt;branch&gt;</code>. This is a common enough operation that Git provides the <code>--track</code> shorthand:</p>
+<h4>Option Description</h4>
 
-<pre class="language-bash command-line" data-host="milestone">
+<ul>
+	<li><code>-<n></code> Show only the last n commits</li>
+	<li><code>--since</code>, <code>--after</code> Limit the commits to those made after the specified date.</li>
+	<li><code>--until</code>, <code>--before</code> Limit the commits to those made before the specified date.</li>
+	<li><code>--author</code> Only show commits in which the author entry matches the specified string.</li>
+	<li><code>--committer</code> Only show commits in which the committer entry matches the specified string.</li>
+	<li><code>--grep</code> Only show commits with a commit message containing the string</li>
+	<li><code>-S</code> Only show commits adding or remo ving code matching the string</li>
+</ul>
+
+<p>At any stage, you may want to undo something. One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your commit message. If you want to redo that commit, make the additional changes you forgot, stage them, and commit again using the <code>--amend</code> option:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout --track origin/serverfix
-		git fetch --all; git branch -vv
+		git commit -m 'Initial commit'
+		git add forgotten_file
+		git commit --amend
 	</code>
 </pre>
 
-<p>Set up a local branch with a different name than the remote branch, you can easily use the first version with a different local branch name:</p>
+<p>For example, let’s say you’ve changed two files and want to commit them as two separate changes, but you accidentally type <code>git add *</code> and stage them both.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout -b sf origin/serverfix
+		git add *
+		git status
 	</code>
 </pre>
 
-<p>Now, your local branch <code>sf</code> will automatically pull from <code>origin/serverfix</code>.</p>
+<p>Right below the “<b>Changes to be committed</b>” text, it says use <code>git reset HEAD <file>…</code> to unstage. So, let’s use that advice to unstage the <code>CONTRIBUTING.md</code> file:</p>
 
-<p>If you already have a local branch and want to set it to a remote branch you just pulled down, or want to change the <code>upstream</code> branch you’re tracking, you can use the <code>-u</code> or <code>--set-upstream-to</code> option to git branch to explicitly set it at any time.</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git branch -u origin/serverfix
+		git reset HEAD CONTRIBUTING.md
 	</code>
 </pre>
 
-<p>If you want to see what <b>tracking</b> branches you have set up, you can use the <code>-vv</code> option to <code>git branch</code>.</p>
+<p>You realize that you don’t want to keep your changes to the <code>CONTRIBUTING.md</code> file. You easily unmodify it — revert it back to what it looked like when you last committed.</p>
 
-<p>There is a command called <code>git pull</code> which is essentially a <code>git fetch</code> immediately followed by a <code>git merge</code> in most cases.</p>
-
-<p>Generally it’s better to simply use the <code>fetch</code> and <code>merge</code> commands explicitly as the magic of <code>git pull</code> can often be confusing.</p>
-
-<p>You can delete a remote branch using the <code>--delete</code> option to <code>git push</code>.</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git push origin --delete serverfix
+		git checkout -- CONTRIBUTING.md
 	</code>
 </pre>
 
-<p>In Git, there are two main ways to integrate changes from one branch into another: the <b>merge</b> and the <b>rebase</b>.</p>
+<p>Git version 2.23.0 introduced a new command: <code>git restore</code>. It’s basically an alternative to git reset which we just covered. To unstage the <code>CONTRIBUTING.md</code> file:</p>
 
-<img class="img-responsive" src="/development-tools/git/simple-diverge-history.png" alt="simple diverge history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/simple-diverge-history.png"'>
-
-<p>The easiest way to integrate the branches, as we’ve already covered, is the <code>merge</code> command.</p>
-
-<img class="img-responsive" src="/development-tools/git/integrating-diverged-history.png" alt="integrating diverged history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/integrating-diverged-history.png"'>
-
-<p>However, there is another way: you can take the patch of the change that was introduced in <code>C4</code> and reapply it on top of <code>C3</code>.</p>
-
-<p>In Git, this is called <b>rebasing</b>. With the <code>rebase</code> command, you can take all the changes that were committed on one branch and replay them on a different branch.</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout experiment
-		git rebase master
+		git restore --staged CONTRIBUTING.md
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/rebasing-history.png" alt="rebasing history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-history.png"'>
+<p>The <code>CONTRIBUTING.md</code> file is modified but once again <code>unstaged</code>.</p>
 
-<p>At this point, you can go back to the master branch and do a <code>fast-forward merge</code>.</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout master
-		git merge experiment
+		git restore CONTRIBUTING.md
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/fast-forwarding-master-branch.png" alt="fast forwarding master branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fast-forwarding-master-branch.png"'>
+<p>To see which remote servers you have configured, you can run the <code>git remote</code> command. It lists the shortnames of each remote handle you’ve specified. You can also specify <code>-v</code>, which shows you the URLs that Git has stored for the shortname to be used when reading and writing to that remote:</p>
 
-<p>You can also have your rebase replay on something other than the rebase target branch</p>
-
-<p>For example, You branched a topic branch (server) to add some server-side functionality to your project, and made a commit. Then, you branched off that to make the client-side changes (client) and committed a few times. Finally, you went back to your server branch and did a few more commits.</p>
-
-<img class="img-responsive" src="/development-tools/git/client-server-history.png" alt="client server history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/client-server-history.png"'>
-
-<p>You can take the changes on client that aren’t on server (C8 and C9) and replay them on your master branch by using the --onto option of git rebase:</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git rebase --onto master server client
+		git remote -v
 	</code>
 </pre>
 
-<p>This basically says, “Take the clientbranch, figure out the patches since it diverged from the server branch, and replay these patches in the client branch as if it was based directly off the master branch instead.” It’s a bit complex, but the result is pretty cool.</p>
+<p>To add a new remote Git repository as a shortname you can reference easily, run:</p>
 
-<img class="img-responsive" src="/development-tools/git/rebasing-master-to-client.png" alt="rebasing master to client" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-master-to-client.png"'>
-
-<p>Now you can <b>fast-forward</b> your master branch</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout master
-		git merge client
+		git remote add &lt;shortname&gt; &lt;url&gt;
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/fast-forwarding-master-after-rebase.png" alt="fast forwarding master after rebase" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fast-forwarding-master-after-rebase.png"'>
+<p>Now you can use the string <code>pb</code> on the command line in <code>lieu</code> of the whole URL. For example, if you want to fetch all the information that Paul has but that you don’t yet have in your repository, you can run:</p>
 
-<p>You can rebase the server branch onto the master branch without having to check it out first by running <code>git rebase &lt;basebranch&gt; &lt;topicbranch&gt;</code> — which checks out the topic branch (in this case, server) for you and replays it onto the base branch (master):</p>
-
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git rebase master server
+		git fetch pb
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/rebasing-server-branch.png" alt="rebasing server branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-server-branch.png"'>
+<p>Paul’s master branch is now accessible locally as <code>pb/master</code> — you can merge it into one of your branches, or you can check out a local branch at that point if you want to inspect it.</p>
 
-<p>Then, you can <b>fast-forward</b> the base branch (master):</p>
+<p>To get data from your remote projects, you can run:</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git checkout master
-		git merge server
-		git branch -d client
-		git branch -d server
+		git fetch &lt;remote&gt;
 	</code>
 </pre>
 
-<img class="img-responsive" src="/development-tools/git/final-commit-history.png" alt="final commit history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/final-commit-history.png"'>
+<p>The command goes out to that remote project and pulls down all the data from that remote project that you don’t have yet. After you do this, you should have references to all the branches from that remote, which you can merge in or inspect at any time.</p>
 
-<p>If you pull down work that was rewritten and rebase it on top of the new commits from your partner, Git can often successfully figure out what is uniquely yours and apply them back on top of the new branch.</p>
+<p>If you clone a repository, the command automatically adds that remote repository under the name “<b>origin</b>”. So, <code>git fetch origin</code> fetches any new work that has been pushed to that server since you cloned (or last fetched from) it.</p>
 
-<img class="img-responsive" src="/development-tools/git/force-pushed-rebase.png" alt="force pushed rebase" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/force-pushed-rebase.png"'>
+<p>It’s important to note that the <code>git fetch</code> command only downloads the data to your local repository — it doesn’t automatically merge it with any of your work or modify what you’re currently working on. You have to merge it manually into your work when you’re ready.</p>
 
-<p>You can also simplify this by running a <code>git pull --rebase</code> instead of a normal <code>git pull</code>. Or you could do it manually with a <code>git fetch</code> followed by a <code>git rebase teamone/master</code> in this case.</p>
+<p>If your current branch is set up to track a remote branch (see the next section and Git Branching for more information), you can use the <code>git pull</code> command to automatically <b>fetch</b> and then <b>merge</b> that remote branch into your current branch.</p>
 
-<p>If you are using <code>git pull</code> and want to make <code>--rebase</code> the default, you can set the <code>pull.rebase</code> config value with something like.</p>
+<p>When you have your project at a point that you want to share, you have to push it upstream.</p>
 
-<pre class="language-bash command-line" data-host="milestone">
+<p>The command for this is simple:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		git config --global pull.rebase true
+		git push &lt;remote&gt; &lt;branch&gt;
+		git push origin master
+	</code>
+</pre>
+
+<p>If you and someone else clone at the same time and they push upstream and then you push upstream, your push will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.</p>
+
+<p>If you want to see more information about a particular remote, you can use the <code>git remote show <remote></code> command.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git remote show origin
+	</code>
+</pre>
+
+<p>You can run <code>git remote rename</code> to change a remote’s shortname. For instance, if you want to rename <code>pb</code> to <code>paul</code>, you can do so with:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git remote rename pb paul
+	</code>
+</pre>
+
+<p>It’s worth mentioning that this changes all your remote-tracking branch names, too. What used to be referenced at <b>pb/master</b> is now at <b>paul/master</b>.</p>
+
+<p>If you want to remove a remote for some reason — you’ve moved the server or are no longer using a particular mirror, or perhaps a contributor isn’t contributing anymore — you can either use <code>git remote remove</code> or <code>git remote rm</code>:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git remote remove paul
+	</code>
+</pre>
+
+<p>Once you delete the reference to a remote this way, all remote-tracking branches and configuration settings associated with that remote are also deleted.</p>
+
+<p>Like most VCSs, Git has the ability to tag specific points in a repository’s history as being important. Typically, people use this functionality to mark release points (v1.0, v2.0 and so on).</p>
+
+<p>Listing the existing <b>tags</b> in Git is straightforward. Just type <code>git tag</code> (with optional <code>-l</code> or <code>--list</code>):</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git tag
+	</code>
+</pre>
+
+<p>This command lists the tags in alphabetical order; the order in which they are displayed has no real importance.</p>
+
+<p>You can also search for tags that match a particular pattern. The Git source repo, for instance, contains more than 500 tags. If you’re interested only in looking at the 1.8.5 series, you can run this:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git tag -l "v1.8.5*"
+	</code>
+</pre>
+
+<p>Git supports two types of tags: <b>lightweight</b> and <b>annotated</b>. A <b>lightweight tag</b> is very much like a branch that doesn’t change — it’s just a pointer to a specific commit.</p>
+
+<p>Annotated tags, however, are stored as full objects in the Git database. They’re checksummed; contain the <b>tagger name</b>, <b>email</b>, and <b>date</b>; have a tagging message; and can be signed and verified with GNU Privacy Guard (GPG). It’s generally recommended that you create annotated tags so you can have all this information; but if you want a temporary tag or for some reason don’t want to keep the other information, lightweight tags are available too.</p>
+
+<p>Creating an <b>annotated tag</b> in Git is simple. The easiest way is to specify <code>-a</code> when you run the <code>tag</code> command:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git tag -a v1.4 -m "my version 1.4"
+	</code>
+</pre>
+
+<p>The <code>-m</code> specifies a tagging message, which is stored with the tag. If you don’t specify a message for an annotated tag, Git launches your editor so you can type it in. You can see the tag data along with the commit that was tagged by using the <code>git show</code> command:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git show v1.4
+	</code>
+</pre>
+
+<p>That shows the tagger information, the <b>date</b> the commit was tagged, and the <b>annotation message</b> before showing the commit information.</p>
+
+<p>Another way to tag commits is with a <b>lightweight tag</b>. This is basically the commit checksum stored in a file — no other information is kept. To create a lightweight tag, don’t supply any of the <code>-a</code>, <code>-s</code>, or <code>-m</code> options, just provide a <b>tag name</b>:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git tag v1.4-lw
+	</code>
+</pre>
+
+<p>This time, if you run <code>git show</code> on the tag, you don’t see the extra tag information. The command just shows the commit:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git show v1.4-lw
+	</code>
+</pre>
+
+<p>You can also tag commits after you’ve moved past them.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git tag -a v1.2 9fceb02
+	</code>
+</pre>
+
+<p>By default, the <code>git push</code> command doesn’t transfer <b>tags</b> to remote servers. You will have to explicitly push tags to a shared server after you have created them.</p>
+
+<p>If you have a lot of tags that you want to push up at once, you can also use the <code>--tags</code> option to the <code>git push</code> command. This will transfer all of your tags to the remote server that are not already there.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git push origin --tags
+	</code>
+</pre>
+
+<p>Now, when someone else clones or pulls from your repository, they will get all your tags as well.</p>
+
+<p>To delete a tag on your local repository, you can use <code>git tag -d &lt;tagname&gt;</code>.</p>
+
+<p>Note that this does not remove the tag from any remote servers. There are two common variations for deleting a tag from a remote server. The first variation is <code>git push &lt;remote&gt; :refs/tags/&lt;tagname&gt;</code>:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git push origin :refs/tags/v1.4-lw
+	</code>
+</pre>
+
+<p>The second (and more intuitive) way to delete a remote tag is with:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git push origin --delete &lt;tagname&gt;
+	</code>
+</pre>
+
+<p>If you want to view the versions of files a tag is pointing to, you can do a <code>git checkout</code> of that tag, although this puts your repository in “<b>detached HEAD</b>” state, which has some ill side effects.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git checkout v2.0.0
+	</code>
+</pre>
+
+<p>In “<b>detached HEAD</b>” state, if you make changes and then create a commit, the tag will stay the same, but your new commit won’t belong to any branch and will be unreachable, except by the exact commit hash. Thus, if you need to make changes — say you’re fixing a bug on an older version, for instance — you will generally want to create a branch:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git checkout -b version2 v2.0.0
+	</code>
+</pre>
+
+<p>Git doesn’t automatically infer your command if you type it in partially. If you don’t want to type the entire text of each of the Git commands, you can easily set up an alias for each command using <code>git config</code>. Here are a couple of examples you may want to set up:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git config --global alias.co checkout
+		git config --global alias.br branch
+		git config --global alias.ci commit
+		git config --global alias.st status
+		git config --global alias.unstage 'reset HEAD --'
+	</code>
+</pre>
+
+<p>As you can tell, Git simply replaces the new command with whatever you alias it for. However, maybe you want to run an external command, rather than a Git subcommand. In that case, you start the command with a <code>!</code> character. This is useful if you write your own tools that work with a Git repository. We can demonstrate by aliasing git visual to run <code>gitk</code>:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		git config --global alias.visual '!gitk'
 	</code>
 </pre>
 <hr />
@@ -621,11 +885,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Pro Git, 2nd Edition - Bem Straub, Scott Chacon: <span style='color: red'> chapter 3</span></li>
+<li class='list-group-item'>Pro Git, 2nd Edition - Bem Straub, Scott Chacon: <span style='color: red'> chapter 1 and 2</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/git/initialization">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/git/collaboration">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/git/initial-configuration">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/git/branches">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
