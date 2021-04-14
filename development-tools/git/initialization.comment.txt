@@ -11,7 +11,7 @@
 		cd /home/user/my_project
 		git init
 	</code>
-<pre>
+</pre>
 
 <p>If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit.</p>
 
@@ -20,7 +20,7 @@
 		git add *.c$ git add LICENSE
 		git commit -m 'Initial project version'
 	</code>
-<pre>
+</pre>
 
 <p>If you want to get a copy of an existing Git repository — for example, a project you’d like to contribute to — the command you need is <code>git clone</code>.</p>
 
@@ -30,7 +30,7 @@
 	<code>
 		git clone https://github.com/libgit2/libgit2
 	</code>
-<pre>
+</pre>
 
 <p>If you want to clone the repository into a directory named something other than <code>libgit2</code>, you can specify the new directory name as an additional argument:</p>
 
@@ -38,7 +38,7 @@
 	<code>
 		git clone https://github.com/libgit2/libgit2 mylibgit
 	</code>
-<pre>
+</pre>
 
 <p>Git has a number of different transfer protocols you can use. The previous example uses the <code>https://</code> protocol, but you may also see <code>git://</code> or <code>user@server:path/to/repo.git</code>, which uses the SSH transfer protocol.</p>
 
@@ -54,7 +54,7 @@
 	<code>
 		git status
 	</code>
-<pre>
+</pre>
 
 <p>In order to begin tracking a new file, you use the command <code>git add</code>.</p>
 
@@ -62,7 +62,7 @@
 	<code>
 		git add README
 	</code>
-<pre>
+</pre>
 
 <p>If you run <code>git status -s</code> or <code>git status --short</code> you get a far more simplified output from the command:</p>
 
