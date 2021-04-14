@@ -276,90 +276,55 @@ Strategy Pattern
 </svg>
 </a>
 </h2>
-<b>Note:</b> Images appearing in this page is subject to copy right and will
-be replaced by <a href="https://milextone.ir">Milestone</a> properties, DO NOT
-USE THEM ELSEWHERE.
+<p><b>Note:</b> Images appearing in this page is subject to copy right and will be replaced by <a href="https://milextone.ir">Milestone</a> properties, DO NOT USE THEM ELSEWHERE.</p>
 
-You may occasionally come across a design where part of your code needs
-different behavior and you know that you just can't create an interface and
-implement some classes with it each with different configurations.
+<p>You may occasionally come across a design where part of your code needs different behavior and you know that you just can't create an interface and implement some classes with it each with different configurations.</p>
 
-Consider a duck simulation game having a <i>Duck</i> super class with
-predefined behaviors: <i>quack, swim, display</i>.
+<p>Consider a duck simulation game having a <code>Duck</code> super class with predefined behaviors: <code>quack</code>, <code>swim</code>, <code>display</code>.</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation.png" alt="duck simulation" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation.png"'>
 
-Now you want to add a <i>fly</i> behavior for ducks.
+<p>Now you want to add a <code>fly</code> behavior for ducks.</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-new-fly-behavior.png" alt="duck simulation with new fly behavior" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-new-fly-behavior.png"'>
 
-This change is usually inevitable in applications.
-No matter how well you design an application, over time it must grow and
-change or it will die.
+<p>This change is usually inevitable in applications. No matter how well you design an application, over time it must grow and change or it will die.</p>
 
-Whenever you need to modify a behavior, you’re often forced to track down and
-change it in all the different subclasses where that behavior is defined,
-probably introducing new bugs along the way!
+<p>Whenever you need to modify a behavior, you’re often forced to track down and change it in all the different subclasses where that behavior is defined, probably introducing new bugs along the way!</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-more-bugs.png" alt="duck simulation with more bugs" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-more-bugs.png"'>
 
-For example we know that <i>fly()</i> and <i>quack()</i> are the parts of
-the Duck class that vary across ducks.
-You may think that to separate these behaviors from the <i>Duck</i> class,
-we’ll pull both methods out of the <i>Duck</i> class and create a new set of
-classes to represent each behavior.
+<p>For example we know that <code>fly()</code> and <code>quack()</code> are the parts of the <code>Duck</code> class that vary across ducks. You may think that to separate these behaviors from the <code>Duck</code> class, we’ll pull both methods out of the <code>Duck</code> class and create a new set of classes to represent each behavior.</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png" alt="duck simulation with behaviors as separate classes" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-behaviors-as-separate-classes.png"'>
 
-But still you're going to need change a lot whenever new requirements arrive.
-Luckily, there’s a design principle for just this situation.
+<p>But still you're going to need change a lot whenever new requirements arrive. Luckily, there’s a design principle for just this situation.</p>
 
-The <b>Strategy Pattern</b> defines a family of algorithms, encapsulates each
-one, and makes them interchangeable.
+<p>The <b>Strategy Pattern</b> defines a family of algorithms, encapsulates each one, and makes them interchangeable.</p>
 
-Identify the aspects of your application that vary and separate them from what
-stays the same.
+<p>Identify the aspects of your application that vary and separate them from what stays the same.</p>
 
-In other words, if you’ve got some aspect of your code that is changing, say
-with every new requirement, then you know you’ve got a behavior that needs to
-be pulled out and separated from all the stuff that doesn’t change.
+<p>In other words, if you’ve got some aspect of your code that is changing, say with every new requirement, then you know you’ve got a behavior that needs to be pulled out and separated from all the stuff that doesn’t change.</p>
 
-Here’s another way to think about this principle: take the parts that vary and
-encapsulate them, so that later you can alter or extend the parts that vary
-without affecting those that don’t.
-All patterns provide a way to let some part of a system vary independently of
-all other parts.
+<p>Here’s another way to think about this principle: take the parts that vary and encapsulate them, so that later you can alter or extend the parts that vary without affecting those that don’t. All patterns provide a way to let some part of a system vary independently of all other parts.</p>
 
-As simple as this concept is, it forms the basis for almost every design
-pattern. All patterns provide a way to let some part of a system vary
-independently of all other parts.
+<p>As simple as this concept is, it forms the basis for almost every design pattern. All patterns provide a way to let some part of a system vary independently of all other parts.</p>
 
-We’ll use an interface to represent each behavior—for instance,
-<i>FlyBehavior</i> and <i>QuackBehavior</i>—and each implementation of a
-behavior will implement one of those interfaces.
+<p>We’ll use an interface to represent each behavior—for instance, <code>FlyBehavior</code> and <code>QuackBehavior</code>—and each implementation of a behavior will implement one of those interfaces.</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-separate-interfaces.png" alt="duck simulation with separate interfaces" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-separate-interfaces.png"'>
 
-Notice that all ducks can swim, even Rubber Ducks and Decoy Ducks!
-So, we are not going to separate them from implementation.
+<p>Notice that all ducks can <code>swim</code>, even <b>Rubber Ducks</b> and <b>Decoy Ducks</b>! So, we are not going to separate them from implementation.</p>
 
-The <b>HAS-A</b> relationship is an interesting one: each duck has a
-<i>FlyBehavior</i> and a <i>QuackBehavior</i> to which it delegates flying and
-quacking.
+<p>The <b>HAS-A</b> relationship is an interesting one: each duck has a <code>FlyBehavior</code> and a <code>QuackBehavior</code> to which it delegates flying and quacking.</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png" alt="duck simulation with behaviors as compositions" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-with-behaviors-as-compositions.png"'>
 
-When you put two classes together like this you’re using composition.
-Instead of inheriting their behavior, the ducks get their behavior by being
-composed with the right behavior object.
+<p>When you put two classes together like this you’re using <b>composition</b>. Instead of inheriting their behavior, the ducks get their behavior by being composed with the right behavior object.</p>
 
-Creating systems using composition gives you a lot more flexibility. Not only
-does it let you encapsulate a family of algorithms into their own set of
-classes, but it also lets you change behavior at runtime as long as the object
-you’re composing with implements the correct behavior interface.
+<p>Creating systems using composition gives you a lot more flexibility. Not only does it let you encapsulate a family of algorithms into their own set of classes, but it also lets you change behavior at runtime as long as the object you’re composing with implements the correct behavior interface.</p>
 
-<h4>Design Principle</h4>
-Design to an interface, not an implementation.
+<p>Design to an interface, not an implementation.</p>
 
 <img class="img-responsive" src="/software-design/design-patterns/duck-simulation-quack-interface.png" alt="duck simulation quack interface" loading="lazy" onerror='this.onerror=null; this.src="software-design/design-patterns/duck-simulation-quack-interface.png"'>
 

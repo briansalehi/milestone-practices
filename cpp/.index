@@ -6,6 +6,7 @@ templates
 stl
 multithreading
 documentation.txt
+design-patterns
 gui
 image-processing
 gpgpu

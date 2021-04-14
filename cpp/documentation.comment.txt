@@ -1,2 +1,11 @@
-<p><a href="https://cplusplus.com">https://cplusplus.com</a></p>
-<p><a href="https://cppreference.com">https://cppreference.com</a></p>
+<p>Following resources are defacto C++ standard documentations:</p>
+
+<ul>
+	<li><b>libstdc++ manual pages</b>: <code>man C++Intro</code></li>
+	<li><a href="https://cplusplus.com">https://cplusplus.com</a></li>
+	<li><a href="https://cppreference.com">https://cppreference.com</a></li>
+</ul>
+
+<p>To go even deeper through this rabbit hole, C++ specification is the ultimate resource:</p>
+
+<p><a href="https://www.iso.org/standard/79358.html">ISO/IEC 14882:2020</a></p>

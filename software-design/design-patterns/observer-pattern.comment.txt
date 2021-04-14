@@ -1,71 +1,48 @@
-<p>
-The Observer Pattern defines a one-to-many dependency between objects so
-that when one object changes state, all of its dependents are notified and
-updated automatically.
-</p>
+<p>The <b>Observer Pattern</b> defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically.</p>
 
-<p>
-Consider a weather monitoring device which retrieves an update every few
-minutes and displays weather data on 3 monitors.
-</p>
+<p>Consider a <b>weather monitoring device</b> which retrieves an update every few minutes and displays weather data on 3 monitors.</p>
 
-<p>
-Our job is to alter the measurementsChanged() method so that it updates the
-three displays for current conditions, weather stats, and forecast.
-</p>
+<p>Our job is to alter the <code>measurementsChanged()</code> method so that it updates the three displays for <b>current conditions</b>, <b>weather stats</b>, and <b>forecast</b>.</p>
 
 ![weatherdata-class-diagram.png]
 
-<p>We’ll need to implement three display elements that use the weather data:</p>
+<p>We’ll need to implement three display elements that use the <b>weather data</b>:</p>
+
 <ul>
-<li>a current conditions display</li>
-<li>a statistics display</li>
-<li>and a forecast display</li>
+	<li>A current conditions display</li>
+	<li>A statistics display</li>
+	<li>And a forecast display</li>
 </ul>
 
-<p>
-These displays must be updated as often as the WeatherData has new
-measurements.
-</p>
+<p>These displays must be updated as often as the <code>WeatherData</code> has new measurements.</p>
 
-<p>
-Here’s a first implementation possibility—as we’ve discussed, we’re going to
-add our code to the measurementsChanged() method in the WeatherData class:
-</p>
+<p>Here’s a first implementation possibility—as we’ve discussed, we’re going to add our code to the <code>measurementsChanged()</code> method in the <code>WeatherData</code> class:</p>
 
-<pre class="language-java line-numbers no-whitespace-normalization"><code>
-public class WeatherData {
-	public void measurementsChanged() {
-		float temp = getTemprature();
-		float humidity = getHumidity();
-		float pressure = getPressure();
+<pre class="language-java line-numbers no-whitespace-normalization" data-line="9-11">
+	<code>
+		public class WeatherData {
+			public void measurementsChanged() {
+				float temp = getTemprature();
+				float humidity = getHumidity();
+				float pressure = getPressure();
 
-		// we're going to update each display by calling its update
-		// method and passing it the most recent measurements.
-		currentConditionsDisplay.update(temp, humidity, pressure);
-		statisitcsDisplay.update(temp, humidity, pressure);
-		forecastDisplay.update(temp, humidity, pressure);
-	}
-}
-</code></pre>
+				// we're going to update each display by calling its update
+				// method and passing it the most recent measurements.
+				currentConditionsDisplay.update(temp, humidity, pressure);
+				statisitcsDisplay.update(temp, humidity, pressure);
+				forecastDisplay.update(temp, humidity, pressure);
+			}
+		}
+	</code>
+</pre>
 
-<p>
-What’s wrong with our implementation anyway?
-Think back to all those Chapter 1 concepts and principles—which are we
-violating, and which are we not? Think in particular about the effects of
-change on this code. Let’s work through our thinking as we look at the code:
-</p>
+<p>What’s wrong with our implementation anyway?</p>
 
-<p>
-By coding to concrete implementations, we have no way to add or remove other
-display elements without making changes to the code.
-</p>
+<p>Think in particular about the effects of change on this code. Let’s work through our thinking as we look at the code:</p>
 
-<p>
-At least we seem to be using a common interface to talk to the display
-elements. They all have an <i>update()</i> method that takes the <i>temp</i>,
-<i>humidity</i>, and <i>pressure</i> values.
-</p>
+<p>By coding to concrete implementations, we have no way to add or remove other display elements without making changes to the code.</p>
+
+<p>At least we seem to be using a common interface to talk to the display elements. They all have an <code>update()</code> method that takes the <code>temp</code>, <code>humidity</code>, and <code>pressure</code> values.</p>
 
 <pre class="language-java line-numbers">
 	<code>
@@ -75,36 +52,21 @@ elements. They all have an <i>update()</i> method that takes the <i>temp</i>,
 	</code>
 </pre>
 
-<p>
-This part looks like an area of change. We need to encapsulate this.
-What if we want to add or remove displays at runtime? This looks hardcoded.
-</p>
+<p>This part looks like an area of change. We need to encapsulate this. What if we want to add or remove displays at runtime? This looks hardcoded.</p>
 
-<p>
-Let’s take a look at the structure of the Observer Pattern, complete with its
-Subject and Observer classes. Here’s the class diagram:
-</p>
+<p>Let’s take a look at the structure of the <a href="/software-design/design-patterns/observer-pattern">Observer Pattern</a>, complete with its <b>Subject</b> and <b>Observer</b> classes. Here’s the class diagram:</p>
 
 ![observer-pattern-diagram.png]
 
-<p>
-When two objects are loosely coupled, they can interact, but they typically
-have very little knowledge of each other. As we’re going to see, loosely
-coupled designs often give us a lot of flexibility (more on that in a bit).
-And, as it turns out, the Observer Pattern is a great example of loose
-coupling.
-</p>
+<p>When two objects are loosely coupled, they can interact, but they typically have very little knowledge of each other. As we’re going to see, loosely coupled designs often give us a lot of flexibility (more on that in a bit). And, as it turns out, the <b>Observer Pattern</b> is a great example of loose coupling.</p>
 
 <p>Using observer pattern, the design of weather station would look like this:</p>
 
 ![weather-station-diagram.png]
 
-<p>
-So, let’s get our implemention of the weather station underway. Let’s start
-with the interfaces:
-</p>
+<p>So, let’s get our implemention of the weather station underway. Let’s start with the interfaces:</p>
 
-<pre class="language-java line-numbers">
+<pre class="language-java line-numbers" data-line="1,7,11">
 	<code>
 		public interface Subject {
 			public void registerObserver(Observer o);
@@ -122,9 +84,9 @@ with the interfaces:
 	</code>
 </pre>
 
-<p>Now lets implement the Subject interface in WeatherData:</p>
+<p>Now lets implement the <code>Subject</code> interface in <code>WeatherData</code>:</p>
 
-<pre class="language-java line-numbers">
+<pre class="language-java line-numbers" data-line="1">
 	<code>
 		public class WeatherData implements Subject {
 			private List&lt;Observer&gt; observers;
@@ -150,7 +112,7 @@ with the interfaces:
 				}
 			}
 
-			public void measurementsChange() {
+			public void measurementsChanged() {
 				notifyObservers();
 			}
 
@@ -168,7 +130,7 @@ with the interfaces:
 
 <p>Now Let's build those display elements:</p>
 
-<pre class="language-java line-numbers">
+<pre class="language-java line-numbers" data-line="7,8">
 	<code>
 		public class CurrentConditionsDisplay implements Observer, DisplayElement {
 			private float temprature;
@@ -192,13 +154,9 @@ with the interfaces:
 	</code>
 </pre>
 
-<p>
-All we need is some code to glue everything together. We’ll be adding some
-more displays and generalizing things in a bit. For now, here’s our first
-attempt:
-</p>
+<p>All we need is some code to glue everything together. We’ll be adding some more displays and generalizing things in a bit. For now, here’s our first attempt:</p>
 
-<pre class="language-java line-numbers">
+<pre class="language-java line-numbers" data-line="5-7">
 	<code>
 		public class WeatherStation {
 			public static void main(String[] args) {
@@ -216,23 +174,11 @@ attempt:
 	</code>
 </pre>
 
-<p>
-In our current Weather Station design, we are pushing all three pieces of data
-to the update() method in the displays, even if the displays don’t need all
-these values. That’s okay, but what if Weather-O-Rama adds another data value
-later, like wind speed? Then we’ll have to change all the update() methods in
-all the displays, even if most of them don’t need or want the wind speed
-data.
-</p>
+<p>In our current <b>Weather Station</b> design, we are pushing all three pieces of data to the <code>update()</code> method in the displays, even if the displays don’t need all these values. That’s okay, but what if <b>Weather-O-Rama</b> adds another data value later, like wind speed? Then we’ll have to change all the <code>update()</code> methods in all the displays, even if most of them don’t need or want the wind speed data.</p>
 
-<p>
-Updating the WeatherStation code to allow Observers to pull the data they
-need is a pretty straightforward exercise. All we need to do is make sure the
-Subject has getter methods for its data, and then change our Observers to use
-them to pull the data that’s appropriate for their needs. Let’s do that.
-</p>
+<p>Updating the <code>WeatherStation</code> code to allow <code>Observers</code> to pull the data they need is a pretty straightforward exercise. All we need to do is make sure the <code>Subject</code> has getter methods for its data, and then change our <code>Observers</code> to use them to pull the data that’s appropriate for their needs. Let’s do that.</p>
 
-<pre class="language-java line-numbers">
+<pre class="language-java line-numbers" data-line="2,3">
 	<code>
 		public void update() {
 			this.temprature = weatherdata.getTemprature();
