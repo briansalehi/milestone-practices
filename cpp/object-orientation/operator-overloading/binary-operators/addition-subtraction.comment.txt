@@ -1,0 +1,1 @@
+<p>Similar to the <a href="/cpp/object-oriented/operator-overloading/binary-operators/increment-decrement">increment/decrement operators</a>, the <b>binary plus</b> and <b>minus</b>, when defined, enable you to add or subtract the value of a supported data type from an object of the class that implements these operators.</p>

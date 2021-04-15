@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>friend</title>
+<title>Move Assignment Operator</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -257,7 +257,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Operator Overloading</a></li>
-<li class='breadcrumb-item active'>friend</li>
+<li class='breadcrumb-item active'>Move Assignment Operator</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -269,8 +269,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="friend" class="anchor" aria-hidden="true" href="#friend">
-friend
+<a id="Move-Assignment-Operator" class="anchor" aria-hidden="true" href="#Move-Assignment-Operator">
+Move Assignment Operator
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -278,94 +278,40 @@ friend
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Friend functions are introduced in previous sections,
-but it didn't mention how to use them.  
-The usage of friend operators are introduced here with a problem.  
-When we write: **object + 1** , meaning that the object is placed in left side
-and integer is in the right side.  
-Here compiler will actually compile **object.operator+(int)** .
-Note that this operator is one of the object's members.  
-But what if we write: **2 + object** ? That is, if integer is in the left side and object in the right side.  
-We can solve such problem in two ways:
+<p>The <b>move constructor</b> and the <b>move assignment operators</b> are performance optimization features that have become a part of the standard in C++11, ensuring that temporary values (<b>rvalues</b> that don’t exist beyond the statement) are not wastefully copied. This is particularly useful when handling a class that manages a dynamically allocated resource, such as a dynamic <code>std::array</code> class or a <code>std::string</code> class.</p>
 
-* use a friend non-member overloaded operator: **friend class operator+(int, class)**
-* or use a non-friend operator and then switch the precedence of operators as you may see in the code.
+<p>The syntax of the move constructor is as follows:</p>
 
-ref[6]
-The ability to declare friendship relationships between classes is useful, but the  
-extensive use of friends often indicates a poor class structure design. For example,  
-a better solution would be to have class Vector define a public subscripting operator.  
-Then the multiply function could use this public member to access the vector class,  
-rather than access private member data.  
-Note that “friendship” is not transitive. For example, if a new class Tensor  
-was made a friend of Matrix, Tensor would not be a friend of Vector, unless class  
-Vector were to explicitly declare it to be so.
-end[6]
-<hr />
-  <cite>friend.cxx</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    #include &lt;iostream&gt;
-    
-    class Base {
-    public:
-        // constructors
-        Base(): member{0} {};
-        Base(int input): member{input} {};
-    
-        // methods
-        void show() {
-            std::cout &lt;&lt; member &lt;&lt; std::endl;
-        }
-    
-        // overloaded operators
-        Base operator+ (int input) const { // member operator has access to private members
-            return Base(member+input);
-        }
-    
-        friend Base operator+ (int input, const Base&amp; base); // non-member operator does not have access to private members so we make them friends
-    
-    private:
-        int member;
-    };
-    
-    Base operator+ (int input, const Base&amp; base) {
-        Base temp(base.member + input);
-        return temp;
-    }
-    
-    /* tip: we could define this function as a non-friend and just switch the operation order
-    
-    Base operator+ (int input, Base&amp; base) const {
-        return base + input;
-    }
-    
-    */
-    
-    int main()
-    {
-        Base alpha(1);
-        Base beta = alpha + 1;
-        beta.show(); // should be 2
-    
-        /* problem: beta.operator+(1) is used when we write beta + 1,
-            what if we write 2 + beta ? here comes the friend operators */
-        Base gama = 2 + beta;
-        gama.show(); // should be 4
-    
-        return 0;
-    }
-</code>
-</pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
-<code>
-g++ -Wall -g -o ./friend.o -c ./friend.cxx
-g++ -g -o ./friend.bin ./friend.o
-./friend.bin
-2
-4
-</code>
+<pre class="language-cpp line-numbers" data-line="10-14,16-23">
+	<code>
+		class Sample
+		{
+		public:
+			Sample(); // default constructor
+
+			Sample(const Sample&amp; copySource); // copy constructor
+
+			Sample&amp; operator=(const Sample&amp; copySource); // copy assignment operator
+
+			Sample(Sample&amp;&amp; moveSource) // Move constructor, note &amp;&amp;
+			{
+				ptrResource = moveSource.ptrResource; // take ownership, start move
+				moveSource.ptrResource = NULL;
+			}
+
+			Sample&amp; operator=(Sample&amp;&amp; moveSource) //move assignment operator, note &amp;&amp;
+			{
+				if(this != &amp;moveSource) {
+					delete [] ptrResource; // free own resource
+					ptrResource = moveSource.ptrResource; // take ownership, start move
+					moveSource.ptrResource = NULL; // free move source of ownership
+				}
+			}
+
+		private:
+			Type* ptrResource;
+		};
+	</code>
 </pre>
 <hr />
 <h3>
@@ -378,11 +324,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>6: 43: <span style='color: red'></span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 12</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.3.2.3.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.5.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operator-overloading/copy-assignment">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/operator-overloading/friend-operators">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

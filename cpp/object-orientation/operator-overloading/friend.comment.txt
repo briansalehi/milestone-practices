@@ -1,23 +1,11 @@
-Friend functions are introduced in previous sections,
-but it didn't mention how to use them.  
-The usage of friend operators are introduced here with a problem.  
-When we write: **object + 1** , meaning that the object is placed in left side
-and integer is in the right side.  
-Here compiler will actually compile **object.operator+(int)** .
-Note that this operator is one of the object's members.  
-But what if we write: **2 + object** ? That is, if integer is in the left side and object in the right side.  
-We can solve such problem in two ways:
+<p>When we write <code>Date + 1</code>, means that the object is placed in left side and integer is in the right side. Here compiler will actually compile <code>object.operator+(int)</code>. Note that this operator is one of the object's members. But what if we write: <code>2 + object</code>? That is, if integer is in the left side and object in the right side. We can solve such problem in two ways:</p>
 
-* use a friend non-member overloaded operator: **friend class operator+(int, class)**
-* or use a non-friend operator and then switch the precedence of operators as you may see in the code.
+<ul>
+	<li>Use a <b>friend</b> non-member overloaded operator: <code>friend class operator+(int, class)</code></li>
+	<p>or</p>
+	<li>Use a <b>non-friend</b> operator and then switch the precedence of operators as you may see in the code <code>object + 2</code></li>
+</ul>
 
-ref[6]
-The ability to declare friendship relationships between classes is useful, but the  
-extensive use of friends often indicates a poor class structure design. For example,  
-a better solution would be to have class Vector define a public subscripting operator.  
-Then the multiply function could use this public member to access the vector class,  
-rather than access private member data.  
-Note that “friendship” is not transitive. For example, if a new class Tensor  
-was made a friend of Matrix, Tensor would not be a friend of Vector, unless class  
-Vector were to explicitly declare it to be so.
-end[6]
+<p>The ability to declare friendship relationships between classes is useful, but the extensive use of <b>friends</b> often indicates a poor class structure design. For example, a better solution would be to have class <code>Vector</code> define a public <a href="/cpp/object-oriented/operator-overloading/binary-operators/subscript">subscripting operator</a>. Then a <code>multiply</code> function could use this public member to access the <code>Vector</code> class, rather than access private member data.</p>  
+
+<p>Note that “<b>friendship</b>” is not <b>transitive</b>. For example, if a new class <code>Tensor</code> was made a <b>friend</b> of <code>Matrix</code>, <code>Tensor</code> would not be a <b>friend</b> of <code>Vector</code>, unless class <code>Vector</code> were to explicitly declare it to be so.</p>

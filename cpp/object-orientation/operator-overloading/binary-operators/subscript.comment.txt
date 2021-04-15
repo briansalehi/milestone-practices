@@ -1,0 +1,22 @@
+Index operator can be overloaded in every class you want, but you should be thinking if it's logical to use them or not.
+
+<p>The operator that allow array-style <code>[]</code> access to a class is called subscript operator. The typical syntax of a subscript operator is:</p>
+
+<pre class="language-cpp">
+	<code>
+		return_type&amp; operator[] (subscript_type&amp; subscript);
+	</code>
+</pre>
+
+<p>Using keyword const is important even when programming operators.</p>
+
+<p>You can implement two subscript operators—one as a const function and the other as a non-const one:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		char&amp; operator[] (int index); // use to write / change buffer at index
+		char&amp; operator[] (int index) const; // used only for accessing char at index
+	</code>
+</pre>
+
+<p>The compiler will invoke the <b>const</b> function for read operations and the <b>non-const</b> version for operations that write into the <code>MyString</code> object. Thus, you can (if you want to) have separate functionalities in the two subscript operations.</p>

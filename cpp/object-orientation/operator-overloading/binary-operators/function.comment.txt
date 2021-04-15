@@ -1,0 +1,7 @@
+<p>Using <code>const</code> as many as possible is a best practice. Be generous using in it.</p>
+
+<p><code>operator()</code> can be overloaded to make an object act like a function. Why an object might need this feature is totally up to you.</p>
+
+<p>The <code>operator()</code> that make objects behave like a function is called a <b>function operator</b>.</p> 
+
+<p>They find application in the <b>standard template library</b> (STL) and are typically used in STL algorithms. Their usage can include making decisions; such function objects are typically called <b>unary</b> or <b>binary predicates</b>, depending on the number of operands they work on.</p>

@@ -1,0 +1,43 @@
+<p>To overload <b>prefix</b> <code>operator++</code>, it needs no argument but postfix <code>operator++</code> must have an argument of type <code>int</code>.</p>
+
+<p>Be careful when implementing overloaded operators, implementations must match the definition of operators.</p>
+
+<pre class="language-cpp line-numbers" data-line="1,7">
+	<code>
+		base + 2; // should not change anything
+		Base additioned = base + 2; // does not modify base but assigns the result to additioned
+	</code>
+</pre>
+
+<p>The postfix increment <code>operator++</code> has a different return type and an input parameter (that is not always used):</p>
+
+<pre class="language-cpp line-numbers" data-line="1,7">
+	<code>
+		Date operator++(int)
+		{
+			// Store a copy of the current state of the object, before incrementing day
+			Date copy(*this);
+
+			// increment implementation code
+			++day;
+
+			// Return state before increment (because, postfix)
+			return copy;
+		}
+	</code>
+</pre>
+
+<p>The <b>prefix</b> and <b>postfix decrement</b> operators have a similar syntax as the <b>increment operators</b>, just that the declaration would contain a <code>--</code> where you see a <code>++</code>.</p>
+
+<p>A unary prefix increment <code>operator++</code> can be programmed using the following syntax within the class declaration:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		// Unary increment operator (prefix)
+		Date&amp; operator++()
+		{
+			// operator implementation code
+			return *this;
+		}
+	</code>
+</pre>

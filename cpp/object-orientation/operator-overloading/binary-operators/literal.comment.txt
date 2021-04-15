@@ -1,0 +1,25 @@
+<p>C++11 extended the standard’s support of <b>literals</b> by allowing you to define your own literals. For instance, if you were working on a scientific application that deals with thermodynamics, you may want all your temperatures to be stored and operated using a scale called Kelvin. You may now declare all your temperatures using a syntax similar to the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		Temperature k1 = 32.15_F;
+		Temperature k2 = 0.0_C;
+	</code>
+</pre>
+
+<p>Using literals <code>_F</code> and <code>_C</code> that you have defined, you have made your application a lot simpler to read and therefore maintain.</p> 
+
+<p>To define your own <b>literal</b>, you define <code>operator""</code> like this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		ReturnType operator"" YourLiteral(ValueType value)
+		{
+			// conversion code here
+		}
+	</code>
+</pre>
+
+<p>Depending on the nature of the user defined literal, the <code>ValueType</code> parameter would be restricted to one of the following:</p>
+
+<p><code>unsigned long long int</code> for integral literal <code>long double</code> for floating point literal <code>char</code>, <code>wchar_t</code>, <code>char16_t</code>, and <code>char32_t</code> for character literal <code>const char*</code> for raw string literal <code>const char*</code> together with <code>size_t</code> for string literal <code>const wchar_t*</code> together with <code>size_t</code> for string literal <code>const char16_t*</code> together with <code>size_t</code> for string literal <code>const char32_t*</code> together with <code>size_t</code> for string literal.</p>

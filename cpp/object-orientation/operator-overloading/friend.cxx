@@ -16,7 +16,8 @@ public:
         return Base(member+input);
     }
 
-    friend Base operator+ (int input, const Base& base); // non-member operator does not have access to private members so we make them friends
+	// non-member operator does not have access to private members so we make them friends
+    friend Base operator+ (int input, const Base& base);
 
 private:
     int member;

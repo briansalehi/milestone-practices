@@ -1,12 +1,6 @@
 README.md
-assignment.cxx
-copy.cxx
-equality.cxx
+unary-operators
+binary-operators
+copy-assignment.cxx
+move-assignment.cxx
 friend.cxx
-function.cxx
-increment.cxx
-inequality.cxx
-literal.cxx
-move.cxx
-stream.cxx
-subscript.cxx

@@ -1,0 +1,45 @@
+<p>To make your object able to directly work with streaming objects like standard output, you should declare a <code>const char*</code> operator. To do so, you should include <code>&lt;sstream&gt;</code> header and use <code>std::ostringstream</code> object in order to convert any type of members into <code>std::string</code> and then return them as a <b>C style string</b>.</p>
+
+<p>To avoid implicit conversions, use keyword <code>explicit</code> at the beginning of an operator declaration, as follows:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		explicit operator const char*()
+		{
+			// conversion code here
+		}
+	</code>
+</pre>
+
+<p>Using <code>explicit</code> would force the programmer to assert his intention to convert using a cast:</p>
+
+<pre class="language-cpp line-numbers" data-line="3">
+	<code>
+		std::string strHoliday(static_cast&lt;const char*&gt;(Holiday));
+
+		strHoliday = static_cast&lt;const char*&gt;(Date(11,11,2016));
+	</code>
+</pre>
+
+<p>Casting, including <code>static_cast</code>, is discussed in detail in <a href="/cpp/memory-management/casting">Casting Operators</a>.</p>
+
+<p>Program as many operators as you think your class would be used with.</p>
+
+<p>If your application needs an integer representation of a <code>Date</code>, then you may program it as follows:</p>
+
+<pre class="language-cpp line-numbers" data-line="1">
+	<code>
+		explicit operator int()
+		{
+			return day + month + year;
+		}
+	</code>
+</pre>
+
+<p>This would allow an instance of <code>Date</code> to be used or transacted as an integer:</p>
+
+<pre class="language-cpp">
+	<code>
+		FuncTakesInt(static_cast&lt;int&gt;(Date(12, 25, 2016)));
+	</code>
+</pre>

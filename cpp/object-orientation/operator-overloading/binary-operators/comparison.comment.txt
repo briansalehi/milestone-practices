@@ -1,0 +1,29 @@
+<p>You need to program the less-than (&lt;), greater-than (&gt;), less-than-equals (&lt;=), and greater-than-equals (&gt;=) operators to enable conditional checking akin to the following:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		if (date1 &lt; date2) {
+			// do something
+		}
+
+		// or
+
+		if (date1 &lt;= date2) {
+			// do something
+		}
+
+		// or
+
+		if (date1 &gt; date2) {
+			// do something
+		}
+
+		// or
+
+		if (date1 &gt;= date2) {
+			// do something
+		}
+	</code>
+</pre>
+
+<p>Comparing <b>year</b>, <b>month</b> and <b>day</b> respectively is a simple logic, this implementation is far away from being a perfect comparison operator.</p>

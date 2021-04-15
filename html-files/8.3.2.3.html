@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>equality and inequality operator</title>
+<title>Copy Assignment Operator</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -257,7 +257,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.3.0.html">Object Orientation</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/8.3.2.0.html">Operator Overloading</a></li>
-<li class='breadcrumb-item active'>equality and inequality operator</li>
+<li class='breadcrumb-item active'>Copy Assignment Operator</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -269,8 +269,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="equality-and-inequality-operator" class="anchor" aria-hidden="true" href="#equality-and-inequality-operator">
-equality and inequality operator
+<a id="Copy-Assignment-Operator" class="anchor" aria-hidden="true" href="#Copy-Assignment-Operator">
+Copy Assignment Operator
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -278,57 +278,121 @@ equality and inequality operator
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-We see that the operator equality checking **==** checks for equality of days, months and years. This is a correct logic when comparing two dates.  
-And notice how we used one operator to implement another.
+<p>There are times when you want to assign the contents of an instance of a class to another, like this:</p>
+
+<pre class="language-cpp line-numbers" data-line="3">
+	<code>
+		Date holiday(12, 25, 2016);
+		Date anotherHoliday(1, 1, 2017);
+		anotherHoliday = holiday; // uses copy assignment operator
+	</code>
+</pre>
+
+<p>This assignment invokes the <b>default copy assignment operator</b> that the compiler has built in to your class when you have not supplied one. Depending on the nature of your class, the <b>default copy assignment operator</b> might be inadequate, especially if your class is managing a resource that will not be copied. This problem with the <b>default copy assignment operator</b> is similar to the one with the <b>default copy constructor</b> discussed in <a href="/cpp/object-orientation/classes/copy-constructor.cxx">Constructors</a>. To ensure deep copies, as with the <b>copy constructor</b>, you need to specify an accompanying <b>copy assignment operator</b>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		ClassType&amp; operator=(const ClassType&amp; copySource)
+		{
+			if(this != &amp;copySource) // protection against copy into self
+			{
+				// copy assignment operator implementation
+			}
+
+			return *this;
+		}
+	</code>
+</pre>
+
+<p>There are some small tips to consider:</p>  
+
+<ul>
+	<li>Always check for pointer validity before modification</li>
+	<li>Always delete a declared block of memory in destructor</li>
+	<li>Use <code>const</code> keyword as many as possible</li>
+</ul>
 <hr />
-  <cite>equality.cxx</cite>
-<pre class="line-numbers" >
+  <cite>copy-assignment.cxx</cite>
+<pre class="line-numbers" data-line='14-26,47'>
 <code class="language-cpp">
     #include &lt;iostream&gt;
+    #include &lt;string&gt;
+    #include &lt;cstring&gt;
     
-    class Date {
-    private:
-        int day, month, year;
-    
+    class Message
+    {
     public:
-        Date(int d, int m, int y): day{d}, month{m}, year{y} {}
-    
-        bool operator == (const Date&amp; pair) {
-            return (day == pair.day &amp;&amp; month == pair.month &amp;&amp; year == pair.year);
+        Message(const char* msg): text(nullptr)
+    	{
+            text = new char[strlen(msg)+1];
+            strcpy(text, msg);
         }
     
-        bool operator != (const Date&amp; pair) {
-            return !(this-&gt;operator== (pair));
+        Message&amp; operator= (const Message&amp; pair)
+    	{
+            if ((this != &amp;pair) &amp;&amp; (pair.text != nullptr)) {
+                if (text != nullptr) {
+                    delete [] text;
+                }
+                
+                text = new char[strlen(pair.text)+1];
+                strcpy(text, pair.text);
+            }
+    
+            return *this;
         }
+    
+        operator const char*()
+    	{
+            return text;
+        }
+    
+        virtual ~Message()
+    	{
+            delete [] text;
+        }
+    
+    private:
+        char* text;
     };
     
     int main()
     {
-        Date today(17,8,2018);
-        Date holiday(17,8,2018);
+        Message msg1(&quot;first message&quot;);
+        Message msg2(&quot;second message&quot;);
+        std::cout &lt;&lt; msg1 &lt;&lt; std::endl;
+        msg1 = msg2;
+        std::cout &lt;&lt; msg1 &lt;&lt; std::endl;
     
-        if (today == holiday) {
-            std::cout &lt;&lt; &quot;today is holiday!&quot; &lt;&lt; std::endl;
-        }
-        else {
-            std::cout &lt;&lt; &quot;today we have a lot of work to do&quot; &lt;&lt; std::endl;
-        }
-            
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
-g++ -Wall -g -o ./equality.o -c ./equality.cxx
-g++ -g -o ./equality.bin ./equality.o
-./equality.bin
-today is holiday!
+g++ -Wall -g -o ./copy-assignment.o -c ./copy-assignment.cxx
+g++ -g -o ./copy-assignment.bin ./copy-assignment.o
+./copy-assignment.bin
+first message
+second message
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 12</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operator-overloading/copy-assignment-operator">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/object-orientation/operator-overloading/binary-operators/function">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.2.4.html">Next Page</a></li>
 </ul>
 <script>

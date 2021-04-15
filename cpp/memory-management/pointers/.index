@@ -10,6 +10,5 @@ nothrow.cxx
 passing.cxx
 pointer.cxx
 range.cxx
-reference.cxx
 store-lambda.cxx
 try_catch.cxx

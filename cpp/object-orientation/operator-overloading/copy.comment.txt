@@ -1,6 +1,0 @@
-The process of copying a C style string is done by assignment operator and a few functions in **cstring** header file.  
-There are some small tips to consider:  
-
-* always check for pointer validity before modification
-* always delete a declared block of memory in destructor
-* use **const** keyword as many as possible

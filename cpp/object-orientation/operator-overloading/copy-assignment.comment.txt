@@ -1,0 +1,33 @@
+<p>There are times when you want to assign the contents of an instance of a class to another, like this:</p>
+
+<pre class="language-cpp line-numbers" data-line="3">
+	<code>
+		Date holiday(12, 25, 2016);
+		Date anotherHoliday(1, 1, 2017);
+		anotherHoliday = holiday; // uses copy assignment operator
+	</code>
+</pre>
+
+<p>This assignment invokes the <b>default copy assignment operator</b> that the compiler has built in to your class when you have not supplied one. Depending on the nature of your class, the <b>default copy assignment operator</b> might be inadequate, especially if your class is managing a resource that will not be copied. This problem with the <b>default copy assignment operator</b> is similar to the one with the <b>default copy constructor</b> discussed in <a href="/cpp/object-orientation/classes/copy-constructor.cxx">Constructors</a>. To ensure deep copies, as with the <b>copy constructor</b>, you need to specify an accompanying <b>copy assignment operator</b>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		ClassType&amp; operator=(const ClassType&amp; copySource)
+		{
+			if(this != &amp;copySource) // protection against copy into self
+			{
+				// copy assignment operator implementation
+			}
+
+			return *this;
+		}
+	</code>
+</pre>
+
+<p>There are some small tips to consider:</p>  
+
+<ul>
+	<li>Always check for pointer validity before modification</li>
+	<li>Always delete a declared block of memory in destructor</li>
+	<li>Use <code>const</code> keyword as many as possible</li>
+</ul>

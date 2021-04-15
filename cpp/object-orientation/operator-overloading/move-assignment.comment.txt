@@ -1,0 +1,35 @@
+<p>The <b>move constructor</b> and the <b>move assignment operators</b> are performance optimization features that have become a part of the standard in C++11, ensuring that temporary values (<b>rvalues</b> that don’t exist beyond the statement) are not wastefully copied. This is particularly useful when handling a class that manages a dynamically allocated resource, such as a dynamic <code>std::array</code> class or a <code>std::string</code> class.</p>
+
+<p>The syntax of the move constructor is as follows:</p>
+
+<pre class="language-cpp line-numbers" data-line="10-14,16-23">
+	<code>
+		class Sample
+		{
+		public:
+			Sample(); // default constructor
+
+			Sample(const Sample&amp; copySource); // copy constructor
+
+			Sample&amp; operator=(const Sample&amp; copySource); // copy assignment operator
+
+			Sample(Sample&amp;&amp; moveSource) // Move constructor, note &amp;&amp;
+			{
+				ptrResource = moveSource.ptrResource; // take ownership, start move
+				moveSource.ptrResource = NULL;
+			}
+
+			Sample&amp; operator=(Sample&amp;&amp; moveSource) //move assignment operator, note &amp;&amp;
+			{
+				if(this != &amp;moveSource) {
+					delete [] ptrResource; // free own resource
+					ptrResource = moveSource.ptrResource; // take ownership, start move
+					moveSource.ptrResource = NULL; // free move source of ownership
+				}
+			}
+
+		private:
+			Type* ptrResource;
+		};
+	</code>
+</pre>
