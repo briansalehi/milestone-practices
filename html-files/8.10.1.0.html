@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>OpenCL</title>
+<title>Data Types</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -255,8 +255,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.10.0.html">General Purpose GPU Programming</a></li>
-<li class='breadcrumb-item active'>OpenCL</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.10.0.html">Image Processing</a></li>
+<li class='breadcrumb-item active'>Data Types</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -268,8 +268,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="OpenCL" class="anchor" aria-hidden="true" href="#OpenCL">
-OpenCL
+<a id="Data-Types" class="anchor" aria-hidden="true" href="#Data-Types">
+Data Types
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -278,8 +278,8 @@ OpenCL
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gpgpu">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.10.1.1.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/image-processing">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.10.1.1.0.html">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -292,11 +292,7 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>C++ Concurrency in Action, 2nd Edition = Anthony Williams: <span style='color: red'></span></li>
-<li class='list-group-item'>Heterogeneous Computing with OpenCL 2.0, 3rd Edition - David R. Kaeli, Perhaad Mistry, Dana Schaa, Dong Ping Zhang: <span style='color: red'></span></li>
-<li class='list-group-item'>OpenCL in Action: How to Accelerate Graphics and Computations, 1st Edition = Matthew Scarpino: <span style='color: red'></span></li>
-<li class='list-group-item'>OpenCL Parallel Programming Development Cookbook - Raymond Tay: <span style='color: red'></span></li>
-<li class='list-group-item'>OpenCL Programming by Example - Ravishekhar Banger, Koushik Bhattacharyya: <span style='color: red'></span></li>
+<li class='list-group-item'>Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski: <span style='color: red'></span></li>
 </ul>
 <hr />
 <h3>
@@ -309,10 +305,202 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/8.10.1.1.html" class="list-group-item">
-	1. Not Implemented Yet
+<a href="#8-10-1-1-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>1. Basic Types
+	<span class="badge badge-primary badge-pill">8</span>
+</a>
+<div class="list-group collapse" id="8-10-1-1-0">
+<a href="/8.10.1.1.1.html" class="list-group-item group-child">
+	1. cv::Point
 	
 </a>
+<a href="/8.10.1.1.2.html" class="list-group-item group-child">
+	2. cv::Size
+	
+</a>
+<a href="/8.10.1.1.3.html" class="list-group-item group-child">
+	3. cv::Vec
+	
+</a>
+<a href="/8.10.1.1.4.html" class="list-group-item group-child">
+	4. cv::Scalar
+	
+</a>
+<a href="/8.10.1.1.5.html" class="list-group-item group-child">
+	5. cv::Rect
+	
+</a>
+<a href="/8.10.1.1.6.html" class="list-group-item group-child">
+	6. cv::RotatedRect
+	
+</a>
+<a href="/8.10.1.1.7.html" class="list-group-item group-child">
+	7. cv::Complex
+	
+</a>
+<a href="/8.10.1.1.8.html" class="list-group-item group-child">
+	8. cv::Matx
+	
+</a>
+</div>
+<a href="#8-10-1-2-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>2. Helper Objects
+	<span class="badge badge-primary badge-pill">6</span>
+</a>
+<div class="list-group collapse" id="8-10-1-2-0">
+<a href="/8.10.1.2.1.html" class="list-group-item group-child">
+	1. cv::Range
+	
+</a>
+<a href="/8.10.1.2.2.html" class="list-group-item group-child">
+	2. cv::Ptr
+	
+</a>
+<a href="/8.10.1.2.3.html" class="list-group-item group-child">
+	3. cv::TermCriteria
+	
+</a>
+<a href="/8.10.1.2.4.html" class="list-group-item group-child">
+	4. cv::Exception
+	
+</a>
+<a href="/8.10.1.2.5.html" class="list-group-item group-child">
+	5. cv::DataType
+	
+</a>
+<a href="/8.10.1.2.6.html" class="list-group-item group-child">
+	6. cv::InputArray, cv::OutputArray, cv::noArray
+	
+</a>
+</div>
+<a href="#8-10-1-3-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>3. Images
+	<span class="badge badge-primary badge-pill">3</span>
+</a>
+<div class="list-group collapse" id="8-10-1-3-0">
+<a href="/8.10.1.3.1.html" class="list-group-item group-child">
+	1. cv::Mat members
+	
+</a>
+<a href="/8.10.1.3.2.html" class="list-group-item group-child">
+	2. access array elements indivitually
+	
+</a>
+<a href="/8.10.1.3.3.html" class="list-group-item group-child">
+	3. creating an array
+	
+</a>
+</div>
+<a href="#8-10-1-4-0" class="list-group-item" data-toggle="collapse">
+	<i class="glyphicon glyphicon-chevron-right"></i>4. Utility Functions
+	<span class="badge badge-primary badge-pill">26</span>
+</a>
+<div class="list-group collapse" id="8-10-1-4-0">
+<a href="/8.10.1.4.1.html" class="list-group-item group-child">
+	1. cv::alignPtr
+	
+</a>
+<a href="/8.10.1.4.2.html" class="list-group-item group-child">
+	2. cv::alignSize
+	
+</a>
+<a href="/8.10.1.4.3.html" class="list-group-item group-child">
+	3. cv::allocate (will be removed)
+	
+</a>
+<a href="/8.10.1.4.4.html" class="list-group-item group-child">
+	4. cv::CV_Assert
+	
+</a>
+<a href="/8.10.1.4.5.html" class="list-group-item group-child">
+	5. cv::cubeRoot
+	
+</a>
+<a href="/8.10.1.4.6.html" class="list-group-item group-child">
+	6. cvCeil
+	
+</a>
+<a href="/8.10.1.4.7.html" class="list-group-item group-child">
+	7. cvFloor
+	
+</a>
+<a href="/8.10.1.4.8.html" class="list-group-item group-child">
+	8. cvIsInf
+	
+</a>
+<a href="/8.10.1.4.9.html" class="list-group-item group-child">
+	9. cvIsNaN
+	
+</a>
+<a href="/8.10.1.4.10.html" class="list-group-item group-child">
+	10. cvRound
+	
+</a>
+<a href="/8.10.1.4.11.html" class="list-group-item group-child">
+	11. cv::deallocate (will be removed)
+	
+</a>
+<a href="/8.10.1.4.12.html" class="list-group-item group-child">
+	12. cv::error
+	
+</a>
+<a href="/8.10.1.4.13.html" class="list-group-item group-child">
+	13. cv::CV_Error
+	
+</a>
+<a href="/8.10.1.4.14.html" class="list-group-item group-child">
+	14. cv::fastatan2
+	
+</a>
+<a href="/8.10.1.4.15.html" class="list-group-item group-child">
+	15. cv::fastFree()
+	
+</a>
+<a href="/8.10.1.4.16.html" class="list-group-item group-child">
+	16. cv::fastMalloc()
+	
+</a>
+<a href="/8.10.1.4.17.html" class="list-group-item group-child">
+	17. cv::format
+	
+</a>
+<a href="/8.10.1.4.18.html" class="list-group-item group-child">
+	18. cv::getCPUTickCount
+	
+</a>
+<a href="/8.10.1.4.19.html" class="list-group-item group-child">
+	19. cv::getNumThreads
+	
+</a>
+<a href="/8.10.1.4.20.html" class="list-group-item group-child">
+	20. cv::getOptimalDFTSize
+	
+</a>
+<a href="/8.10.1.4.21.html" class="list-group-item group-child">
+	21. cv::getThreadNum
+	
+</a>
+<a href="/8.10.1.4.22.html" class="list-group-item group-child">
+	22. cv::getTickCount
+	
+</a>
+<a href="/8.10.1.4.23.html" class="list-group-item group-child">
+	23. cv::getTickFrequency
+	
+</a>
+<a href="/8.10.1.4.24.html" class="list-group-item group-child">
+	24. cv::setNumThreads
+	
+</a>
+<a href="/8.10.1.4.25.html" class="list-group-item group-child">
+	25. cv::setUseOptimized
+	
+</a>
+<a href="/8.10.1.4.26.html" class="list-group-item group-child">
+	26. cv::useOptimized
+	
+</a>
+</div>
 </div>
 <script>
 function darkmode() {
