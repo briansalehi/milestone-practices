@@ -1,0 +1,81 @@
+<p>The main purpose of <b>sequence diagrams</b> is to show the order of events between the parts of your system that are involved in a particular interaction. <b>Communication diagrams</b> add another perspective to an interaction by focusing on the links between the participants.</p>
+
+<p>On a sequence diagram, the links between participants are implied by the fact that a message is passed between them.</p>
+
+<p><b>Sequence</b> and <b>communication diagrams</b> are so similar that most UML tools can automatically convert from one diagram type to the other. The difference between the two approaches is largely personal preference. If you're happier looking at interactions from a link perspective, then <b>communication diagrams</b> are likely to be for you; however, if you prefer to see the order of the interactions as clearly as possible, then you're likely to be in the <b>sequence diagram</b> camp.</p>
+
+<p>A <b>communication diagram</b> is made up of three things: <b>participants</b>, the <b>communication links</b> between those participants, and the <b>messages</b> that can be passed along those communication links.</p>
+
+![communication-diagram-sample.png]
+
+<b>Participants</b> on a communication diagram are represented by a rectangle. The participant's name and class are then placed in the middle of the rectangle. A participant's name is formatted as <code>&lt;name&gt; : &lt;class&gt;</code>, similar to participants on a sequence diagram.
+
+<p>A <b>communication link</b> is shown with a single line that connects two participants.</p>
+
+![message-between-participants.png]
+
+<p><b>Communication diagrams</b> do not necessarily flow down the page like <b>sequence diagrams</b>; therefore, message order on a communication diagram is shown using a number before each message. Each message number indicates the order in which that message is invoked, starting at 1 and increasing until all of the messages on the diagram are accounted for.</p>
+
+<p>When a message causes another message to be invoked, the second message is said to be <b>nested</b> inside the original message.</p>
+
+![nested-calling-messages.png]
+
+<p><b>Communication diagrams</b> use their message numbering scheme to show the <b>order</b> of <b>nested messages</b>. If we say that the initial message is numbered <code>1.</code>, then any messages nested within the initial message begin with <code>1.</code>, adding a number after the decimal point for the ordering of the nested messages. If an initial message's number was <code>1.</code>, then the first nested message's number would be <code>1.1.</code>.</p>
+
+![three-layered-nested-messages.png]
+
+<p><b>Communication diagrams</b> take advantage of their number-based message ordering by adding a number-and-letter notation to indicate that a message happens at the same time as another message.</p>
+
+![concurrent-message-invokation.png]
+
+<p>Although UML does not actually dictate how a <b>communication diagram</b> can show that a message is invoked a number of times, it does state that an <b>asterisk</b> should be used before a looping constraint is applied. This rather complicated statement means that the following example is a safe way to specify that something is going to happen 10 times:</p>
+
+<pre class="language-bash command-line" data-output="1">
+	<code>
+		*[i = 0 .. 9]
+	</code>
+</pre>
+
+![looping-constraint.png]
+
+<p>Sometimes a message should be invoked only if a particular condition is evaluated to be true.</p>
+
+<p>Just as with <b>sequence diagram fragments</b>, communication diagram messages can have <b>guards</b> set to describe the conditions that need to be evaluated before a message is invoked.</p>
+
+![multiple-message-invokation.png]
+
+<p>Just as on <b>sequence diagrams</b>, a participant on a <b>communication diagram</b> can send a message to itself. All that is needed is a link from the participant to itself to enable the message to be invoked</p>
+
+![self-invokation.png]
+
+<p>With the new communication diagram notation out of the way, it's now time to look at a practical example.</p>
+
+![cms-sequence-diagram-with-messages.png]
+
+<p>It isn't necessary to have a <b>sequence diagram</b> before you create a <b>communication diagram</b>. You can create communication diagrams or sequence diagrams for your <b>interactions</b> in whatever order you see fit.</p>
+
+![distributed-participants.png]
+
+<p>Next, the links between each of the participants are added so they can communicate with each other.</p>
+
+![linked-participants.png]
+
+<p>It's now time to add the messages that are sent between participants during the lifetime of the interaction.</p>
+
+![admin-invoking-three-messages.png]
+
+<p>Once the initial message or messages are added to the communication diagram, things start to get more complicated. The <code>3. enterAuthorDetails(  )</code> message triggers a nested creation message that is sent from the <code>ui : AccountCreationUserInterface</code> participant to create a new <code>authorDetails : CustomerDetails</code> participant. Nested messages get an additional decimal point based on the triggering message's number.</p>
+
+![create-stereotype-in-communication-diagram.png]
+
+<p>With that small hurdle out of the way, the rest of the messages can be added to the <b>communication diagram</b>.</p>
+
+![complete-communication-diagram-sample.png]
+
+<p><b>Communication</b> and <b>sequence diagrams</b> present such similar information that a comparison is almost inevitable. Setting personal preferences aside, what are the best reasons for picking a <b>sequence diagram</b>, a <b>communication diagram</b>, or even a combination of both to model a particular interaction?</p>
+
+<p>Following figure shows the two different representations of the same <code>Create a new Regular Blog Account</code> interaction.</p>
+
+![sequence-diagram-vs-communication-diagram.png]
+
+<p>Use <b>sequence diagrams</b> if you are mainly interested in the flow of messages throughout a particular interaction. Use <b>communication diagrams</b> if you are focusing on the links between the different participants involved in the interaction.</p>

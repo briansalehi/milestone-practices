@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Unified Modeling Language</title>
+<title>Communication Diagram</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -255,7 +255,9 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">Software Design</a></li>
-<li class='breadcrumb-item active'>Unified Modeling Language</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.4.0.html">Unified Modeling Language</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/5.4.12.0.html">Interaction Diagrams</a></li>
+<li class='breadcrumb-item active'>Communication Diagram</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -267,93 +269,95 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Unified-Modeling-Language" class="anchor" aria-hidden="true" href="#Unified-Modeling-Language">
-Unified Modeling Language
+<a id="Communication-Diagram" class="anchor" aria-hidden="true" href="#Communication-Diagram">
+Communication Diagram
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>The Unified Modeling Language (UML) is the standard modeling language for software and systems development.</p>
+<p>The main purpose of <b>sequence diagrams</b> is to show the order of events between the parts of your system that are involved in a particular interaction. <b>Communication diagrams</b> add another perspective to an interaction by focusing on the links between the participants.</p>
 
-<p>There are just too many details that can be misinterpreted or forgotten when developing a complex system without some help. This is where modeling and of course UML comes in.</p>
+<p>On a sequence diagram, the links between participants are implied by the fact that a message is passed between them.</p>
 
-<p>When you model a system, you abstract away any details that are irrelevant or potentially confusing. Your model is a simplification of the real system, so it allows the design and viability of a system to be understood, evaluated, and criticized quicker than if you had to dig through the actual system itself.</p>
+<p><b>Sequence</b> and <b>communication diagrams</b> are so similar that most UML tools can automatically convert from one diagram type to the other. The difference between the two approaches is largely personal preference. If you're happier looking at interactions from a link perspective, then <b>communication diagrams</b> are likely to be for you; however, if you prefer to see the order of the interactions as clearly as possible, then you're likely to be in the <b>sequence diagram</b> camp.</p>
 
-<p>To effectively model a system, you need one very important thing: a language with which the model can be described. And here's where UML comes in.</p>
+<p>A <b>communication diagram</b> is made up of three things: <b>participants</b>, the <b>communication links</b> between those participants, and the <b>messages</b> that can be passed along those communication links.</p>
 
-<p>A modeling language can be made up of pseudo-code, actual code, pictures, diagrams, or long passages of description; in fact, it's pretty much anything that helps you describe your system.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/communication-diagram-sample.png" alt="communication diagram sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/communication-diagram-sample.png"'>
 
-<img class="img-responsive" src="/software-design/class-definition-sample-in-uml.png" alt="class definition sample in uml" loading="lazy" onerror='this.onerror=null; this.src="software-design/class-definition-sample-in-uml.png"'>
+<b>Participants</b> on a communication diagram are represented by a rectangle. The participant's name and class are then placed in the middle of the rectangle. A participant's name is formatted as <code>&lt;name&gt; : &lt;class&gt;</code>, similar to participants on a sequence diagram.
 
-<p>There are references to the UML meta-model and profiles throughout notebooks. A more complete description of what the UML meta-model contains and why it is useful is available in <a href="/software-design/uml/meta-model">meta-model</a>.</p>
+<p>A <b>communication link</b> is shown with a single line that connects two participants.</p>
 
-<p>For now, just think of the UML meta-model as the description of what each element of notation means and a profile as a customization of that description for a specific domain (i.e., banking).</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/message-between-participants.png" alt="message between participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/message-between-participants.png"'>
 
-<p>The descriptions of what the notation means are called the semantics of the language and are captured in a language's meta-model.</p>
+<p><b>Communication diagrams</b> do not necessarily flow down the page like <b>sequence diagrams</b>; therefore, message order on a communication diagram is shown using a number before each message. Each message number indicates the order in which that message is invoked, starting at 1 and increasing until all of the messages on the diagram are accounted for.</p>
 
-<p>A modeling language can be anything that contains a notation (a way of expressing the model) and a description of what that notation means (a meta-model).</p>
+<p>When a message causes another message to be invoked, the second message is said to be <b>nested</b> inside the original message.</p>
 
-<p>Every approach to modeling has different advantages and disadvantages, but UML has six main advantages:</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/nested-calling-messages.png" alt="nested calling messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/nested-calling-messages.png"'>
 
-<ul>
-	<li><i>It's a formal language</i></li>
-	<p>Each element of the language has a strongly defined meaning, so you can be confident that when you model a particular facet of your system it will not be misunderstood.</p>
+<p><b>Communication diagrams</b> use their message numbering scheme to show the <b>order</b> of <b>nested messages</b>. If we say that the initial message is numbered <code>1.</code>, then any messages nested within the initial message begin with <code>1.</code>, adding a number after the decimal point for the ordering of the nested messages. If an initial message's number was <code>1.</code>, then the first nested message's number would be <code>1.1.</code>.</p>
 
-	<li><i>It's concise</i></li>
-	<p>The entire language is made up of simple and straightforward notation.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/three-layered-nested-messages.png" alt="three layered nested messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/three-layered-nested-messages.png"'>
 
-	<li><i>It's comprehensive</i></li>
-	<p>It describes all important aspects of a system.</p>
+<p><b>Communication diagrams</b> take advantage of their number-based message ordering by adding a number-and-letter notation to indicate that a message happens at the same time as another message.</p>
 
-	<li><i>It's scaleable</i></li>
-	<p>Where needed, the language is formal enough to handle massive system modeling projects, but it also scales down to small projects, avoiding overkill.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/concurrent-message-invokation.png" alt="concurrent message invokation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/concurrent-message-invokation.png"'>
 
-	<li><i>It's built on lessons learned</i></li>
-	<p>UML is the culmination of best practices in the object-oriented community during the past 15 years.</p>
+<p>Although UML does not actually dictate how a <b>communication diagram</b> can show that a message is invoked a number of times, it does state that an <b>asterisk</b> should be used before a looping constraint is applied. This rather complicated statement means that the following example is a safe way to specify that something is going to happen 10 times:</p>
 
-	<li><i>It's the standard</i></li>
-	<p>UML is controlled by an open standards group with active contributions from a worldwide group of vendors and academics, which fends off "vendor lock-in." The standard ensures UML's transformability and interoperability, which means you aren't tied to a particular product.</p>
-</ul>
+<pre class="language-bash command-line" data-output="1">
+	<code>
+		*[i = 0 .. 9]
+	</code>
+</pre>
 
-<h4>What's wrong with using software source code as your model?</h4>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/looping-constraint.png" alt="looping constraint" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/looping-constraint.png"'>
 
-<p>The source code focuses only on the software itself and ignores the rest of the system. Even though the code is a complete and (generally) unambiguous definition of what the software will do, the source code alone simply cannot tell you how the software is to be used and by whom, nor how it is to be deployed; the bigger picture is missing entirely if all you have is the source code.</p>
+<p>Sometimes a message should be invoked only if a particular condition is evaluated to be true.</p>
 
-<p>As well as ignoring the bigger picture of your system, software code presents a problem in that you need to use other techniques to explain your system to other people. You have to understand code to read code, but source code is the language for software developers and is not for other stakeholders, such as customers and system designers. Those people will want to focus just on requirements or perhaps see how the components of your system work together to fulfill those requirements. Because source code is buried in the details of how the software works, it cannot provide the higher level abstract views of your system that are suitable for these types of stakeholders.</p>
+<p>Just as with <b>sequence diagram fragments</b>, communication diagram messages can have <b>guards</b> set to describe the conditions that need to be evaluated before a message is invoked.</p>
 
-<p>Now imagine that you have implemented your system using a variety of software languages. The problem just gets worse. It is simply impractical to ask all the stakeholders in your system to learn each of these implementation languages before they can understand your system.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/multiple-message-invokation.png" alt="multiple message invokation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/multiple-message-invokation.png"'>
 
-<p>All of these problems boil down to the fact that source code provides only one level of abstraction: the software implementation level. Unfortunately, this root problem makes software source code a poor modeling language.</p>
+<p>Just as on <b>sequence diagrams</b>, a participant on a <b>communication diagram</b> can send a message to itself. All that is needed is a link from the participant to itself to enable the message to be invoked</p>
 
-<p>At the opposite end of the spectrum from complete and precise source code models are informal languages. Informal languages do not have a formally defined notation; there are no hard and fast rules as to what a particular notation can mean, although sometimes there are guidelines.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/self-invokation.png" alt="self invokation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/self-invokation.png"'>
 
-<p>A good example of an informal language is natural language. Natural language—the language that you're reading in this text—is notoriously ambiguous in its meaning.</p>
+<p>With the new communication diagram notation out of the way, it's now time to look at a practical example.</p>
 
-<p>Natural language is flexible and verbose, which happens to be great for conversation but is a real problem when it comes to systems modeling.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/cms-sequence-diagram-with-messages.png" alt="cms sequence diagram with messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/cms-sequence-diagram-with-messages.png"'>
 
-<p>This ambiguity tends to result in the, "No, that's not what I meant!" syndrome, where you've described something as clearly as possible, but the person that you are conveying the design to has misunderstood your meaning.</p>
+<p>It isn't necessary to have a <b>sequence diagram</b> before you create a <b>communication diagram</b>. You can create communication diagrams or sequence diagrams for your <b>interactions</b> in whatever order you see fit.</p>
 
-<p>As with the natural language model, all of the details are present in the following picture, but without a definition of what the boxes, connections, and labels mean, you can't be sure about your interpretation (or mine!).</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/distributed-participants.png" alt="distributed participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/distributed-participants.png"'>
 
-<img class="img-responsive" src="/software-design/natural-language-modeling-sample.png" alt="natural language modeling sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/natural-language-modeling-sample.png"'>
+<p>Next, the links between each of the participants are added so they can communicate with each other.</p>
 
-<p>So, why does any of this matter if your team has a home-grown modeling technique it's been using for years and you all understand what each other means? If you ever have to show your design to external stakeholders, they might become frustrated trying to understand your home-grown symbols, when you could have used a standard notation they already know. It also means you don't have to learn a new modeling technique every time you switch jobs!</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/linked-participants.png" alt="linked participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/linked-participants.png"'>
 
-<p>Unfortunately, informal languages will always suffer from the dual problem of verbosity and ambiguity, and this is why they are a poor—and sometimes extremely dangerous—technique for modeling systems.</p>
+<p>It's now time to add the messages that are sent between participants during the lifetime of the interaction.</p>
 
-<p>Although natural language is dangerously ambiguous, it is still one of the best techniques for capturing requirements, as you will see when you learn about use cases.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/admin-invoking-three-messages.png" alt="admin invoking three messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/admin-invoking-three-messages.png"'>
 
-<p>To effectively model a system—avoiding verbosity, confusion, ambiguity, and unnecessary details—you need a formal modeling language .</p>
+<p>Once the initial message or messages are added to the communication diagram, things start to get more complicated. The <code>3. enterAuthorDetails(  )</code> message triggers a nested creation message that is sent from the <code>ui : AccountCreationUserInterface</code> participant to create a new <code>authorDetails : CustomerDetails</code> participant. Nested messages get an additional decimal point based on the triggering message's number.</p>
 
-<p>The modeling language's notation should be small enough to be learned easily and must have an unambiguous definition of the notation's meaning. UML is just such a formal modeling language.</p>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/create-stereotype-in-communication-diagram.png" alt="create stereotype in communication diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/create-stereotype-in-communication-diagram.png"'>
 
-<p>Following picture is an example of a structure expressed in UML. For now, don't worry too much about the notation or its meaning; at this point, the UML diagram is meant to be used only as a comparison to the informal pictorial and natural language models shown previously.</p>
+<p>With that small hurdle out of the way, the rest of the messages can be added to the <b>communication diagram</b>.</p>
 
-<img class="img-responsive" src="/software-design/formal-language-diagram-sample.png" alt="formal language diagram sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/formal-language-diagram-sample.png"'>
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/complete-communication-diagram-sample.png" alt="complete communication diagram sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/complete-communication-diagram-sample.png"'>
 
-<p>The best thing about having modeled the system using UML is that the notation in the above picture has a specific and defined meaning. If you were to take this diagram to any other stakeholder in your system, provided he knows UML, the design would be clearly understood. This is the advantage of using formal languages for modeling.</p>
+<p><b>Communication</b> and <b>sequence diagrams</b> present such similar information that a comparison is almost inevitable. Setting personal preferences aside, what are the best reasons for picking a <b>sequence diagram</b>, a <b>communication diagram</b>, or even a combination of both to model a particular interaction?</p>
+
+<p>Following figure shows the two different representations of the same <code>Create a new Regular Blog Account</code> interaction.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/sequence-diagram-vs-communication-diagram.png" alt="sequence diagram vs communication diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/sequence-diagram-vs-communication-diagram.png"'>
+
+<p>Use <b>sequence diagrams</b> if you are mainly interested in the flow of messages throughout a particular interaction. Use <b>communication diagrams</b> if you are focusing on the links between the different participants involved in the interaction.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -365,81 +369,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'></span></li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 8</span></li>
 </ul>
-<hr />
-<h3>
-<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
-Table of Content
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<div class="list-group list-group-root well" >
-<a href="/software-design/uml/history" class="list-group-item">
-	1. History
-	
-</a>
-<a href="/software-design/uml/usage" class="list-group-item">
-	2. Degrees of UML
-	
-</a>
-<a href="/software-design/uml/diagrams" class="list-group-item">
-	3. Diagrams
-	
-</a>
-<a href="/software-design/uml/views" class="list-group-item">
-	4. Views
-	
-</a>
-<a href="/software-design/uml/stereotypes" class="list-group-item">
-	5. Notes and Stereotypes
-	
-</a>
-<a href="/software-design/uml/actors" class="list-group-item">
-	6. Actors
-	
-</a>
-<a href="/software-design/uml/use-case" class="list-group-item">
-	7. Use Case
-	
-</a>
-<a href="/software-design/uml/activity-diagrams" class="list-group-item">
-	8. Activity Diagrams
-	
-</a>
-<a href="/software-design/uml/class-diagrams" class="list-group-item">
-	9. Class Diagrams
-	
-</a>
-<a href="/software-design/uml/class-relationships" class="list-group-item">
-	10. Class Relationships
-	
-</a>
-<a href="/software-design/uml/object-diagrams" class="list-group-item">
-	11. Object Diagrams
-	
-</a>
-<a href="#5-4-12-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>12. Interaction Diagrams
-	<span class="badge badge-primary badge-pill">2</span>
-</a>
-<div class="list-group collapse" id="5-4-12-0">
-<a href="/software-design/uml/interaction-diagrams/sequence-diagram" class="list-group-item group-child">
-	1. Sequence Diagram
-	
-</a>
-<a href="/software-design/uml/interaction-diagrams/communication-diagram" class="list-group-item group-child">
-	2. Communication Diagram
-	
-</a>
-</div>
-</div>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/unit-testing/code-design">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/history">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams/sequence-diagram">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
