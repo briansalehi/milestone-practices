@@ -276,7 +276,7 @@ Linux Administration
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Linux administration covers essentials to professional skills.
+<p>Linux administration covers essentials to professional skills.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -779,16 +779,28 @@ function zoominLetter() {
 			pre[i].style.fontSize = s+"px"
 		}
 
-		var li = document.getElementsByTagName('li');
-		for(i=0;i<li.length;i++) {
-			if(li[i].style.fontSize) {
-				var s = parseInt(li[i].style.fontSize.replace("px",""));
+		var ul = document.getElementsByTagName('ul');
+		for(i=0;i<ul.length;i++) {
+			if(ul[i].style.fontSize) {
+				var s = parseInt(ul[i].style.fontSize.replace("px",""));
 			} else {
 				var s = 14;
 			}
 			s += 2;
 
-			li[i].style.fontSize = s+"px"
+			ul[i].style.fontSize = s+"px"
+		}
+
+		var ol = document.getElementsByTagName('ol');
+		for(i=0;i<ol.length;i++) {
+			if(ol[i].style.fontSize) {
+				var s = parseInt(ol[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s += 2;
+
+			ol[i].style.fontSize = s+"px"
 		}
 
 		var table = document.getElementsByTagName('table');
@@ -813,6 +825,18 @@ function zoominLetter() {
 			s += 2;
 
 			cite[i].style.fontSize = s+"px"
+		}
+
+		var toc = document.getElementsByTagName('list-group');
+		for(i=0;i<toc.length;i++) {
+			if(toc[i].style.fontSize) {
+				var s = parseInt(toc[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s += 2;
+
+			toc[i].style.fontSize = s+"px"
 		}
 
 		var h2 = document.getElementsByTagName('h2');
@@ -886,16 +910,28 @@ function zoomoutLetter() {
 			pre[i].style.fontSize = s+"px"
 		}
 
-		var li = document.getElementsByTagName('li');
-		for(i=0;i<li.length;i++) {
-			if(li[i].style.fontSize) {
-				var s = parseInt(li[i].style.fontSize.replace("px",""));
+		var ul = document.getElementsByTagName('ul');
+		for(i=0;i<ul.length;i++) {
+			if(ul[i].style.fontSize) {
+				var s = parseInt(ul[i].style.fontSize.replace("px",""));
 			} else {
 				var s = 14;
 			}
 			s -= 2;
 
-			li[i].style.fontSize = s+"px"
+			ul[i].style.fontSize = s+"px"
+		}
+
+		var ol = document.getElementsByTagName('ol');
+		for(i=0;i<ol.length;i++) {
+			if(ol[i].style.fontSize) {
+				var s = parseInt(ol[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s -= 2;
+
+			ol[i].style.fontSize = s+"px"
 		}
 
 		var table = document.getElementsByTagName('table');
@@ -920,6 +956,18 @@ function zoomoutLetter() {
 			s -= 2;
 
 			cite[i].style.fontSize = s+"px"
+		}
+
+		var toc = document.getElementsByClassName('list-group');
+		for(i=0;i<toc.length;i++) {
+			if(toc[i].style.fontSize) {
+				var s = parseInt(toc[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s -= 2;
+
+			toc[i].style.fontSize = s+"px"
 		}
 
 		var h2 = document.getElementsByTagName('h2');
@@ -974,9 +1022,11 @@ function restoreFontSize() {
 
 	var p = document.getElementsByTagName('p');
 	var pre = document.getElementsByTagName('pre');
-	var li = document.getElementsByTagName('li');
+	var ul = document.getElementsByTagName('ul');
+	var ol = document.getElementsByTagName('ol');
 	var table= document.getElementsByTagName('table');
 	var cite= document.getElementsByTagName('cite');
+	var toc= document.getElementsByClassName('list-group');
 	var h2= document.getElementsByTagName('h2');
 	var h3= document.getElementsByTagName('h3');
 	var h4= document.getElementsByTagName('h4');
@@ -987,14 +1037,20 @@ function restoreFontSize() {
 	for(i=0;i<pre.length;i++) {
 		pre[i].style.fontSize = fontsize+"px"
 	}
-	for(i=0;i<li.length;i++) {
-		li[i].style.fontSize = fontsize+"px"
+	for(i=0;i<ul.length;i++) {
+		ul[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<ol.length;i++) {
+		ol[i].style.fontSize = fontsize+"px"
 	}
 	for(i=0;i<table.length;i++) {
 		table[i].style.fontSize = fontsize+"px"
 	}
 	for(i=0;i<cite.length;i++) {
 		cite[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<toc.length;i++) {
+		toc[i].style.fontSize = fontsize+"px"
 	}
 	for(i=0;i<h2.length;i++) {
 		h2[i].style.fontSize = h2fontsize+"px"
