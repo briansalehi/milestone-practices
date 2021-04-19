@@ -1,5 +1,5 @@
 UID          PID    PPID  C STIME TTY          TIME CMD
-brian       5197    5190  0 Jan10 pts/0    00:00:01 bash
-brian     254263    5197 13 00:52 pts/0    00:00:03  \_ bash /home/brian/.local/bin/practice-manager -f
-brian     265189  254263  0 00:52 pts/0    00:00:00      \_ bash ./linux/process-management/ps.sh
-brian     265190  265189  0 00:52 pts/0    00:00:00          \_ ps -f --forest
+brian     721438  721431  0 Apr19 pts/0    00:00:00 bash
+brian     740198  721438  6 00:29 pts/0    00:00:00  \_ bash /usr/local/bin/practice-manager linux-administration/process-management/ps.sh -p
+brian     740342  740198  0 00:29 pts/0    00:00:00      \_ bash ./linux-administration/process-management/ps.sh
+brian     740343  740342  0 00:29 pts/0    00:00:00          \_ ps -f --forest

@@ -1,1 +1,1 @@
-dpkg
+Debian Package Manager

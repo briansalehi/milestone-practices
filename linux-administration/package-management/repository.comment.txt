@@ -1,5 +1,3 @@
-Repositories are the banks of packages available online to be used by package
-managers.
+<p><b>Repositories</b> are the banks of packages available online to be used by package managers.</p>
 
-Your package manager connects to repository mirros (links) and retrieve all of
-the required packages for your system.
+<p>Your package manager connects to repository <b>mirros</b> (links) and retrieve all of the required packages for your system.</p>

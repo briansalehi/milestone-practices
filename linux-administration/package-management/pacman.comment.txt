@@ -1,1 +1,26 @@
-<b>If you're not using Arch Linux, skip this page</b>.
+<p><b>If you're not using Arch Linux, skip this page</b>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		# sync repository
+		pacman -Sy
+
+		# sync and upgrade packages
+		pacman -Syu
+
+		# install a package
+		pacman -S package
+
+		# search for a package
+		pacman -Ss package
+
+		# query an installed package
+		pacman -Q package
+
+		# list of orphan packages
+		pacman -Qdt
+
+		# remove orphan packages
+		pacman -Rus $(pacman -Qdtq)
+	</code>
+</pre>

@@ -1,6 +1,42 @@
-<b>If you don't use Debian-based distribution, skip this page</b>.
+<p><b>If you don't use Debian-based distribution, skip this page</b>.</p>
 
-Uses mirrors to install/remove packages.
+<p>Uses mirrors to install/remove packages.</p>
 
--y or --yes option can be used to prevent apt from asking for download
-confirmation step.
+<p><code>-y</code> or <code>--yes</code> option can be used to prevent <code>apt</code> from asking for download confirmation step.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		# updates apt repository
+		apt update
+
+		# lists upgradable packages
+		apt list --upgradable
+
+		# upgrades installed packages
+		apt upgrade
+
+		# upgrades Debian
+		apt dist-upgrade
+
+		# searches through all packages
+		apt search gedit
+
+		# prints package information
+		apt show gedit
+
+		# installs packages
+		apt install gedit
+
+		# remove packages
+		apt remove gedit
+
+		# removes packages with dependencies
+		apt purge gedit
+
+		# removes unnecessary packages
+		apt autoremove
+
+		# installs missing packages
+		apt install --fix-missing
+	</code>
+</pre>

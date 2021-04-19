@@ -1,2 +1,40 @@
-Regardless of its similarity with Make in name, CMake does much more than Make
-is capable of.
+<p>Regardless of its similarity with <b>Make</b> in name, <b>CMake</b> does much more than <b>Make</b> is capable of.</p>
+
+<p>To simplify things, building a project with <code>cmake</code> requires a few steps:</p>
+
+<p>First, you need to make the build directory, preferably alongside, or inside the project's directory:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2,5">
+	<code>
+		ls
+		project
+		mkdir build
+		ls
+		project build
+		cd build
+	</code>
+</pre>
+
+<p>Then call <code>cmake</code> to generate Make files into build directory:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		cmake ../project
+	</code>
+</pre>
+
+<p>Then, you can use <code>make</code> to compile sources into build directory:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		make
+		sudo make install
+	</code>
+</pre>
+
+<p>Previous step might take a while, depending on the size of the project you're compiling. It can take up to hours for <a href="/cpp/image-processing">OpenCV</a> as an example.</p>
+
+<p>
+CMake deserves many books, as there are many!
+So CMake is covered in its own chapter, <a href="/development-tools/cmake">CMake</a>.
+</p>

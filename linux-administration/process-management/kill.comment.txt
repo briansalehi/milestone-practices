@@ -1,1 +1,8 @@
-Kills the process having given process id.
+<p>Kills the process having given process id.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		less /etc/hostname &
+		kill $(pidof less)
+	</code>
+</pre>

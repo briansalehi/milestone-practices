@@ -1,2 +1,14 @@
-Make is a auto-completion tool which makes compilation process easier and
-faster.
+<p>Make is a auto-completion tool which makes compilation process easier and faster.</p>
+
+<p>Usually, packages coming with <code>make</code> are the easiest to install. To do so, all you need to do is to run these commands:</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		make
+		sudo make install
+	</code>
+</pre>
+
+<p>What does <code>make</code> do is to reduce the compilation time by comparing source and object files timestamp, if a source is modified more recently than its corresponding object was created, then it needs to be recompiled because most definitely the source was changed.</p>
+
+<p><code>make</code> is a complex tool and is covered in a separate chapter, <a href="/development-tools/make">Make</a>.</p>

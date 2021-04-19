@@ -1,1 +1,11 @@
-<b>If you're not using Redhat-based distribution, skip this page</b>.
+<p><b>If you're not using Redhat-based distribution, skip this page</b>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		# install a package
+		yum install package
+
+		# remove a package
+		yum remove package
+	</code>
+</pre>

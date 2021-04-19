@@ -1,3 +1,9 @@
-Top is an interactive monitoring tool.
+<p>Top is an interactive monitoring tool.</p>
 
-To quit the top, press q and for help press h.
+<p>To quit the top, press <code>q</code> and for help press <code>h</code>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		top
+	</code>
+</pre>

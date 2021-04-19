@@ -1,3 +1,22 @@
-<b>If you're not using Debian-based distribution, skip this page</b>.
+<p><b>If you're not using Debian-based distribution, skip this page</b>.</p>
 
-<b>dpkg</b> or Debian Package Manager is Debian's default package manager.
+<p><b>dpkg</b> or Debian Package Manager is the Debian's default package manager.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		# install a package if it doesn't already exist
+		dpkg -G --install package.deb
+
+		# remove a package but keep config files
+		dpkg --remove package
+
+		# remove a package and erase all the fingerprints
+		dpkg --purge package
+
+		# show information about a package
+		dpkg --info package.deb
+
+		# list the packages with a pattern in their name or description
+		dpkg --list pattern
+	</code>
+</pre>
