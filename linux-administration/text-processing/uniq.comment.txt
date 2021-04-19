@@ -1,2 +1,32 @@
-Truncates duplicate lines of file.
-To get better results, sort file first.
+<p>Truncates duplicate lines of file.</p>
+<p>To get better results, sort file first.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="15-18,22-25">
+	<code>
+		cat &lt;&lt; EOF &gt; /tmp/sample
+		a
+		a
+		b
+		b
+		b
+		c
+		b
+		b
+		a
+		EOF
+
+		# truncates neighbours only
+		uniq /tmp/sample
+		a
+		b
+		c
+		b
+		a
+
+		# to truncate all duplicates, sort first
+		sort /tmp/sample | uniq
+		a
+		b
+		c
+	</code>
+</pre>

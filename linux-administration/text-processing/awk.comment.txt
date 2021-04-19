@@ -1,33 +1,21 @@
-Awk is a strong text processing programmng language which deserves its own
-chapter, or maybe books!
-To learn Awk in depth, visit <a href="/stream-processing/awk">Awk chapter</a>.
+<p>Awk is a strong text processing programmng language which deserves its own chapter, or maybe books! To learn Awk in depth, visit <a href="/linux-administration/stream-processing/awk">Awk chapter</a>.</p>
 
-Covering everything about Awk in a single page is impossible!
-So a brief overview of Awk is that it keeps track of line and word numbers.
-We can easily manipulate text, select lines and fields to print.
+<p>Covering everything about Awk in a single page is impossible! So a brief overview of Awk is that it keeps track of line and word numbers. We can easily manipulate text, select lines and fields to print.</p>
 
-In this sample, the easiest task for Awk is represented which selects the
-second line and third field within that line to print.
+<p>In this sample, the easiest task for <code>awk</code> is represented which selects the second line and third field within that line to print.</p>
 
-Using Awk is straightforward, you give options to <i>awk</i> and then begin
-writing Awk scripts surrounded by single quotes.
+<p>Using <code>awk</code> is straightforward, you give options to <code>awk</code> and then begin writing <b>Awk scripts</b> surrounded by single quotes.</p>
 
-<pre>
-<code class="language-bash">
-awk [options] 'scripts'
-</code>
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="">
+	<code>
+		awk [options] 'scripts'
+	</code>
 </pre>
 
-In Awk, <b>NR</b> stands for <b>N</b>umber of <b>R</b>ecord which keeps
-track of the line Awk is holding in its buffer to process.
+<p>In Awk, <code>NR</code> stands for <b>N</b>umber of <b>R</b>ecord which keeps track of the line <code>awk</code> is holding in its buffer to process.</p>
 
-<b>NF</b> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory.
-To print the second field though, we used <i>print $2</i> command in awk
-script.
+<p><code>NF</code> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory. To print the second field though, we used <code>print $2</code> command in <ode>awk</ode> script.</p>
 
-<b>FS</b> stands for <b>F</b>ield <b>S</b>eparator which Awk uses to devide
-fields within a line to process.
-<i>FS</i> can also be given by -F option.
+<p><code>FS</code> stands for <b>F</b>ield <b>S</b>eparator which <code>awk</code> uses to devide fields within a line to process. <code>FS</code> can also be given by <code>-F</code> option.</p>
 
-Here we have set FS="," variable to separate fields within lines and NF=3 to
-select the third field in NR=2 second line.
+<p>Here we have set <code>FS=","</code> variable to separate fields within lines and <code>NF=3</code> to select the third field in <code>NR=2</code> second line.</p>

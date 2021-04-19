@@ -1,2 +1,11 @@
-Prints the entry of given file.
-Multiple files can be given to print subsequently.
+<p>Prints the entry of given file.</p>
+<p>Multiple files can be given to print subsequently.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2-4">
+	<code>
+		cat /tmp/sample-file
+		first line of file
+		second line of file
+		third line of file
+	</code>
+</pre>

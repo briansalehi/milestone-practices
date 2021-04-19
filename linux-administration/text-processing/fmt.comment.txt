@@ -1,1 +1,26 @@
-Format text files and prepare text to read.
+<p>Format text files and prepare text to read.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="10-18">
+	<code>
+		cat << EOF > /tmp/sample
+		This is a sample letter to dear users.
+		The page you are reading is a notebook for Linux administrators.
+		You have probably finished text processing tutorials before you read this.
+		Make sure you practice notebooks regularly in order to prevent losing details
+		of first chapters while you are making progress.
+		EOF
+
+		fmt --width 40 --uniform-spacing --crown-margin /tmp/sample
+		This is a sample letter to dear users.
+		The page you are reading is a notebook
+		for Linux administrators.  You have
+		probably finished text processing
+		tutorials before you read this.
+		Make sure you practice notebooks
+		regularly in order to prevent losing
+		details of first chapters while you
+		are making progress.
+	</code>
+</pre>
+
+<p>In this sample <code>--width</code> indicates the maximum width of each line, <code>--uniform-spacing</code> puts one space between words, two after sentences, and <code>--crown-margin</code> preserves indentation of first two lines.</p>

@@ -1,8 +1,26 @@
-Sort file content based on characters.
+<p>Sort file content based on characters.</p>
 
-If -h option given, numbers are sorted based on their human readable
-size, e.g. 30K < 20M < 10G
+<p>If <code>-h</code> option given, numbers are sorted based on their human readable size, e.g. 30K &lt; 20M &lt; 10G</p>
 
--n will sort file numeric.
+<p><code>-n</code> will sort file numeric.</p>
 
--r reverses sort result.
+<p><code>-r</code> reverses sort result.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="10-14">
+	<code>
+		cat &lt;&lt; EOF &gt; /tmp/sample
+		z
+		c
+		a
+		f
+		k
+		EOF
+
+		cat /tmp/sample | sort
+		a
+		c
+		f
+		k
+		z
+	</code>
+</pre>

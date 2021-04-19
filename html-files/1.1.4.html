@@ -283,13 +283,43 @@ Environment Variables
 
 <p>On a shell, to create a variable, a variable name must be specified followed by an equals sign <b>without any space in the middle</b>. Variables might be set empty or the equals sign is followed by a value.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		variable=10
+	</code>
+</pre>
+
 <p>Note that there are no spaces between variable name, equals operator, and value. Values can be double-quoted to represent a string which might contain a space. Beware that by eliminating double-quotes, spaces will cut value in pieces and nothing after first space will be stored in that variable.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		fullname="Brian Salehi"
+	</code>
+</pre>
 
 <p>To access the value stored in a variable use <code>$</code> before variable’s name without any space in the middle.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo "$fullname"
+	</code>
+</pre>
+
 <p>Here we use <code>echo</code> command to print the value stored in variables. Environment variables are heavily used in shell configuration. For example <code>PATH</code> variable is used to tell the shell where it can find the external commands like <code>mkdir</code>, which we discussed before.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo $PATH
+	</code>
+</pre>
+
 <p><code>PATH</code> holds a list of all directories which the shell will seek for the commands you type, delimited by colon <code>:</code>. That is, when you type a command like <code>mkdir</code> on your shell and hit enter, shell will look for a program named <i>mkdir</i> in specified directories respectively.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		type mkdir
+	</code>
+</pre>
 
 <p>As the <code>type</code> command indicated, shell will find the <code>mkdir</code> program in <code>/usr/bin</code> directory, so it will stop searching after the first match.</p>
 
@@ -297,31 +327,20 @@ Environment Variables
 
 <p>Two or more commands might have the same name on a system, or one command might be stored in more than one directory, then shell will execute the first matched directory in the PATH environment variable.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		type -a time
+	</code>
+</pre>
+
 <p>Finally, <code>which</code> command, tells you where external commands are and by giving <code>-a</code> option it indicates how many instances of a command exists in PATH directories. In an example, the instance of <code>mkdir</code> in <code>/usr/bin</code> will be executed because the <code>/usr/bin</code> directory preceeds the <code>/bin</code> directory, though they both contain the <code>mkdir</code> command.</p>
-<hr />
-  <cite>variables.sh</cite>
-<pre class="line-numbers" >
-<code class="language-bash">
-    #!/usr/bin/env bash
-    
-    # store a string
-    project=&quot;Linux Administration&quot;
-    
-    # embrace string with double quotes
-    # otherwise, only &apos;Jane&apos; will be stored
-    name=Jane Doe
-    
-    # print an environment variable
-    echo &quot;$PATH&quot;
-</code>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		which -a mkdir
+	</code>
 </pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='2-3'>
-<code>
-bash ./variables.sh
-~/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
-</code>
-</pre>
+
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -336,8 +355,8 @@ References
 <li class='list-group-item'>LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan: <span style='color: red'> chapter 1</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/shell-basics/command-types">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/shell-basics/getting-help">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/shell-basics/command-types">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/shell-basics/getting-help">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -444,6 +463,7 @@ function defaultFontSize() {
 	localStorage.setItem('h4fontsize', h3fontsize);
 
 	restoreFontSize();
+	document.getElementById('dropdown-content').style.display = 'none';
 }
 
 function zoominLetter() {

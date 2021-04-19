@@ -2,13 +2,43 @@
 
 <p>On a shell, to create a variable, a variable name must be specified followed by an equals sign <b>without any space in the middle</b>. Variables might be set empty or the equals sign is followed by a value.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		variable=10
+	</code>
+</pre>
+
 <p>Note that there are no spaces between variable name, equals operator, and value. Values can be double-quoted to represent a string which might contain a space. Beware that by eliminating double-quotes, spaces will cut value in pieces and nothing after first space will be stored in that variable.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		fullname="Brian Salehi"
+	</code>
+</pre>
 
 <p>To access the value stored in a variable use <code>$</code> before variable’s name without any space in the middle.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo "$fullname"
+	</code>
+</pre>
+
 <p>Here we use <code>echo</code> command to print the value stored in variables. Environment variables are heavily used in shell configuration. For example <code>PATH</code> variable is used to tell the shell where it can find the external commands like <code>mkdir</code>, which we discussed before.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo $PATH
+	</code>
+</pre>
+
 <p><code>PATH</code> holds a list of all directories which the shell will seek for the commands you type, delimited by colon <code>:</code>. That is, when you type a command like <code>mkdir</code> on your shell and hit enter, shell will look for a program named <i>mkdir</i> in specified directories respectively.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		type mkdir
+	</code>
+</pre>
 
 <p>As the <code>type</code> command indicated, shell will find the <code>mkdir</code> program in <code>/usr/bin</code> directory, so it will stop searching after the first match.</p>
 
@@ -16,4 +46,17 @@
 
 <p>Two or more commands might have the same name on a system, or one command might be stored in more than one directory, then shell will execute the first matched directory in the PATH environment variable.</p>
 
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		type -a time
+	</code>
+</pre>
+
 <p>Finally, <code>which</code> command, tells you where external commands are and by giving <code>-a</code> option it indicates how many instances of a command exists in PATH directories. In an example, the instance of <code>mkdir</code> in <code>/usr/bin</code> will be executed because the <code>/usr/bin</code> directory preceeds the <code>/bin</code> directory, though they both contain the <code>mkdir</code> command.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		which -a mkdir
+	</code>
+</pre>
+

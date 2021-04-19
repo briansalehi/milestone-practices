@@ -1,8 +1,19 @@
-Word counter can be used to count lines of files, words of files, bytes of
-files and more.
+<p>Word counter can be used to count lines of files, words of files, bytes of files and more.</p>
 
-When -l is used to count numbers, wc counts newline characters, therefore,
-lines without a trailing newline character won't count.
+<p>When <code>-l</code> is used to count numbers, <code>wc</code> counts newline characters, therefore, lines without a trailing newline character won't count.</p>
 
-When -m is used to count characters, the result might be +1 character because
-of newline character at the end of the line.
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2">
+	<code>
+		wc -l /etc/passwd
+		31 /etc/passwd
+	</code>
+</pre>
+
+<p>When <code>-m</code> is used to count characters, the result might be +1 character because of newline character at the end of the line.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2">
+	<code>
+		echo "abcdefghijklmnopqrstuvwxyz" | wc -m
+		27
+	</code>
+</pre>

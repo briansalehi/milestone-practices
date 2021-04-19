@@ -1,1 +1,7 @@
-Changes your working directory to given path.
+<p>Changes your working directory to given path.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		cd /usr/bin/
+	</code>
+</pre>

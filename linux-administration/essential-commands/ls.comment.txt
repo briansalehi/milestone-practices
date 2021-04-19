@@ -1,2 +1,8 @@
-If path is given, lists files and directories in corresponding path.
-Otherwise, lists entry of your working directory.
+<p>If path is given, lists files and directories in corresponding path. Otherwise, lists entry of your working directory.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2">
+	<code>
+		ls
+		Desktop Documents Downloads Music Pictures Public Videos
+	</code>
+</pre>

@@ -1,1 +1,18 @@
-Joins two or more files based on a <b>common</b> field or column.
+<p>Joins two or more files based on a <b>common</b> field or column.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="10-12">
+	<code>
+		echo "Name Number" > /tmp/numbers
+		echo "Jane +12345" >> /tmp/numbers
+		echo "John +16789" >> /tmp/numbers
+
+		echo "Name Country" > /tmp/country
+		echo "Jane US" >> /tmp/country
+		echo "John Ca" >> /tmp/country
+
+		join /tmp/numbers /tmp/country
+		Name Number Country
+		Jane +12345 US
+		John +16789 Ca
+	</code>
+</pre>

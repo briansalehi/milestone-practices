@@ -1,1 +1,13 @@
-Prints the content of files in rerverse order.
+<p>Prints the content of files in rerverse order.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="5-7">
+	<code>
+		echo "first line" &gt; /tmp/sample
+		echo "second line" &gt;&gt; /tmp/sample
+		echo "third line" &gt;&gt; /tmp/sample
+		tac /tmp/sample
+		third line
+		second line
+		first line
+	</code>
+</pre>

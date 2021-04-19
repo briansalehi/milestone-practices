@@ -1,5 +1,9 @@
-<i>touch</i> command's main duty is to change file timestamps, but we also
-use it to create files.
-Many file names can be given to create all at once.
+<p><code>touch</code> command's main duty is to change file timestamps, but we also use it to create files.</p>
+<p>Many file names can be given to create all at once.</p>
+<p>Special characters like <code>/</code> and <code>+</code> should be avoided in file names.</p>
 
-Special characters like / and + should be avoided in file names.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		touch /tmp/sample-file
+	</code>
+</pre>

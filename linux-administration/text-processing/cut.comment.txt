@@ -1,1 +1,8 @@
-Cuts text delimited by -d 'D' option and -f <N> field of N.
+<p>Cuts text delimited by <code>-d 'D'</code> option and <code>-f N</code> field of <code>N</code>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2">
+	<code>
+		echo "column1:column2:column3:column4" | cut -d ':' -f 3
+		column3
+	</code>
+</pre>

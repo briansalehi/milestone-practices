@@ -1,27 +1,15 @@
-Sed is a stream processing tool which has its own reputation and we will not
-cover everything about it (we can't) in a single practice.
+<p>Sed is a stream processing tool which has its own reputation and we will not cover everything about it (we can't) in a single practice.</p>
 
-To learn sed in depth, visit
-<a href="/linux/stream-processing/sed">stream processing</a> chapter.
+<p>To learn <code>sed</code> in depth, visit <a href="/linux-administration/stream-processing/sed">stream processing</a> chapter.</p>
 
-We will cover the most basic and regularly used features of Sed here, which
-are deleting and printing lines, and also substitution of strings.
+<p>We will cover the most basic and regularly used features of <code>sed</code> here, which are deleting and printing lines, and also substitution of strings.</p>
 
-Using Sed is straightforward, you call sed following options and then Sed
-script surrounded by single quotes.
-The Sed script itself follows a specific syntax, first the address of lines
-can be given by numbers or string pattern, then a command is followed by that
-address to give desired results.
+<p>Using <code>sed</code> is straightforward, you call <code>sed</code> following options and then <b>sed</b> script surrounded by single quotes. The <b>sed</b> script itself follows a specific syntax, first the address of lines can be given by numbers or string pattern, then a command is followed by that address to give desired results.</p>
 
-<pre>
-<code class="language-bash">
-sed options '/address/command'
-</code>
+<pre class="language-bash command-line" data-user="user" data-host="milsetone" data-output="">
+	<code>
+		sed options '/address/command'
+	</code>
 </pre>
 
-In case of addess, we are using line numbers in this example.
-And for commands, we used <b>d</b> to delete mentioned lines.
-We used <b>p</b> to print specified lines, which requires -n to avoid
-duplicate printing of lines, simply because sed itself also prints lines
-alongside our print command.
-And then we used <b>s</b> to substitute word <i>amazing</i> to <i>useful</i>.
+<p>In case of addess, we are using line numbers in this example. And for commands, we used <code>d</code> to delete mentioned lines. We used <code>p</code> to print specified lines, which requires <code>-n</code> to avoid duplicate printing of lines, simply because sed itself also prints lines alongside our print command. And then we used <code>s</code> to substitute word <i>amazing</i> to <i>useful</i>.</p>

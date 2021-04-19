@@ -1,10 +1,10 @@
 <p><b>Redirections</b> can be used to write a command's output to a file, e.g. create a log file.</p>
 
-<p>Right shift <code>$gt;</code> can be used to write to file.</p>
+<p>Right shift <code>&gt;</code> can be used to write to file.</p>
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		echo "something" &gt; output.txt
+		echo "something" &gt; file.txt
 	</code>
 </pre>
 
@@ -12,7 +12,7 @@
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		echo "another thing" &gt;&gt; output.txt
+		echo "another thing" &gt;&gt; file.txt
 	</code>
 </pre>
 
@@ -20,7 +20,7 @@
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		sed '1d' &lt; input.txt
+		sed '1d' &lt; file.txt
 	</code>
 </pre>
 
@@ -28,7 +28,7 @@
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2-6">
 	<code>
-		cat &lt;&lt; EOF &gt;&gt; output.txt
+		cat &lt;&lt; EOF &gt;&gt; file.txt
 		this line will be written to file
 		even this line
 		until EOF is caught with no heading and trailing characters

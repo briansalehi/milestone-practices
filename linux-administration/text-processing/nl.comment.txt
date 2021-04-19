@@ -1,1 +1,16 @@
-Numbers lines of file except blank lines.
+<p>Numbers lines of file except blank lines.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="8-10">
+	<code>
+		cat &lt;&lt; EOF &gt; /tmp/sample
+		first
+		second
+		third
+		EOF
+
+		nl /tmp/sample
+			 1	first
+			 2	second
+			 3	third
+	</code>
+</pre>

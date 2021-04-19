@@ -1,1 +1,8 @@
-Expands tab to spaces.
+<p>Expands <b>tab</b> to <b>spaces</b>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2">
+	<code>
+		echo -e "\t sample string" | expand
+		    sample string
+	</code>
+</pre>

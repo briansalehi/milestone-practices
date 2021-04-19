@@ -281,11 +281,11 @@ Redirections
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 <p><b>Redirections</b> can be used to write a command's output to a file, e.g. create a log file.</p>
 
-<p>Right shift <code>$gt;</code> can be used to write to file.</p>
+<p>Right shift <code>&gt;</code> can be used to write to file.</p>
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		echo "something" &gt; output.txt
+		echo "something" &gt; file.txt
 	</code>
 </pre>
 
@@ -293,7 +293,7 @@ Redirections
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		echo "another thing" &gt;&gt; output.txt
+		echo "another thing" &gt;&gt; file.txt
 	</code>
 </pre>
 
@@ -301,7 +301,7 @@ Redirections
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
-		sed '1d' &lt; input.txt
+		sed '1d' &lt; file.txt
 	</code>
 </pre>
 
@@ -309,7 +309,7 @@ Redirections
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2-6">
 	<code>
-		cat &lt;&lt; EOF &gt;&gt; output.txt
+		cat &lt;&lt; EOF &gt;&gt; file.txt
 		this line will be written to file
 		even this line
 		until EOF is caught with no heading and trailing characters
@@ -347,8 +347,8 @@ References
 <li class='list-group-item'>LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan: <span style='color: red'> chapter 1</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/shell-basics/shell-shortcuts">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/commands">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/shell-basics/shell-shortcuts">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/essential-commands">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -455,6 +455,7 @@ function defaultFontSize() {
 	localStorage.setItem('h4fontsize', h3fontsize);
 
 	restoreFontSize();
+	document.getElementById('dropdown-content').style.display = 'none';
 }
 
 function zoominLetter() {

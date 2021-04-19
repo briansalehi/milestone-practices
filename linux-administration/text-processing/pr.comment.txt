@@ -1,2 +1,2 @@
-Prepares text file for printing.
-Formats text and generates headers and trailers.
+<p>Prepares text file for printing.</p>
+<p>Formats text and generates headers and trailers.</p>

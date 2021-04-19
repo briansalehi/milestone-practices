@@ -5,11 +5,7 @@
 #Linux Firewalls: Enhancing Security with nftables and Beyond, 4th Edition - Steve Suehring
 #Linux iptables Pocket Reference: Firewalls, NAT & Accounting, 1st Edition - Gregor N. Purdy
 #Linux Pocket Guide: Essential Commands, 3rd Edition - Daniel J. Barrett
-#LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan
-#LPIC-1 Stduy Guide
-#LPIC-1 Stduy Guide:
-LPIC-1 Stduy Guide: chapter 1
-#LPIC-1 Study Guide - Christine Brensnahan and Richard Blum
+LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan:: chapter 1
 #LPIC-2: Linux Professional Institute Certification Study Guide: Exam 201 and Exam 202, 2nd Edition - Christine Bresnahan, Richard Blum
 #Mastering Bash: A Step-by-Step Guide to working with Bash Programming and Shell Scripting - Giorgio Zarrelli
 #Mastering Linux Security and Hardening: Protect your Linux systems from intruders, malware attacks, and other cyber threats, 2nd Edition - Donald A. Tevault

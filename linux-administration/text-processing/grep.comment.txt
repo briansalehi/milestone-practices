@@ -1,1 +1,11 @@
-Prints the lines containing at least one match of given string.
+<p>Prints the lines containing at least one match of given string.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2,5">
+	<code>
+		grep "PRETTY_NAME" /etc/os-release
+		PRETTY_NAME="Arch Linux"
+
+		cat /etc/os-release | grep "PRETTY_NAME"
+		PRETTY_NAME="Arch Linux"
+	</code>
+</pre>

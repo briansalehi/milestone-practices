@@ -1,1 +1,15 @@
-Splits file in chuncks based on size or lines.
+<p>Splits file in chuncks based on size or lines.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		cat &lt;&lt; EOF &gt; /tmp/sample
+		line 1
+		line 2
+		line 3
+		EOF
+
+		split -l 1 /tmp/sample
+	</code>
+</pre>
+
+<p>This command will generate three files: <code>aaa</code>, <code>aab</code>, <code>aac</code>, each containing one line in <code>/tmp/sample</code>.</p>

@@ -1,2 +1,13 @@
-If option -n <N> given, prints last N lines of text.
-N is 10 by default.
+<p>Prints last 10 lines of a file.</p>
+<p>If option <code>-n N</code> given, prints last <code>N</code> lines of text.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2-6">
+	<code>
+		tail -n 5 /etc/services
+		robotraconteur  48653/udp
+		matahari        49000/tcp
+		nusrp           49001/tcp
+		nusdp-disc      49001/udp
+		inspider        49150/tcp
+	</code>
+</pre>

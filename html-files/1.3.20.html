@@ -279,39 +279,27 @@ Awk
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Awk is a strong text processing programmng language which deserves its own
-chapter, or maybe books!
-To learn Awk in depth, visit <a href="/stream-processing/awk">Awk chapter</a>.
+<p>Awk is a strong text processing programmng language which deserves its own chapter, or maybe books! To learn Awk in depth, visit <a href="/linux-administration/stream-processing/awk">Awk chapter</a>.</p>
 
-Covering everything about Awk in a single page is impossible!
-So a brief overview of Awk is that it keeps track of line and word numbers.
-We can easily manipulate text, select lines and fields to print.
+<p>Covering everything about Awk in a single page is impossible! So a brief overview of Awk is that it keeps track of line and word numbers. We can easily manipulate text, select lines and fields to print.</p>
 
-In this sample, the easiest task for Awk is represented which selects the
-second line and third field within that line to print.
+<p>In this sample, the easiest task for <code>awk</code> is represented which selects the second line and third field within that line to print.</p>
 
-Using Awk is straightforward, you give options to <i>awk</i> and then begin
-writing Awk scripts surrounded by single quotes.
+<p>Using <code>awk</code> is straightforward, you give options to <code>awk</code> and then begin writing <b>Awk scripts</b> surrounded by single quotes.</p>
 
-<pre>
-<code class="language-bash">
-awk [options] 'scripts'
-</code>
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="">
+	<code>
+		awk [options] 'scripts'
+	</code>
 </pre>
 
-In Awk, <b>NR</b> stands for <b>N</b>umber of <b>R</b>ecord which keeps
-track of the line Awk is holding in its buffer to process.
+<p>In Awk, <code>NR</code> stands for <b>N</b>umber of <b>R</b>ecord which keeps track of the line <code>awk</code> is holding in its buffer to process.</p>
 
-<b>NF</b> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory.
-To print the second field though, we used <i>print $2</i> command in awk
-script.
+<p><code>NF</code> stands for <b>N</b>umber of <b>F</b>ield which is self explanatory. To print the second field though, we used <code>print $2</code> command in <ode>awk</ode> script.</p>
 
-<b>FS</b> stands for <b>F</b>ield <b>S</b>eparator which Awk uses to devide
-fields within a line to process.
-<i>FS</i> can also be given by -F option.
+<p><code>FS</code> stands for <b>F</b>ield <b>S</b>eparator which <code>awk</code> uses to devide fields within a line to process. <code>FS</code> can also be given by <code>-F</code> option.</p>
 
-Here we have set FS="," variable to separate fields within lines and NF=3 to
-select the third field in NR=2 second line.
+<p>Here we have set <code>FS=","</code> variable to separate fields within lines and <code>NF=3</code> to select the third field in <code>NR=2</code> second line.</p>
 <hr />
   <cite>awk.sh</cite>
 <pre class="line-numbers" >
@@ -334,9 +322,22 @@ bash ./awk.sh
 b2
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/text-processing/sed">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/package-management">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/text-processing/sed">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/package-management">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -443,6 +444,7 @@ function defaultFontSize() {
 	localStorage.setItem('h4fontsize', h3fontsize);
 
 	restoreFontSize();
+	document.getElementById('dropdown-content').style.display = 'none';
 }
 
 function zoominLetter() {

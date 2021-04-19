@@ -1,2 +1,11 @@
-By default, two arguments are given to translate a character.
-If -d 'C' option is given, removes all 'C' characters.
+<p>By default, two arguments are given to translate a character.</p>
+<p>If <code>-d 'C'</code> option is given, removes all <code>'C'</code> characters.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milsetone" data-output="2,4">
+	<code>
+		echo "space separated string" | tr ' ' '-'
+		space-seperated-string
+		echo "ac:b5:7d:34:11:ce" | tr -d ':'
+		acb57d3411ce
+	</code>
+</pre>

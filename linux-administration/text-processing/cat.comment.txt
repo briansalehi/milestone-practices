@@ -1,1 +1,13 @@
-Prints the content of files.
+<p>Prints the content of files.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="5-7">
+	<code>
+		echo "first line" &gt; /tmp/sample
+		echo "second line" &gt;&gt; /tmp/sample
+		echo "third line" &gt;&gt; /tmp/sample
+		cat /tmp/sample
+		first line
+		second line
+		third line
+	</code>
+</pre>

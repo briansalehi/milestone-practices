@@ -1,2 +1,12 @@
-Multiple files can be removed.
-<i>-r</i> option should be given for directories.
+<p>Multiple files can be removed.</p>
+<p><code>-r</code> option should be given for directories.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		# remove file
+		rm /tmp/sample-file
+
+		# remove directory
+		rm -r /tmp/sample-directory
+	</code>
+</pre>

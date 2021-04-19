@@ -1,2 +1,8 @@
-unexpands tab to spaces, -t is required to specify number of spaces to
-unexpand.
+<p>unexpands <b>tab</b> to <b>spaces</b>, <code>-t</code> is required to specify number of spaces to unexpand.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milsetone" data-output="2">
+	<code>
+		echo "	a sample string" | unexpand -t 4
+		    a sample string
+	</code>
+</pre>

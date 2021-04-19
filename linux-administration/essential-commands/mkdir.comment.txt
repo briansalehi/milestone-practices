@@ -1,5 +1,9 @@
-Creates one or many directories if multiple names are given.
-Directories can also be created in places other than working directory if
-directory names contain path.
+<p>Creates one or many directories if multiple names are given.</p>
+<p>Directories can also be created in places other than working directory if directory names contain path.</p>
+<p>Special characters like <code>/</code> and <code>+</code> should be avoided in directory names.</p>
 
-Special characters like / and + should be avoided in directory names.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		mkdir /tmp/sample-directory
+	</code>
+</pre>

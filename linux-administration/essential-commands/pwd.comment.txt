@@ -1,1 +1,8 @@
-Prints the path of the directory you are currently working in.
+<p>Prints the path of the directory you are currently working in.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2">
+	<code>
+		pwd
+		/home/user
+	</code>
+</pre>

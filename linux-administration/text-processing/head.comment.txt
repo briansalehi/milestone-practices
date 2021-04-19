@@ -1,2 +1,10 @@
-By default, first 10 lines of text is printed.
-If option -n <N> is given, first N lines of text is printed.
+<p>Prints the first 10 lines of a file.</p>
+<p>If option <code>-n N</code> is given, first <code>N</code> lines of text is printed.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2,3">
+	<code>
+		head -n 2 /etc/os-release
+		NAME="Arch Linux"
+		PRETTY_NAME="Arch Linux"
+	</code>
+</pre>

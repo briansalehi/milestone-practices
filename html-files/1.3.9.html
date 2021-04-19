@@ -279,36 +279,40 @@ Join Files
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Joins two or more files based on a <b>common</b> field or column.
+<p>Joins two or more files based on a <b>common</b> field or column.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="10-12">
+	<code>
+		echo "Name Number" > /tmp/numbers
+		echo "Jane +12345" >> /tmp/numbers
+		echo "John +16789" >> /tmp/numbers
+
+		echo "Name Country" > /tmp/country
+		echo "Jane US" >> /tmp/country
+		echo "John Ca" >> /tmp/country
+
+		join /tmp/numbers /tmp/country
+		Name Number Country
+		Jane +12345 US
+		John +16789 Ca
+	</code>
+</pre>
 <hr />
-  <cite>join.sh</cite>
-<pre class="line-numbers" >
-<code class="language-bash">
-    #!/usr/bin/env bash
-    
-    echo &quot;Name Number&quot; &gt; /tmp/numbers
-    echo &quot;Jane +12345&quot; &gt;&gt; /tmp/numbers
-    echo &quot;John +16789&quot; &gt;&gt; /tmp/numbers
-    
-    echo &quot;Name Country&quot; &gt; /tmp/country
-    echo &quot;Jane US&quot; &gt;&gt; /tmp/country
-    echo &quot;John Ca&quot; &gt;&gt; /tmp/country
-    
-    join /tmp/numbers /tmp/country
-</code>
-</pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='2-5'>
-<code>
-bash ./join.sh
-Name Number Country
-Jane +12345 US
-John +16789 Ca
-</code>
-</pre>
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/text-processing/wc">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/text-processing/paste">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/text-processing/wc">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/text-processing/paste">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -415,6 +419,7 @@ function defaultFontSize() {
 	localStorage.setItem('h4fontsize', h3fontsize);
 
 	restoreFontSize();
+	document.getElementById('dropdown-content').style.display = 'none';
 }
 
 function zoominLetter() {

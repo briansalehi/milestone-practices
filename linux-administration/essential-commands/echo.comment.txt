@@ -1,9 +1,19 @@
-<i>echo</i> command might seem nontrivial at first sight but it's usually the
-most used command.
+<p><code>echo</code> command might seem nontrivial at first sight but it's usually the most used command. <code>echo</code> prints a string or the value of a variable on shell. Outputs can be redirected to files or to be piped to another command.</p>
 
-Prints a string or the value of a variable on shell.
-Outputs can be redirected to files or to be piped to another command.
+<p>Only strings with duoble quote will expand variables.</p>
 
-Only strings with duoble quote will expand variables.
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="5,9">
+	<code>
+		variable=20
 
-Always embrace your variables and strings in quote.
+		# notice double quotes
+		echo "variable contains $variable"
+		variable contains 20
+
+		# notice single quotes
+		echo 'variable contains $variable'
+		variable contains $variable
+	</code>
+</pre>
+
+<p>Always embrace your variables and strings in quote.</p>
