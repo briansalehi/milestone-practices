@@ -1,13 +1,33 @@
-Normally, your shell keeps a history of the previous commands you executed.
-You can access to this history by <i>history</i> command.
+<p>Normally, your shell keeps a history of the previous commands you executed. You can access to this history by <code>history</code> command.</p>
 
-You can run previous command by !! which first indicates the command, then
-its results.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		history
+	</code>
+</pre>
 
-You can also specifically choose a command in history and run again by its ID.
+<p>You can run previous command by <code>!!</code> which first indicates the command, then its results.</p>
 
-And finally, you can clear shell history by <b>-c</b> option.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		!!
+	</code>
+</pre>
 
-For security reasons, you might want to frequently do that.
-One reason to do this is that you may have typed a passphrase or a sensitive
-information in command line and now it’s stored in shell history.
+<p>You can also specifically choose a command in history and run again by its ID.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		!32
+	</code>
+</pre>
+
+<p>And finally, you can clear shell history by <code>-c</code> option.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		history -c
+	</code>
+</pre>
+
+<p>For security reasons, you might want to frequently do that. One reason to do this is that you may have typed a passphrase or a sensitive information in command line and now it’s stored in shell history.</p>

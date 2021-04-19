@@ -1,16 +1,54 @@
-Redirections can be used to write a command's output to a file, e.g. create a
-log file.
+<p><b>Redirections</b> can be used to write a command's output to a file, e.g. create a log file.</p>
 
-Right shift can be used to write to file.
+<p>Right shift <code>$gt;</code> can be used to write to file.</p>
 
-Double right shift is used to append output to file.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo "something" &gt; output.txt
+	</code>
+</pre>
 
-Left shift is used to input file contents in standard input.
+<p>Double right shift <code>&gt;&gt;</code> is used to append output to file.</p>
 
-Double left shift is only used when a special word, usually EOF is typed
-afterward, when typed so, standard input will read until it's caught EOF.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo "another thing" &gt;&gt; output.txt
+	</code>
+</pre>
 
-Triple left shift is used to write command's output to standard input.
+<p>Left shift <code>&lt;</code> is used to input file contents in standard input.</p>
 
-Pipe is used to write left hand command's output to right hand's standard
-input.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		sed '1d' &lt; input.txt
+	</code>
+</pre>
+
+<p>Double left shift <code>&lt;&lt;</code> is only used when a special word, usually <code>EOF</code> is typed afterward, when typed so, standard input will read until it's caught <code>EOF</code>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2-6">
+	<code>
+		cat &lt;&lt; EOF &gt;&gt; output.txt
+		this line will be written to file
+		even this line
+		until EOF is caught with no heading and trailing characters
+		even spaces around EOF will not trigger the end of output
+		EOF
+	</code>
+</pre>
+
+<p>Triple left shift <code>&lt;&lt;&lt;</code> is used to write command's output to <b>standard input</b>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		tr ':' ' ' &lt;&lt;&lt; $(cat /etc/passwd)
+	</code>
+</pre>
+
+<p>Pipe <code>|</code> is used to write left hand command's output to right hand's standard input.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo 'ac:b5:7d:35:12:de' | tr ':' '-'
+	</code>
+</pre>

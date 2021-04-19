@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Object Orientation</title>
+<title>Wrapper Classes, AutoBoxing, and Unboxing</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,8 +254,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class='breadcrumb-item active'>Object Orientation</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">Java SE Practices</a></li>
+<li class='breadcrumb-item active'>Wrapper Classes, AutoBoxing, and Unboxing</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -267,8 +267,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Object-Orientation" class="anchor" aria-hidden="true" href="#Object-Orientation">
-Object Orientation
+<a id="Wrapper-Classes,-AutoBoxing,-and-Unboxing" class="anchor" aria-hidden="true" href="#Wrapper-Classes,-AutoBoxing,-and-Unboxing">
+Wrapper Classes, AutoBoxing, and Unboxing
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -276,32 +276,10 @@ Object Orientation
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Object-oriented programming is based on four important aspects:</p> 
-
-<ul>
-	<li>Encapsulation</li>
-	<li>Abstraction</li>
-	<li>Inheritance</li>
-	<li>Polymorphism</li>
-</ul>
+Wrapper Classes, AutoBoxing, and Unboxing are introduced in this chapter
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/memory-management/casting/reinterpret-cast">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/object-orientation/classes">Next Page</a></li>
-</ul>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'></span></li>
-<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'></span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 9 through 12</span></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.2.1.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.1.html">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -314,258 +292,14 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="#8-3-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Classes and Objects
-	<span class="badge badge-primary badge-pill">16</span>
-</a>
-<div class="list-group collapse" id="8-3-1-0">
-<a href="/cpp/object-orientation/classes/encapsulation" class="list-group-item group-child">
-	1. Encapsulation
+<a href="/8.3.1.html" class="list-group-item">
+	1. Wrapper Class
 	
 </a>
-<a href="/cpp/object-orientation/classes/abstraction" class="list-group-item group-child">
-	2. Abstraction
+<a href="/8.3.2.html" class="list-group-item">
+	2. Auto Boxing and Unboxing
 	
 </a>
-<a href="/cpp/object-orientation/classes/structure" class="list-group-item group-child">
-	3. Structure
-	
-</a>
-<a href="/cpp/object-orientation/classes/constructor" class="list-group-item group-child">
-	4. Constructor
-	
-</a>
-<a href="/cpp/object-orientation/classes/constructor-initialization-list" class="list-group-item group-child">
-	5. Constructor Initialization List
-	
-</a>
-<a href="/cpp/object-orientation/classes/copy-constructor" class="list-group-item group-child">
-	6. Copy Constructor
-	
-</a>
-<a href="/cpp/object-orientation/classes/move-constructor" class="list-group-item group-child">
-	7. Move Constructor
-	
-</a>
-<a href="/cpp/object-orientation/classes/destructor" class="list-group-item group-child">
-	8. Destructor
-	
-</a>
-<a href="/cpp/object-orientation/classes/implicit-type-conversion" class="list-group-item group-child">
-	9. Implicit Type Conversion
-	
-</a>
-<a href="/cpp/object-orientation/classes/this-pointer" class="list-group-item group-child">
-	10. <i>this</i> Pointer
-	
-</a>
-<a href="/cpp/object-orientation/classes/sizeof-a-class" class="list-group-item group-child">
-	11. Size of A Class
-	
-</a>
-<a href="/cpp/object-orientation/classes/union" class="list-group-item group-child">
-	12. Union
-	
-</a>
-<a href="/cpp/object-orientation/classes/variant" class="list-group-item group-child">
-	13. std::variant
-	
-</a>
-<a href="/cpp/object-orientation/classes/initialization-aggregation" class="list-group-item group-child">
-	14. Initialization Aggregation
-	
-</a>
-<a href="/cpp/object-orientation/classes/default-constructible" class="list-group-item group-child">
-	15. Default Constructible
-	
-</a>
-<a href="/cpp/object-orientation/classes/delete-expression" class="list-group-item group-child">
-	16. Delete Expression
-	
-</a>
-</div>
-<a href="#8-3-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Operator Overloading
-	<span class="badge badge-primary badge-pill">12</span>
-</a>
-<div class="list-group collapse" id="8-3-2-0">
-<a href="/cpp/object-orientation/operator-overloading/unary-operators" class="list-group-item group-child">
-	1. Unary Operators
-	<span class="badge badge-primary badge-pill">2</span>
-</a>
-<div class="list-group collapse" id="8-3-2-1-0">
-<a href="/cpp/object-orientation/operator-overloading/unary-operators/increment-decrement" class="list-group-item group-child">
-	1. Increment and Decrement Operators
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/unary-operators/conversion" class="list-group-item group-child">
-	2. Conversion Operator
-	
-</a>
-</div>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators" class="list-group-item group-child">
-	2. Binary Operators
-	<span class="badge badge-primary badge-pill">7</span>
-</a>
-<div class="list-group collapse" id="8-3-2-2-0">
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/assignment" class="list-group-item group-child">
-	1. Assignment Operator
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/addition-subtraction" class="list-group-item group-child">
-	2. Addition and Subtraction Operators
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/equality" class="list-group-item group-child">
-	3. Equality Operator
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/comparison" class="list-group-item group-child">
-	4. Comparison Operators
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/user-defined-literal" class="list-group-item group-child">
-	5. User Defined Literal
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/subscript" class="list-group-item group-child">
-	6. Subscript Operator
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/binary-operators/function" class="list-group-item group-child">
-	7. Function Operator
-	
-</a>
-</div>
-<a href="/cpp/object-orientation/operator-overloading/copy-assignment" class="list-group-item group-child">
-	3. Copy Assignment Operator
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/move-assignment" class="list-group-item group-child">
-	4. Move Assignment Operator
-	
-</a>
-<a href="/cpp/object-orientation/operator-overloading/friend-operators" class="list-group-item group-child">
-	5. Friend Operators
-	
-</a>
-</div>
-<a href="#8-3-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Object Decoration
-	<span class="badge badge-primary badge-pill">5</span>
-</a>
-<div class="list-group collapse" id="8-3-3-0">
-<a href="/cpp/object-orientation/object-decoration/constant-expression-classes" class="list-group-item group-child">
-	1. Constant Expression Classes
-	
-</a>
-<a href="/cpp/object-orientation/object-decoration/non-copyable-objects" class="list-group-item group-child">
-	2. Non-Copyable Objects
-	
-</a>
-<a href="/cpp/object-orientation/object-decoration/singleton" class="list-group-item group-child">
-	3. Singleton
-	
-</a>
-<a href="/cpp/object-orientation/object-decoration/stack-prohibition" class="list-group-item group-child">
-	4. Stack Prohibition
-	
-</a>
-<a href="/cpp/object-orientation/object-decoration/friends" class="list-group-item group-child">
-	5. Friends
-	
-</a>
-</div>
-<a href="#8-3-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Inheritance
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="8-3-4-0">
-<a href="/cpp/object-orientation/inheritance/base-class-initialization" class="list-group-item group-child">
-	1. Base Class Initialization
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/override" class="list-group-item group-child">
-	2. Overriding Base Methods
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/order-of-construction" class="list-group-item group-child">
-	3. Order of Construction and Destruction
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/private-inheritance" class="list-group-item group-child">
-	4. Private Inheritance
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/protected-inheritance" class="list-group-item group-child">
-	5. Protected Inheritance
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/slicing" class="list-group-item group-child">
-	6. Slicing
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/multiple-inheritance" class="list-group-item group-child">
-	7. Multiple Inheritance
-	
-</a>
-<a href="/cpp/object-orientation/inheritance/final-inheritance" class="list-group-item group-child">
-	8. Final Inheritance
-	
-</a>
-</div>
-<a href="#8-3-5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. Polymorphism
-	<span class="badge badge-primary badge-pill">6</span>
-</a>
-<div class="list-group collapse" id="8-3-5-0">
-<a href="/cpp/object-orientation/polymorphism/virtual-destructor" class="list-group-item group-child">
-	1. Virtual Destructors
-	
-</a>
-<a href="/8.3.5.2.html" class="list-group-item group-child">
-	2. pure virtual function
-	
-</a>
-<a href="/8.3.5.3.html" class="list-group-item group-child">
-	3. diamond problem
-	
-</a>
-<a href="/8.3.5.4.html" class="list-group-item group-child">
-	4. intention to override
-	
-</a>
-<a href="/8.3.5.5.html" class="list-group-item group-child">
-	5. prevent overriding by final
-	
-</a>
-<a href="/8.3.5.6.html" class="list-group-item group-child">
-	6. virtual copy constructor
-	
-</a>
-</div>
-<a href="#8-3-6-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6. Exception Handling
-	<span class="badge badge-primary badge-pill">4</span>
-</a>
-<div class="list-group collapse" id="8-3-6-0">
-<a href="/cpp/object-orientation/exceptions/try-catch" class="list-group-item group-child">
-	1. Catching Exceptions
-	
-</a>
-<a href="/cpp/object-orientation/exceptions/exception-class" class="list-group-item group-child">
-	2. Exception Class
-	
-</a>
-<a href="/cpp/object-orientation/exceptions/exception-lookup" class="list-group-item group-child">
-	3. Exception Lookup
-	
-</a>
-<a href="/cpp/object-orientation/exceptions/custom-exception" class="list-group-item group-child">
-	4. Custom Exception
-	
-</a>
-</div>
 </div>
 <script>
 function darkmode() {
@@ -646,7 +380,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 

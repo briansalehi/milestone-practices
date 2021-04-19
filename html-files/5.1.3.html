@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>putchar</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+img {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+img {
+	max-width: -moz-available;
+}
+
+@media only screen and (min-width:720px) {
+    .img-responsive {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .btn:hover {
+	color: #777777;
+}
+
+.dark-mode .dropdown-item {
+	background-color: #3a3a3a !important;
+	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.sticky {
+	position: sticky !important;
+	z-index: 1;
+	top: 3%;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
+	text-align: center !important;
+	font-size: 18px !important;
+}
+
+.dropbtn {
+  font-size: 14px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">C</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.1.0.html">Input & Output Streams</a></li>
+<li class='breadcrumb-item active'>putchar</li>
+</ol>
+<div class="dropdown pull-right sticky">
+  <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
+	  &#x2699;
+  </button>
+  <div class="dropdown-content" id="dropdown-content">
+    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
+    <button id="changefont-icon" class="btn dropdown-item" onclick="toggle_font()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+  </div>
+</div>
+<h2>
+<a id="putchar" class="anchor" aria-hidden="true" href="#putchar">
+putchar
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+If you need to print a character, **putchar** can be a substitution of printf as it only works with a single character.
+<hr />
+  <cite>putchar.c</cite>
+<pre class="line-numbers" >
+<code class="language-c">
+    #include &lt;stdio.h&gt;
+    
+    int main(void)
+    {
+        char character = &apos;y&apos;;
+        putchar(character);
+        printf(&quot;\n&quot;);
+    
+        return 0;
+    }
+</code>
+</pre>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
+<code>
+gcc -g -Wall -O0 -c -o ./putchar.o ./putchar.c
+gcc -g -o ./putchar.bin ./putchar.o
+./putchar.bin
+</code>
+</pre>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/5.1.2.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/5.1.4.html">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x2600;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x263d;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x263d;';
+		toggle_settings();
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x2600;';
+		toggle_settings();
+	}
+}
+var current_position = 0;
+
+function scrollDownListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "j") {
+        var screen_height = window.screen.height / 4;
+		current_position += screen_height;
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+function scrollUpListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "k") {
+        var screen_height = window.screen.height / 4;
+		current_position -= screen_height;
+		if (current_position < 0) {
+			current_position = 0;
+		}
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+scrollDownListener()
+scrollUpListener()
+function toggle_settings() {
+	var button_list = document.getElementById('dropdown-content');
+
+	if (button_list.style.display != "none") {
+		button_list.style.display = "none";
+	} else {
+		button_list.style.display = "block";
+	}
+}
+toggle_settings();
+var minimum_fontsize=1;
+var maximum_fontsize=6;
+var current_fontsize=2;
+var fontsize_growth = "upward";
+
+function zoominLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s += 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function zoomoutLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s -= 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function toggle_font() {
+	if (fontsize_growth == "downward") {
+		zoomoutLetter();
+		--current_fontsize;
+		if (current_fontsize == minimum_fontsize) {
+			fontsize_growth = "upward";
+		}
+	} else {
+		zoominLetter();
+		++current_fontsize;
+		if (current_fontsize == maximum_fontsize) {
+			fontsize_growth = "downward";
+		}
+	}
+	console.log(current_fontsize);
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

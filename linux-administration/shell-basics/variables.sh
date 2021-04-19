@@ -3,14 +3,9 @@
 # store a string
 project="Linux Administration"
 
-# only Jane will be stored
+# embrace string with double quotes
+# otherwise, only 'Jane' will be stored
 name=Jane Doe
 
-# print variable
-echo "$name"
-
-# PATH environment variable
+# print an environment variable
 echo "$PATH"
-
-# list of all environment variables
-env

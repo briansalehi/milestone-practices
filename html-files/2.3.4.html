@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Branching</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+img {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+img {
+	max-width: -moz-available;
+}
+
+@media only screen and (min-width:720px) {
+    .img-responsive {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .btn:hover {
+	color: #777777;
+}
+
+.dark-mode .dropdown-item {
+	background-color: #3a3a3a !important;
+	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.sticky {
+	position: sticky !important;
+	z-index: 1;
+	top: 3%;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
+	text-align: center !important;
+	font-size: 18px !important;
+}
+
+.dropbtn {
+  font-size: 14px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/2.0.html">Development Tools</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/2.3.0.html">Git</a></li>
+<li class='breadcrumb-item active'>Branching</li>
+</ol>
+<div class="dropdown pull-right sticky">
+  <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
+	  &#x2699;
+  </button>
+  <div class="dropdown-content" id="dropdown-content">
+    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
+    <button id="changefont-icon" class="btn dropdown-item" onclick="toggle_font()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+  </div>
+</div>
+<h2>
+<a id="Branching" class="anchor" aria-hidden="true" href="#Branching">
+Branching
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git add README test.rb LICENSE
+		git commit -m 'Initial commit'
+	</code>
+</pre>
+
+<p>When you create the commit by running <code>git commit</code>, Git checksums each subdirectory (in this case, just the root project directory) and stores them as a <i>tree object</i> in the Git repository. Git then creates a commit object that has the metadata and a pointer to the root project tree so it can re-create that snapshot when needed.</p>
+
+<p>A Git repository now contains five objects: <b>three blobs</b> (each representing the contents of one of the three files), <b>one tree</b> that lists the contents of the directory and specifies which file names are stored as which blobs, and <b>one commit</b> with the pointer to that root tree and all the commit metadata.</p>
+
+<img class="img-responsive" src="/development-tools/git/object-tree.png" alt="object tree" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/object-tree.png"'>
+
+<p>If you make some changes and commit again, the next commit stores a pointer to the commit that came immediately before it.</p>
+
+<img class="img-responsive" src="/development-tools/git/chain-of-commits.png" alt="chain of commits" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/chain-of-commits.png"'>
+
+<p>A <b>branch</b> in Git is simply a lightweight movable pointer to one of these commits. The default branch name in Git is <code>master</code>. As you start making commits, you’re given a master branch that points to the last commit you made. Every time you commit, the master branch pointer moves forward automatically.</p>
+
+<img class="img-responsive" src="/development-tools/git/master-branch-history.png" alt="master branch history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/master-branch-history.png"'>
+
+<p>To create a new branch called <code>testing</code>, use <code>git branch</code> command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch testing
+	</code>
+</pre>
+
+<p>This creates a new pointer to the same commit you’re currently on.</p>
+
+<img class="img-responsive" src="/development-tools/git/two-commit-pointers.png" alt="two commit pointers" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/two-commit-pointers.png"'>
+
+<p>Git knows what branch you’re currently on by keeping a special pointer called <code>HEAD</code>.</p>
+
+<p>In Git, this is a pointer to the local branch you’re currently on. In this case, you’re still on <code>master</code>. The git branch command only created a new branch — it doesn’t switch to that branch.</p>
+
+<img class="img-responsive" src="/development-tools/git/head-pointer.png" alt="head pointer" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/head-pointer.png"'>
+
+<p>You can easily see this by running a simple git log command that shows you where the branch pointers are pointing. This option is called <code>--decorate</code>.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git log --oneline --decorate
+	</code>
+</pre>
+
+<p>To switch to an existing branch, you run the <code>git checkout</code> command. Let’s switch to the new <code>testing</code> branch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout testing
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/head-pointing-to-new-branch.png" alt="head pointing to new branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/head-pointing-to-new-branch.png"'>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		vim test.rb
+		git commit -a -m 'made a change'
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/new-branch-moves-forward.png" alt="new branch moves forward" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/new-branch-moves-forward.png"'>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/head-back-to-master-branch.png" alt="head back to master branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/head-back-to-master-branch.png"'>
+
+<p>That command did two things. It moved the <code>HEAD</code> pointer back to point to the <code>master</code> branch, and it reverted the files in your working directory back to the snapshot that master points to.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		vim test.rb
+		git commit -a -m 'made other changes'
+	</code>
+</pre>
+
+<p>Now your project history has <i>diverged</i>!</p>
+
+<img class="img-responsive" src="/development-tools/git/divergent-history.png" alt="divergent history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/divergent-history.png"'>
+
+<p>You can also see this easily with the <code>git log</code> command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git log --oneline --decorate --graph --all
+	</code>
+</pre><p>To create a new branch and switch to it at the same time, you can run the <code>git checkout</code> command with the <code>-b</code> switch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout -b iss53
+		git checkout master
+		git checkout -b hotfix
+		vim index.html
+		git commit -a -m 'Fix broken email address'
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/hotfix-branch.png" alt="hotfix branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/hotfix-branch.png"'>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge hotfix
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/master-fast-forwarded-to-hotfix.png" alt="master fast forwarded to hotfix" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/master-fast-forwarded-to-hotfix.png"'>
+
+<p>Delete the <code>hotfix</code> branch, because you no longer need it.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -d hotfix
+	</code>
+</pre>
+
+<p>Check out the branch you wish to merge into and then run the <code>git merge</code> command.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge iss53
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/snapshots-to-merge-into.png" alt="snapshots to merge into" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/snapshots-to-merge-into.png"'>
+
+<p>Instead of just moving the branch pointer forward, Git creates a new <b>snapshot</b> that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a <b>merge commit</b>, and is special in that it has more than one parent.</p>
+
+<p>You can delete the branch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -d iss53
+	</code>
+</pre>
+
+<p>Occasionally, this process doesn’t go smoothly!</p>
+
+<p>If your fix for <code>issue #53</code> modified the same part of a file as the <code>hotfix</code> branch, you’ll get a merge conflict that looks something like this:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git merge iss53
+	</code>
+</pre>
+
+<p>Git adds standard conflict-resolution markers to the files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:</p>
+
+<pre class="language-bash">
+	<code>
+		&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
+		&lt;div id="footer"&gt;contact : email.support@github.com&lt;/div&gt;
+		=======
+		&lt;div id="footer"&gt; please contact us at support@github.com
+		&lt;/div&gt;
+		&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+	</code>
+</pre>
+
+<p>In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.</p>
+
+<p>If you want to use a graphical tool to resolve these issues, you can run <code>git mergetool</code>, which fires up an appropriate visual merge tool and walks you through the conflicts:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git mergetool
+	</code>
+</pre>
+
+<p>If you’re happy with that, and you verify that everything that had conflicts has been staged, you can type <code>git commit</code> to finalize the merge commit.</p>
+
+<p>The <code>git branch</code> command does more than just create and delete branches. If you run it with no arguments, you get a simple listing of your current branches:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch
+	</code>
+</pre>
+
+<p>To see the last commit on each branch, you can run:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -v
+	</code>
+</pre>
+
+<p>The useful <code>--merged</code> and <code>--no-merged</code> options can filter this list to branches that you have or have not yet merged into the branch you’re currently on. To see which branches are already merged into the branch you’re on, you can run:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch --merged
+	</code>
+</pre>
+
+<p>Branches on this list without the <code>*</code> in front of them are generally fine to delete with <code>git branch -d</code></p>
+
+<p>Rename the branch locally with the <code>git branch --move</code> command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch --move bad-branch-name corrected-branch-name
+	</code>
+</pre>
+
+<p>To let others see the corrected branch on the remote, push it:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push --set-upstream origin corrected-branch-name
+	</code>
+</pre>
+
+<p>The corrected branch is available on the remote. However the bad branch is also still present on the remote. You can delete the bad branch from the remote:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin --delete bad-branch-name
+	</code>
+</pre>
+
+<p>Rename your local master branch into main with the following command:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch --move master main
+	</code>
+</pre>
+
+<p>To let others see the new main branch, you need to push it to the remote.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push --set-upstream origin main
+	</code>
+</pre>
+
+<p>Other collaborators will continue to use the master branch as the base of their work, until you make some further changes.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin --delete master
+	</code>
+</pre>
+
+<p>Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references explicitly with <code>git ls-remote &lt;remote&gt;</code>, or <code>git remote show &lt;remote&gt;</code> for remote branches as well as more information.</p>
+
+<p>Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.</p>
+
+<p>As long as you stay out of contact with your <i>origin server</i>, your <code>origin/master</code> pointer doesn’t move.</p>
+
+<img class="img-responsive" src="/development-tools/git/remote-branch-behind.png" alt="remote branch behind" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/remote-branch-behind.png"'>
+
+<p>To synchronize your work with a given remote, you run a <code>git fetch &lt;remote&gt;</code> command.</p>
+
+<img class="img-responsive" src="/development-tools/git/fetching-updates-from-remote.png" alt="fetching updates from remote" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fetching-updates-from-remote.png"'>
+
+<p>If you have a branch named <code>serverfix</code> that you want to work on with others, you can push it up the same way you pushed your first branch. Run <code>git push &lt;remote&gt; &lt;branch&gt;</code>:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin serverfix
+	</code>
+</pre>
+
+<p>Git automatically expands the <code>serverfix</code> branchname out to <code>refs/heads/serverfix:refs/heads/serverfix</code>, which means, <i>“Take my serverfix local branch and push it toupdate the remote’s serverfix branch.”</i></p>
+
+<p>The next time one of your collaborators fetches from the server, they will get a reference to where the server’s version of <code>serverfix</code> is under the remote branch <code>origin/serverfix</code>:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git fetch origin
+	</code>
+</pre>
+
+<p>It’s important to note that when you do a fetch that brings down new <b>remote-tracking</b> branches, you don’t automatically have local, editable copies of them. In other words, in this case, you don’t have a new <code>serverfix</code> branch — you have only an <code>origin/serverfix</code> pointer that you can’t modify.</p>
+
+<p>To merge this work into your current working branch, you can run <code>git merge origin/serverfix</code>. If you want your own <code>serverfix</code> branch that you can work on, you can base it off your <b>remote-tracking</b> branch:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout -b serverfix origin/serverfix
+	</code>
+</pre>
+
+<p><b>Tracking</b> branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type git pull, Git automatically knows which server to fetch from and which branch to merge in.</p>
+
+<p>When you clone a repository, it generally automatically creates a master branch that tracks <code>origin/master</code>. However, you can set up other tracking branches if you wish — ones that track branches on other remotes, or don’t track the <b>master</b> branch. The simple case is the example you just saw, running <code>git checkout -b &lt;branch&gt; &lt;remote&gt;/&lt;branch&gt;</code>. This is a common enough operation that Git provides the <code>--track</code> shorthand:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout --track origin/serverfix
+		git fetch --all; git branch -vv
+	</code>
+</pre>
+
+<p>Set up a local branch with a different name than the remote branch, you can easily use the first version with a different local branch name:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout -b sf origin/serverfix
+	</code>
+</pre>
+
+<p>Now, your local branch <code>sf</code> will automatically pull from <code>origin/serverfix</code>.</p>
+
+<p>If you already have a local branch and want to set it to a remote branch you just pulled down, or want to change the <code>upstream</code> branch you’re tracking, you can use the <code>-u</code> or <code>--set-upstream-to</code> option to git branch to explicitly set it at any time.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git branch -u origin/serverfix
+	</code>
+</pre>
+
+<p>If you want to see what <b>tracking</b> branches you have set up, you can use the <code>-vv</code> option to <code>git branch</code>.</p>
+
+<p>There is a command called <code>git pull</code> which is essentially a <code>git fetch</code> immediately followed by a <code>git merge</code> in most cases.</p>
+
+<p>Generally it’s better to simply use the <code>fetch</code> and <code>merge</code> commands explicitly as the magic of <code>git pull</code> can often be confusing.</p>
+
+<p>You can delete a remote branch using the <code>--delete</code> option to <code>git push</code>.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git push origin --delete serverfix
+	</code>
+</pre>
+
+<p>In Git, there are two main ways to integrate changes from one branch into another: the <b>merge</b> and the <b>rebase</b>.</p>
+
+<img class="img-responsive" src="/development-tools/git/simple-diverge-history.png" alt="simple diverge history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/simple-diverge-history.png"'>
+
+<p>The easiest way to integrate the branches, as we’ve already covered, is the <code>merge</code> command.</p>
+
+<img class="img-responsive" src="/development-tools/git/integrating-diverged-history.png" alt="integrating diverged history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/integrating-diverged-history.png"'>
+
+<p>However, there is another way: you can take the patch of the change that was introduced in <code>C4</code> and reapply it on top of <code>C3</code>.</p>
+
+<p>In Git, this is called <b>rebasing</b>. With the <code>rebase</code> command, you can take all the changes that were committed on one branch and replay them on a different branch.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout experiment
+		git rebase master
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/rebasing-history.png" alt="rebasing history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-history.png"'>
+
+<p>At this point, you can go back to the master branch and do a <code>fast-forward merge</code>.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge experiment
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/fast-forwarding-master-branch.png" alt="fast forwarding master branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fast-forwarding-master-branch.png"'>
+
+<p>You can also have your rebase replay on something other than the rebase target branch</p>
+
+<p>For example, You branched a topic branch (server) to add some server-side functionality to your project, and made a commit. Then, you branched off that to make the client-side changes (client) and committed a few times. Finally, you went back to your server branch and did a few more commits.</p>
+
+<img class="img-responsive" src="/development-tools/git/client-server-history.png" alt="client server history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/client-server-history.png"'>
+
+<p>You can take the changes on client that aren’t on server (C8 and C9) and replay them on your master branch by using the --onto option of git rebase:</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git rebase --onto master server client
+	</code>
+</pre>
+
+<p>This basically says, “Take the clientbranch, figure out the patches since it diverged from the server branch, and replay these patches in the client branch as if it was based directly off the master branch instead.” It’s a bit complex, but the result is pretty cool.</p>
+
+<img class="img-responsive" src="/development-tools/git/rebasing-master-to-client.png" alt="rebasing master to client" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-master-to-client.png"'>
+
+<p>Now you can <b>fast-forward</b> your master branch</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge client
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/fast-forwarding-master-after-rebase.png" alt="fast forwarding master after rebase" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/fast-forwarding-master-after-rebase.png"'>
+
+<p>You can rebase the server branch onto the master branch without having to check it out first by running <code>git rebase &lt;basebranch&gt; &lt;topicbranch&gt;</code> — which checks out the topic branch (in this case, server) for you and replays it onto the base branch (master):</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git rebase master server
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/rebasing-server-branch.png" alt="rebasing server branch" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/rebasing-server-branch.png"'>
+
+<p>Then, you can <b>fast-forward</b> the base branch (master):</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git checkout master
+		git merge server
+		git branch -d client
+		git branch -d server
+	</code>
+</pre>
+
+<img class="img-responsive" src="/development-tools/git/final-commit-history.png" alt="final commit history" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/final-commit-history.png"'>
+
+<p>If you pull down work that was rewritten and rebase it on top of the new commits from your partner, Git can often successfully figure out what is uniquely yours and apply them back on top of the new branch.</p>
+
+<img class="img-responsive" src="/development-tools/git/force-pushed-rebase.png" alt="force pushed rebase" loading="lazy" onerror='this.onerror=null; this.src="development-tools/git/force-pushed-rebase.png"'>
+
+<p>You can also simplify this by running a <code>git pull --rebase</code> instead of a normal <code>git pull</code>. Or you could do it manually with a <code>git fetch</code> followed by a <code>git rebase teamone/master</code> in this case.</p>
+
+<p>If you are using <code>git pull</code> and want to make <code>--rebase</code> the default, you can set the <code>pull.rebase</code> config value with something like.</p>
+
+<pre class="language-bash command-line" data-host="milestone">
+	<code>
+		git config --global pull.rebase true
+	</code>
+</pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Pro Git, 2nd Edition - Bem Straub, Scott Chacon: <span style='color: red'> chapter 3</span></li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/git/project-initialization">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/git/workflows">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x2600;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x263d;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x263d;';
+		toggle_settings();
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x2600;';
+		toggle_settings();
+	}
+}
+var current_position = 0;
+
+function scrollDownListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "j") {
+        var screen_height = window.screen.height / 4;
+		current_position += screen_height;
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+function scrollUpListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "k") {
+        var screen_height = window.screen.height / 4;
+		current_position -= screen_height;
+		if (current_position < 0) {
+			current_position = 0;
+		}
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+scrollDownListener()
+scrollUpListener()
+function toggle_settings() {
+	var button_list = document.getElementById('dropdown-content');
+
+	if (button_list.style.display != "none") {
+		button_list.style.display = "none";
+	} else {
+		button_list.style.display = "block";
+	}
+}
+toggle_settings();
+var minimum_fontsize=1;
+var maximum_fontsize=6;
+var current_fontsize=2;
+var fontsize_growth = "upward";
+
+function zoominLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s += 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function zoomoutLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s -= 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function toggle_font() {
+	if (fontsize_growth == "downward") {
+		zoomoutLetter();
+		--current_fontsize;
+		if (current_fontsize == minimum_fontsize) {
+			fontsize_growth = "upward";
+		}
+	} else {
+		zoominLetter();
+		++current_fontsize;
+		if (current_fontsize == maximum_fontsize) {
+			fontsize_growth = "downward";
+		}
+	}
+	console.log(current_fontsize);
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

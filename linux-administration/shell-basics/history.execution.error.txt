@@ -1,0 +1,2 @@
+./linux-administration/shell-basics/history.sh: line 7: !!: command not found
+./linux-administration/shell-basics/history.sh: line 10: !32: command not found

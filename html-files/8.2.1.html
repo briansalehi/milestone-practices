@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Move Semantics</title>
+<title>ACCESS MODIFIERS</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,9 +254,9 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">Memory Management</a></li>
-<li class='breadcrumb-item active'>Move Semantics</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">Java SE Practices</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.2.0.html">ACCESS MODIFIERS</a></li>
+<li class='breadcrumb-item active'>ACCESS MODIFIERS</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -268,8 +268,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Move-Semantics" class="anchor" aria-hidden="true" href="#Move-Semantics">
-Move Semantics
+<a id="ACCESS-MODIFIERS" class="anchor" aria-hidden="true" href="#ACCESS-MODIFIERS">
+ACCESS MODIFIERS
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -277,39 +277,52 @@ Move Semantics
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-smart pointers cannot be used in lambda functions unless you move them by **std::move** function.
+There are 4 access modifiers in Java, by which each member of class that use them, would have different type of accessibility:
+<ol>
+    <li><b>Public:</b> Accessible everywhere (keyword: public)</li>
+    <li><b>Protected:</b> Accessible in class (itself), class children, and other classes in the same package. (keyword: protected)</li>
+    <li><b>Package Private/Default: </b> Only in the same package. (keyword: this one actually doesn't have any keywords, so you just have to write nothing as access modifier, and then Java assumes that member as a package-private)</li>
+    <li><b>Private:</b> Only in the current class (even not accessible in children) (keyword: private)</li>
+</ol>
+
+
+
+</br>
+</br>
+<b>* Protected and Package-private members are not accessible in sub-packages of current package, and they are only accessible in the current package.</b>
+</br>
+<b>* Access modifiers are part of method signature. </b>
+
+
 <hr />
-  <cite>move-semantics.cxx</cite>
+  <cite>AccessModifiers.java</cite>
 <pre class="line-numbers" >
-<code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;memory&gt; // unique_ptr
-    
-    int main()
-    {
-        std::unique_ptr&lt;char&gt; alphabet(new char);
-        *alphabet = &apos;a&apos;;
-    
-        // if you ever needed to capture a unique pointer in lambda, use std::move
-        auto lambda = [capture = std::move(alphabet)] { std::cout &lt;&lt; *capture &lt;&lt; std::endl; };
-    
-        lambda();
-        return 0;
+<code class="language-java">
+    /*
+    access modifier  return type 
+        |             ^
+        |            _|
+        V           /               */
+    public final void run(double distance) throws InterruptedException {
+    /*
+            ^               
+            |       
+          optional specifier */
+        // run faster
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
 <code>
-g++ -Wall -g -o ./move-semantics.o -c ./move-semantics.cxx
-g++ -g -o ./move-semantics.bin ./move-semantics.o
-./move-semantics.bin
-a
+compiler options ./AccessModifiers.java
+linker options ./java/access_modifiers AccessModifiers
+linker options ./java/access_modifiers AccessModifiers
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/memory-management">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/memory-management/pointers">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.2.0.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.3.0.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -390,7 +403,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 
@@ -455,8 +468,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Built-in Documentation</title>
+<title>Assembly Structure</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,10 +254,10 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Development Tools</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.1.0.html">Vim</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Assembly</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.1.0.html">x86_64</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/4.1.1.0.html">Fundamentals</a></li>
-<li class='breadcrumb-item active'>Built-in Documentation</li>
+<li class='breadcrumb-item active'>Assembly Structure</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -269,26 +269,178 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Built-in-Documentation" class="anchor" aria-hidden="true" href="#Built-in-Documentation">
-Built-in Documentation
+<a id="Assembly-Structure" class="anchor" aria-hidden="true" href="#Assembly-Structure">
+Assembly Structure
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-(See <b>:help</b> )
-<br/>
+In section <b>.data</b> , initialized data is declared and defined, in the
+following format:
 
-The best way to get to know Vim's documentation is by spending time in it.
+<b>&lt;variable name&gt; &lt;type&gt; &lt;value&gt;</b>
+<br>
+Variable names start with a letter, followed by letters or numbers or
+special characters.
 
-Documentations are referenced regularly in pages in the following format
-[<b>:h vimtutor</b>] abbreviated for :help.
+When a variable is included in <i>section .data</i>, memory is allocated
+for that variable when the source code is assembled and linked to an
+executable.
 
-The help reference is a kind of hyperlink to Vim's built-in documentation.
+<i>section .data</i> can also contain constants, which are values that
+cannot be changed in the program. They are declared in the following format:
+
+<b>&lt;constant name&gt; equ &lt;value&gt;</b>
+<br>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Length</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>db</td>
+      <td>8 bits</td>
+      <td>Byte</td>
+    </tr>
+    <tr>
+      <td>dw</td>
+      <td>16 bits</td>
+      <td>Word</td>
+    </tr>
+    <tr>
+      <td>dd</td>
+      <td>32 bits</td>
+      <td>Double word</td>
+    </tr>
+    <tr>
+      <td>dq</td>
+      <td>64 bits</td>
+      <td>Quadword</td>
+    </tr>
+  </tbody>
+</table>
+
+The acronym bss stands for Block Started by Symbol , and its history goes
+back to the fifties, when it was part of assembly language developed for the
+IBM 704. In this section go the uninitialized variables. Space for uninitialized
+variables is declared in this section, in the following format:
+
+<b>&lt;variable name&gt; &lt;type&gt; &lt;number&gt;</b>
+</br>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Length</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>resb</td>
+      <td>8 bits</td>
+      <td>Byte</td>
+    </tr>
+    <tr>
+      <td>resw</td>
+      <td>16 bits</td>
+      <td>Word</td>
+    </tr>
+    <tr>
+      <td>resd</td>
+      <td>32 bits</td>
+      <td>Double word</td>
+    </tr>
+    <tr>
+      <td>resq</td>
+      <td>64 bits</td>
+      <td>Quadword</td>
+    </tr>
+  </tbody>
+</table>
+
+The variables in <i>section .bss</i> do not contain any values; the values
+will be assigned later at execution time.
+Memory places are not reserved at compile time but at execution time.
+
+When your program starts executing, the program asks
+for the needed memory from the operating system, allocated to variables in
+section .bss and initialized to zeros.
+If there is not enough memory
+available for the .bss variables at execution time, the program will crash.
+
+<i>section .txt</i> is where all the action is.
+This section contains the program code and starts with the following:
+
+<pre class="line-numbers">
+	<code class="language-nasm">
+		global main
+	main:
+	</code>
+</pre>
+
+The <b>main:</b> part is called a label.
+Registers such as rdi, rsi, and rax are prepared for outputting a message on
+the screen.
+
+Here, we will display a
+string on the screen using a system call. That is, we will ask the operating
+system to do the work for us.
+
+System calls are used to ask the operating system to do specific actions.
+Every operating system has a different list of system call parameters, and the
+system calls for Linux are different from Windows or macOS.
+We use the Linux system calls for x64 in these series of practices.
+
+Be aware that 32-bit system calls differ from 64-bit system calls.
+
+<hr />
+  <cite>structure.asm</cite>
+<pre class="line-numbers" >
+<code class="language-nasm">
+    section .data
+    	message db &apos;hello, world&apos;, 10, 0
+    	length equ $ - message - 1
+    
+    section .bss
+    	response resb 20
+    
+    section .text
+    	global main
+    
+    main:
+    	mov rax, 1			; write system call
+    	mov rdi, 1			; standard output
+    	mov rsi, message	; message address in memory
+    	mov rdx, length		; length of message
+    	syscall
+    
+    	mov rax, 60			; exit system call
+    	mov rdi, 0			; return 0
+    	syscall
+    
+</code>
+</pre>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<code>
+compiler options ./structure.asm
+linker options ./structure.bin ./structure.o
+./structure.bin options
+hello, world
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/vim/fundamentals/installation">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/vim/fundamentals/factory-settings">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64/fundamentals/compile">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -369,7 +521,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 
@@ -434,7 +586,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-vim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-nasm.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

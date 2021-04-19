@@ -1,29 +1,12 @@
-It would be the best experience if you can touch type on your keyboard and use
-your 10 fingers typing anything with least effort.
+<p>It would be the best experience if you can touch type on your keyboard and use your 10 fingers typing anything with least effort.</p>
 
-There are dozens of touch typing tutorial apps out there, just use one if you
-don’t already know how to do it.
-One recommended website is
-<a target="_blank" href="https://typingclub.com">Typing Club</a>.
+<p>There are dozens of touch typing tutorial apps out there, just use one if you don’t already know how to do it. One recommended website is <a target="_blank" href="https://typingclub.com">Typing Club</a>.</p>
 
-Usually programmers and admins prefer not to raise their hands for frequent
-tasks.
+<p>Usually programmers and admins prefer not to raise their hands for frequent tasks. So, for example you can reach to your previous commands you typed on shell by hitting up and down arrow keys, which requires you to raise your hands and move them to the top of arrow keys which seems to be a very long distance! Instead, we can get used to using the shortcuts doing exact same thing without raising our hands, as for up arrow key we use <b>Ctrl+P</b> and down arrow key we use <b>Ctrl+N</b>.</p>
 
-So, for example you can reach to your previous commands you typed on shell
-by hitting up and down arrow keys, which requires you to raise your hands and
-move them to the top of arrow keys which seems to be a very long distance!
-Instead, we can get used to using the shortcuts doing exact same thing without
-raising our hands, as for up arrow key we use <b>Ctrl+P</b> and down arrow key
-we use <b>Ctrl+N</b>.
+<p><b>NOTE:</b> Before you use <b>Ctrl+S</b> you need to know that it causes your terminal to hang, to make your terminal continue running hit <b>Ctrl+Q</b> afterwards. Type <b>”stty -xion”</b> to make your terminal interpreting <b>Ctrl+S</b> as search shortcut instead.</p>
 
-<b>NOTE:</b>
-<br/>
-Before you use <b>Ctrl+S</b> you need to know that it causes your terminal to
-hang, to make your terminal continue running hit <b>Ctrl+Q</b> afterwards.
-Type <b>”stty -xion”</b> to make your terminal interpreting <b>Ctrl+S</b> as
-search shortcut instead.
-
-There’s a list of shell shortcuts that saves us time and energy:
+<p>There’s a list of shell shortcuts that saves us time and energy:</p>
 
 <table class="table table-dark">
 	<thead>
@@ -34,79 +17,79 @@ There’s a list of shell shortcuts that saves us time and energy:
 	</thead>
 	<tbody>
 		<tr>
-			<td> Ctrl+P</td>
+			<td><b>Ctrl+P</b></td>
 			<td>Previous command</td>
 		</td>
 		<tr>
-			<td> Ctrl+N</td>
+			<td><b>Ctrl+N</b></td>
 			<td>Next command</td>
 		</td>
 		<tr>
-			<td> Ctrl+R</td>
+			<td><b>Ctrl+R</b></td>
 			<td>Search backward (Reverse)</td>
 		</td>
 		<tr>
-			<td> Ctrl+S</td>
-			<td>*Search forward</td>
+			<td><b>Ctrl+S</b></td>
+			<td>Search forward</td>
 		</td>
 		<tr>
-			<td> Ctrl+G</td>
+			<td><b>Ctrl+G</b></td>
 			<td>Cancel search</td>
 		</td>
 		<tr>
-			<td> Ctrl+A</td>
+			<td><b>Ctrl+A</b></td>
 			<td>Move cursor to the start</td>
 		</td>
 		<tr>
-			<td> Ctrl+E</td>
+			<td><b>Ctrl+E</b></td>
 			<td>Move cursor to the end</td>
 		</td>
 		<tr>
-			<td> Ctrl+B</td>
+			<td><b>Ctrl+B</b></td>
 			<td>Move backward within a line</td>
 		</td>
 		<tr>
-			<td> Ctrl+F</td>
+			<td><b>Ctrl+F</b></td>
 			<td>Move cursor forward within a line</td>
 		</td>
 		<tr>
-			<td> Esc then Ctrl+B</td>
+			<td><b>Esc</b> then <b>Ctrl+B</b></td>
 			<td>Move cursor backward a word at a time, right arrow key</td>
 		</td>
 		<tr>
-			<td> Esc then Ctrl+F</td>
+			<td><b>Esc</b> then <b>Ctrl+F</b></td>
 			<td>Move cursor forward a word at a time, left arrow key</td>
 		</td>
 		<tr>
-			<td> Ctrl+D</td>
+			<td><b>Ctrl+D</b></td>
 			<td>Delete character under the cursor, delete key</td>
 		</td>
 		<tr>
-			<td> Ctrl+K</td>
+			<td><b>Ctrl+K</b></td>
 			<td>Delete all text from the cursor to the end of the line</td>
 		</td>
 		<tr>
-			<td> Ctrl+X then Backspace</td>
+			<td><b>Ctrl+X</b> then <b>Backspace</b></td>
 			<td>Delete all text from the cursor to the beginning of the life</td>
 		</td>
 		<tr>
-			<td> Ctrl+T</td>
+			<td><b>Ctrl+T</b></td>
 			<td>Immediately transposes the two words before and under the cursor</td>
 		</td>
 		<tr>
-			<td> Esc then Ctrl+U</td>
+			<td><b>Esc</b> then <b>Ctrl+U</b></td>
 			<td>Converts text from the cursor to the end of line the word to uppercase</td>
 		</td>
 		<tr>
-			<td> Esc then Ctrl+L</td>
+			<td><b>Esc</b> then <b>Ctrl+L</b></td>
 			<td>Converts text from the cursor to the end of line the word to lowercase</td>
 		</td>
 		<tr>
-			<td> Esc then Ctrl+C</td>
+			<td><b>Esc</b> then <b>Ctrl+C</b></td>
 			<td>Capitalizes text from the cursor to the end of line the word</td>
 		</td>
 		<tr>
-			<td> Ctrl+X then Ctrl+E</td>
+			<td><b>Ctrl+X</b> then <b>Ctrl+E</b></td>
 			<td>Launch default editor</td>
 		</td>
 	</tbody>

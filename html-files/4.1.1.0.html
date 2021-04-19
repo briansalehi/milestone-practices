@@ -254,8 +254,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Development Tools</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.1.0.html">Vim</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Assembly</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.1.0.html">x86_64</a></li>
 <li class='breadcrumb-item active'>Fundamentals</li>
 </ol>
 <div class="dropdown pull-right sticky">
@@ -276,10 +276,11 @@ Fundamentals
 </svg>
 </a>
 </h2>
-<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+This chapter holds fundamentals of x86_64 Assembly and the least topics you
+need to know about it before you proceed the main practices.
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/vim">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/vim/fundamentals/installation">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/fundamentals/compile">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -292,44 +293,12 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/development-tools/vim/fundamentals/installation" class="list-group-item">
-	1. Installation
+<a href="/assembly/x86_64/fundamentals/compile" class="list-group-item">
+	1. Compiling and Linking
 	
 </a>
-<a href="/development-tools/vim/fundamentals/documentation" class="list-group-item">
-	2. Built-in Documentation
-	
-</a>
-<a href="/development-tools/vim/fundamentals/factory-settings" class="list-group-item">
-	3. Factory Settings
-	
-</a>
-<a href="/development-tools/vim/fundamentals/prompts" class="list-group-item">
-	4. Prompts
-	
-</a>
-<a href="/development-tools/vim/fundamentals/versions" class="list-group-item">
-	5. Versions
-	
-</a>
-<a href="/development-tools/vim/fundamentals/gui" class="list-group-item">
-	6. Textual and Graphical User Interface
-	
-</a>
-<a href="/development-tools/vim/fundamentals/reversing" class="list-group-item">
-	7. Repeating and Reversing
-	
-</a>
-<a href="/development-tools/vim/fundamentals/compound-commands" class="list-group-item">
-	8. Compound Commands
-	
-</a>
-<a href="/development-tools/vim/fundamentals/notation" class="list-group-item">
-	9. Notation
-	
-</a>
-<a href="/development-tools/vim/fundamentals/count" class="list-group-item">
-	10. Count
+<a href="/assembly/x86_64/fundamentals/structure" class="list-group-item">
+	2. Assembly Structure
 	
 </a>
 </div>
@@ -412,7 +381,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 

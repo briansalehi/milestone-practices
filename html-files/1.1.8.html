@@ -277,37 +277,75 @@ Redirections
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Redirections can be used to write a command's output to a file, e.g. create a
-log file.
+<p><b>Redirections</b> can be used to write a command's output to a file, e.g. create a log file.</p>
 
-Right shift can be used to write to file.
+<p>Right shift <code>$gt;</code> can be used to write to file.</p>
 
-Double right shift is used to append output to file.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo "something" &gt; output.txt
+	</code>
+</pre>
 
-Left shift is used to input file contents in standard input.
+<p>Double right shift <code>&gt;&gt;</code> is used to append output to file.</p>
 
-Double left shift is only used when a special word, usually EOF is typed
-afterward, when typed so, standard input will read until it's caught EOF.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo "another thing" &gt;&gt; output.txt
+	</code>
+</pre>
 
-Triple left shift is used to write command's output to standard input.
+<p>Left shift <code>&lt;</code> is used to input file contents in standard input.</p>
 
-Pipe is used to write left hand command's output to right hand's standard
-input.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		sed '1d' &lt; input.txt
+	</code>
+</pre>
+
+<p>Double left shift <code>&lt;&lt;</code> is only used when a special word, usually <code>EOF</code> is typed afterward, when typed so, standard input will read until it's caught <code>EOF</code>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-output="2-6">
+	<code>
+		cat &lt;&lt; EOF &gt;&gt; output.txt
+		this line will be written to file
+		even this line
+		until EOF is caught with no heading and trailing characters
+		even spaces around EOF will not trigger the end of output
+		EOF
+	</code>
+</pre>
+
+<p>Triple left shift <code>&lt;&lt;&lt;</code> is used to write command's output to <b>standard input</b>.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		tr ':' ' ' &lt;&lt;&lt; $(cat /etc/passwd)
+	</code>
+</pre>
+
+<p>Pipe <code>|</code> is used to write left hand command's output to right hand's standard input.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		echo 'ac:b5:7d:35:12:de' | tr ':' '-'
+	</code>
+</pre>
 <hr />
-  <cite>redirections.sh</cite>
-<pre class="line-numbers" >
-<code class="language-bash">
-</code>
-</pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='2-3'>
-<code>
-
-
-</code>
-</pre>
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/basics/shortcuts">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux/shell-basics/shell-shortcuts">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/commands">Next Page</a></li>
 </ul>
 <script>
@@ -389,7 +427,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Compiling and Linking</title>
+<title>Preprocessor Directives</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,10 +254,10 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">Assembly</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">x86_64</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.1.0.html">Fundamentals</a></li>
-<li class='breadcrumb-item active'>Compiling and Linking</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.1.0.html">Prerequisites</a></li>
+<li class='breadcrumb-item active'>Preprocessor Directives</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -269,95 +269,121 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Compiling-and-Linking" class="anchor" aria-hidden="true" href="#Compiling-and-Linking">
-Compiling and Linking
+<a id="Preprocessor-Directives" class="anchor" aria-hidden="true" href="#Preprocessor-Directives">
+Preprocessor Directives
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-To compile and run your assembly sources, you are going to need a few tools:
-<ul>
-	<li>nasm</li>
-	<li>gcc</li>
-	<li>gdb</li>
-	<li>make</li>
-	<li>build-essential</li>
-</ul>
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>As the name suggests, a <b>preprocessor</b> is a tool that runs before the actual compilation starts. <b>Preprocessor directives</b> are commands to the preprocessor and always start with a pound sign <code>#</code>.</p>
 
-Install specified packages using your distribution specific package manager.
+<p>The following table shows some of the most common preprocessor directives:</p>
 
-All of the steps required to compile sample sources are specified in
-<b>Execution</b> section of practice pages.
-You can write your own make files to ease compilation process.
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Directive</th>
+			<th scope="col">Functionality</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">1</th>
+			<td>#include [file]</td>
+			<td>The specified file is inserted into the code at the location of the directive.</td>
+		</tr>
+		<tr>
+			<th scope="row">2</th>
+			<td>#define [key] [value]</td>
+			<td>Every occurrence of the speci- fied key is replaced with the specified value.</td>
+		</tr>
+		<tr>
+			<th scope="row">3</th>
+			<td>#ifndef [key] #endif</td>
+			<td>Code within the ifdef or ifndef locks are conditionally included or omitted based on whether the specified key has been defined with #define .</td>
+		</tr>
+		<tr>
+			<th scope="row">4</th>
+			<td>#pragma [xyz]</td>
+			<td>xyz is compiler dependent. It often allows the programmer to display a warning or error if the directive is reached during preprocessing.</td>
+		</tr>
+	</tbody>
+</table>
 
-Nasm is a popular assembler available on Linux, Windows and Mac.
-Options given to <b>nasm</b> assembler are as follows:
+<p>One example of using preprocessor directives is to avoid multiple includes.</p>
 
-The -f is followed by the output format, in our case elf64, which means
-<b>E</b>xecutable and <b>L</b>inkable <b>F</b>ormat for <b>64</b>-bit.
+<pre class="language-cpp line-numbers"><code>
+	#ifndef SAMPLE_H
+	#define SAMPLE_H
+	
+	declarations...
+	
+	#endif
+</code></pre>
 
-The -g means that we want to include debug information in a debug format
-specified after the -F option.
+<p>If your compiler supports the #pragma once directive, and most modern compilers do, then this can be rewritten as follows:</p>
 
-We use the dwarf debug format.
-The software geeks who invented this format seemed to like <i>The
-Hobbit</i> and <i>Lord of the Rings</i> written by J.J.R.
-<b>DWARF</b> stands for <b>D</b>ebug <b>W</b>ith <b>A</b>rbitrary <b>R</b>ecord
-<b>F</b>ormat.
-
-<b>STABS</b> is another debug format, which has nothing to do with all the
-stabbing in Tolkien’s novels; the name comes from <b>S</b>ymbol <b>Tab</b>le
-<b>S</b>trings.
-We will not use STABS here, so you won’t get hurt.
-
-You can also use -l option which tells NASM to generate a .lst file.
-You can use .lst files to examine the result of the assembly.
-
-The recent GCC linker and compiler generate <i>position-independent
-executables</i> (PIEs) by default.
-This is to prevent hackers from investigating how memory is used by a program
-and eventually interfering with program execution.
-At this point, we will not build position-independent executables;
-it would really complicate the analysis of our program (on purpose, for
-security reasons).
-So, we give the parameter -no-pie to linker.
-
-We use GCC because of the ease of accessing C standard library functions
-from within assembler code.
-To make life easy, we will use C language
-functions from time to time to simplify the example assembly code.
-
-Another popular linker on Linux is <i>ld</i>, the GNU linker.
+<pre class="language-cpp line-numbers"><code>
+	#pragma once
+</code></pre>
 <hr />
-  <cite>compile.asm</cite>
-<pre class="line-numbers" >
-<code class="language-nasm">
-    section .data
-    section .bss
-    section .text
-    	global main
+  <cite>preprocessor.cxx</cite>
+<pre class="line-numbers" data-line='3,5,10,15'>
+<code class="language-cpp">
+    #include &lt;iostream&gt;
     
-    main:
-    	mov rax, 60			; exit system call
-    	mov rdi, 0			; return 0
-    	syscall
+    #define SAMPLE_H
     
+    #ifdef SAMPLE_H
+    	void function()
+    	{
+    		std::cout &lt;&lt; &quot;defined&quot; &lt;&lt; std::endl;
+    	}
+    #else
+    	void function()
+    	{
+    		std::cout &lt;&lt; &quot;undefined&quot; &lt;&lt; std::endl;
+    	}
+    #endif
+    
+    int main()
+    {
+    	function();
+    	return 0;
+    }
 </code>
 </pre>
   <cite>Build and Run</cite>
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-compiler options ./compile.asm
-linker options ./compile.bin ./compile.o
-./compile.bin options
-
+g++ -Wall -g -o ./preprocessor.o -c ./preprocessor.cxx
+g++ -g -o ./preprocessor.bin ./preprocessor.o
+./preprocessor.bin
+defined
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'> page 5</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64/fundamentals">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/fundamentals/structure">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/prerequisites">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/prerequisites/main">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -438,7 +464,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 
@@ -503,7 +529,8 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-nasm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

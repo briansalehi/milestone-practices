@@ -275,10 +275,7 @@ Linux Administration
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Almost all of the chapters and practices created in Milestone Practices are
-initially written on Linux systems for Linux systems. So having a solid
-background knowledge of Linux administration is an essential to work with the
-rest of practices.
+Linux administration covers essentials to professional skills.
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -290,11 +287,29 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>LPIC-1 Study Guide - Christine Brensnahan and Richard Blum: <span style='color: red'></span></li>
+<li class='list-group-item'>LPIC-1: Linux Professional Institute Certification Study Guide: Exam 101-500 and Exam 102-500, 5th Edition - Christine Bresnahan</li>
+<li class='list-group-item'>LPIC-2: Linux Professional Institute Certification Study Guide: Exam 201 and Exam 202, 2nd Edition - Christine Bresnahan, Richard Blum</li>
+<li class='list-group-item'>Linux Bible, 10th Edition - Christopher Negus</li>
+<li class='list-group-item'>Linux Command Line and Shell Scripting Bible, 4th Edition - Christine Bresnahan, Richard Blum</li>
+<li class='list-group-item'>Learn Bash the Hard Way: Master Bash Using The Only Method That Works - Ian Miell</li>
+<li class='list-group-item'>Mastering Bash: A Step-by-Step Guide to working with Bash Programming and Shell Scripting - Giorgio Zarrelli</li>
+<li class='list-group-item'>Mastering Linux Shell Scripting: A practical guide to Linux command-line, Bash scripting, and Shell programming, 2nd Edition - Mokhtar Ebrahim, Andrew Mallett</li>
+<li class='list-group-item'>SELinux System Administration: Implement mandatory access control to secure applications, users, and information flows on Linux, 3rd Edition - Sven Vermeulen</li>
+<li class='list-group-item'>Sudo Mastery: User Access Control for Real People - Michael W Lucas</li>
+<li class='list-group-item'>Using and Administering Linux: Volume 1: Zero to SysAdmin: Getting Started - David Both</li>
+<li class='list-group-item'>Using and Administering Linux: Volume 2: Zero to SysAdmin: Advanced Topics - David Both</li>
+<li class='list-group-item'>Using and Administering Linux: Volume 3: Zero to SysAdmin: Network Services - David Both</li>
+<li class='list-group-item'>Zabbix 4 Network Monitoring: Monitor the performance of your network devices and applications using the all-new Zabbix 4.0, 3rd Edition - Patrik Uytterhoeven,  Rihards Olups</li>
+<li class='list-group-item'>Linux Firewalls: Attack Detection and Response, 1st Edition - Michael Rash</li>
+<li class='list-group-item'>Linux Firewalls: Enhancing Security with nftables and Beyond, 4th Edition - Steve Suehring</li>
+<li class='list-group-item'>Linux iptables Pocket Reference: Firewalls, NAT & Accounting, 1st Edition - Gregor N. Purdy</li>
+<li class='list-group-item'>Linux Pocket Guide: Essential Commands, 3rd Edition - Daniel J. Barrett</li>
+<li class='list-group-item'>Mastering Linux Security and Hardening: Protect your Linux systems from intruders, malware attacks, and other cyber threats, 2nd Edition - Donald A. Tevault</li>
+<li class='list-group-item'>Practical Linux Security Cookbook: Secure your Linux environment from modern-day attacks with practical recipes, 2nd Edition - Tajinder Kalsi</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/0.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/basics">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux/shell-basics">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -312,35 +327,35 @@ Table of Content
 	<span class="badge badge-primary badge-pill">8</span>
 </a>
 <div class="list-group collapse" id="1-1-0">
-<a href="/linux/basics/shell" class="list-group-item group-child">
-	1. What is a Shell?
+<a href="/linux/shell-basics/shell" class="list-group-item group-child">
+	1. Shell
 	
 </a>
-<a href="/linux/basics/command" class="list-group-item group-child">
-	2. What is a Command?
+<a href="/linux/shell-basics/command" class="list-group-item group-child">
+	2. Command
 	
 </a>
-<a href="/linux/basics/type" class="list-group-item group-child">
+<a href="/linux/shell-basics/command-types" class="list-group-item group-child">
 	3. Command Types
 	
 </a>
-<a href="/linux/basics/variables" class="list-group-item group-child">
+<a href="/linux/shell-basics/environment-variables" class="list-group-item group-child">
 	4. Environment Variables
 	
 </a>
-<a href="/linux/basics/help" class="list-group-item group-child">
+<a href="/linux/shell-basics/getting-help" class="list-group-item group-child">
 	5. Getting Help
 	
 </a>
-<a href="/linux/basics/history" class="list-group-item group-child">
+<a href="/linux/shell-basics/shell-history" class="list-group-item group-child">
 	6. Shell History
 	
 </a>
-<a href="/linux/basics/shortcuts" class="list-group-item group-child">
+<a href="/linux/shell-basics/shell-shortcuts" class="list-group-item group-child">
 	7. Shell Shortcuts
 	
 </a>
-<a href="/linux/basics/redirections" class="list-group-item group-child">
+<a href="/linux/shell-basics/redirections" class="list-group-item group-child">
 	8. Redirections
 	
 </a>
@@ -727,7 +742,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Development Tools</title>
+<title>Assembly</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,7 +254,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class='breadcrumb-item active'>Development Tools</li>
+<li class='breadcrumb-item active'>Assembly</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -266,19 +266,26 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Development-Tools" class="anchor" aria-hidden="true" href="#Development-Tools">
-Development Tools
+<a id="Assembly" class="anchor" aria-hidden="true" href="#Assembly">
+Assembly
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-This chapter contains many development essential tools which every programmer
-might need in their career.
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+This section contains Assembly practices.
+
+Assembly is not a cross-platform language, nor it has one general syntax for
+all platforms.
+Therefore, this section holds different Assembly languages each for a specific
+platform.
+Most of these Assembly languages need their own cross-compilation tools in
+order to compile them.
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-kernel-development">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/vim">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams/communication-diagram">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -292,204 +299,24 @@ Table of Content
 </h3>
 <div class="list-group list-group-root well" >
 <a href="#4-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Vim
-	<span class="badge badge-primary badge-pill">19</span>
-</a>
-<div class="list-group collapse" id="4-1-0">
-<a href="/development-tools/vim/fundamentals" class="list-group-item group-child">
-	1. Fundamentals
-	<span class="badge badge-primary badge-pill">10</span>
-</a>
-<div class="list-group collapse" id="4-1-1-0">
-<a href="/development-tools/vim/fundamentals/installation" class="list-group-item group-child">
-	1. Installation
-	
-</a>
-<a href="/development-tools/vim/fundamentals/documentation" class="list-group-item group-child">
-	2. Built-in Documentation
-	
-</a>
-<a href="/development-tools/vim/fundamentals/factory-settings" class="list-group-item group-child">
-	3. Factory Settings
-	
-</a>
-<a href="/development-tools/vim/fundamentals/prompts" class="list-group-item group-child">
-	4. Prompts
-	
-</a>
-<a href="/development-tools/vim/fundamentals/versions" class="list-group-item group-child">
-	5. Versions
-	
-</a>
-<a href="/development-tools/vim/fundamentals/gui" class="list-group-item group-child">
-	6. Textual and Graphical User Interface
-	
-</a>
-<a href="/development-tools/vim/fundamentals/reversing" class="list-group-item group-child">
-	7. Repeating and Reversing
-	
-</a>
-<a href="/development-tools/vim/fundamentals/compound-commands" class="list-group-item group-child">
-	8. Compound Commands
-	
-</a>
-<a href="/development-tools/vim/fundamentals/notation" class="list-group-item group-child">
-	9. Notation
-	
-</a>
-<a href="/development-tools/vim/fundamentals/count" class="list-group-item group-child">
-	10. Count
-	
-</a>
-</div>
-<a href="/development-tools/vim/modes" class="list-group-item group-child">
-	2. Modes
+	<i class="glyphicon glyphicon-chevron-right"></i>1. x86_64
 	<span class="badge badge-primary badge-pill">2</span>
 </a>
-<div class="list-group collapse" id="4-1-2-0">
-<a href="/development-tools/vim/modes/normal-mode" class="list-group-item group-child">
-	1. Normal Mode
+<div class="list-group collapse" id="4-1-0">
+<a href="/assembly/x86_64/fundamentals" class="list-group-item group-child">
+	1. Fundamentals
+	<span class="badge badge-primary badge-pill">2</span>
+</a>
+<div class="list-group collapse" id="4-1-1-0">
+<a href="/assembly/x86_64/fundamentals/compile" class="list-group-item group-child">
+	1. Compiling and Linking
 	
 </a>
-<a href="/development-tools/vim/modes/operator-pending-mode" class="list-group-item group-child">
-	2. Operator-Pending Mode
-	
-</a>
-</div>
-<a href="/development-tools/vim/operators" class="list-group-item group-child">
-	3. Operators
-	<span class="badge badge-primary badge-pill">6</span>
-</a>
-<div class="list-group collapse" id="4-1-3-0">
-<a href="/development-tools/vim/operators/undo" class="list-group-item group-child">
-	1. Undo Commands
-	
-</a>
-<a href="/development-tools/vim/operators/delete-word" class="list-group-item group-child">
-	2. Delete a Word
-	
-</a>
-<a href="/development-tools/vim/operators/dot-operator" class="list-group-item group-child">
-	3. Dot Operator
-	
-</a>
-<a href="/development-tools/vim/operators/star-operator" class="list-group-item group-child">
-	4. Search Without Typing
-	
-</a>
-<a href="/development-tools/vim/operators/arithmetic" class="list-group-item group-child">
-	5. Incrementing and Decrementing Operator
-	
-</a>
-<a href="/development-tools/vim/operators/custom-operators" class="list-group-item group-child">
-	6. Custom Operators
+<a href="/assembly/x86_64/fundamentals/structure" class="list-group-item group-child">
+	2. Assembly Structure
 	
 </a>
 </div>
-<a href="/development-tools/vim/motions" class="list-group-item group-child">
-	4. Motions
-	<span class="badge badge-primary badge-pill">1</span>
-</a>
-<div class="list-group collapse" id="4-1-4-0">
-<a href="/development-tools/vim/motions/custom-motions" class="list-group-item group-child">
-	1. Custom Motions
-	
-</a>
-</div>
-</div>
-<a href="#4-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Doxygen
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="4-2-0">
-</div>
-<a href="#4-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Git
-	<span class="badge badge-primary badge-pill">11</span>
-</a>
-<div class="list-group collapse" id="4-3-0">
-<a href="/development-tools/git/installation" class="list-group-item group-child">
-	1. Installation
-	
-</a>
-<a href="/development-tools/git/initial-configuration" class="list-group-item group-child">
-	2. Initial Configuration
-	
-</a>
-<a href="/development-tools/git/project-initialization" class="list-group-item group-child">
-	3. Project Initialization
-	
-</a>
-<a href="/development-tools/git/branching" class="list-group-item group-child">
-	4. Branching
-	
-</a>
-<a href="/development-tools/git/workflows" class="list-group-item group-child">
-	5. Workflows
-	
-</a>
-<a href="/development-tools/git/git-tools" class="list-group-item group-child">
-	6. Git Tools
-	
-</a>
-<a href="/development-tools/git/migrating-to-git" class="list-group-item group-child">
-	7. Migrating to Git
-	
-</a>
-<a href="/development-tools/git/customization" class="list-group-item group-child">
-	8. Customization
-	
-</a>
-<a href="/development-tools/git/git-server" class="list-group-item group-child">
-	9. Git Server
-	
-</a>
-<a href="/development-tools/git/git-internals" class="list-group-item group-child">
-	10. Git Internals
-	
-</a>
-<a href="/development-tools/git/documentations" class="list-group-item group-child">
-	11. Documentations
-	
-</a>
-</div>
-<a href="#4-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Make
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="4-4-0">
-</div>
-<a href="#4-5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. CMake
-	<span class="badge badge-primary badge-pill">5</span>
-</a>
-<div class="list-group collapse" id="4-5-0">
-<a href="/development-tools/cmake/installation" class="list-group-item group-child">
-	1. Installation
-	
-</a>
-<a href="/development-tools/cmake/initialization" class="list-group-item group-child">
-	2. Initialization
-	
-</a>
-<a href="/development-tools/cmake/building-executable" class="list-group-item group-child">
-	3. Building Executable
-	
-</a>
-<a href="/development-tools/cmake/variables" class="list-group-item group-child">
-	4. Variables
-	
-</a>
-<a href="/development-tools/cmake/flow-control" class="list-group-item group-child">
-	5. Flow Control
-	
-</a>
-</div>
-<a href="#4-6-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6. Docker
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="4-6-0">
 </div>
 </div>
 <script>
@@ -571,7 +398,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 

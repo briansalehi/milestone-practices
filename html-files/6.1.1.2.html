@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Assembly Structure</title>
+<title>Main Function</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,10 +254,10 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">Assembly</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">x86_64</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.1.0.html">Fundamentals</a></li>
-<li class='breadcrumb-item active'>Assembly Structure</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.1.0.html">Fundamentals</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.1.1.0.html">Prerequisites</a></li>
+<li class='breadcrumb-item active'>Main Function</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -269,178 +269,75 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Assembly-Structure" class="anchor" aria-hidden="true" href="#Assembly-Structure">
-Assembly Structure
+<a id="Main-Function" class="anchor" aria-hidden="true" href="#Main-Function">
+Main Function
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-In section <b>.data</b> , initialized data is declared and defined, in the
-following format:
+<div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>Comments are used in source files to clear things out. Compilers will ignore comments.</p>
 
-<b>&lt;variable name&gt; &lt;type&gt; &lt;value&gt;</b>
-<br>
-Variable names start with a letter, followed by letters or numbers or
-special characters.
+<p>C++ is a <i>Case Sensitive</i> language.</p>
 
-When a variable is included in <i>section .data</i>, memory is allocated
-for that variable when the source code is assembled and linked to an
-executable.
+<p><b>cout</b> is pronounced ("see-out").</p>
 
-<i>section .data</i> can also contain constants, which are values that
-cannot be changed in the program. They are declared in the following format:
+<p>Languages—spoken or programmed—are composed of statements that are executed one after another. All statements in C++ end with a semicolon (;), which defines the boundary of a statement. This is similar to the period (.) you add when ending a sentence in English.</p>
 
-<b>&lt;constant name&gt; equ &lt;value&gt;</b>
-<br>
-
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Length</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>db</td>
-      <td>8 bits</td>
-      <td>Byte</td>
-    </tr>
-    <tr>
-      <td>dw</td>
-      <td>16 bits</td>
-      <td>Word</td>
-    </tr>
-    <tr>
-      <td>dd</td>
-      <td>32 bits</td>
-      <td>Double word</td>
-    </tr>
-    <tr>
-      <td>dq</td>
-      <td>64 bits</td>
-      <td>Quadword</td>
-    </tr>
-  </tbody>
-</table>
-
-The acronym bss stands for Block Started by Symbol , and its history goes
-back to the fifties, when it was part of assembly language developed for the
-IBM 704. In this section go the uninitialized variables. Space for uninitialized
-variables is declared in this section, in the following format:
-
-<b>&lt;variable name&gt; &lt;type&gt; &lt;number&gt;</b>
-</br>
-
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Length</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>resb</td>
-      <td>8 bits</td>
-      <td>Byte</td>
-    </tr>
-    <tr>
-      <td>resw</td>
-      <td>16 bits</td>
-      <td>Word</td>
-    </tr>
-    <tr>
-      <td>resd</td>
-      <td>32 bits</td>
-      <td>Double word</td>
-    </tr>
-    <tr>
-      <td>resq</td>
-      <td>64 bits</td>
-      <td>Quadword</td>
-    </tr>
-  </tbody>
-</table>
-
-The variables in <i>section .bss</i> do not contain any values; the values
-will be assigned later at execution time.
-Memory places are not reserved at compile time but at execution time.
-
-When your program starts executing, the program asks
-for the needed memory from the operating system, allocated to variables in
-section .bss and initialized to zeros.
-If there is not enough memory
-available for the .bss variables at execution time, the program will crash.
-
-<i>section .txt</i> is where all the action is.
-This section contains the program code and starts with the following:
-
-<pre class="line-numbers">
-	<code class="language-nasm">
-		global main
-	main:
-	</code>
-</pre>
-
-The <b>main:</b> part is called a label.
-Registers such as rdi, rsi, and rax are prepared for outputting a message on
-the screen.
-
-Here, we will display a
-string on the screen using a system call. That is, we will ask the operating
-system to do the work for us.
-
-System calls are used to ask the operating system to do specific actions.
-Every operating system has a different list of system call parameters, and the
-system calls for Linux are different from Windows or macOS.
-We use the Linux system calls for x64 in these series of practices.
-
-Be aware that 32-bit system calls differ from 64-bit system calls.
-
+<p>When you group statements together within braces {…}, you create a compound statement or a block. A block typically groups many statements to indicate that they belong together. Blocks are particularly useful when programming conditional if statements or loops.</p>
 <hr />
-  <cite>structure.asm</cite>
-<pre class="line-numbers" >
-<code class="language-nasm">
-    section .data
-    	message db &apos;hello, world&apos;, 10, 0
-    	length equ $ - message - 1
+  <cite>main.cxx</cite>
+<pre class="line-numbers" data-line='11'>
+<code class="language-cpp">
+    // inline comment
     
-    section .bss
-    	response resb 20
+    /*
+        block comment
+    */
     
-    section .text
-    	global main
+    // preprocessor directive
+    #include &lt;iostream&gt;
     
-    main:
-    	mov rax, 1			; write system call
-    	mov rdi, 1			; standard output
-    	mov rsi, message	; message address in memory
-    	mov rdx, length		; length of message
-    	syscall
+    // main function with return type of int (it must always be an int)
+    int main()
+    {
+        // print something in the console
+        std::cout &lt;&lt; &quot;simplest C++ program ever!&quot; &lt;&lt; std::endl;
     
-    	mov rax, 60			; exit system call
-    	mov rdi, 0			; return 0
-    	syscall
-    
+        // return value to operating system
+        return 0;
+    }
 </code>
 </pre>
   <cite>Build and Run</cite>
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
-compiler options ./structure.asm
-linker options ./structure.bin ./structure.o
-./structure.bin options
-hello, world
+g++ -Wall -g -o ./main.o -c ./main.cxx
+g++ -g -o ./main.bin ./main.o
+./main.bin
+simplest C++ program ever!
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
+<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 1</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64/fundamentals/compile">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/fundamentals/prerequisites/preprocessor-directives">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/prerequisites/function">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -521,7 +418,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 
@@ -586,7 +483,8 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-nasm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

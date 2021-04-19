@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Sequence Diagram</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+img {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+img {
+	max-width: -moz-available;
+}
+
+@media only screen and (min-width:720px) {
+    .img-responsive {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .btn:hover {
+	color: #777777;
+}
+
+.dark-mode .dropdown-item {
+	background-color: #3a3a3a !important;
+	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.sticky {
+	position: sticky !important;
+	z-index: 1;
+	top: 3%;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
+	text-align: center !important;
+	font-size: 18px !important;
+}
+
+.dropbtn {
+  font-size: 14px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/3.4.12.0.html">Interaction Diagrams</a></li>
+<li class='breadcrumb-item active'>Sequence Diagram</li>
+</ol>
+<div class="dropdown pull-right sticky">
+  <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
+	  &#x2699;
+  </button>
+  <div class="dropdown-content" id="dropdown-content">
+    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
+    <button id="changefont-icon" class="btn dropdown-item" onclick="toggle_font()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+  </div>
+</div>
+<h2>
+<a id="Sequence-Diagram" class="anchor" aria-hidden="true" href="#Sequence-Diagram">
+Sequence Diagram
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<p><b>Sequence diagrams</b> are an important member of the group known as <b>interaction diagrams</b>.</p>
+
+<p><b>Interaction diagrams</b> model important <b>runtime interactions</b> between the parts that make up your system and form part of the <b>logical view</b> of your model.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/logical-view-diagram.png" alt="logical view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/logical-view-diagram.png"'>
+
+<p><b>Sequence diagrams</b> are not alone in this group; they work alongside <a href="/software-design/uml/interaction-diagrams/communication-diagram">communication diagrams</a> and <a href="/software-design/uml/interaction-diagrams/timing-diagram">timing diagrams</a> to help you accurately model how the parts that make up your system interact.</p>
+
+<p><b>Sequence diagrams</b> are the most popular of the three <b>interaction diagram</b> types. This could be because they show the right sorts of information or simply because they tend to make sense to people new to UML.</p>
+
+<p><b>Sequence diagrams</b> are all about capturing the order of interactions between parts of your system. Using a sequence diagram, you can describe which interactions will be triggered when a particular use case is executed and in what order those interactions will occur.</p>
+
+<p>A <b>sequence diagram</b> is made up of a collection of participants—the parts of your system that interact with each other during the sequence. Where a participant is placed on a sequence diagram is important. Regardless of where a participant is placed vertically, participants are always arranged horizontally with no two participants overlapping each other.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/sequence-diagram-participants.png" alt="sequence diagram participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/sequence-diagram-participants.png"'>
+
+<p>Each participant has a corresponding lifeline running down the page. A participant's <b>lifeline</b> simply states that the part exists at that point in the sequence and is only really interesting when a part is created and/or deleted during a sequence.</p>
+
+<p>Participants on a sequence diagram can be named in number of different ways, picking elements from the standard format:</p>
+
+<pre class="language-bash command-line" data-output="1" data-host="milestone">
+	<code>
+		name [selector] : class_name ref decomposition
+	</code>
+</pre>
+
+<p>A sequence diagram describes the order in which the interactions take place, so time is an important factor. How time relates to a sequence diagram is shown in the following figure.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/participants-lifetime.png" alt="participants lifetime" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/participants-lifetime.png"'>
+
+<p>Time on a sequence diagram is all about <b>ordering</b>, not <b>duration</b>.</p>
+
+<p>The smallest part of an interaction is an <b>event</b>. An event is any point in an interaction where something occurs.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/signals-in-sequence-diagram.png" alt="signals in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/signals-in-sequence-diagram.png"'>
+
+<p><b>Events</b> are the building blocks for signals and messages.</p>
+
+<p>In terms of sequence diagrams, <b>signals</b> and <b>messages</b> act and look the same, so we'll stick to using the term "messages" here.</p>
+
+<p>The elements of the format that you pick to use for a particular participant will depend on the information known about a participant at a given time, as explained in the following table:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Example participant name</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>admin</code></td>
+			<td>A part is named <code>admin</code>, but at this point in time the part has not been assigned a class.</td>
+		</tr>
+		<tr>
+			<td><code>: ContentManagementSystem</code></td>
+			<td>The class of the participant is <code>ContentManagementSystem</code>, but the part currently does not have its own name.</td>
+		</tr>
+		<tr>
+			<td><code>admin : Administrator</code></td>
+			<td>There is a part that has a name of <code>admin</code> and is of the class <code>Adminisitrator</code>.</td>
+		</tr>
+		<tr>
+			<td><code>evenHandlers [2] : EventHandler</code></td>
+			<td>There is a part that is accessed within an array at element 2, and it is of the class <code>EventHandler</code>.</td>
+		</tr>
+		<tr>
+			<td><code>: ContentManagementSystem ref cmsInteraction</code></td>
+			<td>The participant is of the class <code>ContentManagementSystem</code>, and there is another interaction diagram called <code>cmsInteraction</code> that shows how the participant works internally.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>An interaction in a sequence diagram occurs when one participant decides to send a message to another participant.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/messages-in-sequence-diagram.png" alt="messages in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/messages-in-sequence-diagram.png"'>
+
+<p>Messages on a sequence diagram are specified using an arrow from the participant that wants to pass the message, the Message Caller, to the participant that is to receive the message, the Message Receiver. Messages can flow in whatever direction makes sense for the required interaction—from left to right, right to left, or even back to the Message Caller itself. Think of a message as an event that is passed from a Message Caller to get the Message Receiver to do something.</p>
+
+<p>A message arrow comes with a description, or signature. The format for a message signature is:</p>
+
+<pre class="language-bash command-line" data-output="1" data-host="milestone">
+	<code>
+		attribute = signal_or_message_name (arguments) : return_type
+	</code>
+</pre>
+
+<p>You can specify any number of different arguments on a message, each separated using a comma. The format of an argument is:</p>
+
+<pre class="language-bash command-line" data-output="1" data-host="milestone">
+	<code>
+		&lt;name&gt;:&lt;class&gt;
+	</code>
+</pre>
+
+<p>The elements of the format that you use for a particular message will depend on the information known about a particular message at any given time, as explained in the following table:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Example message signature</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>doSomething()</code></td>
+			<td>The message's name is <code>doSomething</code>, but no further information is known about it.</td>
+		</tr>
+		<tr>
+			<td><code>doSomething(number1: Number, number2 : Number)</code></td>
+			<td>The message's name is <code>doSomething</code>, and it takes two arguments, <code>number1</code> and <code>number2</code>, which are both of class <code>Number</code>.</td>
+		</tr>
+		<tr>
+			<td><code>doSomething() : ReturnClass</code></td>
+			<td>The message's name is <code>doSomething</code>; it takes no arguments and returns an object of class <code>ReturnClass</code>.</td>
+		</tr>
+		<tr>
+			<td><code>myVar = doSomething() : ReturnClass</code></td>
+			<td>The message's name is <code>doSomething</code>; it takes no arguments, and it returns an object of class <code>ReturnClass</code> that is assigned to the <code>myVar</code> attribute of the message caller.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>When a message is passed to a participant it triggers, or invokes, the receiving participant into doing something; at this point, the receiving participant is said to be active. To show that a participant is active, i.e., doing something, you can use an activation bar</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/activation-bars.png" alt="activation bars" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/activation-bars.png"'>
+
+<p>When a message from one participant results in one or more messages being sent by the receiving participant, those resulting messages are said to be <b>nested</b> within the <b>triggering message</b>.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/nested-messages.png" alt="nested messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/nested-messages.png"'>
+
+<p>The type of arrowhead that is on a message is also important when understanding what type of message is being passed. For example, the Message Caller may want to wait for a message to return before carrying on with its work—a synchronous message. Or it may wish to just send the message to the Message Receiver without waiting for any return as a form of "fire and forget" message—an asynchronous message. Sequence diagrams need to show these different types of message using various message arrows.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/message-arrow-types.png" alt="message arrow types" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/message-arrow-types.png"'>
+
+<p>As mentioned before, a synchronous message is invoked when the Message Caller waits for the Message Receiver to return from the message invocation.</p>
+
+<p>The interaction shown in the following figure is implemented in Java using nothing more than a simple method invocation.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/single-synchronous-message.png" alt="single synchronous message" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/single-synchronous-message.png"'>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class MessageReceiver
+		{
+			public void foo(  )
+			{	  // Do something inside foo.
+			}
+		}
+
+		public class MessageCaller
+		{
+		   private MessageReceiver messageReceiver;
+		 
+		   // Other Methods and Attributes of the class are declared here
+		 
+		   // The messageRecevier attribute is initialized elsewhere in
+		   // the class.
+		 
+		   public doSomething(String[] args)
+		   {
+			  // The MessageCaller invokes the foo(  ) method
+		 
+			  this.messageReceiver.foo(  ); // then waits for the method to return
+		 
+			  // before carrying on here with the rest of its work
+		   }
+		}
+	</code>
+</pre>
+
+<p>An <b>asynchronous message</b> is invoked by a Message Caller on a Message Receiver, but the Message Caller does not wait for the message invocation to return before carrying on with the rest of the interaction's steps. This means that the Message Caller will invoke a message on the Message Receiver and the Message Caller will be busy invoking further messages before the original message returns.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/synchronous-message-sample.png" alt="synchronous message sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/synchronous-message-sample.png"'>
+
+<p>The <b>return message</b> is an optional piece of notation that you can use at the end of an activation bar to show that the control flow of the activation returns to the participant that passed the original message. In code, a return arrow is similar to reaching the end of a method or explicitly calling a return statement.</p>
+
+<p>Participants do not necessarily live for the entire duration of a sequence diagram's interaction. Participants can be created and destroyed according to the messages that are being passed.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/participants-creation-in-sequence-diagram.png" alt="participants creation in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/participants-creation-in-sequence-diagram.png"'>
+
+<p>To show that a participant is created, you can either simply pass a <code>create(..)</code> message to the participant's lifeline or use the dropped participant box notation where it is absolutely clear that the participant does not exist before the create call is invoked. Participant deletion is shown by the ending of the participant's lifeline with the deletion cross.</p>
+
+<p>With some implementation languages, such as Java, you will not have an explicit destroy method, so it doesn't make sense to show one on your sequence diagrams. Example below is one such case where the <code>messageReceiver</code> object will be flagged for destruction when the <code>doSomething(  )</code> method completes its execution. However, no additional messages have to be passed to the <code>messageReceiver</code> to make it destroy itself since this is all handled implicitly by the Java garbage collector.</p>
+
+<pre class="language-java line-numbers">
+	<code>
+		public class MessageReceiver {
+			// Attributes and Methods of the MessageReceiver class
+		}
+
+		public class MessageCaller {
+
+			// Other Methods and Attributes of the class are declared here
+
+			public void doSomething(  ) {
+				// The MessageReceiver object is created
+				MessageReceiver messageReceiver = new MessageReceiver(  );
+			}
+		}
+	</code>
+</pre>
+
+<p>In these cases, where another factor such as the garbage collector is involved, you can either leave the object as alive but unused or imply that it is no longer needed by using the destruction cross without an associated destroy method.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/explicit-destroy-message.png" alt="explicit destroy message" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/explicit-destroy-message.png"'>
+
+<p>Let's look at a sequence diagram that is going to model the interactions that need to occur to make the <code>Create a new Regular Blog Account</code> use case happen.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/create-new-regular-blog-account-use-case-diagram.png" alt="create new regular blog account use case diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/create-new-regular-blog-account-use-case-diagram.png"'>
+
+<p>Briefly, the <code>Create a new Regular Blog Account</code> use case is a special case of the <code>Create a new Blog Account</code> use case. It also includes all of the steps provided by the <code>Check Identity</code> use case and may optionally execute the steps provided by the <code>Record Application Failure</code> use case, if the application for a new account is denied.</p>
+
+<p>Before you can specify what types of interaction are going to occur when a use case executes, you need a more detailed description of what the use case does. If you've already completed a use case description, you already have a good reference for this detailed information. Following table shows the steps occur in the <code>Create a new Regular Blog Account</code> use case according to its detailed description.</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Main Flow</th>
+			<th scope="col">Step</th>
+			<th scope="col">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td>1</td>
+			<td>The Administrator asks the system to create a new blog account.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>2</td>
+			<td>The Administrator selects the regular blog account type.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>3</td>
+			<td>The Administrator enters the author's details.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>4</td>
+			<td>The author's details are checked using the Author Credentials Database.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>5</td>
+			<td>The new regular blog account is created.</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>6</td>
+			<td>A summary of the new blog account's details are emailed to the author.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Above table only shows the Main Flow—that is the steps that would occur without worrying about any extensions—but this is a good enough starting point for creating a top-level sequence diagram.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/actors-interaction-in-sequence-diagram.png" alt="actors interaction in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/actors-interaction-in-sequence-diagram.png"'>
+
+<p>At this point, previous figure shows only the interactions that must happen between the external actors and your system because that is the level at which the use case description's steps were written. On the sequence diagram, your system is represented as a single participant, the <code>ContentManagementSystem</code>; however, unless you intend on implementing your content management system as a single monolithic piece of code (generally not a good idea!), it's time to break apart <code>ContentManagementSystem</code> to expose the pieces that go inside.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/system-internals-in-sequence-diagram.png" alt="system internals in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/system-internals-in-sequence-diagram.png"'>
+
+<p>Something critical is missing from the sequence diagram in previous diagram.</p>
+
+<p>Following diagram adds the missing pieces to the model to show the actual creation of a regular blog account.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/participant-lifelines-in-sequence-diagram.png" alt="participant lifelines in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/participant-lifelines-in-sequence-diagram.png"'>
+
+<p>Participant lifelines are particularly useful when showing that a participant has been created. In previous diagram, the <code>AuthorDetails</code> and <code>RegularBlogAccount</code> participants are not in existence when the sequence diagram begins but they are created during its execution.</p>
+
+<p>Let's say that the <code>authorDetails:AuthorDetails</code> participant is no longer required once the <code>newAccount:RegularBlogAccount</code> has been created. To show that the <code>authorDetails:AuthorDetails</code> participant is discarded at this point, you can use an explicit destroy message connected to the destruction cross.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/descarding-participant-in-sequence-diagram.png" alt="descarding participant in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/descarding-participant-in-sequence-diagram.png"'>
+
+<p>So far, all of the messages on our example sequence diagram have been <b>synchronous</b>; they are executed one after the other in order, and nothing happens concurrently. However, there is at least one message in the example sequence that is a great candidate for being an asynchronous message.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/irregular-behavior-of-submit.png" alt="irregular behavior of submit" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/irregular-behavior-of-submit.png"'>
+
+<p>In previous diagram, when the Administrator clicks on the submit button the system freezes, until the new blog account has been created. It would be useful to show that the user interface allows the Administrator to carry on with other tasks while the content management system creates the new account. What we need is for the <code>clickSubmit(  )</code> message to be <b>asynchronous</b>.</p>
+
+<p>Converting the <code>clickSubmit(  )</code> from a synchronous to an asynchronous message means that the sequence diagram now shows that when the new regular blog account information is submitted, the user interface will not lock and wait for the new account to be created. Instead, the user interface allows the Administrator actor to continue working with the system.</p>
+
+<p>For the Administrator to receive feedback as to whether the new blog account has been created, the simple return arrow has to be replaced with a new <code>accountCreationNotification(  )</code> asynchronous message since asynchronous messages do not have return values.</p>
+
+<p>A <b>sequence fragment</b> is represented as a box that encloses a portion of the interactions within a sequence diagram.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/sequence-fragment.png" alt="sequence fragment" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/sequence-fragment.png"'>
+
+<p>A sequence fragment's box overlaps the region of the sequence diagram where the fragment's interactions take place. A fragment box can contain any number of interactions and, for large complex interactions, further nested fragments as well. The top left corner of the fragment box contains an operator. The fragment operator indicates which type of fragment this is.</p>
+
+<p>In previous diagram, the operator is <b>opt</b>, which means that this is an <b>optional fragment</b>. All the interactions contained within the fragment box will be executed according to the result of the fragments guard condition parameter.</p>
+
+<p>Some fragment types do not need additional parameters as part of their specification, such as the <b>ref fragment</b> type discussed in the next section, but the <b>guard condition</b> parameter is needed by the <b>opt fragment</b> type to make a decision as to whether it should execute its interactions or not. In the case of the <b>opt fragment</b> type, the interactions that the fragment contains will be executed only if the associated guard condition logic evaluates to true.</p>
+
+<p>The <b>ref</b> type of sequence fragment finally alleviates some of the maintenance nightmare presented by the huge sequence diagrams that are often created for complex systems. In following diagram, the <b>ref fragment</b> represents a piece of a larger sequence diagram.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/select-account-type-in-ref-fraction.png" alt="select account type in ref fraction" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/select-account-type-in-ref-fraction.png"'>
+
+<p>The interactions by which the Administrator actor selects a blog account type for creation are now contained within the referenced sequence fragment. Following diagram shows how the <b>referenced fragment</b> can be expressed on a separate sequence diagram.</p>
+
+<img class="img-responsive" src="/software-design/uml/interaction-diagrams/referenced-sequence-diagram.png" alt="referenced sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/referenced-sequence-diagram.png"'>
+
+<p>Along with managing the sheer size of large sequence diagrams, the <b>ref fragment</b> also presents an opportunity to reuse a set of common interactions. Several <b>ref fragment</b> boxes can reference the same set of interactions, thereby reusing the interactions in multiple places.</p>
+
+<p>UML 2.0 contains a broad set of different fragment types:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Parameters</th>
+			<th scope="col">Why is it useful?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>ref</td>
+			<td>None</td>
+			<td>Represents an interaction that is defined elsewhere in the model. Helps you manage a large diagram by splitting, and potentially reusing, a collection of interactions. Similar to the reuse modeled when the <code>&lt;&lt;include&gt;&gt;</code> use case relationship is applied.</td>
+		</tr>
+		<tr>
+			<td>assert</td>
+			<td>None</td>
+			<td>Specifies that the in teractions contained within the fragment box must occur exactly as they are indicated; otherwise the fragment is declared invalid and an exception should be raised. Works in a similar fashion to the <code>assert</code> statement in Java. Useful when specifying that every step in an interaction(?)</td>
+		</tr>
+		<tr>
+			<td>loop</td>
+			<td>min times, max times, [guard_condition]</td>
+			<td>Loops through the interactions contained within the fragment a specified number of times until the <b>guard condition</b> is evaluated to false. Very similar to the Java and C# <code>for(..)</code> loop. Useful when you are trying execute a set of interactions a specific number of times.</td>
+		</tr>
+		<tr>
+			<td>break</td>
+			<td>None</td>
+			<td>If the interactions contained within the break fragment occur, then any enclosing interaction, most commonly a loop fragment , should be exited. Similar to the break statement in Java and C#.</td>
+		</tr>
+		<tr>
+			<td>alt</td>
+			<td><p>[guard_condition1] ...</p><p>[guard_condition2] ...</p><p>[else]</p></td>
+			<td>Depending on which guard condition evaluates to true first, the corresponding sub-collection of interactions will be executed. Helps you specify that a set of interactions will be executed only under certain conditions. Similar to an if(..) else statement in code.</td>
+		</tr>
+		<tr>
+			<td>opt</td>
+			<td>[guard_condition]</td>
+			<p>The interactions contained within this fragment will execute only if the guard condition evaluates to true. Similar to a simple if(..) statement in code with no corresponding else. Especially useful when showing steps that have been reused from another use case's sequence diagrams, where <<extend>> is the use case relationship.</p>
+		</tr>
+		<tr>
+			<td>neg</td>
+			<td>None</td>
+			<td>Declares that the interactions inside this fragment are not to be executed, ever. Helpful if you are just trying to mark a collection of interactions as not executed until you're sure that those interactions can be removed. Most useful if you happen to be lucky enough to be using an Executable UML tool where your sequence diagrams are actually being run. Also can be helpful to show that something cannot be done, e.g., when you want to show that a participant cannot call read(  ) on a socket after close(  ).Works in a similar fashion to commenting out some method calls in code.</td>
+		</tr>
+		<tr>
+			<td>par</td>
+			<td>None</td>
+			<td>Specifies that interactions within this fragment can happily execute in parallel. This is similar to saying that there is no need for any thread-safe locking required within a set of interactions.</td>
+		</tr>
+		<tr>
+			<td>region</td>
+			<td>None</td>
+			<td>Interactions within this type of fragment are said to be part of a critical region. A critical region is typically an area where a shared participant is updated. Combined with parallel interactions, specified using the par fragment type, you can model where interactions are not required to be thread- or process-safe (par fragment) and where locks are required to prevent parallel interactions interleaving (region fragment ). Has similarities synchronized blocks and object locks in Java.</td>
+		</tr>
+	</tbody>
+</table>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 7</span></li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/interaction-diagrams/communication-diagram">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x2600;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x263d;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x263d;';
+		toggle_settings();
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x2600;';
+		toggle_settings();
+	}
+}
+var current_position = 0;
+
+function scrollDownListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "j") {
+        var screen_height = window.screen.height / 4;
+		current_position += screen_height;
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+function scrollUpListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "k") {
+        var screen_height = window.screen.height / 4;
+		current_position -= screen_height;
+		if (current_position < 0) {
+			current_position = 0;
+		}
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+scrollDownListener()
+scrollUpListener()
+function toggle_settings() {
+	var button_list = document.getElementById('dropdown-content');
+
+	if (button_list.style.display != "none") {
+		button_list.style.display = "none";
+	} else {
+		button_list.style.display = "block";
+	}
+}
+toggle_settings();
+var minimum_fontsize=1;
+var maximum_fontsize=6;
+var current_fontsize=2;
+var fontsize_growth = "upward";
+
+function zoominLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s += 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function zoomoutLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s -= 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function toggle_font() {
+	if (fontsize_growth == "downward") {
+		zoomoutLetter();
+		--current_fontsize;
+		if (current_fontsize == minimum_fontsize) {
+			fontsize_growth = "upward";
+		}
+	} else {
+		zoominLetter();
+		++current_fontsize;
+		if (current_fontsize == maximum_fontsize) {
+			fontsize_growth = "downward";
+		}
+	}
+	console.log(current_fontsize);
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

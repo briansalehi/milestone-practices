@@ -1,10 +1,11 @@
-A good first command to try, <i>uname</i>, will show what operating system is
-being run.
-That does not represent much information unless we track on the -a option to
-the command.
+<p>A good first command to try, <code>uname</code>, will show what operating system is being run. That does not represent much information unless we track on the <code>-a</code> option to the command.</p>
 
 Commands can get options or arguments in front of their name:
-$ command -option argument1 argument2
 
-Most commands accept options both in short and long form, having single and
-double dash respectively. Though this is conventional, don’t rely on it.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		command --option argument1 argument2
+	</code>
+</pre>
+
+<p>Most commands accept options both in short and long form, having single and double dash respectively. Though this is conventional, don’t rely on it.</p>

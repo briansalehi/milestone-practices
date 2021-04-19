@@ -1,19 +1,27 @@
-There are so many commands each having many options in the shell. How can
-we manage?
-There are a few ways we can get help when we need to know about a command
-or we are looking for a command to do what we want.
-Manual pages are widely used in Linux shells to give you information about the
-available commands.
-To get help of manual pages just type <i>man</i> command with the
-investigating command in front.
+<p>There are so many commands each having many options in the shell. How can we manage?</p>
 
-Sometimes the command names themselve are forgotten.
-In this case, description or closes match to what that command is can be
-queried by man with a <i>-k</i> option.
+<p>There are a few ways we can get help when we need to know about a command or we are looking for a command to do what we want. <b>Manual pages</b> are widely used in Linux shells to give you information about the available commands. To get help of manual pages just type <code>man</code> command with the investigating command in front.</p>
 
-We can see that we were looking for a pager and it introduced us the
-<i>pager</i> command which we call it <i>less</i>.
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		man command
+	</code>
+</pre>
 
-There is also another tool for reading manuals, <i>info</i>.
-Though, man pages are mostly used, info command is also pretty popular and
-there’s a chance you need to work with it later.
+<p>Sometimes the command names themselve are forgotten. In this case, description or closes match to what that command is can be queried by <code>man</code> with a <code>-k</code> option.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		man -k pager
+	</code>
+</pre>
+
+<p>We can see that we were looking for a pager and it introduced us the <code>pager</code> command which we call it <b>less</b>.</p>
+
+<p>There is also another tool for reading manuals, <code>info</code>. Though, man pages are mostly used, <code>info</code> command is also pretty popular and there’s a chance you need to work with it later.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone">
+	<code>
+		info less
+	</code>
+</pre>

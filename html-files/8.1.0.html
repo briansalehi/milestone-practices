@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Fundamentals</title>
+<title>Constructors</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,8 +254,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">C++</a></li>
-<li class='breadcrumb-item active'>Fundamentals</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">Java SE Practices</a></li>
+<li class='breadcrumb-item active'>Constructors</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -267,8 +267,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Fundamentals" class="anchor" aria-hidden="true" href="#Fundamentals">
-Fundamentals
+<a id="Constructors" class="anchor" aria-hidden="true" href="#Constructors">
+Constructors
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -276,24 +276,10 @@ Fundamentals
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+ 
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/fundamentals/prerequisites">Next Page</a></li>
-</ul>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata: <span style='color: red'></span></li>
-<li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'></span></li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'></span></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.0.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/8.1.1.html">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -306,322 +292,10 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="#8-1-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Prerequisites
-	<span class="badge badge-primary badge-pill">7</span>
-</a>
-<div class="list-group collapse" id="8-1-1-0">
-<a href="/cpp/fundamentals/prerequisites/preprocessor-directives" class="list-group-item group-child">
-	1. Preprocessor Directives
-	
-</a>
-<a href="/cpp/fundamentals/prerequisites/main" class="list-group-item group-child">
-	2. Main Function
-	
-</a>
-<a href="/cpp/fundamentals/prerequisites/function" class="list-group-item group-child">
-	3. Functions
-	
-</a>
-<a href="/cpp/fundamentals/prerequisites/header" class="list-group-item group-child">
-	4. Headers
-	
-</a>
-<a href="/cpp/fundamentals/prerequisites/namespace" class="list-group-item group-child">
-	5. Name Space
-	
-</a>
-<a href="/cpp/fundamentals/prerequisites/iostream" class="list-group-item group-child">
-	6. Standard Streams
-	
-</a>
-<a href="/cpp/fundamentals/prerequisites/getline" class="list-group-item group-child">
-	7. Get Line
-	
-</a>
-</div>
-<a href="#8-1-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. Memory Objects
-	<span class="badge badge-primary badge-pill">21</span>
-</a>
-<div class="list-group collapse" id="8-1-2-0">
-<a href="/cpp/fundamentals/memory-objects/lvalue" class="list-group-item group-child">
-	1. Lvalue
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/storage" class="list-group-item group-child">
-	2. Multiple Variable Declarations
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/auto" class="list-group-item group-child">
-	3. Auto Type Deduction
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/arguments" class="list-group-item group-child">
-	4. multiple arguments
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/literal-constants" class="list-group-item group-child">
-	5. Literal Constants
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/const" class="list-group-item group-child">
-	6. Constant Qualifier
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/constexpr" class="list-group-item group-child">
-	7. Constant Expression
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/enum" class="list-group-item group-child">
-	8. Enumeration
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/define" class="list-group-item group-child">
-	9. Define Macro
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/scoped-enumeration" class="list-group-item group-child">
-	10. Scoped Enumeration
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/global-enumeration" class="list-group-item group-child">
-	11. Global Enumeration
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/global-variables" class="list-group-item group-child">
-	12. Global Variables
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/no-linkage" class="list-group-item group-child">
-	13. No Linkage Global Variables
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/internal-linkage" class="list-group-item group-child">
-	14. Internal Linkage Global Variables
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/external-linkage" class="list-group-item group-child">
-	15. External Linkage Global Variable
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/list-initialization" class="list-group-item group-child">
-	16. List Initialization
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/overflow" class="list-group-item group-child">
-	17. Overflow
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/sizeof" class="list-group-item group-child">
-	18. Size of Objects
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/structured-binding" class="list-group-item group-child">
-	19. Structured Binding
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/typedef" class="list-group-item group-child">
-	20. Type Alias
-	
-</a>
-<a href="/cpp/fundamentals/memory-objects/typeinfo" class="list-group-item group-child">
-	21. Runtime Type Deduction
-	
-</a>
-</div>
-<a href="#8-1-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. Operators
-	<span class="badge badge-primary badge-pill">10</span>
-</a>
-<div class="list-group collapse" id="8-1-3-0">
-<a href="/cpp/fundamentals/operators/arithmetic-operators" class="list-group-item group-child">
-	1. Arithmetic Operators
-	
-</a>
-<a href="/cpp/fundamentals/operators/bitwise-operator" class="list-group-item group-child">
-	2. Bitwise Operators
-	
-</a>
-<a href="/cpp/fundamentals/operators/compound-operators" class="list-group-item group-child">
-	3. Compound Operators
-	
-</a>
-<a href="/cpp/fundamentals/operators/equality-operator" class="list-group-item group-child">
-	4. Equality Operator
-	
-</a>
-<a href="/cpp/fundamentals/operators/increment-operator" class="list-group-item group-child">
-	5. Increment and Decrement Operators
-	
-</a>
-<a href="/cpp/fundamentals/operators/logical-operators" class="list-group-item group-child">
-	6. Logical Operators
-	
-</a>
-<a href="/cpp/fundamentals/operators/shift-operators" class="list-group-item group-child">
-	7. shifting operators
-	
-</a>
-<a href="/cpp/fundamentals/operators/sizeof" class="list-group-item group-child">
-	8. Sizeof Operator
-	
-</a>
-<a href="/cpp/fundamentals/operators/dynamic-memory" class="list-group-item group-child">
-	9. Dynamic Memory Allocation
-	
-</a>
-<a href="/cpp/fundamentals/operators/references" class="list-group-item group-child">
-	10. References
-	
-</a>
-</div>
-<a href="#8-1-4-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>4. Sequences
-	<span class="badge badge-primary badge-pill">10</span>
-</a>
-<div class="list-group collapse" id="8-1-4-0">
-<a href="/cpp/fundamentals/sequences/array" class="list-group-item group-child">
-	1. array
-	
-</a>
-<a href="/cpp/fundamentals/sequences/charconv" class="list-group-item group-child">
-	2. low level conversion by charconv header
-	
-</a>
-<a href="/cpp/fundamentals/sequences/char" class="list-group-item group-child">
-	3. C-style string
-	
-</a>
-<a href="/cpp/fundamentals/sequences/cstring" class="list-group-item group-child">
-	4. cstring
-	
-</a>
-<a href="/cpp/fundamentals/sequences/multidimensional-array" class="list-group-item group-child">
-	5. multidimentional array
-	
-</a>
-<a href="/cpp/fundamentals/sequences/string" class="list-group-item group-child">
-	6. C++ standard string
-	
-</a>
-<a href="/cpp/fundamentals/sequences/string-view" class="list-group-item group-child">
-	7. std::string_view
-	
-</a>
-<a href="/cpp/fundamentals/sequences/vector" class="list-group-item group-child">
-	8. vector
-	
-</a>
-<a href="/cpp/fundamentals/sequences/wide-character-strings" class="list-group-item group-child">
-	9. wide character string
-	
-</a>
-<a href="/cpp/fundamentals/sequences/wide-string" class="list-group-item group-child">
-	10. wide string
-	
-</a>
-</div>
-<a href="#8-1-5-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>5. Program Flow Control
-	<span class="badge badge-primary badge-pill">12</span>
-</a>
-<div class="list-group collapse" id="8-1-5-0">
-<a href="/8.1.5.1.html" class="list-group-item group-child">
-	1. boundary checking
-	
-</a>
-<a href="/8.1.5.2.html" class="list-group-item group-child">
-	2. break & continue
-	
-</a>
-<a href="/8.1.5.3.html" class="list-group-item group-child">
-	3. do...while
-	
-</a>
-<a href="/8.1.5.4.html" class="list-group-item group-child">
-	4. for loop
-	
-</a>
-<a href="/8.1.5.5.html" class="list-group-item group-child">
-	5. *goto* statement (depricated)
-	
-</a>
-<a href="/cpp/fundamentals/program-flow/if" class="list-group-item group-child">
-	6. If Statement
-	
-</a>
-<a href="/cpp/fundamentals/program-flow/if-constexpr" class="list-group-item group-child">
-	7. If Constant Expression
-	
-</a>
-<a href="/8.1.5.8.html" class="list-group-item group-child">
-	8. nested conditions
-	
-</a>
-<a href="/8.1.5.9.html" class="list-group-item group-child">
-	9. ranged based for loop
-	
-</a>
-<a href="/cpp/fundamentals/program-flow/switch-case" class="list-group-item group-child">
-	10. Switch Case Statement
-	
-</a>
-<a href="/cpp/fundamentals/program-flow/ternary" class="list-group-item group-child">
-	11. ternary operator
-	
-</a>
-<a href="/8.1.5.12.html" class="list-group-item group-child">
-	12. while
-	
-</a>
-</div>
-<a href="#8-1-6-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>6. Functions
-	<span class="badge badge-primary badge-pill">10</span>
-</a>
-<div class="list-group collapse" id="8-1-6-0">
-<a href="/cpp/fundamentals/functions/function-implementation" class="list-group-item group-child">
-	1. Function Implementation
-	
-</a>
-<a href="/cpp/fundamentals/functions/function-parameters" class="list-group-item group-child">
-	2. Parameters
-	
-</a>
-<a href="/cpp/fundamentals/functions/return-statements" class="list-group-item group-child">
-	3. Return Statements
-	
-</a>
-<a href="/cpp/fundamentals/functions/default-input-parameter" class="list-group-item group-child">
-	4. Default Input Parameter
-	
-</a>
-<a href="/cpp/fundamentals/functions/recursive-functions" class="list-group-item group-child">
-	5. Recursive Functions
-	
-</a>
-<a href="/cpp/fundamentals/functions/function-overloading" class="list-group-item group-child">
-	6. Function Overloading
-	
-</a>
-<a href="/cpp/fundamentals/functions/inline-functions" class="list-group-item group-child">
-	7. Inline Functions
-	
-</a>
-<a href="/cpp/fundamentals/functions/auto-return-value" class="list-group-item group-child">
-	8. Return Value Type Deduction
-	
-</a>
-<a href="/cpp/fundamentals/functions/lambda-functions" class="list-group-item group-child">
-	9. Lambda Functions
-	
-</a>
-<a href="/cpp/fundamentals/functions/pointers-parameters" class="list-group-item group-child">
-	10. Pointer Parameters
+<a href="/8.1.1.html" class="list-group-item">
+	1. Everything is an object - Object creation steps
 	
 </a>
-</div>
 </div>
 <script>
 function darkmode() {
@@ -702,7 +376,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 

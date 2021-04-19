@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Building Executable</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+img {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+img {
+	max-width: -moz-available;
+}
+
+@media only screen and (min-width:720px) {
+    .img-responsive {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .btn:hover {
+	color: #777777;
+}
+
+.dark-mode .dropdown-item {
+	background-color: #3a3a3a !important;
+	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.sticky {
+	position: sticky !important;
+	z-index: 1;
+	top: 3%;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
+	text-align: center !important;
+	font-size: 18px !important;
+}
+
+.dropbtn {
+  font-size: 14px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/2.0.html">Development Tools</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/2.5.0.html">CMake</a></li>
+<li class='breadcrumb-item active'>Building Executable</li>
+</ol>
+<div class="dropdown pull-right sticky">
+  <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
+	  &#x2699;
+  </button>
+  <div class="dropdown-content" id="dropdown-content">
+    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
+    <button id="changefont-icon" class="btn dropdown-item" onclick="toggle_font()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+  </div>
+</div>
+<h2>
+<a id="Building-Executable" class="anchor" aria-hidden="true" href="#Building-Executable">
+Building Executable
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<p>Continuing the analogy with sources, CMake defines its own language which has many things a programmer would be familiar with, such as <i>variables</i>, <i>functions</i>, <i>macros</i>, <i>conditional logic</i>, <i>looping</i>, <i>code comments</i> and so on.</p>
+
+<p>The following is a minimal, well-formed <i>CMakeLists.txt</i> file producing a basic executable.</p>
+
+<pre class="language-cmake">
+	<code>
+		cmake_minimum_required(VERSION 3.2)
+		project(MyApp)
+		add_executable(myExe main.cpp)
+	</code>
+</pre>
+
+<p>CMake, commands are similar to other languages’ function calls, except that while they support arguments, they do not return values directly. Arguments are separated from each other by spaces and may be split across multiple lines:</p>
+
+<pre class="language-cmake">
+	<code>
+		add_executable(myExe main.cpp src1.cpp src2.cpp)
+	</code>
+</pre>
+
+<p>Command names are also case insensitive, so the following are all equivalent:</p>
+
+<pre class="language-cmake">
+	<code>
+		add_executable(myExe main.cpp)
+		ADD_EXECUTABLE(myExe main.cpp)
+		Add_Executable(myExe main.cpp)
+	</code>
+</pre>
+
+<p>The primary way a project specifies details about its expected CMake version behavior is with the <code>cmake_minimum_required()</code> command. This should be the first line of the <i>CMakeLists.txt</i> file so that the project’s requirements are checked and established before anything else. This command does two things:</p>
+
+<ul>
+	<li>It specifies the minimum version of CMake the project needs. If the <i>CMakeLists.txt</i> file is processed with a CMake version older than the one specified, it will halt immediately with an error. This ensures that a particular minimum set of CMake functionality is available before proceeding.</li>
+	<li>It enforces policy settings to match CMake behavior to the specified version.</li>
+</ul>
+
+<p>The typical form of the <code>cmake_minimum_required()</code> command is straightforward:</p>
+
+<pre class="language-cmake">
+	<code>
+		cmake_minimum_required(VERSION major.minor[.patch[.tweak]])
+	</code>
+</pre>
+
+<p>The <code>VERSION</code> keyword must always be present and the version details provided must have at least the <code>major.minor</code> part.</p>
+
+<p>Developers should think carefully about what minimum CMake version their project should require. Version 3.2 is perhaps the oldest any new project should consider, since it provides a reasonably complete feature set for modern CMake techniques.</p>
+
+<p>Every CMake project should contain a <code>project()</code> command and it should appear after <code>cmake_minimum_required()</code> has been called. The command with its most common options has the following form:</p>
+
+<pre class="language-cmake">
+	<code>
+		project(projectName [VERSION major[.minor[.patch[.tweak]]]] [LANGUAGES languageName ...])
+	</code>
+</pre>
+
+<p>The <code>projectName</code> is required and may only contain letters, numbers, underscores (_) and hyphens (-), although typically only letters and perhaps underscores are used in practice. Since spaces are not permitted, the project name does not have to be surrounded by quotes.</p>
+
+<p>The name is the only mandatory argument for the <code>project()</code> command.</p>
+
+<p>The optional <code>VERSION</code> details are only supported in CMake 3.0 and later.</p>
+
+<p>The optional <code>LANGUAGES</code> argument defines the programming languages that should be enabled for the project. Supported values include <code>C</code>, <code>CXX</code>, <code>Fortran</code>, <code>ASM</code>, <code>Java</code> and others. If specifying multiple languages, separate each with a space. In some special situations, projects may want to indicate that no languages are used, which can be done using <code>LANGUAGES NONE</code>.</p>
+
+<p>If no <code>LANGUAGES</code> option is provided, CMake will default to <code>C</code> and <code>CXX</code>. CMake versions prior to 3.0 do not support the <code>LANGUAGES</code> keyword, but languages can still be specified after the project name using the older form of the command like so:</p>
+
+<pre class="language-cmake">
+	<code>
+		project(myProj C CXX)
+	</code>
+</pre>
+
+<p>If the <i>CMakeLists.txt</i> file does not call <code>project()</code> or does not call it early enough, CMake will implicitly call it internally for the default languages <code>C</code> and <code>CXX</code> to ensure compilers and linkers are properly set up for other commands which rely on them.</p>
+
+<p><code>add_executable()</code> command tells CMake to create an executable from a set of source files. The basic form of this command is:</p>
+
+<pre class="language-cmake">
+	<code>
+		add_executable(targetName source1 [source2 ...])
+	</code>
+</pre>
+
+<p>This creates an executable which can be referred to within the CMake project as <code>targetName</code>. This name may contain letters, numbers, underscores and hyphens.</p>
+
+<p>Multiple executables can also be defined within the one <i>CMakeLists.txt</i> file by calling <code>add_executable()</code> multiple times with different target names. If the same target name is used in more than one <code>add_executable()</code> command, CMake will fail and highlight the error.</p>
+
+<p>CMake follows similar commenting conventions as Unix shell scripts. Any line beginning with a <code>#</code> character is treated as a comment. Except within a quoted string, anything after a <code>#</code> on a line within a <code>CMakeLists.txt</code> file is also treated as a comment.</p>
+
+<pre class="language-cmake line-numbers">
+	<code>
+		cmake_minimum_required(VERSION 3.2)
+
+		# We don't use the C++ compiler, so don't let project() test for it in case the platform doesn't have one
+		project(MyApp VERSION 4.7.2 LANGUAGES C)
+
+		# Primary tool for this project
+		add_executable(mainTool
+			main.c
+			debug.c # Optimized away for release builds
+		)
+
+		# Helpful diagnostic tool for development and testing
+		add_executable(testTool testTool.c)
+	</code>
+</pre>
+
+<p>The more complete form of the basic <code>add_executable()</code> command is as follows:</p>
+
+<pre class="language-cmake">
+	<code>
+		add_executable(targetName [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] source1 [source2 ...])
+	</code>
+</pre>
+
+<ul>
+	<li><b>WIN32</b></li>
+	<p>When building the executable on a Windows platform, this option instructs CMake to build the executable as a Windows GUI application. In practice, this means it will be created with a <code>WinMain()</code> entry point instead of just <code>main()</code> and it will be linked with the <code>/SUBSYSTEM:WINDOWS</code> option. On all other platforms, the <code>WIN32</code> option is ignored.</p>
+
+	<li><b>MACOSX_BUNDLE</b></li>
+	<p>When present, this option directs CMake to build an app bundle when building on an Apple platform.</p>
+
+	<li><b>EXCLUDE_FROM_ALL</b></li>
+	<p>Sometimes, a project defines a number of targets, but by default only some of them should be built. When no target is specified at build time, the default <code>ALL</code> target is built (depending on the CMake generator being used, the name may be slightly different, such as <code>ALL_BUILD</code> for <i>Xcode</i>). If an executable is defined with the <code>EXCLUDE_FROM_ALL</code> option, it will not be included in that default <code>ALL</code> target. The executable will then only be built if it is explicitly requested by the build command or if it is a dependency for another target that is part of the default <code>ALL</code> build. A common situation where it can be useful to exclude a target from <code>ALL</code> is where the executable is a developer tool that is only needed occasionally.</p>
+</ul>
+
+<p>Library targets are defined using the <code>add_library()</code> command, of which there are a number of forms. The most basic of these is the following:</p>
+
+<pre class="language-cmake">
+	<code>
+		add_library(targetName [STATIC | SHARED | MODULE] [EXCLUDE_FROM_ALL] source1 [source2 ...])
+	</code>
+</pre>
+
+<p>The <code>targetName</code> is used within the <i>CMakeLists.txt</i> file to refer to the library, with the name of the built library on the file system being derived from this name by default. The <code>EXCLUDE_FROM_ALL</code> keyword has exactly the same effect as it does for <code>add_executable()</code>, namely to prevent the library from being included in the default <code>ALL</code> target. The type of library to be built is specified by one of the remaining three keywords <code>STATIC</code>, <code>SHARED</code> or <code>MODULE</code>.</p>
+
+<ul>
+	<li><b>STATIC</b></li>
+	<p>Specifies a static library or archive. On Windows, the default library name would be <i>targetName.lib</i>, while on Unix-like platforms, it would typically be <i>libtargetName.a</i>.</p>
+
+	<li><b>SHARED</b></li>
+	<p>Specifies a shared or dynamically linked library. On Windows, the default library name would be <i>targetName.dll</i>, on Apple platforms it would be <i>libtargetName.dylib</i> and on other Unix-like platforms it would typically be <i>libtargetName.so</i>.</p>
+
+	<li><b>MODULE</b></li>
+	<p>Specifies a library that is somewhat like a shared library, but is intended to be loaded dynamically at runtime rather than being linked directly to a library or executable.</p>
+</ul>
+
+<p>It is possible to omit the keyword defining what type of library to build. Unless the project specifically requires a particular type of library, the preferred practice is to not specify it and leave the choice up to the developer when building the project. In such cases, the library will be either <code>STATIC</code> or <code>SHARED</code>, with the choice determined by the value of a CMake variable called <code>BUILD_SHARED_LIBS</code>. If <code>BUILD_SHARED_LIBS</code> has been set to true, the library target will be a shared library, otherwise it will be static.</p>
+
+<p>One way to set this variable is by including a <code>-D</code> option on the cmake command line like so:</p>
+
+<pre class="language-cmake">
+	<code>
+		cmake -DBUILD_SHARED_LIBS=YES /path/to/source
+	</code>
+</pre>
+
+<p>There are a few different types of dependency relationships that can exist between libraries:</p>
+
+<ul>
+	<li><b>PRIVATE</b></li>
+	<p>Private dependencies specify that library <b>A</b> uses library <b>B</b> in its own internal implementation. Anything else that links to library <b>A</b> doesn’t need to know about <b>B</b> because it is an internal implementation detail of <b>A</b>.</p>
+
+	<li><b>PUBLIC</b></li>
+	<p>Public dependencies specify that not only does library <b>A</b> use library <b>B</b> internally, it also uses <b>B</b> in its interface. This means that <b>A</b> cannot be used without <b>B</b>, so anything that uses <b>A</b> will also have a direct dependency on <b>B</b>. An example of this would be a function defined in library <b>A</b> which has at least one parameter of a type defined and implemented in library <b>B</b>, so code cannot call the function from <b>A</b> without providing a parameter whose type comes from <b>B</b>.</p>
+
+	<li><b>INTERFACE</b></li>
+	<p>Interface dependencies specify that in order to use library <b>A</b>, parts of library <b>B</b> must also be used. This differs from a public dependency in that library <b>A</b> doesn’t require <b>B</b> internally, it only uses <b>B</b> in its interface.</p>
+</ul>
+
+<p>CMake captures this richer set of dependency relationships with its <code>target_link_libraries()</code> command, not just the simplistic idea of needing to link. The general form of the command is:</p>
+
+<pre class="language-cmake">
+	<code>
+		target_link_libraries(targetName <PRIVATE|PUBLIC|INTERFACE> item1 [item2 ...] [<PRIVATE|PUBLIC|INTERFACE> item3 [item4 ...]] ...)
+	</code>
+</pre>
+
+<p>This allows projects to precisely define how one library depends on others. CMake then takes care of managing the dependencies throughout the chain of libraries linked in this fashion. For example, consider the following:</p>
+
+<pre class="language-cmake line-numbers">
+	<code>
+		add_library(collector src1.cpp)
+		add_library(algo src2.cpp)
+		add_library(engine src3.cpp)
+		add_library(ui src4.cpp)
+		add_executable(myApp main.cpp)
+		target_link_libraries(collector PUBLIC ui PRIVATE algo engine)
+		target_link_libraries(myApp PRIVATE collector)
+	</code>
+</pre>
+
+<p>In this example, the <code>ui</code> library is linked to the <code>collector</code> library as <code>PUBLIC</code>, so even though <code>myApp</code> only directly links to <code>collector</code>, <code>myApp</code> will also be linked to <code>ui</code> because of that <code>PUBLIC</code> relationship. The <code>algo</code> and <code>engine</code> libraries, on the other hand, are linked to collector as <code>PRIVATE</code>, so <code>myApp</code> will not be directly linked to them.</p>
+
+<p>The <code>targetName</code> used with <code>target_link_libraries()</code> must have been defined by an <code>add_executable()</code> or <code>add_library()</code> command in the same directory from which <code>target_link_libraries()</code> is being called.</p>
+
+<p>In addition to CMake targets, the following things can also be specified as items in a <code>target_link_libraries()</code> command:</p>
+
+<ul>
+	<li><b>Full path to a library file</b></li>
+	<p>CMake will add the library file to the linker command.</p>
+
+	<li><b>Plain library name</b></li>
+	<p>If just the name of the library is given with no path, the linker command will search for that library (e.g. foo becomes <code>-lfoo</code> or <i>foo.lib</i>, depending on the platform). This would be common for libraries provided by the system.</p>
+
+	<li><b>Link flag</b></li>
+	<p>As a special case, items starting with a hyphen other than <code>-l</code> or <code>-framework</code> will be treated as flags to be added to the linker command. The CMake documentation warns that these should only be used for <code>PRIVATE</code> items, since they would be carried through to other targets if defined as <code>PUBLIC</code> or <code>INTERFACE</code> and this may not always be safe.</p>
+</ul>
+
+<p>In addition to the above, for historical reasons, any item may be preceded by one of the keywords debug, optimized or general. The effect of these keywords is to further refine when the item following it should be included based on whether or not the build is configured as a debug build. If an item is preceded by the debug keyword, then it will only be added if the build is a debug build. If an item is preceded by the optimized keyword, it will only be added if the build is not a debug build. The general keyword specifies that the item should be added for all build configurations, which is the default behavior anyway if no keyword is used. The debug, optimized and general keywords should be avoided for new projects as there are clearer, more flexible and more robust ways to achieve the same thing with today’s CMake features.</p>
+
+<p>The <code>target_link_libraries()</code> command also has a few other forms, but their use is generally discouraged for new projects.</p>
+
+<pre class="language-cmake">
+	<code>
+		target_link_libraries(targetName item [item...])
+	</code>
+</pre>
+
+<p>The above form is generally equivalent to the items being defined as <code>PUBLIC</code>, but in certain situations, they may instead be treated as <code>PRIVATE</code>.</p>
+
+<p>Another supported but deprecated form is the following:</p>
+
+<pre class="language-cmake">
+	<code>
+		target_link_libraries(targetName LINK_INTERFACE_LIBRARIES item [item...])
+	</code>
+</pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Professional CMake: A Practical Guide, 8th Edition - Craig Scott: <span style='color: red'> chapter 3 and 4</span></li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/development-tools/cmake/initialization">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/development-tools/cmake/variables">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x2600;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x263d;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x263d;';
+		toggle_settings();
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x2600;';
+		toggle_settings();
+	}
+}
+var current_position = 0;
+
+function scrollDownListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "j") {
+        var screen_height = window.screen.height / 4;
+		current_position += screen_height;
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+function scrollUpListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "k") {
+        var screen_height = window.screen.height / 4;
+		current_position -= screen_height;
+		if (current_position < 0) {
+			current_position = 0;
+		}
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+scrollDownListener()
+scrollUpListener()
+function toggle_settings() {
+	var button_list = document.getElementById('dropdown-content');
+
+	if (button_list.style.display != "none") {
+		button_list.style.display = "none";
+	} else {
+		button_list.style.display = "block";
+	}
+}
+toggle_settings();
+var minimum_fontsize=1;
+var maximum_fontsize=6;
+var current_fontsize=2;
+var fontsize_growth = "upward";
+
+function zoominLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s += 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function zoomoutLetter() {
+   var p = document.getElementsByTagName('p');
+   for(i=0;i<p.length;i++) {
+      if(p[i].style.fontSize) {
+         var s = parseInt(p[i].style.fontSize.replace("px",""));
+      } else {
+         var s = 16;
+      }
+	   s -= 1;
+
+      p[i].style.fontSize = s+"px"
+   }
+}
+
+function toggle_font() {
+	if (fontsize_growth == "downward") {
+		zoomoutLetter();
+		--current_fontsize;
+		if (current_fontsize == minimum_fontsize) {
+			fontsize_growth = "upward";
+		}
+	} else {
+		zoominLetter();
+		++current_fontsize;
+		if (current_fontsize == maximum_fontsize) {
+			fontsize_growth = "downward";
+		}
+	}
+	console.log(current_fontsize);
+}
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

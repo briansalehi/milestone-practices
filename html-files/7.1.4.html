@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>scanf function</title>
+<title>Floats</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -254,9 +254,9 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/7.0.html">C</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Input & Output Streams</a></li>
-<li class='breadcrumb-item active'>scanf function</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/7.0.html">Python</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/7.1.0.html">Fundamentals</a></li>
+<li class='breadcrumb-item active'>Floats</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -268,8 +268,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="scanf-function" class="anchor" aria-hidden="true" href="#scanf-function">
-scanf function
+<a id="Floats" class="anchor" aria-hidden="true" href="#Floats">
+Floats
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -277,60 +277,48 @@ scanf function
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-To read data from input buffer we can use **scanf**.
+Python calls any number with a decimal point a float. This term is used in
+most programming languages, and it refers to the fact that a decimal point can
+appear at any position in a number.
 
-You might have already asked yourself that why the **printf**
-function carries a string with no newline character, and
-still the output buffer is flushed before the **scanf**
-function prompts the user for input. the reason is simply because
-the **scanf** function will flush output buffer before
-it starts reading any data from input buffer.
+Python 2 returns a slightly different result when you divide two integers like
+3 / 2.
 
-Notice that **scanf** and **printf** functions have one thing
-in common. They take a string to represent the number of
-inputs and outputs in their first paramter.  
-As you probably noticed, for each integer to print into the
-output buffer, your must use a special operator "%d" in the
-first parameter of the **printf** function, and to put a value
-from input buffer into a variable you must use "%d" in the
-first parameter of the **scanf** function.  
-What is really happening is that by using these special operators
-you tell these functions how many additional parameters they
-need to read.  
-This much ability and liberty in writing C can sometimes go so wrong!  
-You must pay enough attention to use as much parameters as these
-functions need in the first parameter. Do not miss one and do not
-give more! unless you want to see how your program misbehaves
-on your system :)
+Instead of 1.5, Python returns 1. Division of integers in Python 2 results in
+an integer with the remainder truncated. Note that the result is not a rounded
+integer; the remainder is simply omitted.
+
+To avoid this behavior in Python 2, make sure that at least one of the numbers
+is a float.
 <hr />
-  <cite>scanf.c</cite>
+  <cite>floats.py</cite>
 <pre class="line-numbers" >
-<code class="language-c">
-    #include &lt;stdio.h&gt;
-    
-    int main(void)
-    {
-        int age;
-    
-        printf(&quot;Enter your age: &quot;);
-        scanf(&quot;%d&quot;, &amp;age);
-        printf(&quot;You are %d years old\n&quot;, age);
-    
-        return 0;
-    }
+<code class="language-python">
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
+<pre class="language-bash command-line" data-host='milestone' data-output='2-3'>
 <code>
-gcc -g -Wall -O0 -c -o ./scanf.o ./scanf.c
-gcc -g -o ./scanf.bin ./scanf.o
-./scanf.bin
+compiler ./floats.py
+
 </code>
 </pre>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Python Crash Course: chapter 1</li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/7.1.3.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/7.1.5.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/python/fundamentals/integers">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/python/fundamentals/strings">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -411,7 +399,7 @@ function toggle_settings() {
 }
 toggle_settings();
 var minimum_fontsize=1;
-var maximum_fontsize=3;
+var maximum_fontsize=6;
 var current_fontsize=2;
 var fontsize_growth = "upward";
 
@@ -476,7 +464,7 @@ function toggle_font() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-python.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {
