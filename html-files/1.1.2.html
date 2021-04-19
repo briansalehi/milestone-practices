@@ -264,7 +264,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </button>
   <div class="dropdown-content" id="dropdown-content">
     <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
-    <button id="changefont-icon" class="btn dropdown-item" onclick="toggle_font()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+    <button class="btn dropdown-item" onclick="zoominLetter()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+    <button class="btn dropdown-item" onclick="zoomoutLetter()" title="ALT + SHIFT + I" accesskey="I"><span style="font-size: 18px;">A</span><span style="font-size: 10px;">A</span></button>
   </div>
 </div>
 <h2>
@@ -277,9 +278,7 @@ Command
 </a>
 </h2>
 <div><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>A good first command to try, <code>uname</code>, will show what operating system is being run. That does not represent much information unless we track on the <code>-a</code> option to the command.</p>
-
-Commands can get options or arguments in front of their name:
+<p>Commands can get options or arguments in front of their name:</p>
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone">
 	<code>
@@ -288,6 +287,8 @@ Commands can get options or arguments in front of their name:
 </pre>
 
 <p>Most commands accept options both in short and long form, having single and double dash respectively. Though this is conventional, don’t rely on it.</p>
+
+<p>A good first command to try, <code>uname</code>, will show what operating system is being run. That does not represent much information unless we track on the <code>-a</code> option to the command.</p>
 <hr />
   <cite>command.sh</cite>
 <pre class="line-numbers" >
@@ -402,55 +403,149 @@ function toggle_settings() {
 	}
 }
 toggle_settings();
-var minimum_fontsize=1;
-var maximum_fontsize=6;
-var current_fontsize=2;
-var fontsize_growth = "upward";
+var minimum_fontlevel = 1;
+var maximum_fontlevel = 10;
+var current_fontlevel = localStorage.getItem('fontlevel');
+if (current_fontlevel == null) {
+	current_fontlevel = 3;
+}
 
 function zoominLetter() {
-   var p = document.getElementsByTagName('p');
-   for(i=0;i<p.length;i++) {
-      if(p[i].style.fontSize) {
-         var s = parseInt(p[i].style.fontSize.replace("px",""));
-      } else {
-         var s = 16;
-      }
-	   s += 1;
+	if (current_fontlevel < maximum_fontlevel) {
+		current_fontlevel++;
+		localStorage.setItem('fontlevel', current_fontlevel);
 
-      p[i].style.fontSize = s+"px"
-   }
+		var p = document.getElementsByTagName('p');
+		for(i=0;i<p.length;i++) {
+			if(p[i].style.fontSize) {
+				var s = parseInt(p[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s += 2;
+
+			p[i].style.fontSize = s+"px"
+			localStorage.setItem('fontsize', s);
+		}
+
+		var code = document.getElementsByTagName('code');
+		for(i=0;i<code.length;i++) {
+			if(code[i].style.fontSize) {
+				var s = parseInt(code[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s += 2;
+
+			code[i].style.fontSize = s+"px"
+		}
+
+		var li = document.getElementsByTagName('li');
+		for(i=0;i<li.length;i++) {
+			if(li[i].style.fontSize) {
+				var s = parseInt(li[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s += 2;
+
+			li[i].style.fontSize = s+"px"
+		}
+
+		var table = document.getElementsByTagName('table');
+		for(i=0;i<table.length;i++) {
+			if(table[i].style.fontSize) {
+				var s = parseInt(table[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s += 2;
+
+			table[i].style.fontSize = s+"px"
+		}
+	}
 }
 
 function zoomoutLetter() {
-   var p = document.getElementsByTagName('p');
-   for(i=0;i<p.length;i++) {
-      if(p[i].style.fontSize) {
-         var s = parseInt(p[i].style.fontSize.replace("px",""));
-      } else {
-         var s = 16;
-      }
-	   s -= 1;
+	if (current_fontlevel > minimum_fontlevel) {
+		current_fontlevel--;
+		localStorage.setItem('fontlevel', current_fontlevel);
 
-      p[i].style.fontSize = s+"px"
-   }
-}
+		var p = document.getElementsByTagName('p');
+		for(i=0;i<p.length;i++) {
+			if(p[i].style.fontSize) {
+				var s = parseInt(p[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s -= 2;
 
-function toggle_font() {
-	if (fontsize_growth == "downward") {
-		zoomoutLetter();
-		--current_fontsize;
-		if (current_fontsize == minimum_fontsize) {
-			fontsize_growth = "upward";
+			p[i].style.fontSize = s+"px"
+			localStorage.setItem('fontsize', s);
 		}
-	} else {
-		zoominLetter();
-		++current_fontsize;
-		if (current_fontsize == maximum_fontsize) {
-			fontsize_growth = "downward";
+
+		var code = document.getElementsByTagName('code');
+		for(i=0;i<code.length;i++) {
+			if(code[i].style.fontSize) {
+				var s = parseInt(code[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s -= 2;
+
+			code[i].style.fontSize = s+"px"
+			localStorage.setItem('fontsize', s);
+		}
+
+		var li = document.getElementsByTagName('li');
+		for(i=0;i<li.length;i++) {
+			if(li[i].style.fontSize) {
+				var s = parseInt(li[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s -= 2;
+
+			li[i].style.fontSize = s+"px"
+			localStorage.setItem('fontsize', s);
+		}
+
+		var table = document.getElementsByTagName('table');
+		for(i=0;i<table.length;i++) {
+			if(table[i].style.fontSize) {
+				var s = parseInt(table[i].style.fontSize.replace("px",""));
+			} else {
+				var s = 14;
+			}
+			s -= 2;
+
+			table[i].style.fontSize = s+"px"
+			localStorage.setItem('fontsize', s);
 		}
 	}
-	console.log(current_fontsize);
 }
+
+function restoreFontSize() {
+	var fontsize = localStorage.getItem('fontsize');
+	var p = document.getElementsByTagName('p');
+	var code = document.getElementsByTagName('code');
+	var li = document.getElementsByTagName('li');
+	var table= document.getElementsByTagName('table');
+
+	for(i=0;i<p.length;i++) {
+		p[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<code.length;i++) {
+		code[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<li.length;i++) {
+		li[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<table.length;i++) {
+		table[i].style.fontSize = fontsize+"px"
+	}
+}
+restoreFontSize();
 </script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
