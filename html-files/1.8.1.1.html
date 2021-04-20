@@ -256,7 +256,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">MySQL</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">...</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">Fundamentals</a></li>
 <li class='breadcrumb-item active'>Comments</li>
 </ol>
 <div class="dropdown pull-right sticky">
@@ -279,10 +279,27 @@ Comments
 </svg>
 </a>
 </h2>
-To code a <i>block comment</i>, type /* at the start of the block and */ and
-the end.
+<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>To code a <b>block comment</b>, type <code>/*</code> at the start of the block and <code>*/</code> and the end.</p>
 
-To code an <i>inline comment</i>, type -- followed by the comment.
+<p>To code an <b>inline comment</b>, type <code>--</code> followed by the comment.</p>
+
+<pre class="language-sql line-numbers" data-line="1-4,9">
+	<code>
+		/*
+		Author: Brian Salehi
+		Date: 02/23/2021
+		*/
+		select invoice_number, invoice_date, invoice_total,
+			invoice_total - payment_total - credit_total as balance_due
+		from invoices;
+
+		-- The fourth column calculates balance due
+		select invoice_number, invoice_date, invoice_total,
+			invoice_total - payment_total - credit_total as balance_due
+		from invoices;
+	</code>
+</pre>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -296,33 +313,9 @@ References
 <ul class="list-group">
 <li class='list-group-item'>Murach's MySQL - Joel Murach: page 33</li>
 </ul>
-<hr />
-  <cite>comments.sql</cite>
-<pre class="line-numbers" >
-<code class="language-sql">
-    /*
-    Author: Brian Salehi
-    Date: 02/23/2021
-    */
-    select invoice_number, invoice_date, invoice_total,
-    	invoice_total - payment_total - credit_total as balance_due
-    from invoices;
-    
-    -- The fourth column calculates balance due
-    select invoice_number, invoice_date, invoice_total,
-    	invoice_total - payment_total - credit_total as balance_due
-    from invoices;
-</code>
-</pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='2-0'>
-<code>
-mysql -u milestone -p milestone-test
-</code>
-</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/1.8.1.0.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/1.8.1.2.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/mysql/database-setup">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/mysql/database-setup/create-database">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -404,17 +397,17 @@ function toggle_settings() {
 toggle_settings();
 var min_level  = 1;
 var max_level  = 12;
-var fontlevel  = localStorage.getItem('fontlevel');
-var fontsize   = localStorage.getItem('fontsize');
+var fontlevel  = localStorage.getItem('fontlevel' );
+var fontsize   = localStorage.getItem('fontsize'  );
 var h2fontsize = localStorage.getItem('h2fontsize');
 var h3fontsize = localStorage.getItem('h3fontsize');
 var h4fontsize = localStorage.getItem('h4fontsize');
 
-if (fontlevel  == null) { fontlevel  =  3; }
-if (fontsize   == null) { fontsize   = 14; }
-if (h2fontsize == null) { h2fontsize = 30; }
-if (h3fontsize == null) { h3fontsize = 24; }
-if (h4fontsize == null) { h4fontsize = 18; }
+if (fontlevel  == null) { fontlevel  =  3; localStorage.setItem('fontlevel',  3 ); }
+if (fontsize   == null) { fontsize   = 14; localStorage.setItem('fontsize',   14); }
+if (h2fontsize == null) { h2fontsize = 30; localStorage.setItem('h2fontsize', 30); }
+if (h3fontsize == null) { h3fontsize = 24; localStorage.setItem('h3fontsize', 24); }
+if (h4fontsize == null) { h4fontsize = 18; localStorage.setItem('h4fontsize', 18); }
 
 function defaultFontSize() {
 	fontlevel  =  3;
@@ -481,6 +474,7 @@ function restoreFontSize() {
 	var table = document.getElementsByTagName('table');
 	var cite  = document.getElementsByTagName('cite');
 	var toc   = document.getElementsByClassName('list-group');
+	var bar   = document.getElementsByClassName('difficulty');
 	var h2    = document.getElementsByTagName('h2');
 	var h3    = document.getElementsByTagName('h3');
 	var h4    = document.getElementsByTagName('h4');
@@ -505,6 +499,9 @@ function restoreFontSize() {
 	}
 	for(i=0;i<toc.length;i++) {
 		toc[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<bar.length;i++) {
+		bar[i].style.fontSize = fontsize+"px"
 	}
 	for(i=0;i<h2.length;i++) {
 		h2[i].style.fontSize = h2fontsize+"px"
