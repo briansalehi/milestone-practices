@@ -13,6 +13,7 @@
 #Mastering Bash: A Step-by-Step Guide to working with Bash Programming and Shell Scripting - Giorgio Zarrelli
 #Mastering Linux Security and Hardening: Protect your Linux systems from intruders, malware attacks, and other cyber threats, 2nd Edition - Donald A. Tevault
 #Mastering Linux Shell Scripting: A practical guide to Linux command-line, Bash scripting, and Shell programming, 2nd Edition - Mokhtar Ebrahim, Andrew Mallett
+#Murach's MySQL - Joel Murach
 Murach's MySQL - Joel Murach: page 28
 #Murach's MySQL - Joel Murach: page 33
 #MySQL Concurrency: Locking and Transactions for MySQL Developers and DBAs - Jesper Wisborg Krogh

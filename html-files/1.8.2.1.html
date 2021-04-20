@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Delete Row</title>
+<title>Query a Single Table</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -256,8 +256,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/1.8.0.html">MySQL</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.1.0.html">...</a></li>
-<li class='breadcrumb-item active'>Delete Row</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/1.8.2.0.html">...</a></li>
+<li class='breadcrumb-item active'>Query a Single Table</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -271,14 +271,18 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Delete-Row" class="anchor" aria-hidden="true" href="#Delete-Row">
-Delete Row
+<a id="Query-a-Single-Table" class="anchor" aria-hidden="true" href="#Query-a-Single-Table">
+Query a Single Table
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
+This sample also shows the <i>result set</i> that's returned by the SELECT
+statement. A result set is a logical table that's created temporarily whithin
+database. When an application requests data from a 	database, it receives a
+result set.
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -290,14 +294,18 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Murach's MySQL - Joel Murach: page 31</li>
+<li class='list-group-item'>Murach's MySQL - Joel Murach: page 27</li>
 </ul>
 <hr />
-  <cite>delete-row.sql</cite>
+  <cite>query-single-table.sql</cite>
 <pre class="line-numbers" >
 <code class="language-sql">
-    delete from invoices
-    where invoice_number = &apos;2356344&apos;
+    select invoice_number, invoice_date, invoice_total,
+    	payment_total, credit_total,
+    	invoice_total - payment_total - credit_total as balance_due
+    from invoices
+    where invoice_total - payment_total - credit_total &gt; 0
+    order by invoice_date;
 </code>
 </pre>
   <cite>Build and Run</cite>
@@ -307,8 +315,8 @@ mysql -u milestone -p milestone-test
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/1.8.1.12.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/hardening">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/mysql/querying-database">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/mysql/querying-database/join-tables">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -390,26 +398,30 @@ function toggle_settings() {
 toggle_settings();
 var min_level  = 1;
 var max_level  = 12;
-var fontlevel  = localStorage.getItem('fontlevel');
-var fontsize   = localStorage.getItem('fontsize');
-var h2fontsize = localStorage.getItem('h2fontsize');
-var h3fontsize = localStorage.getItem('h3fontsize');
-var h4fontsize = localStorage.getItem('h4fontsize');
+var fontlevel  = parseInt(localStorage.getItem('fontlevel'));
+var fontsize   = parseInt(localStorage.getItem('fontsize'));
+var h1fontsize = parseInt(localStorage.getItem('h1fontsize'));
+var h2fontsize = parseInt(localStorage.getItem('h2fontsize'));
+var h3fontsize = parseInt(localStorage.getItem('h3fontsize'));
+var h4fontsize = parseInt(localStorage.getItem('h4fontsize'));
 
-if (fontlevel  == null) { fontlevel  =  3; }
-if (fontsize   == null) { fontsize   = 14; }
-if (h2fontsize == null) { h2fontsize = 30; }
-if (h3fontsize == null) { h3fontsize = 24; }
-if (h4fontsize == null) { h4fontsize = 18; }
+if (!fontlevel)  { fontlevel  =  3; localStorage.setItem('fontlevel', 3 ); }
+if (!fontsize)   { fontsize   = 14; localStorage.setItem('fontsize',  14); }
+if (!h1fontsize) { h1fontsize = 32; localStorage.setItem('h1fontsize',32); }
+if (!h2fontsize) { h2fontsize = 24; localStorage.setItem('h2fontsize',24); }
+if (!h3fontsize) { h3fontsize = 18; localStorage.setItem('h3fontsize',18); }
+if (!h4fontsize) { h4fontsize = 16; localStorage.setItem('h4fontsize',16); }
 
 function defaultFontSize() {
 	fontlevel  =  3;
 	fontsize   = 14;
-	h2fontsize = 30;
-	h3fontsize = 24;
-	h4fontsize = 18;
-	localStorage.setItem('fontlevel' , fontlevel );
-	localStorage.setItem('fontsize'  , fontsize  );
+	h1fontsize = 32;
+	h2fontsize = 24;
+	h3fontsize = 18;
+	h4fontsize = 16;
+	localStorage.setItem('fontlevel',  fontlevel );
+	localStorage.setItem('fontsize',   fontsize  );
+	localStorage.setItem('h1fontsize', h1fontsize);
 	localStorage.setItem('h2fontsize', h2fontsize);
 	localStorage.setItem('h3fontsize', h3fontsize);
 	localStorage.setItem('h4fontsize', h3fontsize);
@@ -420,14 +432,16 @@ function defaultFontSize() {
 
 function zoominLetter() {
 	if (fontlevel < max_level) {
-		fontlevel++;
+		fontlevel += 1;
 		fontsize += 2;
+		h1fontsize += 2;
 		h2fontsize += 2;
 		h3fontsize += 2;
 		h4fontsize += 2;
 
-		localStorage.setItem('fontlevel' , fontlevel );
-		localStorage.setItem('fontsize'  , fontsize  );
+		localStorage.setItem('fontlevel', fontlevel);
+		localStorage.setItem('fontsize', fontsize);
+		localStorage.setItem('h1fontsize', h1fontsize);
 		localStorage.setItem('h2fontsize', h2fontsize);
 		localStorage.setItem('h3fontsize', h3fontsize);
 		localStorage.setItem('h4fontsize', h4fontsize);
@@ -438,14 +452,16 @@ function zoominLetter() {
 
 function zoomoutLetter() {
 	if (fontlevel > min_level) {
-		fontlevel--;
+		fontlevel -= 1;
 		fontsize -= 2;
+		h1fontsize -= 2;
 		h2fontsize -= 2;
 		h3fontsize -= 2;
 		h4fontsize -= 2;
 
-		localStorage.setItem('fontlevel' , fontlevel );
-		localStorage.setItem('fontsize'  , fontsize  );
+		localStorage.setItem('fontlevel', fontlevel);
+		localStorage.setItem('fontsize', fontsize);
+		localStorage.setItem('h1fontsize', h1fontsize);
 		localStorage.setItem('h2fontsize', h2fontsize);
 		localStorage.setItem('h3fontsize', h3fontsize);
 		localStorage.setItem('h4fontsize', h4fontsize);
@@ -455,10 +471,11 @@ function zoomoutLetter() {
 }
 
 function restoreFontSize() {
-	var fontsize   = localStorage.getItem('fontsize');
-	var h2fontsize = localStorage.getItem('h2fontsize');
-	var h3fontsize = localStorage.getItem('h3fontsize');
-	var h4fontsize = localStorage.getItem('h4fontsize');
+	fontsize   = parseInt(localStorage.getItem('fontsize'));
+	h1fontsize = parseInt(localStorage.getItem('h1fontsize'));
+	h2fontsize = parseInt(localStorage.getItem('h2fontsize'));
+	h3fontsize = parseInt(localStorage.getItem('h3fontsize'));
+	h4fontsize = parseInt(localStorage.getItem('h4fontsize'));
 
 	var p     = document.getElementsByTagName('p');
 	var pre   = document.getElementsByTagName('pre');
@@ -467,6 +484,8 @@ function restoreFontSize() {
 	var table = document.getElementsByTagName('table');
 	var cite  = document.getElementsByTagName('cite');
 	var toc   = document.getElementsByClassName('list-group');
+	var bar   = document.getElementsByClassName('difficulty');
+	var h1    = document.getElementsByTagName('h1');
 	var h2    = document.getElementsByTagName('h2');
 	var h3    = document.getElementsByTagName('h3');
 	var h4    = document.getElementsByTagName('h4');
@@ -491,6 +510,12 @@ function restoreFontSize() {
 	}
 	for(i=0;i<toc.length;i++) {
 		toc[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<bar.length;i++) {
+		bar[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<h1.length;i++) {
+		h1[i].style.fontSize = h1fontsize+"px"
 	}
 	for(i=0;i<h2.length;i++) {
 		h2[i].style.fontSize = h2fontsize+"px"
