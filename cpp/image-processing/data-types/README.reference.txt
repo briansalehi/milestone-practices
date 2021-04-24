@@ -1,4 +1,5 @@
 #C++ Primer Plus, 6th Edition - Stephen Prata
 Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski
+#Modern C++ Programming Cookbook, 2nd Edition - Marius Bancila
 #Professional C++, 4th Edition - Marc Gregoire
 #Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao

@@ -1,6 +1,7 @@
 C++ Concurrency in Action, 2nd Edition = Anthony Williams
 #C++ Primer Plus, 6th Edition - Stephen Prata
 Heterogeneous Computing with OpenCL 2.0, 3rd Edition - David R. Kaeli, Perhaad Mistry, Dana Schaa, Dong Ping Zhang
+#Modern C++ Programming Cookbook, 2nd Edition - Marius Bancila
 OpenCL in Action: How to Accelerate Graphics and Computations, 1st Edition = Matthew Scarpino
 OpenCL Parallel Programming Development Cookbook - Raymond Tay
 OpenCL Programming by Example - Ravishekhar Banger, Koushik Bhattacharyya
