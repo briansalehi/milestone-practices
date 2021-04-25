@@ -1,0 +1,169 @@
+<p>In a timing diagram, each event has timing information associated with it that accurately describes when the event is invoked, how long it takes for another participant to receive the event, and how long the receiving participant is expected to be in a particular state.</p>
+
+<p>Timing diagrams will look strangely familiar to anyone with a little experience of the analysis of electronic circuit boards.</p>
+
+<cite>All of the information on a logic analyzer is also shown on a timing diagram in the form of messages, participants, and states</cite>
+![logic-analyzer-as-timing-diagram.png]
+
+<p>The similarities between a timing diagram and a logic analyzer are apparent when you compare previous diagram with next one, which gives a sneak preview of how a complete timing diagram looks.</p>
+
+<cite>Compare this simple yet complete timing diagram for a mail server with the logic analyzer in previous diagram</cite>
+![mail-server-timing-diagram-first-sample.png]
+
+<p>Let's assemble a timing diagram from scratch. We're going to work from the same example used in the communication and sequence diagram chapters, the <code>Create a new Regular Blog Account interaction</code>.</p>
+
+<cite>A sequence diagram contains very little, if any, information about timing, and its main focus is the order of events within an interaction</cite>
+![very-little-info-in-sequence-diagram.png]
+
+<p>The interaction shown in the previous figure was originally the result of a requirement such as the one described in Requirement A.2.</p>
+
+<h4>Requirement A.2</h4>
+
+<p>
+The content management system shall allow an administrator to create a new regular blog account, provided the personal details of the author are verified using the <code>Author Credentials Database</code>.<br/>
+Now, let's extend the original requirement with some timing considerations so that we've got something to add by modeling the interaction in a timing diagram.
+</p>
+
+<h4>Requirement A.2 (Updated)</h4>
+
+<p>
+The content management system shall allow an administrator to create a new regular blog account within five seconds of the information being entered, provided the personal details of the author are verified using the <code>Author Credentials Database</code>.<br/>
+Requirement A.2 has been modified to include a timing constraint that dictates how long it should take for the system to accept, verify, and create a new account.
+</p>
+
+<p>First, you need to create a timing diagram that incorporates all of the participants involved in the <code>Create a new Regular Blog Account</code> interaction</p>
+
+<p>Details of these participants have been left out because timing diagrams focus on timing in relation to state changes.</p>
+
+<cite>The names of the main participants involved in an interaction are written vertically on the lefthand side of a timing diagram</cite>
+![lack-of-timing-on-sequence-diagrams.png]
+
+<p>During an interaction, a participant can exist in any number of states. A participant is said to be in a particular state when it receives an event.</p>
+
+<p>The participant can then be said to be in that state until another event occurs.</p>
+
+<p>States on a timing diagram are placed next to their corresponding participant.</p>
+
+<cite>States are written horizontally on a timing diagram and next to the participant that they are associated with</cite>
+![adding-timing-into-sequence-diagram.png]
+
+<p>Time on a timing diagram runs from left to right across the page.</p>
+
+<p>Time measurements can be expressed in a number of different ways; you can have exact time measurements or relative time indicators as in the next diagram.</p>
+
+<cite>Time measurements are placed on a timing diagram as a ruler along the bottom of the page</cite>
+![states-position-on-timing-diagram.png]
+
+<p>In a timing diagram, <code>t</code> represents a point in time that is of interest.</p>
+
+<cite>Relative time indicators are particularly useful when you have timing considerations such as "ParticipantA will be in State1 for half of the time that ParticipantB is in State2"</cite>
+![relative-time-indicators-in-timing-diagram.png]
+
+<p>Adding time to the diagram we've been putting together so far is tricky because we don't have any concrete timing information in the original requirement.</p>
+
+<p>However, we still need to apply the constraints mentioned in <b>Requirement A.2</b>, so some measure of relative time represented by <code>t</code></p>
+
+<cite>The timing constraints are a blend of exact and relative timings</cite>
+![exact-or-relative-constraint-in-timing-diagram.png]
+
+<p>In this figure, the initial stages of the interaction are simply measured as seconds, and the single <code>t</code> value represents a single second wherever it is mentioned on any further timing constraints on the diagram.</p>
+
+<p>If you take a look back at two previous diagrams, you can already see how participant's current state is indicated: with a horizontal line that is called the state-line.</p>
+
+<p>At any given time in the interaction, a participant's state-line is aligned with one of the participant's states.</p>
+
+![participants-state-line.png]
+
+<p>In this example, p1:Participant's state-line indicates that it is in <code>State1</code> for 1 unit of time, <code>State2</code> for three units of time, and <code>State3</code> for roughly five units of time (before returning to <code>State1</code> at the end of the interaction)</p>
+
+<p>Next figure shows how the <code>Create a new Regular Blog Account</code> timing diagram is updated to show the state of each participant at a given time during the interaction.</p>
+
+<cite>Each of the participants needs to have a corresponding state-line to indicate their state at any given point in time</cite>
+![state-line-example-in-timing-diagram.png]
+
+<p>Participants change state on a timing diagram in response to events. These events might be the invocation of a message or they might be something else, such as a message returning after it has been invoked. The distinction between messages and events is not as important on a timing diagram as it is on sequence diagrams. The important thing to remember is that whatever the event is, it is shown on a timing diagram to trigger a change in the state of a participant.</p>
+
+<p>An event on a timing diagram is shown as an arrow from one participant's state-line—the event source—to another participant's state-line—the event receiver</p>
+
+<cite>Events on a timing diagram can even have their own durations, as shown by <code>event1</code> taking 1 unit of time from invocation by p1:Participant1 and reception by p2:Participant2</cite>
+![events-on-timing-diagram.png]
+
+<p>The sequence diagram already shows the messages that are passed between participants, so you can simply add those messages to the timing diagram</p>
+
+<cite>Participant state changes make much more sense when you can see the events that cause them</cite>
+![events-callback.png]
+
+<p>Timing constraints describe in detail how long a given portion of an interaction should take. They are usually applied to the amount of time that a participant should be in a particular state or how long an event should take to be invoked and received</p>
+
+<cite>Timing constraints can be associated with an event or a state and may or may not be accompanied by constraint boundary arrows</cite>
+![event-and-state-constraints-in-timing-diagram.png]
+
+<p>A timing constraint can be specified in a number of different ways, depending on the information your are trying to model.</p>
+
+<cite>Different ways of specifying a timing constraint</cite>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Timing Constraint</th>
+			<th scope="col">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>{t..t+5s}</code></td>
+			<td>The duration of the event or state should be 5 seconds or less.</td>
+		</tr>
+		<tr>
+			<td><code>{<5s}</code></td>
+			<td>The duration of the event</td>
+		</tr>
+		<tr>
+			<td><code>{&gt;5s, &lt;10s}</code></td>
+			<td>The duration of the event or state should be greater than 5 seconds, but less than 10 seconds.</td>
+		</tr>
+		<tr>
+			<td><code>{t}</code></td>
+			<td>The duration of the event or state should be equal to the value of <code>t</code>. This is a relative measure, where t could be any value of time.</td>
+		</tr>
+		<tr>
+			<td><code>{t..t*5}</code></td>
+			<td>The duration of the event or state should be the value of t multiplied 5 times. This is another relative measure (<code>t</code> could be any value of time).</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Requirement A.2's timing considerations can now be added to the timing diagram as timing constraints.</p>
+
+<cite>From when the <code>:Administrator</code> clicks on submit until the point at which the system has created a new account, no more than five seconds have passed</cite>
+![timing-constraints-in-timing-diagram.png]
+
+<p>Where you arrange participants on a timing diagram does not at first appear to be very important. However, as you add more details to your diagram in the form of events and timing information, you'll soon discover that the place where a participant is located on the timing diagram can cause problems if you haven't thought about it carefully enough.</p>
+
+<cite>The bottom diagram is harder to read, and details are beginning to obscure one another</cite>
+![obsecure-timing-diagram.png]
+
+<p>Simply take the order of the participants as they appear across the top of the page on a sequence diagram and flip the list of participant names 90 degrees counterclockwise.</p>
+
+<cite>Rotating a sequence diagram's major participant's 90 degrees counterclockwise is an easy way to get an initial placement for your timing diagram's participants</cite>
+![rotating-placement-in-timinig-diagram.png]
+
+<p>you might already be beginning to grasp how large a timing diagram can get—at least vertically—for anything more than a trivial interaction that includes a small number of states.</p>
+
+<p>The developers of UML 2.0 realized this problem and created an alternative, simpler notation for when you have an interaction that contains a large number of states</p>
+
+<cite>The top diagram's notation should be familiar to you, but the diagram at the bottom uses the new alternative timing diagram notation</cite>
+![comparison-of-timing-diagram-notations.png]
+
+<p>The notation for participants and time hasn't changed at all. The big change between the regular timing diagram notation and the alternative is in how states and state changes are shown.</p>
+
+<p>To show that a participant changes state because of an event, a cross is placed between the two states and the event that caused the state change is written next to the cross. Timing constraints can then be applied in much the same way as regular notations.</p>
+
+<p>Bringing the subject of timing diagrams to a close, next diagram shows the alternate timing diagram notation in a practical setting: modeling the <code>Create a new Regular Blog Account</code> interaction.</p>
+
+<cite>Even though there are not many states in this interaction, you can begin to see how the alternate notation is more compact and manageable in a situation where there are many states per participant</cite>
+![alternate-timing-diagram-notation.png]
+
+<p>If a participant is placed in many different states during the course of the interaction, then it is worth considering using the alternative notation. Otherwise, use the regular notation since, at this point of writing, it is more widely recognized throughout the modeling community.</p>
+
+<p>The concept of an object's state is integral to timing diagrams since they show states of an object at particular times. State machine diagrams show in detail the states of an object and triggers that cause state changes. Both diagram types are very important to models of real-time and embedded systems. State machine diagrams are covered in <a href="/software-design/uml/state-machine-diagram>state machine diagrams</a>.</p>
