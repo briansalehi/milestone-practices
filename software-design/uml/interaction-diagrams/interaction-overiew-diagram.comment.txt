@@ -1,0 +1,56 @@
+<p>Interaction overview diagrams provide a high-level view of how several interactions work together to implement a system concern, such as a use case.</p>
+
+<p><a href="/software-design/uml/interaction-diagrams/sequence-diagram">Sequence</a>, <a href="/software-design/uml/interaction-diagrams/communication-diagram">communication</a>, and <a href="/software-design/uml/interaction-diagrams/timing-diagram">timing diagrams</a> focus on specific details concerning the messages that make up an interaction, but <b>interaction overview diagrams</b> tie together the different interactions into a single complete picture of the interactions that make up a particular system concern.</p>
+
+<p>The best way to understand an interaction overview diagram notation is to think of it as an <a href="/software-design/uml/activity-diagram">activity diagram</a>, except instead of an action, a complete interaction is described by using its own diagram.</p>
+
+<cite>Individual interactions are placed on an interaction overview diagram as though they were actions on an activity diagram</cite>
+![interaction-overview-diagram-exmple.png]
+
+<p>Any number of participants may be involved in the interactions that occur within the overview. To see which participants are involved across the entire overview, a lifelines subtitle is added to the diagram title.</p>
+
+<cite>The lifelines subtitle shows the combined list of participants involved in the interactions within the overview</cite>
+![lifeline-subtitle-in-interaction-overview-diagram.png]
+
+<p>Just as control flow on an activity diagram can be subjected to decisions, parallel actions, and even loops, so can the control flow on an interaction diagram.</p>
+
+<cite>Starting with the initial node, the control flow executes Interaction1, followed by Interactions 2 and 3 in parallel; Interaction4 will execute only if the condition is assessed as being true; otherwise, Interaction5 is executed 10 times in a loop before the control flow merges and the final node is reached</cite>
+![control-flow-in-interaction-overview-diagram.png]
+
+<p>To set the stage, we are going to develop an interaction overview diagram from scratch for the <code>Create a New Regular Blog</code> use case reusing parts from the interaction diagrams created in the previous chapters.</p>
+
+<p>The big difference between the example in this chapter and the modeling in previous chapters is that with an interaction overview, we can pick and choose from the different interaction diagram types. By using an interaction overview approach, each part of the interaction is modeled using the techniques that are most effective for that part.</p>
+
+<p>First, we need to decide how the interaction overview will be broken down into the most effective diagrams for each of the individual interactions.</p>
+
+<cite>All three types of interaction diagram are used in this overview—sd indicates a sequence diagram, cd is for a communication diagram, and, not surprisingly, td stands for a timing diagram</cite>
+![three-types-of-interaction-diagram.png]
+
+<p>When modeling the <code>Select Blog Account Type</code>, <code>Create Regular Blog Account</code>, and <code>Tidy Up Author Details</code> interactions, message order is more important than any other factor.</p>
+
+<cite>Some interactions to are best modeled using sequence diagrams to focus on message ordering</cite>
+![message-ordering-in-interaction-overview-diagram.png]
+
+<p>For variety's sake, the <code>Enter Author Details</code> will be displayed as a communication diagram.</p>
+
+<cite>Enter Author Details in a communication diagram</cite>
+![enter-author-details-example.png]
+
+<p>You could decide to represent the <code>Enter Author Details</code> interaction as a communication diagram simply because it is easier to understand, but there is so much similarity between sequence and communication diagrams that mixing the two on one interaction overview is not often seen.</p>
+
+<p>The <code>Check Author Details</code> interaction must enforce the timing constraint that its messages will all be executed within five seconds. The focus is on timing for this part of the overview and thanks to the fact that an interaction overview can contain any of the different types of interaction diagram, a timing diagram can be employed for the <code>Check Author Details</code> interaction.</p>
+
+<cite>Adding a timing diagram to show critical timing constraints for one interaction within the overview</cite>
+![show-critical-timing-constraints-example.png]
+
+<p>Now that all the interactions have been added to the interaction overview, all of the participants involved are known so we can add their names to the diagram's title.</p>
+
+<cite>Adding each of the participants involved in an interaction to the lifeline list in the interaction overview's title bar</cite>
+![title-bar-example.png]
+
+<p>The final piece of the puzzle in the <code>Create a New Regular Blog Account</code> interaction overview is the actual flow of control between each of the separate interaction diagrams</p>
+
+<cite>Starting with an initial node and finishing with a final node, the flow of control is the thread that ties each of the interactions together</cite>
+![final-node-example.png]
+
+<p>The control flow in previous diagram shows that each of the separate interactions are executed in order. The one deviation from the normal path occurs at the <code>Create Regular Blog Account</code> interaction, shown as a sequence diagram, which is executed only if the author details checked out during the <code>Check Author Details</code> interaction.</p>
