@@ -10,7 +10,7 @@
 <cite>Compare this simple yet complete timing diagram for a mail server with the logic analyzer in previous diagram</cite>
 ![mail-server-timing-diagram-first-sample.png]
 
-<p>Let's assemble a timing diagram from scratch. We're going to work from the same example used in the communication and sequence diagram chapters, the <code>Create a new Regular Blog Account interaction</code>.</p>
+<p>Let's assemble a timing diagram from scratch. We're going to work from the same example used in the <a href="/software-design/uml/interaction-diagrams/communication-diagram">communication</a> and <a href="/software-design/uml/interaction-diagrs/sequence-diagram">sequence diagram</a>, the <code>Create a new Regular Blog Account interaction</code>.</p>
 
 <cite>A sequence diagram contains very little, if any, information about timing, and its main focus is the order of events within an interaction</cite>
 ![very-little-info-in-sequence-diagram.png]
@@ -19,17 +19,15 @@
 
 <h4>Requirement A.2</h4>
 
-<p>
-The content management system shall allow an administrator to create a new regular blog account, provided the personal details of the author are verified using the <code>Author Credentials Database</code>.<br/>
-Now, let's extend the original requirement with some timing considerations so that we've got something to add by modeling the interaction in a timing diagram.
-</p>
+<p>The content management system shall allow an administrator to create a new regular blog account, provided the personal details of the author are verified using the <code>Author Credentials Database</code>.</p>
+
+<p>Now, let's extend the original requirement with some timing considerations so that we've got something to add by modeling the interaction in a timing diagram.</p>
 
 <h4>Requirement A.2 (Updated)</h4>
 
-<p>
-The content management system shall allow an administrator to create a new regular blog account within five seconds of the information being entered, provided the personal details of the author are verified using the <code>Author Credentials Database</code>.<br/>
-Requirement A.2 has been modified to include a timing constraint that dictates how long it should take for the system to accept, verify, and create a new account.
-</p>
+<p>The content management system shall allow an administrator to create a new regular blog account within five seconds of the information being entered, provided the personal details of the author are verified using the <code>Author Credentials Database</code>.</p>
+
+<p>Requirement A.2 has been modified to include a timing constraint that dictates how long it should take for the system to accept, verify, and create a new account.</p>
 
 <p>First, you need to create a timing diagram that incorporates all of the participants involved in the <code>Create a new Regular Blog Account</code> interaction</p>
 
@@ -38,9 +36,9 @@ Requirement A.2 has been modified to include a timing constraint that dictates h
 <cite>The names of the main participants involved in an interaction are written vertically on the lefthand side of a timing diagram</cite>
 ![lack-of-timing-on-sequence-diagrams.png]
 
-<p>During an interaction, a participant can exist in any number of states. A participant is said to be in a particular state when it receives an event.</p>
+<p>During an interaction, a participant can exist in any number of states.</p>
 
-<p>The participant can then be said to be in that state until another event occurs.</p>
+<p>A participant is said to be in a particular state when it receives an event. The participant can then be said to be in that state until another event occurs.</p>
 
 <p>States on a timing diagram are placed next to their corresponding participant.</p>
 
@@ -74,7 +72,7 @@ Requirement A.2 has been modified to include a timing constraint that dictates h
 
 ![participants-state-line.png]
 
-<p>In this example, p1:Participant's state-line indicates that it is in <code>State1</code> for 1 unit of time, <code>State2</code> for three units of time, and <code>State3</code> for roughly five units of time (before returning to <code>State1</code> at the end of the interaction)</p>
+<p>In this example, <code>p1:Participant</code>'s state-line indicates that it is in <code>State1</code> for 1 unit of time, <code>State2</code> for three units of time, and <code>State3</code> for roughly five units of time (before returning to <code>State1</code> at the end of the interaction)</p>
 
 <p>Next figure shows how the <code>Create a new Regular Blog Account</code> timing diagram is updated to show the state of each participant at a given time during the interaction.</p>
 
