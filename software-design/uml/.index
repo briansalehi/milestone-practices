@@ -14,3 +14,6 @@ component-diagrams.txt
 object-diagrams.txt
 interaction-diagrams
 packages.txt
+state-machine-diagrams.txt
+deployment-diagrams.txt
+profiles.txt

@@ -1,0 +1,302 @@
+Brian Salehi, [12.04.21 18:12]
+Learning UML 2.0
+Kim Hamilton, Russ Miles
+
+Chapter 15. Modeling Your Deployed System: Deployment Diagrams
+
+*****
+
+The physical view is concerned with the physical elements of your system, such as executable software files and the hardware they run on.
+
+*****
+
+Figure 15-1. Deployment diagrams focus on the Physical View of your system
+
+*****
+
+Figure 15-2. Use nodes to represent hardware in your system
+--
+self titled
+
+*****
+
+This system contains a single piece of hardware—a Desktop PC. It's labeled with the stereotype <<device>> to specify that this is a hardware node.
+
+*****
+
+It's entirely up to you how much detail you want to give node names. You could be very precise with a name such as "64-bit Processor Intel Workstation," or very general with a name such as "Generic PC."
+
+*****
+
+Now, you need to model the software that runs on the hardware
+
+*****
+
+Figure 15-3 shows a simple software artifact (see "Deployed Software: Artifacts," next), which in this case is just a JAR file named 3dpacman.jar, containing a 3D-Pacman application.
+
+*****
+
+Figure 15-3. A physical software file such as a jar file is modeled with an artifact
+
+*****
+
+Finally, you need to put these two pieces together to complete the deployment diagram of your system. Draw the artifact inside the node to show that a software artifact is deployed to a hardware node. Figure 15-4 shows that 3dpacman.jar runs on a Desktop PC.
+
+*****
+
+Figure 15-4. Drawing an artifact inside a node shows that the artifact is deployed to the node
+
+*****
+
+Your deployment diagrams should contain details about your system that are important to your audience. If it is important to show the hardware, firmware, operating system, runtime environments, or even device drivers of your system, then you should include these in your deployment diagram.
+
+*****
+
+An artifact is shown as a rectangle with the stereotype <<artifact>>, or the document icon in the upper right hand corner, or both
+
+*****
+
+Figure 15-5. Equivalent representations of a 3dpacman.jar artifact
+
+*****
+
+An artifact is deployed to a node, which means that the artifact resides on (or is installed on) the node.
+
+*****
+
+Figure 15-6. The 3dpacman.jar artifact deployed to a Desktop PC node
+
+*****
+
+You can also draw a dependency arrow from the artifact to the target node with the stereotype <<deploy>>
+
+*****
+
+Figure 15-7. An alternate way to model the relationship deployment
+
+*****
+
+When you're pressed for space, you might want to represent the deployment by simply listing the artifact's name inside the target node
+
+*****
+
+Figure 15-8. A compact way to show deployment is to write the name of the artifact inside the node
+
+*****
+
+Listing the artifacts (without the artifact symbol) can really save space if you have a lot of artifacts
+--
+figure 15.9
+
+*****
+
+But be careful; by listing your artifacts, you cannot show dependencies between artifacts. If you want to show that an artifact uses another artifact, you have to draw the artifact symbols and a dependency arrow connecting the artifacts
+--
+figure 15.10
+
+*****
+
+When designing software, you break it up into cohesive groups of functionality, such as components or packages, which eventually get compiled into one or more files—or artifacts. In UML-speak, if an artifact is the physical actualization of a component, then the artifact manifests that component. An artifact can manifest not just components but any packageable element, such as packages and classes.
+
+*****
+
+Figure 15-9. Listing artifact names inside a node saves a lot of space compared to drawing an artifact symbol for each artifact
+
+*****
+
+Figure 15-10. A deployment notation that uses artifact symbols (instead of listing artifact names) allows you to show artifact dependencies
+
+*****
+
+The manifest relationship is shown with a dependency arrow from the artifact to the component with the stereotype <<manifest>>
+
+*****
+
+Figure 15-11. The artifact mycomponent.jar manifests the component MyComponent
+
+*****
+
+Since artifacts can then be assigned to nodes, the manifest relationship provides the missing link in modeling how your software com
+
+Brian Salehi, [12.04.21 18:12]
+ponents are mapped to hardware. However, linking a component to an artifact to a node can result in a cluttered diagram, so it's common to show the manifest relationships separate from the deployment relationships, even if they're on the same deployment diagram.
+
+*****
+
+You've already seen that you can use nodes to show hardware in your deployment diagram, but nodes don't have to be hardware. Certain types of software—software that provides an environment within which other software components can be executed—are nodes as well.
+A node is a hardware or software resource that can host software or related files. You can think of a software node as an application context; generally not part of the software you developed, but a third-party environment that provides services to your software.
+
+*****
+
+Software items such as library files, property files, and executable files that cannot host software are not nodes—they are artifacts
+
+*****
+
+A node is drawn as a cube with its type written inside
+--
+figure 15.12
+
+*****
+
+The stereotype <<device>> emphasizes that it's a hardware node.
+
+*****
+
+Figure 15-13 shows an Application Server node. Those familiar with enterprise software development will recognize this as a type of execution environment since it's a software environment that provides services to your application. The stereotype <<executionEnvironment>> emphasizes that this node is an execution environment.
+--
+figure 15.13
+
+*****
+
+Figure 15-12. A Sun Blade Server hardware node marked with the stereotype <<device>>
+
+*****
+
+Figure 15-13. An Application Server node marked with the stereotype <<executionEnvironment>>
+
+*****
+
+Execution environments do not exist on their own—they run on hardware. For example, an operating system needs computer hardware to run on. You show that an execution environment resides on a particular device by placing the nodes inside one another, nesting them
+
+*****
+
+Figure 15-14. An Application Server node is shown nested in a Sun Server node, meaning that the Application Server runs on Sun Server hardware.
+
+*****
+
+It's not strictly necessary in UML 2.0 to distinguish device nodes from execution environment nodes, but it's a good habit to get into because it can clarify your model.
+
+*****
+
+You can show an instance of a node by using the name : type notation
+
+*****
+
+Figure 15-15. Showing the name and type of a node; an instance of a Sun Blade Server named svr1
+
+*****
+
+Figure 15-16 shows how two nodes of the same type can be modeled.
+
+*****
+
+Figure 15-16. One node gets read traffic and the other gets write traffic
+
+*****
+
+To get its job done, a node may need to communicate with other nodes. For example, a client application running on a desktop PC may retrieve data from a server using TCP/IP.
+
+*****
+
+Communication paths are used to show that nodes communicate with each other at runtime. A communication path is drawn as a solid line connecting two nodes. The type of communication is shown by adding a stereotype to the path.
+
+*****
+
+Figure 15-17. A Desktop PC and Server communicate via TCP/IP
+
+*****
+
+You can also show communication paths between execution environment nodes. For example, you could model a web server communicating with an EJB container through RMI, as shown in Figure 15-18. This is more precise than showing an RMI communication path at the device node level because the execution environment nodes "speak" RMI. However, some modelers draw the communication paths at the outermost node level because it can make the diagram less cluttered.
+
+*****
+
+Figure 15-18. You can also show communication paths between execution environment nodes
+
+*****
+
+Assigning a stereotype to a communication path can sometimes be tricky. RMI is layered using a TCP/IP transport layer. So, should you assign an <<RMI>> or a <<TCP/IP>> stereotype? As a rule of thumb, your communication stereotype should be as high-level as possible because it communicates more about your system. In this case, <<RMI>> is the right choice; it is higher level, and it tells the reader that you're using a Java implementation. However, as with all UML
+
+Brian Salehi, [12.04.21 18:12]
+modeling, you should tailor the diagram to your audience.
+
+*****
+
+Installing software is rarely as easy as dropping a file on a machine; often you have to specify configuration parameters before your software can execute. A deployment specification is a special artifact specifying how another artifact is deployed to a node. It provides information that allows another artifact to run successfully in its environment.
+
+*****
+
+Deployment specifications are drawn as a rectangle with the stereotype <<deployment spec>>.
+
+*****
+
+There are two ways to tie a deployment specification to the deployment it describes:
+
+*****
+
+Draw a dependency arrow from the deployment specification to the artifact, nesting both of these in the target node.
+--
+1
+
+*****
+
+Attach the deployment specification to the deployment arrow, as shown in Figure 15-19.
+--
+2
+
+*****
+
+The deploy.wsdd file, shown in Figure 15-19, is the standard deployment descriptor file that specifies how a web service is deployed to the Axis web service engine. This file states which class executes the web service and which methods on the class can be called.
+--
+figure 15.19
+
+*****
+
+You can list these properties in the deployment specification using the name : type notation.
+
+*****
+
+15-20 shows the deploy.wsdd deployment specification with the properties className and allowedMethods.
+
+*****
+
+Figure 15-19. Equivalent ways of tying a deployment specification to the deployment it describes
+
+*****
+
+Figure 15-20. Showing the properties of a deployment specification: the notation on the right shows an instance populated with values
+
+*****
+
+Deployment diagrams are useful at all stages of the design process. When you begin designing a system, you probably know only basic information about the physical layout. For example, if you're building a web application, you may not have decided which hardware to use and probably don't know what your software artifacts are called. But you want to communicate important characteristics of your system, such as the following:
+
+*****
+
+Your architecture includes a web server, application server, and database.
+--
+1
+
+*****
+
+Clients can access your application through a browser or through a richer GUI interface.
+--
+2
+
+*****
+
+The web server is protected with a firewall.
+--
+3
+
+*****
+
+Even at this early stage you can use deployment diagrams to model these characteristics. Figure 15-21 shows a rough sketch of your system. The node names don't have to be precise, and you don't have to specify the communication protocols.
+
+*****
+
+Figure 15-21. A rough sketch of your web application
+
+*****
+
+Deployment diagrams are also useful in later stages of software development. Figure 15-22 shows a detailed deployment diagram specifying a J2EE implementation of the system.
+
+*****
+
+Figure 15-22 is more specific about the hardware types, the communication protocols, and the allocation of software artifacts to nodes.
+
+*****
+
+Figure 15-22. You can provide any amount of detail about the physical design of your system
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
