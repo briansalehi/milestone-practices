@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Interaction Overview Diagram</title>
+<title>Profiles</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/3.4.12.0.html">Interaction Diagrams</a></li>
-<li class='breadcrumb-item active'>Interaction Overview Diagram</li>
+<li class='breadcrumb-item active'>Profiles</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -279,70 +278,14 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Interaction-Overview-Diagram" class="anchor" aria-hidden="true" href="#Interaction-Overview-Diagram">
-Interaction Overview Diagram
+<a id="Profiles" class="anchor" aria-hidden="true" href="#Profiles">
+Profiles
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>Interaction overview diagrams provide a high-level view of how several interactions work together to implement a system concern, such as a use case.</p>
-
-<p><a href="/software-design/uml/interaction-diagrams/sequence-diagram">Sequence</a>, <a href="/software-design/uml/interaction-diagrams/communication-diagram">communication</a>, and <a href="/software-design/uml/interaction-diagrams/timing-diagram">timing diagrams</a> focus on specific details concerning the messages that make up an interaction, but <b>interaction overview diagrams</b> tie together the different interactions into a single complete picture of the interactions that make up a particular system concern.</p>
-
-<p>The best way to understand an interaction overview diagram notation is to think of it as an <a href="/software-design/uml/activity-diagram">activity diagram</a>, except instead of an action, a complete interaction is described by using its own diagram.</p>
-
-<cite>Individual interactions are placed on an interaction overview diagram as though they were actions on an activity diagram</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/interaction-overview-diagram-exmple.png" alt="interaction overview diagram exmple" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/interaction-overview-diagram-exmple.png"'>
-
-<p>Any number of participants may be involved in the interactions that occur within the overview. To see which participants are involved across the entire overview, a lifelines subtitle is added to the diagram title.</p>
-
-<cite>The lifelines subtitle shows the combined list of participants involved in the interactions within the overview</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/lifeline-subtitle-in-interaction-overview-diagram.png" alt="lifeline subtitle in interaction overview diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/lifeline-subtitle-in-interaction-overview-diagram.png"'>
-
-<p>Just as control flow on an activity diagram can be subjected to decisions, parallel actions, and even loops, so can the control flow on an interaction diagram.</p>
-
-<cite>Starting with the initial node, the control flow executes Interaction1, followed by Interactions 2 and 3 in parallel; Interaction4 will execute only if the condition is assessed as being true; otherwise, Interaction5 is executed 10 times in a loop before the control flow merges and the final node is reached</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/control-flow-in-interaction-overview-diagram.png" alt="control flow in interaction overview diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/control-flow-in-interaction-overview-diagram.png"'>
-
-<p>To set the stage, we are going to develop an interaction overview diagram from scratch for the <code>Create a New Regular Blog</code> use case reusing parts from the interaction diagrams created in the previous chapters.</p>
-
-<p>The big difference between the example in this chapter and the modeling in previous chapters is that with an interaction overview, we can pick and choose from the different interaction diagram types. By using an interaction overview approach, each part of the interaction is modeled using the techniques that are most effective for that part.</p>
-
-<p>First, we need to decide how the interaction overview will be broken down into the most effective diagrams for each of the individual interactions.</p>
-
-<cite>All three types of interaction diagram are used in this overview—sd indicates a sequence diagram, cd is for a communication diagram, and, not surprisingly, td stands for a timing diagram</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/three-types-of-interaction-diagram.png" alt="three types of interaction diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/three-types-of-interaction-diagram.png"'>
-
-<p>When modeling the <code>Select Blog Account Type</code>, <code>Create Regular Blog Account</code>, and <code>Tidy Up Author Details</code> interactions, message order is more important than any other factor.</p>
-
-<cite>Some interactions to are best modeled using sequence diagrams to focus on message ordering</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/message-ordering-in-interaction-overview-diagram.png" alt="message ordering in interaction overview diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/message-ordering-in-interaction-overview-diagram.png"'>
-
-<p>For variety's sake, the <code>Enter Author Details</code> will be displayed as a communication diagram.</p>
-
-<cite>Enter Author Details in a communication diagram</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/enter-author-details-example.png" alt="enter author details example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/enter-author-details-example.png"'>
-
-<p>You could decide to represent the <code>Enter Author Details</code> interaction as a communication diagram simply because it is easier to understand, but there is so much similarity between sequence and communication diagrams that mixing the two on one interaction overview is not often seen.</p>
-
-<p>The <code>Check Author Details</code> interaction must enforce the timing constraint that its messages will all be executed within five seconds. The focus is on timing for this part of the overview and thanks to the fact that an interaction overview can contain any of the different types of interaction diagram, a timing diagram can be employed for the <code>Check Author Details</code> interaction.</p>
-
-<cite>Adding a timing diagram to show critical timing constraints for one interaction within the overview</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/show-critical-timing-constraints-example.png" alt="show critical timing constraints example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/show-critical-timing-constraints-example.png"'>
-
-<p>Now that all the interactions have been added to the interaction overview, all of the participants involved are known so we can add their names to the diagram's title.</p>
-
-<cite>Adding each of the participants involved in an interaction to the lifeline list in the interaction overview's title bar</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/title-bar-example.png" alt="title bar example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/title-bar-example.png"'>
-
-<p>The final piece of the puzzle in the <code>Create a New Regular Blog Account</code> interaction overview is the actual flow of control between each of the separate interaction diagrams</p>
-
-<cite>Starting with an initial node and finishing with a final node, the flow of control is the thread that ties each of the interactions together</cite>
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/final-node-example.png" alt="final node example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/final-node-example.png"'>
-
-<p>The control flow in previous diagram shows that each of the separate interactions are executed in order. The one deviation from the normal path occurs at the <code>Create Regular Blog Account</code> interaction, shown as a sequence diagram, which is executed only if the author details checked out during the <code>Check Author Details</code> interaction.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -354,10 +297,10 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 10</span></li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> Appendix B</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams/timing-diagram">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/deployment-diagrams">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
 </ul>
 <script>
@@ -587,6 +530,7 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {
