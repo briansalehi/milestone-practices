@@ -1,0 +1,178 @@
+<p>In UML, groups of classes are modeled with packages.</p>
+
+<p>Package diagrams are often used to view dependencies among packages. Since a package can break if another package on which it depends changes, understanding dependencies between packages is vital to the stability of your software.</p>
+
+<p>Packages can organize almost any UML element—not just classes. For example, packages are also commonly used to group use cases. Package diagrams form part of the development view, which is concerned with how your system's parts are organized into modules and packages</p>
+
+<cite>The Development View describes how your system's parts are organized into modules, which are represented as packages in UML</cite>
+![development-view-diagram.png]
+
+<p>Packages are grouping structures that are used to organize almost any UML element, but their most common use is to organize classes in class diagrams.</p>
+
+<p>Suppose that during the design of a CMS, you decide to keep classes related to security (for example, performing user authentication) grouped together.</p>
+
+<p>The symbol for a package is a folder with a tab. The name of the package is written inside the folder.</p>
+
+<cite>Packages in a CMS; each package corresponds to a specific system concern</cite>
+![packages-in-cms.png]
+
+<p>Packages organize UML elements, such as classes, and the contents of a package can be drawn inside the package or outside the package attached by a line.</p>
+
+<cite>Two ways to show that the Credentials and IdentityVerifier classes are contained in the security package</cite>
+![two-ways-to-show-components-in-packakge.png]
+
+<p>If you draw the elements inside the package, write the name of the package in the folder tab.</p>
+
+<p>Example below shows a Java code sample corresponding to the Credentials class in previous figure.</p>
+
+<cite>The Credentials class is located in the security package in this Java implementation</cite>
+<pre class="language-java line-numbers">
+	<code>
+		package security;
+		 
+		public class Credentials {
+			...
+		}
+	</code>
+</pre>
+
+<p>Packages can also contain other packages.</p>
+
+<cite>A package that contains another package</cite>
+![nested-packages.png]
+
+<p>It's common to see deeply nested packages in enterprise applications. Java applications typically use the URL-in-reverse package naming convention (omitting the www part of the URL). For example, the ACME company with the URL <a href="https://acme.com">http://www.acme.com</a> would put all its packages under the acme package, which is under com.</p>
+
+<cite>Deeply nested packages are common in enterprise applications: the search and indexing packages are shown in a typical package structure for the ACME company</cite>
+![deeply-nested-packages.png]
+
+<p>Even at this point, these packages consume a lot of space, and if you want to show classes inside the indexing package, each package containing it would have to expand in size accordingly. Luckily, there's an alternate notation that can be easier to work with. You can "flatten" nested packages to write them as <code>packageA::packageB::packageC</code>, and so on.</p>
+
+<cite>Flattening nested packages</cite>
+![flatten-nested-packages.png]
+
+<p>Currently, a small amount of UML tools don't support the notations shown in two previous diagram. However, almost all tools can show that a class belongs to a package using one of the notations shown in next figure. The notation to the far right is the standard UML namespace notation, discussed next in "Namespaces and Classes Referring to Each Other."</p>
+
+<cite>Common ways UML tools show that a class belongs to a package</cite>
+![tool-belongs-to-a-package.png]
+
+<p>Breaking up your classes into packages introduces some bookkeeping. If you're a Java programmer, you may have encountered a related issue before. To use an <code>ArrayList</code> in a Java program, you have to specify that <code>ArrayList</code> is located in the <code>java.util</code> package. That is because Java packages define their own namespaces, or naming contexts. If an item is not in the current namespace, you have to specify where it is located.</p>
+
+<p>Similarly, a UML package establishes a namespace. So, if an element in a package wants to use an element in a different package, it has to specify where the desired element is. To specify the context of a UML element, you provide the fully-scoped name, which includes the package name and the element name separated by double colons, as in <code>packageName::className</code>.</p>
+
+<p>As discussed previously in "UML Tool Variation," your UML tool may display the classes in below figure differently.</p>
+
+<cite>Representing a class with its fully-scoped name: both the security and utils packages have a class named Credentials</cite>
+![fully-scoped-class.png]
+
+<p>Classes in the same package are part of the same namespace, so they can refer to each other without using fully-scoped names. Since they are in the same package, IdentityVerifier can have an attribute of type Credentials and not have to specify the package.</p>
+
+<cite>Classes in different packages have to provide name scope</cite>
+![packages-in-different-name-scopes.png]
+
+<p>On the other hand, a class outside the security package, such as User, would have to provide a scope when accessing <code>Credentials</code>, which it can do by using the fully-scoped <code>name—security::Credentials</code>.</p>
+
+<p>In UML, elements in a nested package can refer to elements in the containing package without scoping the name, which in below figure means that an element in indexing could refer to an element in search without using the fully-scoped name.</p>
+
+<cite>In UML, a nested package implies namespace "inheritance," which doesn't apply in some implementation languages</cite>
+![namespace-inheritance.png]
+
+<p>Elements in a package may have public or private visibility. Elements with public visibility are accessible outside the package. Elements with private visibility are available only to other elements inside the package. You can model public or private visibility in UML by writing a plus or minus symbol in front of the element's name.</p>
+
+<cite>Since MD5Crypt has private visibility, it isn't accessible outside the security package</cite>
+![package-private-visibility.png]
+
+<p>If an element in package A uses an element in package B, then package A depends on package B.</p>
+
+<cite>Package A depends on package B</cite>
+![package-a-depends-on-package-b.png]
+
+<p>Understanding the dependencies among your packages is useful for analyzing the stability of your software, as discussed in "Managing Package Dependencies." In fact, the most common use of UML package diagrams is to give an overview of the core packages in your software and the dependencies among them.</p>
+
+<cite>A typical package diagram featuring core packages and dependencies</cite>
+![featuring-core-packages.png]
+
+<p>When a package imports another package, elements in the importing package can use elements in the imported package without having to use their fully scoped names. This feature is similar to a Java import, in which a class can import a package and use its contents without having to provide their package names.</p>
+
+<p>To show the import relation, draw a dependency arrow from the importing package to the target package with the stereotype import.</p>
+
+<cite>The package users imports security, so classes in users may use public classes in security without having to specify the package name</cite>
+![public-packages.png]
+
+<p>A package can also import a specific element in another package instead of the whole package.</p>
+
+<cite>The users package imports only the Credentials element from the security package</cite>
+![package-importing-element.png]
+
+<p>When importing a package, only public elements of the target package are available in the importing namespace. For example, in below figure, elements in users can see Credentials and IdentityVerifier but not MD5Crypt.</p>
+
+<cite>Private visibility causes a class not to be seen even though its package is imported</cite>
+![private-visibility-not-seen.png]
+
+<p>Not only do elements have visibility—the import relation itself has visibility. An import can be a public import or private import with public as the default. A public import means imported elements have public visibility inside the importing namespace; a private import means imported elements have private visibility inside the importing namespace. You show a private import with the stereotype access instead of import.</p>
+
+<p>The difference between import and access arises when a package imports a package that imports or accesses others. Imported elements have public visibility in the importing package, so they get passed on with further imports, whereas accessed elements do not.</p>
+
+<p>In below figure, package B imports C and accesses D, so B can see public elements in C and D. A imports B, so A can see public elements in B. A can also see public elements in C because C is publicly imported into B, but A cannot see anything in D because D is privately imported into B.</p>
+
+<cite>Package A can see public elements in C but not D</cite>
+![public-visibility-in-packages.png]
+
+<p>Import and access relationships can be used to model the programming world concepts of importing of classes into another namespace so that elements in the importing namespace may refer to elements in the target namespace without scoping the name. For example, the package relationships in above figure could be used to model the Java code example in below example.</p>
+
+<cite>Because the User class imports the security package, it can refer to the Credentials class without using the fully qualified name security</cite>
+
+<pre class="language-java line-numbers">
+	<code>
+		package users;
+		 
+		// importing all public elements in the security package
+		import security.*;
+		 
+		class User {
+			Credentials credentials;
+			...
+		}
+	</code>
+</pre>
+
+<p>The element import in previous figures corresponds to the Java implementation shown in below example.</p>
+
+<cite>Only the Credentials class is imported from the security package</cite>
+
+<pre class="language-java line-numbers">
+	<code>
+		package users;
+		 
+		// importing only the Credentials class
+		import security.Credentials;
+		 
+		class User {
+			Credentials credentials;
+		 
+			...
+		}
+	</code>
+</pre>
+
+<p>Having complicated dependencies among packages can lead to brittle software since changes in one package can cause its dependent packages to break. Next figure shows a dependency disaster: a change in any one package could ultimately affect every other package.</p>
+
+<cite>Directly or indirectly, a change in any one package could affect every other package</cite>
+![directly-or-indirectly-changes-in-packages.png]
+
+<p>If you have cycles in your dependencies, you can break the cycles in different ways. You could factor out a new package that both packages can depend on or you could decide that all the classes really belong together anyway.</p>
+
+<cite>Removing cycles in package dependencies</cite>
+![removing-cycles-in-package-dependencies.png]
+
+<p>Depending in the order of stability means that a package should depend only on packages more stable than itself. An unstable package depends on many other packages; a stable package depends on few packages.</p>
+
+<p>Just as packages group classes of similar functionality, packages also group other UML elements such as use cases.</p>
+
+<cite>Packaging major use case groups within a CMS</cite>
+![major-use-case-in-cms.png]
+
+<p>Rolling up use cases into higher levels of your system can help organize your model, allowing you to see which actors interact with which portions of the system.</p>
+
+<cite>Packages enable a higher level view of how actors interact with the system</cite>
+![higher-level-view-of-packages.png]

@@ -1,0 +1,160 @@
+<p>Composite structures show how objects create a big picture. They model how objects work together inside a class, or how objects achieve a goal.</p>
+
+<p>They are perfectly suited for specific modeling situations, such as showing:</p>
+
+<ul>
+	<li><b>Internal structures</b> <p>Show the parts contained by a class and the relationships between the parts; this allows you to show context-sensitive relationships, or relationships that hold in the context of a containing class</p></li>
+	<li><b>Ports</b> <p>Show how a class is used on your system with ports</p></li>
+	<li><b>Collaborations</b> <p>Show design patterns in your software and, more generally, objects cooperating to achieve a goal</p></li>
+</ul>
+
+<p>Composite structures provide a view of your system's parts and form part of the logical view of your system's model.</p>
+
+<cite>The logical view captures the abstract descriptions of a system's parts, including composite structures</cite>
+![logical-view-diagram.png]
+
+<p>Possession-related relationships between classes was introduced in <a href="/software-design/uml/class-relationships">class relationships</a>, including association "<b>has a</b>" and composition "<b>contains a</b>". Composite structures offer an alternate way of showing these relationships.</p>
+
+<p>Following diagram repeats a class diagram from <a href="/software-design/uml/class-relationships">class relationships</a>, showing that <code>BlogEntry</code> contains objects of type <code>Introduction</code> and <code>MainBody</code> through composition.</p>
+
+<cite>Class diagram showing that BlogEntry contains Introduction and MainBody</cite>
+![blog-entry-contains-introduction-and-mainbody.png]
+
+<p>Suppose you want to update your diagrams to reflect that a blog entry's introduction has a reference to its main body.</p>
+
+<p>As a first pass, you modify the class diagram in previous diagram by drawing an association between the <code>Introduction</code> and the <code>MainBody</code> classes.</p>
+
+<cite>This first pass at showing that a blog entry's introduction introduces its main body doesn't quite work</cite>
+![the-diagram-that-doesnt-quite-work.png]
+
+<p>But there's a problem. Previous figure specifies that an object of type <code>Introduction</code> will have a reference to an object of type <code>MainBody</code>, but it can be any <code>MainBody</code> object—not just the one owned by the same instance of <code>BlogEntry</code>.</p></code>
+
+<p>Because last diagram doesn't specify which <code>Introduction</code> and <code>MainBody</code> objects should be associated, the object diagram in next figure conforms to the class diagram in previous figure.</p>
+
+<cite>Unintended but valid object structure</cite>
+![unintended-but-valid-object-structure.png]
+
+<p>But what you meant to say is that the introduction introduces the main body that is contained by the same class that contains the introduction.</p>
+
+<cite>This was the intended object structure</cite>
+![intended-object-structure.png]
+
+<p>It turns out that class diagrams are not good at expressing how items contained in a class relate to each other. This is where internal structure comes in.</p>
+
+<p>When showing the internal structure of a class, you draw its parts, or items contained by composition, inside the containing class.</p>
+
+<cite>The internal structure of the BlogEntry class</cite>
+![internal-structure-of-blogentry-class.png]
+
+<p>Parts are specified by the role they play in the containing class, written as <code>&lt;roleName&gt; : &lt;type&gt;</code>.</p>
+
+<p>The part of type <code>Introduction</code> has the role <code>blogIntro</code> and the part of type <code>MainBody</code> has the role <code>blogMain</code>.</p>
+
+<p>The multiplicity, or number of instances of that part, is written in the upper righthand corner of the part.</p>
+
+<p>Next figure shows the internal structure diagram side by side with the class diagram from first diagram above, allowing you to see how the class names, roles, and multiplicities correspond.</p>
+
+<cite>How the internal structure of BlogEntry matches up to the class diagram</cite>
+![blogentry-class-matches-class-diagram.png]
+
+<p>A part is a set of instances that may exist in an instance of the containing class at runtime.</p>
+
+<cite>In the internal structure of BlogEntry, the part with role pic has a</cite>
+![internal-structure-of-blogentry-with-multiplicity.png]
+
+<p>The part with role pic has multiplicity of zero to three in the internal structure of <code>BlogEntry</code>.</p>
+
+<p>In this case, if you run across an instance of <code>BlogEntry</code> at runtime, it will have anywhere from zero to three instances of type <code>Image</code>. It may contain one <code>Image</code> object, it may contain three <code>Image</code> objects, and so on, but with parts, you don't have to worry about such details. A part is a general way to describe these contained objects by the role they play, without specifying exactly which objects are present.</p>
+
+<p>You show relationships between parts by drawing a connector between the parts with the multiplicities specified at each end of the connector.</p>
+
+<cite>Using connectors to link parts in the internal structure of a class</cite>
+![using-connectors-to-link-parts-in-class.png]
+
+<p>The notation for multiplicities on connectors is the same as multiplicities on associations, discussed in <a href="/software-design/uml/class-diagrams">class diagrams</a>.</p>
+
+<p>You can also show multiplicity in brackets after the name and type.</p>
+
+<cite>Equivalent notations for multiplicity</cite>
+![equivalent-notation-for-multiplicity.png]
+
+<p>In addition to showing parts, which are contained by composition, you can also show properties, which are referenced through association and therefore may be shared with other classes in the system.</p>
+
+<p>Properties are drawn with a dashed outline, unlike parts, which are drawn with a solid outline.</p>
+
+<p>Next figure shows a class diagram in which Frame has an association with File, and then shows what File looks like as a property in the internal structure of Frame.</p>
+
+<cite>Parts and properties in the internal structure of a class</cite>
+![parts-and-properties.png]
+
+<p>Previous figure models a merge tool GUI that displays the two files to compare in one panel and the merged file in another panel.</p>
+
+<p>The notation for properties and parts is identical except for the dashed versus solid rectangle outlines.</p>
+
+<p>As with parts, properties can be connected to other properties or parts using connectors.</p>
+
+<p>Showing a class's internal structure is especially useful when its contained items relate to each other in unusual ways. Revisiting the merge tool example in previous figure, suppose you want to explicitly model one panel displaying the two files being compared and the other panel displaying the merged file. You can do this by defining more detailed roles for files and panels to show how they relate to each other within a frame.</p>
+
+<cite>A more detailed internal structure diagram that specifies how files and panels relate to each other within a frame</cite>
+![relation-of-parts-and-panels.png]
+
+<p>Previous figure demonstrates that there can be parts (or properties) of the same type playing different roles.</p>
+
+<p>If you're showing an instance of a class with internal structure, then you also show its parts and properties as instances. Specify instances of the parts and properties by writing the name followed by a slash, then the usual role and type, e.g., <code>{&lt;name&gt;} / &lt;role&gt; : &lt;type&gt;</code>. Since these are instances, however, they are now underlined.</p>
+
+<cite>An instance of Frame with instances of its contained parts</cite>
+![instances-of-frame-with-parts.png]
+
+<p>The internal structure of a class focuses on the contents of a class; ports focus on the outside of a class, showing how a class is used by other classes.</p>
+
+<p>A port is a point of interaction between a class and the outside world.</p>
+
+<p>Each distinct use of a class is represented with a port, drawn as a small rectangle on the boundary of the class.</p>
+
+<cite>A class with two ports showing that the class provides UserServices and Maintenance capabilities.</cite>
+![wiki-provides-user-services-and-maintenance.png]
+
+<p>Write a name next to the port to show the purpose of the port.</p>
+
+<p>Recall from <a href="/software-design/uml/class-relationships">class relationships</a> that a class can realize an interface, and this relationship can be shown using the ball interface symbol.</p>
+
+<p>When a class realizes an interface, the interface is called a provided interface of the class. A provided interface can be used by other classes to access the class through the interface.</p>
+
+<p>Similarly, classes can have required interfaces. A required interface is an interface that the class requires to function. More precisely, the class needs another class or component that realizes that interface so it can do its job. A required interface is shown with an open lollipop, or the socket symbol.</p>
+
+<p>Provided and required interfaces are used to promote loose coupling of classes and components. They are particularly important to components and so are discussed in more detail in <a href="/software-design/uml/component-diagrams">component diagrams</a>.</p>
+
+<p>Suppose the <code>Wiki</code> class above implements the interfaces <code>Updateable</code> and <code>Viewable</code>, allowing other classes to update and view the <code>Wiki</code> through these interfaces. These interfaces are associated with the <code>User Services</code> port, so you can draw them extending out from the <code>User Services</code> port.</p>
+
+<cite>Ports can be used to group "like" interfaces</cite>
+![ports-diagram.png]
+
+<p>Previous figure shows that the Maintenance port has a provided interface called Rollback, allowing administrators to roll back the <code>Wiki</code>. It additionally has a required interface called <code>VersionControl</code>, which is a service the <code>Wiki</code> uses for version control.</p>
+
+<p>Collaborations are a good way to document design patterns , which are solutions to common problems in software design.</p>
+
+<p>Let's consider a problem in the CMS design that can be solved with a design pattern, which we'll then model using collaborations. Suppose the CMS requires a content approval process: the author submits content, the reviewer may reject the content or pass it on to the editor, and the editor may reject or accept the content. You decide to implement this flow with the Chain of Responsibility (COR) design pattern. The COR design pattern allows an object to send a request without worrying about which object will ultimately handle the request. In the COR pattern, the client submits the request, and each handler in the chain decides whether to handle the request or to pass the request on to the next handler. In the content approval process, the author will play the role of client, while the reviewer and editor will each play the role of handler.</p>
+
+<cite>Sequence diagram showing how the COR pattern is used in the content approval process</cite>
+![cor-pattern-in-sequence-diagram.png]
+
+<p>There are two ways to model this pattern using collaborations. The first way uses a large dashed-lined oval with the collaboration participants drawn inside the oval. You name a participant by the role it plays in the collaboration and its class or interface type, written as <code>&lt;role&gt; : &lt;type&gt;</code>. The participants are linked together using connectors to show how they communicate. The name of the collaboration is written inside the oval above a dashed line.</p>
+
+<cite>Collaboration showing the COR pattern in the content approval process</cite>
+![cor-pattern-in-content-approval-process.png]
+
+<p>You can think of participants in a collaboration as placeholders for objects because at runtime, objects will fill those places (or play the roles).</p>
+
+<p>Connectors are temporary links; connectors mean that the runtime objects communicate during the collaboration, but the objects don't have to communicate outside the collaboration.</p>
+
+<p>The second way to draw a collaboration is shown in next figure. In this notation, you show the class (or interface) rectangles of the participants, connecting each to a small collaboration oval. Write the participants' roles along the lines. This notation is useful for showing details of the class or interface, such as its operations.</p>
+
+<cite>Alternate representation of the COR design pattern</cite>
+![alternate-representation-of-the-cor-design-pattern.png]
+
+<p>Because collaborations are only temporary relationships, they have some interesting runtime properties that are best described with an everyday example of a collaboration. Suppose a company has monthly training sessions in which the topic changes every session, and in every session the resident expert on the topic performs the training. This is modeled as a Training collaboration that has participants with roles trainer and trainee.</p>
+
+<cite>This Training collaboration shows that the objects participating in a collaboration at runtime can interact with different</cite>
+![objects-participating-at-runtime.png]
+
+<p>The concepts of ports and internal structure of a class, which are introduced in composite structures, are heavily reused for components in component diagrams. Component diagrams allow you to show the key components (or reusable parts) in your system. Components are typically major players in your architecture, using other classes to achieve their behavior, which is why internal structure is so important to components. Ports are often used to show the primary ways to use a component. Component diagrams are covered in <a href="/software-design/uml/component-diagrams">next page</a>.</p>

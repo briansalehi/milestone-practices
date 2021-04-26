@@ -1,0 +1,153 @@
+<p>When designing a software system, it's rare to jump directly from requirements to defining the classes in your system. With all but the most trivial systems, it's helpful to plan out the high-level pieces of your system to establish the architecture and manage complexity and dependencies among the parts. Components are used to organize a system into manageable, reusable, and swappable pieces of software.</p>
+
+<p>UML component diagrams model the components in your system and as such form part of the development view.</p>
+
+<cite>The Development View of your model describes how your system's parts are organized into modules and components</cite>
+![development-view-diagram.png]
+
+<p>A component is an encapsulated, reusable, and replaceable part of your software.</p>
+
+<p>As with <a href="/software-design/uml/composite-structures">composite structures</a>, they can have ports and show internal structure.</p>
+
+<p>A component is drawn as a rectangle with the <code>&lt;&lt;component&gt;&gt;</code> stereotype and an optional tabbed rectangle icon in the upper righthand corner.</p>
+
+<cite>The basic component symbol showing a ConversionManagement component</cite>
+![component-symbol.png]
+
+<p>You can show that a component is actually a subsystem of a very large system by replacing <code>&lt;&lt;component&gt;&gt;</code> with <code>&lt;&lt;subsystem&gt;&gt;</code>.</p>
+
+<cite>You can substitute the &lt;&lt;subsystem&gt;&gt; stereotype to show the largest pieces of your system</cite>
+![largest-pieces-of-system.png]
+
+<p>Components need to be loosely coupled so that they can be changed without forcing changes on other parts of the system—this is where interfaces come in.</p>
+
+<p>Components interact with each other through provided and required interfaces to control dependencies between components and to make components swappable.</p>
+
+<p>A provided interface of a component is an interface that the component realizes. Other components and classes interact with a component through its provided interfaces</p>
+
+<p>A required interface of a component is an interface that the component needs to function. More precisely, the component needs another class or component that realizes that interface to function.</p>
+
+<p>There are three standard ways to show provided and required interfaces in UML: ball and socket symbols, stereotype notation, and text listings.</p>
+
+<p>You can show a provided interface of a component using the ball symbol introduced in <a href="/software-design/uml/class-relationships">class relationships</a>. A required interface is shown using the counterpart of the ball—the socket symbol—drawn as a semicircle extending from a line. Write the name of the interface near the symbols.</p>
+
+<cite>The ball and socket notation for showing a component's provided and required interfaces</cite>
+![the-ball-and-socket-notation.png]
+
+<p>The ball and socket notation is the most common way to show a component's interfaces, compared with the following techniques.</p>
+
+<p>You can also show a component's required and provided interfaces by drawing the interfaces with the stereotyped class notation introduced in <a href="/software-design/uml/class-relationships">class relationships</a>.</p>
+
+<cite>The stereotyped class notation, showing operations of the required and provided interfaces</cite>
+![stereotyped-class-notation.png]
+
+<p>This notation is helpful if you want to show the operations of interfaces. If not, it's best to use the ball and socket notation, since it shows the same information more compactly.</p>
+
+<p>The most compact way of showing required and provided interfaces is to list them inside the component.</p>
+
+<cite>Listing required and provided interfaces within the component is the most compact representation</cite>
+![compact-representation-of-interfaces.png]
+
+<p>This notation additionally has an &lt;&lt;artifacts&gt;&gt; section listing the artifacts, or physical files, manifesting this component. Since artifacts are concerned with how your system is deployed, they are discussed in <a href="/software-design/uml/deployment-diagrams">deployment diagrams</a>.</p>
+
+<p>Deciding when to use which notation for required and provided interfaces depends on what you're trying to communicate. This question can be answered more fully when examining components working together.</p>
+
+<p>If a component has a required interface, then it needs another class or component in the system to provide it. To show that a component with a required interface depends on another component that provides it, draw a dependency arrow from the dependent component's socket symbol to the providing component's ball symbol.</p>
+
+<cite>The ConversionManagement component requires the DataSource interface, and the BlogDataSource component provides that interface</cite>
+![conversionmanagement-component-requires-datasource-interface.png]
+
+<p>your UML tool may let you get away with snapping the ball and socket together (omitting the dependency arrow).</p>
+
+<cite>Presentation option that snaps the ball and socket together</cite>
+![ball-and-socket-notation.png]
+
+<p>This is actually the assembly connector notation, which is introduced later.</p>
+
+<p>You can also omit the interface and draw the dependency relationship directly between the components.</p>
+
+<cite>You can draw dependency arrows directly between components to show a higher level view</cite>
+![dependency-arrows.png]
+
+<p>
+The second notation (omitting the interface, shown in previous figure) is simpler than the first (including the interface, shown in first requirement diagram above), so you may be tempted to use that as a shorthand, but keep in mind a few factors when choosing how to draw component dependencies.<br />
+Remember that interfaces help components stay loosely coupled, so they are an important factor in your component architecture. Showing the key components in your system and their interconnections through interfaces is a great way to describe the architecture of your system, and this is what the first notation is good
+</p>
+
+<cite>Focusing on the key components and interfaces in your system</cite>
+![focusing-on-key-components.png]
+
+<p>The second notation is good at showing simplified higher level views of component dependencies. This can be useful for understanding a system's configuration management or deployment concerns because emphasizing component dependencies and listing the manifesting artifacts allows you to clearly see which components and related files are required during deployment</p>
+
+<cite>Focusing on component dependencies and the manifesting artifacts is useful when you are trying control the configuration or deployment of your system</cite>
+![component-dependencies.png]
+
+<p>
+A component often contains and uses other classes to implement its functionality. Such classes are said to realize a component—they help the component do its job.<br />
+You can show realizing classes by drawing them (and their relationships) inside the component.
+</p>
+
+<p>Next figure shows that the <code>BlogDataSource</code> component contains the <code>Blog</code> and <code>Entry</code> classes. It also shows the aggregation relationship between the two classes.</p>
+
+<cite>The Blog and Entry classes realize the BlogDataSource component</cite>
+![the-blog-and-entry-classes-realize-component.png]
+
+<p>You can also show a component's realizing classes by drawing them outside the component with a dependency arrow from the realizing class to the component.</p>
+
+<cite>Alternate view, showing the realizing classes outside with the dependency relationship</cite>
+![alternate-view-of-realization.png]
+
+<p>The final way to show realizing classes is to list them in a &lt;&lt;realizations&gt;&gt; compartment inside the component.</p>
+
+<cite>You can also list the realizing classes inside the component</cite>
+![listing-realizing-classes.png]
+
+<a href="/software-design/uml/composite-structures">composite structures</a> introduced ports and internal structure of a class. Components can also have ports and internal structure.
+
+<cite>Ports show unique uses of a component and group "like" interfaces</cite>
+![ports-and-internal-structure.png]
+
+<p>In previous figure, the <code>ConversionManagement</code> component has a <code>Formatting</code> and a <code>Data</code> port, each with their associated interfaces.</p>
+
+<p>Next figure shows the internal structure of a <code>BlogDataSource</code> component.</p>
+
+<cite>Showing the internal structure of a component</cite>
+![internal-structure-of-component.png]
+
+<p>A component's provided interface can be realized by one of its internal parts. Similarly, a component's required interface can be required by one of its parts. In these cases, you can use delegation connectors to show that internal parts realize or use the component's interfaces.</p>
+
+<p>Delegation connectors are drawn with arrows pointing in the "direction of traffic," connecting.</p>
+
+<p>The port attached to the interface with the internal part. If the part realizes a provided interface, then the arrow points from the port to the internal part.</p>
+
+<p>If the part uses a required interface, then the arrow points from the internal part to the port.</p>
+
+<p>Next figure shows the use of delegation connectors to connect interfaces with internal parts.</p>
+
+<cite>Delegation connectors show how interfaces correspond to internal parts: the Blog class realizes the DataSource interface and the Entry class requires the Logger interface</cite>
+![delegating-connectors.png]
+
+<p>You can think of the delegation connectors as follows: the port represents an opening into a component through which communications pass, and delegation connectors point in the direction of communication. So, a delegation connector pointing from a port to an internal part represents messages being passed to the part that will handle it.</p>
+
+<p>If you're showing the interfaces of the internal parts, you can connect delegation connectors to the interface instead of directly to the part. This is commonly used when showing a component that contains other components.</p>
+
+<cite>Delegation connectors can also connect interfaces of internal parts with ports</cite>
+![delegation-connectors.png]
+
+<p>Next figure demonstrates this notation. The <code>ConversionManagement</code> component has a <code>Controller</code> and a <code>BlogParser</code> component. The <code>ConversionManagement</code> component provides the <code>FeedProvider</code> interface, but this is actually realized internally by the <code>Controller</code> part.</p>
+
+<p>Assembly connectors show that a component requires an interface that another component provides. Assembly connectors snap together the ball and socket symbols that represent required and provided interfaces.</p>
+
+<cite>Assembly connectors show components working together through interfaces</cite>
+![assembly-connectors.png]
+
+<p>There are two views of components in UML: a black-boxview and a white-box view. The black-box view shows how a component looks from the outside, including its required interfaces, its provided interfaces, and how it relates to other components. A black-box view specifies nothing about the internal implementation of a component. The white-box view, on the other hand, shows which classes, interfaces, and other components help a component achieve its functionality.</p>
+
+<p>A white-box view is one that shows parts inside a component, whereas a black-box view doesn't.</p>
+
+<cite>Black-box component views are useful for showing the big picture of the components in your system, whereas white-box views focus on the inner workings of a component</cite>
+![black-box-compoentnt-views.png]
+
+<p>Black-box views are good at showing the key components in your system and how they're connected. White-box views, on the other hand, are useful for showing how a component achieves its functionality through the classes it uses.</p>
+
+<p>Black-box views usually contain more than one component, whereas in a white-box view, it's common to focus on the contents of one component.</p>

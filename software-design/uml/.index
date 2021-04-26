@@ -9,5 +9,8 @@ use-case.txt
 activity-diagrams.txt
 class-diagrams.txt
 class-relationships.txt
+composite-structures.txt
+component-diagrams.txt
 object-diagrams.txt
 interaction-diagrams
+packages.txt

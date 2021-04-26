@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Component Diagrams</title>
+<!-- ajax -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- prims plugin styles -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+<style>
+img {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+a,
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+pre {
+	margin-bottom: 1.3rem !important;
+}
+
+img {
+	max-width: -moz-available;
+}
+
+@media only screen and (min-width:720px) {
+	.description {
+		display: block;
+		max-width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 10px;
+	}
+
+    .img-responsive {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dark-mode {
+	background-color: black;
+	color: #aaaaaa;
+}
+
+.dark-mode a {
+	color: royalblue;
+}
+
+.dark-mode .list-group-item {
+	background-color: #212529;
+	color: #aaaaaa;
+}
+
+.dark-mode .btn {
+	background-color: #212529;
+}
+
+.dark-mode .btn:hover {
+	color: #777777;
+}
+
+.dark-mode .dropdown-item {
+	background-color: #3a3a3a !important;
+	color: #aaaaaa;
+}
+
+.dark-mode .group-child {
+	background-color: #3a3a3a !important;
+}
+
+.dark-mode a.list-group-item:focus,
+.dark-mode a.list-group-item:hover,
+.dark-mode button.list-group-item:focus,
+.dark-mode button.list-group-item:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+.sticky {
+	position: sticky !important;
+	z-index: 1;
+	top: 3%;
+}
+
+.btn {
+	background-color: #f5f5f5;
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
+	text-align: center !important;
+	font-size: 18px !important;
+}
+
+.dropbtn {
+  font-size: 14px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	text-decoration: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+	content: '> ';
+}
+
+.dark-mode .breadcrumb {
+	background-color: #212529;
+}
+
+.dark-mode .breadcrumb a {
+	color: #bdc0c4;
+}
+
+.dark-mode .breadcrumb a:hover,
+.dark-mode .breadcrumb a:focus {
+	text-decoration: none;
+	color: #777777;
+}
+.just-padding {
+  padding: 15px;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #dfdfdf;
+}
+
+.group-child {
+	background-color: #f0f0f0 !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+.pager .top {
+	float: center;
+}
+
+.dark-mode .page-link {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .page-link .disabled li > a {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a,
+.dark-mode .pager li > span {
+	color: #bdc0c4;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+
+.dark-mode .pager li > a:hover,
+.dark-mode .pager li > a:focus,
+.dark-mode .pager li > span:hover {
+	background-color: #555555;
+	color: #bdc0c4;
+}
+
+.dark-mode .pager .disabled a,
+.dark-mode .pager .disabled a:hover,
+.dark-mode .pager .disabled a:focus {
+	color: #6c757d;
+	background-color: #212529;
+	border: 1px solid #616161;
+}
+/* prism overrides */
+div.code-toolbar>.toolbar a,
+div.code-toolbar>.toolbar button,
+div.code-toolbar>.toolbar span {
+	margin-left: 0.7rem;
+}
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1:hover .anchor .octicon-link, h2:hover .anchor .octicon-link, h3:hover .anchor .octicon-link, h4:hover .anchor .octicon-link, h5:hover .anchor .octicon-link, h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octicon-link, h6 .octicon-link {
+	color: var(--color-text-primary);
+	visibility: hidden;
+}
+
+.octicon {
+    fill: currentColor;
+}
+</style>
+</head>
+<body class="container dark-mode">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
+<li class='breadcrumb-item active'>Component Diagrams</li>
+</ol>
+<div class="dropdown pull-right sticky">
+  <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
+	  &#x2699;
+  </button>
+  <div class="dropdown-content" id="dropdown-content">
+    <button id="darkmode-icon" class="btn dropdown-item" onclick="toggle_darkmode()" title="ALT + SHIFT + N" accesskey="N">&#x2600;</button>
+    <button class="btn dropdown-item" onclick="zoominLetter()" title="ALT + SHIFT + I" accesskey="i"><span style="font-size: 10px;">A</span><span style="font-size: 18px;">A</span></button>
+    <button class="btn dropdown-item" onclick="zoomoutLetter()" title="ALT + SHIFT + O" accesskey="o"><span style="font-size: 18px;">A</span><span style="font-size: 10px;">A</span></button>
+    <button class="btn dropdown-item" onclick="defaultFontSize()" title="ALT + SHIFT + D" accesskey="d">&#x21ba;</button>
+  </div>
+</div>
+<h2>
+<a id="Component-Diagrams" class="anchor" aria-hidden="true" href="#Component-Diagrams">
+Component Diagrams
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h2>
+<p>When designing a software system, it's rare to jump directly from requirements to defining the classes in your system. With all but the most trivial systems, it's helpful to plan out the high-level pieces of your system to establish the architecture and manage complexity and dependencies among the parts. Components are used to organize a system into manageable, reusable, and swappable pieces of software.</p>
+
+<p>UML component diagrams model the components in your system and as such form part of the development view.</p>
+
+<cite>The Development View of your model describes how your system's parts are organized into modules and components</cite>
+<img class="img-responsive" src="/software-design/uml/development-view-diagram.png" alt="development view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/development-view-diagram.png"'>
+
+<p>A component is an encapsulated, reusable, and replaceable part of your software.</p>
+
+<p>As with <a href="/software-design/uml/composite-structures">composite structures</a>, they can have ports and show internal structure.</p>
+
+<p>A component is drawn as a rectangle with the <code>&lt;&lt;component&gt;&gt;</code> stereotype and an optional tabbed rectangle icon in the upper righthand corner.</p>
+
+<cite>The basic component symbol showing a ConversionManagement component</cite>
+<img class="img-responsive" src="/software-design/uml/component-symbol.png" alt="component symbol" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/component-symbol.png"'>
+
+<p>You can show that a component is actually a subsystem of a very large system by replacing <code>&lt;&lt;component&gt;&gt;</code> with <code>&lt;&lt;subsystem&gt;&gt;</code>.</p>
+
+<cite>You can substitute the &lt;&lt;subsystem&gt;&gt; stereotype to show the largest pieces of your system</cite>
+<img class="img-responsive" src="/software-design/uml/largest-pieces-of-system.png" alt="largest pieces of system" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/largest-pieces-of-system.png"'>
+
+<p>Components need to be loosely coupled so that they can be changed without forcing changes on other parts of the system—this is where interfaces come in.</p>
+
+<p>Components interact with each other through provided and required interfaces to control dependencies between components and to make components swappable.</p>
+
+<p>A provided interface of a component is an interface that the component realizes. Other components and classes interact with a component through its provided interfaces</p>
+
+<p>A required interface of a component is an interface that the component needs to function. More precisely, the component needs another class or component that realizes that interface to function.</p>
+
+<p>There are three standard ways to show provided and required interfaces in UML: ball and socket symbols, stereotype notation, and text listings.</p>
+
+<p>You can show a provided interface of a component using the ball symbol introduced in <a href="/software-design/uml/class-relationships">class relationships</a>. A required interface is shown using the counterpart of the ball—the socket symbol—drawn as a semicircle extending from a line. Write the name of the interface near the symbols.</p>
+
+<cite>The ball and socket notation for showing a component's provided and required interfaces</cite>
+<img class="img-responsive" src="/software-design/uml/the-ball-and-socket-notation.png" alt="the ball and socket notation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/the-ball-and-socket-notation.png"'>
+
+<p>The ball and socket notation is the most common way to show a component's interfaces, compared with the following techniques.</p>
+
+<p>You can also show a component's required and provided interfaces by drawing the interfaces with the stereotyped class notation introduced in <a href="/software-design/uml/class-relationships">class relationships</a>.</p>
+
+<cite>The stereotyped class notation, showing operations of the required and provided interfaces</cite>
+<img class="img-responsive" src="/software-design/uml/stereotyped-class-notation.png" alt="stereotyped class notation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/stereotyped-class-notation.png"'>
+
+<p>This notation is helpful if you want to show the operations of interfaces. If not, it's best to use the ball and socket notation, since it shows the same information more compactly.</p>
+
+<p>The most compact way of showing required and provided interfaces is to list them inside the component.</p>
+
+<cite>Listing required and provided interfaces within the component is the most compact representation</cite>
+<img class="img-responsive" src="/software-design/uml/compact-representation-of-interfaces.png" alt="compact representation of interfaces" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/compact-representation-of-interfaces.png"'>
+
+<p>This notation additionally has an &lt;&lt;artifacts&gt;&gt; section listing the artifacts, or physical files, manifesting this component. Since artifacts are concerned with how your system is deployed, they are discussed in <a href="/software-design/uml/deployment-diagrams">deployment diagrams</a>.</p>
+
+<p>Deciding when to use which notation for required and provided interfaces depends on what you're trying to communicate. This question can be answered more fully when examining components working together.</p>
+
+<p>If a component has a required interface, then it needs another class or component in the system to provide it. To show that a component with a required interface depends on another component that provides it, draw a dependency arrow from the dependent component's socket symbol to the providing component's ball symbol.</p>
+
+<cite>The ConversionManagement component requires the DataSource interface, and the BlogDataSource component provides that interface</cite>
+<img class="img-responsive" src="/software-design/uml/conversionmanagement-component-requires-datasource-interface.png" alt="conversionmanagement component requires datasource interface" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/conversionmanagement-component-requires-datasource-interface.png"'>
+
+<p>your UML tool may let you get away with snapping the ball and socket together (omitting the dependency arrow).</p>
+
+<cite>Presentation option that snaps the ball and socket together</cite>
+<img class="img-responsive" src="/software-design/uml/ball-and-socket-notation.png" alt="ball and socket notation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/ball-and-socket-notation.png"'>
+
+<p>This is actually the assembly connector notation, which is introduced later.</p>
+
+<p>You can also omit the interface and draw the dependency relationship directly between the components.</p>
+
+<cite>You can draw dependency arrows directly between components to show a higher level view</cite>
+<img class="img-responsive" src="/software-design/uml/dependency-arrows.png" alt="dependency arrows" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/dependency-arrows.png"'>
+
+<p>
+The second notation (omitting the interface, shown in previous figure) is simpler than the first (including the interface, shown in first requirement diagram above), so you may be tempted to use that as a shorthand, but keep in mind a few factors when choosing how to draw component dependencies.<br />
+Remember that interfaces help components stay loosely coupled, so they are an important factor in your component architecture. Showing the key components in your system and their interconnections through interfaces is a great way to describe the architecture of your system, and this is what the first notation is good
+</p>
+
+<cite>Focusing on the key components and interfaces in your system</cite>
+<img class="img-responsive" src="/software-design/uml/focusing-on-key-components.png" alt="focusing on key components" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/focusing-on-key-components.png"'>
+
+<p>The second notation is good at showing simplified higher level views of component dependencies. This can be useful for understanding a system's configuration management or deployment concerns because emphasizing component dependencies and listing the manifesting artifacts allows you to clearly see which components and related files are required during deployment</p>
+
+<cite>Focusing on component dependencies and the manifesting artifacts is useful when you are trying control the configuration or deployment of your system</cite>
+<img class="img-responsive" src="/software-design/uml/component-dependencies.png" alt="component dependencies" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/component-dependencies.png"'>
+
+<p>
+A component often contains and uses other classes to implement its functionality. Such classes are said to realize a component—they help the component do its job.<br />
+You can show realizing classes by drawing them (and their relationships) inside the component.
+</p>
+
+<p>Next figure shows that the <code>BlogDataSource</code> component contains the <code>Blog</code> and <code>Entry</code> classes. It also shows the aggregation relationship between the two classes.</p>
+
+<cite>The Blog and Entry classes realize the BlogDataSource component</cite>
+<img class="img-responsive" src="/software-design/uml/the-blog-and-entry-classes-realize-component.png" alt="the blog and entry classes realize component" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/the-blog-and-entry-classes-realize-component.png"'>
+
+<p>You can also show a component's realizing classes by drawing them outside the component with a dependency arrow from the realizing class to the component.</p>
+
+<cite>Alternate view, showing the realizing classes outside with the dependency relationship</cite>
+<img class="img-responsive" src="/software-design/uml/alternate-view-of-realization.png" alt="alternate view of realization" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/alternate-view-of-realization.png"'>
+
+<p>The final way to show realizing classes is to list them in a &lt;&lt;realizations&gt;&gt; compartment inside the component.</p>
+
+<cite>You can also list the realizing classes inside the component</cite>
+<img class="img-responsive" src="/software-design/uml/listing-realizing-classes.png" alt="listing realizing classes" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/listing-realizing-classes.png"'>
+
+<a href="/software-design/uml/composite-structures">composite structures</a> introduced ports and internal structure of a class. Components can also have ports and internal structure.
+
+<cite>Ports show unique uses of a component and group "like" interfaces</cite>
+<img class="img-responsive" src="/software-design/uml/ports-and-internal-structure.png" alt="ports and internal structure" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/ports-and-internal-structure.png"'>
+
+<p>In previous figure, the <code>ConversionManagement</code> component has a <code>Formatting</code> and a <code>Data</code> port, each with their associated interfaces.</p>
+
+<p>Next figure shows the internal structure of a <code>BlogDataSource</code> component.</p>
+
+<cite>Showing the internal structure of a component</cite>
+<img class="img-responsive" src="/software-design/uml/internal-structure-of-component.png" alt="internal structure of component" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/internal-structure-of-component.png"'>
+
+<p>A component's provided interface can be realized by one of its internal parts. Similarly, a component's required interface can be required by one of its parts. In these cases, you can use delegation connectors to show that internal parts realize or use the component's interfaces.</p>
+
+<p>Delegation connectors are drawn with arrows pointing in the "direction of traffic," connecting.</p>
+
+<p>The port attached to the interface with the internal part. If the part realizes a provided interface, then the arrow points from the port to the internal part.</p>
+
+<p>If the part uses a required interface, then the arrow points from the internal part to the port.</p>
+
+<p>Next figure shows the use of delegation connectors to connect interfaces with internal parts.</p>
+
+<cite>Delegation connectors show how interfaces correspond to internal parts: the Blog class realizes the DataSource interface and the Entry class requires the Logger interface</cite>
+<img class="img-responsive" src="/software-design/uml/delegating-connectors.png" alt="delegating connectors" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/delegating-connectors.png"'>
+
+<p>You can think of the delegation connectors as follows: the port represents an opening into a component through which communications pass, and delegation connectors point in the direction of communication. So, a delegation connector pointing from a port to an internal part represents messages being passed to the part that will handle it.</p>
+
+<p>If you're showing the interfaces of the internal parts, you can connect delegation connectors to the interface instead of directly to the part. This is commonly used when showing a component that contains other components.</p>
+
+<cite>Delegation connectors can also connect interfaces of internal parts with ports</cite>
+<img class="img-responsive" src="/software-design/uml/delegation-connectors.png" alt="delegation connectors" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/delegation-connectors.png"'>
+
+<p>Next figure demonstrates this notation. The <code>ConversionManagement</code> component has a <code>Controller</code> and a <code>BlogParser</code> component. The <code>ConversionManagement</code> component provides the <code>FeedProvider</code> interface, but this is actually realized internally by the <code>Controller</code> part.</p>
+
+<p>Assembly connectors show that a component requires an interface that another component provides. Assembly connectors snap together the ball and socket symbols that represent required and provided interfaces.</p>
+
+<cite>Assembly connectors show components working together through interfaces</cite>
+<img class="img-responsive" src="/software-design/uml/assembly-connectors.png" alt="assembly connectors" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/assembly-connectors.png"'>
+
+<p>There are two views of components in UML: a black-boxview and a white-box view. The black-box view shows how a component looks from the outside, including its required interfaces, its provided interfaces, and how it relates to other components. A black-box view specifies nothing about the internal implementation of a component. The white-box view, on the other hand, shows which classes, interfaces, and other components help a component achieve its functionality.</p>
+
+<p>A white-box view is one that shows parts inside a component, whereas a black-box view doesn't.</p>
+
+<cite>Black-box component views are useful for showing the big picture of the components in your system, whereas white-box views focus on the inner workings of a component</cite>
+<img class="img-responsive" src="/software-design/uml/black-box-compoentnt-views.png" alt="black box compoentnt views" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/black-box-compoentnt-views.png"'>
+
+<p>Black-box views are good at showing the key components in your system and how they're connected. White-box views, on the other hand, are useful for showing how a component achieves its functionality through the classes it uses.</p>
+
+<p>Black-box views usually contain more than one component, whereas in a white-box view, it's common to focus on the contents of one component.</p>
+<hr />
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 12</span></li>
+</ul>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams/interaction-overview-diagram">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
+</ul>
+<script>
+function darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.add("dark-mode");
+		sessionStorage.setItem('darkmode', true);
+		icon.innerHTML = '&#x2600;';
+	} else {
+		sessionStorage.setItem('darkmode', false);
+		bodystyle.classList.remove("dark-mode");
+		icon.innerHTML = '&#x263d;';
+	}
+}
+darkmode();
+
+function toggle_darkmode() {
+	var bodystyle = document.body;
+	var icon = document.getElementById('darkmode-icon');
+	const dark = sessionStorage.getItem('darkmode');
+
+	if (dark === 'true' || dark == 'undefined') {
+		bodystyle.classList.remove("dark-mode");
+		sessionStorage.setItem('darkmode', false);
+		icon.innerHTML = '&#x263d;';
+		toggle_settings();
+	} else {
+		sessionStorage.setItem('darkmode', true);
+		bodystyle.classList.add("dark-mode");
+		icon.innerHTML = '&#x2600;';
+		toggle_settings();
+	}
+}
+var current_position = 0;
+
+function scrollDownListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "j") {
+        var screen_height = window.screen.height / 4;
+		current_position += screen_height;
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+function scrollUpListener() {
+  window.addEventListener(
+    "keydown",
+    function(event) {
+      if (event.key == "k") {
+        var screen_height = window.screen.height / 4;
+		current_position -= screen_height;
+		if (current_position < 0) {
+			current_position = 0;
+		}
+        window.scrollTo({top: current_position, behavior: 'smooth'})
+      }
+    }
+  )
+}
+
+scrollDownListener()
+scrollUpListener()
+function toggle_settings() {
+	var button_list = document.getElementById('dropdown-content');
+
+	if (button_list.style.display != "none") {
+		button_list.style.display = "none";
+	} else {
+		button_list.style.display = "block";
+	}
+}
+toggle_settings();
+var min_level  = 1;
+var max_level  = 12;
+var fontlevel  = parseInt(localStorage.getItem('fontlevel'));
+var fontsize   = parseInt(localStorage.getItem('fontsize'));
+var h1fontsize = parseInt(localStorage.getItem('h1fontsize'));
+var h2fontsize = parseInt(localStorage.getItem('h2fontsize'));
+var h3fontsize = parseInt(localStorage.getItem('h3fontsize'));
+var h4fontsize = parseInt(localStorage.getItem('h4fontsize'));
+
+if (!fontlevel)  { fontlevel  =  3; localStorage.setItem('fontlevel', 3 ); }
+if (!fontsize)   { fontsize   = 14; localStorage.setItem('fontsize',  14); }
+if (!h1fontsize) { h1fontsize = 32; localStorage.setItem('h1fontsize',32); }
+if (!h2fontsize) { h2fontsize = 24; localStorage.setItem('h2fontsize',24); }
+if (!h3fontsize) { h3fontsize = 18; localStorage.setItem('h3fontsize',18); }
+if (!h4fontsize) { h4fontsize = 16; localStorage.setItem('h4fontsize',16); }
+
+function defaultFontSize() {
+	fontlevel  =  3;
+	fontsize   = 14;
+	h1fontsize = 32;
+	h2fontsize = 24;
+	h3fontsize = 18;
+	h4fontsize = 16;
+	localStorage.setItem('fontlevel',  fontlevel );
+	localStorage.setItem('fontsize',   fontsize  );
+	localStorage.setItem('h1fontsize', h1fontsize);
+	localStorage.setItem('h2fontsize', h2fontsize);
+	localStorage.setItem('h3fontsize', h3fontsize);
+	localStorage.setItem('h4fontsize', h3fontsize);
+
+	restoreFontSize();
+	document.getElementById('dropdown-content').style.display = 'none';
+}
+
+function zoominLetter() {
+	if (fontlevel < max_level) {
+		fontlevel += 1;
+		fontsize += 2;
+		h1fontsize += 2;
+		h2fontsize += 2;
+		h3fontsize += 2;
+		h4fontsize += 2;
+
+		localStorage.setItem('fontlevel', fontlevel);
+		localStorage.setItem('fontsize', fontsize);
+		localStorage.setItem('h1fontsize', h1fontsize);
+		localStorage.setItem('h2fontsize', h2fontsize);
+		localStorage.setItem('h3fontsize', h3fontsize);
+		localStorage.setItem('h4fontsize', h4fontsize);
+
+		restoreFontSize();
+	}
+}
+
+function zoomoutLetter() {
+	if (fontlevel > min_level) {
+		fontlevel -= 1;
+		fontsize -= 2;
+		h1fontsize -= 2;
+		h2fontsize -= 2;
+		h3fontsize -= 2;
+		h4fontsize -= 2;
+
+		localStorage.setItem('fontlevel', fontlevel);
+		localStorage.setItem('fontsize', fontsize);
+		localStorage.setItem('h1fontsize', h1fontsize);
+		localStorage.setItem('h2fontsize', h2fontsize);
+		localStorage.setItem('h3fontsize', h3fontsize);
+		localStorage.setItem('h4fontsize', h4fontsize);
+
+		restoreFontSize();
+	}
+}
+
+function restoreFontSize() {
+	fontsize   = parseInt(localStorage.getItem('fontsize'));
+	h1fontsize = parseInt(localStorage.getItem('h1fontsize'));
+	h2fontsize = parseInt(localStorage.getItem('h2fontsize'));
+	h3fontsize = parseInt(localStorage.getItem('h3fontsize'));
+	h4fontsize = parseInt(localStorage.getItem('h4fontsize'));
+
+	var p     = document.getElementsByTagName('p');
+	var pre   = document.getElementsByTagName('pre');
+	var ul    = document.getElementsByTagName('ul');
+	var ol    = document.getElementsByTagName('ol');
+	var table = document.getElementsByTagName('table');
+	var cite  = document.getElementsByTagName('cite');
+	var toc   = document.getElementsByClassName('list-group');
+	var bar   = document.getElementsByClassName('difficulty');
+	var h1    = document.getElementsByTagName('h1');
+	var h2    = document.getElementsByTagName('h2');
+	var h3    = document.getElementsByTagName('h3');
+	var h4    = document.getElementsByTagName('h4');
+
+	for(i=0 ; i<p.length ; i++) {
+		p[i].style.fontSize     = fontsize+"px"
+	}
+	for(i=0;i<pre.length;i++) {
+		pre[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<ul.length;i++) {
+		ul[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<ol.length;i++) {
+		ol[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<table.length;i++) {
+		table[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<cite.length;i++) {
+		cite[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<toc.length;i++) {
+		toc[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<bar.length;i++) {
+		bar[i].style.fontSize = fontsize+"px"
+	}
+	for(i=0;i<h1.length;i++) {
+		h1[i].style.fontSize = h1fontsize+"px"
+	}
+	for(i=0;i<h2.length;i++) {
+		h2[i].style.fontSize = h2fontsize+"px"
+	}
+	for(i=0;i<h3.length;i++) {
+		h3[i].style.fontSize = h3fontsize+"px"
+	}
+	for(i=0;i<h4.length;i++) {
+		h4[i].style.fontSize = h4fontsize+"px"
+	}
+}
+restoreFontSize();
+</script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- prism js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js'></script>
+<!-- prism plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autolinker/prism-autolinker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/command-line/prism-command-line.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
+<script>
+$(function() {
+  $('.list-group-item').on('click', function() {
+    $('.glyphicon', this)
+      .toggleClass('glyphicon-chevron-right')
+      .toggleClass('glyphicon-chevron-down');
+  });
+});
+</script>
+</body>
+</html>

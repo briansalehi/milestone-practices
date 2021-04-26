@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Class's Internal Structure</title>
+<title>Composite Structures</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
-<li class='breadcrumb-item active'>Class's Internal Structure</li>
+<li class='breadcrumb-item active'>Composite Structures</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Class's-Internal-Structure" class="anchor" aria-hidden="true" href="#Class's-Internal-Structure">
-Class's Internal Structure
+<a id="Composite-Structures" class="anchor" aria-hidden="true" href="#Composite-Structures">
+Composite Structures
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -315,7 +315,7 @@ Class's Internal Structure
 <cite>This first pass at showing that a blog entry's introduction introduces its main body doesn't quite work</cite>
 <img class="img-responsive" src="/software-design/uml/the-diagram-that-doesnt-quite-work.png" alt="the diagram that doesnt quite work" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/the-diagram-that-doesnt-quite-work.png"'>
 
-<p>But there's a problem. Previous figure specifies that an object of type <code>Introduction</code> will have a reference to an object of type <code>MainBody</code>, but it can be any <code>MainBody</code> object—not just the one owned by the same instance of <code>BlogEntry</code>.</p></code>
+<p>But there's a problem. Previous figure specifies that an object of type Introduction will have a reference to an object of type <code>MainBody</code>, but it can be any <code>MainBody</code> object—not just the one owned by the same instance of BlogEntry.</p></code>
 
 <p>Because last diagram doesn't specify which <code>Introduction</code> and <code>MainBody</code> objects should be associated, the object diagram in next figure conforms to the class diagram in previous figure.</p>
 
@@ -336,9 +336,7 @@ Class's Internal Structure
 
 <p>Parts are specified by the role they play in the containing class, written as <code>&lt;roleName&gt; : &lt;type&gt;</code>.</p>
 
-<p>The part of type <code>Introduction</code> has the role <code>blogIntro</code> and the part of type <code>MainBody</code> has the role <code>blogMain</code>.</p>
-
-<p>The multiplicity, or number of instances of that part, is written in the upper righthand corner of the part.</p>
+<p>The part of type Introduction has the role <code>blogIntro</code> and the part of type <code>MainBody</code> has the role <code>blogMain</code>. The multiplicity, or number of instances of that part, is written in the upper righthand corner of the part.</p>
 
 <p>Next figure shows the internal structure diagram side by side with the class diagram from first diagram above, allowing you to see how the class names, roles, and multiplicities correspond.</p>
 
@@ -352,7 +350,7 @@ Class's Internal Structure
 
 <p>The part with role pic has multiplicity of zero to three in the internal structure of <code>BlogEntry</code>.</p>
 
-<p>In this case, if you run across an instance of <code>BlogEntry</code> at runtime, it will have anywhere from zero to three instances of type <code>Image</code>. It may contain one <code>Image</code> object, it may contain three <code>Image</code> objects, and so on, but with parts, you don't have to worry about such details. A part is a general way to describe these contained objects by the role they play, without specifying exactly which objects are present.</p>
+<p>In this case, if you run across an instance of BlogEntry at runtime, it will have anywhere from zero to three instances of type <code>Image</code>. It may contain one <code>Image</code> object, it may contain three <code>Image</code> objects, and so on, but with parts, you don't have to worry about such details. A part is a general way to describe these contained objects by the role they play, without specifying exactly which objects are present.</p>
 
 <p>You show relationships between parts by drawing a connector between the parts with the multiplicities specified at each end of the connector.</p>
 
@@ -460,8 +458,8 @@ References
 <li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 11</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/class-relationships">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/object-diagrams">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams/interaction-overview-diagram">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
