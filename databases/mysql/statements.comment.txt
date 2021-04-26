@@ -1,12 +1,206 @@
+<p>Following table summarizes some of the most common SQL statements. These statements can be divided into two categories. The statements that work with the data in a database are called the <i>data manipulation language</i> (<b>DML</b>). These are the statements that application programmers use the most.</p>
+
+<cite>SQL statements used to work with data (DML)</cite>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Statement</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>SELECT</b></td>
+      <td>Retrieves data from one or more tables.</td>
+    </tr>
+    <tr>
+      <td><b>INSERT</b></td>
+      <td>Adds new rows to a table.</td>
+    </tr>
+    <tr>
+      <td><b>UPDATE</b></td>
+      <td>Changes existing rows in a table.</td>
+    </tr>
+    <tr>
+      <td><b>DELETE</b></td>
+      <td>Delets existing rows from a table.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The statements that create databases and work with the objects within a database are called the <i>data definition language</i> (<b>DDL</b>). These statements are used exclusively by <i>database administrators</i> (<b>DBA</b>s).</p>
+
+<cite>SQL statements used to work with database objects (DDL)</cite>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Statement</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>CREATE DATABASE</b></td>
+      <td>Creates a new database on the server.</td>
+    </tr>
+    <tr>
+      <td><b>CREATE TABLE</b></td>
+      <td>Creates a new table in a database.</td>
+    </tr>
+    <tr>
+      <td><b>CREATE INDEX</b></td>
+      <td>Creates a new index for a table.</td>
+    </tr>
+    <tr>
+      <td><b>ALTER TABLE</b></td>
+      <td>Changes the definition of an existing table.</td>
+    </tr>
+    <tr>
+      <td><b>ALTER INDEX</b></td>
+      <td>Changes the structure of an existing index.</td>
+    </tr>
+    <tr>
+      <td><b>DROP DATABASE</b></td>
+      <td>Delets an existing database and all of its tables.</td>
+    </tr>
+    <tr>
+      <td><b>DROP TABLE</b></td>
+      <td>Delets an existing table.</td>
+    </tr>
+    <tr>
+      <td><b>DROP INDEX</b></td>
+      <td>Delets an existing index.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p>This sample also shows the <i>result set</i> that's returned by the <code>SELECT</code> statement. A result set is a logical table that's created temporarily whithin database. When an application requests data from a database, it receives a result set.</p>
 
-<pre class="language-sql line-numbers">
+<pre class="language-sql line-numbers" data-line="1">
 	<code>
 		select invoice_number, invoice_date, invoice_total,
 			payment_total, credit_total,
 			invoice_total - payment_total - credit_total as balance_due
 		from invoices
-		where invoice_total - payment_total - credit_total > 0
+		where invoice_total - payment_total - credit_total &gt; 0
 		order by invoice_date;
+	</code>
+</pre>
+
+<p>Following sample presents a <code>SELECT</code> statement that retrieves data from two tables. This type of operation is called <i>join</i> because the data from the two tables is joined together into a single result set.</p>
+
+<p>An <i>inner join</i> is the most common type of join. By using an inner join, rows from the two tables in the join are included in the result set only if their related columns match.</p>
+
+<pre class="language-sql line-numbers" data-line="3">
+	<code>
+		select vendor_name, invoice_number, invoice_date, invoice_total
+		form vendors
+		inner join invoices
+			on vendors.vendor_id = invoices.vendor_id
+		where invoice_total &gt;= 500
+		order by vendor_name, invoice_total desc;
+	</code>
+</pre>
+
+<p>Although this sample uses only how to join data from two tables, you can extend this syntax to join data from three or more tables.</p>
+
+<p>In addition to inner joins, most relational databases including MySQL support other types of joins such as <i>outer joins</i>. An outer join lets you include all rows from a table even if the other table doesn't have a matching row. You'll learn more about different types of joins in <a href="/linux-administration/mysql/joins">joins chapter</a>.</p>
+
+# use database
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		use milestone-test;
+	</code>
+</pre>
+
+# create database
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		create database milestone-test;
+	</code>
+</pre>
+
+# create table
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		create table invoices
+		(
+			invoice_id int primary key auto_increment,
+			vendor_id int int not null,
+			invoice_number varchar(50) not null,
+			invoice_date date not null,
+			invoice_total decimal(9,2) not null,
+			payment_total decimal(9,2) default 0,
+			credit_total decimal(9,2) default 0,
+			terms_id int not null,
+			invoice_due_date date not null,
+			payment_date date,
+			constraint invoices_fk_vendors
+				foreign key (vendor_id)
+				references vendors (vendor_id),
+			constraint invoices_fk_terms
+				foreign key (terms_id)
+				references terms (terms_id)
+		);
+	</code>
+</pre>
+
+# create index
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		create index invoices_vendor_id_index
+			on invoices (vendor_id);
+	</code>
+</pre>
+
+# delete index
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		drop index invoices_vendor_id_index
+			on invoices;
+	</code>
+</pre>
+
+# add column
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		alter table invoices
+			add balance_due decimal(9,2);
+	</code>
+</pre>
+
+# delete column
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		alter table invoices
+			drop column balance_due;
+	</code>
+</pre>
+
+# add row
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		insert into invoices
+			(vendor_id, invoices_number, invoices_date,
+			invoices_total, terms_id, invoices_due_date)
+		values
+			(12, '3245436', '2021-02-23', 164, 5, '2021-03-23');
+	</code>
+</pre>
+
+# delete row
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		delete from invoices
+		where invoice_number = '2356344'
+	</code>
+</pre>
+
+# update row
+<pre class="language-sql line-numbers" data-line="">
+	<code>
+		update invoices
+		set credit_total = 35.95
+		where invoice_number = '346457';
 	</code>
 </pre>
