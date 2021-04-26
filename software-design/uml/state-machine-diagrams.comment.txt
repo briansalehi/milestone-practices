@@ -1,298 +1,180 @@
-Brian Salehi, [12.04.21 17:03]
-Learning UML 2.0
-Kim Hamilton, Russ Miles
-
-Chapter 14. Modeling an Object's State: State Machine Diagrams
-
-*****
-
-Activity diagrams and interaction diagrams are useful for describing behavior, but there's still a missing piece. Sometimes the state of an object or system is an important factor in its behavior. For example, if the CMS required potential users to submit an application for an account, which could be approved or rejected, then the AccountApplication object may act differently depending on whether it is pending, accepted, or rejected.
+<p>
+Activity diagrams and interaction diagrams are useful for describing behavior, but there's still a missing piece. Sometimes the state of an object or system is an important factor in its behavior. For example, if the CMS required potential users to submit an application for an account, which could be approved or rejected, then the <code>AccountApplication</code> object may act differently depending on whether it is pending, accepted, or rejected.<br />
 In such situations, it's helpful to model states of an object and the events causing state changes—this is what state machine diagrams do best.
+</p>
 
-*****
+<p>Most of this chapter focuses on behavioral state machines , which can show states, transitions, and behavior (inside states and along transitions). There's another type of state machine called a protocol state machine that doesn't model behavior but is useful for modeling protocols such as network communication protocols.</p>
 
-Most of this chapter focuses on behavioral state machines , which can show states, transitions, and behavior (inside states and along transitions). There's another type of state machine called a protocol state machine that doesn't model behavior but is useful for modeling protocols such as network communication protocols.
+<p>State machine diagrams are part of the logical model of your system.</p>
 
-*****
+<cite>The Logical View describes the abstract descriptions of a system's parts, including when and how those parts can be in different states using state machine diagrams</cite>
+![logical-view-diagram.png]
 
-State machine diagrams are part of the logical model of your system
+<p>State machine diagrams are often referred to informally as state diagrams. You may also have seen them referred to as a statechart diagrams in the past, since this diagram has undergone many name changes.</p>
 
-*****
+<p>Below figure shows a state diagram modeling a light. When you lift the light switch, the light turns on. When you lower the light switch, the light turns off.</p>
 
-Figure 14-1. The Logical View describes the abstract descriptions of a system's parts, including when and how those parts can be in different states using state machine diagrams
+<cite>The fundamental elements of a state diagram: states and transitions between states</cite>
+![state-and-transitions-between-state.png]
 
-*****
+<p>A state diagram consists of states, drawn as rounded rectangles, and transitions, drawn as arrows connecting the states. A transition represents a change of state, or how to get from one state to the next. A state is active when entered through a transition, and it becomes inactive when exited through a transition.</p>
 
-State machine diagrams are often referred to informally as state diagrams. You may also have seen them referred to as a statechart diagrams in the past, since this diagram has undergone many name changes.
+<p>The event causing the state change, or trigger, is written along the transition arrow.</p>
 
-*****
+<p>If you haven't seen state diagrams before, it may help to view the states and transitions in table form, as shown in Table 14-1. In the left column are the states, and along the top row are triggers. The table is interpreted as follows: when the object is in a state and receives a trigger, the object moves to the resulting state specified in the cell. A dash (-) means that no transition happens or that the combination is impossible. Viewing states and transitions in table form can be helpful when getting up-to-speed, but don't depend on this too heavily; details of states and transitions can be more complex, and it will become easier to work with state diagrams.</p>
 
-Figure 14-2 shows a state diagram modeling a light. When you lift the light switch, the light turns on. When you lower the light switch, the light turns off.
+<cite>Table view of light states and transitions—not UML notation</cite>
 
-*****
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col"><b>State / Trigger</b></th>
+			<th scope="col"><b>Light Switch Lifted</b></th>
+			<th scope="col"><b>Light Switch Lowered</b></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Off</td>
+			<td>On</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td>On</td>
+			<td>-</td>
+			<td>Off</td>
+		</tr>
+	</tbody>
+</table>
 
-Figure 14-2. The fundamental elements of a state diagram: states and transitions between states
+<p>State diagrams usually have an initial pseudostate and a final state, marking the start and end points of the state machine, respectively. An initial pseudostate is drawn with a filled circle, and a final state is drawn with two concentric circles with a filled inner circle.</p>
 
-*****
+<cite>Initial pseudostate and final states in an AccountApplication state diagram</cite>
+![initial-and-final-pseudostates.png]
 
-A state diagram consists of states, drawn as rounded rectangles, and transitions, drawn as arrows connecting the states. A transition represents a change of state, or how to get from one state to the next. A state is active when entered through a transition, and it becomes inactive when exited through a transition.
+<p>A state is a condition of being at a certain time. A state can be a passive quality, such as On and Off for the light object. A state can also be an active quality, or something that an object is doing. For example, a coffeemaker has the state Brewing during which it is brewing coffee. A state is drawn as a rounded rectangle with the name of the state in the center.</p>
 
-*****
+<cite>A rectangle with rounded corners and the name in the center is the most common way to draw a state</cite>
+![state.png]
 
-The event causing the state change, or trigger, is written along the transition arrow.
+<p>If the state is a "doing" state, you can write the behavior inside the state.</p>
 
-*****
+<cite>Showing the behavior details of a "doing" state</cite>
+![doing-state.png]
 
-If you haven't seen state diagrams before, it may help to view the states and transitions in table form, as shown in Table 14-1. In the left column are the states, and along the top row are triggers. The table is interpreted as follows: when the object is in a state and receives a trigger, the object moves to the resulting state specified in the cell. A dash (-) means that no transition happens or that the combination is impossible. Viewing states and transitions in table form can be helpful when getting up-to-speed, but don't depend on this too heavily; details of states and transitions can be more complex, and it will become easier to work with state diagrams.
+<p>A transition, shown with an arrow, represents a change of states from a source state to a target state . A transition description, written along the arrow, describes the circumstances causing the state change to occur.</p>
 
-*****
+<p>For example, the light in the first figure changed state in response to the triggers lift switch and lower switch. But transition descriptions can be more complex. The full notation for transition descriptions is <code>trigger[guard] / behavior</code>, where each element is optional.</p>
 
-Table 14-1. Table view of light states and transitions—not UML notation
+<cite>This input processing state diagram models features a trigger, guard, and transition behavior along one of its transitions</cite>
+![input-processing-state.png]
 
-*****
+<p>A trigger is an event that may cause a transition. In a system that processes user input, a keystroke trigger may cause the system to change states from Gathering input to Processing input.</p>
 
-State/TriggerLight switch liftedLight switch lowered
-OffOn-
-On-Off
+<p>In addition to triggers , transitions can also be prompted by the completion of internal behavior, as discussed later in this chapter.</p>
 
-*****
+<p>A guard is a Boolean condition that permits or blocks the transition. When a guard is present, the transition is taken if the guard evaluates to true, but the transition is blocked if the guard is false.</p>
 
-State diagrams usually have an initial pseudostate and a final state, marking the start and end points of the state machine, respectively. An initial pseudostate is drawn with a filled circle, and a final state is drawn with two concentric circles with a filled inner circle
+<p>Transition behavior is an uninterruptible activity that executes while the transition takes place (if the transition is taken).</p>
 
-*****
+<p>Previous figure shows all three elements of a transition—trigger, guard, and transition behavior. It also shows that a state can transition to itself; this is known as a self-transition.</p>
 
-Figure 14-3. Initial pseudostate and final states in an AccountApplication state diagram
+<p>Next figure shows a state diagram for a CD player. Its transition descriptions feature an assortment of triggers, guards, and transition behavior.</p>
 
-*****
+<cite>CD player state diagram, featuring a variety of transition descriptions</cite>
+![cd-player-state-diagram.png]
 
-A state is a condition of being at a certain time. A state can be a passive quality, such as On and Off for the light object. A state can also be an active quality, or something that an object is doing. For example, a coffeemaker has the state Brewing during which it is brewing coffee. A state is drawn as a rounded rectangle with the name of the state in the center
+<p>If a trigger is specified but no guard is, then the transition is taken when the trigger occurs. This is useful for modeling a state change in response to an event. In next figure, the CD player moves from the Playing state to Stopped when press stop occurs.</p>
 
-*****
+<cite>The most common type of transition features only a trigger</cite>
+![common-type-of-transition.png]
 
-Figure 14-4. A rectangle with rounded corners and the name in the center is the most common way to draw a state
+<p>If a trigger and a guard are specified, then the transition is taken when the trigger occurs if the guard evaluates to true. Otherwise, the transition isn't taken.</p>
 
-*****
+<p>In below figure, the CD player moves from the Stopped state to Playing when press play occurs, but only if a disc is in the tray.</p>
 
-If the state is a "doing" state, you can write the behavior inside the state
+<cite>A guard will block a transition if it evaluates to false</cite>
+![transition-guard.png]
 
-*****
+<p>If neither a trigger nor a guard are specified, then the transition is taken immediately after the source state's internal behavior (if any) is complete. This is useful for modeling a transition caused by completion of internal behavior. Figure 14-10 shows a triggerless, guardless transition leading from Playing to Stopped, which means that the CD player moves to the Stopped state as soon as it finishes reading the disc.</p>
 
-Figure 14-5. Showing the behavior details of a "doing" state
+<cite>In this example, a transition is caused by the completion of internal behavior</cite>
+![transition-caused-by-completion-of-internal-behavior.png]
 
-*****
+<p>This transition is not seen in the full CD player state diagram in previous diagrams, but is included to explain triggerless transitions</p>
 
-A transition, shown with an arr
+<cite>Using guards to model a choice between paths</cite>
+![using-gaurds-for-choice.png]
 
-Brian Salehi, [12.04.21 17:03]
-ow, represents a change of states from a source state to a target state . A transition description, written along the arrow, describes the circumstances causing the state change to occur.
+<p>You can also use guards to show a choice between transitions: the transition whose guard evaluates to true is taken. In above diagram, after the CD player is done reading the disc, it will either move to the Stopped state if there are no more discs or transition back to the Playing state if there are more discs.</p>
 
-*****
+<p>In software, state diagrams model an object's life cycle, or the states it goes through during its lifespan. Next diagram shows the life cycle of an AccountApplication object as it passes from pending to approved or rejected and then to finalizing.</p>
 
-For example, the light in Figure 14-2 changed state in response to the triggers lift switch and lower switch. But transition descriptions can be more complex. The full notation for transition descriptions is trigger[guard] / behavior, where each element is optional,
---
-figure 14.6
+<cite>The life cycle of an AccountApplication object</cite>
+![lifecycle-of-accountapplication-object.png]
 
-*****
+<p>If an object has a simple life cycle, then it's not worth modeling its life cycle with a state diagram. For example, a ContactInformation object that stores an Author's contact information and doesn't change states other than being created and destroyed probably doesn't warrant a state diagram.</p>
 
-Figure 14-6. This input processing state diagram models features a trigger, guard, and transition behavior along one of its transitions
+<p>Internal behavior is any behavior that happens while the object is in a state. You've already seen do behavior, which is behavior that is ongoing while the state is active. Internal behavior is a more general concept that also includes entry and exit behavior.</p>
 
-*****
+<cite>Internal behavior and transitions of the Attack state</cite>
+![transitions-of-attack-state.png]
 
-A trigger is an event that may cause a transition. In a system that processes user input, a keystroke trigger may cause the system to change states from Gathering input to Processing input.
+<p>Internal behavior is written as <code>label / behavior</code>. The label indicates when the behavior executes—in other words, events or circumstances causing the behavior. There are three special labels: entry, exit, and do.</p>
 
-*****
+<p>Entry behavior happens as soon as the state becomes active and is written as <code>entry/behavior</code>. Exit behavior happens immediately before the state becomes inactive and is written as <code>exit/behavior</code>.</p>
 
-In addition to triggers , transitions can also be prompted by the completion of internal behavior, as discussed later in this chapter.
+<p>Unlike do behavior, entry and exit behaviors can't be interrupted.</p>
 
-*****
+<cite>The middle compartment shows internal behavior</cite>
+![middle-compartment.png]
 
-A guard is a Boolean condition that permits or blocks the transition. When a guard is present, the transition is taken if the guard evaluates to true, but the transition is blocked if the guard is false.
+<p>An internal transition is a transition that causes a reaction within a state, but doesn't cause the object to change states. An internal transition is different from a self transition because self transitions cause entry and exit behavior to occur whereas internal transitions don't.</p>
 
-*****
+<p>Internal transitions are written as <code>trigger [guard] / behavior</code>, and they are listed inside a state.</p>
 
-Transition behavior is an uninterruptible activity that executes while the transition takes place (if the transition is taken).
+<cite>The bottom compartment shows internal transitions</cite>
+![bottom-compartment.png]
 
-*****
+<p>Use internal transitions to model reactions to events that don't cause state changes. For example, you could use internal transitions to show that a pause-and-serve coffee-maker suspends dispensing the coffee when you remove the coffee pot but doesn't leave the <code>Brewing</code> state.</p>
 
-Figure 14-6 shows all three elements of a transition—trigger, guard, and transition behavior.
+<cite>An internal transition models a reaction while staying in the same state</cite>
+![staying-the-same-state-transition.png]
 
-*****
+<p>
+A key difference between UML state diagrams and other non-UML state diagrams you may be familiar with is that UML allows concurrent states, or being in multiple states at the same time. Composite states are what makes this possible.<br />
+Suppose the troll in the Neutral state is doing two things at the same time: Searching and Pacing. You can model two simultaneous states by using a composite state.
+</p>
 
-Figure 14-6 also shows that a state can transition to itself; this is known as a self-transition
+<cite>Composite states contain one or more state diagrams; if they contain more than one state diagram, then the state diagrams execute in parallel</cite>
+![composite-states.png]
 
-*****
+<p>A composite state is a state that contains one or more state diagrams. Each diagram belongs to a region, and regions are divided by a dotted line. A state in a region is referred to as a substate of the composite state.</p>
 
-Figure 14-7 shows a state diagram for a CD player. Its transition descriptions feature an assortment of triggers, guards, and transition behavior.
+<p>If substates have behavior that can run to completion, then the composite state is complete when every region's state diagram is complete.</p>
 
-*****
+<p>You've already seen initial pseudostates, which mark the start of a state diagram. There are additional pseudostates that are useful for directing the flow of traffic between states.</p>
 
-Figure 14-7. CD player state diagram, featuring a variety of transition descriptions
+<p>A choice pseudostate is used to emphasize that a Boolean condition determines which transition is followed. A choice has guards on each of its outgoing transitions, and the transition that is followed depends on the guard. In next figure, the CD player will go back to the Playing state if another disc is available or will go to the Stopped state if there are no more discs. Notice that this is an alternate, and cleaner, way to model the transition choice in previous figures.</p>
 
-*****
+<cite>The path followed after a choice depends on the guard</cite>
+![choice-depending-gaurd.png]
 
-If a trigger is specified but no guard is, then the transition is taken when the trigger occurs. This is useful for modeling a state change in response to an event. In Figure 14-8, the CD player moves from the Playing state to Stopped when press stop occurs.
+<p>Fork and join pseudostates show branching into concurrent states and then rejoining. For example, in next figure, the fork breaks the incoming transition into two transitions, allowing Searching and Pacing to happen simultaneously. The join then merges its two incoming transitions into one outgoing transition.</p>
 
-*****
+<cite>Forks and joins show concurrent states</cite>
+![fork-and-join-states.png]
 
-Figure 14-8. The most common type of transition features only a trigger
+<p>You can use special icons for transitions to draw attention to transitions and transition behavior. This is called a transition-oriented view. In this view, a trigger is represented with a receive signal icon and transition behavior is represented with a send signal icon. Next figure shows how previous figures can be drawn in this alternate notation.</p>
 
-*****
+<cite>The bottom diagram draws transitions and transition behavior as receive and send signals</cite>
+![receive-and-send-signal-transitions.png]
 
-If a trigger and a guard are specified, then the transition is taken when the trigger occurs if the guard evaluates to true. Otherwise, the transition isn't taken.
+<p>The main purpose of this notation is to visually emphasize sending and receiving signals.</p>
 
-*****
+<p>Protocol state machines are a special kind of state machine focusing on how a protocol, such as a communication protocol (e.g., TCP), works. The main difference between protocol state machines and behavioral state machines, which we've focused on previously, is that protocol state machines don't show behavior along transitions or inside states. Instead, they focus on showing a legal sequence of events and resulting states. Protocol state machines are drawn in a tabbed rectangle with the name of the state machine in the tab followed by <code>{protocol}</code>.</p>
 
-In Figure 14-9, the CD player moves from the Stopped state to Playing when press play occurs, but only if a disc is in the tray.
+<cite>Protocol state machine modeling the receiver side of a simplified communication protocol called My Communication Protocol (MCP)</cite>
+![protocol-state-machine-example.png]
 
-*****
-
-Figure 14-9. A guard will block a transition if it evaluates to false
-
-*****
-
-If neither a trigger nor a guard are specified, then the transition is taken immediately after the source state's internal behavior (if any) is complete. This is useful for modeling a transition caused by completion of internal behavior. Figure 14-10 shows a triggerless, guardless transition leading from Playing to Stopped, which means that the CD player moves to the Stopped state as soon as it finishes reading the disc.
---
-figure 14.10
-
-*****
-
-This transition is not seen in the full CD player state diagram in Figure 14-7, but is included to explain triggerless transitions
---
-figure 14.11
-
-*****
-
-Figure 14-10. In this example, a transition is caused by the completion of internal behavior
-
-*****
-
-Figure 14-11. Using guards to model a choice between paths
-
-*****
-
-You can also use guards to show a choice between transitions: the transition whose guard evaluates to true is taken. In Figure 14-11, after the CD player is done reading the disc, it will either move to the Stopped state if there are no more discs or transition back to the Playing state if there are more discs.
-
-*****
-
-In software, state diagrams model an object's life cycle, or the states it goes through during its lifespan. Figure 14-12 shows the life cycle of an AccountApplication object as it passes from pending to approved or rejected and then to finalizing.
-
-*****
-
-Figure 14-12. The life cycle of an AccountApplication object
-
-*****
-
-If an object has a simple life cycle, then it's not worth modeling its life cycle with a state diagram. For example, a ContactInformation object that stores an Author's
-
-Brian Salehi, [12.04.21 17:03]
-contact information and doesn't change states other than being created and destroyed probably doesn't warrant a state diagram.
-
-*****
-
-Internal behavior is any behavior that happens while the object is in a state. You've already seen do behavior, which is behavior that is ongoing while the state is active. Internal behavior is a more general concept that also includes entry and exit behavior.
-
-*****
-
-Figure 14-14. Internal behavior and transitions of the Attack state
-
-*****
-
-Internal behavior is written as label / behavior. The label indicates when the behavior executes—in other words, events or circumstances causing the behavior. There are three special labels: entry, exit, and do.
-
-*****
-
-Entry behavior happens as soon as the state becomes active and is written as entry/behavior. Exit behavior happens immediately before the state becomes inactive and is written as exit/behavior.
-
-*****
-
-Unlike do behavior, entry and exit behaviors can't be interrupted.
-
-*****
-
-Figure 14-15. The middle compartment shows internal behavior
-
-*****
-
-An internal transition is a transition that causes a reaction within a state, but doesn't cause the object to change states. An internal transition is different from a self transition (see Figure 14-11) because self transitions cause entry and exit behavior to occur whereas internal transitions don't.
-Internal transitions are written as trigger [guard] / behavior, and they are listed inside a state.
-
-*****
-
-Figure 14-16. The bottom compartment shows internal transitions
-
-*****
-
-Use internal transitions to model reactions to events that don't cause state changes. For example, you could use internal transitions to show that a pause-and-serve coffee-maker suspends dispensing the coffee when you remove the coffee pot but doesn't leave the Brewing state
-
-*****
-
-Figure 14-17. An internal transition models a reaction while staying in the same state
-
-*****
-
-A key difference between UML state diagrams and other non-UML state diagrams you may be familiar with is that UML allows concurrent states, or being in multiple states at the same time. Composite states are what makes this possible.
-Suppose the troll in the Neutral state is doing two things at the same time: Searching and Pacing. You can model two simultaneous states by using a composite state
-
-*****
-
-Figure 14-18. Composite states contain one or more state diagrams; if they contain more than one state diagram, then the state diagrams execute in parallel
-
-*****
-
-A composite state is a state that contains one or more state diagrams. Each diagram belongs to a region, and regions are divided by a dotted line. A state in a region is referred to as a substate of the composite state.
-
-*****
-
-If substates have behavior that can run to completion, then the composite state is complete when every region's state diagram is complete.
-
-*****
-
-You've already seen initial pseudostates, which mark the start of a state diagram. There are additional pseudostates that are useful for directing the flow of traffic between states.
-
-*****
-
-A choice pseudostate is used to emphasize that a Boolean condition determines which transition is followed. A choice has guards on each of its outgoing transitions, and the transition that is followed depends on the guard. In Figure 14-19, the CD player will go back to the Playing state if another disc is available or will go to the Stopped state if there are no more discs. Notice that this is an alternate, and cleaner, way to model the transition choice in Figure 14-11.
-
-*****
-
-Figure 14-19. The path followed after a choice depends on the guard
-
-*****
-
-Fork and join pseudostates show branching into concurrent states and then rejoining. For example, in Figure 14-20, the fork breaks the incoming transition into two transitions, allowing Searching and Pacing to happen simultaneously. The join then merges its two incoming transitions into one outgoing transition.
-
-*****
-
-Figure 14-20. Forks and joins show concurrent states
-
-*****
-
-You can use special icons for transitions to draw attention to transitions and transition behavior. This is cal
-
-Brian Salehi, [12.04.21 17:03]
-led a transition-oriented view.
-In this view, a trigger is represented with a receive signal icon and transition behavior is represented with a send signal icon. Figure 14-21 shows how Figure 14-6 can be drawn in this alternate notation.
-
-*****
-
-Figure 14-21. The bottom diagram draws transitions and transition behavior as receive and send signals
-
-*****
-
-The main purpose of this notation is to visually emphasize sending and receiving signals.
-
-*****
-
-Protocol state machines are a special kind of state machine focusing on how a protocol, such as a communication protocol (e.g., TCP), works. The main difference between protocol state machines and behavioral state machines, which we've focused on previously, is that protocol state machines don't show behavior along transitions or inside states. Instead, they focus on showing a legal sequence of events and resulting states. Protocol state machines are drawn in a tabbed rectangle with the name of the state machine in the tab followed by {protocol}
-
-*****
-
-Figure 14-22. Protocol state machine modeling the receiver side of a simplified communication protocol called My Communication Protocol (MCP)
-
-*****
-
-Because protocol state machines don't show behavior, you can't model what the system is doing in response—for example, if it's sending acknowledgements back. But it can be useful for showing how to work with an object or system, such as specifying a communication protocol or an expected call sequence for an object's operations.
-
---
-Reading books with ReadEra
-https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
+<p>Because protocol state machines don't show behavior, you can't model what the system is doing in response—for example, if it's sending acknowledgements back. But it can be useful for showing how to work with an object or system, such as specifying a communication protocol or an expected call sequence for an object's operations.</p>
