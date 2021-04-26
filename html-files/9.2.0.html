@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Databases</title>
+<title>MongoDB</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -262,7 +262,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class='breadcrumb-item active'>Databases</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/9.0.html">Databases</a></li>
+<li class='breadcrumb-item active'>MongoDB</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -276,8 +277,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Databases" class="anchor" aria-hidden="true" href="#Databases">
-Databases
+<a id="MongoDB" class="anchor" aria-hidden="true" href="#MongoDB">
+MongoDB
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -285,24 +286,10 @@ Databases
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Databases are listed here irrespective of their relational or non-relational types.</p>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design, 4th Edition - Michael J Hernandez</li>
-<li class='list-group-item'>Database Systems: Design, Implementation, & Management, 13th Edition - Carlos Coronel, Steven Morris</li>
-</ul>
+<p>MongoDB is a non-relational database.</p>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.1.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/databases/mysql">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/databases/mysql/sql-statements">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/9.3.0.html">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -315,98 +302,6 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="#9-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. MySQL
-	<span class="badge badge-primary badge-pill">14</span>
-</a>
-<div class="list-group collapse" id="9-1-0">
-<a href="/databases/mysql/database-setup" class="list-group-item group-child">
-	1. Fundamentals
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="9-1-1-0">
-<a href="/databases/mysql/database-setup/comments" class="list-group-item group-child">
-	1. Comments
-	
-</a>
-<a href="/databases/mysql/database-setup/create-database" class="list-group-item group-child">
-	2. Create Database
-	
-</a>
-<a href="/databases/mysql/database-setup/use-database" class="list-group-item group-child">
-	3. Use Database
-	
-</a>
-<a href="/databases/mysql/database-setup/create-table" class="list-group-item group-child">
-	4. Create Table
-	
-</a>
-<a href="/databases/mysql/database-setup/add-column" class="list-group-item group-child">
-	5. Add Column
-	
-</a>
-<a href="/databases/mysql/database-setup/delete-column" class="list-group-item group-child">
-	6. Delete Column
-	
-</a>
-<a href="/databases/mysql/database-setup/create-index" class="list-group-item group-child">
-	7. Create Index
-	
-</a>
-<a href="/databases/mysql/database-setup/delete-index" class="list-group-item group-child">
-	8. Delete Index
-	
-</a>
-</div>
-<a href="/databases/mysql/querying-database" class="list-group-item group-child">
-	2. 
-	<span class="badge badge-primary badge-pill">2</span>
-</a>
-<div class="list-group collapse" id="9-1-2-0">
-<a href="/databases/mysql/querying-database/Databases" class="list-group-item group-child">
-	1. Query a Single Table
-	
-</a>
-<a href="/databases/mysql/querying-database/join-tables" class="list-group-item group-child">
-	2. Join Tables
-	
-</a>
-</div>
-<a href="/9.1.3.0.html" class="list-group-item group-child">
-	3. 
-	<span class="badge badge-primary badge-pill">3</span>
-</a>
-<div class="list-group collapse" id="9-1-3-0">
-<a href="/9.1.3.1.html" class="list-group-item group-child">
-	1. Add Row
-	
-</a>
-<a href="/9.1.3.2.html" class="list-group-item group-child">
-	2. Update Row
-	
-</a>
-<a href="/9.1.3.3.html" class="list-group-item group-child">
-	3. Delete Row
-	
-</a>
-</div>
-<a href="/databases/mysql/sql-statements" class="list-group-item group-child">
-	4. 
-	
-</a>
-</div>
-<a href="#9-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. MongoDB
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="9-2-0">
-</div>
-<a href="#9-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. 
-	<span class="badge badge-primary badge-pill">0</span>
-</a>
-<div class="list-group collapse" id="9-3-0">
-</div>
 </div>
 <script>
 function darkmode() {

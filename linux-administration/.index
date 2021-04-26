@@ -6,5 +6,4 @@ package-management
 process-management
 user-management
 stream-processing
-mysql
 hardening

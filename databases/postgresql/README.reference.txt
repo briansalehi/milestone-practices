@@ -1,0 +1,2 @@
+#Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design, 4th Edition - Michael J Hernandez
+#Database Systems: Design, Implementation, & Management, 13th Edition - Carlos Coronel, Steven Morris
