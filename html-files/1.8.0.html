@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>MySQL</title>
+<title>Linux Security Hardening</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -263,7 +263,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/1.0.html">Linux Administration</a></li>
-<li class='breadcrumb-item active'>MySQL</li>
+<li class='breadcrumb-item active'>Linux Security Hardening</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -277,28 +277,47 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="MySQL" class="anchor" aria-hidden="true" href="#MySQL">
-MySQL
+<a id="Linux-Security-Hardening" class="anchor" aria-hidden="true" href="#Linux-Security-Hardening">
+Linux Security Hardening
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>SQL is a freeform language. That means that you can include line breaks, spaces, and indentation without affecting the way the database interprets the code.</p>
+<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-warning" role="progressbar" style="width: 66%; background-color: #ffc107 !important;" aria-valuenow="2" aria-valuemin="1" aria-valuemax="3">Medium</div></div></div>
+<p>First, there are quite a few websites that specialize in network security news. Examples include <a href="https://packetstormsecurity.com/">Packet Storm Security</a> and <a href="https://thehackernews.com/">The Hacker News</a>. Regular tech news sites and Linux news websites, such as Ars Technica, Fudzilla, The Register, ZDNet, and LXer, also carry reports about network security breaches. And, if you'd rather watch videos than read, you'll find plenty of good YouTube channels, such as BeginLinux Guru.</p>
 
-<p>In addition, SQL isn't case-sensitive. That means that you can use uppercase or lowercase or combination of both without affecting the way the database interprets the code.</p>
-
-<h4>Coding Recommendations</h4>
-
+<p>The links to security news websites are as follows:</p>
 <ul>
-	<li>Capitalize all keywords, and use lowercase for the other code in a SQL statement.</li>
-	<li>Separate the words in names with underscores, as in invoice_number.</li>
-	<li>Start each clause on a new line.</li>
-	<li>Break long clauses into multiple lines and indent continued lines.</li>
-	<li>Use <i>comments</i> only for portions of code that are difficult to understand. Then, make sure that the comments are correct and up-to-date.</li>
+<li>Packet Storm Security: https://packetstormsecurity.com/</li>
+<li>The Hacker News: https://thehackernews.com/</li>
 </ul>
+
+<p>Links to general tech news sites are as follows:</p>
+<ul>
+<li>Ars Technica: https://arstechnica.com/</li>
+<li>Fudzilla: https://www.fudzilla.com/</li>
+<li>The Register: https://www.theregister.co.uk/</li>
+<li>ZDNet: https://www.zdnet.com/</li>
+</ul>
+
+<p>You can check out some general Linux learning resources as well as Linux news site:</p>
+<ul>
+<li>LXer: http://lxer.com/</li>
+<li>BeginLinux Guru on YouTube: https://www.youtube.com/channel/UC88eard_2sz89an6unmlbeA(Full disclosure: I am the world-famous BeginLinux Guru.)</li>
+</ul>
+
+<p>Further readings:</p>
+<ul>
+<li>Linux Security: https://linuxsecurity.com/</li>
+</ul>
+
+<p>Finally, regardless of which Linux distribution you're using, be sure to keep up with the news and current documentation for your Linux distribution. Distribution maintainers should have a way of letting you know if a security problem crops up in their products.</p>
+
+<p>Spend some time perusing the Common Vulnerabilities and Exposures database, and you'll soon see why it's so important to keep your systems updated.</p>
+
+<p>You can find the Common Vulnerabilities and Exposures database here: https://cve.mitre.org/.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -310,15 +329,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Database Design for Mere Mortals: A Hands-On Guide to Relational Database Design, 4th Edition - Michael J Hernandez</li>
-<li class='list-group-item'>Database Systems: Design, Implementation, & Management, 13th Edition - Carlos Coronel, Steven Morris</li>
-<li class='list-group-item'>Murach's MySQL - Joel Murach</li>
-<li class='list-group-item'>MySQL Concurrency: Locking and Transactions for MySQL Developers and DBAs - Jesper Wisborg Krogh</li>
-<li class='list-group-item'>SQL Injection Attacks and Defense 2nd Edition - Justin Clarke, Kevvie Fowler</li>
+<li class='list-group-item'>Mastering Linux Security and Hardening, 2nd Edition - Donald A. Tevault</li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/linux-administration/stream-processing/awk">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/mysql/database-setup">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/linux-administration/hardening/updating">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -331,76 +346,10 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="#1-8-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Fundamentals
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="1-8-1-0">
-<a href="/linux-administration/mysql/database-setup/comments" class="list-group-item group-child">
-	1. Comments
+<a href="/linux-administration/hardening/updating" class="list-group-item">
+	1. Updating Linux
 	
 </a>
-<a href="/linux-administration/mysql/database-setup/create-database" class="list-group-item group-child">
-	2. Create Database
-	
-</a>
-<a href="/linux-administration/mysql/database-setup/use-database" class="list-group-item group-child">
-	3. Use Database
-	
-</a>
-<a href="/linux-administration/mysql/database-setup/create-table" class="list-group-item group-child">
-	4. Create Table
-	
-</a>
-<a href="/linux-administration/mysql/database-setup/add-column" class="list-group-item group-child">
-	5. Add Column
-	
-</a>
-<a href="/linux-administration/mysql/database-setup/delete-column" class="list-group-item group-child">
-	6. Delete Column
-	
-</a>
-<a href="/linux-administration/mysql/database-setup/create-index" class="list-group-item group-child">
-	7. Create Index
-	
-</a>
-<a href="/linux-administration/mysql/database-setup/delete-index" class="list-group-item group-child">
-	8. Delete Index
-	
-</a>
-</div>
-<a href="#1-8-2-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>2. 
-	<span class="badge badge-primary badge-pill">2</span>
-</a>
-<div class="list-group collapse" id="1-8-2-0">
-<a href="/linux-administration/mysql/querying-database/query-single-table" class="list-group-item group-child">
-	1. Query a Single Table
-	
-</a>
-<a href="/linux-administration/mysql/querying-database/join-tables" class="list-group-item group-child">
-	2. Join Tables
-	
-</a>
-</div>
-<a href="#1-8-3-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>3. 
-	<span class="badge badge-primary badge-pill">3</span>
-</a>
-<div class="list-group collapse" id="1-8-3-0">
-<a href="/1.8.3.1.html" class="list-group-item group-child">
-	1. Add Row
-	
-</a>
-<a href="/1.8.3.2.html" class="list-group-item group-child">
-	2. Update Row
-	
-</a>
-<a href="/1.8.3.3.html" class="list-group-item group-child">
-	3. Delete Row
-	
-</a>
-</div>
 </div>
 <script>
 function darkmode() {

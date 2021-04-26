@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Encapsulation</title>
+<title>Querying Database</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -262,9 +262,9 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/8.0.html">Java SE Practices</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/8.4.0.html">Object Orientation</a></li>
-<li class='breadcrumb-item active'>Encapsulation</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/9.0.html">Databases</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/9.1.0.html">MySQL</a></li>
+<li class='breadcrumb-item active'>Querying Database</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Encapsulation" class="anchor" aria-hidden="true" href="#Encapsulation">
-Encapsulation
+<a id="Querying-Database" class="anchor" aria-hidden="true" href="#Querying-Database">
+Querying Database
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -287,71 +287,392 @@ Encapsulation
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-Encapsulation means limiting access to properties using access modifiers (like private) and grant access to those modifiers using methods (getters and setters) so we (as class designer) can hide (and force) some functionalities in these methods. (e.g. input validation)
+<p>The <code>SELECT</code> clause is always the first clause in a <code>SELECT</code> statement. It identifies the columns in the result set. These columns are retrieved from the <i>base tables</i> named in the <code>FROM</code> clause.</p>
 
+<p>The <code>WHERE</code>, <code>ORDER BY</code>, and <code>LIMIT</code> clauses are optional.</p>
+
+<p>The <code>ORDER BY</code> clause determines how the rows in the result set are sorted, and the <code>WHERE</code> clause determines which rows in the base table are included in the result set.</p>
+
+<p>The <code>WHERE</code> clause specifies a search condition that's used to filter the rows in the base table.</p>
+
+<p>The <code>LIMIT</code> clause limits the number of rows in the result set.</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [database]&gt;" data-output="2-5">
+	<code>
+		SELECT select_list
+		[FROM table_source]
+		[WHERE search_condition]
+		[ORDER BY order_by_list]
+		[LIMIT row_limit];
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that retrieves all the data from users table:</p>
+
+<pre class="language-sql command-line" data-lines="1" data-prompt="MariaDB [milestone]&gt;" data-output="2-8">
+	<code>
+		SELECT * FROM users;
+		+--------+----------+----------+-----------+----------+--------------------+------------+--------+
+		| userid | username | password | firstname | lastname | email              | join_date  | active |
+		+--------+----------+----------+-----------+----------+--------------------+------------+--------+
+		|      1 | janedoe  | 12345    | Jane      | Doe      | janedoe@domain.com | 2021-04-26 |      1 |
+		|      2 | johndoe  | 12345    | John      | Doe      | johndoe@domain.com | 2021-04-26 |      1 |
+		+--------+----------+----------+-----------+----------+--------------------+------------+--------+
+		2 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that retrieves three columns from each row, sorted in descending sequence by <code>join_date</code>:</p>
+
+<pre class="language-sql command-line" data-lines="3" data-prompt="MariaDB [milestone]&gt;" data-output="2-10">
+	<code>
+		SELECT username, email, join_date
+		FROM users
+		ORDER BY join_date DESC;
+		+----------+--------------------+------------+
+		| username | email              | join_date  |
+		+----------+--------------------+------------+
+		| janedoe  | janedoe@domain.com | 2021-04-26 |
+		| johndoe  | johndoe@domain.com | 2021-05-03 |
+		+----------+--------------------+------------+
+		2 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that retrieves all users joined between given dates:</p>
+
+<pre class="language-sql command-line" data-lines="3" data-prompt="MariaDB [milestone]&gt;" data-output="2-10">
+	<code>
+		SELECT username, email, join_date
+		FROM users
+		WHERE join_date BETWEEN '2021-04-01' AND '2021-04-30'
+		ORDER BY join_date;
+		+----------+--------------------+------------+
+		| username | email              | join_date  |
+		+----------+--------------------+------------+
+		| janedoe  | janedoe@domain.com | 2021-04-26 |
+		+----------+--------------------+------------+
+		1 row in set (0.001 sec)
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that returns an empty set:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="1">
+	<code>
+		Empty set (0.000 sec)
+	</code>
+</pre>
+
+<p>There are four ways to code column specifications:</p>
+
+<ul>
+	<li>All columns: <code>*</code></li>
+	<li>Column name: <code>column_name</code></li>
+	<li>Result of a calculation: Arithmetic expressions</li>
+	<li>Result of a function: Functions</li>
+</ul>
+
+<p>The expanded syntax of the <code>SELECT</code> clause is as follows:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="2,3">
+	<code>
+		SELECT [ALL | DISTINCT]
+			column_specification [[AS] column_alias]
+			[, column_specification [[AS] column_alias]] ...
+	</code>
+</pre>
+
+<p>The <code>ALL</code> and <code>DISTINCT</code> keywords specify whether or not duplicate rows are returned.</p>
+
+<p>A <code>SELECT</code> statement that renames the columns in the result set:</p>
+
+<pre class="language-sql command-line" data-lines="1,2" data-prompt="MariaDB [milestone]&gt;" data-output="2-9">
+	<code>
+		SELECT username, email, join_date AS joined
+		FROM users;
+		+----------+--------------------+------------+
+		| username | email              | joined     |
+		+----------+--------------------+------------+
+		| janedoe  | janedoe@domain.com | 2021-04-26 |
+		| johndoe  | johndoe@domain.com | 2021-04-26 |
+		+----------+--------------------+------------+
+		2 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>Altough, you're probably familiar with the addition, subtraction, multiplication, and division operators, you might not be familiar with the <code>MOD</code> or <code>DIV</code> operators. <code>MOD</code> returns the remainder of a division of two integers, and <code>DIV</code> returns the integer quotient of two numbers.</p>
+
+<p>The arithmetic operators in order of precedence is as follows:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col"><b>Operator</b></th>
+			<th scope="col"><b>Name</b></th>
+			<th scope="col"><b>Order of Precedence</b></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>*</code></td>
+			<td>Multiplication</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td><code>/</code></td>
+			<td>Division</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td><code>DIV</code></td>
+			<td>Integer Division</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td><code>% (MOD)</code></td>
+			<td>Modulo</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td><code>+</code></td>
+			<td>Addition</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td><code>-</code></td>
+			<td>Subtraction</td>
+			<td>2</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>You can use parentheses to control the sequence of arithmetic operations.</p>
+
+<p><code>CONCAT</code> function joins strings into one.</p>
+
+<p>To code a string literal, you can enclose the value in either single quotes or double quotes.</p>
+
+<p>You don't have to code <code>FROM</code> clauses in <code>SELECT</code> statements. This makes it easy for you to code <code>SELECT</code> statements that test expressions and functions like those that you've seen so far.</p>
+
+<pre class="language-sql command-line" data-lines="1" data-prompt="MariaDB [milestone]&gt;" data-output="2-7">
+	<code>
+		SELECT CONCAT('John', ' Doe') AS fullname;
+		+----------+
+		| fullname |
+		+----------+
+		| John Doe |
+		+----------+
+		1 row in set (0.000 sec)
+	</code>
+</pre>
+
+<p>The general syntax of the <code>CONCAT</code> function is:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="">
+	<code>
+		CONCAT(string1[, string2]...);
+	</code>
+</pre>
+
+<p>Three more functions to learn is <code>LEFT</code> function which operates on strings, the <code>DATE_FORMAT</code> function which operates on dates, and the <code>ROUND</code> function which operates on numbers.</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="2,3">
+	<code>
+		LEFT(string, number_of_characters);
+		DATE_FORMAT(date, format_string);
+		ROUND(number[, number_of_decimal_places]);
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that uses the <code>LEFT</code> function:</p>
+
+<pre class="language-sql command-line" data-lines="1,2" data-prompt="MariaDB [milestone]&gt;" data-output="2-9">
+	<code>
+		SELECT username, CONCAT(LEFT(firstname, 1), LEFT(lastname, 1)) AS initials
+		FROM users;
+		+----------+----------+
+		| username | initials |
+		+----------+----------+
+		| janedoe  | JD       |
+		| johndoe  | JD       |
+		+----------+----------+
+		2 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that uses the <code>DATE_FORMAT</code> function:</p>
+
+<pre class="language-sql command-line" data-lines="1,2" data-prompt="MariaDB [milestone]&gt;" data-output="2-9">
+	<code>
+		SELECT CONCAT(firstname, ' ', lastname) as user, DATE_FORMAT(join_date, '%d/%m/%Y') AS joined
+		FROM users;
+		+----------+------------+
+		| user     | joined     |
+		+----------+------------+
+		| Jane Doe | 26/04/2021 |
+		| John Doe | 26/04/2021 |
+		+----------+------------+
+		2 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that uses the <code>ROUND</code> function:</p>
+
+<pre class="language-sql command-line" data-lines="1" data-prompt="MariaDB [milestone]&gt;" data-output="2-7">
+	<code>
+		SELECT ROUND(10 / 3) AS result;
+		+--------+
+		| result |
+		+--------+
+		|      3 |
+		+--------+
+		1 row in set (0.000 sec)
+	</code>
+</pre>
+
+<p>Yet, another function to use is <code>CURRENT_DATE</code> or <code>CURRENT_TIMESTAMP</code>, which supplies a date and date time respectively.</p>
+
+<pre class="language-sql command-line" data-lines="1,2" data-prompt="MariaDB [milestone]&gt;" data-output="2-7">
+	<code>
+		SELECT CURRENT_DATE() as date, CURRENT_TIMESTAMP() as datetime;
+		+------------+---------------------+
+		| date       | datetime            |
+		+------------+---------------------+
+		| 2021-04-26 | 2021-04-26 22:19:29 |
+		+------------+---------------------+
+		1 row in set (0.000 sec)
+	</code>
+</pre>
+
+<p>By default, all of the rows in the base table that satisfy the search condition in the <code>WHERE</code> clause are included in the result set. In some cases, though, that means that the result set will contain duplicate rows, or rows whose column values are identical. If that's not what you want, you can include the <code>DISTINCT</code> keyword in the <code>SELECT</code> clause to eliminate the duplicate rows.</p>
+
+<p>A <code>SELECT</code> statement that returns all rows:</p>
+
+<pre class="language-sql command-line" data-lines="1-3" data-prompt="MariaDB [milestone]&gt;" data-output="2-12">
+	<code>
+		SELECT city
+		FROM users
+		ORDER BY city;
+		+-------------+
+		| city        |
+		+-------------+
+		| California  |
+		| Los Angeles |
+		| Los Angeles |
+		| New York    |
+		+-------------+
+		4 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>A <code>SELECT</code> statement that eliminates duplicates:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="2-11">
+	<code>
+		SELECT DISTINCT city
+		FROM users
+		ORDER BY city;
+		+-------------+
+		| city        |
+		+-------------+
+		| California  |
+		| Los Angeles |
+		| New York    |
+		+-------------+
+		3 rows in set (0.000 sec)
+	</code>
+</pre>
+
+<p>Note that <code>DISTINCTROW</code> is a synonym for <code>DISTINCT</code>.</p>
+
+<p>The <code>ALL</code> keyword causes all rows matching the search condition to be included in the result set, regardless of whether rows are duplicated. Since this is the default, you'll usually omit the <code>ALL</code> keyword.</p>
+
+<p>To retrieve fewer rows and restrict the result set, you can use <code>WHERE</code> clause.</p>
+
+<p>The syntax of the <code>WHERE</code> clause with comparison operators:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="">
+	<code>
+		WHERE expression_1 operator expression_2;
+	</code>
+</pre>
+
+<p>The comparison Operators are as follows:</p>
+
+<ul>
+	<li>=  Equal</li>
+	<li>&lt;  Less than</li>
+	<li>&gt;  Greater than</li>
+	<li>&lt;= Less than or equal to</li>
+	<li>&gt;= Greater than or equal to</li>
+	<li>&lt;&gt; Not equal</li>
+	<li>!= Not equal</li>
+</ul>
+
+<p>Whenever possible, you should compare expressions that have similar data types. If you compare expressions that have different data types, MySQL implicitly converts the data type for you. Generally, this implicit conversion is acceptable. however, implicit conversions can occasionally yield unexpected results. To prevent this, you can explicitly convert the data type by using the <code>CAST</code> or <code>CONVERT</code> functions.</p>
+
+<p>You can use the <code>AND</code> and <code>OR</code> operators to combine two or more search conditions into a compound condition. And you can use the <code>NOT</code> operator to negate a search condition.</p>
+
+<p>You can use the <code>NOT</code> operator to negate a condition. Though, it will make the search condition unclear, so you should rephrase the condition whenever possible so that you don't use <code>NOT</code>.</p>
+
+<p>When MySQL evaluates a compound condition, it evaluates the operators in this sequence: 1. <code>NOT</code>, 2. <code>AND</code>, 3. <code>OR</code>. You can use parentheses to override this order or to clarify the sequence in which the operations are evaluated.</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="2-7">
+	<code>
+		WHERE (condition1 OR condition2) AND condition3 > 0;
+		+-------------+
+		| Result Set  |
+		+-------------+
+		| ...         |
+		+-------------+
+		11 rows in set (0.001 sec)
+	</code>
+</pre>
+
+<p>When you use <code>IN</code> operator, the value of the test expression is compared with the list of expressions in the <code>IN</code> phrase. If the test expression is equal to one of the expressions in the list, the row is included in the query results.</p>
+
+<p>You can also use <code>NOT</code> operator with the <code>IN</code> phrase to test for a value that's not in a list.</p>
+
+<p>The syntax of the <code>WHERE</code> clause with an <code>IN</code> phrase:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="2">
+	<code>
+		WHERE test_expression [NOT] IN
+			({subquery|expression_1 [, expression_2]...})
+	</code>
+</pre>
+
+<p>Examples of the <code>IN</code> phrase are as follows:</p>
+
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [milestone]&gt;" data-output="2-8">
+	<code>
+		Where terms_id IN (1,3,4);
+
+		WHERE vendor_state NOT IN ('CA', 'NV', 'OR');
+
+		WHERE vendor_id IN
+			(SELECT vendor_id
+			 FROM invoices
+			 WHERE invoice_date = '2021-04-26');
+	</code>
+</pre>
 <hr />
-  <cite>MainEncapsulation.java</cite>
-<pre class="line-numbers" >
-<code class="language-java">
-    public class MainEncapsulation {
-        public static void main(String[] args) {
-            Encapsulation encapsulated = new Encapsulation();
-    
-            encapsulated.setName(&quot;Joe&quot;);
-            System.out.println(encapsulated.getName());
-    
-            encapsulated.setNumber(10);
-            System.out.println(encapsulated.getNumber());
-    
-            encapsulated.setNumber(-1);
-        }
-    }
-    
-</code>
-</pre>
-  <cite>Encapsulation.java</cite>
-<pre class="line-numbers" >
-<code class="language-java">
-    public class Encapsulation {
-        private String name;
-        private int number;
-    
-        public String getName() {
-            return name + &quot; we (as a class designer) added this extra words using ENCAPSULATION! :)) &quot;;
-        }
-    
-        public void setName(String name) {
-            this.name = name;
-        }
-    
-        public int getNumber() {
-            return number;
-        }
-    
-        public void setNumber(int number) {
-            // We don&apos;t want the number be less than zero
-            // So let&apos;s add some input validation before setting &quot;number&quot; using the power of ENCAPSULATION
-            if (number &gt; 0)
-                this.number = number;
-            else
-            {
-                System.out.println(&quot;You can&apos;t set number as a negative one!&quot;);
-            }
-        }
-    }
-    
-</code>
-</pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='2-3'>
-<code>
-compiler options ./Encapsulation.java ./MainEncapsulation.java
-
-</code>
-</pre>
+<h3>
+<a id="References" class="anchor" aria-hidden="true" href="#References">
+References
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<ul class="list-group">
+<li class='list-group-item'>Murach's MySQL - Joel Murach: <span style='color: red'> chapter 3 and 4</span></li>
+</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/8.4.0.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/databases">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/databases/mysql/sql-statements">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/9.1.3.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -580,7 +901,7 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

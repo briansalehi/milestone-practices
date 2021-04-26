@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Neural Networks Structure</title>
+<title>Binary Numbers</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -262,9 +262,9 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/11.0.html">Machine Learning</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/11.1.0.html">Neural Networks</a></li>
-<li class='breadcrumb-item active'>Neural Networks Structure</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/12.0.html">Electronics</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/12.1.0.html">Digital Design</a></li>
+<li class='breadcrumb-item active'>Binary Numbers</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,124 +278,29 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Neural-Networks-Structure" class="anchor" aria-hidden="true" href="#Neural-Networks-Structure">
-Neural Networks Structure
+<a id="Binary-Numbers" class="anchor" aria-hidden="true" href="#Binary-Numbers">
+Binary Numbers
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-Real biological neurons take many inputs, not just one.
-Similarly, we simply combine input signals by adding them up, and the
-resultant sum is the input to the sigmoid function which controls the output.
-This reflects how real neurons work. The following diagram illustrates this
-idea of combining inputs and then applying the threshold to the combined sum:
+<hr />
+  <cite>binary-numbers.txt</cite>
+<pre class="line-numbers" >
+<code class="language-txt">
+</code>
+</pre>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='2-0'>
+<code>
 
-<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function-demonstration-in-a-node.png" alt="sigmoid function demonstration in a node" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/sigmoid-function-demonstration-in-a-node.png"'>
-
-If the combined signal is not large enough then the effect of the sigmoid
-threshold function is to suppress the output signal. If the sum x is large
-enough, the effect of the sigmoid is to fire the neuron. Interestingly, if only
-one of the several inputs is large and the rest small, this may be enough to
-fire the neuron. What's more, the neuron can fire if some of the inputs
-are individually almost, but not quite, large enough because when combined the
-signal is large enough to overcome the threshold.
-
-<img class="img-responsive" src="/machine-learning/neural-networks/three-layers-neural-networks-sample-without-weights.png" alt="three layers neural networks sample without weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/three-layers-neural-networks-sample-without-weights.png"'>
-
-The following diagram again shows the connected nodes, but this time a weight
-is shown associated with each connection. A low weight will de-emphasise a
-signal, and a high weight will amplify it.
-
-The weight w2,3 is simply the weight associated with the signal that passed
-between node 2 in a layer to node 3 in the next layer. So w1,2 is the weight
-that diminishes or amplifies the signal between node 1 and node 2 in the next
-layer.
-
-<img class="img-responsive" src="/machine-learning/neural-networks/three-layers-neural-networks-sample-with-weights.png" alt="three layers neural networks sample with weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/three-layers-neural-networks-sample-with-weights.png"'>
-
-You might reasonably challenge this design and ask yourself why each node
-should connect to every other node in the previous and next layer. They
-don't have to and you could connect them in all sorts of creative ways. We
-don't because the uniformity of this full connectivity is actually easier
-to encode as computer instructions, and because there shouldn't be any big
-harm in having a few more connections than the absolute minimum that might be
-needed for solving a specific task. The learning process will de-emphasise
-those few extra connections if they aren't actually needed.
-
-What do we mean by this? It means that as the network learns to improve its
-outputs by refining the link weights inside the network, some weights become
-zero or close to zero. Zero, or almost zero, weights means those links
-don't contribute to the network because signals don't pass. A zero
-weight means the signals are multiplied by zero, which results in zero, so the
-link is effectively broken.
-
-we'll try doing the workings out with a smaller neural network with only 2
-layers, each with 2 neurons, as shown below:
-
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-without-weights.png" alt="two layers neural networks without weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-without-weights.png"'>
-
-Let's imagine the two inputs are 1.0 and 0.5. The following shows these inputs
-entering this smaller neural network.
-
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-inputs.png" alt="two layers neural networks with inputs" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-with-inputs.png"'>
-
-Just as before, each node turns the sum of the inputs into an output using an
-activation function. We'll also use the sigmoid function that we saw before,
-where x is the sum of incoming signals to a neuron, and y is the output of
-that neuron.
-
-<img class="img-responsive" src="/machine-learning/neural-networks/sigmoid-function.png" alt="sigmoid function" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/sigmoid-function.png"'>
-
-The x in this function is the combined input into a node. That combination was
-the raw outputs from the connected nodes in the previous layer, but moderated
-by the link weights.
-
-The following diagram shows all these numbers now marked.
-
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-weights.png" alt="two layers neural networks with weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-with-weights.png"'>
-
-The first layer of nodes is the input layer, and it doesn't do anything other
-than represent the input signals. That is, the input nodes don't apply an
-activation function to the input.
-
-The following diagram is like the one we saw previously but now includes the
-need to moderate the incoming signals with the link weights.
-
-<img class="img-responsive" src="/machine-learning/neural-networks/node-with-input-and-weights.png" alt="node with input and weights" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/node-with-input-and-weights.png"'>
-
-So let's first focus on node 1 in the layer 2.
-
-The combined moderated input is:
-
-x = (output from first node * link weight) + (output from second node * link weight)
-x = (1.0 * 0.9) + (0.5 * 0.3)
-x = 0.9 + 0.15
-x = 1.05
-
-If we didn't moderate the signal, we'd have a very simple addition of the
-signals 1.0 + 0.5, but we don't want that. It is the weights that do the
-learning in a neural networks as they are iteratively refined to give better
-and better results.
-
-We can now, finally, calculate that node's output using the activation
-function.
-
-x = (1.0 * 0.2) + (0.5 * 0.8)
-x = 0.2 + 0.4
-x = 0.6
-
-So the node's output using the sigmoid activation function would be:
-
-y = 1/(1 + 0.5488) = 1/(1.5488)
-y = 0.6457
-
-<img class="img-responsive" src="/machine-learning/neural-networks/two-layers-neural-networks-with-outputs.png" alt="two layers neural networks with outputs" loading="lazy" onerror='this.onerror=null; this.src="machine-learning/neural-networks/two-layers-neural-networks-with-outputs.png"'>
-
+</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/machine-learning/neural-networks">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/electornics">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/12.1.0.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/12.1.2.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

@@ -106,21 +106,21 @@
 
 <p>In addition to inner joins, most relational databases including MySQL support other types of joins such as <i>outer joins</i>. An outer join lets you include all rows from a table even if the other table doesn't have a matching row. You'll learn more about different types of joins in <a href="/linux-administration/mysql/joins">joins chapter</a>.</p>
 
-# use database
+<cite>Use database</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		use milestone-test;
 	</code>
 </pre>
 
-# create database
+<cite>Create database</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		create database milestone-test;
 	</code>
 </pre>
 
-# create table
+<cite>Create table</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		create table invoices
@@ -145,7 +145,7 @@
 	</code>
 </pre>
 
-# create index
+<cite>Create index</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		create index invoices_vendor_id_index
@@ -153,7 +153,7 @@
 	</code>
 </pre>
 
-# delete index
+<cite>Delete index</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		drop index invoices_vendor_id_index
@@ -161,7 +161,7 @@
 	</code>
 </pre>
 
-# add column
+<cite>Add column</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		alter table invoices
@@ -169,7 +169,7 @@
 	</code>
 </pre>
 
-# delete column
+<cite>Delete column</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		alter table invoices
@@ -177,7 +177,7 @@
 	</code>
 </pre>
 
-# add row
+<cite>Add row</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		insert into invoices
@@ -188,7 +188,7 @@
 	</code>
 </pre>
 
-# delete row
+<cite>Delete row</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		delete from invoices
@@ -196,7 +196,7 @@
 	</code>
 </pre>
 
-# update row
+<cite>Update row</cite>
 <pre class="language-sql line-numbers" data-line="">
 	<code>
 		update invoices
