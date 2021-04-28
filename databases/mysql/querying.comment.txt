@@ -8,7 +8,7 @@
 
 <p>The <code>LIMIT</code> clause limits the number of rows in the result set.</p>
 
-<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [database]&gt;" data-output="2-5">
+<pre class="language-sql command-line" data-lines="" data-prompt="MariaDB [(none)]&gt;" data-output="2-5">
 	<code>
 		SELECT select_list
 		[FROM table_source]

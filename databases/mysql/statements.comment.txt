@@ -76,7 +76,7 @@
 
 <p>This sample also shows the <i>result set</i> that's returned by the <code>SELECT</code> statement. A result set is a logical table that's created temporarily whithin database. When an application requests data from a database, it receives a result set.</p>
 
-<pre class="language-sql line-numbers" data-line="1">
+<pre class="language-sql command-line" data-line="" data-prompt="MariaDB [sample]&gt;" data-output="2-6">
 	<code>
 		select invoice_number, invoice_date, invoice_total,
 			payment_total, credit_total,
@@ -91,7 +91,7 @@
 
 <p>An <i>inner join</i> is the most common type of join. By using an inner join, rows from the two tables in the join are included in the result set only if their related columns match.</p>
 
-<pre class="language-sql line-numbers" data-line="3">
+<pre class="language-sql command-line" data-line="" data-prompt="MariaDB [sample]&gt;" data-output="2-6">
 	<code>
 		select vendor_name, invoice_number, invoice_date, invoice_total
 		form vendors
@@ -106,101 +106,93 @@
 
 <p>In addition to inner joins, most relational databases including MySQL support other types of joins such as <i>outer joins</i>. An outer join lets you include all rows from a table even if the other table doesn't have a matching row. You'll learn more about different types of joins in <a href="/linux-administration/mysql/joins">joins chapter</a>.</p>
 
-<cite>Use database</cite>
-<pre class="language-sql line-numbers" data-line="">
+<p>All the following code snippets are examples of SQL statements and each will be discussed next pages.</p>
+
+<cite>Create database</cite>
+<pre class="language-sql command-line" data-prompt="MariaDB [(none)]&gt;" data-output="">
 	<code>
-		use milestone-test;
+		CREATE DATABASE milestone;
 	</code>
 </pre>
 
-<cite>Create database</cite>
-<pre class="language-sql line-numbers" data-line="">
+<cite>Use database</cite>
+<pre class="language-sql command-line" data-prompt="MariaDB [(none)]&gt;" data-output="">
 	<code>
-		create database milestone-test;
+		USE milestone;
 	</code>
 </pre>
 
 <cite>Create table</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2-10">
 	<code>
-		create table invoices
+		CREATE TABLE users
 		(
-			invoice_id int primary key auto_increment,
-			vendor_id int int not null,
-			invoice_number varchar(50) not null,
-			invoice_date date not null,
-			invoice_total decimal(9,2) not null,
-			payment_total decimal(9,2) default 0,
-			credit_total decimal(9,2) default 0,
-			terms_id int not null,
-			invoice_due_date date not null,
-			payment_date date,
-			constraint invoices_fk_vendors
-				foreign key (vendor_id)
-				references vendors (vendor_id),
-			constraint invoices_fk_terms
-				foreign key (terms_id)
-				references terms (terms_id)
+			userid INT PRIMARY KEY AUTO_INCREMENT,
+			username VARCHAR(50) NOT NULL UNIQUE,
+			firstname VARCHR(50) DEFAULT NULL,
+			lastname VARCHAR(50) DEFAULT NULL,
+			email VARCHAR(60) NOT NULL UNIQUE,
+			join_date DATE NOT NULL,
+			active TINYINT(1) NOT NULL DEFAULT 1
 		);
 	</code>
 </pre>
 
 <cite>Create index</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2">
 	<code>
-		create index invoices_vendor_id_index
-			on invoices (vendor_id);
+		CREATE INDEX user_id_index
+			ON users (userid);
 	</code>
 </pre>
 
 <cite>Delete index</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2">
 	<code>
-		drop index invoices_vendor_id_index
-			on invoices;
+		DROP INDEX user_id_index
+			ON users;
 	</code>
 </pre>
 
 <cite>Add column</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2">
 	<code>
-		alter table invoices
-			add balance_due decimal(9,2);
+		ALTER TABLE payment
+			ADD balance_due DECIMAL(9,2);
 	</code>
 </pre>
 
 <cite>Delete column</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2">
 	<code>
-		alter table invoices
-			drop column balance_due;
+		ALTER TABLE payment
+			DROP COLUMN balance_due;
 	</code>
 </pre>
 
 <cite>Add row</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2-5">
 	<code>
-		insert into invoices
-			(vendor_id, invoices_number, invoices_date,
-			invoices_total, terms_id, invoices_due_date)
-		values
-			(12, '3245436', '2021-02-23', 164, 5, '2021-03-23');
+		INSERT INTO users
+			(username, firstname, lastname, email, join_date)
+		VALUES
+			('janedoe', 'Jane', 'Doe', 'janedoe@domain.com', NOW());
 	</code>
 </pre>
 
 <cite>Delete row</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2">
 	<code>
-		delete from invoices
-		where invoice_number = '2356344'
+		DELETE FROM users
+		WHERE userid = '2356344'
 	</code>
 </pre>
 
 <cite>Update row</cite>
-<pre class="language-sql line-numbers" data-line="">
+<pre class="language-sql command-line" data-prompt="MariaDB [milestone]&gt;" data-output="2,3">
 	<code>
-		update invoices
-		set credit_total = 35.95
-		where invoice_number = '346457';
+		UPDATE payment
+		SET credit_total = 35.95
+		WHERE userid = '2356344';
 	</code>
 </pre>

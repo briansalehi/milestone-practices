@@ -287,6 +287,7 @@ Compiling and Linking
 </svg>
 </a>
 </h2>
+<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
 To compile and run your assembly sources, you are going to need a few tools:
 <ul>
 	<li>nasm</li>
@@ -357,12 +358,11 @@ Another popular linker on Linux is <i>ld</i>, the GNU linker.
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
 <code>
-compiler options ./compile.asm
-linker options ./compile.bin ./compile.o
-./compile.bin options
-
+nasm -f elf64 -g -F dwarf ./compile.asm
+ld -o ./compile.bin ./compile.o
+./compile.bin
 </code>
 </pre>
 <ul class="pager">
