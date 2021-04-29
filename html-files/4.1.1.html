@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Program Structure</title>
+<title>Registers</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Assembly</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.1.0.html">x86_64</a></li>
-<li class='breadcrumb-item active'>Program Structure</li>
+<li class='breadcrumb-item active'>Registers</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Program-Structure" class="anchor" aria-hidden="true" href="#Program-Structure">
-Program Structure
+<a id="Registers" class="anchor" aria-hidden="true" href="#Registers">
+Registers
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -287,246 +287,19 @@ Program Structure
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>This first program illustrates the basic structure of an assembly program.</p>
-
-<pre class="language-nasm line-numbers">
-	<code>
-		section .data
-			message db 'hello, world', 10, 0
-			length equ $ - message - 1
-
-		section .bss
-		section .text
-			global main
-
-		main:
-			mov rax, 1			; write system call
-			mov rdi, 1			; standard output
-			mov rsi, message	; message address in memory
-			mov rdx, length		; length of message
-			syscall
-
-			mov rax, 60			; exit system call
-			mov rdi, 0			; return 0
-			syscall
-	</code>
+<hr />
+  <cite>registers.asm</cite>
+<pre class="line-numbers" >
+<code class="language-nasm">
+</code>
 </pre>
-
-<p>The following are the main parts of an assembly program:</p>
-
-<ul>
-	<li>section .data</li>
-	<li>section .bss</li>
-	<li>section .text</li>
-</ul>
-
-<p>In section <code>.data</code>, initialized data is declared and defined, in the following format:</p>
-
-<pre class="language-nasm">
-	<code>
-		&lt;variable name&gt; &lt;type&gt; &lt;value&gt;
-	</code>
-</pre>
-
-<p>Variable names start with a letter, followed by letters or numbers or special characters.</p>
-
-<p>When a variable is included in section <code>.data</code>, memory is allocated for that variable when the source code is assembled and linked to an executable.</p>
-
-<p>Section <code>.data</code> can also contain constants, which are values that cannot be changed in the program. They are declared in the following format:</p>
-
-<pre class="language-nasm">
-	<code>
-		&lt;constant name&gt; equ &lt;value&gt;
-	</code>
-</pre>
-
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Length</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>db</td>
-      <td>8 bits</td>
-      <td>Byte</td>
-    </tr>
-    <tr>
-      <td>dw</td>
-      <td>16 bits</td>
-      <td>Word</td>
-    </tr>
-    <tr>
-      <td>dd</td>
-      <td>32 bits</td>
-      <td>Double word</td>
-    </tr>
-    <tr>
-      <td>dq</td>
-      <td>64 bits</td>
-      <td>Quadword</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Variable names start with a letter, followed by letters or numbers or special characters.</p>
-
-<p>The acronym <i>bss</i> stands for <b>Block Started by Symbol</b>, and its history goes back to the fifties, when it was part of assembly language developed for the IBM 704. In this section go the uninitialized variables. Space for uninitialized variables is declared in this section, in the following format:</p>
-
-<pre class="language-nasm">
-	<code>
-		&lt;variable name&gt; &lt;type&gt; &lt;number&gt;
-	</code>
-</pre>
-
-<p>When a variable is included in section <code>.data</code>, memory is allocated for that variable when the source code is assembled and linked to an executable. Variable names are symbolic names, and references to memory locations and a variable can take one or more memory locations. The variable name refers to the start address of the variable in memory.</p>
-
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Length</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>resb</td>
-      <td>8 bits</td>
-      <td>Byte</td>
-    </tr>
-    <tr>
-      <td>resw</td>
-      <td>16 bits</td>
-      <td>Word</td>
-    </tr>
-    <tr>
-      <td>resd</td>
-      <td>32 bits</td>
-      <td>Double word</td>
-    </tr>
-    <tr>
-      <td>resq</td>
-      <td>64 bits</td>
-      <td>Quadword</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>The variables in section <code>.bss</code> do not contain any values; the values will be assigned later at execution time. Memory places are not reserved at compile time but at execution time.</p>
-
-<p>When your program starts executing, the program asks for the needed memory from the operating system, allocated to variables in section <code>.bss</code> and initialized to zeros. If there is not enough memory available for the <code>.bss</code> variables at execution time, the program will crash.</p>
-
-<p>Section <code>.txt</code> is where all the action is. This section contains the program code and starts with the following:</p>
-
-<pre class="language-nasm line-numbers" data-line="4">
-	<code>
-		section .text
-			global main
-
-		main:
-			...
-	</code>
-</pre>
-
-<p>The <code>main:</code> part is called a label. Registers such as <b>rdi</b>, <b>rsi</b>, and <b>rax</b> are prepared for outputting a message on the screen. We write 1 into register <code>rax</code> in order to tell the operating system to write our message into output stream, which is basically the terminal we are executing this program in.</p>
-
-<pre class="language-nasm line-numbers" data-line="1">
-	<code>
-		mov rax, 1			; write system call
-		mov rdi, 1			; standard output
-		mov rsi, message	; message address in memory
-		mov rdx, length		; length of message
-		syscall
-	</code>
-</pre>
-
-<p>To put some value into a register, we use the instruction <code>mov</code>. In reality, this instruction does not move anything; it makes a copy from the source to the destination. The format is as follows:</p>
-
-<pre class="language-nasm">
-	<code>
-		mov destination, source
-	</code>
-</pre>
-
-<p>The instruction <code>mov</code> can be used as follows:</p>
-
-<pre class="language-nasm">
-	<code>
-		mov register, immediate value ; legal
-		mov register, memory ; legal
-		mov memory, register ; legal
-		mov memory, memory ; illegal
-	</code>
-</pre>
-
-<p>In our code, the output destination for writing is stored into the register <code>rdi</code>, and 1 means standard output (in this case, output to your screen).</p>
-
-<pre class="language-nasm line-numbers" data-line="2">
-	<code>
-		mov rax, 1			; write system call
-		mov rdi, 1			; standard output
-		mov rsi, message	; message address in memory
-		mov rdx, length		; length of message
-		syscall
-	</code>
-</pre>
-
-<p>The address of the string to be displayed is put into register <code>rsi</code>.</p>
-
-<pre class="language-nasm line-numbers" data-line="3">
-	<code>
-		mov rax, 1			; write system call
-		mov rdi, 1			; standard output
-		mov rsi, message	; message address in memory
-		mov rdx, length		; length of message
-		syscall
-	</code>
-</pre>
-
-<p>In register <code>rdx</code>, we place the message length.</p>
-
-<pre class="language-nasm line-numbers" data-line="4">
-	<code>
-		mov rax, 1			; write system call
-		mov rdi, 1			; standard output
-		mov rsi, message	; message address in memory
-		mov rdx, length		; length of message
-		syscall
-	</code>
-</pre>
-
-<p>Then the system call, <code>syscall</code>, is executed, and the string, <code>message</code>, will be displayed on the standard output.</p>
-
-<pre class="language-nasm line-numbers" data-line="5">
-	<code>
-		mov rax, 1			; write system call
-		mov rdi, 1			; standard output
-		mov rsi, message	; message address in memory
-		mov rdx, length		; length of message
-		syscall
-	</code>
-</pre>
-
-<p>Here, we will display a string on the screen using a system call. That is, we will ask the operating system to do the work for us.</p>
-
-<p>A <code>syscall</code> is a call to functionality provided by the operating system.</p>
-
-<p>System calls are used to ask the operating system to do specific actions. Every operating system has a different list of system call parameters, and the system calls for Linux are different from Windows or macOS. We use the Linux system calls for x64 in this book; you can find more details at <a href="http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/">Linux System Call Table for x86_64</a>.</p>
-
-<p>Be aware that 32-bit system calls differ from 64-bit system calls.</p>
-
-<p>To avoid error messages when the program finishes, a clean program exit is needed. We start with writing 60 into <code>rax</code>, which indicates “exit.” The “success” exit code 0 goes into <code>rdi</code>, and then a system call is executed. The program exits without complaining.</p>
-
-<pre class="language-nasm line-numbers" data-line="">
-	<code>
-		mov rax, 60			; exit system call
-		mov rdi, 0			; return 0
-		syscall
-	</code>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
+<code>
+nasm -f elf64 -g -F dwarf ./registers.asm
+ld -o ./registers.bin ./registers.o
+./registers.bin
+</code>
 </pre>
 <hr />
 <h3>
@@ -539,11 +312,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Beginning x64 Assembly Programming - Jo Van Hoey: <span style='color: red'> chapter 2 and 4</span></li>
+<li class='list-group-item'>Beginning x64 Assembly Programming - Jo Van Hoey: <span style='color: red'> chapter 2 and 5</span></li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/debugging">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/program-structure">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
