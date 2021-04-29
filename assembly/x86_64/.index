@@ -1,4 +1,3 @@
 README.md
-compile.asm
-structure.asm
-debugging.sh
+memory-sections.asm
+debugging.asm

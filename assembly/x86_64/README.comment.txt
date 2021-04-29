@@ -24,3 +24,7 @@ There are other assemblers such as YASM, FASM, GAS, or MASM from Microsoft. And 
 		gcc -no-pie -o program source.o
 	</code>
 </pre>
+
+<p>We use GCC because of the ease of accessing C standard library functions from within assembler code. To make life easy, we will use C language functions from time to time to simplify the example assembly code.</p>
+
+<p>Just so you know, another popular linker on Linux is <code>ld</code>, the GNU linker.</p>
