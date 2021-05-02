@@ -19,7 +19,7 @@
 		<tr>
 			<th scope="row">2</th>
 			<td>#define [key] [value]</td>
-			<td>Every occurrence of the speci- fied key is replaced with the specified value.</td>
+			<td>Every occurrence of the specified key is replaced with the specified value.</td>
 		</tr>
 		<tr>
 			<th scope="row">3</th>
@@ -45,7 +45,7 @@
 	#endif
 </code></pre>
 
-<p>If your compiler supports the #pragma once directive, and most modern compilers do, then this can be rewritten as follows:</p>
+<p>If your compiler supports the <code>#pragma once</code> directive, and most modern compilers do, then this can be rewritten as follows:</p>
 
 <pre class="language-cpp line-numbers"><code>
 	#pragma once

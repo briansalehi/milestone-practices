@@ -309,7 +309,7 @@ Preprocessor Directives
 		<tr>
 			<th scope="row">2</th>
 			<td>#define [key] [value]</td>
-			<td>Every occurrence of the speci- fied key is replaced with the specified value.</td>
+			<td>Every occurrence of the specified key is replaced with the specified value.</td>
 		</tr>
 		<tr>
 			<th scope="row">3</th>
@@ -335,30 +335,17 @@ Preprocessor Directives
 	#endif
 </code></pre>
 
-<p>If your compiler supports the #pragma once directive, and most modern compilers do, then this can be rewritten as follows:</p>
+<p>If your compiler supports the <code>#pragma once</code> directive, and most modern compilers do, then this can be rewritten as follows:</p>
 
 <pre class="language-cpp line-numbers"><code>
 	#pragma once
 </code></pre>
 <hr />
   <cite>preprocessor.cxx</cite>
-<pre class="line-numbers" data-line='3,5,10,15'>
+<pre class="line-numbers" data-line='1,2'>
 <code class="language-cpp">
-    #include &lt;iostream&gt;
-    
-    #define SAMPLE_H
-    
-    #ifdef SAMPLE_H
-    	void function()
-    	{
-    		std::cout &lt;&lt; &quot;defined&quot; &lt;&lt; std::endl;
-    	}
-    #else
-    	void function()
-    	{
-    		std::cout &lt;&lt; &quot;undefined&quot; &lt;&lt; std::endl;
-    	}
-    #endif
+    #include &quot;preprocessor-header.hpp&quot;
+    #include &quot;preprocessor-header.hpp&quot; // won&apos;t include twice
     
     int main()
     {
@@ -367,13 +354,29 @@ Preprocessor Directives
     }
 </code>
 </pre>
+  <cite>preprocessor-header.hpp</cite>
+<pre class="line-numbers" data-line='1,2,11'>
+<code class="language-cpp">
+    #ifndef SAMPLE_H
+    #define SAMPLE_H
+    
+    #include &lt;iostream&gt;
+    
+    void function()
+    {
+    	std::cout &lt;&lt; &quot;Sample Header&quot; &lt;&lt; std::endl;
+    }
+    
+    #endif
+</code>
+</pre>
   <cite>Build and Run</cite>
 <pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
 <code>
 g++ -Wall -g -o ./preprocessor.o -c ./preprocessor.cxx
 g++ -g -o ./preprocessor.bin ./preprocessor.o
 ./preprocessor.bin
-defined
+Sample Header
 </code>
 </pre>
 <hr />
@@ -387,7 +390,6 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire: <span style='color: red'> page 5</span></li>
 <li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 1</span></li>
 </ul>

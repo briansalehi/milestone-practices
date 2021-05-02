@@ -1,5 +1,5 @@
 README.md
-preprocessor.cxx
+preprocessor.cxx preprocessor-header.hpp
 main.cxx
 function.cxx
 header.cxx header.hpp
