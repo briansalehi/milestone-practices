@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Packages</title>
+<title>Communication Diagram</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
-<li class='breadcrumb-item active'>Packages</li>
+<li class='breadcrumb-item active'>Communication Diagram</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,192 +278,95 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Packages" class="anchor" aria-hidden="true" href="#Packages">
-Packages
+<a id="Communication-Diagram" class="anchor" aria-hidden="true" href="#Communication-Diagram">
+Communication Diagram
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>In UML, groups of classes are modeled with packages.</p>
+<p>The main purpose of <b>sequence diagrams</b> is to show the order of events between the parts of your system that are involved in a particular interaction. <b>Communication diagrams</b> add another perspective to an interaction by focusing on the links between the participants.</p>
 
-<p>Package diagrams are often used to view dependencies among packages. Since a package can break if another package on which it depends changes, understanding dependencies between packages is vital to the stability of your software.</p>
+<p>On a sequence diagram, the links between participants are implied by the fact that a message is passed between them.</p>
 
-<p>Packages can organize almost any UML element—not just classes. For example, packages are also commonly used to group use cases. Package diagrams form part of the development view, which is concerned with how your system's parts are organized into modules and packages</p>
+<p><b>Sequence</b> and <b>communication diagrams</b> are so similar that most UML tools can automatically convert from one diagram type to the other. The difference between the two approaches is largely personal preference. If you're happier looking at interactions from a link perspective, then <b>communication diagrams</b> are likely to be for you; however, if you prefer to see the order of the interactions as clearly as possible, then you're likely to be in the <b>sequence diagram</b> camp.</p>
 
-<cite>The Development View describes how your system's parts are organized into modules, which are represented as packages in UML</cite>
-<img class="img-responsive" src="/software-design/uml/development-view-diagram.png" alt="development view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/development-view-diagram.png"'>
+<p>A <b>communication diagram</b> is made up of three things: <b>participants</b>, the <b>communication links</b> between those participants, and the <b>messages</b> that can be passed along those communication links.</p>
 
-<p>Packages are grouping structures that are used to organize almost any UML element, but their most common use is to organize classes in class diagrams.</p>
+<img class="img-responsive" src="/software-design/uml/communication-diagram-sample.png" alt="communication diagram sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/communication-diagram-sample.png"'>
 
-<p>Suppose that during the design of a CMS, you decide to keep classes related to security (for example, performing user authentication) grouped together.</p>
+<b>Participants</b> on a communication diagram are represented by a rectangle. The participant's name and class are then placed in the middle of the rectangle. A participant's name is formatted as <code>&lt;name&gt; : &lt;class&gt;</code>, similar to participants on a sequence diagram.
 
-<p>The symbol for a package is a folder with a tab. The name of the package is written inside the folder.</p>
+<p>A <b>communication link</b> is shown with a single line that connects two participants.</p>
 
-<cite>Packages in a CMS; each package corresponds to a specific system concern</cite>
-<img class="img-responsive" src="/software-design/uml/packages-in-cms.png" alt="packages in cms" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/packages-in-cms.png"'>
+<img class="img-responsive" src="/software-design/uml/message-between-participants.png" alt="message between participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/message-between-participants.png"'>
 
-<p>Packages organize UML elements, such as classes, and the contents of a package can be drawn inside the package or outside the package attached by a line.</p>
+<p><b>Communication diagrams</b> do not necessarily flow down the page like <b>sequence diagrams</b>; therefore, message order on a communication diagram is shown using a number before each message. Each message number indicates the order in which that message is invoked, starting at 1 and increasing until all of the messages on the diagram are accounted for.</p>
 
-<cite>Two ways to show that the Credentials and IdentityVerifier classes are contained in the security package</cite>
-<img class="img-responsive" src="/software-design/uml/two-ways-to-show-components-in-packakge.png" alt="two ways to show components in packakge" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/two-ways-to-show-components-in-packakge.png"'>
+<p>When a message causes another message to be invoked, the second message is said to be <b>nested</b> inside the original message.</p>
 
-<p>If you draw the elements inside the package, write the name of the package in the folder tab.</p>
+<img class="img-responsive" src="/software-design/uml/nested-calling-messages.png" alt="nested calling messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/nested-calling-messages.png"'>
 
-<p>Example below shows a Java code sample corresponding to the Credentials class in previous figure.</p>
+<p><b>Communication diagrams</b> use their message numbering scheme to show the <b>order</b> of <b>nested messages</b>. If we say that the initial message is numbered <code>1.</code>, then any messages nested within the initial message begin with <code>1.</code>, adding a number after the decimal point for the ordering of the nested messages. If an initial message's number was <code>1.</code>, then the first nested message's number would be <code>1.1.</code>.</p>
 
-<cite>The Credentials class is located in the security package in this Java implementation</cite>
-<pre class="language-java line-numbers">
+<img class="img-responsive" src="/software-design/uml/three-layered-nested-messages.png" alt="three layered nested messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/three-layered-nested-messages.png"'>
+
+<p><b>Communication diagrams</b> take advantage of their number-based message ordering by adding a number-and-letter notation to indicate that a message happens at the same time as another message.</p>
+
+<img class="img-responsive" src="/software-design/uml/concurrent-message-invokation.png" alt="concurrent message invokation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/concurrent-message-invokation.png"'>
+
+<p>Although UML does not actually dictate how a <b>communication diagram</b> can show that a message is invoked a number of times, it does state that an <b>asterisk</b> should be used before a looping constraint is applied. This rather complicated statement means that the following example is a safe way to specify that something is going to happen 10 times:</p>
+
+<pre class="language-bash command-line" data-output="1">
 	<code>
-		package security;
-		 
-		public class Credentials {
-			...
-		}
+		*[i = 0 .. 9]
 	</code>
 </pre>
 
-<p>Packages can also contain other packages.</p>
+<img class="img-responsive" src="/software-design/uml/looping-constraint.png" alt="looping constraint" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/looping-constraint.png"'>
 
-<cite>A package that contains another package</cite>
-<img class="img-responsive" src="/software-design/uml/nested-packages.png" alt="nested packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/nested-packages.png"'>
+<p>Sometimes a message should be invoked only if a particular condition is evaluated to be true.</p>
 
-<p>It's common to see deeply nested packages in enterprise applications. Java applications typically use the URL-in-reverse package naming convention (omitting the www part of the URL). For example, the ACME company with the URL <a href="https://acme.com">http://www.acme.com</a> would put all its packages under the acme package, which is under com.</p>
+<p>Just as with <b>sequence diagram fragments</b>, communication diagram messages can have <b>guards</b> set to describe the conditions that need to be evaluated before a message is invoked.</p>
 
-<cite>Deeply nested packages are common in enterprise applications: the search and indexing packages are shown in a typical package structure for the ACME company</cite>
-<img class="img-responsive" src="/software-design/uml/deeply-nested-packages.png" alt="deeply nested packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/deeply-nested-packages.png"'>
+<img class="img-responsive" src="/software-design/uml/multiple-message-invokation.png" alt="multiple message invokation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/multiple-message-invokation.png"'>
 
-<p>Even at this point, these packages consume a lot of space, and if you want to show classes inside the indexing package, each package containing it would have to expand in size accordingly. Luckily, there's an alternate notation that can be easier to work with. You can "flatten" nested packages to write them as <code>packageA::packageB::packageC</code>, and so on.</p>
+<p>Just as on <b>sequence diagrams</b>, a participant on a <b>communication diagram</b> can send a message to itself. All that is needed is a link from the participant to itself to enable the message to be invoked</p>
 
-<cite>Flattening nested packages</cite>
-<img class="img-responsive" src="/software-design/uml/flatten-nested-packages.png" alt="flatten nested packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/flatten-nested-packages.png"'>
+<img class="img-responsive" src="/software-design/uml/self-invokation.png" alt="self invokation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/self-invokation.png"'>
 
-<p>Currently, a small amount of UML tools don't support the notations shown in two previous diagram. However, almost all tools can show that a class belongs to a package using one of the notations shown in next figure. The notation to the far right is the standard UML namespace notation, discussed next in "Namespaces and Classes Referring to Each Other."</p>
+<p>With the new communication diagram notation out of the way, it's now time to look at a practical example.</p>
 
-<cite>Common ways UML tools show that a class belongs to a package</cite>
-<img class="img-responsive" src="/software-design/uml/tool-belongs-to-a-package.png" alt="tool belongs to a package" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/tool-belongs-to-a-package.png"'>
+<img class="img-responsive" src="/software-design/uml/cms-sequence-diagram-with-messages.png" alt="cms sequence diagram with messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/cms-sequence-diagram-with-messages.png"'>
 
-<p>Breaking up your classes into packages introduces some bookkeeping. If you're a Java programmer, you may have encountered a related issue before. To use an <code>ArrayList</code> in a Java program, you have to specify that <code>ArrayList</code> is located in the <code>java.util</code> package. That is because Java packages define their own namespaces, or naming contexts. If an item is not in the current namespace, you have to specify where it is located.</p>
+<p>It isn't necessary to have a <b>sequence diagram</b> before you create a <b>communication diagram</b>. You can create communication diagrams or sequence diagrams for your <b>interactions</b> in whatever order you see fit.</p>
 
-<p>Similarly, a UML package establishes a namespace. So, if an element in a package wants to use an element in a different package, it has to specify where the desired element is. To specify the context of a UML element, you provide the fully-scoped name, which includes the package name and the element name separated by double colons, as in <code>packageName::className</code>.</p>
+<img class="img-responsive" src="/software-design/uml/distributed-participants.png" alt="distributed participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/distributed-participants.png"'>
 
-<p>As discussed previously in "UML Tool Variation," your UML tool may display the classes in below figure differently.</p>
+<p>Next, the links between each of the participants are added so they can communicate with each other.</p>
 
-<cite>Representing a class with its fully-scoped name: both the security and utils packages have a class named Credentials</cite>
-<img class="img-responsive" src="/software-design/uml/fully-scoped-class.png" alt="fully scoped class" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/fully-scoped-class.png"'>
+<img class="img-responsive" src="/software-design/uml/linked-participants.png" alt="linked participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/linked-participants.png"'>
 
-<p>Classes in the same package are part of the same namespace, so they can refer to each other without using fully-scoped names. Since they are in the same package, IdentityVerifier can have an attribute of type Credentials and not have to specify the package.</p>
+<p>It's now time to add the messages that are sent between participants during the lifetime of the interaction.</p>
 
-<cite>Classes in different packages have to provide name scope</cite>
-<img class="img-responsive" src="/software-design/uml/packages-in-different-name-scopes.png" alt="packages in different name scopes" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/packages-in-different-name-scopes.png"'>
+<img class="img-responsive" src="/software-design/uml/admin-invoking-three-messages.png" alt="admin invoking three messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/admin-invoking-three-messages.png"'>
 
-<p>On the other hand, a class outside the security package, such as User, would have to provide a scope when accessing <code>Credentials</code>, which it can do by using the fully-scoped <code>name—security::Credentials</code>.</p>
+<p>Once the initial message or messages are added to the communication diagram, things start to get more complicated. The <code>3. enterAuthorDetails(  )</code> message triggers a nested creation message that is sent from the <code>ui : AccountCreationUserInterface</code> participant to create a new <code>authorDetails : CustomerDetails</code> participant. Nested messages get an additional decimal point based on the triggering message's number.</p>
 
-<p>In UML, elements in a nested package can refer to elements in the containing package without scoping the name, which in below figure means that an element in indexing could refer to an element in search without using the fully-scoped name.</p>
+<img class="img-responsive" src="/software-design/uml/create-stereotype-in-communication-diagram.png" alt="create stereotype in communication diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/create-stereotype-in-communication-diagram.png"'>
 
-<cite>In UML, a nested package implies namespace "inheritance," which doesn't apply in some implementation languages</cite>
-<img class="img-responsive" src="/software-design/uml/namespace-inheritance.png" alt="namespace inheritance" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/namespace-inheritance.png"'>
+<p>With that small hurdle out of the way, the rest of the messages can be added to the <b>communication diagram</b>.</p>
 
-<p>Elements in a package may have public or private visibility. Elements with public visibility are accessible outside the package. Elements with private visibility are available only to other elements inside the package. You can model public or private visibility in UML by writing a plus or minus symbol in front of the element's name.</p>
+<img class="img-responsive" src="/software-design/uml/complete-communication-diagram-sample.png" alt="complete communication diagram sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/complete-communication-diagram-sample.png"'>
 
-<cite>Since MD5Crypt has private visibility, it isn't accessible outside the security package</cite>
-<img class="img-responsive" src="/software-design/uml/package-private-visibility.png" alt="package private visibility" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/package-private-visibility.png"'>
+<p><b>Communication</b> and <b>sequence diagrams</b> present such similar information that a comparison is almost inevitable. Setting personal preferences aside, what are the best reasons for picking a <b>sequence diagram</b>, a <b>communication diagram</b>, or even a combination of both to model a particular interaction?</p>
 
-<p>If an element in package A uses an element in package B, then package A depends on package B.</p>
+<p>Following figure shows the two different representations of the same <code>Create a new Regular Blog Account</code> interaction.</p>
 
-<cite>Package A depends on package B</cite>
-<img class="img-responsive" src="/software-design/uml/package-a-depends-on-package-b.png" alt="package a depends on package b" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/package-a-depends-on-package-b.png"'>
+<img class="img-responsive" src="/software-design/uml/sequence-diagram-vs-communication-diagram.png" alt="sequence diagram vs communication diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/sequence-diagram-vs-communication-diagram.png"'>
 
-<p>Understanding the dependencies among your packages is useful for analyzing the stability of your software, as discussed in "Managing Package Dependencies." In fact, the most common use of UML package diagrams is to give an overview of the core packages in your software and the dependencies among them.</p>
-
-<cite>A typical package diagram featuring core packages and dependencies</cite>
-<img class="img-responsive" src="/software-design/uml/featuring-core-packages.png" alt="featuring core packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/featuring-core-packages.png"'>
-
-<p>When a package imports another package, elements in the importing package can use elements in the imported package without having to use their fully scoped names. This feature is similar to a Java import, in which a class can import a package and use its contents without having to provide their package names.</p>
-
-<p>To show the import relation, draw a dependency arrow from the importing package to the target package with the stereotype import.</p>
-
-<cite>The package users imports security, so classes in users may use public classes in security without having to specify the package name</cite>
-<img class="img-responsive" src="/software-design/uml/public-packages.png" alt="public packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/public-packages.png"'>
-
-<p>A package can also import a specific element in another package instead of the whole package.</p>
-
-<cite>The users package imports only the Credentials element from the security package</cite>
-<img class="img-responsive" src="/software-design/uml/package-importing-element.png" alt="package importing element" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/package-importing-element.png"'>
-
-<p>When importing a package, only public elements of the target package are available in the importing namespace. For example, in below figure, elements in users can see Credentials and IdentityVerifier but not MD5Crypt.</p>
-
-<cite>Private visibility causes a class not to be seen even though its package is imported</cite>
-<img class="img-responsive" src="/software-design/uml/private-visibility-not-seen.png" alt="private visibility not seen" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/private-visibility-not-seen.png"'>
-
-<p>Not only do elements have visibility—the import relation itself has visibility. An import can be a public import or private import with public as the default. A public import means imported elements have public visibility inside the importing namespace; a private import means imported elements have private visibility inside the importing namespace. You show a private import with the stereotype access instead of import.</p>
-
-<p>The difference between import and access arises when a package imports a package that imports or accesses others. Imported elements have public visibility in the importing package, so they get passed on with further imports, whereas accessed elements do not.</p>
-
-<p>In below figure, package B imports C and accesses D, so B can see public elements in C and D. A imports B, so A can see public elements in B. A can also see public elements in C because C is publicly imported into B, but A cannot see anything in D because D is privately imported into B.</p>
-
-<cite>Package A can see public elements in C but not D</cite>
-<img class="img-responsive" src="/software-design/uml/public-visibility-in-packages.png" alt="public visibility in packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/public-visibility-in-packages.png"'>
-
-<p>Import and access relationships can be used to model the programming world concepts of importing of classes into another namespace so that elements in the importing namespace may refer to elements in the target namespace without scoping the name. For example, the package relationships in above figure could be used to model the Java code example in below example.</p>
-
-<cite>Because the User class imports the security package, it can refer to the Credentials class without using the fully qualified name security</cite>
-
-<pre class="language-java line-numbers">
-	<code>
-		package users;
-		 
-		// importing all public elements in the security package
-		import security.*;
-		 
-		class User {
-			Credentials credentials;
-			...
-		}
-	</code>
-</pre>
-
-<p>The element import in previous figures corresponds to the Java implementation shown in below example.</p>
-
-<cite>Only the Credentials class is imported from the security package</cite>
-
-<pre class="language-java line-numbers">
-	<code>
-		package users;
-		 
-		// importing only the Credentials class
-		import security.Credentials;
-		 
-		class User {
-			Credentials credentials;
-		 
-			...
-		}
-	</code>
-</pre>
-
-<p>Having complicated dependencies among packages can lead to brittle software since changes in one package can cause its dependent packages to break. Next figure shows a dependency disaster: a change in any one package could ultimately affect every other package.</p>
-
-<cite>Directly or indirectly, a change in any one package could affect every other package</cite>
-<img class="img-responsive" src="/software-design/uml/directly-or-indirectly-changes-in-packages.png" alt="directly or indirectly changes in packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/directly-or-indirectly-changes-in-packages.png"'>
-
-<p>If you have cycles in your dependencies, you can break the cycles in different ways. You could factor out a new package that both packages can depend on or you could decide that all the classes really belong together anyway.</p>
-
-<cite>Removing cycles in package dependencies</cite>
-<img class="img-responsive" src="/software-design/uml/removing-cycles-in-package-dependencies.png" alt="removing cycles in package dependencies" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/removing-cycles-in-package-dependencies.png"'>
-
-<p>Depending in the order of stability means that a package should depend only on packages more stable than itself. An unstable package depends on many other packages; a stable package depends on few packages.</p>
-
-<p>Just as packages group classes of similar functionality, packages also group other UML elements such as use cases.</p>
-
-<cite>Packaging major use case groups within a CMS</cite>
-<img class="img-responsive" src="/software-design/uml/major-use-case-in-cms.png" alt="major use case in cms" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/major-use-case-in-cms.png"'>
-
-<p>Rolling up use cases into higher levels of your system can help organize your model, allowing you to see which actors interact with which portions of the system.</p>
-
-<cite>Packages enable a higher level view of how actors interact with the system</cite>
-<img class="img-responsive" src="/software-design/uml/higher-level-view-of-packages.png" alt="higher level view of packages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/higher-level-view-of-packages.png"'>
+<p>Use <b>sequence diagrams</b> if you are mainly interested in the flow of messages throughout a particular interaction. Use <b>communication diagrams</b> if you are focusing on the links between the different participants involved in the interaction.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -475,11 +378,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 13</span></li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 8</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams/interaction-overview-diagram">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/state-machine-diagrams">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/sequence-diagram">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/timing-diagram">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -708,7 +611,6 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

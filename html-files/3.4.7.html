@@ -587,13 +587,13 @@ Use Case
 
 <p>This repetitive behavior shared between two use cases is best separated and captured within a totally new use case. This new use case can then be reused by the <code>Create a new Blog Account</code> and <code>Create a new Personal Wiki</code> use cases using the <code>&lt;&lt;include&gt;&gt;</code> relationship.</p>
 
-<p>The &lt;&lt;include&gt;&gt; relationship declares that the use case at the head of the dotted arrow completely reuses all of the steps from the use case being included. In the following figure, the <code>Create a new Blog Account</code> and <code>Create a new Personal Wiki</code> completely reuse all of the steps declared in the <code>Check Identity</code> use case.</p>
+<p>The <code>&lt;&lt;include&gt;&gt;</code> relationship declares that the use case at the head of the dotted arrow completely reuses all of the steps from the use case being included. In the following figure, the <code>Create a new Blog Account</code> and <code>Create a new Personal Wiki</code> completely reuse all of the steps declared in the <code>Check Identity</code> use case.</p>
 
 <img class="img-responsive" src="/software-design/uml/include-relationship.png" alt="include relationship" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/include-relationship.png"'>
 
 <p>To show the <code>&lt;&lt;include&gt;&gt;</code> relationship in your use case descriptions, you need to remove the redundant steps from the <code>Create a new Blog Account</code> and <code>Create new Personal Wiki</code> use case descriptions and instead use the <b>Included Cases</b> field and <code>include::&lt;use case name&gt;</code> syntax to indicate the use case where the reused steps reside, as shown in next two tables.</p>
 
-<p>The <code>Create a new Blog Account</code> use case description modified to use &lt;&lt;include&gt;&gt; relationship.</p>
+<p>The <code>Create a new Blog Account</code> use case description modified to use <code>&lt;&lt;include&gt;&gt;</code> relationship.</p>
 
 <table class="table table-dark">
   <thead>
@@ -657,7 +657,7 @@ Use Case
 	</tr>
 	<tr>
       <td></td>
-      <th scope="row">4 include::Check Identity</th>
+      <th scope="row">4 <code>include::Check Identity</code></th>
       <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
 	</tr>
 	<tr>
@@ -688,7 +688,7 @@ Use Case
   </tbody>
 </table>
 
-<p>The <code>Create a new Personal Wiki</code> use case description modified to use &lt;&lt;include&gt;&gt; relationship.</p>
+<p>The <code>Create a new Personal Wiki</code> use case description modified to use <code>&lt;&lt;include&gt;&gt;</code> relationship.</p>
 
 <table class="table table-dark">
   <thead>
@@ -747,7 +747,7 @@ Use Case
 	</tr>
 	<tr>
       <td></td>
-      <th scope="row">3 include::Check Identity</th>
+      <th scope="row">3 <code>include::Check Identity</code></th>
       <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
 	</tr>
 	<tr>
@@ -837,7 +837,7 @@ Use Case
 	</tr>
 	<tr>
       <td></td>
-      <th scope="row">3 include::Check Identity</th>
+      <th scope="row">3 <code>include::Check Identity</code></th>
       <td>The details are returned as verified by the <code>Author Credentials Database</code>.</td>
 	</tr>
     <tr>
@@ -866,17 +866,17 @@ Use Case
 
 <img class="img-responsive" src="/software-design/uml/specialized-use-case.png" alt="specialized use case" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/specialized-use-case.png"'>
 
-<p>But be careful—by using inheritance, you are effectively saying that every step in the general use case must occur in the specialized use cases. Also, every relationship that the general use case has with external actors or use cases, as shown with the &lt;&lt;include&gt;&gt; relationship between Create a new Blog Account and Check Identity, must also make sense in the more specialized use cases, such as Create a new Editorial Blog Account.</p>
+<p>But be careful—by using inheritance, you are effectively saying that every step in the general use case must occur in the specialized use cases. Also, every relationship that the general use case has with external actors or use cases, as shown with the <code>&lt;&lt;include&gt;&gt;</code> relationship between Create a new Blog Account and Check Identity, must also make sense in the more specialized use cases, such as Create a new Editorial Blog Account.</p>
 
-<p>If you really don't want your more specific use case to do everything that the general use case describes, then don't use generalization. Instead, you might want to consider using either the &lt;&lt;include&gt;&gt; relationship shown in the previous section or the &lt;&lt;extend&gt;&gt; relationship coming up in the next section.</p>
+<p>If you really don't want your more specific use case to do everything that the general use case describes, then don't use generalization. Instead, you might want to consider using either the <code>&lt;&lt;include&gt;&gt;</code> relationship shown in the previous section or the <code>&lt;&lt;extend&gt;&gt;</code> relationship coming up in the next section.</p>
 
-<p>Following figure shows you how &lt;&lt;extend&gt;&gt; works.</p>
+<p>Following figure shows you how <code>&lt;&lt;extend&gt;&gt;</code> works.</p>
 
 <img class="img-responsive" src="/software-design/uml/extend-relationship.png" alt="extend relationship" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/extend-relationship.png"'>
 
-<p>The designers of UML 2.0 took a very different view as to the meaning of &lt;&lt;extend&gt;&gt; between use cases. They wanted a means for you to show that a use case might completely reuse another use case's behavior, similar to the &lt;&lt;include&gt;&gt; relationship, but that this reuse was optional and dependent either on a runtime or system implementation decision.</p>
+<p>The designers of UML 2.0 took a very different view as to the meaning of <code>&lt;&lt;extend&gt;&gt;</code> between use cases. They wanted a means for you to show that a use case might completely reuse another use case's behavior, similar to the <code>&lt;&lt;include&gt;&gt;</code> relationship, but that this reuse was optional and dependent either on a runtime or system implementation decision.</p>
 
-<p>The &lt;&lt;extend&gt;&gt; relationship is ideal in this sort of reuse situation, as shown in the following figure.</p>
+<p>The <code>&lt;&lt;extend&gt;&gt;</code> relationship is ideal in this sort of reuse situation, as shown in the following figure.</p>
 
 <img class="img-responsive" src="/software-design/uml/extend-example-in-diagram.png" alt="extend example in diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/extend-example-in-diagram.png"'>
 

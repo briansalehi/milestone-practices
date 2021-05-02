@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Deployment Diagrams</title>
+<title>Interaction Overview Diagram</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
-<li class='breadcrumb-item active'>Deployment Diagrams</li>
+<li class='breadcrumb-item active'>Interaction Overview Diagram</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,171 +278,70 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Deployment-Diagrams" class="anchor" aria-hidden="true" href="#Deployment-Diagrams">
-Deployment Diagrams
+<a id="Interaction-Overview-Diagram" class="anchor" aria-hidden="true" href="#Interaction-Overview-Diagram">
+Interaction Overview Diagram
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>The physical view is concerned with the physical elements of your system, such as executable software files and the hardware they run on.</p>
+<p>Interaction overview diagrams provide a high-level view of how several interactions work together to implement a system concern, such as a use case.</p>
 
-<cite>Deployment diagrams focus on the Physical View of your system</cite>
-<img class="img-responsive" src="/software-design/uml/physical-view-diagram.png" alt="physical view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/physical-view-diagram.png"'>
+<p><a href="/software-design/uml/interaction-diagrams/sequence-diagram">Sequence</a>, <a href="/software-design/uml/interaction-diagrams/communication-diagram">communication</a>, and <a href="/software-design/uml/interaction-diagrams/timing-diagram">timing diagrams</a> focus on specific details concerning the messages that make up an interaction, but <b>interaction overview diagrams</b> tie together the different interactions into a single complete picture of the interactions that make up a particular system concern.</p>
 
-<p>Use nodes to represent hardware in your system.</p>
+<p>The best way to understand an interaction overview diagram notation is to think of it as an <a href="/software-design/uml/activity-diagram">activity diagram</a>, except instead of an action, a complete interaction is described by using its own diagram.</p>
 
-<img class="img-responsive" src="/software-design/uml/hardware-representation.png" alt="hardware representation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/hardware-representation.png"'>
+<cite>Individual interactions are placed on an interaction overview diagram as though they were actions on an activity diagram</cite>
+<img class="img-responsive" src="/software-design/uml/interaction-overview-diagram-exmple.png" alt="interaction overview diagram exmple" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-overview-diagram-exmple.png"'>
 
-<p>This system contains a single piece of hardware—a Desktop PC. It's labeled with the stereotype <code>&lt;&lt;device&gt;&gt;</code> to specify that this is a hardware node.</p>
+<p>Any number of participants may be involved in the interactions that occur within the overview. To see which participants are involved across the entire overview, a lifelines subtitle is added to the diagram title.</p>
 
-<p>It's entirely up to you how much detail you want to give node names. You could be very precise with a name such as "64-bit Processor Intel Workstation," or very general with a name such as "Generic PC".</p>
+<cite>The lifelines subtitle shows the combined list of participants involved in the interactions within the overview</cite>
+<img class="img-responsive" src="/software-design/uml/lifeline-subtitle-in-interaction-overview-diagram.png" alt="lifeline subtitle in interaction overview diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/lifeline-subtitle-in-interaction-overview-diagram.png"'>
 
-<p>Now, you need to model the software that runs on the hardware.</p>
+<p>Just as control flow on an activity diagram can be subjected to decisions, parallel actions, and even loops, so can the control flow on an interaction diagram.</p>
 
-<p>Next figure shows a simple software artifact (see "Deployed Software: Artifacts," next), which in this case is just a JAR file named 3dpacman.jar, containing a 3D-Pacman application.</p>
+<cite>Starting with the initial node, the control flow executes Interaction1, followed by Interactions 2 and 3 in parallel; Interaction4 will execute only if the condition is assessed as being true; otherwise, Interaction5 is executed 10 times in a loop before the control flow merges and the final node is reached</cite>
+<img class="img-responsive" src="/software-design/uml/control-flow-in-interaction-overview-diagram.png" alt="control flow in interaction overview diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/control-flow-in-interaction-overview-diagram.png"'>
 
-<cite>A physical software file such as a jar file is modeled with an artifact</cite>
-<img class="img-responsive" src="/software-design/uml/physical-software.png" alt="physical software" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/physical-software.png"'>
+<p>To set the stage, we are going to develop an interaction overview diagram from scratch for the <code>Create a New Regular Blog</code> use case reusing parts from the interaction diagrams created in the previous chapters.</p>
 
-<p>Finally, you need to put these two pieces together to complete the deployment diagram of your system. Draw the artifact inside the node to show that a software artifact is deployed to a hardware node. Next figure shows that 3dpacman.jar runs on a Desktop PC.</p>
+<p>The big difference between the example in this chapter and the modeling in previous chapters is that with an interaction overview, we can pick and choose from the different interaction diagram types. By using an interaction overview approach, each part of the interaction is modeled using the techniques that are most effective for that part.</p>
 
-<cite>Drawing an artifact inside a node shows that the artifact is deployed to the node</cite>
-<img class="img-responsive" src="/software-design/uml/pc.png" alt="pc" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/pc.png"'>
+<p>First, we need to decide how the interaction overview will be broken down into the most effective diagrams for each of the individual interactions.</p>
 
-<p>Your deployment diagrams should contain details about your system that are important to your audience. If it is important to show the hardware, firmware, operating system, runtime environments, or even device drivers of your system, then you should include these in your deployment diagram.</p>
+<cite>All three types of interaction diagram are used in this overview—sd indicates a sequence diagram, cd is for a communication diagram, and, not surprisingly, td stands for a timing diagram</cite>
+<img class="img-responsive" src="/software-design/uml/three-types-of-interaction-diagram.png" alt="three types of interaction diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/three-types-of-interaction-diagram.png"'>
 
-<p>An artifact is shown as a rectangle with the stereotype <code>&lt;&lt;artifact&gt;&gt;</code>, or the document icon in the upper right hand corner, or both.</p>
+<p>When modeling the <code>Select Blog Account Type</code>, <code>Create Regular Blog Account</code>, and <code>Tidy Up Author Details</code> interactions, message order is more important than any other factor.</p>
 
-<cite>Equivalent representations of a 3dpacman.jar artifact</cite>
-<img class="img-responsive" src="/software-design/uml/equivalent-presentation-of-artifacts.png" alt="equivalent presentation of artifacts" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/equivalent-presentation-of-artifacts.png"'>
+<cite>Some interactions to are best modeled using sequence diagrams to focus on message ordering</cite>
+<img class="img-responsive" src="/software-design/uml/message-ordering-in-interaction-overview-diagram.png" alt="message ordering in interaction overview diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/message-ordering-in-interaction-overview-diagram.png"'>
 
-<p>An artifact is deployed to a node, which means that the artifact resides on (or is installed on) the node.</p>
+<p>For variety's sake, the <code>Enter Author Details</code> will be displayed as a communication diagram.</p>
 
-<cite>The 3dpacman.jar artifact deployed to a Desktop PC node</cite>
-<img class="img-responsive" src="/software-design/uml/artifact-deployed-on-pc.png" alt="artifact deployed on pc" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/artifact-deployed-on-pc.png"'>
+<cite>Enter Author Details in a communication diagram</cite>
+<img class="img-responsive" src="/software-design/uml/enter-author-details-example.png" alt="enter author details example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/enter-author-details-example.png"'>
 
-<p>You can also draw a dependency arrow from the artifact to the target node with the stereotype <code>&lt;&lt;deploy&gt;&gt;</code>.</p>
+<p>You could decide to represent the <code>Enter Author Details</code> interaction as a communication diagram simply because it is easier to understand, but there is so much similarity between sequence and communication diagrams that mixing the two on one interaction overview is not often seen.</p>
 
-<cite>An alternate way to model the relationship deployment</cite>
-<img class="img-responsive" src="/software-design/uml/relationship-deployment-alternative-model.png" alt="relationship deployment alternative model" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/relationship-deployment-alternative-model.png"'>
+<p>The <code>Check Author Details</code> interaction must enforce the timing constraint that its messages will all be executed within five seconds. The focus is on timing for this part of the overview and thanks to the fact that an interaction overview can contain any of the different types of interaction diagram, a timing diagram can be employed for the <code>Check Author Details</code> interaction.</p>
 
-<p>When you're pressed for space, you might want to represent the deployment by simply listing the artifact's name inside the target node.</p>
+<cite>Adding a timing diagram to show critical timing constraints for one interaction within the overview</cite>
+<img class="img-responsive" src="/software-design/uml/show-critical-timing-constraints-example.png" alt="show critical timing constraints example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/show-critical-timing-constraints-example.png"'>
 
-<cite>A compact way to show deployment is to write the name of the artifact inside the node</cite>
-<img class="img-responsive" src="/software-design/uml/artifact-name-inside-node.png" alt="artifact name inside node" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/artifact-name-inside-node.png"'>
+<p>Now that all the interactions have been added to the interaction overview, all of the participants involved are known so we can add their names to the diagram's title.</p>
 
-<p>Listing the artifacts (without the artifact symbol) can really save space if you have a lot of artifacts.</p>
+<cite>Adding each of the participants involved in an interaction to the lifeline list in the interaction overview's title bar</cite>
+<img class="img-responsive" src="/software-design/uml/title-bar-example.png" alt="title bar example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/title-bar-example.png"'>
 
-<cite>Listing artifact names inside a node saves a lot of space compared to drawing an artifact symbol for each artifact</cite>
-<img class="img-responsive" src="/software-design/uml/listing-artifacts-inside-node.png" alt="listing artifacts inside node" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/listing-artifacts-inside-node.png"'>
+<p>The final piece of the puzzle in the <code>Create a New Regular Blog Account</code> interaction overview is the actual flow of control between each of the separate interaction diagrams</p>
 
-But be careful; by listing your artifacts, you cannot show dependencies between artifacts. If you want to show that an artifact uses another artifact, you have to draw the artifact symbols and a dependency arrow connecting the artifacts
+<cite>Starting with an initial node and finishing with a final node, the flow of control is the thread that ties each of the interactions together</cite>
+<img class="img-responsive" src="/software-design/uml/final-node-example.png" alt="final node example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/final-node-example.png"'>
 
-<cite>A deployment notation that uses artifact symbols (instead of listing artifact names) allows you to show artifact dependencies</cite>
-<img class="img-responsive" src="/software-design/uml/artifact-symbol-for-deployment-notation.png" alt="artifact symbol for deployment notation" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/artifact-symbol-for-deployment-notation.png"'>
-
-<p>When designing software, you break it up into cohesive groups of functionality, such as components or packages, which eventually get compiled into one or more files—or artifacts. In UML-speak, if an artifact is the physical actualization of a component, then the artifact manifests that component. An artifact can manifest not just components but any packageable element, such as packages and classes.</p>
-
-<p>The manifest relationship is shown with a dependency arrow from the artifact to the component with the stereotype <code>&lt;&lt;manifest&gt;&gt;</code>.</p>
-
-<cite>The artifact mycomponent.jar manifests the component MyComponent</cite>
-<img class="img-responsive" src="/software-design/uml/artifact-manifests-component.png" alt="artifact manifests component" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/artifact-manifests-component.png"'>
-
-<p>Since artifacts can then be assigned to nodes, the manifest relationship provides the missing link in modeling how your software components are mapped to hardware. However, linking a component to an artifact to a node can result in a cluttered diagram, so it's common to show the manifest relationships separate from the deployment relationships, even if they're on the same deployment diagram.</p>
-
-<p>You've already seen that you can use nodes to show hardware in your deployment diagram, but nodes don't have to be hardware. Certain types of software—software that provides an environment within which other software components can be executed—are nodes as well.</p>
-
-<p>A node is a hardware or software resource that can host software or related files. You can think of a software node as an application context; generally not part of the software you developed, but a third-party environment that provides services to your software.</p>
-
-<p>Software items such as library files, property files, and executable files that cannot host software are not nodes—they are artifacts.</p>
-
-<p>A node is drawn as a cube with its type written inside.</p>
-
-<cite>A Sun Blade Server hardware node marked with the stereotype &lt;&lt;device&gt;&gt;</cite>
-<img class="img-responsive" src="/software-design/uml/sun-blade-server.png" alt="sun blade server" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/sun-blade-server.png"'>
-
-<p>The stereotype <code>&lt;&lt;device&gt;&gt;</code> emphasizes that it's a hardware node.</p>
-
-<p>Next figure shows an Application Server node. Those familiar with enterprise software development will recognize this as a type of execution environment since it's a software environment that provides services to your application. The stereotype &lt;&lt;executionEnvironment&gt;&gt; emphasizes that this node is an execution environment.</p>
-
-<cite>An Application Server node marked with the stereotype &lt;&lt;executionEnvironment&gt;&gt;</cite>
-<img class="img-responsive" src="/software-design/uml/application-server-node-marked-as-streotype.png" alt="application server node marked as streotype" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/application-server-node-marked-as-streotype.png"'>
-
-<p>Execution environments do not exist on their own—they run on hardware. For example, an operating system needs computer hardware to run on. You show that an execution environment resides on a particular device by placing the nodes inside one another, nesting them.</p>
-
-<cite>An Application Server node is shown nested in a Sun Server node, meaning that the Application Server runs on Sun Server hardware.</cite>
-<img class="img-responsive" src="/software-design/uml/application-server-nested.png" alt="application server nested" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/application-server-nested.png"'>
-
-<p>It's not strictly necessary in UML 2.0 to distinguish device nodes from execution environment nodes, but it's a good habit to get into because it can clarify your model.</p>
-
-<p>You can show an instance of a node by using the <code>name : type</code> notation.</p>
-
-<cite>Showing the name and type of a node; an instance of a Sun Blade Server named svr1</cite>
-<img class="img-responsive" src="/software-design/uml/name-and-type-of-node.png" alt="name and type of node" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/name-and-type-of-node.png"'>
-
-<p>Next figure shows how two nodes of the same type can be modeled.</p>
-
-<cite>One node gets read traffic and the other gets write traffic</cite>
-<img class="img-responsive" src="/software-design/uml/traffic-node-example.png" alt="traffic node example" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/traffic-node-example.png"'>
-
-<p>To get its job done, a node may need to communicate with other nodes. For example, a client application running on a desktop PC may retrieve data from a server using TCP/IP.</p>
-
-<p>Communication paths are used to show that nodes communicate with each other at runtime. A communication path is drawn as a solid line connecting two nodes. The type of communication is shown by adding a stereotype to the path.</p>
-
-<cite>A Desktop PC and Server communicate via TCP/IP</cite>
-<img class="img-responsive" src="/software-design/uml/communication-with-tcp.png" alt="communication with tcp" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/communication-with-tcp.png"'>
-
-<p>You can also show communication paths between execution environment nodes. For example, you could model a web server communicating with an EJB container through RMI, as shown in next figure. This is more precise than showing an RMI communication path at the device node level because the execution environment nodes "speak" RMI. However, some modelers draw the communication paths at the outermost node level because it can make the diagram less cluttered.</p>
-
-<cite>You can also show communication paths between execution environment nodes</cite>
-<img class="img-responsive" src="/software-design/uml/communication-paths-between-execution-environments.png" alt="communication paths between execution environments" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/communication-paths-between-execution-environments.png"'>
-
-<p>Assigning a stereotype to a communication path can sometimes be tricky. RMI is layered using a TCP/IP transport layer. So, should you assign an &lt;&lt;RMI&gt;&gt; or a &lt;&lt;TCP/IP&gt;&gt; stereotype? As a rule of thumb, your communication stereotype should be as high-level as possible because it communicates more about your system. In this case, &lt;&lt;RMI&gt;&gt; is the right choice; it is higher level, and it tells the reader that you're using a Java implementation. However, as with all UML modeling, you should tailor the diagram to your audience.</p>
-
-<p>Installing software is rarely as easy as dropping a file on a machine; often you have to specify configuration parameters before your software can execute. A deployment specification is a special artifact specifying how another artifact is deployed to a node. It provides information that allows another artifact to run successfully in its environment.</p>
-
-<p>Deployment specifications are drawn as a rectangle with the stereotype &lt;&lt;deployment spec&gt;&gt;.</p>
-
-<p>There are two ways to tie a deployment specification to the deployment it describes:</p>
-
-<ul>
-	<li>Draw a dependency arrow from the deployment specification to the artifact, nesting both of these in the target node.</li>
-	<li>Attach the deployment specification to the deployment arrow, as shown in Figure 15-19.</li>
-</ul>
-
-<p>The deploy.wsdd file, shown in Figure 15-19, is the standard deployment descriptor file that specifies how a web service is deployed to the Axis web service engine. This file states which class executes the web service and which methods on the class can be called.</p>
-
-<cite>Equivalent ways of tying a deployment specification to the deployment it describes</cite>
-<img class="img-responsive" src="/software-design/uml/tying-deployment-specification.png" alt="tying deployment specification" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/tying-deployment-specification.png"'>
-
-<p>You can list these properties in the deployment specification using the <code>name : type</code> notation.</p>
-
-<p>Next figure shows the deploy.wsdd deployment specification with the properties <code>className</code> and <code>allowedMethods</code>.</p>
-
-<cite>Showing the properties of a deployment specification: the notation on the right shows an instance populated with values</cite>
-<img class="img-responsive" src="/software-design/uml/deployment-notation-properties.png" alt="deployment notation properties" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/deployment-notation-properties.png"'>
-
-<p>Deployment diagrams are useful at all stages of the design process. When you begin designing a system, you probably know only basic information about the physical layout. For example, if you're building a web application, you may not have decided which hardware to use and probably don't know what your software artifacts are called. But you want to communicate important characteristics of your system, such as the following:</p>
-
-<ul>
-	<li>Your architecture includes a web server, application server, and database.</li>
-	<li>Clients can access your application through a browser or through a richer GUI interface.</li>
-	<li>The web server is protected with a firewall.</li>
-</ul>
-
-<p>Even at this early stage you can use deployment diagrams to model these characteristics. Next figure shows a rough sketch of your system. The node names don't have to be precise, and you don't have to specify the communication protocols.</p>
-
-<cite>A rough sketch of your web application</cite>
-<img class="img-responsive" src="/software-design/uml/web-application-deployment-sketch.png" alt="web application deployment sketch" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/web-application-deployment-sketch.png"'>
-
-<p>Deployment diagrams are also useful in later stages of software development. Next diagram shows a detailed deployment diagram specifying a J2EE implementation of the system.</p>
-
-<cite>You can provide any amount of detail about the physical design of your system</cite>
-<img class="img-responsive" src="/software-design/uml/physical-details.png" alt="physical details" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/physical-details.png"'>
-
-<p>Show diagram is more specific about the hardware types, the communication protocols, and the allocation of software artifacts to nodes.</p>
+<p>The control flow in previous diagram shows that each of the separate interactions are executed in order. The one deviation from the normal path occurs at the <code>Create Regular Blog Account</code> interaction, shown as a sequence diagram, which is executed only if the author details checked out during the <code>Check Author Details</code> interaction.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -454,11 +353,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 15</span></li>
+<li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 10</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/state-machine-diagrams">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/timing-diagram">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/packages">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
@@ -687,7 +586,6 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-java.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

@@ -264,7 +264,6 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/3.0.html">Software Design</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/3.4.0.html">Unified Modeling Language</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/3.4.14.0.html">Interaction Diagrams</a></li>
 <li class='breadcrumb-item active'>Sequence Diagram</li>
 </ol>
 <div class="dropdown pull-right sticky">
@@ -287,11 +286,15 @@ Sequence Diagram
 </svg>
 </a>
 </h2>
+<p><b>Use cases</b> allow your model to describe what your system must be able to do; <b>classes</b> allow your model to describe the different types of parts that make up your system's structure.</p>
+
+<p>With use cases and classes alone, you can't yet model how your system is actually going to its job. This is where <b>interaction diagrams</b>, and specifically <b>sequence diagrams</b>, come into play.</p>
+
 <p><b>Sequence diagrams</b> are an important member of the group known as <b>interaction diagrams</b>.</p>
 
 <p><b>Interaction diagrams</b> model important <b>runtime interactions</b> between the parts that make up your system and form part of the <b>logical view</b> of your model.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/logical-view-diagram.png" alt="logical view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/logical-view-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/logical-view-diagram.png" alt="logical view diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/logical-view-diagram.png"'>
 
 <p><b>Sequence diagrams</b> are not alone in this group; they work alongside <a href="/software-design/uml/interaction-diagrams/communication-diagram">communication diagrams</a> and <a href="/software-design/uml/interaction-diagrams/timing-diagram">timing diagrams</a> to help you accurately model how the parts that make up your system interact.</p>
 
@@ -301,7 +304,7 @@ Sequence Diagram
 
 <p>A <b>sequence diagram</b> is made up of a collection of participants—the parts of your system that interact with each other during the sequence. Where a participant is placed on a sequence diagram is important. Regardless of where a participant is placed vertically, participants are always arranged horizontally with no two participants overlapping each other.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/sequence-diagram-participants.png" alt="sequence diagram participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/sequence-diagram-participants.png"'>
+<img class="img-responsive" src="/software-design/uml/sequence-diagram-participants.png" alt="sequence diagram participants" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/sequence-diagram-participants.png"'>
 
 <p>Each participant has a corresponding lifeline running down the page. A participant's <b>lifeline</b> simply states that the part exists at that point in the sequence and is only really interesting when a part is created and/or deleted during a sequence.</p>
 
@@ -315,13 +318,13 @@ Sequence Diagram
 
 <p>A sequence diagram describes the order in which the interactions take place, so time is an important factor. How time relates to a sequence diagram is shown in the following figure.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/participants-lifetime.png" alt="participants lifetime" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/participants-lifetime.png"'>
+<img class="img-responsive" src="/software-design/uml/participants-lifetime.png" alt="participants lifetime" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/participants-lifetime.png"'>
 
 <p>Time on a sequence diagram is all about <b>ordering</b>, not <b>duration</b>.</p>
 
 <p>The smallest part of an interaction is an <b>event</b>. An event is any point in an interaction where something occurs.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/signals-in-sequence-diagram.png" alt="signals in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/signals-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/signals-in-sequence-diagram.png" alt="signals in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/signals-in-sequence-diagram.png"'>
 
 <p><b>Events</b> are the building blocks for signals and messages.</p>
 
@@ -362,7 +365,7 @@ Sequence Diagram
 
 <p>An interaction in a sequence diagram occurs when one participant decides to send a message to another participant.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/messages-in-sequence-diagram.png" alt="messages in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/messages-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/messages-in-sequence-diagram.png" alt="messages in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/messages-in-sequence-diagram.png"'>
 
 <p>Messages on a sequence diagram are specified using an arrow from the participant that wants to pass the message, the Message Caller, to the participant that is to receive the message, the Message Receiver. Messages can flow in whatever direction makes sense for the required interaction—from left to right, right to left, or even back to the Message Caller itself. Think of a message as an event that is passed from a Message Caller to get the Message Receiver to do something.</p>
 
@@ -413,21 +416,21 @@ Sequence Diagram
 
 <p>When a message is passed to a participant it triggers, or invokes, the receiving participant into doing something; at this point, the receiving participant is said to be active. To show that a participant is active, i.e., doing something, you can use an activation bar</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/activation-bars.png" alt="activation bars" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/activation-bars.png"'>
+<img class="img-responsive" src="/software-design/uml/activation-bars.png" alt="activation bars" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/activation-bars.png"'>
 
 <p>When a message from one participant results in one or more messages being sent by the receiving participant, those resulting messages are said to be <b>nested</b> within the <b>triggering message</b>.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/nested-messages.png" alt="nested messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/nested-messages.png"'>
+<img class="img-responsive" src="/software-design/uml/nested-messages.png" alt="nested messages" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/nested-messages.png"'>
 
 <p>The type of arrowhead that is on a message is also important when understanding what type of message is being passed. For example, the Message Caller may want to wait for a message to return before carrying on with its work—a synchronous message. Or it may wish to just send the message to the Message Receiver without waiting for any return as a form of "fire and forget" message—an asynchronous message. Sequence diagrams need to show these different types of message using various message arrows.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/message-arrow-types.png" alt="message arrow types" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/message-arrow-types.png"'>
+<img class="img-responsive" src="/software-design/uml/message-arrow-types.png" alt="message arrow types" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/message-arrow-types.png"'>
 
 <p>As mentioned before, a synchronous message is invoked when the Message Caller waits for the Message Receiver to return from the message invocation.</p>
 
 <p>The interaction shown in the following figure is implemented in Java using nothing more than a simple method invocation.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/single-synchronous-message.png" alt="single synchronous message" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/single-synchronous-message.png"'>
+<img class="img-responsive" src="/software-design/uml/single-synchronous-message.png" alt="single synchronous message" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/single-synchronous-message.png"'>
 
 <pre class="language-java line-numbers">
 	<code>
@@ -461,13 +464,13 @@ Sequence Diagram
 
 <p>An <b>asynchronous message</b> is invoked by a Message Caller on a Message Receiver, but the Message Caller does not wait for the message invocation to return before carrying on with the rest of the interaction's steps. This means that the Message Caller will invoke a message on the Message Receiver and the Message Caller will be busy invoking further messages before the original message returns.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/synchronous-message-sample.png" alt="synchronous message sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/synchronous-message-sample.png"'>
+<img class="img-responsive" src="/software-design/uml/synchronous-message-sample.png" alt="synchronous message sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/synchronous-message-sample.png"'>
 
 <p>The <b>return message</b> is an optional piece of notation that you can use at the end of an activation bar to show that the control flow of the activation returns to the participant that passed the original message. In code, a return arrow is similar to reaching the end of a method or explicitly calling a return statement.</p>
 
 <p>Participants do not necessarily live for the entire duration of a sequence diagram's interaction. Participants can be created and destroyed according to the messages that are being passed.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/participants-creation-in-sequence-diagram.png" alt="participants creation in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/participants-creation-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/participants-creation-in-sequence-diagram.png" alt="participants creation in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/participants-creation-in-sequence-diagram.png"'>
 
 <p>To show that a participant is created, you can either simply pass a <code>create(..)</code> message to the participant's lifeline or use the dropped participant box notation where it is absolutely clear that the participant does not exist before the create call is invoked. Participant deletion is shown by the ending of the participant's lifeline with the deletion cross.</p>
 
@@ -493,11 +496,11 @@ Sequence Diagram
 
 <p>In these cases, where another factor such as the garbage collector is involved, you can either leave the object as alive but unused or imply that it is no longer needed by using the destruction cross without an associated destroy method.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/explicit-destroy-message.png" alt="explicit destroy message" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/explicit-destroy-message.png"'>
+<img class="img-responsive" src="/software-design/uml/explicit-destroy-message.png" alt="explicit destroy message" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/explicit-destroy-message.png"'>
 
 <p>Let's look at a sequence diagram that is going to model the interactions that need to occur to make the <code>Create a new Regular Blog Account</code> use case happen.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/create-new-regular-blog-account-use-case-diagram.png" alt="create new regular blog account use case diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/create-new-regular-blog-account-use-case-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/create-new-regular-blog-account-use-case-diagram.png" alt="create new regular blog account use case diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/create-new-regular-blog-account-use-case-diagram.png"'>
 
 <p>Briefly, the <code>Create a new Regular Blog Account</code> use case is a special case of the <code>Create a new Blog Account</code> use case. It also includes all of the steps provided by the <code>Check Identity</code> use case and may optionally execute the steps provided by the <code>Record Application Failure</code> use case, if the application for a new account is denied.</p>
 
@@ -547,27 +550,27 @@ Sequence Diagram
 
 <p>Above table only shows the Main Flow—that is the steps that would occur without worrying about any extensions—but this is a good enough starting point for creating a top-level sequence diagram.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/actors-interaction-in-sequence-diagram.png" alt="actors interaction in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/actors-interaction-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/actors-interaction-in-sequence-diagram.png" alt="actors interaction in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/actors-interaction-in-sequence-diagram.png"'>
 
 <p>At this point, previous figure shows only the interactions that must happen between the external actors and your system because that is the level at which the use case description's steps were written. On the sequence diagram, your system is represented as a single participant, the <code>ContentManagementSystem</code>; however, unless you intend on implementing your content management system as a single monolithic piece of code (generally not a good idea!), it's time to break apart <code>ContentManagementSystem</code> to expose the pieces that go inside.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/system-internals-in-sequence-diagram.png" alt="system internals in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/system-internals-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/system-internals-in-sequence-diagram.png" alt="system internals in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/system-internals-in-sequence-diagram.png"'>
 
 <p>Something critical is missing from the sequence diagram in previous diagram.</p>
 
 <p>Following diagram adds the missing pieces to the model to show the actual creation of a regular blog account.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/participant-lifelines-in-sequence-diagram.png" alt="participant lifelines in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/participant-lifelines-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/participant-lifelines-in-sequence-diagram.png" alt="participant lifelines in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/participant-lifelines-in-sequence-diagram.png"'>
 
 <p>Participant lifelines are particularly useful when showing that a participant has been created. In previous diagram, the <code>AuthorDetails</code> and <code>RegularBlogAccount</code> participants are not in existence when the sequence diagram begins but they are created during its execution.</p>
 
 <p>Let's say that the <code>authorDetails:AuthorDetails</code> participant is no longer required once the <code>newAccount:RegularBlogAccount</code> has been created. To show that the <code>authorDetails:AuthorDetails</code> participant is discarded at this point, you can use an explicit destroy message connected to the destruction cross.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/descarding-participant-in-sequence-diagram.png" alt="descarding participant in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/descarding-participant-in-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/descarding-participant-in-sequence-diagram.png" alt="descarding participant in sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/descarding-participant-in-sequence-diagram.png"'>
 
 <p>So far, all of the messages on our example sequence diagram have been <b>synchronous</b>; they are executed one after the other in order, and nothing happens concurrently. However, there is at least one message in the example sequence that is a great candidate for being an asynchronous message.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/irregular-behavior-of-submit.png" alt="irregular behavior of submit" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/irregular-behavior-of-submit.png"'>
+<img class="img-responsive" src="/software-design/uml/irregular-behavior-of-submit.png" alt="irregular behavior of submit" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/irregular-behavior-of-submit.png"'>
 
 <p>In previous diagram, when the Administrator clicks on the submit button the system freezes, until the new blog account has been created. It would be useful to show that the user interface allows the Administrator to carry on with other tasks while the content management system creates the new account. What we need is for the <code>clickSubmit(  )</code> message to be <b>asynchronous</b>.</p>
 
@@ -577,7 +580,7 @@ Sequence Diagram
 
 <p>A <b>sequence fragment</b> is represented as a box that encloses a portion of the interactions within a sequence diagram.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/sequence-fragment.png" alt="sequence fragment" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/sequence-fragment.png"'>
+<img class="img-responsive" src="/software-design/uml/sequence-fragment.png" alt="sequence fragment" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/sequence-fragment.png"'>
 
 <p>A sequence fragment's box overlaps the region of the sequence diagram where the fragment's interactions take place. A fragment box can contain any number of interactions and, for large complex interactions, further nested fragments as well. The top left corner of the fragment box contains an operator. The fragment operator indicates which type of fragment this is.</p>
 
@@ -587,11 +590,11 @@ Sequence Diagram
 
 <p>The <b>ref</b> type of sequence fragment finally alleviates some of the maintenance nightmare presented by the huge sequence diagrams that are often created for complex systems. In following diagram, the <b>ref fragment</b> represents a piece of a larger sequence diagram.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/select-account-type-in-ref-fraction.png" alt="select account type in ref fraction" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/select-account-type-in-ref-fraction.png"'>
+<img class="img-responsive" src="/software-design/uml/select-account-type-in-ref-fraction.png" alt="select account type in ref fraction" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/select-account-type-in-ref-fraction.png"'>
 
 <p>The interactions by which the Administrator actor selects a blog account type for creation are now contained within the referenced sequence fragment. Following diagram shows how the <b>referenced fragment</b> can be expressed on a separate sequence diagram.</p>
 
-<img class="img-responsive" src="/software-design/uml/interaction-diagrams/referenced-sequence-diagram.png" alt="referenced sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/interaction-diagrams/referenced-sequence-diagram.png"'>
+<img class="img-responsive" src="/software-design/uml/referenced-sequence-diagram.png" alt="referenced sequence diagram" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/referenced-sequence-diagram.png"'>
 
 <p>Along with managing the sheer size of large sequence diagrams, the <b>ref fragment</b> also presents an opportunity to reuse a set of common interactions. Several <b>ref fragment</b> boxes can reference the same set of interactions, thereby reusing the interactions in multiple places.</p>
 
@@ -667,8 +670,8 @@ References
 <li class='list-group-item'>Learning UML 2.0 - Russ Miles, Kim Hamilton: <span style='color: red'> chapter 7</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/interaction-diagrams">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/interaction-diagrams/communication-diagram">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/object-diagrams">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/software-design/uml/communication-diagram">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
