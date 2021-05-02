@@ -340,14 +340,12 @@ Use Case
     <tr>
       <th scope="row">1</th>
       <td>Related Requirements</td>
-      <td>Some indication as to which requirements this use case partially or
-completely fulfills.</td>
+      <td>Some indication as to which requirements this use case partially or completely fulfills.</td>
     </tr>
     <tr>
       <th scope="row">2</th>
       <td>Goal in Context</td>
-      <td>The use case's place within the system and why this use case is
-important.</td>
+      <td>The use case's place within the system and why this use case is important.</td>
     </tr>
     <tr>
       <th scope="row">3</th>
@@ -357,27 +355,22 @@ important.</td>
     <tr>
       <th scope="row">4</th>
       <td>Successful End Condition</td>
-      <td>What the system's condition should be if the use case executes
-successully.</td>
+      <td>What the system's condition should be if the use case executes successully.</td>
     </tr>
     <tr>
       <th scope="row">5</th>
       <td>Failed End Condition</td>
-      <td>What the system condition should be if the use case failed to
-execute successfully.</td>
+      <td>What the system condition should be if the use case failed to execute successfully.</td>
     </tr>
     <tr>
       <th scope="row">6</th>
       <td>Primary Actors</td>
-      <td>The main actors that participate in the use case. Often includes the
-actors that trigger or directly receive information from a use case's
-execution.</td>
+      <td>The main actors that participate in the use case. Often includes the actors that trigger or directly receive information from a use case's execution.</td>
     </tr>
     <tr>
       <th scope="row">7</th>
       <td>Secondary Actors</td>
-      <td>Actors that participate but are not the main players in a use case's
-execution.</td>
+      <td>Actors that participate but are not the main players in a use case's execution.</td>
     </tr>
     <tr>
       <th scope="row">8</th>
@@ -387,21 +380,483 @@ execution.</td>
     <tr>
       <th scope="row">9</th>
       <td>Main Flow</td>
-      <td>The place to describe each of the important steps in use case's
-normal execution.</td>
+      <td>The place to describe each of the important steps in use case's normal execution.</td>
     </tr>
     <tr>
       <th scope="row">10</th>
       <td>Extensions</td>
-      <td>A description of any alternative steps from the ones described in
-the Main Flow.</td>
+      <td>A description of any alternative steps from the ones described in the Main Flow.</td>
     </tr>
   </tbody>
 </table>
 
-<p>The &lt;&lt;include&gt;&gt; relationship declares that the use case at the head of the dotted arrow completely reuses all of the steps from the use case being included. In the following figure, the Create a new Blog Account and Create a new Personal Wiki completely reuse all of the steps declared in the Check Identity use case.</p>
+<p>Following table shows an example use case description for the <code>Create a new Blog Account</code> use case and provides a handy template for your own descriptions.</p>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Use Case Name</th>
+      <th scope="col">Create a new Blog Account</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Related Requirements</td>
+      <td>Requirement A.1</td>
+    </tr>
+    <tr>
+      <td>Goal in Context</td>
+      <td>A new or existing author requests a new blog account from the <i>Administrator</i>.</td>
+    </tr>
+    <tr>
+      <td>Preconditions</td>
+      <td>The system is limited to recognized authors and so the author needs to have appropriate proof of identity.</td>
+    </tr>
+    <tr>
+      <td>Successful End Condition</td>
+      <td>A new blog account is created for the author.</td>
+    </tr>
+    <tr>
+      <td>Failed End Condition</td>
+      <td>The application for a new blog account is rejected.</td>
+    </tr>
+    <tr>
+      <td>Primary Actors</td>
+      <td><i>Administrator</i></td>
+    </tr>
+    <tr>
+      <td>Secondary Actors</td>
+      <td><i>Author Credentials Database</i></td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>The <i>Administrator</i> asks the CMS to create a new blog account.</td>
+    </tr>
+    <tr>
+      <th scope="col">Main Flow</td>
+      <th scope="col">Step</th>
+      <th scope="col">Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">1</th>
+      <td>The <i>Administrator</i> asks the system to create a new regular blog account.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">2</th>
+      <td>The <i>Administrator</i> selects an account type.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3</th>
+      <td>The <i>Administrator</i> enters the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">4</th>
+      <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">5</th>
+      <td>The new blog account is created.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">6</th>
+      <td>A summary of the new blog account's details are emailed to the author.</td>
+	</tr>
+    <tr>
+      <th scope="col">Extensions</th>
+      <th scope="col">Step</th>
+      <th scope="col">Branching Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">4.1</th>
+      <td>The <i>Author Credentials Database</i> does not verify the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">4.2</th>
+      <td>The author's new blog account application is rejected.</td>
+	</tr>
+  </tbody>
+</table>
+
+<h4>Requirement A.2</h4>
+
+<p>The <code>Content Management System</code> shall allow an administrator to <code>Create a new Personal Wiki</code>, provided the personal details of the applying author are verified using the <code>Author Credentials Database</code>.</p>
+
+<p>A new requirement can often mean a new use case for the system, although it's not always a one-to-one mapping.</p>
+
+<p>To capture <b>Requirement A.2</b> a new use case needs to be added to the <code>Content Management System</code>, as shown in the following figure.</p>
+
+<img class="img-responsive" src="/software-design/uml/content-management-system-use-cases.png" alt="content management system use cases" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/content-management-system-use-cases.png"'>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Use Case Name</th>
+      <th scope="col">Create a new Personal Wiki</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Related Requirements</td>
+      <td>Requirement A.2</td>
+    </tr>
+    <tr>
+      <td>Goal in Context</td>
+      <td>A new or existing author requests a new personal wiki from the <i>Administrator</i>.</td>
+    </tr>
+    <tr>
+      <td>Preconditions</td>
+      <td>The author has appropriate proof of identity.</td>
+    </tr>
+    <tr>
+      <td>Successful End Condition</td>
+      <td>A new personal Wiki is created for the author.</td>
+    </tr>
+    <tr>
+      <td>Failed End Condition</td>
+      <td>The application for a new personal Wiki is rejected.</td>
+    </tr>
+    <tr>
+      <td>Primary Actors</td>
+      <td><i>Administrator</i></td>
+    </tr>
+    <tr>
+      <td>Secondary Actors</td>
+      <td><i>Author Credentials Database</i></td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>The <i>Administrator</i> asks the CMS to create a new personal Wiki.</td>
+    </tr>
+    <tr>
+      <th scope="col">Main Flow</td>
+      <th scope="col">Step</th>
+      <th scope="col">Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">1</th>
+      <td>The <i>Administrator</i> asks the system to create a new regular personal Wiki.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">2</th>
+      <td>The <i>Administrator</i> enters the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3</th>
+      <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">4</th>
+      <td>The new personal Wiki is created.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">5</th>
+      <td>A summary of the new blog account's details are emailed to the author.</td>
+	</tr>
+    <tr>
+      <th scope="col">Extensions</th>
+      <th scope="col">Step</th>
+      <th scope="col">Branching Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">3.1</th>
+      <td>The <i>Author Credentials Database</i> does not verify the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3.2</th>
+      <td>The author's new personal Wiki application is rejected.</td>
+	</tr>
+  </tbody>
+</table>
+
+<p>The first thing to notice is that we have some redundancy between the two use case descriptions. Both <code>Create a new Blog Account</code> and <code>Create a new Personal Wiki</code> need to check the applicant's credentials. Currently, this behavior is simply repeated between the two use case descriptions.</p>
+
+<p>This repetitive behavior shared between two use cases is best separated and captured within a totally new use case. This new use case can then be reused by the <code>Create a new Blog Account</code> and <code>Create a new Personal Wiki</code> use cases using the <code>&lt;&lt;include&gt;&gt;</code> relationship.</p>
+
+<p>The &lt;&lt;include&gt;&gt; relationship declares that the use case at the head of the dotted arrow completely reuses all of the steps from the use case being included. In the following figure, the <code>Create a new Blog Account</code> and <code>Create a new Personal Wiki</code> completely reuse all of the steps declared in the <code>Check Identity</code> use case.</p>
 
 <img class="img-responsive" src="/software-design/uml/include-relationship.png" alt="include relationship" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/include-relationship.png"'>
+
+<p>To show the <code>&lt;&lt;include&gt;&gt;</code> relationship in your use case descriptions, you need to remove the redundant steps from the <code>Create a new Blog Account</code> and <code>Create new Personal Wiki</code> use case descriptions and instead use the <b>Included Cases</b> field and <code>include::&lt;use case name&gt;</code> syntax to indicate the use case where the reused steps reside, as shown in next two tables.</p>
+
+<p>The <code>Create a new Blog Account</code> use case description modified to use &lt;&lt;include&gt;&gt; relationship.</p>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Use Case Name</th>
+      <th scope="col">Create a new Blog Account</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Related Requirements</td>
+      <td>Requirement A.1</td>
+    </tr>
+    <tr>
+      <td>Goal in Context</td>
+      <td>A new or existing author requests a new blog account from the <i>Administrator</i>.</td>
+    </tr>
+    <tr>
+      <td>Preconditions</td>
+      <td>The system is limited to recognized authors and so the author needs to have appropriate proof of identity.</td>
+    </tr>
+    <tr>
+      <td>Successful End Condition</td>
+      <td>A new blog account is created for the author.</td>
+    </tr>
+    <tr>
+      <td>Failed End Condition</td>
+      <td>The application for a new blog account is rejected.</td>
+    </tr>
+    <tr>
+      <td>Primary Actors</td>
+      <td><i>Administrator</i></td>
+    </tr>
+    <tr>
+      <td>Secondary Actors</td>
+      <td><i>Author Credentials Database</i></td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>The <i>Administrator</i> asks the CMS to create a new blog account.</td>
+    </tr>
+    <tr>
+      <th scope="col">Main Flow</td>
+      <th scope="col">Step</th>
+      <th scope="col">Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">1</th>
+      <td>The <i>Administrator</i> asks the system to create a new regular blog account.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">2</th>
+      <td>The <i>Administrator</i> selects an account type.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3</th>
+      <td>The <i>Administrator</i> enters the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">4 include::Check Identity</th>
+      <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">5</th>
+      <td>The new blog account is created.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">6</th>
+      <td>A summary of the new blog account's details are emailed to the author.</td>
+	</tr>
+    <tr>
+      <th scope="col">Extensions</th>
+      <th scope="col">Step</th>
+      <th scope="col">Branching Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">4.1</th>
+      <td>The <i>Author Credentials Database</i> does not verify the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">4.2</th>
+      <td>The author's new blog account application is rejected.</td>
+	</tr>
+  </tbody>
+</table>
+
+<p>The <code>Create a new Personal Wiki</code> use case description modified to use &lt;&lt;include&gt;&gt; relationship.</p>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Use Case Name</th>
+      <th scope="col">Create a new Personal Wiki</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Related Requirements</td>
+      <td>Requirement A.2</td>
+    </tr>
+    <tr>
+      <td>Goal in Context</td>
+      <td>A new or existing author requests a new personal wiki from the <i>Administrator</i>.</td>
+    </tr>
+    <tr>
+      <td>Preconditions</td>
+      <td>The author has appropriate proof of identity.</td>
+    </tr>
+    <tr>
+      <td>Successful End Condition</td>
+      <td>A new personal Wiki is created for the author.</td>
+    </tr>
+    <tr>
+      <td>Failed End Condition</td>
+      <td>The application for a new personal Wiki is rejected.</td>
+    </tr>
+    <tr>
+      <td>Primary Actors</td>
+      <td><i>Administrator</i></td>
+    </tr>
+    <tr>
+      <td>Secondary Actors</td>
+      <td><i>Author Credentials Database</i></td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>The <i>Administrator</i> asks the CMS to create a new personal Wiki.</td>
+    </tr>
+    <tr>
+      <th scope="col">Main Flow</td>
+      <th scope="col">Step</th>
+      <th scope="col">Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">1</th>
+      <td>The <i>Administrator</i> asks the system to create a new regular personal Wiki.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">2</th>
+      <td>The <i>Administrator</i> enters the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3 include::Check Identity</th>
+      <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">4</th>
+      <td>The new personal Wiki is created.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">5</th>
+      <td>A summary of the new blog account's details are emailed to the author.</td>
+	</tr>
+    <tr>
+      <th scope="col">Extensions</th>
+      <th scope="col">Step</th>
+      <th scope="col">Branching Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">3.1</th>
+      <td>The <i>Author Credentials Database</i> does not verify the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3.2</th>
+      <td>The author's new personal Wiki application is rejected.</td>
+	</tr>
+  </tbody>
+</table>
+
+<p>The <code>Check Identity</code> use case description containing reusable steps.</p>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Use Case Name</th>
+      <th scope="col">Check Identity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Related Requirements</td>
+      <td>Requirement A.1, Requirement A.2</td>
+    </tr>
+    <tr>
+      <td>Goal in Context</td>
+      <td>An author's details need to be checked.</td>
+    </tr>
+    <tr>
+      <td>Preconditions</td>
+      <td>The author being checked has appropriate proof of identity.</td>
+    </tr>
+    <tr>
+      <td>Successful End Condition</td>
+      <td>The details are verified.</td>
+    </tr>
+    <tr>
+      <td>Failed End Condition</td>
+      <td>The details are not verified.</td>
+    </tr>
+    <tr>
+      <td>Primary Actors</td>
+      <td><i>Author Credentials Database</i></td>
+    </tr>
+    <tr>
+      <td>Secondary Actors</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>The author's credentials are provided to the system for verification.</td>
+    </tr>
+    <tr>
+      <th scope="col">Main Flow</td>
+      <th scope="col">Step</th>
+      <th scope="col">Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">1</th>
+      <td>The details are provided to the system.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">2</th>
+      <td>The <code>Author Credentials Database</code> verifies the details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">3 include::Check Identity</th>
+      <td>The details are returned as verified by the <code>Author Credentials Database</code>.</td>
+	</tr>
+    <tr>
+      <th scope="col">Extensions</th>
+      <th scope="col">Step</th>
+      <th scope="col">Branching Action</th>
+    </tr>
+	<tr>
+      <td></td>
+      <th scope="row">2.1</th>
+      <td>The <i>Author Credentials Database</i> does not verify the author's details.</td>
+	</tr>
+	<tr>
+      <td></td>
+      <th scope="row">2.2</th>
+      <td>The details are returned as unverified.</td>
+	</tr>
+  </tbody>
+</table>
 
 <h4>Inheritance (Specialized Use Case)</h4>
 

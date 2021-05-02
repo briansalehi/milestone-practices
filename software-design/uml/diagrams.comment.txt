@@ -110,3 +110,5 @@ can change that state.</td>
     </tr>
   </tbody>
 </table>
+
+<p>In the following sections we are going to review UML diagrams using <a href="https://plantuml.com">PlantUML</a> tool which is a text to diagram UML tool written in Java. To use it you must already have Java installed on your system and to sketch sequence diagrams you will also need to have GraphViz installed.</p>

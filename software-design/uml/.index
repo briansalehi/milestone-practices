@@ -12,7 +12,10 @@ class-relationships.txt
 composite-structures.txt
 component-diagrams.txt
 object-diagrams.txt
-interaction-diagrams
+sequence-diagram.txt
+communication-diagram.txt
+timing-diagram.txt
+interaction-overview-diagram.txt
 packages.txt
 state-machine-diagrams.txt
 deployment-diagrams.txt

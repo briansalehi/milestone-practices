@@ -1,3 +1,7 @@
+<p><b>Use cases</b> allow your model to describe what your system must be able to do; <b>classes</b> allow your model to describe the different types of parts that make up your system's structure.</p>
+
+<p>With use cases and classes alone, you can't yet model how your system is actually going to its job. This is where <b>interaction diagrams</b>, and specifically <b>sequence diagrams</b>, come into play.</p>
+
 <p><b>Sequence diagrams</b> are an important member of the group known as <b>interaction diagrams</b>.</p>
 
 <p><b>Interaction diagrams</b> model important <b>runtime interactions</b> between the parts that make up your system and form part of the <b>logical view</b> of your model.</p>
