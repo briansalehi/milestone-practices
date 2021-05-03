@@ -1,6 +1,4 @@
-#C++ Primer Plus
 #C++ Primer Plus, 6th Edition - Stephen Prata
 #Modern C++ Programming Cookbook, 2nd Edition - Marius Bancila
-#Professional C++, 4th Edition - Marc Gregoire
-#Sam's Teach Yourself C++ in One Hour a Day
+Professional C++, 4th Edition - Marc Gregoire:: chapter 1
 #Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao

@@ -2,9 +2,20 @@
 
 <p>A use case is a case (or situation) where your system is used to fulfill one or more of your user's requirements; a use case captures a piece of functionality that the system provides.</p>
 
-<p>A use case, or job, might be as simple as allowing the user to log in or as complex as executing a distributed transaction across multiple global databases. The important thing to remember is that a use case—from the user's perspective—is a complete use of the system; there is some interaction with the system, as well as some output from that interaction. For example, Requirement A.1 describes one main use of the CMS: to create a new blog account. following figure shows how this interaction is captured as a use case.</p>
+<p>A use case, or job, might be as simple as allowing the user to log in or as complex as executing a distributed transaction across multiple global databases. The important thing to remember is that a use case—from the user's perspective—is a complete use of the system; there is some interaction with the system, as well as some output from that interaction. For example, <b>Requirement A.1</b> describes one main use of the CMS: to create a new blog account. following figure shows how this interaction is captured as a use case.</p>
 
-![use-case-sample.png]
+![use-case.png]
+
+<p>Use cases can be created by PlantUML in the following format:</p>
+
+<pre class="language-uml line-numbers" data-line="">
+	<code>
+		@startuml
+			(Create a new\nBlog Account) as U1
+			usecase (Create a new\nBlog Account) as U2
+		@enduml
+	</code>
+</pre>
 
 <p>A use case in UML is drawn as an oval with a name that describes the interaction that it represents.</p>
 
@@ -24,7 +35,19 @@
 
 <p>A communication line connects an actor and a use case to show the actor participating in the use case. In this example, the Administrator actor is involved in the creation of a new blog account use case.</p>
 
-![communication-line-sample.png]
+![communication-line.png]
+
+<p>Communication line can be implanted by PlantUML in the following formats:</p>
+
+<pre class="language-uml line-numbers" data-line="">
+	<code>
+		@startuml
+			:Administrator: as A
+			(Create a new\nBlog Account) as U
+			A -> U
+		@enduml
+	</code>
+</pre>
 
 <p>There is potential to have any number of actors involved in a use case. There is no theoretical limit to the number of actors that can participate in a use case.</p>
 
@@ -199,7 +222,7 @@
 
 <h4>Requirement A.2</h4>
 
-<p>The <code>Content Management System</code> shall allow an administrator to <code>Create a new Personal Wiki</code>, provided the personal details of the applying author are verified using the <code>Author Credentials Database</code>.</p>
+<p>The <code>Content Management System</code> shall allow an administrator to <code>Create a new Personal Wiki</code>, provided the personal details of the applying author are verified using the <i>Author Credentials Database</i>.</p>
 
 <p>A new requirement can often mean a new use case for the system, although it's not always a one-to-one mapping.</p>
 
@@ -369,7 +392,7 @@
 	</tr>
 	<tr>
       <td></td>
-      <th scope="row">4 <code>include::Check Identity</code></th>
+      <th scope="row">4 include::Check Identity</th>
       <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
 	</tr>
 	<tr>
@@ -459,7 +482,7 @@
 	</tr>
 	<tr>
       <td></td>
-      <th scope="row">3 <code>include::Check Identity</code></th>
+      <th scope="row">3 include::Check Identity</th>
       <td>The author's details are verified using the <i>Author Credentials Database</i>.</td>
 	</tr>
 	<tr>
@@ -490,7 +513,7 @@
   </tbody>
 </table>
 
-<p>The <code>Check Identity</code> use case description containing reusable steps.</p>
+<p>Following table holds the <code>Check Identity</code> use case description containing reusable steps.</p>
 
 <table class="table table-dark">
   <thead>
@@ -545,12 +568,12 @@
 	<tr>
       <td></td>
       <th scope="row">2</th>
-      <td>The <code>Author Credentials Database</code> verifies the details.</td>
+      <td>The <i>Author Credentials Database</i> verifies the details.</td>
 	</tr>
 	<tr>
       <td></td>
-      <th scope="row">3 <code>include::Check Identity</code></th>
-      <td>The details are returned as verified by the <code>Author Credentials Database</code>.</td>
+      <th scope="row">3 include::Check Identity</th>
+      <td>The details are returned as verified by the <i>Author Credentials Database</i>.</td>
 	</tr>
     <tr>
       <th scope="col">Extensions</th>
@@ -572,13 +595,13 @@
 
 <h4>Inheritance (Specialized Use Case)</h4>
 
-<p>Currently, the Content Management System contains a single Create a new Blog Account use case that describes the steps required to create an account. But what if the CMS supports several different types of blog accounts, and the steps required to create each of these accounts differs ever so slightly from the original use case? You want to describe the general behavior for creating a blog account—captured in the Create a new Blog Account use case—and then define specialized use cases in which the account being created is a specific type, such as a regular account with one blog or an editorial account that can make changes to entries in a set of blogs.</p>
+<p>Currently, the <b>Content Management System</b> contains a single <code>Create a new Blog Account</code> use case that describes the steps required to create an account. But what if the CMS supports several different types of blog accounts, and the steps required to create each of these accounts differs ever so slightly from the original use case? You want to describe the general behavior for creating a blog account—captured in the <code>Create a new Blog Account</code> use case—and then define specialized use cases in which the account being created is a specific type, such as a regular account with one blog or an editorial account that can make changes to entries in a set of blogs.</p>
 
 <p>This is where use case generalization comes in. A more common way of referring to generalization is using the term inheritance . Use case inheritance is useful when you want to show that one use case is a special type of another use case. To show use case inheritance , use the generalization arrow to connect the more general, or parent, use case to the more specific use case.  The following figure shows how you could extend the CMS's use cases to show that two different types of blog accounts can be created.</p>
 
 ![specialized-use-case.png]
 
-<p>But be careful—by using inheritance, you are effectively saying that every step in the general use case must occur in the specialized use cases. Also, every relationship that the general use case has with external actors or use cases, as shown with the <code>&lt;&lt;include&gt;&gt;</code> relationship between Create a new Blog Account and Check Identity, must also make sense in the more specialized use cases, such as Create a new Editorial Blog Account.</p>
+<p>But be careful—by using inheritance, you are effectively saying that every step in the general use case must occur in the specialized use cases. Also, every relationship that the general use case has with external actors or use cases, as shown with the <code>&lt;&lt;include&gt;&gt;</code> relationship between <code>Create a new Blog Account</code> and <code>Check Identity</code>, must also make sense in the more specialized use cases, such as <code>Create a new Editorial Blog Account</code>.</p>
 
 <p>If you really don't want your more specific use case to do everything that the general use case describes, then don't use generalization. Instead, you might want to consider using either the <code>&lt;&lt;include&gt;&gt;</code> relationship shown in the previous section or the <code>&lt;&lt;extend&gt;&gt;</code> relationship coming up in the next section.</p>
 

@@ -290,6 +290,19 @@ Actors
 
 <img class="img-responsive" src="/software-design/uml/actor-sample.png" alt="actor sample" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/actor-sample.png"'>
 
+<p>You only can make the stick man notation in PlantUML which can be written in two ways:</p>
+
+<pre class="language-txt line-numbers" data-line="2,3">
+	<code>
+		@startuml
+		:Administrator: as A1
+		actor Administrator as A2
+		@enduml
+	</code>
+</pre>
+
+<img class="img-responsive" src="/software-design/uml/actor.png" alt="actor" loading="lazy" onerror='this.onerror=null; this.src="software-design/uml/actor.png"'>
+
 <p>Above figure captures the Administrator role as it is described in Requirement A.1 of a weblog content management system (CMS) which shall allow an administrator to create a new blog account, provided the personal details of the new blogger are verified using the author credentials database.</p>
 
 <p>The requirement's description indicates that the Administrator interacts with the system to create a new blogger's account. The Administratorinteracts with the system and is not part of the system; therefore, the Administrator is defined as an actor.</p>

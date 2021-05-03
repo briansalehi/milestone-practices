@@ -1,14 +1,14 @@
 <p>UML can be used as much or as little as you like.</p>
 
 <ul>
-	<li><i>UML as a sketch</i></li>
+	<li><b>UML as a sketch</b></li>
 	<p>Use UML to make brief sketches to convey key points. These are throwaway sketches—they could be written on a whiteboard or even a beer coaster in a crunch.</p>
 
-	<li><i>UML as a blueprint</i></li>
+	<li><b>UML as a blueprint</b></li>
 	<p>Provide a detailed specification of a system with UML diagrams. These diagrams would not be disposable but would be generated with a UML tool. This approach is generally associated with software systems and usually involves using forward and reverse engineering to keep the model synchronized with the code.</p>
 
-	<li><i>UML as a programming language This goes directly from a UML model to</i></li>
-	<p>executable code (not just portions of the code as with forward engineering), meaning that every aspect of the system is modeled. Theoretically, you can keep your model indefinitely and use transformations and code generation to deploy to different environments.</p>
+	<li><b>UML as a programming language</b></li>
+	<p>This goes directly from a UML model to executable code (not just portions of the code as with forward engineering), meaning that every aspect of the system is modeled. Theoretically, you can keep your model indefinitely and use transformations and code generation to deploy to different environments.</p>
 </ul>
 
 <p>In certain industries, such as medical and defense, software projects tend to lean toward UML as a blueprint because a high level of quality is demanded.  Software design is heavily reviewed since it could be mission-critical: you don't want your heart monitoring machine to suddenly display the "blue screen of death."</p>
