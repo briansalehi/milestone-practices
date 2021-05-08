@@ -4,3 +4,5 @@ memory-sections.asm
 debugging.asm
 conditions.asm
 memory-structure.asm
+integer-arithmetic.asm
+documentation.txt

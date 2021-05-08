@@ -427,12 +427,6 @@ main:
 
 <p><code>readelf</code> is a CLI tool used to obtain more information about the executable file.</p>
 
-<p>If you feel the irresistible urge to know more about linkers, here is an interesting source of information: <a href="https://www.amazon.com/Kaufmann-Software-Engineering-Programming-1999-10-25/dp/B01JXNXJW0">Linkers and Loaders, John R. Levine, 1999, The Morgan Kaufmann Series in Software Engineering and Programming</a></p>
-
-<p>Here is a shorter treatment of the ELF format: <a href="https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis">https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis</a> or <a href="https://www.cirosantilli.com/elf-hello-world">https://www.cirosantilli.com/elf-hello-world</a>.</p>
-
-<p>You can also consult manual page for elf(5): <code>man 5 elf</code></p>
-
 <p>Now we will use <code>readelf</code> at the command line.</p>
 
 <pre class="language-bash command-line" data-user="user" data-host="milestone" data-line="12" data-output="2-21">
@@ -535,6 +529,104 @@ main:
 <p>To summarize, following figure shows how the memory looks when an executable is loaded.</p>
 
 <img class="img-responsive" src="/assembly/x86_64/memory-structure.png" alt="memory structure" loading="lazy" onerror='this.onerror=null; this.src="assembly/x86_64/memory-structure.png"'>
+
+<p>The stack segment starts in high memory, and when it grows, it grows in the downward direction.</p>
+
+<p>Items are placed on the stack with the <code>push</code> instruction and removed from the stack with the <code>pop</code> instruction. Every time you <code>push</code>, the stack grows; every time you <code>pop</code>, the stack shrinks.</p>
+
+<p>You can verify this stack behavior by monitoring <code>rsp</code>, the stack pointer, which points to the top (thus actually the bottom, because it grows downward) of the stack.</p>
+
+<p>The stack can be used as temporary storage to save values in registers and call them back later or, more importantly, to transfer values to functions.</p>
+
+<p>In the following code sample, we will use the stack to reverse a string.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+extern printf
+
+section .data
+     strng       db    "ABCDE",0
+     strngLen    equ   $ - strng-1 ; stringlength without 0
+     fmt1        db    "The original string: %s",10,0
+     fmt2        db    "The reversed string: %s",10,0
+
+section .bss
+section .text
+     global main
+
+main:
+	push  rbp
+	mov   rbp,rsp		; Print the original string
+
+	mov    rdi, fmt1
+	mov    rsi, strng
+	mov    rax, 0
+	call   printf		; push the string char per char on the stack
+
+    xor   rax, rax
+    mov   rbx, strng	; address of strng in rbx
+    mov   rcx, strngLen	; length in rcx counter
+    mov   r12, 0		; use r12 as pointer
+
+pushLoop:
+	mov   al, byte [rbx+r12]	; move char into rax
+	push  rax			; push rax on the stack
+	inc   r12			; increase char pointer with 1
+	loop  pushLoop		; continue loop
+						; pop the string char per char from the stack
+						; this will reverse the original string
+
+    mov   rbx, strng	; address of strng in rbx
+    mov   rcx, strngLen	; length in rcx counter
+    mov   r12, 0		; use r12 as pointer
+
+popLoop:
+	pop   rax			; pop a char from the stack
+	mov   byte [rbx+r12], al	; move the char into strng
+	inc   r12			; increase char pointer with 1
+	loop  popLoop		; continue loop
+	mov   byte [rbx+r12],0	; terminate string with 0
+						; Print the reversed string
+
+	mov    rdi, fmt2
+	mov    rsi, strng
+	mov    rax, 0
+	call   printf
+
+	mov   rsp,rbp
+	pop   rbp
+
+	ret
+	</code>
+</pre>
+
+<p>Here is an overview of what is happening:</p>
+
+<img class="img-responsive" src="/assembly/x86_64/reversing-string-schema.png" alt="reversing string schema" loading="lazy" onerror='this.onerror=null; this.src="assembly/x86_64/reversing-string-schema.png"'>
+
+<p>The original string is at the right, and the characters are pushed, sent one by one to the stack, where they are appended to the previous stack content. After that the characters are popped and sent back to the memory address of the string, and because of the “last in first out” working of the stack, the string is reversed.</p>
+
+<p>Somehow you have to keep track of what you pushed on the stack and in what order. For example, when you use the stack to temporarily store registers, be sure to <code>pop</code> the registers in the reverse correct order; otherwise, your program will be wrong or in the worst case will probably crash. That is, when you <code>push</code> the following sequence:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		push rax
+		push rbx
+		push rcx
+	</code>
+</pre>
+
+<p>Then you have to <code>pop</code> as follows, according to the “last in first out” principle:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		pop rcx
+		pop rbx
+		pop rax
+	</code>
+</pre>
+
+<p>If you want to <code>push</code> and <code>pop</code> the flag register to the stack, you can use the instructions <code>pushf</code> and use <code>popf</code>.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -546,11 +638,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Beginning x64 Assembly Programming - Jo Van Hoey: <span style='color: red'> chapter 8</span></li>
+<li class='list-group-item'>Beginning x64 Assembly Programming: From Novice to AVX Professional - Jo Van Hoey: <span style='color: red'> chapter 8 and 10</span></li>
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64/conditions">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/documentation">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

@@ -1,0 +1,187 @@
+<p>The first instruction is <code>add</code>, which can be used to add signed or unsigned integers.</p>
+
+<pre class="language-nasm line-numbers" data-line="11">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .bss
+			resulti resq 1
+
+		section .text
+			...
+			mov rax, [number1]
+			add rax, [number2]	; add number2 to rax
+			mov [resulti], rax	; move sum to result
+			...
+	</code>
+</pre>
+
+<p>When the resulting sum is too large to fit in the destination, the CF flag is set for signed integers. For unsigned integers, the OF flag is then set. When the result is 0, the ZF flag is set to 1, and when the result is negative, the SF flag is set.</p>
+
+<p>The subtraction with <code>sub</code> is similar to the <code>add</code> instruction.</p>
+
+<pre class="language-nasm line-numbers" data-line="8">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .text
+			...
+			mov rax, [number1]
+			sub rax, [number2]	; subtract number2 from rax
+			...
+	</code>
+</pre>
+
+<p>To increment a register or value in a memory location with 1, use the <code>inc</code> instruction.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			inc rax			; increment rax with 1
+			...
+	</code>
+</pre>
+
+<p>Similarly, <code>dec</code> can be used to decrement a register or value in a memory location with 1.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			dec rax			; decrement rax with 1
+			...
+	</code>
+</pre>
+
+<p>The arithmetic shift instructions are a special breed. The shift left, <code>sal</code>, is in fact multiplying; if you shift left one position, you are multiplying by 2. Every bit is shifted one place to the left, and a 0 is added to the right.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			sal rax, 2		; multiply rax by 4
+			...
+	</code>
+</pre>
+
+<p>Shift right, <code>sar</code>, is similar to shift left, but it means dividing by 2. Every bit is shifted one place to the right, and an additional bit is added to the left.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			sar rax, 2
+			...
+	</code>
+</pre>
+
+<p>Here there is a complication, however: if the original value was negative, the leftmost bit would be 1; if the shift instruction added a 0 bit at the left, the value would become positive, and the result would be wrong. So, in the case of a negative value, a sar will add a 1 bit to the left, and in the case of a positive value, 0 bits will be added to the left. This is called sign extension.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			neg_num dq -12		; to show sign extension
+
+		section .text
+			...
+			mov rax, [neg_num]
+			sar rax, 2
+			...
+	</code>
+</pre>
+
+<p>There are also nonarithmetic shift instructions which will be discussed later.</p>
+
+<p>For multiplying unsigned integers, you can use <code>mul</code> for unsigned multiplication and <code>imul</code> for signed multiplication.</p>
+
+<pre class="language-nasm line-numbers" data-line="8">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .text
+			...
+			mov rax, [number1]
+			imul qword [number2]	; multiply rax with number2
+			...
+	</code>
+</pre>
+
+<p>When you multiply a 48-bit digit with a 30-bit digit, you will obtain a 77-bit digit or a 78-bit digit, and that value does not fit in a 64-bit register. To cope with this, the instruction imul will store the lower 64 bits of the resulting product in rax  and the upper 64 bits in rdx.</p>
+
+<p><code>number1</code> contains 12345678901234567 and <code>number2</code> contains 100.</p>
+
+<p>The product will just fit in <code>rax</code>. Now modify <code>number2</code> into 10000.</p>
+
+<p>After executing <code>imul</code> you see that the product is a large negative number! That is because the most significant bit in <code>rax</code> is a 1</p>
+
+<p>As soon as the <code>imul</code> instruction is executed, <code>rax</code> contains 0xb14e9f812f364970. In binary, this is:</p>
+
+<pre class="language-nasm">
+	<code>
+		101100010100111010011111100000010010111100110110010010010
+	</code>
+</pre>
+
+<p>With a 1 in the most significant position and hence is negative. And <code>rdx</code> contains 0x6. That is:</p>
+
+<pre class="language-nasm">
+	<code>
+		000000000000000000000000000000000000000000000000000000110
+	</code>
+</pre>
+
+<p>With a 0 in the most significant position and hence is positive.</p>
+
+<p>The actual product is 0x6b14e9f812f364970 and can be found by combining <code>rdx</code> and <code>rax</code>, in this order: <code>rdx:rax</code>.</p>
+
+<p>If you convert this hexadecimal number to decimal, you will find the product you expect: 123456789012345670000.</p>
+
+<p>Integer division is also possible by <code>idiv</code> instruction.</p>
+
+<pre class="language-nasm line-numbers" data-line="12,13">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .bss
+			   resulti  resq  1
+			   modulo   resq  1
+
+		section .text
+			...
+			mov rax, [number1]
+			mov rdx, 0				; rdx needs to be 0 before idiv
+			idiv qword [number2]	; divide rax by number2, modulo in rdx
+			mov [resulti], rax
+			mov [modulo], rdx		; rdx to modulo
+			...
+	</code>
+</pre>
+
+<p>Divide the dividend in <code>rdx:rax</code> by the divisor in the source operand and store the integer result in <code>rax</code>. The modulo can be found in <code>rdx</code>. It’s important and easy to forget: make sure to set <code>rdx</code> to zero every time before you use <code>idiv</code> or the resulting quotient may be wrong.</p>
+
+<p>64-bit integer multiplication and division have some subtleties for which you can find more details in the Intel manuals. Here we just gave an overview that serves as a general introduction to integer arithmetic. In the Intel manuals, not only will you find more details about the instructions, but you will find a large number of other arithmetic instructions that can be used in specific situations.</p>

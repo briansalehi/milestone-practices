@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Assembly</title>
+<title>Integer Arithmetic</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -262,7 +262,9 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <body class="container dark-mode">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
-<li class='breadcrumb-item active'>Assembly</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/4.0.html">Assembly</a></li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/4.1.0.html">x86_64</a></li>
+<li class='breadcrumb-item active'>Integer Arithmetic</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -276,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Assembly" class="anchor" aria-hidden="true" href="#Assembly">
-Assembly
+<a id="Integer-Arithmetic" class="anchor" aria-hidden="true" href="#Integer-Arithmetic">
+Integer Arithmetic
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -285,16 +287,193 @@ Assembly
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Learning assembly has several benefits:</p>
+<p>The first instruction is <code>add</code>, which can be used to add signed or unsigned integers.</p>
 
-<ul>
-	<li>You’ll learn how a CPU and memory works.</li>
-	<li>You’ll learn how a computer and operating system work together.</li>
-	<li>You’ll learn how high-level language compilers generate machine language, and that knowledge can help you to write more efficient code.</li>
-	<li>You will be better equipped to analyze bugs in your programs.</li>
-	<li>It is a lot of fun when you eventually get your program working.</li>
-	<li>And if you want to investigate malware, you have only the machine code, not the source code. With an understanding of assembly language, you will be able to analyze malware and take necessary actions and precautions.</li>
-</ul>
+<pre class="language-nasm line-numbers" data-line="11">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .bss
+			resulti resq 1
+
+		section .text
+			...
+			mov rax, [number1]
+			add rax, [number2]	; add number2 to rax
+			mov [resulti], rax	; move sum to result
+			...
+	</code>
+</pre>
+
+<p>When the resulting sum is too large to fit in the destination, the CF flag is set for signed integers. For unsigned integers, the OF flag is then set. When the result is 0, the ZF flag is set to 1, and when the result is negative, the SF flag is set.</p>
+
+<p>The subtraction with <code>sub</code> is similar to the <code>add</code> instruction.</p>
+
+<pre class="language-nasm line-numbers" data-line="8">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .text
+			...
+			mov rax, [number1]
+			sub rax, [number2]	; subtract number2 from rax
+			...
+	</code>
+</pre>
+
+<p>To increment a register or value in a memory location with 1, use the <code>inc</code> instruction.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			inc rax			; increment rax with 1
+			...
+	</code>
+</pre>
+
+<p>Similarly, <code>dec</code> can be used to decrement a register or value in a memory location with 1.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			dec rax			; decrement rax with 1
+			...
+	</code>
+</pre>
+
+<p>The arithmetic shift instructions are a special breed. The shift left, <code>sal</code>, is in fact multiplying; if you shift left one position, you are multiplying by 2. Every bit is shifted one place to the left, and a 0 is added to the right.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			sal rax, 2		; multiply rax by 4
+			...
+	</code>
+</pre>
+
+<p>Shift right, <code>sar</code>, is similar to shift left, but it means dividing by 2. Every bit is shifted one place to the right, and an additional bit is added to the left.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+
+		section .text
+			...
+			mov rax, [number1]
+			sar rax, 2
+			...
+	</code>
+</pre>
+
+<p>Here there is a complication, however: if the original value was negative, the leftmost bit would be 1; if the shift instruction added a 0 bit at the left, the value would become positive, and the result would be wrong. So, in the case of a negative value, a sar will add a 1 bit to the left, and in the case of a positive value, 0 bits will be added to the left. This is called sign extension.</p>
+
+<pre class="language-nasm line-numbers" data-line="7">
+	<code>
+		section .data
+			neg_num dq -12		; to show sign extension
+
+		section .text
+			...
+			mov rax, [neg_num]
+			sar rax, 2
+			...
+	</code>
+</pre>
+
+<p>There are also nonarithmetic shift instructions which will be discussed later.</p>
+
+<p>For multiplying unsigned integers, you can use <code>mul</code> for unsigned multiplication and <code>imul</code> for signed multiplication.</p>
+
+<pre class="language-nasm line-numbers" data-line="8">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .text
+			...
+			mov rax, [number1]
+			imul qword [number2]	; multiply rax with number2
+			...
+	</code>
+</pre>
+
+<p>When you multiply a 48-bit digit with a 30-bit digit, you will obtain a 77-bit digit or a 78-bit digit, and that value does not fit in a 64-bit register. To cope with this, the instruction imul will store the lower 64 bits of the resulting product in rax  and the upper 64 bits in rdx.</p>
+
+<p><code>number1</code> contains 12345678901234567 and <code>number2</code> contains 100.</p>
+
+<p>The product will just fit in <code>rax</code>. Now modify <code>number2</code> into 10000.</p>
+
+<p>After executing <code>imul</code> you see that the product is a large negative number! That is because the most significant bit in <code>rax</code> is a 1</p>
+
+<p>As soon as the <code>imul</code> instruction is executed, <code>rax</code> contains 0xb14e9f812f364970. In binary, this is:</p>
+
+<pre class="language-nasm">
+	<code>
+		101100010100111010011111100000010010111100110110010010010
+	</code>
+</pre>
+
+<p>With a 1 in the most significant position and hence is negative. And <code>rdx</code> contains 0x6. That is:</p>
+
+<pre class="language-nasm">
+	<code>
+		000000000000000000000000000000000000000000000000000000110
+	</code>
+</pre>
+
+<p>With a 0 in the most significant position and hence is positive.</p>
+
+<p>The actual product is 0x6b14e9f812f364970 and can be found by combining <code>rdx</code> and <code>rax</code>, in this order: <code>rdx:rax</code>.</p>
+
+<p>If you convert this hexadecimal number to decimal, you will find the product you expect: 123456789012345670000.</p>
+
+<p>Integer division is also possible by <code>idiv</code> instruction.</p>
+
+<pre class="language-nasm line-numbers" data-line="12,13">
+	<code>
+		section .data
+			 number1 dq 128		; the numbers to be used to
+			 number2 dq 19		; show the arithmetic
+
+		section .bss
+			   resulti  resq  1
+			   modulo   resq  1
+
+		section .text
+			...
+			mov rax, [number1]
+			mov rdx, 0				; rdx needs to be 0 before idiv
+			idiv qword [number2]	; divide rax by number2, modulo in rdx
+			mov [resulti], rax
+			mov [modulo], rdx		; rdx to modulo
+			...
+	</code>
+</pre>
+
+<p>Divide the dividend in <code>rdx:rax</code> by the divisor in the source operand and store the integer result in <code>rax</code>. The modulo can be found in <code>rdx</code>. It’s important and easy to forget: make sure to set <code>rdx</code> to zero every time before you use <code>idiv</code> or the resulting quotient may be wrong.</p>
+
+<p>64-bit integer multiplication and division have some subtleties for which you can find more details in the Intel manuals. Here we just gave an overview that serves as a general introduction to integer arithmetic. In the Intel manuals, not only will you find more details about the instructions, but you will find a large number of other arithmetic instructions that can be used in specific situations.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -306,56 +485,12 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Modern Computer Architecture and Organization: Learn x86, ARM, and RISC-V architectures and the design of smartphones, PCs, and cloud servers - Jim Ledin</li>
-<li class='list-group-item'>Linkers and Loaders - John R. Levine</li>
-<li class='list-group-item'>Beginning x64 Assembly Programming - Jo Van Hoey</li>
+<li class='list-group-item'>Beginning x64 Assembly Programming: From Novice to AVX Professional - Jo Van Hoey: <span style='color: red'> chapter 9</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/software-design/uml/deployment-diagrams">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64/memory-structure">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/documentation">Next Page</a></li>
 </ul>
-<hr />
-<h3>
-<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
-Table of Content
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<div class="list-group list-group-root well" >
-<a href="#4-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. x86_64
-	<span class="badge badge-primary badge-pill">6</span>
-</a>
-<div class="list-group collapse" id="4-1-0">
-<a href="/assembly/x86_64/registers" class="list-group-item group-child">
-	1. Registers
-	
-</a>
-<a href="/assembly/x86_64/memory-sections" class="list-group-item group-child">
-	2. Memory Sections
-	
-</a>
-<a href="/assembly/x86_64/debugging" class="list-group-item group-child">
-	3. Debugging
-	
-</a>
-<a href="/assembly/x86_64/conditions" class="list-group-item group-child">
-	4. Conditions
-	
-</a>
-<a href="/assembly/x86_64/memory-structure" class="list-group-item group-child">
-	5. Memory Structure
-	
-</a>
-<a href="/assembly/x86_64/documentation" class="list-group-item group-child">
-	6. Documentation
-	
-</a>
-</div>
-</div>
 <script>
 function darkmode() {
 	var bodystyle = document.body;
@@ -583,6 +718,7 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-nasm.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {

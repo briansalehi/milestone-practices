@@ -1,0 +1,18 @@
+<p>The main reference of x86_64 Assembly for Intel processors:</p>
+
+<ul>
+	<li><a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel Manuals</a></li>
+</ul>
+
+<p>To know more about linkers:</p>
+
+<ul>
+	<li><a href="https://www.amazon.com/Kaufmann-Software-Engineering-Programming-1999-10-25/dp/B01JXNXJW0">Linkers and Loaders, John R. Levine, 1999, The Morgan Kaufmann Series in Software Engineering and Programming</a></li>
+</ul>
+
+<p>To read about ELF in detail:</p>
+
+<ul>
+	<li>manual page for elf(5): <code>man 5 elf</code></li>
+</ul>
+
