@@ -1,0 +1,248 @@
+<p>Accessing memory is a lot slower than accessing registers. But the number of registers is limited. The memory size has a theoretical limit of 264 addresses, which is <code>18,446,744,073,709,551,616</code> bits, or 16 exabytes. You cannot use that much memory because of practical design issues!</p>
+
+<p>Next source sample shows an example we will use during our discussion of memory.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+section .data
+     bNum        db    123
+     wNum        dw    12345
+     warray      times        5 dw 0      ; array of 5 words
+                                          ; containing 0
+     dNum        dd    12345
+     qNum1       dq    12345
+     text1       db    "abc",0
+     qNum2       dq    3.141592654
+     text2       db    "cde",0
+
+section .bss
+     bvar  resb  1
+     dvar  resd  1
+     wvar  resw  10
+     qvar  resq  3
+
+section .text
+     global main
+
+main:
+     push   rbp
+     mov   rbp, rsp
+
+     lea   rax, [bNum]      ;load address of bNum in rax
+     mov   rax, bNum        ;load address of bNum in rax
+     mov   rax, [bNum]      ;load value at bNum in rax
+     mov   [bvar], rax      ;load from rax at address bvar
+     lea   rax, [bvar]      ;load address of bvar in rax
+     lea   rax, [wNum]      ;load address of wNum in rax
+     mov   rax, [wNum]      ;load content of wNum in rax
+     lea   rax, [text1]     ;load address of text1 in rax
+     mov   rax, text1       ;load address of text1 in rax
+     mov   rax, text1+1     ;load second character in rax
+     lea   rax, [text1+1]   ;load second character in rax
+     mov   rax, [text1]     ;load starting at text1 in rax
+     mov   rax, [text1+1]   ;load starting at text1+1 in rax
+
+     mov   rsp,rbp
+     pop   rbp
+
+     ret
+	</code>
+</pre>
+
+<p>There is no output for this program; use a debugger to step through each instruction.</p>
+
+<p>We defined some variables of different sizes, including an array of five double words filled with zeros. We also defined some items in section <code>.bss</code>.</p>
+
+<p>The stack pointer refers to an address in high memory. The stack is an area in memory used for temporarily storing data. The stack will grow as more data is stored in it, and it will grow in the downward direction, from higher addresses to lower addresses. The stack pointer <code>rsp</code> will decrease every time you put data on the stack.</p>
+
+<p><code>rsp</code> contains an address in high memory.</p>
+
+<p>We used the <code>lea</code> instruction, which means “load effective address,” to load the memory address of <code>bNum</code> into <code>rax</code>. We can obtain the same result with <code>mov</code>, without the square brackets around <code>bNum</code>. If we use the square brackets, [ ], with the <code>mov</code> instruction, we are loading the value, not the address at <code>bNum</code> into <code>rax</code>. But we are not loading only <code>bNum</code> into <code>rax</code>. Because <code>rax</code> is a 64-bit (or 8-byte) register, more bytes are loaded into <code>rax</code>. Our <code>bNum</code> is the rightmost byte in <code>rax</code> (little endian); here we are only interested in the register <code>al</code>. When you require <code>rax</code> to contain only the value 123, you would first have to clear <code>rax</code>, as shown here:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		xor rax, rax
+	</code>
+</pre>
+
+<p>Then instead of this:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		mov rax, [bNum]
+	</code>
+</pre>
+
+<p>Use this:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		mov al, [bNum]
+	</code>
+</pre>
+
+<p>Be careful about the sizes of data you are moving to and from memory. Look, for instance, at the following:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		mov [bvar], rax
+	</code>
+</pre>
+
+<p>This can introduce nasty bugs in your program. To avoid that, replace the instruction with the following:</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		mov [bvar], al
+	</code>
+</pre>
+
+<p>There are two ways to load a memory address: mov and lea. Using lea can make your code more readable, as everybody can immediately see that you are handling addresses here. You can also use lea to speed up calculations, but we will not use lea for that purpose here.</p>
+
+<p>To make <code>gdb</code> display the output assembly in Intel flavor, execute the following command in <code>gdb</code>:</p>
+
+<pre class="language-bash command-line" data-prompt="(gdb)" data-user="" data-host="" data-line="" data-output="">
+	<code>
+		set disassembly-flavor intel
+	</code>
+</pre>
+
+<p>Start <code>gdb ./memory</code> and then <code>disassemble main</code> and look at the left column with memory addresses:</p>
+
+<pre class="language-bash command-line" data-prompt="(gdb)" data-user="" data-host="" data-line="" data-output="2-22">
+	<code>
+		disassemble main
+		Dump of assembler code for function main:
+		   0x0000000000401110 <+0>:	push   rbp
+		   0x0000000000401111 <+1>:	mov    rbp,rsp
+		   0x0000000000401114 <+4>:	lea    rax,ds:0x404028
+		   0x000000000040111c <+12>:	movabs rax,0x404028
+		   0x0000000000401126 <+22>:	mov    rax,QWORD PTR ds:0x404028
+		   0x000000000040112e <+30>:	mov    QWORD PTR ds:0x404058,rax
+		   0x0000000000401136 <+38>:	lea    rax,ds:0x404058
+		   0x000000000040113e <+46>:	lea    rax,ds:0x404029
+		   0x0000000000401146 <+54>:	mov    rax,QWORD PTR ds:0x404029
+		   0x000000000040114e <+62>:	lea    rax,ds:0x404041
+		   0x0000000000401156 <+70>:	movabs rax,0x404041
+		   0x0000000000401160 <+80>:	movabs rax,0x404042
+		   0x000000000040116a <+90>:	lea    rax,ds:0x404042
+		   0x0000000000401172 <+98>:	mov    rax,QWORD PTR ds:0x404041
+		   0x000000000040117a <+106>:	mov    rax,QWORD PTR ds:0x404042
+		   0x0000000000401182 <+114>:	mov    rsp,rbp
+		   0x0000000000401185 <+117>:	pop    rbp
+		   0x0000000000401186 <+118>:	ret    
+		   0x0000000000401187 <+119>:	nop    WORD PTR [rax+rax*1+0x0]
+		End of assembler dump.
+	</code>
+</pre>
+
+<p><code>readelf</code> is a CLI tool used to obtain more information about the executable file.</p>
+
+<p>If you feel the irresistible urge to know more about linkers, here is an interesting source of information: <a href="https://www.amazon.com/Kaufmann-Software-Engineering-Programming-1999-10-25/dp/B01JXNXJW0">Linkers and Loaders, John R. Levine, 1999, The Morgan Kaufmann Series in Software Engineering and Programming</a></p>
+
+<p>Here is a shorter treatment of the ELF format: <a href="https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis">https://linux-audit.com/elf-binaries-on-linux-understanding-and-analysis</a> or <a href="https://www.cirosantilli.com/elf-hello-world">https://www.cirosantilli.com/elf-hello-world</a>.</p>
+
+<p>You can also consult manual page for elf(5): <code>man 5 elf</code></p>
+
+<p>Now we will use <code>readelf</code> at the command line.</p>
+
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-line="12" data-output="2-21">
+	<code>
+		readelf --file-header ./memory
+		ELF Header:
+		  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+		  Class:                             ELF64
+		  Data:                              2's complement, little endian
+		  Version:                           1 (current)
+		  OS/ABI:                            UNIX - System V
+		  ABI Version:                       0
+		  Type:                              EXEC (Executable file)
+		  Machine:                           Advanced Micro Devices X86-64
+		  Version:                           0x1
+		  Entry point address:               0x401020
+		  Start of program headers:          64 (bytes into file)
+		  Start of section headers:          14832 (bytes into file)
+		  Flags:                             0x0
+		  Size of this header:               64 (bytes)
+		  Size of program headers:           56 (bytes)
+		  Number of program headers:         13
+		  Size of section headers:           64 (bytes)
+		  Number of section headers:         32
+		  Section header string table index: 31
+	</code>
+</pre>
+
+<p>Look at <b>Entry point address</b>: 0x401020. That is the memory location of the start of our program.</p>
+
+<p>The header provides us with additional information about the OS and the executable code.</p>
+
+<p><code>readelf</code> is convenient for exploring a binary executable.</p>
+
+<pre class="language-bash command-line" data-user="" data-host="" data-line="11,23,36,42" data-output="2-56">
+	<code>
+		readelf --symbols ./memory | tail +10 | sort -k2 -r
+		   Num:    Value          Size Type    Bind   Vis      Ndx Name
+		Symbol table '.symtab' contains 53 entries:
+			45: 0000000000404090     0 NOTYPE  GLOBAL DEFAULT   23 _end
+			25: 0000000000404071     8 OBJECT  LOCAL  DEFAULT   23 qvar
+			24: 000000000040405d     2 OBJECT  LOCAL  DEFAULT   23 wvar
+			23: 0000000000404059     4 OBJECT  LOCAL  DEFAULT   23 dvar
+			22: 0000000000404058     1 OBJECT  LOCAL  DEFAULT   23 bvar
+			50: 0000000000404058     0 OBJECT  GLOBAL HIDDEN    22 __TMC_END__
+			 9: 0000000000404054     1 OBJECT  LOCAL  DEFAULT   23 completed.0
+			48: 0000000000404051     0 NOTYPE  GLOBAL DEFAULT   23 __bss_start
+			37: 0000000000404051     0 NOTYPE  GLOBAL DEFAULT   22 _edata
+			21: 000000000040404d     1 OBJECT  LOCAL  DEFAULT   22 text2
+			20: 0000000000404045     8 OBJECT  LOCAL  DEFAULT   22 qNum2
+			19: 0000000000404041     1 OBJECT  LOCAL  DEFAULT   22 text1
+			18: 0000000000404039     8 OBJECT  LOCAL  DEFAULT   22 qNum1
+			17: 0000000000404035     4 OBJECT  LOCAL  DEFAULT   22 dNum
+			16: 000000000040402b     2 OBJECT  LOCAL  DEFAULT   22 warray
+			15: 0000000000404029     2 OBJECT  LOCAL  DEFAULT   22 wNum
+			14: 0000000000404028     1 OBJECT  LOCAL  DEFAULT   22 bNum
+			42: 0000000000404020     0 OBJECT  GLOBAL HIDDEN    22 __dso_handle
+			36: 0000000000404018     0 NOTYPE  WEAK   DEFAULT   22 data_start
+			40: 0000000000404018     0 NOTYPE  GLOBAL DEFAULT   22 __data_start
+			33: 0000000000404000     0 OBJECT  LOCAL  DEFAULT   21 _GLOBAL_OFFSET_TABLE_
+			30: 0000000000403e50     0 OBJECT  LOCAL  DEFAULT   19 _DYNAMIC
+			10: 0000000000403e48     0 OBJECT  LOCAL  DEFAULT   18 __do_global_dtor[...]
+			29: 0000000000403e48     0 NOTYPE  LOCAL  DEFAULT   17 __init_array_end
+			12: 0000000000403e40     0 OBJECT  LOCAL  DEFAULT   17 __frame_dummy_in[...]
+			31: 0000000000403e40     0 NOTYPE  LOCAL  DEFAULT   17 __init_array_start
+			27: 00000000004020cc     0 OBJECT  LOCAL  DEFAULT   16 __FRAME_END__
+			32: 0000000000402004     0 NOTYPE  LOCAL  DEFAULT   15 __GNU_EH_FRAME_HDR
+			43: 0000000000402000     4 OBJECT  GLOBAL DEFAULT   14 _IO_stdin_used
+			38: 0000000000401208     0 FUNC    GLOBAL HIDDEN    13 _fini
+			34: 0000000000401200     5 FUNC    GLOBAL DEFAULT   12 __libc_csu_fini
+			44: 0000000000401190   101 FUNC    GLOBAL DEFAULT   12 __libc_csu_init
+			49: 0000000000401110     0 NOTYPE  GLOBAL DEFAULT   12 main
+			11: 0000000000401100     0 FUNC    LOCAL  DEFAULT   12 frame_dummy
+			 8: 00000000004010d0     0 FUNC    LOCAL  DEFAULT   12 __do_global_dtors_aux
+			 7: 0000000000401090     0 FUNC    LOCAL  DEFAULT   12 register_tm_clones
+			 6: 0000000000401060     0 FUNC    LOCAL  DEFAULT   12 deregister_tm_clones
+			46: 0000000000401050     5 FUNC    GLOBAL HIDDEN    12 _dl_relocate_sta[...]
+			47: 0000000000401020    47 FUNC    GLOBAL DEFAULT   12 _start
+			52: 0000000000401000     0 FUNC    GLOBAL HIDDEN    11 _init
+			 2: 000000000040037c    32 OBJECT  LOCAL  DEFAULT    4 __abi_tag
+			51: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_registerTMC[...]
+			35: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_deregisterT[...]
+			41: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+			 0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+			39: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_mai[...]
+			13: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS /tmp/memory.asm
+			 4: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS static-reloc.c
+			 3: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS init.c
+			 5: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c
+			26: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS crtstuff.c
+			 1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS abi-note.c
+			28: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS
+	</code>
+</pre>
+
+<p>The start of the program is at some low address, and the start of main is at 0x00401110. Look for the start of section <code>.data</code> at 0x00404018, with the addresses of all its variables and the start of section <code>.bss</code> at 0x00404051, with the addresses reserved for its variables.</p>
+
+<p>With <code>readelf</code>, we found that the executable code is at the lower side of memory. On top of the executable code, we have section <code>.data</code> and on top of that section <code>.bss</code>. The stack in high memory can grow; it grows in the downward direction toward section <code>.bss</code>. The available free memory between the stack and the other sections is called the heap.</p>
+
+<p>To summarize, following figure shows how the memory looks when an executable is loaded.</p>
+
+![memory-structure.png]

@@ -1,0 +1,178 @@
+<p>The <code>cmp</code> instruction is what is called a conditional instruction. Here <code>cmp</code> compares two operands, in this case two registers. One of the two operands can also be a memory operand, and the second operand can be an immediate value. In any case, the size of the two operands must be the same (byte, word, and so on). The <code>cmp</code> instruction will set or clear flags in the flag register.</p>
+
+<p>The flags are bits located in the <code>rflags</code> register that can be set to 1 or cleared to 0, depending on a number of conditions. Important in our case are the zero flag (ZF), the overflow flag (OF), and the sign flag (SF).</p>
+
+<p>If you want to use the flags, you have to evaluate them immediately after the <code>cmp</code> instruction. If you execute other instructions before you evaluate <code>rflags</code>, the flags may have been changed. In next source sample we evaluate the flags with  <code>jge</code> , meaning “jump if greater than or equal.” If the condition is met, the execution jumps to the label following the <code>jge</code> instruction. If the condition is not met, execution continues with the instruction just after the <code>jge</code> instruction. Following table lists some of the usual conditions, but you can hunt for more details in the Intel manuals.</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Instruction</th>
+			<th scope="col">Flags</th>
+			<th scope="col">Meaning</th>
+			<th scope="col">Use</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>je</code></td>
+			<td>ZF=1</td>
+			<td>Jump if equal</td>
+			<td>Signed, Unsigned</td>
+		</tr>
+		<tr>
+			<td><code>jne</code></td>
+			<td>ZF=0</td>
+			<td>Jump if not equal</td>
+			<td>Signed, Unsigned</td>
+		</tr>
+		<tr>
+			<td><code>jg</code></td>
+			<td>((SF XOR OF) OR ZF) = 0</td>
+			<td>Jump if greater</td>
+			<td>Signed</td>
+		</tr>
+		<tr>
+			<td><code>jge</code></td>
+			<td>(SF XOR OF) = 0</td>
+			<td>Jump if greater or equal</td>
+			<td>Signed</td>
+		</tr>
+		<tr>
+			<td><code>jl</code></td>
+			<td>(SF XOR OF) = 1</td>
+			<td>Jump if lower</td>
+			<td>Signed</td>
+		</tr>
+		<tr>
+			<td><code>jle</code></td>
+			<td>((SF XOR OF) OR ZF) = 1</td>
+			<td>Jump if lower or equal</td>
+			<td>Signed</td>
+		</tr>
+		<tr>
+			<td><code>ja</code></td>
+			<td>(CF OR ZF) = 0</td>
+			<td>Jump if above</td>
+			<td>Unsigned</td>
+		</tr>
+		<tr>
+			<td><code>jae</code></td>
+			<td>CF=0</td>
+			<td>Jump if above or equal</td>
+			<td>Unsigned</td>
+		</tr>
+		<tr>
+			<td><code>jb</code></td>
+			<td>CF=1</td>
+			<td>Jump if lesser</td>
+			<td>Unsigned</td>
+		</tr>
+		<tr>
+			<td><code>jbe</code></td>
+			<td>(CF OR ZF) = 1</td>
+			<td>Jump if lesser or equal</td>
+			<td>Unsigned</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>A more complicated form of jumping is looping, which means repeating a set of instructions until a condition is met (or is not met).</p>
+
+<pre class="language-nasm line-numbers" data-line="17,21">
+	<code>
+extern printf
+
+section .data
+     number      dq    5
+     fmt         db    "The sum from 0 to %ld is %ld",10,0
+
+section .bss
+section .text
+     global main
+
+main:
+     push  rbp
+     mov   rbp, rsp
+
+     mov   rbx,0            ; counter
+     mov   rax,0            ; sum will be in rax
+jloop:
+     add   rax, rbx
+     inc   rbx
+     cmp   rbx,[number]     ; number already reached?
+     jle   jloop            ; number not reached yet, loop
+                            ; number reached, continue here
+
+     mov   rdi,fmt          ; prepare for displaying
+     mov   rsi, [number]
+     mov   rdx,rax
+     mov   rax,0
+     call  printf
+
+     mov   rsp,rbp
+     pop   rbp
+
+     ret
+	</code>
+</pre>
+
+<p>Following source code shows another way to write a loop.</p>
+
+<pre class="language-nasm line-numbers" data-line="17,19">
+	<code>
+		extern printf
+
+		section .data
+			 number      dq    5
+			 fmt         db    "The sum from 0 to %ld is %ld",10,0
+
+		section .bss
+		section .text
+			 global main
+
+		main:
+			 push  rbp
+			 mov   rbp,rsp
+			 mov   rcx,[number]    ; initialize rcx with number
+			 mov   rax, 0
+
+		bloop:
+			 add   rax,rcx         ; add rcx to sum
+			 loop  bloop           ; loop while decreasing rcx with 1
+								   ; until rcx = 0
+
+			 mov   rdi,fmt         ; rcx = 0, continue here
+			 mov   rsi, [number]   ; sum to be displayed
+			 mov   rdx, rax
+			 mov   rax,0           ; no floating point
+			 call  printf          ; display
+
+			 mov   rsp,rbp
+			 pop   rbp
+			 ret
+	</code>
+</pre>
+
+<p>Here you see that there is a special loop instruction that uses <code>rcx</code> as a decreasing loop counter.</p>
+
+<p>Note that loop is slower than jump! Using the <code>loop</code> instruction is convenient but comes at a price in terms of execution performance.</p>
+
+<cite>Looping versus jumping on an x86_64 Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz processor:</cite>
+<pre class="language-bash command-line" data-user="user" data-host="milestone" data-lines="" data-output="2-7,9-13">
+	<code>
+		time ./jump
+		The sum from 0 to 1000000000 is 500000000500000000
+
+		real    0m0.641s
+		user    0m0.640s
+		sys     0m0.000s
+
+		time ./loop
+		The sum from 0 to 1000000000 is 500000000500000000
+
+		real    0m2.400s
+		user    0m2.398s
+		sys     0m0.000s
+	</code>
+</pre>

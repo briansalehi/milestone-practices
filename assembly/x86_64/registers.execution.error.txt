@@ -1,0 +1,1 @@
+/usr/local/bin/practice-manager: line 1090: ./assembly/x86_64/registers.bin: cannot execute binary file: Exec format error

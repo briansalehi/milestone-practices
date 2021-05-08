@@ -2,3 +2,5 @@ README.md
 registers.asm
 memory-sections.asm
 debugging.asm
+conditions.asm
+memory-structure.asm

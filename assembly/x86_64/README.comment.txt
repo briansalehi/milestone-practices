@@ -1,6 +1,6 @@
 <p>
 In this course, we will write code for the Netwide Assembler (NASM).<br />
-There are other assemblers such as YASM, FASM, GAS, or MASM from Microsoft. And as with everything in the computer world, there are sometimes heavy discussions about which assembler is the best. We will use NASM in this course because it is available on Linux, Windows, and macOS and because there is a large community using NASM. You can find the manual at <a href="www.nasm.us">www.nasm.us</a>.
+There are other assemblers such as YASM, FASM, GAS, or MASM from Microsoft. And as with everything in the computer world, there are sometimes heavy discussions about which assembler is the best. We will use NASM in this course because it is available on Linux, Windows, and macOS and because there is a large community using NASM. You can find the manual at <a href="https://www.nasm.us/">www.nasm.us</a>.
 </p>
 
 <p>To compile an assembly source, you need to use NASM as follows:</p>

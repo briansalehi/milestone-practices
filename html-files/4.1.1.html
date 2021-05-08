@@ -287,20 +287,97 @@ Registers
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<hr />
-  <cite>registers.asm</cite>
-<pre class="line-numbers" >
-<code class="language-nasm">
-</code>
+<p>In binary logic, 0 means <b>false</b>, and 1 means <b>true</b>.</p>
+
+<p>Convert every 0 into 1 and every 1 into 0 using <code>NOT</code> operator.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+			A = 11001011
+		NOT A = 00110100
+	</code>
 </pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
-<code>
-nasm -f elf64 -g -F dwarf ./registers.asm
-ld -o ./registers.bin ./registers.o
-./registers.bin
-</code>
+
+<p>When we <code>OR</code> two numbers, if there is a 1 in A or B or in both, the outcome is a 1.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		A =        11001011
+		B =        00011000
+		A OR B =   11011011
+	</code>
 </pre>
+
+<p>When we perform exclusive or (<code>XOR</code>) operation on two numbers, if there is a 1 in A or B, the outcome is a 1. If A and B are both 1 or 0, the outcome is 0.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		A =         11001011
+		B =         00011000
+		A XOR B =   11010011
+	</code>
+</pre>
+
+<p><code>xor</code> as an assembly instruction that can be used to clear a register.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		A =         11001011
+		A =         11001011
+		A XOR A =   00000000
+	</code>
+</pre>
+
+<p>Hence, <code>xor rax, rax</code> is the same is <code>mov rax,0</code>. But <code>xor</code> executes faster than <code>mov</code>.</p>
+
+<p>You can also use <code>xor</code> to modify the sign of a floating-point number.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		A            = 17.0  = 0x41880000 = 01000001 10001000 00000000 00000000
+		B            = -0.0  = 0x80000000 = 10000000 00000000 00000000 00000000
+		A XOR B      = -17.0 = 0xC1880000 = 11000001 10001000 00000000 00000000
+	</code>
+</pre>
+
+<p>Note that if you want to change the sign of an integer, subtract it from zero or use the <code>neg</code> instruction.</p>
+
+<p>When we perform <code>AND</code> operator on two numbers, if there is a 1 in A and in B, the outcome is a 1; otherwise, it’s 0.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		A =         11001011
+		B =         00011000
+		A AND B =   00001000
+	</code>
+</pre>
+
+<p>The <code>AND</code> instruction  can be used as a mask to select and investigate bits.</p>
+<p>In this example, B is used as a mask to select bits 3 and 6 from A (the lowest, rightmost bit has index 0):</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		A =         11000011
+		B =         01001000
+		A AND B =   01000000
+	</code>
+</pre>
+
+<p>Here we conclude that bit 6 is set and bit 3 is not set.</p>
+
+<p>The <code>AND</code> instruction can also be used to round down numbers, and it is especially useful to round down addresses on a 16-byte boundary. We will use this later to align stacks.</p>
+
+<p>16 and multiples of 16 in hexadecimal all end with 0 or 0000 in binary.</p>
+
+<pre class="language-nasm line-numbers" data-line="">
+	<code>
+		address =    0x42444213 = 01000010010001000100001000010011
+		mask =       0xfffffff0 = 11111111111111111111111111110000
+		rounded =    0x42444210 = 01000010010001000100001000010000
+	</code>
+</pre>
+
+<p>Here we rounded down the lowest byte of the address. If the address already ends in a zero byte, the and instruction would not change anything.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -316,7 +393,7 @@ References
 </ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/assembly/x86_64">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/program-structure">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/assembly/x86_64/memory-sections">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
