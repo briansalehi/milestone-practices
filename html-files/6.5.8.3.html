@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Binary Function Object</title>
+<title>Input Stream</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.8.0.html">Function Objects</a></li>
-<li class='breadcrumb-item active'>Binary Function Object</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.8.0.html">Streams</a></li>
+<li class='breadcrumb-item active'>Input Stream</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -279,102 +279,49 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Binary-Function-Object" class="anchor" aria-hidden="true" href="#Binary-Function-Object">
-Binary Function Object
+<a id="Input-Stream" class="anchor" aria-hidden="true" href="#Input-Stream">
+Input Stream
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Functions of type <code>f(x, y)</code> are particularly useful when they return a value based on the input supplied. Such binary functions can be used for a host of arithmetic activity that involves two operands, such as addition, multiplication, subtraction, and so on. A sample binary function that returns the multiple of input arguments can be written as follows:</p>
+<p><code>std::cin</code> is versatile and enables you to read input into the plain old data types, such as the <code>int</code>, <code>double</code>, and <code>char*</code>, and you can also read lines or characters from the screen using methods such as <code>getline()</code>.</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		template &lt;typename elementType&gt;
-		class Multiply
-		{
-		public:
-			elementType operator () (const elementType& elem1, const elementType& elem2)
-			{
-				return (elem1 * elem2);
-			}
-		};
+		std::string placehoder;
+		std::cin >> placeholder;
 	</code>
 </pre>
 
-<p>Such binary functions are used in algorithms such as <code>std::transform()</code> where you can use it to multiply the contents of two containers.</p>
+<p>Just like <code>std::cin</code> allows you to write directly into an <code>int</code>, you can do the same with a C-style char array, too:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		std::vector&lt;int&gt; multiplicands{ 0, 1, 2, 3, 4 };
-		std::vector&lt;int&gt; multipliers{ 100, 101, 102, 103, 104 };
-		std::vector&lt;int&gt; vecResult;
-		vecResult.resize(multipliers.size());
-		transform (multiplicands.begin(), multiplicands.end(), multipliers.begin(), vecResult.begin(), Multiply&lt;int&gt;() );
+		char buffer[10] = {0}; // can contain max 10 chars
+		std::cin >> buffer; // Danger: user may enter more than 10 chars
 	</code>
 </pre>
-<hr />
-  <cite>binary_function.cxx</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;vector&gt;
-    #include &lt;list&gt;
-    #include &lt;algorithm&gt;
-    
-    // binary function object
-    template &lt;typename numeric&gt;
-    struct Multiply {
-        numeric operator() (const numeric&amp; a, const numeric&amp; b) const {
-            return (a * b);
-        }
-    };
-    
-    // generic display function
-    template &lt;typename printable&gt;
-    void Display(const printable&amp; element) { std::cout &lt;&lt; element &lt;&lt; &quot; &quot;; }
-    
-    int main()
-    {
-        std::vector&lt;int&gt; multiplicants{1,2,3,4,5,6,7,8,9};
-        std::vector&lt;int&gt; multipliers{9,8,7,6,5,4,3,2,1};
-        std::list&lt;int&gt; orderedResult;
-        
-        // resize results container to store multiplied numbers
-        orderedResult.resize(multipliers.size());
-    
-        // multiply containers and move to result
-        transform(multiplicants.cbegin(),
-            multiplicants.cend(),
-            multipliers.cbegin(),
-            orderedResult.begin(),
-            Multiply&lt;int&gt;()
-        );
-    
-        // display containers
-        for_each(multiplicants.cbegin(), multiplicants.cend(), Display&lt;int&gt;);
-        std::cout &lt;&lt; std::endl;
-        for_each(multipliers.cbegin(), multipliers.cend(), Display&lt;int&gt;);
-        std::cout &lt;&lt; std::endl;
-        for_each(orderedResult.cbegin(), orderedResult.cend(), Display&lt;int&gt;);
-        std::cout &lt;&lt; std::endl;
-    
-        return 0;
-    }
-</code>
+
+<p>When writing into a C-style string buffer, it is very important that you don’t exceed the bounds of the buffer to avoid a crash or a security vulnerability. So, a better way of reading into a C-style char buffer is this:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::cin.get(buffer, 9); // stop inserting at the 9th character
+	</code>
 </pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
-<code>
-g++ -Wall -g -o ./binary_function.o -c ./binary_function.cxx
-g++ -g -o ./binary_function.bin ./binary_function.o
-./binary_function.bin
-1 2 3 4 5 6 7 8 9 
-9 8 7 6 5 4 3 2 1 
-9 16 21 24 25 24 21 16 9 
-</code>
+
+<p><code>std::cin</code> stops insertion when it encounters the first white space.</p>
+
+<p>To allow the user to enter a complete line, including spaces, you need to use <code>std::getline()</code>:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::string name;
+		std::getline(std::cin, name);
+	</code>
 </pre>
 <hr />
 <h3>
@@ -387,11 +334,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 21</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 27</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/function-objects/unary-predicate">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/function-objects/binary-predicate">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams/output-stream">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams/file-stream">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

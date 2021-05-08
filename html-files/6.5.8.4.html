@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Binary Predicate</title>
+<title>File Stream</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.8.0.html">Function Objects</a></li>
-<li class='breadcrumb-item active'>Binary Predicate</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.8.0.html">Streams</a></li>
+<li class='breadcrumb-item active'>File Stream</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -279,119 +279,119 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Binary-Predicate" class="anchor" aria-hidden="true" href="#Binary-Predicate">
-Binary Predicate
+<a id="File-Stream" class="anchor" aria-hidden="true" href="#File-Stream">
+File Stream
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Binary function objects that return <code>bool</code> are called <i>binary predicates</i>.</p>  
+<p><code>std:fstream</code> is a class that C++ provides for (relatively) platform-independent file access. <code>std::fstream</code> inherits from <code>std::ofstream</code> for writing a file and <code>std::ifstream</code> for reading one. In other words, std::fstream provides you with both read and write functionality.</p>
 
-<p>Such functions find application in STL functions such as std::sort().</p>
+<p>To use class <code>std::fstream</code> or its base classes, include header <code>&lt;fstream&gt;</code>.</p>
 
-<p>Such a predicate can be used in performing a case-insensitive sort on a <code>std::vector</code> of <code>std::string</code>, for instance:</p>
+<p>To use an <code>std::fstream</code>, <code>std::ofstream</code>, or <code>std::ifstream</code> class, you need to open a file using method <code>open()</code>:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>
-		vector&lt;string&gt; names;
-		names.push_back("jim");
-		names.push_back("Jack");
-		names.push_back("Sam");
-		names.push_back("Anna");
-		sort(names.begin(), names.end());
-		sort(names.begin(), names.end(), CompareStringNoCase());
+		std::fstream myFile;
+		myFile.open("HelloFile.txt", std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
+
+		// check if open() succeeded
+		if (myFile.is_open()) {
+			// do reading or writing here
+			myFile.close();
+		}
 	</code>
 </pre>
 
-<p>Binary predicates are required in a variety of STL algorithms. For example, <code>std::unique()</code> that erases duplicate neighboring elements, <code>std::sort()</code> that sorts, <code>std::stable_sort()</code> that sorts while maintaining relative order, and <code>std::transform()</code> that can perform an operation on two ranges are some of the STL algorithms that need a binary predicate.</p>
-<hr />
-  <cite>binary_predicate.cxx</cite>
-<pre class="line-numbers" >
-<code class="language-cpp">
-    #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;vector&gt;
-    #include &lt;algorithm&gt;
-    
-    // generic display function
-    template &lt;typename printable&gt;
-    void Display(const printable&amp; container) {
-        for (auto iterator = container.cbegin(); iterator != container.cend(); ++iterator) {
-            std::cout &lt;&lt; *iterator &lt;&lt; std::endl;
-        }
-        std::cout &lt;&lt; std::endl;
-    }
-    
-    // compare std::strings binary predicate
-    struct iSort {
-        bool operator() (const std::string&amp; str1, const std::string&amp; str2) const {
-            std::string lower1;
-            lower1.resize(str1.size());
-            transform(str1.begin(), str1.end(), lower1.begin(), ::tolower);
-    
-            std::string lower2;
-            lower2.resize(str2.size());
-            transform(str2.begin(), str2.end(), lower2.begin(), ::tolower);
-    
-            return (lower1 &lt; lower2);
-        }
-    };
-    
-    int main()
-    {
-        // unsorted names
-        std::vector&lt;std::string&gt; names;
-        names.push_back(&quot;Kevin&quot;);
-        names.push_back(&quot;Brian&quot;);
-        names.push_back(&quot;rick&quot;);
-        names.push_back(&quot;Vladimir&quot;);
-        names.push_back(&quot;jack&quot;);
-        names.push_back(&quot;frank&quot;);
-        Display(names);
-    
-        // sorted by default predicate
-        sort(names.begin(), names.end());
-        Display(names);
-    
-        // sorted by custom predicate
-        sort(names.begin(), names.end(), iSort());
-        Display(names);
-    
-        return 0;
-    }
-</code>
+<p><code>open()</code> takes two arguments: The first is the path and name of the file being opened (if you don’t supply a path, it assumes the current directory settings for the application), whereas the second is the mode in which the file is being opened. The modes chosen allow the file to be created even if one exists (<code>std::ios_base::trunc</code>) and allow you to read and write into the file (<code>std::ios_base::in | std::ios_base::out</code>).</p>
+
+<p>Closing the stream using <code>close()</code> is essential to save the file.</p>
+
+<p>There is an alternative way of opening a file stream, which is via the constructor:</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::fstream myFile("HelloFile.txt", std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
+	</code>
 </pre>
-  <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-25'>
-<code>
-g++ -Wall -g -o ./binary_predicate.o -c ./binary_predicate.cxx
-g++ -g -o ./binary_predicate.bin ./binary_predicate.o
-./binary_predicate.bin
-Kevin
-Brian
-rick
-Vladimir
-jack
-frank
 
-Brian
-Kevin
-Vladimir
-frank
-jack
-rick
+<p>If you want to open a file for reading, use this:</p>
 
-Brian
-frank
-jack
-Kevin
-rick
-Vladimir
+<pre class="language-cpp line-numbers">
+	<code>
+		std::ifstream myFile("HelloFile.txt", std::ios_base::in);
+	</code>
+</pre>
 
-</code>
+<p>Irrespective of whether you use the constructor or the member method <code>open()</code>, it is recommended that you check for the successful opening of the file via <code>is_open()</code> before continuing to use the corresponding file stream object.</p>
+
+<p>The various modes in which a file stream can be opened are the following:</p>
+
+<table class="table table-dark">
+	<thead>
+		<tr>
+			<th scope="col">Object</th>
+			<th scope="col">Purpose</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>std::ios_base::app</code></td>
+			<td>Appends to the end of existing files rather than truncating them</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::ate</code></td>
+			<td>Places you at the end of the file, but you can write data  anywhere in the file</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::binary</code></td>
+			<td>Creates a binary file (default is text)</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::in</code></td>
+			<td>Opens file for read operations only</td>
+		</tr>
+		<tr>
+			<td><code>std::ios_base::out</code></td>
+			<td>Opens file for write operations only</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>After you have opened a file stream, you can write to it using <code>operator&lt;&lt;</code></p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::ofstream myFile;
+		myFile.open("HelloFile.txt", std::ios_base::out);
+
+		if (myFile.is_open()) {
+			myFile << "My first text file!" << std::endl;
+			myFile.close();
+		}
+	</code>
+</pre>
+
+<p>To read a file, one can use <code>std::fstream</code> and open it using flag <code>std::ios_base::in</code> or use <code>std::ifstream</code>.</p>
+
+<pre class="language-cpp line-numbers">
+	<code>
+		std::ifstream myFile;
+		myFile.open("HelloFile.txt", std::ios_base::in);
+		if (myFile.is_open())
+		{
+			std::string fileContents;
+			while (myFile.good()) {
+				std::getline(myFile, fileContents);
+			}
+			myFile.close();
+		} else {
+			std::cout << "open() failed: check if file is in right folder" << std::endl;
+		}
+	</code>
 </pre>
 <hr />
 <h3>
@@ -404,11 +404,11 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 21</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 27</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/function-objects/binary-function-object">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/lambda-expressions">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams/input-stream">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/streams/binary-stream">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

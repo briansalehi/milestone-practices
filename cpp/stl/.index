@@ -2,9 +2,9 @@ README.md
 sequential
 assotiative
 adaptive
-streams
-stream-manipulators
 iterators
-algorithms
 function_object
 lambda
+algorithms
+streams
+stream-manipulators

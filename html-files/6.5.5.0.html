@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Stream Manipulators</title>
+<title>Function Objects</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Standard Template Library</a></li>
-<li class='breadcrumb-item active'>Stream Manipulators</li>
+<li class='breadcrumb-item active'>Function Objects</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Stream-Manipulators" class="anchor" aria-hidden="true" href="#Stream-Manipulators">
-Stream Manipulators
+<a id="Function-Objects" class="anchor" aria-hidden="true" href="#Function-Objects">
+Function Objects
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -287,91 +287,23 @@ Stream Manipulators
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>When using a stream class, you have the option of specifying <a href="/cpp/fundamentals/string-manipulators">manipulators</a> that perform specific actions for you. <code>std::endl</code> is one such manipulator that you have been using thus far to insert a newline character.</p>
+<p>On a conceptual level, function objects are objects that work as functions. On an implementation level, however, function objects are objects of a class that implement <code>operator()</code>. Although functions and function pointers can also be classified as function objects, it is the capability of an object of a class that implements <code>operator()</code> to carry state (that is, values in member attributes of the class) that makes it useful with Standard Template Library (STL) algorithms.</p>
 
-<p>Below table demonstrates a few other such manipulator functions and flags:</p>
+<p>Function objects as typically used by a C++ programmer working with STL are classifiable into the following types:</p>
 
-<table class="table table-dark">
-	<thead>
-		<tr>
-			<th scope="col">Output Manipulators</th>
-			<th scope="col">Purpose</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><code>std::endl</code></td>
-			<td>Inserts a newline character</td>
-		</tr>
-		<tr>
-			<td><code>std::ends</code></td>
-			<td>Inserts a null character</td>
-		</tr>
-		<tr>
-			<th scope="col">Radix Manipulators</th>
-			<th scope="col">Purpose</th>
-		</tr>
-		<tr>
-			<td><code>std::dec</code></td>
-			<td>Instructs stream to interpret input or display output in decimal</td>
-		</tr>
-		<tr>
-			<td><code>std::dex</code></td>
-			<td>Instructs stream to interpret input or display output in hexadecimal</td>
-		</tr>
-		<tr>
-			<td><code>std::oct</code></td>
-			<td>Instructs stream to interpret input or display output in octal</td>
-		</tr>
-		<tr>
-			<th scope="col">Floating Point</th>
-			<th scope="col">Representing Manipulators Purpose</th>
-		</tr>
-		<tr>
-			<td><code>std::fixed</code></td>
-			<td>Instructs stream to display in fixed point notation</td>
-		</tr>
-		<tr>
-			<td><code>std::scientific</code></td>
-			<td>Instructs stream to display in scientific notation</td>
-		</tr>
-		<tr>
-			<td><code>&lt;iomanip&gt;</code> header</td>
-			<td></td>
-		</tr>
-		<tr>
-			<th scope="col">Manipulators</th>
-			<th scope="col">Purpose</th>
-		</tr>
-		<tr>
-			<td><code>std::setprecision</code></td>
-			<td>Set decimal point precision as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setw</code></td>
-			<td>Set field width as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setfill</code></td>
-			<td>Set fill character as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setbase</code></td>
-			<td>Set the radix/base, akin to using <code>std::dec</code> , <code>std::hex</code> , or <code>std::oct</code> as a parameter</td>
-		</tr>
-		<tr>
-			<td><code>std::setiosflag</code></td>
-			<td>Set flags via a mask input parameter of type <code>std::ios_base::fmtflags</code></td>
-		</tr>
-		<tr>
-			<td><code>std::resetiosflag</code></td>
-			<td>Restore defaults for a particular type specified by that contained in <code>std::ios_base::fmtflags</code></td>
-		</tr>
-	</tbody>
-</table>
+<ul>
+	<li><b>Unary function</b>: A function called with one argument; for example, <code>f(x)</code>.
+	<li><b>Unary Predicate</b>: When a unary function returns a bool, it is called a predicate.</li>
+	<li><b>Binary function</b>: A function called with two arguments; for example, <code>f(x, y)</code>.</li>
+	<li><b>Binary Predicate</b>: A binary function that returns a bool is called a binary predicate.</li>
+</ul>
+
+<p>Function objects that return a boolean type are naturally suited for use in algorithms that help in decision making. <code>find()</code> and <code>sort()</code> are two such algorithms.</p>
+
+<p>A function object that combines two function objects is called an adaptive function object.</p>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/streams/random-access">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.5.5.1.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.5.4.5.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/function-objects/unary-function-object">Next Page</a></li>
 </ul>
 <hr />
 <h3>
@@ -386,7 +318,7 @@ References
 <ul class="list-group">
 <li class='list-group-item'>C++ Primer Plus, 6th Edition - Stephen Prata</li>
 <li class='list-group-item'>Professional C++, 4th Edition - Marc Gregoire</li>
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 27</span></li>
+<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 21</span></li>
 </ul>
 <hr />
 <h3>
@@ -399,48 +331,20 @@ Table of Content
 </a>
 </h3>
 <div class="list-group list-group-root well" >
-<a href="/6.5.5.1.html" class="list-group-item">
-	1. boolalpha flag
+<a href="/cpp/stl/function-objects/unary-function-object" class="list-group-item">
+	1. Unary Function Object
 	
 </a>
-<a href="/6.5.5.2.html" class="list-group-item">
-	2. fill function
+<a href="/cpp/stl/function-objects/unary-predicate" class="list-group-item">
+	2. Unary Predicate
 	
 </a>
-<a href="/6.5.5.3.html" class="list-group-item">
-	3. fmtflags
+<a href="/cpp/stl/function-objects/binary-function-object" class="list-group-item">
+	3. Binary Function Object
 	
 </a>
-<a href="/6.5.5.4.html" class="list-group-item">
-	4. std::hex flag
-	
-</a>
-<a href="/6.5.5.5.html" class="list-group-item">
-	5. I/O stream flags
-	
-</a>
-<a href="/6.5.5.6.html" class="list-group-item">
-	6. output stream manipulators
-	
-</a>
-<a href="/6.5.5.7.html" class="list-group-item">
-	7. precision function
-	
-</a>
-<a href="/6.5.5.8.html" class="list-group-item">
-	8. setf function
-	
-</a>
-<a href="/6.5.5.9.html" class="list-group-item">
-	9. showbase flag
-	
-</a>
-<a href="/6.5.5.10.html" class="list-group-item">
-	10. showpoint flag
-	
-</a>
-<a href="/6.5.5.11.html" class="list-group-item">
-	11. field width
+<a href="/cpp/stl/function-objects/binary-predicate" class="list-group-item">
+	4. Binary Predicate
 	
 </a>
 </div>

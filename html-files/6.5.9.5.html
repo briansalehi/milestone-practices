@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Lambda as Binary Predicate</title>
+<title>I/O stream flags</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.9.0.html">Lambda Expressions</a></li>
-<li class='breadcrumb-item active'>Lambda as Binary Predicate</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.9.0.html">Stream Manipulators</a></li>
+<li class='breadcrumb-item active'>I/O stream flags</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -279,8 +279,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Lambda-as-Binary-Predicate" class="anchor" aria-hidden="true" href="#Lambda-as-Binary-Predicate">
-Lambda as Binary Predicate
+<a id="I/O-stream-flags" class="anchor" aria-hidden="true" href="#I/O-stream-flags">
+I/O stream flags
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -288,76 +288,65 @@ Lambda as Binary Predicate
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Making a lambda do a binary predicate task is easy but we need to behave lambda functions carefully, they may have overhead when they grow in size. Notice how we clarified the return type of lambda function, using member selection operator <code>operator-&gt;</code>, we can restrict the return type of a lambda function.</p>
 <hr />
-  <cite>binary_predicate.cxx</cite>
+  <cite>ios.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;algorithm&gt;
     #include &lt;iostream&gt;
-    #include &lt;string&gt;
-    #include &lt;deque&gt;
+    #include &lt;iomanip&gt;
     
     int main()
     {
-        std::deque&lt;std::string&gt; names{&quot;Tom&quot;,&quot;jack&quot;,&quot;Penny&quot;,&quot;alana&quot;,&quot;rick&quot;,&quot;Brian&quot;};
+        int number = 255;
+        double pi = 3.1415926535;
     
-        // sort container
-        sort(
-            names.begin()
-            , names.end()
-            , [](const std::string&amp; nameA, const std::string&amp; nameB) -&gt; bool {
-                std::string lowerA(nameA);
-                transform(nameA.begin(),nameA.end(),lowerA.begin(),::tolower);
+        std::cout &lt;&lt; &quot;integer: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;octal: &quot; &lt;&lt; std::oct &lt;&lt; number &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;hexadecimal: 0x&quot; &lt;&lt; std::hex &lt;&lt; number &lt;&lt; std::endl;
+        std::cout &lt;&lt; setiosflags(std::ios_base::hex|std::ios_base::showbase|std::ios_base::uppercase);
+        std::cout &lt;&lt; &quot;capital hexadecimal: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        std::cout &lt;&lt; resetiosflags(std::ios_base::hex|std::ios_base::showbase|std::ios_base::uppercase);
+        std::cout &lt;&lt; &quot;ios reset: &quot; &lt;&lt; number &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
     
-                std::string lowerB(nameB);
-                transform(nameB.begin(),nameB.end(),lowerB.begin(),::tolower);
-    
-                return (lowerA &lt; lowerB);
-            }
-        );
-    
-        // display container
-        for_each(
-            names.cbegin()
-            , names.cend()
-            , [](const std::string&amp; element){ std::cout &lt;&lt; element &lt;&lt; std::endl; }
-        );
+        std::cout &lt;&lt; &quot;pi number: &quot; &lt;&lt; pi &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;fixed pi: &quot; &lt;&lt; std::fixed &lt;&lt; pi &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::setprecision(7);
+        std::cout &lt;&lt; &quot;pi with precision 7: &quot; &lt;&lt; pi &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;fixed pi: &quot; &lt;&lt; std::fixed &lt;&lt; pi &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::setprecision(10);
+        std::cout &lt;&lt; &quot;pi with precision 10: &quot; &lt;&lt; pi &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;fixed pi: &quot; &lt;&lt; std::fixed &lt;&lt; pi &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;scientific: &quot; &lt;&lt; std::scientific &lt;&lt; pi &lt;&lt; std::endl;
     
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-10'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-17'>
 <code>
-g++ -Wall -g -o ./binary_predicate.o -c ./binary_predicate.cxx
-g++ -g -o ./binary_predicate.bin ./binary_predicate.o
-./binary_predicate.bin
-alana
-Brian
-jack
-Penny
-rick
-Tom
+g++ -Wall -g -o ./ios.o -c ./ios.cxx
+g++ -g -o ./ios.bin ./ios.o
+./ios.bin
+integer: 255
+octal: 377
+hexadecimal: 0xff
+capital hexadecimal: 0XFF
+ios reset: 255
+
+pi number: 3.14159
+fixed pi: 3.141593
+pi with precision 7: 3.1415927
+fixed pi: 3.1415927
+pi with precision 10: 3.1415926535
+fixed pi: 3.1415926535
+scientific: 3.1415926535e+00
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 22</span></li>
-</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/lambda-expressions/binary-function-lambda">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/multithreading">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.5.9.4.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.5.9.6.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

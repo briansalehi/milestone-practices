@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Lambda as Binary Function</title>
+<title>std::hex flag</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.5.0.html">Standard Template Library</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.9.0.html">Lambda Expressions</a></li>
-<li class='breadcrumb-item active'>Lambda as Binary Function</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.5.9.0.html">Stream Manipulators</a></li>
+<li class='breadcrumb-item active'>std::hex flag</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -279,8 +279,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Lambda-as-Binary-Function" class="anchor" aria-hidden="true" href="#Lambda-as-Binary-Function">
-Lambda as Binary Function
+<a id="std::hex-flag" class="anchor" aria-hidden="true" href="#std::hex-flag">
+std::hex flag
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -288,82 +288,37 @@ Lambda as Binary Function
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>A binary function takes two parameters and optionally returns a value. A lambda expression equivalent of the same would be:</p>
-
-<pre class="language-cpp line-numbers">
-	<code>
-		[...](Type1& param1Name, Type2& param2Name) { // lambda code here; }
-	</code>
-</pre>
+To print hexadecimal numbers or print integers as hexadecimals, use **hex** flag in output stream.
 <hr />
-  <cite>binary_function.cxx</cite>
+  <cite>hex.cxx</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;algorithm&gt;
     #include &lt;iostream&gt;
-    #include &lt;vector&gt;
-    
-    void display(const int&amp; element) {
-        std::cout &lt;&lt; element &lt;&lt; &quot; &quot;;
-    }
     
     int main()
     {
-        std::vector&lt;int&gt; multiplicand{1,2,3,4,5};
-        std::vector&lt;int&gt; multiplier{5,4,3,2,1};
-        std::vector&lt;int&gt; result;
-        result.resize(multiplier.size());
+        int number = 20;
+        std::cout &lt;&lt; number &lt;&lt; std::endl;
+        std::cout.setf(std::ios_base::showbase);
+        std::cout &lt;&lt; std::hex &lt;&lt; number &lt;&lt; std::endl;
     
-        transform(
-            multiplicand.cbegin()
-            , multiplicand.cend()
-            , multiplier.cbegin()
-            , result.begin()
-            , [](const int&amp; a, const int&amp; b) { return (a + b); }
-        );
-    
-        for_each( multiplicand.cbegin(), multiplicand.cend(), display);
-        std::cout &lt;&lt; std::endl;
-    
-        for_each( multiplier.cbegin(), multiplier.cend(), display);
-        std::cout &lt;&lt; std::endl;
-        std::cout &lt;&lt; &quot;---------&quot; &lt;&lt; std::endl;
-    
-        for_each( result.cbegin(), result.cend(), display);
-        std::cout &lt;&lt; std::endl;
-        
         return 0;
     }
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
-g++ -Wall -g -o ./binary_function.o -c ./binary_function.cxx
-g++ -g -o ./binary_function.bin ./binary_function.o
-./binary_function.bin
-1 2 3 4 5 
-5 4 3 2 1 
----------
-6 6 6 6 6 
+g++ -Wall -g -o ./hex.o -c ./hex.cxx
+g++ -g -o ./hex.bin ./hex.o
+./hex.bin
+20
+0x14
 </code>
 </pre>
-<hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Sam's Teach Yourself C++ in One Hour a Day, 8th Edition - Siddhartha Rao: <span style='color: red'> chapter 22</span></li>
-</ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/stl/lambda-expressions/unary-predicate-lambda">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/stl/lambda-expressions/binary-predicate-lambda">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.5.9.3.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.5.9.5.html">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
