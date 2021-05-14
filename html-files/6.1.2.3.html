@@ -291,219 +291,226 @@ Auto Type Deduction
 <p><code>auto</code> type is a way to let compiler deduce a type and replace it in compile type. Using auto requires you to initialize the variable for the compiler that uses this initial value in deciding what the variable type can be. When you don’t initialize a variable of type <code>auto</code>, you get a compile error.</p>
 
 <pre class="language-cpp line-numbers" data-line="">
-	<code>
-		// types are deduced by compiler at compile time
-		auto guess = true; // bool
-		auto deduct = 3.1415; // double
-	</code>
+    <code>
+        // types are deduced by compiler at compile time
+        auto guess = true; // bool
+        auto deduct = 3.1415; // double
+    </code>
 </pre>
 
 <p>Consider using <code>auto</code> as a placeholder for the actual type in the following situations:</p>
 
 <ul>
-	<li>To declare local variables with the form <code>auto name = expression</code> when you do not want to commit to a specific type:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto i = 42; // int
-			auto d = 42.5; // double
-			auto s = "text"; // char const *
-			auto v = { 1, 2, 3 }; // std::initializer_list&lt;int&gt;
-		</code>
-	</pre>
+    <li>To declare local variables with the form <code>auto name = expression</code> when you do not want to commit to a specific type:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto i = 42; // int
+            auto d = 42.5; // double
+            auto s = "text"; // char const *
+            auto v = { 1, 2, 3 }; // std::initializer_list&lt;int&gt;
+        </code>
+    </pre>
 
-	<li>To declare local variables with the <code>auto name = type-id { expression }</code> form when you need to commit to a specific type:</li>	
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto b = new char[10]{ 0 }; // char*
-			auto s1 = std::string {"text"}; // std::string
-			auto v1 = std::vector&lt;int&gt; { 1, 2, 3 }; // std::vector<int>
-			auto p = std::make_shared&lt;int&gt;(42); // std::shared_ptr<int>
-		</code>
-	</pre>
+    <li>To declare local variables with the <code>auto name = type-id { expression }</code> form when you need to commit to a specific type:</li>    
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto b = new char[10]{0}; // char*
+            auto s1 = std::string{"text"}; // std::string
+            auto v1 = std::vector&lt;int&gt;{ 1, 2, 3 }; // std::vector<int>
+            auto p = std::make_shared&lt;int&gt;(42); // std::shared_ptr<int>
+        </code>
+    </pre>
 
-	<li>To declare named lambda functions, with the form <code>auto name = lambda-expression</code>, unless the lambda needs to be passed or returned to a function:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto upper = [](char const c) {return toupper(c); };
-		</code>
-	</pre>
-	
-	<li>To declare lambda parameters and return values:</li>	
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto add = [](auto const a, auto const b) {return a + b;};
-		</code>
-	</pre>
+    <li>To declare named lambda functions, with the form <code>auto name = lambda-expression</code>, unless the lambda needs to be passed or returned to a function:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto upper = [](char const c) { return toupper(c); };
+        </code>
+    </pre>
+    
+    <li>To declare lambda parameters and return values:</li>    
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto add = [](auto const a, auto const b) { return a + b; };
+        </code>
+    </pre>
 
-	<li>To declare a function return type when you don't want to commit to a specific type:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			template &lt;typename F, typename T&gt;
-			auto apply(F&amp;&amp; f, T value) {  return f(value); }
-		</code>
-	</pre>
+    <li>To declare a function return type when you don't want to commit to a specific type:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            template &lt;typename F, typename T&gt;
+            auto apply(F&amp;&amp; f, T value) { return f(value); }
+        </code>
+    </pre>
 </ul>
 
 <p>There are some important benefits of using the <code>auto</code> specifier instead of actual types; the following is a list of, perhaps, the most important ones:</p>
 
 <ul>
-	<li>It is not possible to leave a variable uninitialized. This is a common mistake that developers make when declaring variables specifying the actual type. However, this is not possible with <code>auto</code>, which requires an initialization of the variable in order to deduce the type.</li>
+    <li>It is not possible to leave a variable uninitialized. This is a common mistake that developers make when declaring variables specifying the actual type. However, this is not possible with <code>auto</code>, which requires an initialization of the variable in order to deduce the type.</li>
 
-	<li>Using <code>auto</code> ensures that you always use the correct type and that implicit conversion will not occur. Consider the following example where we retrieve the size of a vector to a local variable. In the first case, the type of the variable is <code>int</code>, though the <code>size()</code> method returns <code>size_t</code>. This means an implicit conversion from <code>size_t</code> to <code>int</code> will occur. However, using <code>auto</code> for the type will deduce the correct type; that is, <code>size_t</code>:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto v = std::vector&lt;int&gt;{ 1, 2, 3 };
-		</code>
-	</pre>
+    <li>Using <code>auto</code> ensures that you always use the correct type and that implicit conversion will not occur. Consider the following example where we retrieve the size of a vector to a local variable. In the first case, the type of the variable is <code>int</code>, though the <code>size()</code> method returns <code>size_t</code>. This means an implicit conversion from <code>size_t</code> to <code>int</code> will occur. However, using <code>auto</code> for the type will deduce the correct type; that is, <code>size_t</code>:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto v = std::vector&lt;int&gt;{ 1, 2, 3 };
+        </code>
+    </pre>
 
-	<li>It means less typing and less concern for actual types that we don't care about anyway. A very common case is with iterators, but there are many more. In the following example, in the first for loop, we explicitly use the type of the iterator. The second loop with the <code>auto</code> specifier looks simpler and saves you from typing and caring about actual types:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			std::map&lt;int, std::string&gt; m;
-			for (std::map&lt;int, std::string&gt;::const_iterator  it = m.cbegin(); it != m.cend(); ++it)
-			{ /*...*/ }
+    <li>It means less typing and less concern for actual types that we don't care about anyway. A very common case is with iterators, but there are many more. In the following example, in the first for loop, we explicitly use the type of the iterator. The second loop with the <code>auto</code> specifier looks simpler and saves you from typing and caring about actual types:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            std::map&lt;int, std::string&gt; m;
+            for (std::map&lt;int, std::string&gt;::const_iterator  it = m.cbegin(); it != m.cend(); ++it)
+            { /*...*/ }
 
-			for (auto it = m.cbegin(); it != m.cend(); ++it)
-			{ /*...*/ }
-		</code>
-	</pre>
+            for (auto it = m.cbegin(); it != m.cend(); ++it)
+            { /*...*/ }
+        </code>
+    </pre>
 
-	<li>Declaring variables with <code>auto</code> provides a consistent coding style with the type always in the right-hand side. If you allocate objects dynamically, you need to write the type both on the left and right side of the assignment, for example, <code>int* p = new int(42)</code>. With <code>auto</code>, the type is specified only once on the right side.</li>
+    <li>Declaring variables with <code>auto</code> provides a consistent coding style with the type always in the right-hand side. If you allocate objects dynamically, you need to write the type both on the left and right side of the assignment, for example, <code>int* p = new int(42)</code>. With <code>auto</code>, the type is specified only once on the right side.</li>
 </ul>
 
 <p>However, there are some gotchas when using <code>auto</code>:</p>
 
 <ul>
-	<li>The <code>auto</code> specifier is only a placeholder for the type, not for the <b>const</b>, <b>volatile</b> and <b>references</b> specifiers.</li>
-	<pre class="language-cpp line-numbers" data-line="15">
-		<code>
-			#include &lt;iostream&gt>
+    <li>The <code>auto</code> specifier is only a placeholder for the type, not for the <b>const</b>, <b>volatile</b> and <b>references</b> specifiers.</li>
+    <pre class="language-cpp line-numbers" data-line="15">
+        <code>
+            #include <iostream>                                                             
+                                                                                            
+            class Variable                                                                  
+            {                                                                               
+            public:                                                                         
+                Variable(int const value = 0) : value_{value} {}                            
+                int& get() { return value_; }                                               
+            private:                                                                        
+                int value_;                                                                 
+            };                                                                              
+                                                                                            
+            int main()                                                                      
+            {                                                                               
+                Variable number(42);                                                        
+                auto value = number.get();                                                  
+                                                                                               
+                // tries to change Variable::value_  but auto dropped reference specifier   
+                value = 100;                                                                
+                                                                                            
+                std::cout << number.get() << '\n'; // prints 42                                
+                return 0;                                                                      
+            }
+        </code>
+    </pre>
 
-			class foo
-			{
-			public:
-				foo(int const x = 0) : x_{ x } {}
-				int&amp; get() { return x_; }
-			private:
-				int x_;
-			};
+    <li>It is not possible to use <code>auto</code> for types that are not moveable:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto ai = std::atomic&lt;int&gt;(42); // error
+        </code>
+    </pre>
 
-			int main()
-			{
-				foo f(42);
-				auto x = f.get();
-				x = 100;
-				std::cout &lt;&lt; f.get() &lt;&lt; '\n'; // prints 42
-				return 0;
-			}
-		</code>
-	</pre>
+    <li>It is not possible to use <code>auto</code> for multi-word types, such as <code>long long</code>, <code>long double</code>, or <code>struct foo</code>. However, in the first case, the possible workarounds are to use literals or type aliases; as for the second, using struct/class in that form is only supported in C++ for C compatibility and should be avoided anyway:</li>
+    <pre class="language-cpp line-numbers" data-line="">
+        <code>
+            auto l1 = long long{ 42 }; // error
 
-	<li>It is not possible to use <code>auto</code> for types that are not moveable:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto ai = std::atomic&lt;int&gt;(42); // error
-		</code>
-	</pre>
+            using llong = long long;
+            auto l2 = llong{ 42 }; // OK
 
-	<li>It is not possible to use <code>auto</code> for multi-word types, such as <code>long long</code>, <code>long double</code>, or <code>struct foo</code>. However, in the first case, the possible workarounds are to use literals or type aliases; as for the second, using struct/class in that form is only supported in C++ for C compatibility and should be avoided anyway:</li>
-	<pre class="language-cpp line-numbers" data-line="">
-		<code>
-			auto l1 = long long{ 42 }; // error using llong = long long;
-			auto l2 = llong{ 42 }; // OK auto l3 = 42LL; // OK
-		</code>
-	</pre>
+            auto l3 = 42LL; // OK
+        </code>
+    </pre>
 
-	<li>If you use the <code>auto</code> specifier but still need to know the type, you can do so in most IDEs by putting the cursor over a variable, for instance. If you leave the IDE, however, that is not possible anymore, and the only way to know the actual type is to deduce it yourself from the initialization expression, which could mean searching through the code for function return types.</li>
+    <li>If you use the <code>auto</code> specifier but still need to know the type, you can do so in most IDEs by putting the cursor over a variable, for instance. If you leave the IDE, however, that is not possible anymore, and the only way to know the actual type is to deduce it yourself from the initialization expression, which could mean searching through the code for function return types.</li>
 </ul>
 
 <p>In C++11, <code>auto</code> can be used for declaring local variables and for the return type of a function with a trailing return type.</p>
 
 <pre class="language-cpp line-numbers" data-line="2">
-	<code>
-		// C++11
-		auto func1(int const i) -&gt; int { return 2*i; }
-	</code>
+    <code>
+        // C++11
+        auto func1(int const i) -&gt; int { return 2*i; }
+    </code>
 </pre>
 
 <p>In C++14, <code>auto</code> can be used for the return type of a function without specifying a trailing type and for parameter declarations in lambda expressions. Future standard versions are likely to expand the use of <code>auto</code> to even more cases.</p>
 
 <pre class="language-cpp line-numbers" data-line="2">
-	<code>
-		// C++14
-		auto func2(int const i) { return 2*i; }
-	</code>
+    <code>
+        // C++14
+        auto func2(int const i) { return 2*i; }
+    </code>
 </pre>
 
 <p>As mentioned earlier, <code>auto</code> does not retain const/volatile and reference qualifiers. This leads to problems with <code>auto</code> as a placeholder for the return type from a function.</p>
 
 <pre class="language-cpp line-numbers" data-line="17,18">
-	<code>
-		class foo
-		{
-		public:
-			foo(int const x = 0) : x_{ x } {}
-			int&amp; get() { return x_; }
-		private:
-			int x_;
-		};
+    <code>
+        class foo
+        {
+        public:
+            foo(int const x = 0) : x_{ x } {}
+            int&amp; get() { return x_; }
+        private:
+            int x_;
+        };
 
-		auto proxy_get(foo&amp; f)
-		{
-			return f.get();
-		}
+        auto proxy_get(foo&amp; f)
+        {
+            return f.get();
+        }
 
-		int main()
-		{
-			auto f = foo{ 42 };
-			auto&amp; x = proxy_get(f); // cannot convert from 'int' to 'int &amp;'
-			return 0;
-		}
-	</code>
+        int main()
+        {
+            auto f = foo{ 42 };
+            auto&amp; x = proxy_get(f); // cannot convert from 'int' to 'int &amp;'
+            return 0;
+        }
+    </code>
 </pre>
 
 <p>The solution to this problem in C++14 is <code>decltype(auto)</code>, which will correctly deduce the type:</p>
 
 <pre class="language-cpp line-numbers" data-line="1,9">
-	<code>
-		decltype(auto) proxy_get(foo& f)
-		{
-			return f.get();
-		}
+    <code>
+        decltype(auto) proxy_get(foo& f)
+        {
+            return f.get();
+        }
 
-		int main()
-		{
-			auto f = foo{ 42 };
-			decltype(auto) x = proxy_get(f);
-			return 0;
-		}
-	</code>
+        int main()
+        {
+            auto f = foo{ 42 };
+            decltype(auto) x = proxy_get(f);
+            return 0;
+        }
+    </code>
 </pre>
 
 <p>The last important case where <code>auto</code> can be used is with lambdas. As of C++14, both lambda return types and lambda parameter types can be <code>auto</code>.</p>
 
 <pre class="language-cpp line-numbers" data-line="1,8,16,17">
-	<code>
-		auto ladd = [] (auto const a, auto const b)
-		{
-			return a + b;
-		};
+    <code>
+        auto ladd = [] (auto const a, auto const b)
+        {
+            return a + b;
+        };
 
-		struct {
-			template&lt;typename T, typename U&gt;
-			auto operator() (T const a, U const b) const
-			{
-				return a + b;
-			}
-		} L;
+        struct {
+            template&lt;typename T, typename U&gt;
+            auto operator() (T const a, U const b) const
+            {
+                return a + b;
+            }
+        } L;
 
-		int main()
-		{
-			auto i = ladd(40, 2); // 42
-			auto s = L("forty"s, "two"s); // "fortytwo"s
-			return 0;
-		}
-	</code>
+        int main()
+        {
+            auto i = ladd(40, 2); // 42
+            auto s = L("forty"s, "two"s); // "fortytwo"s
+            return 0;
+        }
+    </code>
 </pre>
 <hr />
 <h3>

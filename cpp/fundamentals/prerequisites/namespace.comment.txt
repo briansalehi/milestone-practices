@@ -1,7 +1,3 @@
 <p><b>Global variables</b> present many problems in large software systems because they can be accessed and possibly modified anywhere in the program. They also can lead to programming errors, since an important global variable may be hidden by a local variable of the same name. As a result, it is best to avoid global variables. We may not be able to avoid globals entirely, however.</p>
 
 <p>A namespace is a mechanism that allows a group of related names to be defined in one place. This helps organize global objects into natural groups and minimizes the problems of globals.</p>
-
-<p>I believe namespaces are better mentioned than being used. that is, don't use <b>using namespace std</b>, instead, mention them like <b>std::cout</b>. In large code bases, namespaces can colide and make great confusion. Though, this is totally optional for you and it's my personal approach in coding not a best practice.</p>
-
-<p>Namespaces address the problem of naming conflicts between different pieces of code. For example, you might be writing some code that has a function called <i>foo()</i>. One day, you decide to start using a third-party library, which also has a <i>foo()</i> function. The compiler has no way of knowing which version of <i>foo()</i> you are referring to within your code. You can’t change the library’s function name, and it would be a big pain to change your own. Namespaces come to the rescue in such scenarios because you can define the context in which names are defined. To place code in a namespace, enclose it within a namespace block.</p>

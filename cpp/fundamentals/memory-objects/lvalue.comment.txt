@@ -1,6 +1,6 @@
-<p><b>L-values</b> often refer to locations in memory. A variable such as <code>daysInYear</code> in the following example is actually a handle to a memory location and is an <b>l-value</b>. <b>R-values</b>, on the other hand, can be the very content of a memory location.</p>
+<p><b>L-values</b> often refer to locations in memory. A variable such as <code>daysInYear</code> in the following example is actually a handle to a memory location and is an <b>L-value</b>. <b>R-values</b>, on the other hand, can be the very content of a memory location.</p>
 
-<p>So, all l-values can be r-values, but not all r-values can be l-values. To understand it  better, look at the following example, which doesn’t make any sense and therefore won’t compile:</p>
+<p>So, all <b>lvalues</b> can be <b>rvalues</b>, but not all <b>rvalues</b> can be <b>lvalues</b>. To understand it  better, look at the following example, which doesn’t make any sense and therefore won’t compile:</p>
 
 <pre class="language-cpp line-numbers">
 	<code>

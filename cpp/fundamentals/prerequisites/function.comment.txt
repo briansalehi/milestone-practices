@@ -1,5 +1,5 @@
-<p>The <code>main()</code> function, as the name suggests is the main function that always exists in all C and C++ programs.</p>
+<p>The <code>main()</code> function is the function that must always exist in all C and C++ programs.</p>
 
-<p>All other functions must be defined before <i>main function</i>. Either they can only be declared before main and implemented after main, or they can be implemented in one step before main function.</p>
+<p>All other functions must be defined before <i>main function</i> either by declaration, or by implementation.</p>
 
-<p>All functions either return an object type using return statement or not. In case of non-returning functions, return type is <code>void</code>.</p>
+<p>All functions either return an object type using <code>return</code> statement or return <code>void</code> to indicate function as a non-returning function.</p>
