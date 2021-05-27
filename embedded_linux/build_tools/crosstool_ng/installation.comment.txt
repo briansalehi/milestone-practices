@@ -1,0 +1,41 @@
+<p>To install <b>crosstool-ng</b>, follow these steps:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="user" data-host="milestone" data-line="" data-output="">
+	<code>
+		git clone https://github.com/crosstool-ng/crosstool-ng.git
+		cd crosstool-ng
+		./bootstrap
+		./config --enable-local
+		make
+		sudo make install
+	</code>
+</pre>
+
+<p>To see the list of pre-built toolchains:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng list-samples
+	</code>
+</pre>
+
+<p>After choosing an architecture, use its name to build the toolchain:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng armv6-unknown-linux-gnueabi
+	</code>
+</pre>
+
+<p>After choosing the toochain, now you need to fine-tune the configuration:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng manuconfig
+	</code>
+</pre>
+
+<p>
+An ncurses window will show up.<br />
+You will need to consider the following configuration values:
+</p>
