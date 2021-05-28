@@ -1,0 +1,118 @@
+<p>To install <b>crosstool-ng</b>, follow these steps:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="user" data-host="milestone" data-line="" data-output="">
+	<code>
+		git clone https://github.com/crosstool-ng/crosstool-ng.git
+		cd crosstool-ng
+		./bootstrap
+		./config --enable-local
+		make
+		sudo make install
+	</code>
+</pre>
+
+<p>To see the list of pre-built toolchains:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng list-samples
+	</code>
+</pre>
+
+<p>After choosing an architecture, use its name to build the toolchain:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng armv6-unknown-linux-gnueabi
+	</code>
+</pre>
+
+<p>After choosing the toochain, now you need to fine-tune the configuration:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng manuconfig
+	</code>
+</pre>
+
+<p>
+An ncurses window will show up.<br />
+You will need to consider the following configuration values:
+</p>
+
+<p>The <b>Paths and misc options ---&gt;</b> options menu contains the paths where crosstool-ng should be working with files.</p>
+
+<ul>
+	<li>The <b>Local tarballs directory</b> (<code>CT_LOCAL_TARBALLS_DIR</code>) option represents the directory which crosstool-ng will download and store tarball files within.</li>
+	<li>The <b>Working directory</b> (<code>CT_WORK_DIR</code>) option represents the directory which crosstool-ng will generate binary files within. It should have enough available storage.</li>
+	<li>The <b>Prefix directory</b> (<code>CT_PREFIX_DIR</code>) option declares the <code>CT_PREFIX</code> global variable which represents the path toolchains will be stored.</li>
+	<li><b>Number of parallel jobs</b> (<code>CT_PARALLEL_JOBS</code>) option aquires specified number of processes to work with. Should be set to number of processor cores.</li>
+</ul>
+
+<p>The <b>Target options</b> options menu holds configurations about target architecture.</p>
+<ul>
+	<li><b>Target Architecture</b> contains the supported processor architectures a target system can have.</li>
+	<li>The <b>Emit assembly for CPU</b> option represents the processor core model.</li>
+</ul>
+
+<p>The <b>Toolchain options</b> menu holds the toolchain naming options.</p>
+<ul>
+	<li>The <b>Tuple's vendor string</b> option holds the name of target device.</li>
+	<li>The <b>Type</b> option specifies the type of compilation which either is <b>cross</b> or <b>canadian</b>.</li>
+</ul>
+
+<p>The <b>Operating System</b> option menu holds the options for kernel configurations.</p>
+<ul>
+	<li>The <b>Target OS</b> specifies wether you want to use <b>Linux</b> or <b>bare metal</b> OS.</li>
+</ul>
+
+<p>The <b>Binary utilities</b> option menu contains the compiler and linker options which usually there are only one options for each.</p>
+
+<p>The <b>C-library</b> option menu holds configurations for the libraries you want to target device to be working with.</p>
+<ul>
+	<li>The <b>C Library</b> option specifies wether you want <b>glibc</b> or <b>uClibc</b> libraries.</li>
+	<li>The <b>Minimum supported kernel version</b> option causes build system to complain if kernel is older than specified.</li>
+</ul>
+
+<p>The <b>C compiler</b> option menu holds compiler version options.</p>
+<ul>
+	<li>The <b>Version of GCC</b> option should only be set to compatible toolchain versions.</li>
+	<li>The <b>Debug facilities</b> option holds the debugging system which you want to use. <b>Duma</b> (Detect Unintended Memory Access), <b>gdb</b> (Gnu Debugger), <b>ltrace</b> and <b>strace</b> are example tools of this option.</li>
+</ul>
+
+<p>After configuration is complete, the result will be stored in <code>.config</code> file.</p>
+
+<p>Now run <code>./ct-ng build</code> executable to generate toolchains.</p>
+
+<p>The resulting toolchains will be stored in a tarball named under the prefix value you had in configuration.</p>
+
+<p>Extract the toolchain by <code>tar</code> and use them against your code to compile and generate architecture specific binaries.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		./ct-ng build
+		tar -xf armv6-unknown-linux-gnueabi.tar
+		cd bin
+		vim main.c # write code
+		gcc main.c -o app.x86_64 # host architecture
+		./armv6-unknown-linux-gnueabi-gcc main.c -o app.armv6 # target architecture
+	</code>
+</pre>
+
+<p>Now you can see that binary file is architecture specific:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2,4">
+	<code>
+		file app.x86_64
+		app_x86_64: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, not stripped
+		file app.armv6
+	</code>
+</pre>
+
+<p>You can either run your architecture specific executable on target device, or run it under <b>qemu</b> emulator.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		qemu-arm -L/path/to/library app.armv6
+	</code>
+</pre>
