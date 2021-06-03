@@ -9,3 +9,4 @@ a.out
 package-lock.json
 markdown-files/
 .qmake.stash
+/notepool/
