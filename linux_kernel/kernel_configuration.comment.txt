@@ -1,0 +1,18 @@
+<p>You can configure the kernel using one of the following tools:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make menuconfig
+	</code>
+</pre>
+
+<p>
+To create your own configuration file run <code>make savedefconfig</code>.<br/>
+This command creates a minimal default configuration and renames existing <i>.config</i> file to <i>.config.bak</i>.
+</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="" data-line="" data-output="">
+	<code>
+		make savedefconfig
+	</code>
+</pre>
