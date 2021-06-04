@@ -287,9 +287,103 @@ Kernel Compilation
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>The compiler invoked by the kernel <code>Makefile</code> is <code>$(CROSS_COMPILE)gcc</code>.</p>
+
+<p>When compiling natively, leave <code>CROSS_COMPILE</code> undefined and the kernel will be natively compiled for the host architecture using <code>gcc</code>.</p>
+
+<p>When using a cross-compiler, set <code>CROSS_COMPILE</code>.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make ARCH=x86_64 CROSS_COMPILE=armv6-linux-gnueabi-
+	</code>
+</pre>
+
+<p>To make compilation process faster, run <code>make</code> using multiple processor cores by adding <code>-j N</code> option and replacing <code>N</code> with number of processor cores to get involve with compilation.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make -j $(nproc) ARCH=x86_64 CROSS_COMPILE=armv6-linux-gnueabi-
+	</code>
+</pre>
+
+<p>To recompile faster (7x according to some benchmarks), use the <code>ccache</code> compiler cache:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make -j $(nproc) ARCH=x86_64 CROSS_COMPILE="ccache armv6-linux-gnueabi-"
+	</code>
+</pre>
+
+<p>The result of building kernel source tree is <code>vmlinux</code> which is the raw uncompressed kernel image in the ELF format and is useful for debugging purposes, but cannot be booted.</p>
+
+<p>
+Instead, <code>arch/&lt;arch&gt;/boot/*Image</code> files, usually compressed, are the final kernel images that can be booted.<br/>
+For example: <code>bzImage</code> for x86, <code>zImage</code> for ARM, <code>Image.gz</code> for RISC-V, <code>vmlinux.bin.gz</code> for ARC, etc.
+</p>
+
+<p>Compiled device tree are also built in <code>arch/&lt;arch&gt;/boot/dts/*.dtb</code>.</p>
+
+<p>Device tree files are not a C source files. Instead, they are written in a specific language, and device tree compiler, compiles them into device tree blob (DTB) files.</p>
+
+<p>All built kernel modules are spread over the kernel source tree, as <code>.ko</code> (Kernel Object) files.</p>
+
+<p>To move the kernel image and device tree, run following command to replace the current kernel of your system with newly compiled kernel.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		sudo make install
+	</code>
+</pre>
+
+<p><code>make install</code> is rarely used in embedded development, as the kernel image is a single file, easy to handle.</p>
+
+<p>Making the kernel image available to the target is usually manual or done through scripts in build systems.</p>
+
+<p><code>make modules_install</code> installs all modules in <code>/lib/modules/&lt;version&gt;/</code>.</p>
+
+<p>The <code>INSTALL_MOD_PATH</code> variable is needed to generate the module related files and install the modules in the target root filesystem instead of your host root filesystem:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make INSTALL_MOD_PATH=&lt;dir&gt;/ modules_install
+	</code>
+</pre>
+
+<p>Clean up generated files:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make clean
+	</code>
+</pre>
+
+<p>You can also remove all generated files including the <code>.config</code> file using:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make mrproper
+	</code>
+</pre>
+
+<p>You can also remove editor backup and patch reject files:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make distclean
+	</code>
+</pre>
+
+<p>If you are in a git tree, remove all files not tracked (and ignored) by git:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		git clean -fdx
+	</code>
+</pre>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/embedded-linux/fundamentals/kernel-configuration">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/embedded-linux/fundamentals/kernel-structure">Next Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/embedded-linux/fundamentals/booting-kernel">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

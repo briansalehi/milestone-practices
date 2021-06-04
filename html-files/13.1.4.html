@@ -287,17 +287,64 @@ Kernel Configuration
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>You can configure the kernel using one of the following tools:</p>
+<p>Building kernel itself is a sub-project in kernel source tree named <b>kbuild</b>, which itself uses <b>kconfig</b> and <b>make</b> tool.</p>
+
+<p>The configuration is stored in the <code>.config</code> file at the root of kernel source tree.</p>
+
+<p>To get help, type:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make help
+	</code>
+</pre>
+
+<p>You can configure the kernel using one of the following command line interface tools:</p>
 
 <pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
 	<code>
 		make menuconfig
+		make nconfig
+	</code>
+</pre>
+
+<p>Or, use one of the graphical user interfaces:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make xconfig
+		make gconfig
+	</code>
+</pre>
+
+<p>
+Usually the configuration file of current working system is used as a working configuration file, stored as <code>/boot/config-`uname -r`</code>.<br/>
+Further edits are applied on this file using following command:
+</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make cpu_defconfig
+	</code>
+</pre>
+
+<p>Note that this command will overwrite your configuration file.</p>
+
+<p>
+When current system's configuration is not an option, default configuration for each CPU family are used.<br/>
+They are stored in <code>arch/<arch>/configs/</code>, and are just minimal <code>.config</code> files.<br/>
+And again, to fine-tune this configuration file, following command is used:
+</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make cpu_defconfig
 	</code>
 </pre>
 
 <p>
 To create your own configuration file run <code>make savedefconfig</code>.<br/>
-This command creates a minimal default configuration and renames existing <i>.config</i> file to <i>.config.bak</i>.
+This command creates a minimal default configuration and renames existing <i>.config</i> file to <i>.config.old</i>.
 </p>
 
 <pre class="language-bash command-line" data-prompt="" data-user="" data-host="" data-line="" data-output="">
@@ -305,6 +352,33 @@ This command creates a minimal default configuration and renames existing <i>.co
 		make savedefconfig
 	</code>
 </pre>
+
+<p>There are different types of options, defined in <b>Kconfig</b> files:</p>
+
+<p>Set ARCH to the name of a directory under <code>arch/</code> in order to specify the architecture for the kernel to build:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		export ARCH=arm64
+	</code>
+</pre>
+
+<p>By default, the kernel build system assumes that the kernel is configured and built for the host architecture.</p>
+
+<p>If you edit a <code>.config</code> file by hand, it’s useful to run <code>make oldconfig</code> afterwards, to set values to new parameters that could have appeared because of dependency changes.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		make oldconfig
+	</code>
+</pre>
+<ul>
+	<li>bool: they are either true or false</li>
+	<li>tristate: they are either true, module or false</li>
+	<li>int: to specify integer values</li>
+	<li>hex: to specify hexadecimal values, <code>CONFIG_PAGE_OFFSET=0xC0000000</code></li>
+	<li>string: to specify string values <code>CONFIG_LOCALVERSION=-no-network</code></li>
+</ul>
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/embedded-linux/fundamentals/kernel-patching">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/embedded-linux/fundamentals/kernel-compilation">Next Page</a></li>

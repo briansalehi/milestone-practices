@@ -1,0 +1,68 @@
+<p>Many embedded architectures have a lot of non-discoverable hardware. (serial, Ethernet, I2C, Nand flash, USB controllers, etc.)</p>
+
+<p>Depending on the architecture, such hardware is either described in BIOS ACPI tables (x86), using C code directly within the kernel, or using a special hardware description language in a Device Tree.</p>
+
+<p>The Device Tree (DT) was created for PowerPC, and later was adopted by other architectures (ARM, ARC...). Now Linux has DT support in most architectures, at least for specific systems (for example for the OLPC on x86).</p>
+
+<p>A Device Tree Source, written by kernel developers, is compiled into a binary Device Tree Blob, and needs to be passed to the kernel at boot time.</p>
+
+<p>There is one different Device Tree for each board/platform supported by the kernel, available in <code>arch/arm/boot/dts/<board>.dtb</code>.</p>
+
+<p>The bootloader must load both the kernel image and the Device Tree Blob in memory before starting the kernel.</p>
+
+<p>Embedded system developers usually need to know about device tree because of following reasons:</p>
+
+<ul>
+	<li>To describe external devices attached to non-discoverable busses (such as I2C) and configure them.</li>
+	<li>To configure pin muxing: choosing what SoC signals are made available on the board external connectors. See <a href="http://linux.tanzilli.com/">http://linux.tanzilli.com/</a> for a web service doing this interactively.</li>
+	<li>To configure some system parameters: flash partitions, kernel command line (other ways exist)</li>
+</ul>
+
+<p>Visit Device Tree 101 webinar, Thomas Petazzoni (2021):</p>
+
+<ul>
+	<li>Slides: <a href="https://bootlin.com/blog/device-tree-101-webinar-slides-and-videos/">https://bootlin.com/blog/device-tree-101-webinar-slides-and-videos/</a></li>
+	<li>Video: <a href="https://youtu.be/a9CZ1Uk3OYQ">https://youtu.be/a9CZ1Uk3OYQ</a></li>
+</ul>
+
+<p>Recent versions of U-Boot can boot the zImage binary.</p>
+
+<p>Older versions require a special kernel image format: <code>uImage</code></p>
+
+<p>uImage is generated from zImage using the <code>mkimage</code> tool. It is done automatically by the kernel <code>make uImage</code> target.</p>
+
+<p>On some ARM platforms, <code>make uImage</code> requires passing a <code>LOADADDR</code> environment variable, which indicates at which physical memory address the kernel will be executed.</p>
+
+<p>In addition to the kernel image, U-Boot can also pass a Device Tree Blob to the kernel.</p>
+
+<p>The typical boot process is therefore:</p>
+
+<ol>
+	<li>Load zImage or uImage at address X in memory</li>
+	<li>Load <board>.dtb at address Y in memory</li>
+	<li>Start the kernel with bootz X - Y (zImage case), or bootm X - Y (uImage case) The - in the middle indicates no initramfs</li>
+</ol>
+
+<p>In addition to the compile time configuration, the kernel behavior can be adjusted with no recompilation using the kernel command line</p>
+
+<p>The kernel command line is a string that defines various arguments to the kernel.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		console=ttyS0 root=/dev/mmcblk0p2 rootwait earlyprintk
+	</code>
+</pre>
+
+<p>The most important ones are documented in <code>admin-guide/kernel-parameters</code> in kernel documentation.</p>
+
+<p>This kernel command line can be, in order of priority (highest to lowest):</p>
+
+<ul>
+	<li>Passed by the bootloader. In U-Boot, the contents of the bootargs environment variable is automatically passed to the kernel.</li>
+	<li>Specified in the Device Tree (for architectures which use it)</li>
+	<li>Built into the kernel, using the <code>CONFIG_CMDLINE</code> option.</li>
+	<li>A combination of the above depending on the kernel configuration.</li>
+	<li>Set up the cross-compiling environment</li>
+	<li>Configure and cross-compile the kernel for an arm platform</li>
+	<li>On this platform, interact with the bootloader and boot your kernel</li>
+</ul>

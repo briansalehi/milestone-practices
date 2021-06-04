@@ -4,5 +4,6 @@ obtaining_kernel.txt
 kernel_patching.txt
 kernel_configuration.txt
 kernel_compilation.txt
+booting_kernel.txt
 kernel_structure.txt
 virtual_filesystems.txt
