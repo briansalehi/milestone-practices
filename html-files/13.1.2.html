@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Kernel Versioning</title>
+<title>Obtaining Kernel</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/13.0.html">Embedded Linux</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/13.1.0.html">Fundamentals</a></li>
-<li class='breadcrumb-item active'>Kernel Versioning</li>
+<li class='breadcrumb-item active'>Obtaining Kernel</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Kernel-Versioning" class="anchor" aria-hidden="true" href="#Kernel-Versioning">
-Kernel Versioning
+<a id="Obtaining-Kernel" class="anchor" aria-hidden="true" href="#Obtaining-Kernel">
+Obtaining Kernel
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -287,15 +287,47 @@ Kernel Versioning
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>Until 2003, there was a new stable release branch of Linux every 2 or 3 years (2.0, 2.2, 2.4). New development branches took 2-3 years to become stable (too slow!).</p>
+<p>The official (mainline) versions of the Linux kernel, as released by Linus Torvalds, are available at <a href="https://kernel.org">kernel.org</a></p>
 
-<p>Since 2003, there is a new stable release of Linux about every 10 weeks.</p>
+<p>Many chip vendors also supply their own kernel sources.</p>
 
-<p>For each release, there are bugfix and security updates.</p>
+<p>
+Many kernel sub-communities maintain their own kernel, with usually newer but less stable features.<br/>
+Example of sub-communities are as follows:
+</p>
 
-<img class="img-responsive" src="/embedded-linux/fundamentals/merge-and-bug-fix-window.png" alt="merge and bug fix window" loading="lazy" onerror='this.onerror=null; this.src="embedded-linux/fundamentals/merge-and-bug-fix-window.png"'>
+<ul>
+	<li>Architecture communities (ARM, MIPS, PowerPC, etc.)</li>
+	<li>Device drivers communities (I2C, SPI, USB, PCI, network, etc.)</li>
+	<li>Other communities (real-time, etc.)</li>
+</ul>
+
+<p>Kernel source can be obtained by <a href="git-scm.com">Git</a> from following sources:</p>
+
+<ul>
+	<li><a href="https://kernel.org/pub/linux/kernel">https://kernel.org/pub/linux/kernel</a></li>
+	<li><a href="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git">git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</a></li>
+</ul>
+
+<p>You can count the files in the kernel source tree by following command:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2">
+	<code>
+		git ls-files | wc -l
+		70,639
+	</code>
+</pre>
+
+<p>You can also count the written lines in the kernel by running following command:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2">
+	<code>
+		git ls-files | xargs cat | wc -l
+		29,746,102
+	</code>
+</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/13.1.1.html">Previous Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/embedded-linux/fundamentals/kernel-versioning">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/embedded-linux/fundamentals/kernel-patching">Next Page</a></li>
 </ul>
 <script>

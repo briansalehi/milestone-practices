@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Crosstool-NG</title>
+<title>Kernel Versioning</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -263,8 +263,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/13.0.html">Embedded Linux</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/13.1.0.html">Build Tools</a></li>
-<li class='breadcrumb-item active'>Crosstool-NG</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/13.1.0.html">Fundamentals</a></li>
+<li class='breadcrumb-item active'>Kernel Versioning</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Crosstool-NG" class="anchor" aria-hidden="true" href="#Crosstool-NG">
-Crosstool-NG
+<a id="Kernel-Versioning" class="anchor" aria-hidden="true" href="#Kernel-Versioning">
+Kernel Versioning
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -287,127 +287,43 @@ Crosstool-NG
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-<p>To install <b>crosstool-ng</b>, follow these steps:</p>
+<p>Until 2003, there was a new stable release branch of Linux every 2 or 3 years (2.0, 2.2, 2.4). New development branches took 2-3 years to become stable (too slow!).</p>
 
-<pre class="language-bash command-line" data-prompt="" data-user="user" data-host="milestone" data-line="" data-output="">
+<p>Since 2003, there is a new stable release of Linux about every 10 weeks.</p>
+
+<p>For each release, there are bugfix and security updates.</p>
+
+<img class="img-responsive" src="/embedded-linux/fundamentals/merge-and-bug-fix-window.png" alt="merge and bug fix window" loading="lazy" onerror='this.onerror=null; this.src="embedded-linux/fundamentals/merge-and-bug-fix-window.png"'>
+
+<p>Only the last release of each year is made an LTS (Long Term Support) release, and is supposed to be supported for up to 6 years.</p>
+
+<p>The LTS versions can be captured on <a href="https://www.kernel.org/category/releases.html">kernel.org</a>.</p>
+
+<p>Example at Google: starting from Android O (2017), all new Android devices will have to run such an LTS kernel.</p>
+
+<p>It is easy to tell if you are running a distribution kernel. Unless you downloaded, compiled and installed your own version of kernel from kernel.org, you are running a distribution kernel. To find out the version of your kernel, run <code>uname -r</code>:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2">
 	<code>
-		git clone https://github.com/crosstool-ng/crosstool-ng.git
-		cd crosstool-ng
-		./bootstrap
-		./config --enable-local
-		make
-		sudo make install
+		uname -r
+		5.12.8-arch1-1
 	</code>
 </pre>
 
-<p>To see the list of pre-built toolchains:</p>
+<p>You can see what changes in Linux version by following these resources:</p>
 
-<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
-	<code>
-		./ct-ng list-samples
-	</code>
-</pre>
-
-<p>After choosing an architecture, use its name to build the toolchain:</p>
-
-<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
-	<code>
-		./ct-ng armv6-unknown-linux-gnueabi
-	</code>
-</pre>
-
-<p>After choosing the toochain, now you need to fine-tune the configuration:</p>
-
-<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
-	<code>
-		./ct-ng manuconfig
-	</code>
-</pre>
+<ul>
+	<li><a href="https://kernelnewbies.org/LinuxChanges">Kernel Newbies</a></li>
+	<li><a href="https://lwn.net/Kernel">Linux</a></li>
+</ul>
 
 <p>
-An ncurses window will show up.<br />
-You will need to consider the following configuration values:
+More detailed descriptions in version changes are the code change which can be obtained and read by patches or git.<br/>
+Patching kernel is discussed in the <a href="/linux-kernel/fundamentals/kernel-patching">Kernel Patching</a> page.
 </p>
-
-<p>The <b>Paths and misc options ---&gt;</b> options menu contains the paths where crosstool-ng should be working with files.</p>
-
-<ul>
-	<li>The <b>Local tarballs directory</b> (<code>CT_LOCAL_TARBALLS_DIR</code>) option represents the directory which crosstool-ng will download and store tarball files within.</li>
-	<li>The <b>Working directory</b> (<code>CT_WORK_DIR</code>) option represents the directory which crosstool-ng will generate binary files within. It should have enough available storage.</li>
-	<li>The <b>Prefix directory</b> (<code>CT_PREFIX_DIR</code>) option declares the <code>CT_PREFIX</code> global variable which represents the path toolchains will be stored.</li>
-	<li><b>Number of parallel jobs</b> (<code>CT_PARALLEL_JOBS</code>) option aquires specified number of processes to work with. Should be set to number of processor cores.</li>
-</ul>
-
-<p>The <b>Target options</b> options menu holds configurations about target architecture.</p>
-<ul>
-	<li><b>Target Architecture</b> contains the supported processor architectures a target system can have.</li>
-	<li>The <b>Emit assembly for CPU</b> option represents the processor core model.</li>
-</ul>
-
-<p>The <b>Toolchain options</b> menu holds the toolchain naming options.</p>
-<ul>
-	<li>The <b>Tuple's vendor string</b> option holds the name of target device.</li>
-	<li>The <b>Type</b> option specifies the type of compilation which either is <b>cross</b> or <b>canadian</b>.</li>
-</ul>
-
-<p>The <b>Operating System</b> option menu holds the options for kernel configurations.</p>
-<ul>
-	<li>The <b>Target OS</b> specifies wether you want to use <b>Linux</b> or <b>bare metal</b> OS.</li>
-</ul>
-
-<p>The <b>Binary utilities</b> option menu contains the compiler and linker options which usually there are only one options for each.</p>
-
-<p>The <b>C-library</b> option menu holds configurations for the libraries you want to target device to be working with.</p>
-<ul>
-	<li>The <b>C Library</b> option specifies wether you want <b>glibc</b> or <b>uClibc</b> libraries.</li>
-	<li>The <b>Minimum supported kernel version</b> option causes build system to complain if kernel is older than specified.</li>
-</ul>
-
-<p>The <b>C compiler</b> option menu holds compiler version options.</p>
-<ul>
-	<li>The <b>Version of GCC</b> option should only be set to compatible toolchain versions.</li>
-	<li>The <b>Debug facilities</b> option holds the debugging system which you want to use. <b>Duma</b> (Detect Unintended Memory Access), <b>gdb</b> (Gnu Debugger), <b>ltrace</b> and <b>strace</b> are example tools of this option.</li>
-</ul>
-
-<p>After configuration is complete, the result will be stored in <code>.config</code> file.</p>
-
-<p>Now run <code>./ct-ng build</code> executable to generate toolchains.</p>
-
-<p>The resulting toolchains will be stored in a tarball named under the prefix value you had in configuration.</p>
-
-<p>Extract the toolchain by <code>tar</code> and use them against your code to compile and generate architecture specific binaries.</p>
-
-<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
-	<code>
-		./ct-ng build
-		tar -xf armv6-unknown-linux-gnueabi.tar
-		cd bin
-		vim main.c # write code
-		gcc main.c -o app.x86_64 # host architecture
-		./armv6-unknown-linux-gnueabi-gcc main.c -o app.armv6 # target architecture
-	</code>
-</pre>
-
-<p>Now you can see that binary file is architecture specific:</p>
-
-<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2,4">
-	<code>
-		file app.x86_64
-		app_x86_64: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 4.4.0, not stripped
-		file app.armv6
-	</code>
-</pre>
-
-<p>You can either run your architecture specific executable on target device, or run it under <b>qemu</b> emulator.</p>
-
-<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
-	<code>
-		qemu-arm -L/path/to/library app.armv6
-	</code>
-</pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/embedded-linux/build-tools">Previous Page</a></li>
-<li class="next disabled"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/embedded-linux/fundamentals">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/embedded-linux/fundamentals/obtaining-kernel">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
