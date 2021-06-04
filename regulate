@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+if ! [ -d notepool ]
+then
+	echo "Notebook pool note found!" >&2
+	exit 1
+fi
+
 # remove redundant html tags
 find notepool -name \*.html -exec \
 	sed -i -e 's/<br\/>/\n/g' -e 's/<div><\/div>/\n/g' -e 's/\*\{5\}//g' {} \;
 
 # remove redundant text tags
-find notepool -name \*.txt -exec \
-	sed -i 's/\*\{5\}//g' {} \;
+find notepool -name \*.txt -exec sed -i 's/\*\{5\}//g' {} \;
