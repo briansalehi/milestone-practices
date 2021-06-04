@@ -1,0 +1,8 @@
+<p>System and kernel information is available in user space through <b>pseudo filesystems</b>, or <b>virtual filesystems.</b></p>
+
+<p>Two examples of virtual filesystems are <b>proc</b> and <b>sys</b>, which are mounted on <code>/proc</code> and <code>/sys</code> respectively.</p>
+
+<p>
+Operating system related information like processes, memory management parameters, etc. are found in <code>/proc</code>.<br/>
+Tree of devices connected by buses can be found in <code>/sys</code>. These information are gathered by the kernel frameworks managing these devices.
+</p>

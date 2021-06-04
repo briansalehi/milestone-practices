@@ -1,0 +1,81 @@
+<p>A patch is the difference between two source trees computed by a standard protocol using <code>diff</code> tool.</p>
+
+<p>Each sub-section of changes are called <i>hunks</i>.</p>
+
+<p>
+Patching is done using the <code>patch</code> command.<br/>
+<code>patch</code> either takes a file from argument, or though standard input using pipe.
+</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2-11">
+	<code>
+		xzcat patch.xz | patch -p1
+		diff -Nru a/file1 b/file2
+		--- a/file1 2005-03-04 09:27:15 -08:00
+		+++ b/file2 2005-03-04 09:27:15 -08:00
+		@@ -1,7 +1,7 @@
+		VERSION = 2
+		PATCHLEVEL = 6
+		SUBLEVEL = 11
+		-EXTRAVERSION =
+		+EXTRAVERSION = .1
+		NAME=Woozy Numbat
+	</code>
+</pre>
+
+<p>In the previous output, there are some extra lines other than file contents in order to interpret the changes.</p>
+
+<p>
+Following two highlighted lines mean that wherever <code>-</code> appears, the changes belong to <i>file1</i>.<br/>
+And all the lines prefixed by <code>+</code> belongs to the <i>file2</i>.
+</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="3,4" data-output="2-11">
+	<code>
+		xzcat patch.xz | patch -p1
+		diff -Nru a/file1 b/file2
+		--- a/file1 2005-03-04 09:27:15 -08:00
+		+++ b/file2 2005-03-04 09:27:15 -08:00
+		@@ -1,7 +1,7 @@
+		VERSION = 2
+		PATCHLEVEL = 6
+		SUBLEVEL = 11
+		-EXTRAVERSION =
+		+EXTRAVERSION = .1
+		NAME=Woozy Numbat
+	</code>
+</pre>
+
+<p>In highlighted line, <code>-1,7</code> indicates that 7 lines are shown from the old file (<i>file1</i>), and <code>+1,7</code> indicates that 7 lines of the new file (<i>file2</i>) also shown in the output.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="5" data-output="2-11">
+	<code>
+		xzcat patch.xz | patch -p1
+		diff -Nru a/file1 b/file2
+		--- a/file1 2005-03-04 09:27:15 -08:00
+		+++ b/file2 2005-03-04 09:27:15 -08:00
+		@@ -1,7 +1,7 @@
+		VERSION = 2
+		PATCHLEVEL = 6
+		SUBLEVEL = 11
+		-EXTRAVERSION =
+		+EXTRAVERSION = .1
+		NAME=Woozy Numbat
+	</code>
+</pre>
+
+<p>Before any changes, run <code>--dry-run</code> to check if patching process will be complete or not.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		xzcat patch.xz | patch -p1 --dry-run
+	</code>
+</pre>
+
+<p>To revert the patch process from version <b>x.y</b> to <b>x.y-1</b>, you should have the <b>patch-x.y.xz</b> file and the add <code>-R</code> to the <code>patch</code> command.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		zxcat patch.xz | patch -p1 -R --dry-run
+	</code>
+</pre>

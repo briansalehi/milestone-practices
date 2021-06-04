@@ -1,0 +1,39 @@
+<p>The official (mainline) versions of the Linux kernel, as released by Linus Torvalds, are available at <a href="https://kernel.org">kernel.org</a></p>
+
+<p>Many chip vendors also supply their own kernel sources.</p>
+
+<p>
+Many kernel sub-communities maintain their own kernel, with usually newer but less stable features.<br/>
+Example of sub-communities are as follows:
+</p>
+
+<ul>
+	<li>Architecture communities (ARM, MIPS, PowerPC, etc.)</li>
+	<li>Device drivers communities (I2C, SPI, USB, PCI, network, etc.)</li>
+	<li>Other communities (real-time, etc.)</li>
+</ul>
+
+<p>Kernel source can be obtained by <a href="git-scm.com">Git</a> from following sources:</p>
+
+<ul>
+	<li><a href="https://kernel.org/pub/linux/kernel">https://kernel.org/pub/linux/kernel</a></li>
+	<li><a href="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git">git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</a></li>
+</ul>
+
+<p>You can count the files in the kernel source tree by following command:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2">
+	<code>
+		git ls-files | wc -l
+		70,639
+	</code>
+</pre>
+
+<p>You can also count the written lines in the kernel by running following command:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2">
+	<code>
+		git ls-files | xargs cat | wc -l
+		29,746,102
+	</code>
+</pre>

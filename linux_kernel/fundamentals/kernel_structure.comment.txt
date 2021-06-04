@@ -1,0 +1,39 @@
+<p>Kernel consist of many subsections.</p>
+
+<h4>Memory Management</h4>
+
+<p>Kernel is responsible for managing memory.</p>
+
+<h4>Task Scheduler</h4>
+
+<p>Kernel also manages the order of tasks or processes execution.</p>
+
+<4>File System Layer and Drivers</4>
+
+Making a file system can be fun 
+
+<h4>Device Drivers and Driver Frameworks</h4>
+
+<p>Driver frameworks are on user space and device drivers are on kernel space connecting to hardwares.</p>
+
+<h4>Processor Architecture Support</h4>
+
+<p>Architectures are found in <code>arch</code> directory in kernel source.</p>
+
+<p>Some architectures are 32bit, like <b>arm</b>, and some are 64bit, like <b>arm64</b> and <b>ia64</b>. A few though, are merged and held in one directory supporting both 32bit and 64bit processors, like <b>x86</b>, <b>mips</b>, <b>powerpc</b>, <b>riscv</b>, <b>sparc</b>.</p>
+
+<p>More infomation about architectures can be found in kernel source <code>Documentation/&lt;arch&gt;/</code> or <code>arch/&lt;arch&gt;/README</code>.</p>
+
+<p>When a new architecture is designed, kernel should be adapted to it so that other subsections won't be changed.</p>
+
+<h4>Network Stack</h4>
+
+<p>Kernel is contains the full support of managing network cards and firewalls.</p>
+
+<h4>Device Trees and Hardware Description</h4>
+
+<p>
+Devices usually are capable of describing and introducing themselves to the operating systems. But some devices are not capable of hardware descriptions.<br/>
+Kernel has a capability of detecting such devices which will be discussed in embedded device driver development.
+</p>
+

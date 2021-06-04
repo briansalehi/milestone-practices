@@ -1,0 +1,34 @@
+<p>Until 2003, there was a new stable release branch of Linux every 2 or 3 years (2.0, 2.2, 2.4). New development branches took 2-3 years to become stable (too slow!).</p>
+
+<p>Since 2003, there is a new stable release of Linux about every 10 weeks.</p>
+
+<p>For each release, there are bugfix and security updates.</p>
+
+![merge-and-bug-fix-window.png]
+
+<p>Only the last release of each year is made an LTS (Long Term Support) release, and is supposed to be supported for up to 6 years.</p>
+
+<p>The LTS versions can be captured on <a href="https://www.kernel.org/category/releases.html">kernel.org</a>.</p>
+
+<p>Example at Google: starting from Android O (2017), all new Android devices will have to run such an LTS kernel.</p>
+
+<p>It is easy to tell if you are running a distribution kernel. Unless you downloaded, compiled and installed your own version of kernel from kernel.org, you are running a distribution kernel. To find out the version of your kernel, run <code>uname -r</code>:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="2">
+	<code>
+		uname -r
+		5.12.8-arch1-1
+	</code>
+</pre>
+
+<p>You can see what changes in Linux version by following these resources:</p>
+
+<ul>
+	<li><a href="https://kernelnewbies.org/LinuxChanges">Kernel Newbies</a></li>
+	<li><a href="https://lwn.net/Kernel">Linux</a></li>
+</ul>
+
+<p>
+More detailed descriptions in version changes are the code change which can be obtained and read by patches or git.<br/>
+Patching kernel is discussed in the <a href="/linux-kernel/fundamentals/kernel-patching">Kernel Patching</a> page.
+</p>
