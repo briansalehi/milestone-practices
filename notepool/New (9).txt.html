@@ -1,0 +1,158 @@
+Professional C++, 4th Edition
+Marc Gregoire
+1
+A Crash Course in C++ and the Standard Library
+
+Building a C++ program is a three-step process. First, the code is run through a preprocessor, which recognizes meta-information about the code. Next, the code is compiled, or translated into machine-readable object files. Finally, the individual object files are linked together into a single application.
+
+In C, the names of the Standard Library header files usually end in .h, such as<stdio.h>, and namespaces are not used.
+In C++, the .h suffix is omitted for Standard Library headers, such as<iostream>, and everything is defined in thestdnamespace or a sub-namespace ofstd.
+
+The new and recommended versions without a .h suffix but with a c prefix. These versions put everything in the std namespace (for example, <cstdio>).
+
+The old versions with the .h suffix. These versions do not use namespaces (for example, <stdio.h>).
+
+The following table shows some of the most common preprocessor directives.
+--
+table of 3 cols (maybe a list)
+
+#include [file]
+
+Almost always used to include header files so that code can
+
+#define [key] [value]
+
+Often used in C to define a constant value or a macro. C++ provides better mechanisms for constants and most types of macros. Macros can be dangerous, so use them cautiously.
+
+Used most frequently to protect against circular includes.
+
+#ifdef [key]
+#endif
+#ifndef [key]
+#endif
+
+#pragma [xyz]
+
+xyz is compiler dependent. It often allows the programmer to display a warning or error if the directive is reached during preprocessing.
+
+One example of using preprocessor directives is to avoid multiple includes, as shown here: 
+#ifndef MYHEADER_H
+#define MYHEADER_H
+// … the contents of this header file
+#endif
+
+If your compiler supports the #pragma once directive, and most modern compilers do, then this can be rewritten as follows: 
+#pragma once
+
+Never put ausingdirective orusingdeclaration in a header file; otherwise, you force it on everyone who is including your header file.
+
+A nested namespace is a namespace inside another one.
+
+namespace MyLibraries {
+    namespace Networking {
+        namespace FTP {
+            /* … */
+        }
+    }
+}
+This can be simplified a lot with C++17: 
+namespace MyLibraries::Networking::FTP {
+    /* … */
+}
+
+}
+A namespace alias can be used to give a new and possibly shorter name to another namespace. For example: namespace MyFTP = MyLibraries::Networking::FTP;
+
+Literals are used to write numbers or strings in your code. C++ supports a number of standard literals.
+
+Decimal literal, 123
+
+Octal literal, 0173
+
+Hexadecimal literal, 0x7B
+
+Binary literal, 0b1111011
+
+A floating-point value (such as 3.14f)
+
+A double floating-point value (such as 3.14)
+
+A single character (such as 'a')
+
+A zero-terminated array of characters (such as "character array")
+
+It is also possible to define your own type of literals
+
+Digits separators can be used in numeric literals. A digits separator is a single quote character. For example, 
+23'456'789
+0.123'456f
+
+C++17 adds support for hexadecimal floating-point literals—for example, 0x3.ABCp-10, 0Xb.cp12l.
+
+The following table shows the most common types used in C++.
+
+(signed) int
+signed
+
+(signed) short 
+(int)
+
+(signed) long (int)
+
+(signed) long long (int)
+
+unsigned (int)
+unsigned short (int)
+unsigned long (int)
+unsigned long long (int)
+
+float
+
+double
+
+long double
+--
+next:
+char
+char16_t
+char 32_t
+wchar_t
+bool
+
+std::byte
+
+The switch statement is an alternate syntax for performing actions based on the value of an expression. In C++, the expression of a switch statement must be of an integral type, a type convertible to an integral type, an enumerated type, or a strongly typed enumeration, and must be compared to constants.
+
+C++ has one operator that takes three ar
+guments, known as a ternary operator. It is used as a shorthand conditional expression of the form “if [something] then [perform action], otherwise [perform some other action].” The conditional operator is represented by a ? and a :. The following code outputs “yes” if the variable i is greater than 2, and “no” otherwise: 
+std::cout << ((i > 2) ? "yes" : "no");
+The parentheses around i > 2 are optional, so the following is equivalent: 
+std::cout << (i > 2 ? "yes" : "no");
+
+With C++14, you can ask the compiler to figure out the return type of a function automatically. To make use of this functionality, you need to specify auto as the return type: 
+auto addNumbers(int number1, int number2)
+{
+    return number1 + number2;
+}
+
+Every function has a local predefined variable __func__ containing the name of the current function. One use of this variable would be for logging purposes: 
+int addNumbers(int number1, int number2)
+{
+    std::cout << "Entering function " << __func__ << std::endl;
+    return number1 + number2;
+}
+
+To get the size of a stack-based C-style array, you can use the C++17 std::size() function (requires <array>). For example: 
+unsigned int arraySize = std::size(myArray);
+I
+
+If your compiler is not yet C++17 compliant, the old trick to get the size of a stack-based C-style array is to use the sizeof operator. The sizeof operator returns the size of its argument in bytes. To get the number of elements in a stack-based array, you divide the size in bytes of the array by the size in bytes of the first element. For example: 
+unsigned int arraySize = sizeof(myArray) / sizeof(myArray[0]);
+
+C++ has a special type of fixed-size container called std::array, defined in the <array> header file. It’s basically a thin wrapper around C-style arrays. 
+There are a number of advantages to using std::arrays instead of C-style arrays. They always know their own size, are not automatically cast to a pointer to avoid certain types of bugs, and have iterators to easily loop over the elements.
+
+The range-basedfor loop is the fourth looping mechanism. It allows for easy iteration over elements of a container. This type of loop works for C-style arrays, initializer lists (discussed later in this chapter), and any type that has begin() and end() methods returning iterators (see Chapter 17), such as std::array, std::vector, and all other Standard Library containers discussed in Chapter 17.
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

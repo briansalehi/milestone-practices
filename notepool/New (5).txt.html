@@ -1,0 +1,9 @@
+Mastering the C++17 STL (2017)
+Arthur O'Dwyer
+Iterators and Ranges
+
+Many of the two-range algorithms in the C++17 standard library also have variant forms colloquially known as one-and-a-half-range algorithms. For example, in addition to std::mismatch(a,b,c,d) you'll find std::mismatch(a,b,c)--the second range's "end" point is simply assumed to be at c + std::distance(a, b). If c actually points into a container where c + std::distance(a, b) would be "off the end," then, tough luck!
+Because "tough luck" is never a really great answer to a technical question, the C++17 standard added safe two-range variants for many of the one-and-a-half-range algorithms that had existed in C++14.
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

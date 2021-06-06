@@ -1,0 +1,2505 @@
+Modern C++ Programming Cookbook, 2nd Edition (2020)
+Marius Bancila
+
+8 Leveraging Threading and Concurrency
+
+
+
+Most computers contain multiple processors or at least multiple cores, and leveraging this computational power is the key for many categories of applications. 
+Unfortunately, many developers still have a mindset of sequential code execution, even though operations that do not depend on each other could be executed concurrently. This chapter presents standard library support for threads, asynchronous tasks, and related components, as well as some practical examples at the end.
+
+
+
+Most modern processors (except those dedicated to types of applications that do not require great computing power, such as Internet of Things applications) have two, four, or more cores that enable you to concurrently execute multiple threads of execution. Applications must be explicitly written to leverage the multiple processing units that exist; you can write such applications by executing functions on multiple threads at the same time. The C++ standard library provides support for working with threads, synchronization of shared data, thread communication, and asynchronous tasks.
+
+
+
+Working with threads
+
+
+
+A thread is a sequence of instructions that can be managed independently by a scheduler, such as the operating system. Threads could be software or hardware. 
+Software threads are threads of execution that are managed by the operating system. 
+They can run on single processing units, usually by time slicing. This is a mechanism where each thread gets a time slot of execution (in the range of milliseconds) on the processing unit before the operating system schedules another software thread to run on the same processing unit. Hardware threads are threads of execution at the physical level. They are, basically, a CPU or a CPU core. They can run simultaneously, that is, in parallel, on systems with multiprocessors or multicores. 
+Many software threads can run concurrently on a hardware thread, usually by using time slicing. The C++ library provides support for working with software threads.
+
+
+
+A thread of execution is represented by the thread class, available in the std namespace in the <thread> header. Additional thread utilities are available in the same header but in the std::this_thread namespace.
+
+
+
+In the following examples, the print_time() function is used. This function prints the local time to the console. Its implementation is as follows:
+
+
+
+inline void print_time() {  auto now = std::chrono::system_clock::now();
+ auto stime = std::chrono::system_clock::to_time_t(now);
+ auto ltime = std::localtime(&stime);
+ std::cout << std::put_time(ltime, "%c") << '\n';
+}
+
+
+
+How to do it...
+
+
+
+Use the following solutions to manage threads:
+
+
+
+1. To create an std::thread object without starting the execution of a new thread, use its default constructor:
+
+
+
+std::thread t;
+
+
+
+2. Start the execution of a function on another thread by constructing an std::thread object and passing the function as an argument:
+
+
+
+void func1() {  std::cout << "thread func without params" << '\n';
+} std::thread t(func1);
+std::thread t([]() {  std::cout << "thread func without params"  << '\n'; });
+
+
+
+3. Start the execution of a function with arguments on another thread by constructing an std::thread object, and then passing the function as an argument to the constructor, followed by its arguments:
+
+
+
+void func2(int const i, double const d, std::string const s) {  std::cout << i << ", " << d << ", " << s << '\n';
+} std::thread t(func2, 42, 42.0, "42");
+
+
+
+4. To wait for a thread to fi nish its execution, use the join() method on the thread object:
+
+
+
+t.join();
+
+
+
+5. To allow a thread to continue its execution independently of the current thread object, use the detach() method. This means the thread will continue its execution until it fi nishes without being managed by the std::thread object, which will no longer own any thread:
+
+
+
+t.detach();
+
+
+
+6. To pass arguments by reference to a function, thread wrap them in either std::ref or std::cref (if the reference is constant):
+
+
+
+void func3(int & i) {  i *= 2;
+} int n = 42;
+std::thread t(func3, std::ref(n));
+t.join();
+std::cout << n << '\n'; // 84
+
+
+
+7. To stop the execution of a thread for a specif i ed duration, use the std::this_ thread::sleep_for() function:
+
+
+
+void func4() {  using namespace std::chrono;
+ print_time();
+ std::this_thread::sleep_for(2s);
+ print_time();
+} std::thread t(func4);
+t.join();
+
+
+
+8. To stop the execution of a thread until a specif i ed moment in time, use the std::this_thread::sleep_until() function:
+
+
+
+void func5() {  using namespace std::chrono;
+ print_time();
+ std::this_thread::sleep_until(  std::chrono::system_clock::now() + 2s);
+ print_time();
+} std::thread t(func5);
+t.join();
+
+
+
+9. To suspend the execution of the current thread and provide an opportunity to another thread to perform the execution, use std::this_thread::yield():
+
+
+
+void func6(std::chrono::seconds timeout) {  auto now = std::chrono::system_clock::now();
+ auto then = now + timeout;
+ do  {  std::this_thread::yield();
+ } while (std::chrono::system_clock::now() < then);
+} std::thread t(func6, std::chrono::seconds(2));
+t.join();
+print_time();
+
+
+
+How it works...
+
+
+
+The std::thread class, which represents a single thread of execution, has several constructors:
+
+
+
+• A default constructor that only creates the thread object but does not start the execution of a new thread.
+
+
+
+• A move constructor that creates a new thread object to represent a thread of execution previously represented by the object it was constructed from. After the construction of the new object, the other object is no longer associated with the execution thread.
+
+
+
+• A constructor with a variable number of arguments: the fi rst being a function that represents the top-level thread function and the others being arguments to be passed to the thread function. Arguments need to be passed to the thread function by value. If the thread function takes parameters by reference or by constant reference, they must be wrapped in either an std::ref or std::cref object. These are helper function templates that generate objects of the type std::reference_wrapper, which wraps a reference in a copyable and assignable object.
+
+
+
+The thread function, in this case, cannot return a value. It is not illegal for the function to actually have a return type other than void, but it ignores any value that is directly returned by the function. If it has to return a value, it can do so using a shared variable or a function argument. In the Using promises and futures to return values from threads recipe, later in this chapter, we will see how a thread function returns a value to another thread using a promise.
+
+
+
+If the function terminates with an exception, the exception cannot be caught with a try...catch statement in the context where a thread was started and the program terminated abnormally with a call to std::terminate(). All exceptions must be caught within the executing thread, but they can be transported across threads via an std::exception_ptr object. We'll discuss this topic in a following recipe, called Handling exceptions from thread functions.
+
+
+
+After a thread has started its execution, it is both joinable and detachable. Joining a thread implies blocking the execution of the current thread until the joined thread ends its execution. Detaching a thread means decoupling the thread object from the thread of execution it represents, allowing both the current thread and the detached thread to be executed at the same time. Joining a thread is done with join() and detaching a thread is done with detach(). Once you call either of these two methods, the thread is said to be non-joinable and the thread object can be safely destroyed. 
+When a thread is detached, the shared data it may need to access must be available throughout its execution. The joinable() method indicates whether a thread can be joined or not.
+
+
+
+Each thread has an identif i er that can be retrieved. For the current thread, call the std::this_thread::get_id() function. For another thread of execution represented by a thread object, call its get_id() method.
+
+
+
+There are several additional utility functions available in the std::this_thread namespace:
+
+
+
+• The yield() method hints the scheduler to activate another thread. This is useful when implementing a busy-waiting routine, as in the last example from the previous section.
+
+
+
+• The sleep_for() method blocks the execution of the current thread for at least the specif i ed period of time (the actual time the thread is put to sleep may be longer than the requested period due to scheduling).
+
+
+
+• The sleep_until() method blocks the execution of the current thread until at least the specif i ed time point (the actual duration of the sleep may be longer than requested due to scheduling).
+
+
+
+The std::thread class requires the join() method be called explicitly to wait for the thread to fi nish. This can lead to programming errors. The C++20 standard provides a new thread class, called std::jthread, that solves this inconvenience. This will be the topic of the recipe Using joinable threads and cancellation mechanisms, later in this chapter.
+
+
+
+Synchronizing access to shared data with mutexes and locks
+
+
+
+Threads allow you to execute multiple functions at the same time, but it is often necessary that these functions access shared resources. Access to shared resources must be synchronized so that only one thread can read or write from or to the shared resource at a time. An example of this was shown in the previous recipe, where multiple threads had the ability to add objects to a shared container at the same time. In this recipe, we will see what mechanisms the C++ standard def i nes for synchronizing thread access to shared data and how they work.
+
+
+
+The mutex and lock classes discussed in this recipe are available in the std namespace in the <mutex> header.
+
+
+
+How to do it...
+
+
+
+Use the following pattern for synchronizing access with a single shared resource:
+
+
+
+1. Def i ne a mutex in the appropriate context (class or global scope):
+
+
+
+std::mutex g_mutex;
+
+
+
+2. Acquire a lock on this mutex before accessing the shared resource in each thread:
+
+
+
+void thread_func() {  using namespace std::chrono_literals;
+ {  std::lock_guard<std::mutex> lock(g_mutex);
+ std::cout << "running thread "  << std::this_thread::get_id() << '\n';
+ }  std::this_thread::yield();
+ std::this_thread::sleep_for(2s);
+ {  std::lock_guard<std::mutex> lock(g_mutex);
+ std::cout << "done in thread "  << std::this_thread::get_id() << '\n';
+ } }
+
+
+
+Use the following pattern for synchronizing access to multiple shared resources at the same time to avoid deadlocks:
+
+
+
+1. Def i ne a mutex for each shared resource in the appropriate context (global or class scope):
+
+
+
+template <typename T> struct container {  std::mutex mutex;
+
+
+
+std::vector<T> data;
+};
+
+
+
+2. Lock the mutexes at the same time using a deadlock avoidance algorithm with std::lock():
+
+
+
+template <typename T> void move_between(container<T> & c1, container<T> & c2,  T const value) {  std::lock(c1.mutex, c2.mutex);
+ // continued at 3.
+}
+
+
+
+3. After locking them, adopt the ownership of each mutex into an std::lock_ guard class to ensure they are safely released at the end of the function (or scope):
+
+
+
+// continued from 2.
+std::lock_guard<std::mutex> l1(c1.mutex, std::adopt_lock);
+std::lock_guard<std::mutex> l2(c2.mutex, std::adopt_lock);
+c1.data.erase(  std::remove(c1.data.begin(), c1.data.end(), value),  c1.data.end());
+c2.data.push_back(value);
+
+
+
+A mutex is a synchronization primitive that allows us to protect simultaneous access to shared resources from multiple threads. The C++ standard library provides several implementations:
+
+
+
+• std::mutex is the most commonly used mutex type; it is illustrated in the preceding code snippet. It provides methods to acquire and release the mutex. lock() tries to acquire the mutex and blocks it if it is not available, try_lock() tries to acquire the mutex and returns it without blocking if the mutex is not available, and unlock() releases the mutex.
+
+
+
+• std::timed_mutex is similar to std::mutex but provides two more methods to acquire the mutex using a timeout: try_lock_for() tries to acquire the mutex and returns it if the mutex is not made available during the specif i ed duration, and try_lock_until() tries to acquire the mutex and returns it if the mutex is not made available until a specif i ed time point.
+
+
+
+• std::recursive_mutex is similar to std::mutex, but the mutex can be acquired multiple times from the same thread without being blocked.
+
+
+
+• std::recursive_timed_mutex is a combination of a recursive mutex and a timed mutex.
+
+
+
+• std::shared_timed_mutex, since C++14, is to be used in scenarios when multiple readers can access the same resource at the same time without causing data races, while only one writer it allowed to do so. It implements locking with two levels of access – shared (several threads can share the ownership of the same mutex) and exclusive (only one thread can own the mutex) – and provides timeout facilities.
+
+
+
+• std::shared_mutex, since C++17, similar to the shared_timed_mutex but without the timeout facilities.
+
+
+
+The fi rst thread that locks an available mutex takes ownership of it and continues with the execution. All consecutive attempts to lock the mutex from any thread fail, including the thread that already owns the mutex, and the lock() method blocks the thread until the mutex is released with a call to unlock(). If a thread needs to be able to lock a mutex multiple times without blocking it and therefore enter a deadlock, a recursive_mutex class template should be used.
+
+
+
+The typical use of a mutex to protect access to a shared resource comprises locking the mutex, using the shared resource, and then unlocking the mutex:
+
+
+
+g_mutex.lock();
+// use the shared resource such as std::cout std::cout << "accessing shared resource" << '\n';
+g_mutex.unlock();
+
+
+
+This method of using the mutex is, however, prone to error. This is because each call to lock() must be paired with a call to unlock() on all execution paths; that is, both normal return paths and exception return paths. In order to safely acquire and release a mutex, regardless of the way the execution of a function goes, the C++ standard def i nes several locking classes:
+
+
+
+• std::lock_guard is the locking mechanism seen earlier; it represents a mutex wrapper implemented in an RAII manner. It attempts to acquire the mutex at the time of its construction and release it upon destruction. This is available in C++11. The following is a typical implementation of lock_guard:
+
+
+
+template <class M> class lock_guard
+
+
+
+• std::unique_lock is a mutex ownership wrapper that provides support for deferred locking, time locking, recursive locking, transfer of ownership, and using it with condition variables. This is available in C++11.
+
+
+
+• std::shared_lock is a mutex-shared ownership wrapper that provides support for deferred locking, time locking, and transfer of ownership. This is available in C++14.
+
+
+
+• std::scoped_lock is a wrapper for multiple mutexes implemented in an RAII manner. Upon construction, it attempts to acquire ownership of the mutexes in a deadlock avoidance manner as if it is using std::lock(), and upon destruction, it releases the mutexes in reverse order of the way they were acquired. This is available in C++17.
+
+
+
+In the fi rst example in the How to do it... section, we used std::mutex and std::lock_ guard to protect access to the std::cout stream object, which is shared between all the threads in a program. The following example shows how the thread_func() function can be executed concurrently on several threads:
+
+
+
+std::vector<std::thread> threads;
+for (int i = 0; i < 5; ++i)
+
+
+
+[ 409 ] { public:
+ typedef M mutex_type;
+ explicit lock_guard(M& Mtx) : mtx(Mtx)  {  mtx.lock();
+ }  lock_guard(M& Mtx, std::adopt_lock_t) : mtx(Mtx)  { }  ~lock_guard() noexcept  {  mtx.unlock();
+ }  lock_guard(const lock_guard&) = delete;
+ lock_guard& operator=(const lock_guard&) = delete;
+private:
+ M& mtx;
+};
+
+
+
+threads.emplace_back(thread_func);
+for (auto & t : threads)  t.join();
+
+
+
+A possible output for this program is as follows:
+
+
+
+running thread 140296854550272 running thread 140296846157568 running thread 140296837764864 running thread 140296829372160 running thread 140296820979456 done in thread 140296854550272 done in thread 140296846157568 done in thread 140296837764864 done in thread 140296820979456 done in thread 140296829372160
+
+
+
+When a thread needs to take ownership of multiple mutexes that are meant to protect multiple shared resources, acquiring them one by one may lead to deadlocks. 
+Let's consider the following example (where container is the class shown in the How to do it... section):
+
+
+
+template <typename T> void move_between(container<T> & c1, container<T> & c2, T const value) {  std::lock_guard<std::mutex> l1(c1.mutex);
+ std::lock_guard<std::mutex> l2(c2.mutex);
+ c1.data.erase(  std::remove(c1.data.begin(), c1.data.end(), value),  c1.data.end());
+ c2.data.push_back(value);
+} container<int> c1;
+c1.data.push_back(1);
+c1.data.push_back(2);
+c1.data.push_back(3);
+container<int> c2;
+c2.data.push_back(4);
+c2.data.push_back(5);
+
+
+
+c2.data.push_back(6);
+std::thread t1(move_between<int>, std::ref(c1), std::ref(c2), 3);
+std::thread t2(move_between<int>, std::ref(c2), std::ref(c1), 6);
+t1.join();
+t2.join();
+
+
+
+In this example, the container class holds data that may be accessed simultaneously from different threads; therefore, it needs to be protected by acquiring a mutex. The move_between() function is a thread-safe function that removes an element from a container and adds it to a second container. To do so, it acquires the mutexes of the two containers sequentially, then erases the element from the fi rst container and adds it to the end of the second container.
+
+
+
+This function is, however, prone to deadlocks because a race condition might be triggered while acquiring the locks. Suppose we have a scenario where two different threads execute this function, but with different arguments:
+
+
+
+• The fi rst thread starts executing with the arguments c1 and c2 in this order.
+• The fi rst thread is suspended after it acquires the lock for the c1 container. 
+The second thread starts executing with the arguments c2 and c1 in this order.
+• The second thread is suspended after it acquires the lock for the c2 container.
+• The fi rst thread continues the execution and tries to acquire the mutex for c2, but the mutex is unavailable. Therefore, a deadlock occurs (this can be simulated by putting the thread to sleep for a short while after it acquires the fi rst mutex).
+
+
+
+To avoid possible deadlocks such as these, mutexes should be acquired in a deadlock avoidance manner, and the standard library provides a utility function called std::lock() that does that. The move_between() function needs to change by replacing the two locks with the following code (as shown in the How to do it... 
+section):
+
+
+
+std::lock(c1.mutex, c2.mutex);
+std::lock_guard<std::mutex> l1(c1.mutex, std::adopt_lock);
+std::lock_guard<std::mutex> l2(c2.mutex, std::adopt_lock);
+
+
+
+The ownership of the mutexes must still be transferred to a lock guard object so they are properly released after the execution of the function ends (or depending on the case, when a particular scope ends).
+
+
+
+In C++17, a new mutex wrapper is available, std::scoped_lock, that can be used to simplify code, such as the one in the preceding example. This type of lock can acquire the ownership of multiple mutexes in a deadlock-free manner. These mutexes are released when the scoped lock is destroyed. The preceding code is equivalent to the following single line of code:
+
+
+
+std::scoped_lock lock(c1.mutex, c2.mutex);
+
+
+
+The scoped_lock class provides a simplif i ed mechanism for owning one or more mutexes for the duration of a scoped block, and also helps with writing simple and more robust code.
+
+
+
+Avoiding using recursive mutexes
+
+
+
+The standard library provides several mutex types for protecting access to shared resources. std::recursive_mutex and std::recursive_timed_mutex are two implementations that allow you to use multiple locking in the same thread. A typical use for a recursive mutex is to protect access to a shared resource from a recursive function. An std::recursive_mutex class may be locked multiple times from a thread, either with a call to lock() or try_lock(). When a thread locks an available recursive mutex, it acquires its ownership; as a result of this, consecutive attempts to lock the mutex from the same thread do not block the execution of the thread, creating a deadlock. The recursive mutex is, however, released only when an equal number of calls to unlock() are made. Recursive mutexes may also have a greater overhead than non-recursive mutexes. For these reasons, when possible, they should be avoided. This recipe presents a use case for transforming a thread-safe type using a recursive mutex into a thread-safe type using a non-recursive mutex.
+
+
+
+For this recipe, we will consider the following class:
+
+
+
+class foo_rec {  std::recursive_mutex m;
+ int data;
+public:
+ foo_rec(int const d = 0) : data(d) {}  void update(int const d)  {  std::lock_guard<std::recursive_mutex> lock(m);
+ data = d;
+ }  int update_with_return(int const d)  {  std::lock_guard<std::recursive_mutex> lock(m);
+ auto temp = data;
+ update(d);
+ return temp;
+ } };
+
+
+
+The purpose of this recipe is to transform the foo_rec class so we can avoid using std::recursive_mutex.
+
+
+
+How to do it...
+
+
+
+To transform the preceding implementation into a thread-safe type using a non-recursive mutex, do this:
+
+
+
+1. Replace std::recursive_mutex with std::mutex:
+
+
+
+class foo {  std::mutex m;
+
+
+
+int data;
+ // continued at 2.
+};
+
+
+
+2. Def i ne private non-thread-safe versions of the public methods or helper functions to be used in thread-safe public methods:
+
+
+
+void internal_update(int const d) { data = d; } // continued at 3.
+
+
+
+3. Rewrite the public methods to use the newly def i ned non-thread-safe private methods:
+
+
+
+public:
+ foo(int const d = 0) : data(d) {}  void update(int const d)  {  std::lock_guard<std::mutex> lock(m);
+ internal_update(d);
+ }  int update_with_return(int const d)  {  std::lock_guard<std::mutex> lock(m);
+ auto temp = data;
+ internal_update(d);
+ return temp;
+ }
+
+
+
+How it works...
+
+
+
+The foo_rec class we just discussed uses a recursive mutex to protect access to shared data; in this case, it is an integer member variable that is accessed from two thread-safe public functions:
+
+
+
+• update() sets a new value in the private variable.
+• update_and_return() sets a new value in the private variable and returns the previous value to the called function. This function calls update() to set the new value.
+
+
+
+The implementation of foo_rec was probably intended to avoid duplication of code, yet this particular approach is rather a design error that can be improved, as shown in the How to do it... section. Rather than reusing public thread-safe functions, we can provide private non-thread-safe functions that could then be called from the public interface.
+
+
+
+The same solution can be applied to other similar problems: def i ne a non-thread-safe version of the code and then provide perhaps lightweight, thread-safe wrappers.
+
+
+
+Handling exceptions from thread functions
+
+
+
+In that recipe, we brief l y discussed exception handling in thread functions and mentioned that exceptions cannot leave the top-level thread function. This is because they cause the program to abnormally terminate with a call to std::terminate().
+
+
+
+On the other hand, exceptions can be transported between threads within an std::exception_ptr wrapper. In this recipe, we will see how to handle exceptions from thread functions.
+
+
+
+The exception_ptr class is available in the std namespace, which is in the <exception> header; mutex (which we discussed in more detail previously) is also available in the same namespace but in the <mutex> header.
+
+
+
+How to do it...
+
+
+
+To properly handle exceptions thrown in a worker thread from the main thread or the thread where it was joined, do the following (assuming multiple exceptions can be thrown from multiple threads):
+
+
+
+1. Use a global container to hold instances of std::exception_ptr:
+
+
+
+std::vector<std::exception_ptr> g_exceptions;
+
+
+
+2. Use a global mutex to synchronize access to the shared container:
+
+
+
+std::mutex g_mutex;
+
+
+
+3. Use a try...catch block for the code that is being executed in the top-level thread function. Use std::current_exception() to capture the current exception and wrap a copy or its reference into an std::exception_ptr pointer, which is added to the shared container for exceptions:
+
+
+
+void func1() {  throw std::runtime_error("exception 1");
+} void func2() {  throw std::runtime_error("exception 2");
+} void thread_func1() {  try  {  func1();
+ }  catch (...)  {  std::lock_guard<std::mutex> lock(g_mutex);
+ g_exceptions.push_back(std::current_exception());
+ } } void thread_func2() {  try  {  func2();
+ }  catch (...)  {  std::lock_guard<std::mutex> lock(g_mutex);
+ g_exceptions.push_back(std::current_exception());
+ } }
+
+
+
+4. Clear the container from the main thread before you start the threads:
+
+
+
+g_exceptions.clear();
+
+
+
+5. In the main thread, after the execution of all the threads has fi nished, inspect the caught exceptions and handle each of them appropriately:
+
+
+
+std::thread t1(thread_func1);
+std::thread t2(thread_func2);
+t1.join();
+t2.join();
+for (auto const & e : g_exceptions) {  try  {  if(e != nullptr)  std::rethrow_exception(e);
+ }  catch(std::exception const & ex)  {  std::cout << ex.what() << '\n';
+ } }
+
+
+
+How it works...
+
+
+
+For the example in the preceding section, we assumed that multiple threads could throw exceptions and therefore need a container to hold them all. If there is a single exception from a single thread at a time, then you do not need a shared container and a mutex to synchronize access to it. You can use a single global object of the type std::exception_ptr to hold the exception that's transported between threads.
+
+
+
+std::current_exception() is a function that is typically used in a catch clause to capture the current exception and create an instance of std::exception_ptr. 
+This is done to hold a copy or reference (depending on the implementation) to the original exception, which remains valid as long as there is an std::exception_ptr pointer available that refers to it. If this function is called when no exception is being handled, then it creates an empty std::exception_ptr.
+
+
+
+The std::exception_ptr pointer is a wrapper for an exception captured with std::current_exception(). If default constructed, it does not hold any exception. 
+Two objects of this type are equal if they are both empty or point to the same exception object. The std::exception_ptr objects can be passed to other threads, where they can be rethrown and caught in a try...catch block.
+
+
+
+std::rethrow_exception() is a function that takes std::exception_ptr as an argument and throws the exception object referred to by its argument.
+
+
+
+std::current_exception(), std::rethrow_exception(), and std::exception_ptr are all available in C++11.
+
+
+
+In the example from the previous section, each thread function uses a try...
+catch statement for the entire code it executes so that no exception may leave the function uncaught. When an exception is handled, a lock on the global mutex object is acquired and the std::exception_ptr object holding the current exception is added to the shared container. With this approach, the thread function stops at the fi rst exception; however, in other circumstances, you may need to execute multiple operations, even if the previous one throws an exception. In this case, you will have multiple try...catch statements and perhaps transport only some of the exceptions outside the thread.
+
+
+
+In the main thread, after all the threads have fi nished executing, the container is iterated, and each non-empty exception is rethrown and caught with a try...catch block and handled appropriately.
+
+
+
+Sending notif i cations between threads
+
+
+
+Mutexes are synchronization primitives that can be used to protect access to shared data. However, the standard library provides a synchronization primitive, called a condition variable, that enables a thread to signal to others that a certain condition has occurred. The thread or the threads that are waiting on the condition variable are blocked until the condition variable is signaled or until a timeout or a spurious wakeup occurs. In this recipe, we will see how to use condition variables to send notif i cations between thread-producing data and thread-consuming data.
+
+
+
+For this recipe, you need to be familiar with threads, mutexes, and locks. Condition variables are available in the std namespace in the <condition_variable> header.
+
+
+
+Use the following pattern for synchronizing threads with notif i cations on condition variables:
+
+
+
+1. Def i ne a condition variable (in the appropriate context):
+
+
+
+std::condition_variable cv;
+
+
+
+2. Def i ne a mutex for threads to lock on. A second mutex should be used for synchronizing access to the standard console from different threads:
+
+
+
+std::mutex cv_mutex; // data mutex std::mutex io_mutex; // I/O mutex
+
+
+
+3. Def i ne the shared data used between the threads:
+
+
+
+int data = 0;
+
+
+
+4. In the producing thread, lock the mutex before you modify the data:
+
+
+
+std::thread p([&](){  // simulate long running operation  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(2s);
+ }  // produce  {  std::unique_lock lock(cv_mutex);
+ data = 42;
+ }  // print message  {  std::lock_guard l(io_mutex);
+ std::cout << "produced " << data << '\n';
+ }  // continued at 5.
+});
+
+
+
+5. In the producing thread, signal the condition variable with a call to notify_ one() or notify_all() (do this after the mutex used to protect the shared data is unlocked):
+
+
+
+// continued from 4.
+cv.notify_one();
+
+
+
+6. In the consuming thread, acquire a unique lock on the mutex and use it to wait on the condition variable. Beware that spurious wakeups may occur, which is a subject we'll discuss in detail in the following section:
+
+
+
+std::thread c([&](){  // wait for notification  {  std::unique_lock lock(cv_mutex);
+ cv.wait(lock);
+ }  // continued at 7.
+});
+
+
+
+7. In the consuming thread, use the shared data after the condition is notif i ed:
+
+
+
+// continued from 6.
+{  std::lock_guard lock(io_mutex);
+ std::cout << "consumed " << data << '\n';
+}
+
+
+
+The preceding example represents two threads that share common data (in this case, an integer variable). One thread produces data after a lengthy computation (simulated with a sleep), while the other consumes it only after it is produced. To do so, they use a synchronization mechanism that uses a mutex and a condition variable that blocks the consuming thread until a notif i cation arises from the producer thread, indicating that data has been made available. The key in this communication channel is the condition variable that the consuming thread waits on until the producing thread notif i es it. Both threads start about the same time. The producer thread begins a long computation that is supposed to produce data for the consuming thread. At the same time, the consuming thread cannot actually proceed until the data is made available; it must remain blocked until it is notif i ed that the data has been produced. 
+Once notif i ed, it can continue its execution. The entire mechanism works as follows:
+
+
+
+• There must be at least one thread waiting on the condition variable to be notif i ed.
+
+
+
+• There must be at least one thread that is signaling the condition variable.
+
+
+
+• The waiting threads must fi rst acquire a lock on a mutex (std::unique_ lock<std::mutex>) and pass it to the wait(), wait_for(), or wait_until() method of the condition variable. All the waiting methods atomically release the mutex and block the thread until the condition variable is signaled. At this point, the thread is unblocked and the mutex is atomically acquired again.
+
+
+
+• The thread that signals the condition variable can do so with either notify_ one(), where one blocked thread is unblocked, or notify_all(), where all the blocked threads waiting for the condition variable are unblocked.
+
+
+
+Condition variables cannot be made completely predictable on multiprocessor systems. Therefore, spurious wakeups may occur, and a thread is unlocked even if nobody signals the condition variable. So, it is necessary to check whether the condition is true after the thread has been unblocked. However, spurious wakeups may occur multiple times and, therefore, it is necessary to check the condition variable in a loop.
+
+
+
+The C++ standard provides two implementations of condition variables:
+
+
+
+• std::condition_variable, used in this recipe, def i nes a condition variable associated with std::unique_lock.
+• std::condition_variable_any represents a more general implementation that works with any lock that meets the requirements of a basic lock (implements the lock() and unlock() methods). A possible use of this implementation is providing interruptible waits, as explained by Anthony Williams in C++ concurrency in action (2012):
+
+
+
+"A custom lock operation would both lock the associated mutex as expected and also perform the necessary job of notifying this condition variable when the interrupting signal is received."
+Condition variables cannot be made completely predictable on multiprocessor systems. Therefore, spurious wakeups may occur, and a thread is unlocked even if nobody signals the condition variable. So, it is necessary to check whether the condition is true after the thread has been unblocked. However, spurious wakeups may occur multiple times and, therefore, it is necessary to check the condition variable in a loop.
+--
+quote
+
+
+
+All the waiting methods of the condition variable have two overloads:
+
+
+
+• The fi rst overload takes std::unique_lock<std::mutex> (based on the type; 
+that is, duration or time point) and causes the thread to remain blocked until the condition variable is signaled. This overload atomically releases the mutex and blocks the current thread, and then adds it to the list of threads waiting on the condition variable. The thread is unblocked when the condition is notif i ed with either notify_one() or notify_all(), a spurious wakeup occurs, or a timeout occurs (depending on the function overload). 
+When this happens, the mutex is atomically acquired again.
+
+
+
+• The second overload takes a predicate in addition to the arguments of the other overloads. This predicate can be used to avoid spurious wakeups while waiting for a condition to become true. This overload is equivalent to the following:
+
+
+
+while(!pred())  wait(lock);
+
+
+
+The following code illustrates a similar but more complex example than the one presented in the previous section. The producing thread generates data in a loop (in this example, it is a fi nite loop), and the consuming thread waits for new data to be made available and consumes it (prints it to the console). The producing thread terminates when it fi nishes producing data, and the consuming thread terminates when there is no more data to consume. Data is added to queue<int>, and a Boolean variable is used to indicate to the consuming thread that the process of producing data is fi nished. The following snippet shows the implementation of the producer thread:
+
+
+
+std::mutex g_lockprint;
+std::mutex g_lockqueue;
+std::condition_variable g_queuecheck;
+std::queue<int> g_buffer;
+bool g_done;
+void producer(  int const id,  std::mt19937& generator,  std::uniform_int_distribution<int>& dsleep,  std::uniform_int_distribution<int>& dcode) {  for (int i = 0; i < 5; ++i)  {  // simulate work
+
+
+
+std::this_thread::sleep_for(  std::chrono::seconds(dsleep(generator)));
+ // generate data  {  std::unique_lock<std::mutex> locker(g_lockqueue);
+ int value = id * 100 + dcode(generator);
+ g_buffer.push(value);
+ {  std::unique_lock<std::mutex> locker(g_lockprint);
+ std::cout << "[produced(" << id << ")]: " << value  << '\n';
+ }  }  // notify consumers  g_queuecheck.notify_one();
+ } }
+
+
+
+On the other hand, the consumer thread's implementation is listed here:
+
+
+
+void consumer() {  // loop until end is signaled  while (!g_done)  {  std::unique_lock<std::mutex> locker(g_lockqueue);
+ g_queuecheck.wait_for(  locker,  std::chrono::seconds(1),  [&]() {return !g_buffer.empty(); });
+ // if there are values in the queue process them  while (!g_done && !g_buffer.empty())  {  std::unique_lock<std::mutex> locker(g_lockprint);
+ std::cout  << "[consumed]: " << g_buffer.front()  << '\n';
+
+
+
+g_buffer.pop();
+ }  } }
+
+
+
+The consumer thread does the following:
+
+
+
+• Loops until it is signaled that the process of producing data is fi nished.
+• Acquires a unique lock on the mutex object associated with the condition variable.
+• Uses the wait_for() overload, which takes a predicate, checking that the buffer is not empty when a wakeup occurs (to avoid spurious wakeups). 
+This method uses a timeout of 1 second and returns after the timeout has occurred, even if the condition is signaled.
+• Consumes all of the data from the queue after it is signaled through the condition variable.
+
+
+
+To test this, we can start several producing threads and one consuming thread. 
+Producer threads generate random data and, therefore, share the pseudo-random generator engines and distributions. All of this is shown in the following code sample:
+
+
+
+auto seed_data = std::array<int, std::mt19937::state_size> {};
+std::random_device rd {};
+std::generate(std::begin(seed_data), std::end(seed_data),  std::ref(rd));
+std::seed_seq seq(std::begin(seed_data), std::end(seed_data));
+auto generator = std::mt19937{ seq };
+auto dsleep = std::uniform_int_distribution<>{ 1, 5 };
+auto dcode = std::uniform_int_distribution<>{ 1, 99 };
+std::cout << "start producing and consuming..." << '\n';
+std::thread consumerthread(consumer);
+std::vector<std::thread> threads;
+for (int i = 0; i < 5; ++i) {  threads.emplace_back(producer,  i + 1,  std::ref(generator),  std::ref(dsleep),  std::ref(dcode));
+
+
+
+start producing and consuming...
+[produced(5)]: 550 [consumed]: 550 [produced(5)]: 529 [consumed]: 529 [produced(5)]: 537 [consumed]: 537 [produced(1)]: 122 [produced(2)]: 224 [produced(3)]: 326 [produced(4)]: 458 [consumed]: 122 [consumed]: 224 [consumed]: 326 [consumed]: 458 ...
+done producing and consuming
+
+
+
+The standard also features a helper function called notify_all_at_thread_exit(), which provides a way for a thread to notify other threads through a condition_ variable object that it's completely fi nished execution, including destroying all thread_local objects. This function has two parameters: a condition_variable and an std::unique_lock<std::mutex> associated with the condition variable (that it takes ownership of). The typical use case for this function is running a detached thread that calls this function just before fi nishing.
+
+
+
+[ 425 ] } // work for the workers to finish for (auto& t : threads)  t.join();
+// notify the logger to finish and wait for it g_done = true;
+consumerthread.join();
+std::cout << "done producing and consuming" << '\n';
+
+
+
+Using promises and futures to return values from threads
+
+
+
+In the fi rst recipe of this chapter, we discussed how to work with threads. You also learned that thread functions cannot return values and that threads should use other means, such as shared data, to do so; however, for this, synchronization is required. An alternative to communicating a return value or an exception with either the main or another thread is using std::promise. This recipe will explain how this mechanism works.
+
+
+
+The promise and future classes used in this recipe are available in the std namespace in the <future> header.
+
+
+
+To communicate a value from one thread to another through promises and futures, do this:
+
+
+
+Make a promise available to the thread function through a parameter; for example:
+
+
+
+void produce_value(std::promise<int>& p) {  // simulate long running operation  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(2s);
+ }  // continued at 2.
+}
+
+
+
+2. Call set_value() on the premise to set the result to represent a value or set_ exception() to set the result to indicate an exception:
+
+
+
+// continued from 1.
+p.set_value(42);
+
+
+
+3. Make the future associated with the premise available to the other thread function through a parameter; for example:
+
+
+
+void consume_value(std::future<int>& f) {  // continued at 4.
+}
+
+
+
+4. Call get() on the future object to get the result set to the promise:
+
+
+
+// continued from 3.
+auto value = f.get();
+
+
+
+5. In the calling thread, use get_future() on the promise to get the future associated with the promise:
+
+
+
+std::promise<int> p;
+std::thread t1(produce_value, std::ref(p));
+std::future<int> f = p.get_future();
+std::thread t2(consume_value, std::ref(f));
+t1.join();
+t2.join();
+
+
+
+The promise-future pair is basically a communication channel that enables a thread to communicate a value or exception with another thread through a shared state. 
+promise is an asynchronous provider of the result and has an associated future that represents an asynchronous return object. To establish this channel, you must fi rst create a promise. This, in turn, creates a shared state that can be later read through the future associated with the promise.
+
+
+
+To set a result to a promise, you can use any of the following methods:
+
+
+
+• The set_value() or set_value_at_thread_exit() method is used to set a return value; the latter function stores the value in the shared state but only makes it available through the associated future if the thread exits.
+
+
+
+• The set_exception() or set_exception_at_thread_exit() method is used to set an exception as a return value. The exception is wrapped in an std::exception_ptr object. The latter function stores the exception in the shared state but only makes it available when the thread exits.
+
+
+
+To retrieve the future object associated with promise, use the get_future() method. 
+To get the value from the future value, use the get() method. This blocks the calling thread until the value from the shared state is made available. The future class has several methods for blocking the thread until the result from the shared state is made available:
+
+
+
+• wait() only returns when the result is available.
+• wait_for() returns either when the result is available or when the specif i ed timeout expires.
+• wait_until() returns either when the result is available or when the specif i ed time point is reached.
+
+
+
+If an exception is set to the promise value, calling the get() method on the future object will throw this exception. The example from the previous section has been rewritten as follows to throw an exception instead of setting a result:
+
+
+
+void produce_value(std::promise<int>& p) {  // simulate long running operation  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(2s);
+ }  try  {  throw std::runtime_error("an error has occurred!");
+ }  catch(...)  {  p.set_exception(std::current_exception());
+ } } void consume_value(std::future<int>& f) {  std::lock_guard<std::mutex> lock(g_mutex);
+ try
+
+
+
+Establishing a promise-future channel in this manner is a rather explicit operation that can be avoided by using the std::async() function; this is a higher-level utility that runs a function asynchronously, creates an internal promise and a shared state, and returns a future associated with the shared state. We will see how std::async() works in the next recipe, Executing functions asynchronously.
+
+
+
+Executing functions asynchronously
+
+
+
+Threads enable us to run multiple functions at the same time; this helps us take advantage of the hardware facilities in multiprocessor or multicore systems. 
+However, threads require explicit, lower-level operations. An alternative to threads is tasks, which are units of work that run in a particular thread. The C++ standard does not provide a complete task library, but it enables developers to execute functions asynchronously on different threads and communicate results back through a promise-future channel, as seen in the previous recipe. In this recipe, we will see how to do this using std::async() and std::future.
+
+
+
+[ 429 ]  {  std::cout << f.get() << '\n';
+ }  catch(std::exception const & e)  {  std::cout << e.what() << '\n';
+ } }
+
+
+
+For the examples in this recipe, we will use the following functions:
+
+
+
+void do_something() {  // simulate long running operation  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(2s);
+ }  std::lock_guard<std::mutex> lock(g_mutex);
+ std::cout << "operation 1 done" << '\n'; 
+} void do_something_else() {  // simulate long running operation  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(1s);
+ }  std::lock_guard<std::mutex> lock(g_mutex);
+ std::cout << "operation 2 done" << '\n'; 
+} int compute_something() {  // simulate long running operation  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(2s);
+ }  return 42;
+} int compute_something_else() {  // simulate long running operation
+
+
+
+{  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(1s);
+ }  return 24;
+}
+
+
+
+In this recipe, we will use futures; therefore, you are advised to read the previous recipe to get a quick overview of how they work. Both async() and future are available in the std namespace in the <future> header.
+
+
+
+How to do it...
+
+
+
+To execute a function asynchronously on another thread when the current thread is continuing with the execution without expecting a result, do the following:
+
+
+
+1. Use std::async() to start a new thread to execute the specif i ed function. 
+Create an asynchronous provider and return a future associated with it. Use the std::launch::async policy for the fi rst argument to the function in order to make sure the function will run asynchronously:
+
+
+
+auto f = std::async(std::launch::async, do_something);
+
+
+
+2. Continue with the execution of the current thread:
+
+
+
+do_something_else();
+
+
+
+3. Call the wait() method on the future object returned by std::async() when you need to make sure the asynchronous operation is completed:
+
+
+
+f.wait();
+
+
+
+To execute a function asynchronously on a worker thread while the current thread continues its execution, until the result from the asynchronous function is needed in the current thread, do the following:
+
+
+
+1. Use std::async() to start a new thread to execute the specif i ed function, create an asynchronous provider, and return a future associated with it. Use the std::launch::async policy of the fi rst argument to the function to make sure the function does run asynchronously:
+auto f = std::async(std::launch::async, compute_something);
+
+
+
+2. Continue the execution of the current thread:
+
+
+
+auto value = compute_something_else();
+
+
+
+3. Call the get() method on the future object returned by std::async() when you need the result from the function to be executed asynchronously:
+
+
+
+value += f.get();
+
+
+
+How it works...
+
+
+
+std::async() is a variadic function template that has two overloads: one that specif i es a launch policy as the fi rst argument and another that does not. The other arguments to std::async() are the function to execute and its arguments, if any. The launch policy is def i ned by a scoped enumeration called std::launch, available in the <future> header:
+
+
+
+enum class launch : /* unspecified */ {  async = /* unspecified */,  deferred = /* unspecified */,  /* implementation-defined */ };
+
+
+
+The two available launch policies specify the following:
+
+
+
+• With async, a new thread is launched to execute the task asynchronously.
+• With deferred, the task is executed on the calling thread the fi rst time its result is requested.
+
+
+
+When both fl ags are specif i ed (std::launch::async | std::launch::deferred), it is an implementation decision regarding whether to run the task asynchronously on a new thread or synchronously on the current thread. This is the behavior of the std::async() overload; it does not specify a launch policy. This behavior is not deterministic.
+
+
+
+Do not use the non-deterministic overload of std::async() to run tasks asynchronously. For this purpose, always use the overload that requires a launch policy, and always use only std::launch::async.
+
+
+
+Both overloads of std::async() return a future object that refers to the shared state created internally by std::async() for the promise-future channel it establishes. 
+When you need the result of the asynchronous operation, call the get() method on the future. This blocks the current thread until either the result value or an exception is made available. If the future does not transport any value or if you are not actually interested in that value, but you want to make sure the asynchronous operation would be completed at some point, use the wait() method; it blocks the current thread until the shared state is made available through the future.
+
+
+
+The future class has two more waiting methods: wait_for() specif i es a duration after which the call ends and returns even if the shared state is not yet available through the future, while wait_until() specif i es a time point after which the call returns, even if the shared state is not yet available. These methods could be used to create a polling routine and display a status message to the user, as shown in the following example:
+
+
+
+auto f = std::async(std::launch::async, do_something);
+while(true) {  using namespace std::chrono_literals;
+ auto status = f.wait_for(500ms);
+ if(status == std::future_status::ready)  break;
+ std::cout << "waiting..." << '\n';
+} std::cout << "done!" << '\n';
+
+
+
+waiting...
+waiting...
+waiting...
+operation 1 done done!
+
+
+
+Using atomic types
+
+
+
+The thread support library offers functionalities for managing threads and synchronizing access to shared data with mutexes and locks, and, as of C++20, with latches, barriers, and semaphores. The standard library provides support for the complementary, lower-level atomic operations on data, which are indivisible operations that can be executed concurrently from different threads on shared data, without the risk of producing race conditions and without the use of locks. 
+The support it provides includes atomic types, atomic operations, and memory synchronization ordering. In this recipe, we will see how to use some of these types and functions.
+
+
+
+All the atomic types and operations are def i ned in the std namespace in the <atomic> header.
+
+
+
+How to do it...
+
+
+
+The following are a series of typical operations that use atomic types:
+
+
+
+• Use the std::atomic class template to create atomic objects that support atomic operations, such as loading, storing, or performing arithmetic or bitwise operations:
+
+
+
+std::atomic<int> counter {0};
+std::vector<std::thread> threads;
+for(int i = 0; i < 10; ++i) {  threads.emplace_back([&counter](){  for(int i = 0; i < 10; ++i)  ++counter;
+ });
+}
+
+
+
+for(auto & t : threads) t.join();
+std::cout << counter << '\n'; // prints 100
+
+
+
+• In C++20, use the std::atomic_ref class template to apply atomic operations to a referenced object, which can be a reference or pointer to an integral type, a fl oating-point type, or a user-def i ned type:
+
+
+
+void do_count(int& c) {  std::atomic_ref<int> counter{ c };
+ std::vector<std::thread> threads;
+ for (int i = 0; i < 10; ++i)  {  threads.emplace_back([&counter]() {  for (int i = 0; i < 10; ++i)  ++counter;
+ });
+ }  for (auto& t : threads) t.join();
+} int main() {  int c = 0;
+ do_count(c);
+ std::cout << c << '\n'; // prints 100 }
+
+
+
+• Use the std::atomic_flag class for an atomic Boolean type:
+
+
+
+std::atomic_flag lock = ATOMIC_FLAG_INIT;
+int counter = 0;
+std::vector<std::thread> threads;
+for(int i = 0; i < 10; ++i) {  threads.emplace_back([&](){  while(lock.test_and_set(std::memory_order_acquire));
+ ++counter;
+ lock.clear(std::memory_order_release);
+ });
+
+
+
+} for(auto & t : threads) t.join();
+std::cout << counter << '\n'; // prints 10
+
+
+
+• Use the atomic type's members – load(), store(), and exchange() – or non-member functions – atomic_load()/atomic_load_explicit(), atomic_ store()/atomic_store_explicit(), and atomic_exchange()/atomic_ exchange_explicit() – to atomically read, set, or exchange the value of an atomic object.
+
+
+
+• Use its member functions fetch_add() and fetch_sub() or non-member functions atomic_fetch_add()/atomic_fetch_add_explicit() and atomic_ fetch_sub()/atomic_fetch_sub_explicit() to atomically add or subtract a value to/from an atomic object and return its value before the operation:
+
+
+
+std::atomic<int> sum {0};
+std::vector<int> numbers = generate_random();
+size_t size = numbers.size();
+std::vector<std::thread> threads;
+for(int i = 0; i < 10; ++i) {  threads.emplace_back([&sum, &numbers](size_t const start,  size_t const end) {  for(size_t i = start; i < end; ++i)  {  std::atomic_fetch_add_explicit(  &sum, numbers[i],  std::memory_order_acquire);
+ // same as  // sum.fetch_add(numbers[i], std::memory_order_acquire);
+ }},  i*(size/10),  (i+1)*(size/10));
+} for(auto & t : threads) t.join();
+
+
+
+• Use its member functions fetch_and(), fetch_or(), and fetch_xor() or non-member functions atomic_fetch_and()/atomic_fetch_and_explicit(), atomic_fetch_or()/ atomic_fetch_or_explicit(), and atomic_fetch_xor()/ atomic_fetch_xor_explicit() to perform AND, OR, and XOR atomic operations, respectively, with the specif i ed argument and return the value of the atomic object before the operation.
+
+
+
+• Use the std::atomic_flag member functions test_and_set() and clear() or non-member functions atomic_flag_test_and_set()/atomic_flag_test_and_ set_explicit() and atomic_flag_clear()/atomic_flag_clear_explicit() to set or reset an atomic fl ag. In addition, in C++20, you can use the member function test() and the non-member function atomic_flag_test()/atomic_ flag_test_explicit() to atomically return the value of the fl ag.
+
+
+
+• In C++20, perform thread synchronization with member functions wait(), notify_one(), and notify_all(), available to std::atomic, std::atomic_ref, and std::atomic_flag, as well as the non-member functions atomic_wait()/ atomic_wait_explicit(), atomic_notify_one(), and atomic_notify_all(). 
+These functions provide a more eff i cient mechanism for waiting for the value of an atomic object to change than polling.
+
+
+
+How it works...
+
+
+
+std::atomic is a class template that def i nes (including its specializations) an atomic type. The behavior of an object of an atomic type is well def i ned when one thread writes to the object and the other reads data, without using locks to protect access. 
+The std::atomic class provides several specializations:
+
+
+
+• Full specialization for bool, with a typedef called atomic_bool.
+• Full specialization for all integral types, with typedefs called atomic_int, atomic_long, atomic_char, atomic_wchar, and many others.
+• Partial specialization for pointer types.
+• In C++20, full specializations for the fl oating-point types float, double, and long double.
+• In C++20, partial specializations such as std::atomic<std::shared_ptr<U>> for std::shared_ptr and std::atomic<std::weak_ptr<U>> for std::weak_ptr.
+
+
+
+The atomic class template has various member functions that perform atomic operations, such as the following:
+
+
+
+• load() to atomically load and return the value of the object.
+
+
+
+• store() to atomically store a non-atomic value in the object; this function does not return anything.
+• exchange() to atomically store a non-atomic value in the object and return the previous value.
+• operator=, which has the same effect as store(arg).
+• fetch_add() to atomically add a non-atomic argument to the atomic value and return the value stored previously.
+• fetch_sub() to atomically subtract a non-atomic argument from the atomic value and return the value stored previously.
+• fetch_and(), fetch_or(), and fetch_xor() to atomically perform a bitwise AND, OR, or XOR operation between the argument and the atomic value; 
+store the new value in the atomic object; and return the previous value.
+• Pref i xing and postf i xing operator++ and operator-- to atomically increment and decrement the value of the atomic object with 1. These operations are equivalent to using fetch_add() or fetch_sub().
+• operator +=, -=, &=, |=, and ˆ= to add, subtract, or perform bitwise AND, OR, or XOR operations between the argument and the atomic value and store the new value in the atomic object. These operations are equivalent to using fetch_add(), fetch_sub(), fetch_and(), fetch_or(), and fetch_xor().
+
+
+
+Consider you have an atomic variable, such as std::atomic<int> a; the following is not an atomic operation:
+
+
+
+a = a + 42;
+
+
+
+This involves a series of operations, some of which are atomic:
+
+
+
+• Atomically load the value of the atomic object • Add 42 to the value that was loaded • Atomically store the result in the atomic object a
+
+
+
+On the other hand, the following operation, which uses the member operator +=, is atomic:
+
+
+
+a += 42;
+
+
+
+This operation has the same effect as either of the following:
+
+
+
+a.fetch_add(42); // using member function std::atomic_fetch_add(&a, 42); // using non-member function
+
+
+
+Though std::atomic has a full specialization for the bool type, called std::atomic<bool>, the standard def i nes yet another atomic type called std::atomic_flag, which is guaranteed to be lock-free. This atomic type, however, is very different than std::atomic_bool, and it has only the following member functions:
+
+
+
+• test_and_set() atomically sets the value to true and returns the previous value.
+• clear() atomically sets the value to false.
+• In C++20, there's test(), which atomically returns the value of the fl ag.
+
+
+
+Prior to C++20, the only way to initialize an std::atomic_flag to a def i nite value was by using the ATOMIC_FLAG_INIT macro. This initializes the atomic fl ag to the clear (false) value:
+
+
+
+std::atomic_flag lock = ATOMIC_FLAG_INIT;
+
+
+
+In C++20, this macro has been deprecated because the default constructor of std::atomic_flag initializes it to the clear state.
+
+
+
+All member functions mentioned earlier, for both std::atomic and std::atomic_ flag, have non-member equivalents that are pref i xed with atomic_ or atomic_ flag_, depending on the type they refer to. For instance, the equivalent of std::atomic::fetch_add() is std::atomic_fetch_add(), and the fi rst argument of these non-member functions is always a pointer to an std::atomic object. Internally, the non-member function calls the equivalent member function on the provided std::atomic argument. Similarly, the equivalent of std::atomic_flag::test_and_ set() is std::atomic_flag_test_and_set(), and its fi rst parameter is a pointer to an std::atomic_flag object.
+
+
+
+All these member functions of std::atomic and std::atomic_flag have two sets of overloads; one of them has an extra argument representing a memory order. 
+Similarly, all non-member functions – such as std::atomic_load(), std::atomic_ fetch_add(), and std::atomic_flag_test_and_set() – have a companion with the suff i x _explicit – std::atomic_load_explicit(), std::atomic_fetch_add_ explicit(), and std::atomic_flag_test_and_set_explicit(); these functions have an extra argument that represents the memory order.
+
+
+
+The memory order specif i es how non-atomic memory accesses are to be ordered around atomic operations. By default, the memory order of all atomic types and operations is sequential consistency.
+
+
+
+Additional ordering types are def i ned in the std::memory_order enumeration and can be passed as an argument to the member functions of std::atomic and std::atomic_flag, or the non-member functions with the suff i x _explicit().
+
+
+
+Sequential consistency is a consistency model that requires that, in a multiprocessor system, all instructions are executed in some order and all writes become instantly visible throughout the system. 
+This model was fi rst proposed by Leslie Lamport in the 70s, and is described as follows:
+
+
+
+"the results of any execution is the same as if the operations of all the processors were executed in some sequential order, and the operations of each individual processor appear in this sequence in the order specif i ed by its program."
+--
+quote
+
+
+
+Various types of memory ordering functions are described in the following table, taken from the C++ reference website (http://en.cppreference.com/w/cpp/atomic/ memory_order). The details of how each one of these works is beyond the scope of this book and can be looked up in the standard C++ reference (see the link we just came across):
+--
+table of 2 cols
+
+
+
+Model Explanation memory_order_relaxed This is a relaxed operation. There are no synchronization or ordering constraints; only atomicity is required from this operation.
+memory_order_consume A load operation with this memory order performs a consume operation on the affected memory location; no reads or writes in the current thread that are dependent on the value currently loaded can be reordered before this load operation. Writes to data-dependent variables in other threads that release the same atomic variable are visible in the current thread. On most platforms, this affects compiler optimizations only.
+memory_order_acquire A load operation with this memory order performs the acquire operation on the affected memory location; no reads or writes in the current thread can be reordered before this load. All writes in other threads that release the same atomic variable are visible in the current thread.
+
+
+
+memory_order_release A store operation with this memory order performs the release operation; no reads or writes in the current thread can be reordered after this store. All writes in the current thread are visible in other threads that acquire the same atomic variable, and writes that carry a dependency to the atomic variable become visible in other threads that consume the same atomic.
+memory_order_acq_rel A read-modify-write operation with this memory order is both an acquire operation and a release operation. 
+No memory reads or writes in the current thread can be reordered before or after this store. All writes in other threads that release the same atomic variable are visible before the modif i cation, and the modif i cation is visible in other threads that acquire the same atomic variable.
+memory_order_seq_cst Any operation with this memory order is both an acquire operation and a release operation; a single total order exists in which all threads observe all modif i cations in the same order.
+
+
+
+The fi rst example in the How to do it... section shows several threads repeatedly modifying a shared resource – a counter – by incrementing it concurrently. This example can be ref i ned further by implementing a class to represent an atomic counter with methods such as increment() and decrement(), which modify the value of the counter, and get(), which retrieves its current value:
+
+
+
+template <typename T,  typename I =  typename std::enable_if<std::is_integral_v<T>>::type> class atomic_counter {  std::atomic<T> counter {0};
+public:
+ T increment()  {  return counter.fetch_add(1);
+ }  T decrement()  {  return counter.fetch_sub(1);
+ }  T get()  {  return counter.load();
+--
+}
+};
+
+
+
+With this class template, the fi rst example can be rewritten in the following form with the same result:
+
+
+
+atomic_counter<int> counter;
+std::vector<std::thread> threads;
+for(int i = 0; i < 10; ++i) {  threads.emplace_back([&counter](){  for(int i = 0; i < 10; ++i)  counter.increment();
+ });
+ } for(auto & t : threads) t.join();
+std::cout << counter.get() << '\n'; // prints 100
+
+
+
+If you need to perform atomic operations to references, you cannot use std::atomic. 
+However, in C++20, you can use the new std::atomic_ref type. This is a class template that applies atomic operations to the object it references. This object must outlive the std::atomic_ref object and, as long as any std::atomic_ref instance referencing this object exists, the object must be accessed only through the std::atomic_ref instances.
+
+
+
+The std::atomic_ref type has the following specializations:
+
+
+
+• The primary template that can be instantiated with any trivially-copyable type T, including bool.
+• Partial specialization for all pointer types.
+• Specializations for integral types (character types, signed and unsigned integer types, and any additional integral types needed by the typedefs in the <cstdint> header).
+• Specializations for the fl oating-point types float, double, and long double.
+
+
+
+When using std::atomic_ref, you must keep in mind that:
+
+
+
+• It is not thread-safe to access any sub-object of the object referenced by an std::atomic_ref.
+• It is possible to modify the referenced value through a const std::atomic_ref object.
+
+
+
+Also, in C++20, there are new member and non-member functions that provide an eff i cient thread-synchronization mechanism:
+
+
+
+• The member function wait() and non-member functions atomic_wait()/ atomic_wait_explicit() and atomic_flag_wait()/atomic_flag_wait_ explicit() perform atomic wait operations, blocking a thread until notif i ed and the atomic value changes. Its behavior is similar to repeatedly comparing the provided argument with the value returned by load() and, if equal, blocks until notif i ed by notify_one() or notify_all(), or the thread is unblocked spuriously. If the compared values are not equal, then the function returns without blocking.
+• The member function notify_one() and non-member functions atomic_ notify_one() and atomic_flag_notify_one() notify, atomically, at least one thread blocked in an atomic waiting operation. If there is no such thread blocked, the function does nothing.
+• The member function notify_all() and the non-member functions atomic_ notify_all() and atomic_flag_notify_all() unblock all the threads blocked in an atomic waiting operation, or do nothing if no such thread exists.
+
+
+
+Finally, it should be mentioned that all the atomic objects from the atomic operations library – std::atomic, std::atomic_ref, and std::atomic_flag – are free of data races.
+
+
+
+Implementing parallel map and fold with threads
+
+
+
+In Chapter 3, Exploring Functions, we discussed two higher-order functions: map, which applies a function to the elements of a range by either transforming the range or producing a new range, and fold, which combines the elements of a range into a single value. The various implementations we did were sequential. However, in the context of concurrency, threads, and asynchronous tasks, we can leverage the hardware and run parallel versions of these functions to speed up their execution for large ranges, or when the transformation and aggregation are time-consuming. 
+In this recipe, we will see a possible solution for implementing map and fold using threads.
+
+
+
+You need to be familiar with the concepts of the map and fold functions. It is recommended that you read the Implementing higher-order functions map and fold recipe from Chapter 3, Exploring Functions. In this recipe, we will use the various thread functionalities presented in the Working with threads recipe.
+
+
+
+To measure the execution time of these functions and compare it with sequential alternatives, we will use the perf_timer class template, which we introduced in the Measuring function execution time with a standard clock recipe in Chapter 6, General-Purpose Utilities.
+
+
+
+A parallel version of an algorithm can potentially speed up execution time, but this is not necessarily true in all circumstances. 
+Context switching for threads and synchronized access to shared data can introduce a signif i cant overhead. For some implementations and particular datasets, this overhead could make a parallel version actually take a longer time to execute than a sequential version.
+
+
+
+To determine the number of threads required to split the work, we will use the following function:
+
+
+
+unsigned get_no_of_threads() {  return std::thread::hardware_concurrency();
+--
+}
+
+
+
+We'll explore a fi rst possible implementation for a parallel version of the map and fold functions in the next section.
+
+
+
+How to do it...
+
+
+
+To implement a parallel version of the map function, do the following:
+
+
+
+1. Def i ne a function template that takes the begin and end iterators to a range and a function to apply to all the elements:
+
+
+
+template <typename Iter, typename F> void parallel_map(Iter begin, Iter end, F f) { }
+
+
+
+2. Check the size of the range. If the number of elements is smaller than a predef i ned threshold (for this implementation, the threshold is 10,000), execute the mapping in a sequential manner:
+
+
+
+auto size = std::distance(begin, end);
+if(size <= 10000)  std::transform(begin, end, begin, std::forward<F>(f));
+
+
+
+3. For larger ranges, split the work on multiple threads and let each thread map be a part of the range. These parts should not overlap to avoid the need of synchronizing access to the shared data:
+
+
+
+else {  auto no_of_threads = get_no_of_threads();
+ auto part = size / no_of_threads;
+ auto last = begin;
+ // continued at 4. and 5.
+}
+
+
+
+4. Start the threads, and on each thread, run a sequential version of the mapping:
+
+
+
+std::vector<std::thread> threads;
+for(unsigned i = 0; i < no_of_threads; ++i) {  if(i == no_of_threads - 1) last = end;
+ else std::advance(last, part);
+ threads.emplace_back(  [=,&f]{std::transform(begin, last,
+
+
+
+begin, std::forward<F>(f));});
+ begin = last;
+}
+
+
+
+5. Wait until all the threads have fi nished their execution:
+
+
+
+for(auto & t : threads) t.join();
+
+
+
+The preceding steps, when put together, result in the following implementation:
+
+
+
+template <typename Iter, typename F> void parallel_map(Iter begin, Iter end, F f) {  auto size = std::distance(begin, end);
+ if(size <= 10000)  std::transform(begin, end, begin, std::forward<F>(f)); 
+ else  {  auto no_of_threads = get_no_of_threads();
+ auto part = size / no_of_threads;
+ auto last = begin;
+ std::vector<std::thread> threads;
+ for(unsigned i = 0; i < no_of_threads; ++i)  {  if(i == no_of_threads - 1) last = end;
+ else std::advance(last, part);
+ threads.emplace_back(  [=,&f]{std::transform(begin, last,  begin, std::forward<F>(f));});
+ begin = last;
+ }  for(auto & t : threads) t.join();
+ } }
+
+
+
+To implement a parallel version of the left fold function, do the following:
+
+
+
+1. Def i ne a function template that takes a begin and an end iterator to a range, an initial value, and a binary function to apply to the elements of the range:
+
+
+
+template <typename Iter, typename R, typename F> auto parallel_reduce(Iter begin, Iter end, R init, F op) { }
+
+
+
+2. Check the size of the range. If the number of elements is smaller than a predef i ned threshold (for this implementation, it is 10,000), execute the folding in a sequential manner:
+
+
+
+auto size = std::distance(begin, end);
+if(size <= 10000)  return std::accumulate(begin, end,  init, std::forward<F>(op));
+
+
+
+3. For larger ranges, split the work into multiple threads and let each thread fold a part of the range. These parts should not overlap in order to avoid thread synchronization of shared data. The result can be returned through a reference passed to the thread function in order to avoid data synchronization:
+
+
+
+else {  auto no_of_threads = get_no_of_threads();
+ auto part = size / no_of_threads;
+ auto last = begin;
+ // continued with 4. and 5.
+}
+
+
+
+4. Start the threads, and on each thread, execute a sequential version of the folding:
+
+
+
+std::vector<std::thread> threads;
+std::vector<R> values(no_of_threads);
+for(unsigned i = 0; i < no_of_threads; ++i) {  if(i == no_of_threads - 1) last = end;
+ else std::advance(last, part);
+ threads.emplace_back(  [=,&op](R& result){  result = std::accumulate(begin, last, R{},  std::forward<F>(op));},  std::ref(values[i]));
+ begin = last;
+}
+
+
+
+5. Wait until all the threads have fi nished execution and fold the partial results into the fi nal result:
+
+
+
+for(auto & t : threads) t.join();
+return std::accumulate(std::begin(values), std::end(values),  init, std::forward<F>(op));
+
+
+
+The steps we just put together result in the following implementation:
+
+
+
+template <typename Iter, typename R, typename F> auto parallel_reduce(Iter begin, Iter end, R init, F op) {  auto size = std::distance(begin, end);
+ if(size <= 10000)  return std::accumulate(begin, end, init, std::forward<F>(op));
+ else  {  auto no_of_threads = get_no_of_threads();
+ auto part = size / no_of_threads;
+ auto last = begin;
+ std::vector<std::thread> threads;
+ std::vector<R> values(no_of_threads);
+ for(unsigned i = 0; i < no_of_threads; ++i)  {  if(i == no_of_threads - 1) last = end;
+ else std::advance(last, part);
+ threads.emplace_back(  [=,&op](R& result){  result = std::accumulate(begin, last, R{},  std::forward<F>(op));},  std::ref(values[i]));
+ begin = last;
+ }  for(auto & t : threads) t.join();
+
+
+
+return std::accumulate(std::begin(values), std::end(values),  init, std::forward<F>(op));
+ } }
+
+
+
+How it works...
+
+
+
+These parallel implementations of map and fold are similar in several aspects:
+
+
+
+• They both fall back to a sequential version if the number of elements in the range is smaller than 10,000.
+• They both start the same number of threads. These threads are determined using the static function std::thread::hardware_concurrency(), which returns the number of concurrent threads supported by the implementation. 
+However, this value is rather a hint than an accurate value and should be used with that in mind.
+• No shared data is used to avoid synchronization of access. Even though all the threads work on the elements from the same range, they all process parts of the range that do not overlap.
+• Both these functions are implemented as function templates that take a begin and an end iterator to def i ne the range to be processed. In order to split the range into multiple parts to be processed independently by different threads, use additional iterators in the middle of the range. For this, we use std::advance() to increment an iterator with a particular number of positions. This works well for vectors or arrays but is very ineff i cient for containers such as lists. Therefore, this implementation is suited only for ranges that have random access iterators.
+
+
+
+The sequential versions of map and fold can be simply implemented in C++ with std::transform() and std::accumulate(). In fact, to verify the correctness of the parallel algorithms and check whether they provide any execution speedup, we can compare them with the execution of these general-purpose algorithms.
+
+
+
+To put this to the test, we will use map and fold on a vector with sizes varying from 10,000 to 50 million elements. The range is fi rst mapped (that is, transformed) by doubling the value of each element, and then the result is folded into a single value by adding together all the elements of the range. For simplicity, each element in the range is equal to its 1-based index (the fi rst element is 1, the second element is 2, and so on). The following sample runs both the sequential and parallel versions of map and fold on vectors of different sizes and prints the execution time in a tabular format:
+
+
+
+As an exercise, you can vary the number of elements, as well as the number of threads, and see how the parallel version performs compared to the sequential version.
+
+
+
+std::vector<int> sizes {  10000, 100000, 500000,  1000000, 2000000, 5000000,  10000000, 25000000, 50000000 };
+As an exercise, you can vary the number of elements, as well as the number of threads, and see how the parallel version performs compared to the sequential version.
+std::cout  << std::right << std::setw(8) << std::setfill(' ') << "size"  << std::right << std::setw(8) << "s map"  << std::right << std::setw(8) << "p map"  << std::right << std::setw(8) << "s fold"  << std::right << std::setw(8) << "p fold"  << '\n';
+for (auto const size : sizes) {  std::vector<int> v(size);
+ std::iota(std::begin(v), std::end(v), 1);
+ auto v1 = v;
+ auto s1 = 0LL;
+ auto tsm = perf_timer<>::duration([&] {  std::transform(std::begin(v1), std::end(v1), std::begin(v1),  [](int const i) {return i + i; }); });
+ auto tsf = perf_timer<>::duration([&] {  s1 = std::accumulate(std::begin(v1), std::end(v1), 0LL,  std::plus<>()); });
+ auto v2 = v;
+ auto s2 = 0LL;
+ auto tpm = perf_timer<>::duration([&] {  parallel_map(std::begin(v2), std::end(v2),  [](int const i) {return i + i; }); });
+
+
+
+auto tpf = perf_timer<>::duration([&] {  s2 = parallel_reduce(std::begin(v2), std::end(v2), 0LL,  std::plus<>()); });
+ assert(v1 == v2);
+ assert(s1 == s2);
+ std::cout  << std::right << std::setw(8) << std::setfill(' ') << size  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tsm).count()  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tpm).count()  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tsf).count()  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tpf).count()  << '\n';
+}
+
+
+
+A possible output of this program is shown in the following chart (executed on a machine running Windows 64-bit with an Intel Core i7 processor and 4 physical and 8 logical cores). The parallel version, especially the fold implementation, performs better than the sequential version. But this is true only when the length of the vector exceeds a certain size. In the following table, we can see that for up to 1 million elements, the sequential version is still faster. The parallel version executes faster when there are 2 million or more elements in the vector. Notice that the actual times vary slightly from one run to another, but they can be very different on different machines:
+--
+generate output
+
+
+
+To better visualize these results, we can represent the speedup of the parallel version in the form of a bar chart. In the following chart, the blue bars represent the speedup of a parallel map implementation, while the orange bars show the speedup of the parallel fold implementation. A positive value indicates that the parallel version is faster; a negative version indicates that the sequential version is faster:
+
+
+
+This chart makes it easier to see that only when the number of elements exceeds a certain threshold (which is about 2 million in my benchmarks) is the parallel implementation faster than the sequential version.
+
+
+
+Implementing parallel map and fold with tasks
+
+
+
+Tasks are a higher-level alternative to threads for performing concurrent computations. std::async() enables us to execute functions asynchronously, without the need to handle lower-level threading details. In this recipe, we will take the same task of implementing a parallel version of the map and fold functions, as in the previous recipe, but we will use tasks and see how it compares with the thread version.
+
+
+
+The solution presented in this recipe is similar in many aspects to the one that uses threads in the previous recipe, Implementing parallel map and fold with threads. Make sure you read that one before continuing with the current recipe.
+
+
+
+How to do it...
+
+
+
+To implement a parallel version of the map function, do the following:
+
+
+
+1. Def i ne a function template that takes a begin and end iterator to a range, and a function to apply to all the elements:
+
+
+
+template <typename Iter, typename F> void parallel_map(Iter begin, Iter end, F f) { }
+
+
+
+2. Check the size of the range. For a number of elements smaller than the predef i ned threshold (for this implementation, the threshold is 10,000), execute the mapping in a sequential manner:
+
+
+
+auto size = std::distance(begin, end);
+if(size <= 10000)  std::transform(begin, end, begin, std::forward<F>(f));
+
+
+
+3. For larger ranges, split the work into multiple tasks and let each task map a part of the range. These parts should not overlap to avoid synchronizing thread access to shared data:
+
+
+
+else {  auto no_of_tasks = get_no_of_threads();
+ auto part = size / no_of_tasks;
+ auto last = begin;
+ // continued at 4. and 5.
+}
+
+
+
+4. Start the asynchronous functions and run a sequential version of the mapping on each one of them:
+
+
+
+std::vector<std::future<void>> tasks;
+for(unsigned i = 0; i < no_of_tasks; ++i) {  if(i == no_of_tasks - 1) last = end;
+ else std::advance(last, part);
+ tasks.emplace_back(std::async(  std::launch::async,  [=,&f]{std::transform(begin, last, begin,  std::forward<F>(f));}));
+ begin = last;
+}
+
+
+
+5. Wait until all the asynchronous functions have fi nished their execution:
+
+
+
+for(auto & t : tasks) t.wait();
+
+
+
+These steps, when put together, result in the following implementation:
+
+
+
+template <typename Iter, typename F> void parallel_map(Iter begin, Iter end, F f) {  auto size = std::distance(begin, end);
+ if(size <= 10000)  std::transform(begin, end, begin, std::forward<F>(f)); 
+ else  {  auto no_of_tasks = get_no_of_threads();
+ auto part = size / no_of_tasks;
+ auto last = begin;
+
+
+
+std::vector<std::future<void>> tasks;
+ for(unsigned i = 0; i < no_of_tasks; ++i)  {  if(i == no_of_tasks - 1) last = end;
+ else std::advance(last, part);
+ tasks.emplace_back(std::async(  std::launch::async,  [=,&f]{std::transform(begin, last, begin,  std::forward<F>(f));}));
+ begin = last;
+ }  for(auto & t : tasks) t.wait();
+ } }
+
+
+
+To implement a parallel version of the left fold function, do the following:
+
+
+
+1. Def i ne a function template that takes a begin and end iterator to a range, an initial value, and a binary function to apply to the elements of the range:
+
+
+
+template <typename Iter, typename R, typename F> auto parallel_reduce(Iter begin, Iter end, R init, F op) { }
+
+
+
+2. Check the size of the range. For a number of elements smaller than the predef i ned threshold (for this implementation, the threshold is 10,000), execute the folding in a sequential manner:
+
+
+
+auto size = std::distance(begin, end);
+if(size <= 10000)  return std::accumulate(begin, end, init,  std::forward<F>(op));
+
+
+
+3. For larger ranges, split the work into multiple tasks and let each task fold a part of the range. These parts should not overlap to avoid synchronizing thread access to the shared data. The result can be returned through a reference passed to the asynchronous function to avoid synchronization:
+
+
+
+else {
+
+
+
+auto no_of_tasks = get_no_of_threads();
+ auto part = size / no_of_tasks;
+ auto last = begin;
+ // continued at 4. and 5.
+}
+
+
+
+4. Start the asynchronous functions and execute a sequential version of folding on each one of them:
+
+
+
+std::vector<std::future<R>> tasks;
+for(unsigned i = 0; i < no_of_tasks; ++i) {  if(i == no_of_tasks - 1) last = end;
+ else std::advance(last, part);
+ tasks.emplace_back(  std::async(  std::launch::async,  [=,&op]{return std::accumulate(  begin, last, R{},  std::forward<F>(op));}));
+ begin = last;
+}
+
+
+
+5. Wait until all the asynchronous functions have fi nished execution and fold the partial results into the fi nal result:
+
+
+
+std::vector<R> values;
+for(auto & t : tasks)  values.push_back(t.get());
+return std::accumulate(std::begin(values), std::end(values),  init, std::forward<F>(op));
+
+
+
+These steps, when put together, result in the following implementation:
+
+
+
+template <typename Iter, typename R, typename F> auto parallel_reduce(Iter begin, Iter end, R init, F op) {  auto size = std::distance(begin, end);
+ if(size <= 10000)  return std::accumulate(begin, end, init, std::forward<F>(op));
+
+
+
+else  {  auto no_of_tasks = get_no_of_threads();
+ auto part = size / no_of_tasks;
+ auto last = begin;
+ std::vector<std::future<R>> tasks;
+ for(unsigned i = 0; i < no_of_tasks; ++i)  {  if(i == no_of_tasks - 1) last = end;
+ else std::advance(last, part);
+ tasks.emplace_back(  std::async(  std::launch::async,  [=,&op]{return std::accumulate(  begin, last, R{},  std::forward<F>(op));}));
+ begin = last;
+ }  std::vector<R> values;
+ for(auto & t : tasks)  values.push_back(t.get());
+ return std::accumulate(std::begin(values), std::end(values),  init, std::forward<F>(op));
+ } }
+
+
+
+How it works...
+
+
+
+The implementation just proposed is only slightly different than what we did in the previous recipe. Threads were replaced with asynchronous functions, starting with std::async(), and results were made available through the returned std::future. 
+The number of asynchronous functions that are launched concurrently is equal to the number of threads the implementation can support. This is returned by the static method std::thread::hardware_concurrency(), but this value is only a hint and should not be considered very reliable.
+
+
+
+There are mainly two reasons for taking this approach:
+
+
+
+• Seeing how a function implemented for parallel execution with threads can be modif i ed to use asynchronous functions and, therefore, avoid lower-level details of threading.
+• Running a number of asynchronous functions equal to the number of supported threads can potentially run one function per thread; this could provide the fastest execution time for the parallel function because there is a minimum overhead of context switching and waiting time.
+
+
+
+We can test the performance of the new map and fold implementations using the same method as in the previous recipe:
+
+
+
+std::vector<int> sizes {  10000, 100000, 500000,  1000000, 2000000, 5000000,  10000000, 25000000, 50000000 };
+std::cout  << std::right << std::setw(8) << std::setfill(' ') << "size"  << std::right << std::setw(8) << "s map"  << std::right << std::setw(8) << "p map"  << std::right << std::setw(8) << "s fold"  << std::right << std::setw(8) << "p fold"  << '\n';
+for(auto const size : sizes) {  std::vector<int> v(size);
+ std::iota(std::begin(v), std::end(v), 1);
+ auto v1 = v;
+ auto s1 = 0LL;
+ auto tsm = perf_timer<>::duration([&] {  std::transform(std::begin(v1), std::end(v1), std::begin(v1),  [](int const i) {return i + i; }); });
+ auto tsf = perf_timer<>::duration([&] {  s1 = std::accumulate(std::begin(v1), std::end(v1), 0LL,  std::plus<>()); });
+
+
+
+auto v2 = v;
+auto s2 = 0LL;
+auto tpm = perf_timer<>::duration([&] {  parallel_map(std::begin(v2), std::end(v2),  [](int const i) {return i + i; }); });
+auto tpf = perf_timer<>::duration([&] {  s2 = parallel_reduce(std::begin(v2), std::end(v2), 0LL,  std::plus<>()); });
+assert(v1 == v2);
+assert(s1 == s2);
+std::cout  << std::right << std::setw(8) << std::setfill(' ') << size  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tsm).count()  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tpm).count()  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tsf).count()  << std::right << std::setw(8)  << std::chrono::duration<double, std::micro>(tpf).count()  << '\n';
+}
+--
+generate output
+
+
+
+Similar to the illustration of the solution with threads, the speedup of the parallel map and fold implementations can be seen in the following chart.
+
+
+
+Negative values indicate that the sequential version was faster:
+
+
+
+Figure 8.2: The speedup of the parallel implementation of map (in blue) and fold (in orange) using asynchronous functions, compared to the sequential implementation
+
+
+
+If we compare this with the results from the parallel version using threads, we will fi nd that these are faster execution times and that the speedup is signif i cant, especially for the fold function. The following chart shows the speedup of the task's implementation over the thread's implementation. In this chart, a value smaller than 1 means that the thread's implementation was faster:
+
+
+
+Figure 8.3: The speedup of the parallel implementation using asynchronous functions over the parallel implementation using threads for map (in blue) and fold (in orange)
+
+
+
+There's more...
+
+
+
+The implementation shown earlier is only one of the possible approaches we can take for parallelizing the map and fold functions. A possible alternative uses the following strategy:
+
+
+
+• Divide the range to process into two equal parts.
+• Recursively call the parallel function asynchronously to process the fi rst part of the range.
+• Recursively call the parallel function synchronously to process the second part of the range.
+• After the synchronous recursive call is fi nished, wait for the asynchronous recursive call to end too before fi nishing the execution.
+
+
+
+This divide-and-conquer algorithm can potentially create a lot of tasks. Depending on the size of the range, the number of asynchronous calls can greatly exceed the number of threads, and in this case, there will be lots of waiting time that will affect the overall execution time.
+
+
+
+The map and fold functions can be implemented using a divide-and-conquer algorithm, as follows:
+
+
+
+template <typename Iter, typename F> void parallel_map(Iter begin, Iter end, F f) {  auto size = std::distance(begin, end);
+ if(size <= 10000)  {  std::transform(begin, end, begin, std::forward<F>(f)); 
+ }  else  {  auto middle = begin;
+ std::advance(middle, size / 2);
+ auto result = std::async(  std::launch::deferred,  parallel_map<Iter, F>,  begin, middle, std::forward<F>(f));
+ parallel_map(middle, end, std::forward<F>(f));
+ result.wait();
+ } } template <typename Iter, typename R, typename F> auto parallel_reduce(Iter begin, Iter end, R init, F op) {  auto size = std::distance(begin, end);
+ if(size <= 10000)  return std::accumulate(begin, end, init, std::forward<F>(op));
+
+
+
+else  {  auto middle = begin;
+ std::advance(middle, size / 2);
+ auto result1 = std::async(  std::launch::async,  parallel_reduce<Iter, R, F>,  begin, middle, R{}, std::forward<F>(op));
+ auto result2 = parallel_reduce(middle, end, init,  std::forward<F>(op));
+ return result1.get() + result2;
+ } }
+
+
+
+When we compare these execution times, we can see that this version (indicated by p2 in the preceding output) is similar to the sequential version for both map and fold and much worse than the fi rst parallel version shown earlier (indicated by p1).
+
+
+
+Implementing parallel map and fold with standard parallel algorithms
+
+
+
+In the previous two recipes, we implemented parallel versions of the map and fold functions (which are called std::transform() and std::accumulate() in the standard library) using threads and tasks. However, these implementations required manual handling of parallelization details, such as splitting data into chunks to be processed in parallel and creating threads or tasks, synchronizing their execution, and merging the results.
+
+
+
+In C++17, many of the standard generic algorithms have been parallelized. In fact, the same algorithm can execute sequentially or in parallel, depending on a provided execution policy. In this recipe, we will learn how to implement map and fold in parallel with standard algorithms.
+
+
+
+To use the standard algorithms with parallel execution, you should do the following:
+
+
+
+• Find a good candidate for an algorithm to parallelize. Not every algorithm runs faster in parallel. Make sure you correctly identify the parts of the program that can be improved with parallelization. Use prof i lers for this purpose and, in general, look at operations that have O(n) or worse complexity.
+• Include the header <execution> for the execution policies.
+• Provide the parallel execution policy (std::execution::par) as the fi rst argument to the overloaded algorithm.
+
+
+
+A parallel implementation of the map function using the parallel overload of std::transform() is as follows:
+
+
+
+template <typename Iter, typename F> void parallel_map(Iter begin, Iter end, F f) {  std::transform(std::execution::par,
+
+
+
+begin, end,  begin,  std::forward<F>(f));
+}
+
+
+
+A parallel implementation of the fold function using the parallel overload of std::reduce() is as follows:
+
+
+
+template <typename Iter, typename R, typename F> auto parallel_reduce(Iter begin, Iter end, R init, F op) {  return std::reduce(std::execution::par,  begin, end,  init,  std::forward<F>(op));
+}
+
+
+
+How it works...
+
+
+
+In C++17, 69 of the standard generic algorithms have been overloaded to support parallel execution. These overloads take an execution policy as the fi rst parameter. 
+The available execution policies, from header <execution>, are as follows:
+--
+table with 4 cols
+
+
+
+Apart from the existing algorithms that have been overloaded, seven new algorithms have been added:
+--
+table with 2 cols
+
+
+
+Algorithm Description std::for_each_n Applies a given function to the fi rst N elements of the specif i ed range, according to the specif i ed execution policy.
+std::exclusive_scan Computes the partial sum of a range of elements but excludes the ith element from the ith sum. If the binary operation is associative, the result is the same as when using std::partial_sum().
+std::inclusive_scan Computes the partial sum of a range of elements but includes the ith element in the ith sum.
+std::transform_exclusive_ scan Applies a function and then calculates exclusive scan.
+std::transform_inclusive_ scan Applies a function and then calculates inclusive scan.
+std::reduce An out of order version of std::accumulate().
+std::transform_reduce Applies a function then accumulates out of order (that is, reduces).
+
+
+
+In the preceding examples, we used std::transform() and std::reduce() with an execution policy – in our case, std::execution::par. The algorithm std::reduce() is similar to std::accumulate() but it processes the elements out of order. 
+std::accumulate() does not have an overload for specifying an execution policy, so it can only execute sequentially.
+
+
+
+It is important to note that, just because an algorithm supports parallelization, it doesn't mean that it will run faster than the sequential version. Execution depends on the actual hardware, datasets, and algorithm particularities. In fact, some of these algorithms may never or hardly execute faster when parallelized than sequentially. 
+For this reason, the Microsoft implementation of several algorithms that permute, copy, or move elements does not perform parallelization but falls back to sequential execution in all cases. These algorithms are copy(), copy_n(), fill(), fill_n(), move(), reverse(), reverse_copy(), rotate(), rotate_copy(), and swap_ranges(). 
+Moreover, the standard does not guarantee a particular execution; specifying a policy is actually a request for an execution strategy but with no guarantees implied.
+
+
+
+On the other hand, the standard library allows parallel algorithms to allocate memory. When this cannot be done, an algorithm throws std::bad_alloc. However, again, the Microsoft implementation differs and instead of throwing, it falls back to the sequential version of the algorithm.
+
+
+
+Another important aspect that must be known is that the standard algorithms work with different kinds of iterators. Some require forward iterators, some input iterators. 
+However, all the overloads that allow to specify an execution policy restrict the use of the algorithm with forward iterators.
+
+
+
+Take a look at the following table:
+
+
+
+Figure 8.4: A comparison of execution times for sequential and parallel implementations of the map and reduce functions
+
+
+
+Here, you can see a comparison of execution times for sequential and parallel implementations of the map and reduce functions. Highlighted are the versions of the functions implemented in this recipe. These times may vary slightly from execution to execution. These values were obtained by running a 64-bit released version compiled with Visual C++ 2019 16.4.x on a machine with an Intel Xeon CPU with four cores. Although the parallel versions perform better than the sequential version for these data sets, which one is actually better varies with the size of the dataset. 
+This is why prof i ling is key when you optimize by parallelizing work.
+
+
+
+In this example, we have seen separate implementations for map and fold (which is also called reduce). However, in C++17, there is a standard algorithm called std::transform_reduce(), which composes the two operations into a single function call. This algorithm has overloads for sequential execution, as well as policy-based execution for parallelism and vectorization. We can, therefore, utilize this algorithm instead of the handwritten implementation we did in these previous three recipes.
+
+
+
+The following are the sequential and parallel versions of the algorithm used to compute the sum of the doubles of all the elements of a range:
+
+
+
+std::vector<int> v(size);
+std::iota(std::begin(v), std::end(v), 1);
+// sequential auto sums = std::transform_reduce(  std::begin(v), std::end(v),  0LL,  std::plus<>(),  [](int const i) {return i + i; } );
+// parallel auto sump = std::transform_reduce(  std::execution::par,  std::begin(v), std::end(v),  0LL,  std::plus<>(),  [](int const i) {return i + i; });
+
+
+
+If we compare the execution time of these two calls, seen in the following table in the last two columns, with the total time for separately calling map and reduce, as seen in the other implementations, you can see that std::transform_reduce(), especially the parallel version, executes better in most cases:
+
+
+
+Figure 8.5: A comparison of execution times for the transform/reduce pattern with a highlight of the times for the std::transform_reduce() standard algorithm from C++17
+
+
+
+Using joinable threads and cancellation mechanisms
+
+
+
+The C++11 class std::thread represents a single thread of execution and allows multiple functions to execute concurrently. However, it has a major inconvenience: 
+you must explicitly invoke the join() method to wait for the thread to fi nish execution. This can lead to problems because if an std::thread object is destroyed while it is still joinable, and then std::terminate() is called. C++20 provides an improved thread class called std::jthread (from joinable thread) that automatically calls join() if the thread is still joinable when the object is destroyed. Moreover, this type supports cancellation through std::stop_source/std::stop_token and its destructor also requests the thread to stop before joining. In this recipe, you will learn how to use these new C++20 types.
+
+
+
+Before you continue with this, you should read the fi rst recipe of this chapter, Working with threads, to make sure you are familiar with std::thread. To use std::jthread, you need to include the same <thread> header. For std::stop_source and std::stop_token, you need to include the header <stop_token>.
+
+
+
+How to do it...
+
+
+
+The typical scenarios for using joinable threads and a cooperative cancellation mechanism are as follows:
+
+
+
+• If you want to automatically join a thread object when it goes out of scope, use std::jthread instead of std::thread. You can still use all the methods that std::thread has, such as explicitly joining with join():
+
+
+
+void thread_func(int i) {  while(i-- > 0)  {  std::cout << i << '\n';
+ } } int main() {  std::jthread t(thread_func, 10);
+}
+
+
+
+• If you need to be able to cancel the execution of a thread, you should do the following:
+
+
+
+• Make sure the fi rst parameter of the thread function is an std::stop_token object.
+• In the thread function, periodically check if stopping was requested using the stop_requested() method of the std::stop_token object and stop when signaled.
+• Use std::jthread for executing the function on a separate thread.
+• From the calling thread, use the request_stop() method of the std::jthread object to request the thread function to stop and return.
+
+
+
+void thread_func(std::stop_token st, int& i) {  while(!st.stop_requested() && i < 100)  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(200ms);
+ i++;
+ } } int main() {  int a = 0;
+  std::jthread t(thread_func, std::ref(a));
+  using namespace std::chrono_literals;
+
+
+
+std::this_thread::sleep_for(1s);
+  t.request_stop();
+  std::cout << a << '\n'; // prints 4 }
+
+
+
+• If you need to cancel the work of multiple threads, then you can do the following:
+
+
+
+• All thread functions must take an std::stop_token object as the fi rst argument.
+• All thread functions should periodically check if a stop was requested by calling the stop_requested() method of std::stop_token and, if a stop was requested, abort the execution.
+• Use std::jthread to execute functions on different threads.
+• In the calling thread, create an std::stop_source object.
+• Get an std::stop_token object by calling the get_token() method of the std::stop_source object and pass it as the fi rst argument for the thread function when creating std::jthread objects.
+• When you want to stop the execution of the thread functions, call the request_stop() method of the std::stop_source object.
+
+
+
+void thread_func(std::stop_token st, int& i) {  while(!st.stop_requested() && i < 100)  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(200ms);
+ i++;
+ } } int main() {  int a = 0;
+ int b = 10;
+  std::stop_source st;
+  std::jthread t1(thread_func, st.get_token(),  std::ref(a));
+
+
+
+std::jthread t2(thread_func, st.get_token(),  std::ref(b));
+  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(1s);
+  st.request_stop();
+  std::cout << a << ' ' << b << '\n'; // prints 4  // and 14 }
+
+
+
+• If you need to execute a piece of code when a stop source is requesting cancellation, you can use an std::stop_callback created with the std::stop_token object, which signals the stop request and a callback function that is invoked when the stop is requested (through the std::stop_source object associated with std::stop_token):
+
+
+
+void thread_func(std::stop_token st, int& i) {  while(!st.stop_requested() && i < 100)  {  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(200ms);
+ i++;
+ } } int main() {  int a = 0;
+  std::stop_source src;
+ std::stop_token token = src.get_token();
+ std::stop_callback cb(token,  []{std::cout << "the end\n";});
+  std::jthread t(thread_func, token, std::ref(a));
+  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(1s);
+
+
+
+src.request_stop();
+  std::cout << a << '\n'; // prints "the end" and 4 }
+
+
+
+How it works...
+
+
+
+std::jthread is very similar to std::thread. It is, in fact, the attempt to fi x what was wrong with threads in C++11. Its public interface is very similar to std::thread. All the methods std::thread has are also present in std:jthread. However, it differs in the following key aspects:
+
+
+
+• Internally, it maintains, at least logically, a shared stop-state, which allows for the request of the thread function to stop execution.
+• It has several methods for handling cooperative cancellation: get_stop_source(), which returns an std::stop_source object associated with the shared stop state of the thread, get_stop_token(), which returns an std::stop_token associated with the shared stop state of the thread, and request_stop(), which requests the cancellation of the execution of the thread function via the shared stop state.
+• The behavior of its destructor that, when the thread is joinable, calls request_stop() and then join() to fi rst signal the request to stop execution and then wait until the thread has fi nished its execution.
+
+
+
+You can create std::jthread objects just as you would create std::thread objects. 
+However, the callable function that you pass to an std::jthread can have a fi rst argument of the type std::stop_token. This is necessary when you want to be able to cooperatively cancel the thread's execution. Typical scenarios include graphical user interfaces where user interaction may cancel work in progress, but many other situations can be envisioned. The invocation of such a function thread happens as follows:
+
+
+
+• If the fi rst argument for the thread function, supplied when constructing std::jthread, is an std::stop_token, it is forwarded to the callable function.
+• If the fi rst argument, if any, for the callable function is not an std::stop_ token object, then the std::stop_token object associated with the std::jthread object's internal shared stop-state is passed to the function. This token is obtained with a call to get_stop_token().
+
+
+
+The function thread must periodically check the status of the std::stop_token object. 
+The stop_requested() method checks if a stop was requested. The request to stop comes from an std::stop_source object.
+
+
+
+If multiple stop tokens are associated with the same stop source, a stop request is visible to all the stop tokens. If a stop is requested, it cannot be withdrawn, and successive stop requests have no meaning. To request a stop, you should call the request_stop() method. You can check if an std::stop_source is associated with a stop-state and can be requested to stop by calling the stop_possible() method.
+
+
+
+If you need to invoke a callback function when a stop source is requested to stop, then you can use the std::stop_callback class. This associates an std::stop_token object with a callback function when the stop source of the stop token is requested to stop the callback is invoked. Callback functions are invoked as follows:
+
+
+
+• In the same thread that invoked request_stop().
+• In the thread constructing the std::stop_callback object, if the stop has already been requested before the stop callback object has been constructed.
+
+
+
+You can create any number of std::stop_callback objects for the same stop token. 
+However, the order the callbacks are invoked in is unspecif i ed. The only guarantee is that they will be executed synchronously, provided that the stop has been requested after the std::stop_callback objects have been created.
+
+
+
+It is also important to note that, if any callback function returns via an exception, then std::terminate() will be invoked.
+
+
+
+Using thread synchronization mechanisms
+
+
+
+The thread support library from C++11 includes mutexes and condition variables that enable thread-synchronization to shared resources. A mutex allows only one thread of multiple processes to execute, while other threads that want to access a shared resource are put to sleep. Mutexes can be expensive to use in some scenarios. 
+For this reason, the C++20 standard features several new simpler synchronization mechanisms: latches, barriers, and semaphores. Although these do not provide new use cases, they are simpler to use and can be more performant because they may internally rely on lock-free mechanisms.
+
+
+
+At the time of writing this book, no compiler supports the C++20 thread synchronization mechanisms. Although based on the standard specif i cations, the sample code in this recipe could not be tested with any compiler, and we cannot guarantee their correctness.
+
+
+
+The new C++20 synchronization mechanisms are def i ned in new headers. You have to include <latch> for std::latch, <barrier>, or std::barrier, and <semaphore> for std::counting_semaphore and std::binary_semaphore.
+
+
+
+How to do it...
+
+
+
+Use the C++20 synchronization mechanisms as follows:
+
+
+
+• Use std::latch when you need threads to wait until a counter, decreased by other threads, reaches zero. The latch must be initialized with a non-zero count and multiple threads can decrease it, while others wait to the count to reach zero. When that happens, all waiting threads are awakened and the latch can no longer be used. In the following example, four threads are creating data (stored in a vector of integers) and the main thread waits for the completion of them all by utilizing an std::latch, decremented by each thread after completing its work:
+
+
+
+int const jobs = 4;
+std::latch work_done(jobs);
+std::vector<int> data(jobs);
+std::vector<std::jthread> threads;
+for(int i = 1; i <= jobs; ++i) {  threads.push_back(std::jthread([&data, i, &work_done]{  using namespace std::chrono_literals;
+
+
+
+std::this_thread::sleep_for(1s); // simulate work  data[i] = create(i); // create data   work_done.count_down(); // decrement counter  })); } work_done.wait(); // wait for all jobs to finish process(data); // process data from all jobs
+
+
+
+• Use std::barrier when you need to perform loop synchronization between parallel tasks. You construct a barrier with a count and, optionally, a completion function. Threads arrive at the barrier, decrease the internal counter, and block. When the counter reaches zero, the completion function is invoked, all blocked threads are awakened, and a new cycle begins. In the following example, four threads are creating data that they store in a vector of integers. When all the threads have completed a cycle, the data is processed in the main thread, by a completion function. Each thread blocks after completing a cycle until they are awakened through the use of an std::barrier object, which also stores the completion function. This process is repeated 10 times:
+
+
+
+int const jobs = 4;
+std::vector<int> data(jobs);
+int cycle = 1;
+std::stop_source st;
+std::barrier<std::function<void()>>  work_done(  jobs, // counter  [&data, &cycle, &st]() { // completion function  process(data); // process data from all jobs  cycle++;
+ if (cycle == 10)  st.request_stop(); // stop after ten cycles  });
+std::vector<std::jthread> threads;
+for (int i = 1; i <= jobs; ++i) {  threads.push_back(std::jthread(  [&cycle, &work_done](std::stop_token st, int const i)  {  while (!st.stop_requested())  {  // simulate work  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(200ms); 
+ // create data  data[i] = create(i, cycle);
+
+
+
+// decrement counter  work_done.arrive_and_wait(); }  }));
+} for (auto& t : threads) t.join();
+
+
+
+• Use std::counting_semaphore<N> or std::binary_semaphore when you want to restrict a number of N threads (a single thread, in the case of binary_semaphore) to access a shared resource, or when you want to pass notif i cations between different threads. In the following example, four threads are creating data that is added to the end of a vector of integers. To avoid race conditions, a binary_semaphore object is used to restrict the access of a single thread to the vector:
+
+
+
+int const jobs = 4;
+std::vector<int> data;
+std::binary_semaphore bs;
+for (int i = 1; i <= jobs; ++i) {  threads.push_back(std::jthread([&data, i, &bs] {  for (int k = 1; k < 5; ++k)  {  // simulate work  using namespace std::chrono_literals;
+ std::this_thread::sleep_for(200ms);
+ // create data  int value = create(i, k);
+ // acquire the semaphore  bs.acquire();
+ // write to the shared resource  data.push_back(value);
+ // release the semaphore  bs.release(); }  }));
+} process(data); // process data from all jobs
+
+
+
+How it works...
+
+
+
+The std::latch class implements a counter that can be used to synchronize threads. 
+It is a race-free class that works as follows:
+
+
+
+• The counter is initialized when the latch is created and can only be decreased.
+• A thread may decrease the value of the latch and can do so multiple times.
+• A thread may block by waiting until the latch counter reaches zero.
+• When the counter reaches zero, the latch becomes permanently signaled and all the threads that are blocked on the latch are awakened.
+
+
+
+The std::latch class has the following methods:
+--
+table of 2 cols
+
+
+
+Methods Descriptions count_down() Decrements the internal counter by N (which is 1 by default) without blocking the caller. This operation is performed atomically. N must be a positive value not greater than the value of the internal counter; otherwise, the behavior is undef i ned.
+try_wait() Indicates whether the internal counter reaches zero, in which case it returns true. There is a very low probability that, although the counter has reached zero, the function may still return false.
+wait() Blocks the calling thread until the internal counter reaches zero. If the internal counter is already zero, the function returns immediately without blocking.
+arrive_and_wait() This function is equivalent to calling count_down(), followed by wait(). It decrements the internal counter with N (which is 1 by default), and then blocks the calling thread until the internal counter reaches zero.
+
+
+
+In the fi rst example in the previous section, we have an std::latch, called work_done, initialized with the number of threads (or jobs) that perform work. Each thread produces data that is then written in a shared resource, a vector of integers. Although this is shared, there is no race condition because each thread writes to a different place; therefore, there is no need for a synchronization mechanism. After completing its work, each thread decrements the counter of the latch. The main thread waits until the counter of the latch reaches zero, after which it processes the data from the threads.
+
+
+
+Because the internal counter of std::latch cannot be incremented or reset, this synchronization mechanism can be used only once. A similar but reusable synchronization mechanism is std::barrier. A barrier allows threads to block until an operation is completed and is useful for managing repeated tasks performed by multiple threads.
+
+
+
+A barrier works as follows:
+
+
+
+• A barrier contains a counter that is initialized during its creation and can be decreased by threads arriving at the barrier. When the counter reaches zero, it is reset to its initial value and the barrier can be reused.
+• A barrier also contains a completion function that is called when the counter reaches zero. If a default completion function is used, it is invoked as part of the call to arrive_and_wait() or arrive_and_drop(). Otherwise, the completion function is invoked on one of the threads that participates in the completion phase.
+• The process through which a barrier goes from start to reset is called the completion phase. This starts with a so-called synchronization point and ends with the completion step.
+• The fi rst N threads that arrive at the synchronization point after the construction of the barrier are said to be the set of participating threads. 
+Only these threads are allowed to arrive at the barrier during each of the following cycles.
+• A thread that arrives at the synchronization point may decide to participate in the completion phase by calling arrive_and_wait(). However, a thread may remove itself from the participation set by calling arrive_and_drop(). In this case, another thread must take its place in the participation set.
+• When all the threads in the participation set have arrived at the synchronization point, the completion phase is executed. There are three steps that occur: fi rst, the completion function is invoked. Second, all the threads that are blocked are awakened. Third, and last, the barrier count is reset and a new cycle begins.
+
+
+
+The std::barrier class has the following methods:
+--
+table of 2 cols
+
+
+
+Methods Descriptions arrive_and_wait() Arrives at the barrier's synchronization point and blocks. The calling thread must be in the participating set; otherwise, the behavior is undef i ned. This function only returns after the completion phase ends.
+arrive_and_drop() Arrives at the barrier's synchronization point and removes the thread from the participation set. It is an implementation detail whether the function blocks or not until the end of the completion phase. The calling thread must be in the participation set; 
+otherwise, the behavior is undef i ned.
+
+
+
+We saw an example with std::barrier in the second snippet from the How to do it... 
+section. In this example, an std::barrier is created and initialized with a counter, which represents the number of threads, and a completion function. This function processes the data produced by all the threads, then increments a loop counter, and requests threads to stop after 10 loops. This basically means that the barrier will perform 10 cycles before the threads will fi nish their work. Each thread loops until a stop is requested, and, in each iteration, they produce some data, written to the shared vector of integers. At the end of the loop, each thread arrives at the barrier synchronization point, decrements the counter, and waits for it to reach zero and the completion function to execute. This is done with a call to the arrive_and_wait() method of the std::barrier class.
+
+
+
+The last synchronization mechanism available in the thread support library in C++20 is represented by semaphores. A semaphore contains an internal counter that can be both decreased and increased by multiple threads. When the counter reaches zero, further attempts to decrease it will block the thread, until another thread increases the counter.
+
+
+
+There are two semaphore classes: std::counting_semaphore<N> and std::binary_ semaphore. The latter is actually just an alias for std::counting_semaphore<1>.
+
+
+
+A counting_semaphore allows N threads to access a shared resource, unlike a mutex, which only allows one. binary_semaphore, is, in this matter, similar to the mutex, because only one thread can access the shared resource. On the other hand, a mutex is bound to a thread: the thread that locked the mutex must unlock it. However, this is not the case for semaphores. A semaphore can be released by threads that did not acquire it, and a thread that acquired a semaphore does not have to also release it.
+
+
+
+The std::counting_semaphore class has the following methods:
+--
+table of 2 cols
+
+
+
+Methods Descriptions acquire() Decrements the internal counter by 1 if it is greater than 0. Otherwise, it blocks until the counter becomes greater than 0.
+try_acquire() Tries to decrement the counter by 1 if it is greater than 0. It returns true if it succeeds, or false otherwise. This method does not block.
+try_acquire_for() Tries to decrease the counter by 1 if it is greater than 0. 
+Otherwise, it blocks either until the counter becomes greater than 0 or a specif i ed timeout occurs. The function returns true if it succeeded in decreasing the counter.
+
+
+
+try_acquire_until() Tries to decrease the counter by 1 if it is greater than 0. Otherwise, it blocks either until the counter becomes greater than 0 or a specif i ed time point has been passed. The function returns true if it succeeded in decreasing the counter.
+release() Increments the internal counter by the specif i ed value (which is 1 by default). Any thread that was blocked waiting for the counter to become greater than zero is awakened.
+
+
+
+All the increment and decrement operations performed on the counter by the methods listed here are executed atomically.
+
+
+
+The last example in the How to do it... section shows how a binary_semaphore can be used. A number of threads (four, in this example) produce work in a loop and write to a shared resource. Unlike the previous examples, they simply add to the end of a vector of integers. Therefore, the access to this vector must be synchronized between the threads, and this is where the binary semaphore is used. In each loop, the thread function creates a new value (which may take some time). This value is then appended to the end of the vector. However, the thread must call the acquire() method of the semaphore to make sure it is the only thread that can continue execution and access the shared resource. After the write operation completes, the thread calls the release() method of the semaphore in order to increment the internal counter and allow another thread to access the shared resource.
+
+
+
+Semaphores can be used for multiple purposes: to block access to shared resources (similar to mutexes), to signal or pass notif i cations between threads (similar to condition variables), or to implement barriers, often with better performance than similar mechanisms.
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

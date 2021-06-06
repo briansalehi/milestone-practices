@@ -1,0 +1,47 @@
+Boost.Asio C++ Network Programming - 2nd Edition
+Anggoro Wisnu, Torjo John
+Boost.Asio C++ Network Programming
+--
+, 2nd Edition - 
+
+Wisnu Anggoro
+John Torjo
+
+For more information about ISO C++11 features available in GCC, go to http://gcc.gnu.org/projects/cxx0x.html. To obtain all the diagnostics required by the standard, you should also specify the -pedantic option (or the -pedantic-errors option if you want to handle warnings as errors).
+
+The -ansi option alone does not cause non-ISO programs to be rejected gratuitously. For that, the -pedantic option or the -pedantic-errors option is required in addition with the -ansi option.
+
+The Boost C++ libraries is a set of libraries to complement the C++ standard libraries.
+
+For detailed information about Boost libraries, go to www.boost.org. And if you want to contribute developing libraries to Boost, you can join the developer mailing list at lists.boost.org/mailman/listinfo.cgi/boost.
+The entire source code of the libraries is available on the official GitHub page at github.com/boostorg.
+
+#include <boost/thread.hpp>
+#include <boost/chrono.hpp>
+#include <iostream>
+void Print1() {
+  for (int i=0; i<5; i++) {
+    boost::this_thread::sleep_for(boost::chrono::milliseconds{500});
+    std::cout << "[Print1] Line: " << i << '\n';
+  }
+}
+void Print2() {
+  for (int i=0; i<5; i++) {
+    boost::this_thread::sleep_for(boost::chrono::milliseconds{500});
+    std::cout << "[Print2] Line: " << i << '\n';
+  }
+}
+int main(void) {
+  boost::thread_group threads;
+  threads.create_thread(Print1);
+--
+ threads.create_thread(Print2);
+ threads.join_all()
+}
+
+The core  object of the Boost::Asio namespace is io_service. The I/O service is a channel that is used to access operating system resources  and establish communication between our program and the operating system that performs I/O requests. There  is also an I/O object that  has the role of submitting I/O requests. For  instance, the tcp::socket object will provide a socket programming request from our program to the operating system.
+
+One of the  most frequently used functions in the I/O service  object is the run() function. It is used to run  the io_service object's event processing loop. It will block  the next statement program until all the work in the io_service object is completed and there are no more handlers to be dispatched. If we stop the io_service object, it will no longer block the program.
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

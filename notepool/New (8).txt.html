@@ -1,0 +1,34 @@
+Beginning x64 Assembly Programming
+Jo Van Hoey
+4. Your Next Program: Alive and Kicking!
+
+;alive.asmsection .data      msg1   db    "Hello, World!",10,0       ; string with NL and 0      msg1Len      equ    $-msg1-1     ; measure the length, minus the 0      msg2   db    "Alive and Kicking!",10,0  ; string with NL and 0      msg2Len      equ    $-msg2-1     ; measure the length, minus the 0      radius dq    357                 ; no string, not displayable?      pi     dq    3.14                ; no string, not displayable?section .bsssection .text      global mainmain:    push           rbp            ; function prologue    mov            rbp,rsp        ; function prologue    mov            rax, 1         ; 1 = write    mov            rdi, 1         ; 1 = to stdout    mov            rsi, msg1      ; string to display    mov            rdx, msg1Len   ; length of the string    syscall                       ; display the string    mov            rax, 1         ; 1 = write    mov            rdi, 1         ; 1 = to stdout    mov            rsi, msg2      ; string to display    mov            rdx, msg2Len   ; length of the string    syscall                       ; display the string    mov            rsp,rbp        ; function epilogue    pop            rbp            ; function epilogue    mov            rax, 60        ; 60 = exit    mov            rdi, 0         ; 0 = success exit code    syscall                       ; quit
+
+The $-msg1-1 part means this: take this memory location ($) and subtract the memory location of msg1. The result is the length of msg1
+--
+use in first page
+
+Note the use of a function prologue and function epilogue in the code. These are needed for  GDB  to function correctly
+
+For a floating-point variable, use the following:
+      x/fg &pi      x/fx &pi
+
+So, we start by telling the assembler (and the linker) that we are going to use an external function called printf. We created a string for formatting how  printf  will display msg. The syntax for the format string is similar to the syntax in C; if you have any experience with C, you will certainly recognize the format string. %s is a placeholder for the string to be printed.
+Do not forget the function prologue and epilogue. Move the address of msg into rsi, and move the address of the fmtstr into rdi. Clear rax, which in this case means there are no floating-point numbers in the xmm registers to be printed.
+
+The  printf  function requires that a string is terminated with 0 (NULL). If you omit the 0, printf will display everything until it finds a 0. Terminating a string with a 0 is not a requirement in assembly, but it is necessary with printf, GDB, and also some SIMD instructions
+
+section .data      msg1        db    "Hello, World!",0      msg2        db    "Alive and Kicking!",0      radius      dd    357      pi          dq    3.14      fmtstr      db    "%s",10,0 ;format for printing a string      fmtflt      db    "%lf",10,0 ;format for a float      fmtint      db    "%d",10,0 ;format for an integersection .bsssection .textextern     printf      global mainmain:    push   rbp    mov    rbp,rsp; print msg1    mov    rax, 0            ; no floating point    mov    rdi, fmtstr    mov    rsi, msg1    call   printf; print msg2    mov    rax, 0            ; no floating point    mov    rdi, fmtstr    mov    rsi, msg2    call   printf; print radius    mov    rax, 0            ; no floating point    mov    rdi, fmtint    mov    rsi, [radius]    call   printf; print pi    mov    rax, 1            ; 1 xmm register used    movq   xmm0, [pi]    mov    rdi, fmtflt    call   printf    mov    rsp,rbp    pop    rbpret
+
+Note the square brackets, [ ], around radius and pi.
+      mov rsi, [radius]
+
+This means: take the content at address radius and put it in rsi. The function printf wants a memory address for strings, but for numbers it expects a value, not a memory address. Keep that in mind.
+
+The exit of our program is something new. Instead of the familiar code shown here:
+      mov  rax, 60
+; 60 = exit      mov  rdi, 0     ; 0 = success exit code      syscall         ; quitwe use the equivalent:
+      ret
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

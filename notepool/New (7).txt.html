@@ -1,0 +1,195 @@
+Beginning x64 Assembly Programming
+Jo Van Hoey
+Computers use binary digits (0s and 1s) to do the work. Eight binary digits grouped together are called a  byte .
+
+Hexadecimal numbers are more user-friendly (only slightly), not in the least because every 8-bit byte can be represented by only two hexadecimal numbers.
+
+There are two kinds of integers, signed and unsigned. Signed integers have the leftmost bit set to 1 if negative and 0 if positive. Unsigned integers are 0 or positive; there is no room for a sign bit. To be able to do integer arithmetic, negative integers are used in what is called a two’s complement representation.
+
+Here is an example using 16-bit numbers, instead of 64-bit numbers (to keep the example manageable):
+
+decimal number =     17binary number =      0000    0000    0001    0001hexadecimal number =   0       0       1       1    = 11
+
+decimal number =                      -17
+
+binary number absolute value =        0000    0000    0001    0001complement =                          1111    1111    1110    1110
+
+add 1 =                               1111    1111    1110    1111
+
+hexadecimal =                         f       f       e       f      = ffef
+
+Verify:    -17       11111111 11101111
+
+add:       +17       00000000 00010001
+
+equals:    0         00000000 00000000
+
+If it is a signed integer, it means -17 in decimal. If it is an unsigned integer, it means 65519.
+
+Floating-point numbers  are written in binary or hexadecimal according to the IEEE-754 standard. The process is even more complicated than with integers; if you want to know the details, here is a good place to start:
+http://mathcenter.oxford.emory.edu/site/cs170/ieee754/
+
+Registers are storage locations, used by the CPU to store data, instructions, or memory addresses.
+
+One rule to keep in mind if speed is important is that the CPU can access registers much faster than it can access memory.
+
+There are 16 general-purpose registers, and each register can be used as a 64-bit, 32-bit, 16-bit, or 8-bit register. In the following table, you can see the names of each register in different sizes. Four registers—rax, rbx, rcx, and rdx—can have two kinds of 8-bit registers: low 8-bit, which is the lower half of the 16-bit register, and high 8-bit, which is the higher half of the 16-bit register.
+
+Although rbp and rsp are called general-purpose registers, they should be handled with care, as they are used by the processor during the program execution.
+
+The processor keeps track of the next instruction to be executed by storing the address of the next instruction in  rip . You can change the value in rip to whatever you want at your own peril; you have been warned. A safer way of changing the value in rip is by using jump instructions.
+
+Flag Register
+
+Here is the layout of  rflags , the flag register. After executing an instruction, a program can check whether a certain flag is set (e.g., ZF=1) and then act accordingly.
+
+NameSym
+bolBitContent
+CarryCF0Previous instruction had a 
+carry
+ParityPF2Last byte has even number 
+of 1s
+AdjustAF4BCD operations
+ZeroZF6Previous instruction resul
+ted a zero
+SignSF8Previous instruction resul
+ted in most significant bit equal to 1
+DirectionDF10Direction of string operati
+ons (increment or decrement)
+OverflowOF11Previous instruction resul
+ted in overflow
+--
+table of 4 cols
+
+There is another flag register, called MXCSR, that will be used in the single instruction, multiple data (SIMD) instruction chapters
+
+xmm and ymm Registers
+These registers are used for floating-point calculations and SIMD. We will use the xmm and corresponding ymmregisters extensively later, starting with the floating-point instructions.
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
+Beginning x64 Assembly Programming
+Jo Van Hoey
+Debugging is an important skill, because with a debugger you can investigate the content of registers and memory in hexadecimal, binary, or decimal representation.
+
+There are several free and commercial debuggers available. In Linux, the mother of all debuggers is GDB
+
+To start debugging the hello program , in the CLI navigate to the directory where you saved the hello program. At the command prompt, type the following:
+      gdb hello
+
+GDB will load the executable hello into memory and answer with its own prompt (gdb), waiting for your instructions. If you type the following:
+      list
+
+GDB will show a number of lines of your code. Type list again , and GDB will show the next lines, and so on.
+
+To list a specific line, for example, the start of your code, type list 1.
+
+If the output on your screen is different from our screen, containing lots of % signs, then your GDB is configured to use the AT&T syntax flavor. We will use the Intel syntax flavor, which is more intuitive (to us).
+--
+set disassembly-flavor intel
+
+If you type the following:
+      run
+
+runGDB will run your hello program, printing hello, world, and return to its prompt (gdb).
+
+As you learned before, the hello, world program first initializes some data in section.data and section.bss and then proceeds to the main label.
+
+At the (gdb) prompt, type the following:
+      disassemble main
+
+GDB returns your source code, more or less. The returned source code is not exactly the same as the source you wrote originally.
+
+Figure 3-3
+--
+disassembled main
+
+The long numbers on the left, starting with 0x00..., are memory addresses; they are the places where the machine instructions of our program are stored
+
+The 64-bit assembler is an extension of the 32-bit assembler, and you will see that whenever possible the assembler will use 32-bit instructions.
+
+The 0x1 is the hexadecimal representation of the decimal number 1, 0xd is decimal 13, and 0x3c is decimal 60.
+
+The nop instruction   means “no operation” and is inserted there by the assembler for memory management reasons.
+
+What happened to our msg? The instruction mov rsi, msg got replaced by movabs rsi,0x601030. Do not worry about movabs for now; it is there because of 64-bit addressing, and it is used to put an immediate (value) in a register.
+
+The 0x601030 is the memory address where msg is stored on our computer. This can be a different address in your case.
+At the (gdb) prompt, type the following:
+      x/s 0x601030 (or x/s 'your_memory_address')
+
+GDB answers with the output
+
+The x stands for “examine,” and the s stands for “string.” GDB answered that 0x601030 is the start of the string msg and tries to show the whole string up until a string-terminating 0.
+
+You can also type the following:
+      x/c 0x601030to get the output
+--
+gdb output
+
+With c you ask for a character. Here GDB returns the first character of msg, preceded by the decimal ASCII code of that character.
+
+Use this to show 13 characters starting at a memory address (see Figure 3-6):
+      x/13c 0x601030
+
+Use the following to show 13 characters starting at a memory address in decimal representation (see Figure 3-7):
+      x/13d 0x601030
+
+Use the following to show 13 characters starting at a memory address in hexadecimal representation (see Figure 3-8):
+      x/13x 0x601030
+
+Use the following to show msg (see Figure 3-9):
+      x/s &msg
+
+Let’s return to the disassemble listing. Type the following:
+      x/2x 0x004004e0
+
+This shows in hexadecimal the content of the two memory addresses starting at 0x004004e0 (see Figure 3-10).
+
+GDB output
+
+This is our first instruction,  mov eax,0x1 , in machine language.
+
+we will put a break in the program, pausing the execution and allowing us to examine a number or things. Type the following:
+      break main
+
+Then type the following:
+      run
+
+The debugger stops at the break and shows the next instruction that will be executed.
+
+Type the following:
+      info registers
+
+The content of the registers is not important now, except for rip, the instruction pointer. Register rip  has the value 0x4004e0, which is the memory address of the next instruction to execute.
+
+It is important to remember that the instruction pointed to byripis not yet executed.
+
+Type the following to advance one step:
+      step
+
+The type the following, which is the abbreviation for  info registers :
+      i r
+
+Step further through the program and notice how rsi receives the address of msg, prints hello, world on the screen, and exits. Notice also how rip points every time to the next instruction to execute.
+
+Some Additional GDB Commands
+
+break or b: Set a breakpoint as we have done before.
+
+disable breakpointnumberenable breakpointnumberdelete breakpointnumber
+
+continue or c: Continue execution until next breakpoint.
+
+step or s: Step into the current line, eventually jumping into the called function.
+
+next or n: Step over the current line and stop at the next line.
+
+help or h: Show help.
+
+tui enable: Enable  a simple text user interface; to disable, use tui disable.
+
+print or p: Print  the value of a variable, register, and so on.
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

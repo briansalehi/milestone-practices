@@ -1,0 +1,159 @@
+Mastering the C++17 STL (2017)
+Arthur O'Dwyer
+Mastering the C++17 STL
+Make full use of the standard library components in C++17
+Arthur O'Dwyer
+
+The C++ standard library has two distinct, yet equally important, missions.
+
+One of these missions is to provide rock-solid implementations of certain concrete data types or functions
+
+std::string, std::regex, std::filesystem
+
+The other mission of the standard library is to provide rock-solid implementations of widely used abstract algorithms such as sorting, searching, reversing, collating, and so on.
+
+we will
+
+describe the two approaches that the standard library uses to provide abstraction: classical polymorphism and generic programming.
+
+What distinguishes an abstract algorithm from a concrete function? This is best shown by example.
+--
+rewrite to a simple form
+
+class array_of_ints {      int data[10] = {};
+      public:
+        int size() const { return 10; }
+        int& at(int i) { return data[i]; }
+    };
+    void double_each_element(array_of_ints& arr)
+    {
+      for (int i=0; i < arr.size(); ++i) {
+        arr.at(i) *= 2;
+      }
+    }
+
+Our function double_each_element works only with objects of type array_of_int; passing in an object of a different type won't work (nor even compile).
+
+We refer to functions like this version of double_each_element as concrete or monomorphic functions. We call them concrete because they are insufficiently abstract for our purposes. Just imagine how painful it would be if the C++ standard library provided a concrete sort routine that worked only on one specific data type!
+
+We can increase the abstraction level of our algorithms via the techniques of classical object-oriented (OO) programming
+
+The OO approach is to decide exactly which behaviors we'd like to be customizable, and then declare them as the public virtual member functions of an abstract base class:
+
+class container_of_ints {      public:
+      virtual int size() const = 0;
+      virtual int& at(int) = 0;
+    };
+    class array_of_ints : public container_of_ints {
+      int data[10] = {};
+      public:
+        int size() const override { return 10; }
+        int& at(int i) override { return data[i]; }
+    };
+    class list_of_ints : public container_of_ints {
+      struct node {
+        int data;
+        node *next;
+      };
+      node *head_ = nullptr;
+      int size_ = 0;
+      public:
+       int size() const override { return size_; }
+       int& at(int i) override {
+        if (i >= size_) throw std::out_of_range("at");
+        node *p = head_;
+        for (int j=0; j < i; ++j) {
+          p = p->next;
+        }
+        return p->data;
+      }
+      ~list_of_ints();
+    };
+    void double_each_element(container_of_ints& 
+arr)     {
+      for (int i=0; i < arr.size(); ++i) {
+        arr.at(i) *= 2;
+      } 
+    }
+    void test()
+    {
+      array_of_ints arr;
+      double_each_element(arr);
+      list_of_ints lst;
+      double_each_element(lst);
+    }
+
+Inside test, the two different calls to double_each_element compile because in classical OO terminology, an array_of_intsIS-Acontainer_of_ints (that is, it inherits from container_of_ints and implements the relevant virtual member functions), and a list_of_intsIS-Acontainer_of_ints as well. However, the behavior of any given container_of_ints object is parameterized by its dynamic type; that is, by the table of function pointers associated with this particular object.
+
+Since we can now parameterize the behavior of the double_each_element function without editing its source code directly--simply by passing in objects of different dynamic types--we say that the function has become polymorphic.
+
+But still, this polymorphic function can handle only those types which are descendants of the base class container_of_ints. For example, you couldn't pass a std::vector<int> to this function; you'd get a compile error if you tried.
+
+Classical polymorphism is useful, but it does not get us all the way to full gen
+ericity.
+
+In modern C++, the typical way to write a fully generic algorithm is to implement the algorithm as a template.
+
+template<class ContainerModel>    void double_each_element(ContainerModel& 
+arr)    {
+      for (int i=0; i < arr.size(); ++i) {
+        arr.at(i) *= 2;
+      }
+    }
+    void test()
+    {
+      array_of_ints arr;
+      double_each_element(arr);
+      list_of_ints lst;
+      double_each_element(lst);
+      std::vector<int> vec = {1, 2, 3};
+      double_each_element(vec);
+    }
+
+That set of operations, taken together, constitutes what's known in C++ as a concept;
+
+Whenever some class array_of_ints correctly supplies the operations required by the concept Container, such that array_of_ints is usable with double_each_element, we say that the concrete class array_of_intsis a model of the Container concept.
+
+When we implement an abstract algorithm using templates, so that the behavior of the algorithm can be parameterized at compile time by any types modeling the appropriate concepts, we say we are doing generic programming.
+
+Let's look at a couple more hand-written generic algorithms, before we dive into the standard generic algorithms provided by the STL. Here is a function template count, returning the total number of elements in a container:
+
+template<class Container>    int count(const Container& container)
+    {
+      int sum = 0;
+      for (auto&& elt : container) {
+        sum += 1;
+      }
+      return sum;
+    }
+
+And here is count_if, which returns the number of elements satisfying a user-supplied predicate function:
+
+template<class Container, class Predicate>    int count_if(const Container& container, Predi
+cate pred)     { 
+      int sum = 0;
+      for (auto&& elt : container) {
+        if (pred(elt)) {
+            sum += 1;
+        }
+      }
+      return sum;
+    }
+
+These functions would be used like this:
+
+std::vector<int> v = {3, 1, 4, 1, 5, 9, 2, 6};
+    assert(count(v) == 8);
+    int number_above =
+      count_if(v, [](int e) { return e > 5; });
+    int number_below =
+      count_if(v, [](int e) { return e < 5; });
+    assert(number_above == 2);
+    assert(number_below == 5);
+
+I encourage you to try re-implementing the count_if function in terms of classical polymorphism, just to get a sense of where the whole thing breaks down.
+
+in the generic-programming version, we never specify--we never need to specify--whether pred takes its parameter elt by value or by reference. Try doing that with a virtual bool operator()!
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
