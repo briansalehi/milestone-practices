@@ -66,3 +66,4 @@
 	<li>Configure and cross-compile the kernel for an arm platform</li>
 	<li>On this platform, interact with the bootloader and boot your kernel</li>
 </ul>
+

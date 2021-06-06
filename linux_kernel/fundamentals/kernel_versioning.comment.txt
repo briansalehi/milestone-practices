@@ -25,7 +25,7 @@
 
 <ul>
 	<li><a href="https://kernelnewbies.org/LinuxChanges">Kernel Newbies</a></li>
-	<li><a href="https://lwn.net/Kernel">Linux</a></li>
+	<li><a href="https://lwn.net/Kernel">LWN</a></li>
 </ul>
 
 <p>
