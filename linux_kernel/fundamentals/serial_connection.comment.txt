@@ -1,0 +1,65 @@
+<p>Embedded devices compatible with <i>serial connection</i> can be connected to your computer using <b>Serial Communication</b> or RS-232 standard.</p>
+
+<p>To connect your board to your computer, first you need to have a <b>USB to Serial</b> convertor:</p>
+
+![usb-to-serial-cable.jpg]
+
+<p>There are four pins to use in this connection:</p>
+
+<ul>
+	<li><span style="color: red; background-color: lightgray">VCC</span>: +5V Power</li>
+	<li><span style="color: green; background-color: lightgray">TXD</span>: Transfer</li>
+	<li><span style="color: white; background-color: lightgray">RXD</span>: Receive</li>
+	<li><span style="color: black; background-color: lightgray">GND</span>: Ground</li>
+</ul>
+
+<p>
+First you need to find <b>RX</b> and <b>TX</b> pins on your embedded device.<br/>
+In this example, Raspberry Pi Zero is used, so this device's pinout is:
+</p>
+
+![raspberry-pi-zero-pinout.png]
+
+<p>And on the other side you have the PL2303TA cable pinout:</p>
+
+![pl2303ta-pinout.jpg]
+
+<p>Now you need to connect <b>RX</b> and <b>TX</b> pins of cable and device in cross:</p>
+
+![rx-tx-connection-cross.png]
+
+<p>And connect the ground (<b>GND</b>) wire.</p>
+
+<h3>WARNING!</h3>
+<p><b>DO NOT</b> connect your board into another power source like USB or charging cable when it's already powered by <b>VCC</b> pin using PL2303TA.</p>
+
+<p>Now, you should use a serial communication client before powering up your board.</p>
+
+<p>Here are recommended programs:</p>
+
+<ul>
+	<li>minicom</li>
+	<li>picocom</li>
+</ul>
+
+<p>In this notebook, we cover <code>minicom</code> for now.</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		sudo minicom -D /dev/ttyUSB0 -b 115200
+	</code>
+</pre>
+
+<p>This command will connect your terminal to device, if you have properly wired it.</p>
+
+<p>There's an <b>echo test</b> in <b>UART</b> connection, by which you should ensure that at least the PL2303TA cable and minicom is working properly.</p>
+
+<p>Connect the <b>Rx</b> and <b>Tx</b> wires of PL2303TA cable to each other and run the following command in another terminal other that minicom shell. By writing a string into <b>/dev/ttyUSB0</b> virtual device, you should also see the output on the minicom shell because what you send through <b>TX</b> will now come back to minicom itself through <b>RX</b>:</p>
+
+<pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
+	<code>
+		echo 'echo test' | sudo tee /dev/ttyUSB0
+	</code>
+</pre>
+
+<p>If you see the output, PL2303TA and minicom are working correctly, now you need to troubleshoot your device.</p>

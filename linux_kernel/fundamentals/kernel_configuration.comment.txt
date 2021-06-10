@@ -35,7 +35,7 @@ Further edits are applied on this file using following command:
 
 <pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
 	<code>
-		make cpu_defconfig
+		make &lt;soc&gt;_defconfig
 	</code>
 </pre>
 
@@ -49,7 +49,7 @@ And again, to fine-tune this configuration file, following command is used:
 
 <pre class="language-bash command-line" data-prompt="" data-user="" data-host="milestone" data-line="" data-output="">
 	<code>
-		make cpu_defconfig
+		make &lt;soc&gt;_defconfig
 	</code>
 </pre>
 

@@ -8,3 +8,4 @@ booting_kernel.txt
 kernel_structure.txt
 virtual_filesystems.txt
 kernel_modules.txt
+serial_connection.txt
