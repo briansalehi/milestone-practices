@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>QDateTimeEdit</title>
+<title>Notebook</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.9.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.9.4.0.html">*Widgets</a></li>
-<li class='breadcrumb-item active'>QDateTimeEdit</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.9.6.0.html">Charts</a></li>
+<li class='breadcrumb-item active'>...</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,51 +278,232 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
     <button class="btn dropdown-item" onclick="defaultFontSize()" title="ALT + SHIFT + D" accesskey="d">&#x21ba;</button>
   </div>
 </div>
-<h2>
-<a id="QDateTimeEdit" class="anchor" aria-hidden="true" href="#QDateTimeEdit">
-QDateTimeEdit
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h2>
-Date time can be set simply by using this widget.
+Creating the dashboard page
+
+
+
+For multiple pages to co-exist in the same program and to be able to switch between different pages at any time, Qt provides us with something called QStackedWidget.
+
+
+
+First, drag and drop a stacked widget from the Widget Box to the central widget of your application, and then, we need to move everything previously under the central widget into the first page of the stacked widget, which we renamed loginPage:
+
+
+
+Next, set all the layout settings of the central widget to 0, so that it contains no margin at all, like so:
+
+
+
+Next, drag and drop a grid layout to the dashboard page, and apply Layout Vertically to the dashboard page:
+--
+<b>Image Not Found</b>
+
+
+
+After that, drag and drop six Vertical Layout into the Grid Layout, like so:
+--
+<b>Image Not Found</b>
+
+
+
+Then, select each of the vertical layouts we just added to the grid layout, and turn it into QFrame:
+
+
+
+This time around, we also include the QLineSeries header for creating the line chart:
+
+
+
+#include <QtCharts> 
+#include <QChartView> 
+ 
+#include <QBarSet> 
+#include <QBarSeries> 
+ 
+#include <QPieSeries> 
+#include <QPieSlice> 
+ 
+#include <QLineSeries>
+
+
+
+After that, declare the pointers for the charts, like so:
+
+
+
+QChartView *chartViewBar; 
+QChartView *chartViewPie; 
+QChartView *chartViewLine;
+
+
+
+Then, we'll add the code for creating a bar chart.
+
+
+
+The anti-aliasing feature removes the jagged edges of all charts and thus makes the rendering appear smoother:
+
+
+
+MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent), 
+   ui(new Ui::MainWindow) 
+{ 
+   ui->setupUi(this); 
+ 
+   ////////BAR CHART///////////// 
+   QBarSet *set0 = new QBarSet("Jane"); 
+   QBarSet *set1 = new QBarSet("John"); 
+   QBarSet *set2 = new QBarSet("Axel"); 
+   QBarSet *set3 = new QBarSet("Mary"); 
+   QBarSet *set4 = new QBarSet("Samantha"); 
+ 
+   *set0 << 10 << 20 << 30 << 40 << 50 << 60; 
+   *set1 << 50 << 70 << 40 << 45 << 80 << 70; 
+   *set2 << 30 << 50 << 80 << 13 << 80 << 50; 
+   *set3 << 50 << 60 << 70 << 30 << 40 << 25; 
+   *set4 << 90 << 70 << 50 << 30 << 16 << 42; 
+ 
+   QBarSeries *seriesBar = new QBarSeries(); 
+   seriesBar->append(set0); 
+   seriesBar->append(set1); 
+   seriesBar->append(set2); 
+   seriesBar->append(set3); 
+   seriesBar->append(set4); 
+ 
+   QChart *chartBar = new QChart(); 
+   chartBar->addSeries(seriesBar); 
+   chartBar->setTitle("Students Performance"); 
+   chartBar->setAnimationOptions(QChart::SeriesAnimations); 
+ 
+   QStringList categories; 
+   categories << "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"; 
+   QBarCategoryAxis *axis = new QBarCategoryAxis(); 
+   axis->append(categories); 
+   chartBar->createDefaultAxes(); 
+   chartBar->setAxisX(axis, seriesBar); 
+ 
+   chartViewBar = new QChartView(chartBar); 
+   chartViewBar->setRenderHint(QPainter::Antialiasing);    chartViewBar->setParent(ui->chart1); 
+}
+
+
+
+Next, we also add the code for the pie chart. Again, this is the same pie chart from the previous example:
+
+
+
+QPieSeries *seriesPie = new QPieSeries(); 
+seriesPie->append("Jane", 10); 
+seriesPie->append("Joe", 20); 
+seriesPie->append("Andy", 30); 
+seriesPie->append("Barbara", 40); 
+seriesPie->append("Jason", 50); 
+ 
+QPieSlice *slice = seriesPie->slices().at(1); 
+slice->setExploded(); 
+slice->setLabelVisible(); 
+slice->setPen(QPen(Qt::darkGreen, 2)); 
+slice->setBrush(Qt::green); 
+ 
+QChart *chartPie = new QChart(); 
+chartPie->addSeries(seriesPie); 
+chartPie->setTitle("Students Performance"); 
+ 
+chartViewPie = new QChartView(chartPie); 
+chartViewPie->setRenderHint(QPainter::Antialiasing); 
+chartViewPie->setParent(ui->chart2);
+
+
+
+Finally, we also add a line graph to the dashboard
+
+
+
+QLineSeries *seriesLine = new QLineSeries(); 
+seriesLine->append(0, 6); 
+seriesLine->append(2, 4); 
+seriesLine->append(3, 8); 
+seriesLine->append(7, 4); 
+seriesLine->append(10, 5); 
+seriesLine->append(11, 10); 
+seriesLine->append(13, 3); 
+seriesLine->append(17, 6); 
+seriesLine->append(18, 3); 
+seriesLine->append(20, 2);  
+QChart *chartLine = new QChart(); 
+chartLine->addSeries(seriesLine); 
+chartLine->createDefaultAxes(); 
+chartLine->setTitle("Students Performance"); 
+ 
+chartViewLine = new QChartView(chartLine); 
+chartViewLine->setRenderHint(QPainter::Antialiasing); 
+chartViewLine->setParent(ui->chart3);
+
+
+
+Once you're done with that, we must add a resize-event slot to the main window class, and make the charts follow the size of their respective parent when the main window is being resized. This can be done by first going to the mainwindow.h and adding in the event-handler declaration:
+
+
+
+protected: 
+   void resizeEvent(QResizeEvent* event);
+
+
+
+Then, open up mainwindow.cpp and add the following code:
+
+
+
+void MainWindow::resizeEvent(QResizeEvent* event) 
+{ 
+   QMainWindow::resizeEvent(event); 
+ 
+   chartViewBar->resize(chartViewBar->parentWidget()->size()); 
+   chartViewPie->resize(chartViewPie->parentWidget()->size()); 
+   chartViewLine->resize(chartViewLine->parentWidget()->size()); 
+}
+
+
+
+If we build and run the project now, we should be getting something like this:
+--
+<img class="img-responsive" src="/three-charts-sample.png" alt="three charts sample" loading="lazy" onerror='this.onerror=null; this.src="three-charts-sample.png"'>
+
+
+
+If you intend to use data from the database, don't make any SQL query during program startup, as this will make your program freeze if the data you're loading is very large, or your server is very slow.
+
+
+
+The best way to do it is to load the data only when you're switching from the login page to the dashboard page (or upon switching to any other pages) so that the loading time is less obvious to the user. To do this, right-click on the stacked widget and select Go to slot. Then, select currentChanged(int) and click OK.
+
+
+
+You can check which page it is currently switching over to by checking the arg1 variable. The arg1 value will be 0 if the target page is the first page within stacked widget, or 1 if the target is the second page, and so on.
+
+
+
+You can submit the SQL query only when the stacked widget is showing the dashboard page, which is the second page (arg1equals to 1):
+
+
+
+void MainWindow::on_stackedWidget_currentChanged(int arg1) 
+{ 
+   if (arg1 == 1) 
+   { 
+      // Do it here 
+   } }
+
 <hr />
-<h3>
-<a id="References" class="anchor" aria-hidden="true" href="#References">
-References
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<ul class="list-group">
-<li class='list-group-item'>Getting Started with Qt 5: chapter 2</li>
-</ul>
-<hr />
-  <cite>datetime-edit.cxx</cite>
+  <cite>dashboard_sample.txt</cite>
 <pre class="line-numbers" >
 <code class="language-cpp">
-    #include &lt;QApplication&gt;
-    #include &lt;QDateTimeEdit&gt;
-    
-    int main(int argc, char **argv)
-    {
-    	QApplication app(argc, argv);
-    
-    	QDateTimeEdit birthDate;
-    	
-    	birthDate.show();
-    	return app.exec();
-    }
 </code>
 </pre>
-<img class="img-responsive" src="/cpp/gui/widgets/QDateTimeEdit.screenshot.png" alt="datetime-edit.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/widgets/QDateTimeEdit.screenshot.png"'>
+<b>Screenshot Not Found</b>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/widgets/QLineEdit">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/widgets/QSpinBox">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/charts">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/data-presentation">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

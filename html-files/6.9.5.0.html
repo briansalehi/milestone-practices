@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Database</title>
+<title>*Database</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,7 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.9.0.html">Graphical User Interface</a></li>
-<li class='breadcrumb-item active'>Database</li>
+<li class='breadcrumb-item active'>*Database</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -278,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Database" class="anchor" aria-hidden="true" href="#Database">
-Database
+<a id="*Database" class="anchor" aria-hidden="true" href="#*Database">
+*Database
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -293,6 +293,224 @@ information for further processing and future use.
 Qt comes with modules and classes that make connecting to databases
 effortless. The MySql database will be used to illustrate the examples in this
 chapter, but the same principles will apply to other databases.
+
+Database Connection
+
+
+
+Qt supports multiple different types of database systems:
+MySQL (or MariaDB)
+SQLite (version 2 and 3)
+IBM DB2
+Oracle
+ODBC
+PostgreSQL
+Sybase Adaptive Server
+
+
+
+The SQLite database is usually used offline and it doesn't require any setup as it uses an on-disk file format for storing data.
+
+
+
+SQL commands
+
+
+
+SELECT
+
+
+
+INSERT
+
+
+
+UPDATE
+
+
+
+DELETE
+
+
+
+JOIN
+
+
+
+open up your project file (.pro), which in my case is DatabaseConnection.pro, and add the sql keyword at the back of the first line, like so:
+QT += core sql
+
+
+
+import the relevant headers to main.cpp, like so:
+
+
+
+#include <QCoreApplication> 
+#include <QtSql> 
+#include <QSqlDatabase> 
+#include <QSqlQuery> 
+#include <QDebug> int main(int argc, char *argv[]) 
+{ 
+   QCoreApplication a(argc, argv); 
+   return a.exec(); 
+}
+
+
+
+Next, we'll add some code to the main.cpp file.
+
+
+
+int main(int argc, char *argv[]) 
+{ 
+   QCoreApplication a(argc, argv); 
+   QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL"); 
+   db.setHostName("127.0.0.1"); 
+   db.setPort(3306); 
+   db.setDatabaseName("test"); 
+   db.setUserName("testuser"); 
+   db.setPassword("testpass"); 
+   if (db.open()) 
+   { 
+         qDebug() << "Connected!"; 
+   } 
+   else 
+   { 
+         qDebug() << "Failed to connect."; 
+         return 0; 
+   } 
+   return a.exec(); 
+}
+
+
+
+Next, we can start playing around with SQL commands
+
+
+
+Add the following code before return a.exec():
+
+
+
+QString command = "SELECT name FROM department"; 
+QSqlQuery query(db); 
+if (query.exec(command)) 
+{ 
+   while(query.next()) 
+   { 
+         QString name = query.value("name").toString(); 
+         qDebug() << name; 
+   } 
+}
+
+
+
+Let's try out something more complex:
+
+
+
+QString command = "SELECT my_user.username, department.name AS deptname FROM (SELECT * FROM user WHERE status = 0) AS my_user INNER JOIN department ON department.id = my_user.deptID"; 
+QSqlQuery query(db); 
+if (query.exec(command)) 
+{ 
+   while(query.next()) 
+   { 
+         QString username = query.value("username").toString(); 
+         QString department = query.value("deptname").toString(); 
+         qDebug() << username << department; 
+   } 
+}
+
+
+
+The very first thing we need to do now is to name the widgets that are important in this login page, which are the Username input, Password input, and the Submit button.
+
+
+
+When one widget is emitting a signal, another widget will be notified and will proceed to run a specific function that is designed to react to the particular signal.
+
+
+
+go back to mainwindow.cpp and add the following code to the on_loginButton_clicked() function:
+
+
+
+void MainWindow::on_loginButton_clicked() 
+{ 
+   QString username = ui->userInput->text(); 
+   QString password = ui->passwordInput->text(); 
+   qDebug() << username << password; 
+}
+
+
+
+Now, click the Run button and wait for the application to start. Then, key in any random username and password, followed by clicking on the submit button. You should now see your username and password being displayed on the application output window in Qt Creator.
+
+
+
+Next, we'll copy the SQL integration code we have written previously into mainwindow.cpp:
+
+
+
+MainWindow::MainWindow(QWidget *parent) : 
+   QMainWindow(parent),    ui(new Ui::MainWindow) 
+{ 
+   ui->setupUi(this); 
+ 
+   db = QSqlDatabase::addDatabase("QMYSQL"); 
+   db.setHostName("127.0.0.1"); 
+   db.setPort(3306); 
+   db.setDatabaseName("test"); 
+   db.setUserName("testuser"); 
+   db.setPassword("testpass"); 
+ 
+   if (db.open()) 
+   { 
+         qDebug() << "Connected!"; 
+   } 
+   else 
+   { 
+         qDebug() << "Failed to connect."; 
+   } 
+}
+
+
+
+QSqlDatabase db has now been relocated to mainwindow.h:
+
+
+
+private: 
+   Ui::MainWindow *ui; 
+   QSqlDatabase db;
+
+
+
+void MainWindow::on_loginButton_clicked() 
+{ 
+   QString username = ui->userInput->text(); 
+   QString password = ui->passwordInput->text(); 
+ 
+   qDebug() << username << password; 
+ 
+   QString command = "SELECT * FROM user WHERE username = '" + username    + "' AND password = '" + pas
+sword + "' AND status = 0"; 
+   QSqlQuery query(db); 
+   if (query.exec(command)) 
+   { 
+         if (query.size() > 0) 
+         { 
+               QMessageBox::information(this, "Login success.", "You                have successfully 
+logged in!"); 
+         } 
+         else 
+         { 
+               QMessageBox::information(this, "Login failed.", "Login                failed. Please try 
+again..."); 
+         } 
+   } }
+
 <ul class="pager">
 <li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/widgets/QInputDialog">Previous Page</a></li>
 <li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/database/connection">Next Page</a></li>
@@ -309,6 +527,7 @@ References
 </h3>
 <ul class="list-group">
 <li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: <span style='color: red'> chapter 6</span></li>
+<li class='list-group-item'>Hands-On GUI Programming with C++ and Qt5 - Lee Zhi Eng: <span style='color: red'> chapter 3</span></li>
 </ul>
 <hr />
 <h3>
