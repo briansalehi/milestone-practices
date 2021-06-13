@@ -1,0 +1,1286 @@
+Hands-On GUI Programming with C++ and Qt5 (2018)
+Lee Zhi Eng
+
+Qt generally uses C++, which is a compiled language that generates small and efficient code.
+
+
+
+Do be aware that Qt does include a small amount of features that only work on specific platforms. However, these are minimal and often for special use cases, such as Qt Sensors, which only work on mobile platforms; Qt Web Engine, which only works on desktops; Qt NFC, only for Android and Linux; and so on.
+
+
+
+Qt Designer is normally used by developers to design GUIs for desktop applications, while Qt Quick Designer is usually used for mobile and embedded platforms.
+
+
+
+The GUI file saved by Qt Designer carries the .ui extension, which is saved in XML format. The file stores the attributes of each and every widget placed by the GUI designer, such as position, size, margin, tooltip, layout direction, and so on. It also saves the signal-and-slot event names within itself for easily connecting with the code in the later stages.
+
+
+
+On the other hand, Qt Quick Designer saves GUI files in both .ui.qml and .qml formats.
+
+
+
+Instead of XML format, Qt Quick Designer saves its data in a declarative language similar to JavaScript called QML. QML not only allows the designer to customize their GUI in a CSS-like (Cascading Style Sheets) fashion, it also allows the programmer to write functional JavaScript within the QML file. As we mentioned earlier, .ui.qml is the file format used for visual decoration only while .qml contains application logic.
+
+
+
+Qt's Widgets Application uses a styling system called Qt Style Sheets, which is similar to the web technology's styling system—CSS (Cascading Style Sheet). All you need to do is write the style description of the widget and Qt will render it accordingly. The syntax of Qt Style Sheets is pretty much the same as CSS.
+
+
+
+Qt Style Sheets:
+QLineEdit { color: blue; background-color: black; }
+
+
+
+CSS:
+h1 { color: blue; background-color: black; }
+
+
+
+You can change a widget's style sheet by using two methods—using C++ code directly or by using the properties editor. If you're using C++ code, you can call the QObject::setStyleSheet() function, like so:
+myButton->setStyleSheet("background-color: green");
+
+
+
+You can also achieve the same result by writing the same declaration into the styleSheet property of the widget in Qt Designer:
+QPushButton#myButton { background-color: green }
+
+
+
+Database Connection
+
+
+
+Qt supports multiple different types of database systems:
+MySQL (or MariaDB)
+SQLite (version 2 and 3)
+IBM DB2
+Oracle
+ODBC
+PostgreSQL
+Sybase Adaptive Server
+
+
+
+The SQLite database is usually used offline and it doesn't require any setup as it uses an on-disk file format for storing data.
+
+
+
+SQL commands
+
+
+
+SELECT
+
+
+
+INSERT
+
+
+
+UPDATE
+
+
+
+DELETE
+
+
+
+JOIN
+
+
+
+open up your project file (.pro), which in my case is DatabaseConnection.pro, and add the sql keyword at the back of the first line, like so:
+QT += core sql
+
+
+
+import the relevant headers to main.cpp, like so:
+
+
+
+#include <QCoreApplication> 
+#include <QtSql> 
+#include <QSqlDatabase> 
+#include <QSqlQuery> 
+#include <QDebug> int main(int argc, char *argv[]) 
+{ 
+   QCoreApplication a(argc, argv); 
+   return a.exec(); 
+}
+
+
+
+Next, we'll add some code to the main.cpp file.
+
+
+
+int main(int argc, char *argv[]) 
+{ 
+   QCoreApplication a(argc, argv); 
+   QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL"); 
+   db.setHostName("127.0.0.1"); 
+   db.setPort(3306); 
+   db.setDatabaseName("test"); 
+   db.setUserName("testuser"); 
+   db.setPassword("testpass"); 
+   if (db.open()) 
+   { 
+         qDebug() << "Connected!"; 
+   } 
+   else 
+   { 
+         qDebug() << "Failed to connect."; 
+         return 0; 
+   } 
+   return a.exec(); 
+}
+
+
+
+Next, we can start playing around with SQL commands
+
+
+
+Add the following code before return a.exec():
+
+
+
+QString command = "SELECT name FROM department"; 
+QSqlQuery query(db); 
+if (query.exec(command)) 
+{ 
+   while(query.next()) 
+   { 
+         QString name = query.value("name").toString(); 
+         qDebug() << name; 
+   } 
+}
+
+
+
+Let's try out something more complex:
+
+
+
+QString command = "SELECT my_user.username, department.name AS deptname FROM (SELECT * FROM user WHERE status = 0) AS my_user INNER JOIN department ON department.id = my_user.deptID"; 
+QSqlQuery query(db); 
+if (query.exec(command)) 
+{ 
+   while(query.next()) 
+   { 
+         QString username = query.value("username").toString(); 
+         QString department = query.value("deptname").toString(); 
+         qDebug() << username << department; 
+   } 
+}
+
+
+
+The very first thing we need to do now is to name the widgets that are important in this login page, which are the Username input, Password input, and the Submit button.
+
+
+
+When one widget is emitting a signal, another widget will be notified and will proceed to run a specific function that is designed to react to the particular signal.
+
+
+
+go back to mainwindow.cpp and add the following code to the on_loginButton_clicked() function:
+
+
+
+void MainWindow::on_loginButton_clicked() 
+{ 
+   QString username = ui->userInput->text(); 
+   QString password = ui->passwordInput->text(); 
+   qDebug() << username << password; 
+}
+
+
+
+Now, click the Run button and wait for the application to start. Then, key in any random username and password, followed by clicking on the submit button. You should now see your username and password being displayed on the application output window in Qt Creator.
+
+
+
+Next, we'll copy the SQL integration code we have written previously into mainwindow.cpp:
+
+
+
+MainWindow::MainWindow(QWidget *parent) : 
+   QMainWindow(parent),    ui(new Ui::MainWindow) 
+{ 
+   ui->setupUi(this); 
+ 
+   db = QSqlDatabase::addDatabase("QMYSQL"); 
+   db.setHostName("127.0.0.1"); 
+   db.setPort(3306); 
+   db.setDatabaseName("test"); 
+   db.setUserName("testuser"); 
+   db.setPassword("testpass"); 
+ 
+   if (db.open()) 
+   { 
+         qDebug() << "Connected!"; 
+   } 
+   else 
+   { 
+         qDebug() << "Failed to connect."; 
+   } 
+}
+
+
+
+QSqlDatabase db has now been relocated to mainwindow.h:
+
+
+
+private: 
+   Ui::MainWindow *ui; 
+   QSqlDatabase db;
+
+
+
+void MainWindow::on_loginButton_clicked() 
+{ 
+   QString username = ui->userInput->text(); 
+   QString password = ui->passwordInput->text(); 
+ 
+   qDebug() << username << password; 
+ 
+   QString command = "SELECT * FROM user WHERE username = '" + username    + "' AND password = '" + pas
+sword + "' AND status = 0"; 
+   QSqlQuery query(db); 
+   if (query.exec(command)) 
+   { 
+         if (query.size() > 0) 
+         { 
+               QMessageBox::information(this, "Login success.", "You                have successfully 
+logged in!"); 
+         } 
+         else 
+         { 
+               QMessageBox::information(this, "Login failed.", "Login                failed. Please try 
+again..."); 
+         } 
+   } }
+
+
+
+Graphs and Charts
+
+
+
+Since Qt 5.7, several modules that were only available for commercial users before have become free for all the open source package users, which includes the Qt Charts module. Therefore, it is considered a very new module for most Qt users who don't own the commercial license.
+
+
+
+Do note that, unlike most of the Qt modules that are available under an LGPLv3 license, the Qt Chart module is offered under an GPLv3 license. Unlike LGPLv3, a GPLv3 license requires you to release the source code of your application, while your application must also be licensed under GPLv3. This means that you are not allowed to static-link Qt Chart with your application. It also prevents the module from being used in proprietary software.
+
+
+
+The Qt Charts module provides the following chart types:
+Line and spline charts
+Bar charts
+Pie charts
+Polar charts
+Area and scatter charts
+Box-and-whiskers charts
+Candlestick charts
+
+
+
+Line and spline charts
+
+
+
+These charts are typically presented as a series of points/markers that are connected by lines. In a line chart, the points are connected by straight lines to show the changes of the variables over a period of time. On the other hand, spline charts are very similar to line charts except the points are connected by a spline/curve line instead of straight lines:
+
+
+
+Bar charts
+
+
+
+A bar chart is quite similar to a line chart, except it doesn't connect the data along an axis. Instead, a bar chart displays its data using individual rectangular shapes, where its height is determined by the value of the data. This means that the higher the value, the taller the rectangular shape will become:
+
+
+
+Pie charts
+
+
+
+A pie chart presents its data in the form of pie slices. The size of each slice of pie will be determined by the overall percentage of its value compared to the rest of the data. Therefore, pie charts are normally used to display fraction, ratio, percentage, or a share of a set of data:
+
+
+
+Sometimes, a pie chart can also be displayed in a donut shape (also known as donut chart):
+
+
+
+Polar charts
+
+
+
+Polar charts present data in a circular graph, where the placement of the data is based on both the angle and the distance from the center of the graph, which means the higher the value of the data, the further away the point is from the center of the chart. You can display multiple types of graphs within the polar chart, such as line, spline, area, and scatter to visualize the data:
+
+
+
+Area and scatter charts
+
+
+
+An area chart displays its data as an area or shape to indicate volume. It's usually used to compare the differences between two or more datasets.
+
+
+
+Scatter charts, on the other hand, are used to display a collection of data points, and for showing the non-linear relationship between two or more datasets.
+
+
+
+Box-and-whiskers charts
+
+
+
+Candlestick charts
+
+
+
+Box-and-whiskers charts present data as quartiles extended with whiskers that show the variability of the values. The boxes may have lines extending vertically called whiskers. These lines indicate variability outside the upper and lower quartiles, and any point outside those lines or whiskers is considered an outlier. Box-and-whisker charts are most commonly used in statistical analysis, such as stock market analysis:
+
+
+
+Candlestick charts are visually quite similar to the box-and-whiskers charts, except they are used to represent the difference between the opening and closing value, while showing the direction of the value (whether increasing or decreasing) through different colors. If the value of a particular piece of data stays the same, the rectangular shape will not be shown at all:
+
+
+
+For more information regarding the different types of charts supported by Qt, please head over to the following link: https://doc.qt.io/qt-5/qtcharts-overview.html.
+
+
+
+Implementing charts and graphs
+
+
+
+After you have created the new project, open up the project file (.pro) and add the charts module to your project, like so:
+QT += core gui charts
+
+
+
+Then, open up mainwindow.h and add the following to include the header files that are required for using the charts module:
+#include <QtCharts> 
+#include <QChartView> 
+#include <QBarSet> 
+#include <QBarSeries>
+
+
+
+The QtCharts and QtChartView headers are both essential for Qt's charts module.
+
+
+
+Next, open mainwindow.ui and drag either Vertical Layout or Horizontal Layout to the central widget. Then, select the central widget and click either Layout Horizontally or Layout Vertically. The layout direction is not particularly important, as we will only create a single chart here:
+--
+![charts-layout.png]
+
+
+
+After that, right-click on the layout widget you just dragged to the central widget, and select Morph into | QFrame.
+
+
+
+Now open up mainwindow.cpp and add the following code:
+
+
+
+MainWindow::MainWindow(QWidget *parent) : 
+   QMainWindow(parent), 
+   ui(new Ui::MainWindow) 
+{ 
+   ui->setupUi(this); 
+ 
+   QBarSet *set0 = new QBarSet("Jane"); 
+   QBarSet *set1 = new QBarSet("John"); 
+   QBarSet *set2 = new QBarSet("Axel"); 
+   QBarSet *set3 = new QBarSet("Mary"); 
+   QBarSet *set4 = new QBarSet("Samantha"); 
+ 
+   *set0 << 10 << 20 << 30 << 40 << 50 << 60; 
+   *set1 << 50 << 70 << 40 << 45 << 80 << 70; 
+   *set2 << 30 << 50 << 80 << 13 << 80 << 50; 
+   *set3 << 50 << 60 << 70 << 30 << 40 << 25; 
+   *set4 << 90 << 70 << 50 << 30 << 16 << 42; 
+ 
+   QBarSeries *series = new QBarSeries(); 
+   series->append(set0); 
+   series->append(set1); 
+   series->append(set2); 
+   series->append(set3); 
+   series->append(set4); 
+}
+
+
+
+Then, we also added six different items of data to each category, which will later be represented in the form of bars/rectangular shapes.
+
+
+
+Next, initiate the QChart object and add the series to it. We also set the chart's title and enable animation:
+
+
+
+QChart *chart = new QChart(); 
+chart->addSeries(series); 
+chart->setTitle("Student Performance"); 
+chart->setAnimationOptions(QChart::SeriesAnimations);
+
+
+
+After that, we create a bar chart category axis and apply it to the bar chart's x axis.
+
+
+
+QStringList categories; 
+categories << "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"; 
+QBarCategoryAxis *axis = new QBarCategoryAxis(); 
+axis->append(categories); 
+chart->createDefaultAxes(); 
+chart->setAxisX(axis, series);
+
+
+
+Then, we create a chart view for Qt to render the bar chart and set it as a child of the frame widget in the main window; otherwise, it won't be rendered on the main window:
+
+
+
+QChartView *chartView = new QChartView(chart); 
+chartView->setParent(ui->verticalFrame);
+
+
+
+Click the Run button in Qt Creator, and you should see something like this:
+--
+![bar-chart-result.png]
+
+
+
+Next, let's do a pie chart
+
+
+
+First, instead of QBarSet and QBarSeries, we include QPieSeries and QPieSlice:
+
+
+
+#include <QPieSeries> 
+#include <QPieSlice>
+
+
+
+Then, create a QPieSeries object and set up the name and value of each data.
+
+
+
+After that, set one of the slices to a different visual style and make it pop out from the rest.
+
+
+
+Then, create a QChart object and link it with the QPieSeriesobject that we have created:
+
+
+
+QPieSeries *series = new QPieSeries(); 
+series->append("Jane", 10); 
+series->append("Joe", 20); 
+series->append("Andy", 30); 
+series->append("Barbara", 40); 
+series->append("Jason", 50); 
+ 
+QPieSlice *slice = series->slices().at(1); 
+slice->setExploded(); // Explode this chart 
+slice->setLabelVisible(); // Make label visible 
+slice->setPen(QPen(Qt::darkGreen, 2)); // Set line color 
+slice->setBrush(Qt::green); // Set slice color 
+ 
+QChart *chart = new QChart(); 
+chart->addSeries(series); 
+chart->setTitle("Students Performance");
+
+
+
+QChartView *chartView = new QChartView(chart);chartView->setParent(ui->verticalFrame);
+
+
+
+you should be able to see something like this:
+--
+![pie-chart-result.png]
+
+
+
+For more examples of how to create different charts in Qt, please check out their sample code at the following link: https://doc.qt.io/qt-5/qtcharts-examples.html.
+
+
+
+Creating the dashboard page
+
+
+
+For multiple pages to co-exist in the same program and to be able to switch between different pages at any time, Qt provides us with something called QStackedWidget.
+
+
+
+First, drag and drop a stacked widget from the Widget Box to the central widget of your application, and then, we need to move everything previously under the central widget into the first page of the stacked widget, which we renamed loginPage:
+
+
+
+Next, set all the layout settings of the central widget to 0, so that it contains no margin at all, like so:
+
+
+
+Next, drag and drop a grid layout to the dashboard page, and apply Layout Vertically to the dashboard page:
+--
+![vertical-layout-setup.png]
+
+
+
+After that, drag and drop six Vertical Layout into the Grid Layout, like so:
+--
+![grid-layout-setup.png]
+
+
+
+Then, select each of the vertical layouts we just added to the grid layout, and turn it into QFrame:
+
+
+
+This time around, we also include the QLineSeries header for creating the line chart:
+
+
+
+#include <QtCharts> 
+#include <QChartView> 
+ 
+#include <QBarSet> 
+#include <QBarSeries> 
+ 
+#include <QPieSeries> 
+#include <QPieSlice> 
+ 
+#include <QLineSeries>
+
+
+
+After that, declare the pointers for the charts, like so:
+
+
+
+QChartView *chartViewBar; 
+QChartView *chartViewPie; 
+QChartView *chartViewLine;
+
+
+
+Then, we'll add the code for creating a bar chart.
+
+
+
+The anti-aliasing feature removes the jagged edges of all charts and thus makes the rendering appear smoother:
+
+
+
+MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent), 
+   ui(new Ui::MainWindow) 
+{ 
+   ui->setupUi(this); 
+ 
+   ////////BAR CHART///////////// 
+   QBarSet *set0 = new QBarSet("Jane"); 
+   QBarSet *set1 = new QBarSet("John"); 
+   QBarSet *set2 = new QBarSet("Axel"); 
+   QBarSet *set3 = new QBarSet("Mary"); 
+   QBarSet *set4 = new QBarSet("Samantha"); 
+ 
+   *set0 << 10 << 20 << 30 << 40 << 50 << 60; 
+   *set1 << 50 << 70 << 40 << 45 << 80 << 70; 
+   *set2 << 30 << 50 << 80 << 13 << 80 << 50; 
+   *set3 << 50 << 60 << 70 << 30 << 40 << 25; 
+   *set4 << 90 << 70 << 50 << 30 << 16 << 42; 
+ 
+   QBarSeries *seriesBar = new QBarSeries(); 
+   seriesBar->append(set0); 
+   seriesBar->append(set1); 
+   seriesBar->append(set2); 
+   seriesBar->append(set3); 
+   seriesBar->append(set4); 
+ 
+   QChart *chartBar = new QChart(); 
+   chartBar->addSeries(seriesBar); 
+   chartBar->setTitle("Students Performance"); 
+   chartBar->setAnimationOptions(QChart::SeriesAnimations); 
+ 
+   QStringList categories; 
+   categories << "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"; 
+   QBarCategoryAxis *axis = new QBarCategoryAxis(); 
+   axis->append(categories); 
+   chartBar->createDefaultAxes(); 
+   chartBar->setAxisX(axis, seriesBar); 
+ 
+   chartViewBar = new QChartView(chartBar); 
+   chartViewBar->setRenderHint(QPainter::Antialiasing);    chartViewBar->setParent(ui->chart1); 
+}
+
+
+
+Next, we also add the code for the pie chart. Again, this is the same pie chart from the previous example:
+
+
+
+QPieSeries *seriesPie = new QPieSeries(); 
+seriesPie->append("Jane", 10); 
+seriesPie->append("Joe", 20); 
+seriesPie->append("Andy", 30); 
+seriesPie->append("Barbara", 40); 
+seriesPie->append("Jason", 50); 
+ 
+QPieSlice *slice = seriesPie->slices().at(1); 
+slice->setExploded(); 
+slice->setLabelVisible(); 
+slice->setPen(QPen(Qt::darkGreen, 2)); 
+slice->setBrush(Qt::green); 
+ 
+QChart *chartPie = new QChart(); 
+chartPie->addSeries(seriesPie); 
+chartPie->setTitle("Students Performance"); 
+ 
+chartViewPie = new QChartView(chartPie); 
+chartViewPie->setRenderHint(QPainter::Antialiasing); 
+chartViewPie->setParent(ui->chart2);
+
+
+
+Finally, we also add a line graph to the dashboard
+
+
+
+QLineSeries *seriesLine = new QLineSeries(); 
+seriesLine->append(0, 6); 
+seriesLine->append(2, 4); 
+seriesLine->append(3, 8); 
+seriesLine->append(7, 4); 
+seriesLine->append(10, 5); 
+seriesLine->append(11, 10); 
+seriesLine->append(13, 3); 
+seriesLine->append(17, 6); 
+seriesLine->append(18, 3); 
+seriesLine->append(20, 2);  
+QChart *chartLine = new QChart(); 
+chartLine->addSeries(seriesLine); 
+chartLine->createDefaultAxes(); 
+chartLine->setTitle("Students Performance"); 
+ 
+chartViewLine = new QChartView(chartLine); 
+chartViewLine->setRenderHint(QPainter::Antialiasing); 
+chartViewLine->setParent(ui->chart3);
+
+
+
+Once you're done with that, we must add a resize-event slot to the main window class, and make the charts follow the size of their respective parent when the main window is being resized. This can be done by first going to the mainwindow.h and adding in the event-handler declaration:
+
+
+
+protected: 
+   void resizeEvent(QResizeEvent* event);
+
+
+
+Then, open up mainwindow.cpp and add the following code:
+
+
+
+void MainWindow::resizeEvent(QResizeEvent* event) 
+{ 
+   QMainWindow::resizeEvent(event); 
+ 
+   chartViewBar->resize(chartViewBar->parentWidget()->size()); 
+   chartViewPie->resize(chartViewPie->parentWidget()->size()); 
+   chartViewLine->resize(chartViewLine->parentWidget()->size()); 
+}
+
+
+
+If we build and run the project now, we should be getting something like this:
+--
+![three-charts-sample.png]
+
+
+
+If you intend to use data from the database, don't make any SQL query during program startup, as this will make your program freeze if the data you're loading is very large, or your server is very slow.
+
+
+
+The best way to do it is to load the data only when you're switching from the login page to the dashboard page (or upon switching to any other pages) so that the loading time is less obvious to the user. To do this, right-click on the stacked widget and select Go to slot. Then, select currentChanged(int) and click OK.
+
+
+
+You can check which page it is currently switching over to by checking the arg1 variable. The arg1 value will be 0 if the target page is the first page within stacked widget, or 1 if the target is the second page, and so on.
+
+
+
+You can submit the SQL query only when the stacked widget is showing the dashboard page, which is the second page (arg1equals to 1):
+
+
+
+void MainWindow::on_stackedWidget_currentChanged(int arg1) 
+{ 
+   if (arg1 == 1) 
+   { 
+      // Do it here 
+   } }
+
+
+
+Item Views and Dialogs
+
+
+
+Working with item view widgets
+
+
+
+Other than displaying data using different types of chart, we can also display this data using different types of item view. An item view widget presents data by rendering it visually, usually along the vertical axis.
+
+
+
+A two-dimensional item view, often known as a table view, displays data in both vertical and horizontal directions.
+
+
+
+The other method is the manual way, in which the programmer must tell Qt which data goes into which column and row. This method is much simpler than the model-view, but much slower when compared to its performance. However, for small amounts of data, the performance issue can be negligible, making this a good approach.
+
+
+
+Under the Item Widgets (Item-Based) category are three different widgets called List Widget, Tree Widget, and Table Widget. Each of these item widgets displays data in a different way. Pick the one that suits your needs:
+
+
+
+Creating our Qt Widgets application
+
+
+
+Once you have created the project, open up mainwindow.ui and drag the three different item widgets to your main window. After that, select the main window and click the Layout Vertically button located at the top:
+
+
+
+Making our List Widget functional
+
+
+
+First, open up mainwindow.cpp and write the following code to the class constructor, right after ui->setupui(this):
+
+
+
+ui->listWidget->addItem("My Test Item");
+
+
+
+As simple as that, you have successfully added an item to the List Widget!
+
+
+
+There is another way to add an item to the List Widget. But before that, we must add the following headers to mainwindow.h:
+
+
+
+#ifndef MAINWINDOW_H 
+#define MAINWINDOW_H 
+ 
+#include <QMainWindow> 
+#include <QDebug> 
+#include <QListWidgetItem>
+
+
+
+Next, open up mainwindow.cpp and add the following code:
+
+
+
+QListWidgetItem* listItem = new QListWidgetItem; 
+listItem->setText("My Second Item"); 
+listItem->setData(100, 1000); 
+ui->listWidget->addItem(listItem);
+
+
+
+The preceding code does the same as the previous one-line code. Except, this time, I've added an extra data to the item. The setData() function takes in two input variables—the first variable is the data-role of item, which indicates how it should be treated by Qt. If you put a value that matches the Qt::ItemDataRole enumerator, the data will affect the display, decoration, tooltip, and so on, and that may change its appearance.
+In my case, I just simply set a number that doesn't match any of the enumerators in Qt::ItemDataRole so that I can store it as a hidden data for later use. To retrieve the data, you can simply call data() and insert the number that matches the one you've just set:
+
+
+
+qDebug() << listItem->data(100);
+
+
+
+For more information about Qt::ItemDataRole enumerators, please check out the following link: http://doc.qt.io/qt-5/qt.html#ItemDataRole-enum
+
+
+
+As mentioned earlier, hidden data can be attached to a list item for later use. For example, you could use the list widget to display a list of products ready to be purchased by the user. Each of these items can be attached with its product ID so that when the user selects the item and places it on the cart, your system can automatically identify which product has been added to the cart by identifying the product ID stored as the data role.
+
+
+
+In the preceding example, I stored custom data, 1000, in my list item and set its data role as 100, which does not match any of the Qt::ItemDataRole enumerators. This way, the data won't be shown to the users, and thus it can only be retrieved through C++ code.
+
+
+
+Adding functionality to the Tree Widget
+
+
+
+Let's take a look at the following code:
+
+
+
+QTreeWidgetItem* treeItem = new QTreeWidgetItem; 
+treeItem->setText(0, "My Test Item"); 
+ui->treeWidget->addTopLevelItem(treeItem);
+
+
+
+It's pretty much the same as the List Widget, except we have to set the column ID in the setText() function.
+
+
+
+The most obvious distinction between a Tree Widget and other view widgets is that all its items can contain children items, recursively. Let's look at the following code to see how we can add a child item to an existing item in the Tree Widget:
+
+
+
+QTreeWidgetItem* treeItem2 = new QTreeWidgetItem; 
+treeItem2->setText(0, "My Test Subitem"); 
+treeItem->addChild(treeItem2);
+
+
+
+Table Widget
+
+
+
+Technically, the items already exist and are reserved in the Table Widget when the columns and rows are being created. What we need to do is to create a new item and replace it with the (currently empty) item located at a specific column and row, which is why the function name is called setItem(), instead of addItem() used by the List Widget.
+
+
+
+QTableWidgetItem* tableItem = new QTableWidgetItem; 
+tableItem->setText("Testing1"); 
+ui->tableWidget->setItem(0, 0, tableItem); 
+ 
+QTableWidgetItem* tableItem2 = new QTableWidgetItem; 
+tableItem2->setText("Testing2"); 
+ui->tableWidget->setItem(1, 2, tableItem2);
+
+
+
+If you are looking for more examples related to item views, please visit the following link: http://doc.qt.io/qt-5/examples-itemviews.html
+
+
+
+Working with dialog boxes
+
+
+
+There are several types of message box you can use in Qt; the most basic one uses just a single line of code, like so:
+
+
+
+QMessageBox::information(this, "Alert", "Just to let you know, something happened!");
+
+
+
+There are three parameters you need to provide for this function. The first one is the parent of the message box, which we have set as the main window. The second parameter is for the window title, and the third parameter is for the message we want to deliver to the user.
+
+
+
+The appearance may look different on different operating systems (Linux, macOS, and so forth).
+
+
+
+There are a few types of icon you can use, such as information, warning, and critical.
+
+
+
+QMessageBox::question(this, "Alert", "Just to let you know, something happened!"); 
+QMessageBox::warning(this, "Alert", "Just to let you know, something happened!"); 
+QMessageBox::information(this, "Alert", "Just to let you know, something happened!"); 
+QMessageBox::critical(this, "Alert", "Just to let you know, something happened!");
+
+
+
+If you don't need any icons, just call the QMessageBox::about() function instead.
+
+
+
+You can also set the buttons you want by picking from a list of standard buttons provided by Qt, for example:
+
+
+
+QMessageBox::question(this, "Serious Question", "Am I an awesome guy?", QMessageBox::Ignore, QMessageBox::Yes);
+
+
+
+Since these are the built-in functions provided by Qt to create message boxes with ease, it doesn't give developers the freedom to fully customize a message box. However, Qt does allow you to create your message boxes manually using another method, which is much more customizable than the built-in method. It takes a couple more lines of code, but is still pretty simple to write:
+
+
+
+QMessageBox msgBox; 
+msgBox.setWindowTitle("Alert"); 
+msgBox.setText("Just to let you know, something happened!"); 
+msgBox.exec();
+
+
+
+What about adding our own icon and customized buttons?
+
+
+
+QMessageBox msgBox; 
+msgBox.setWindowTitle("Serious Question"); 
+msgBox.setText("Am I an awesome guy?"); 
+msgBox.addButton("Seriously Yes!", QMessageBox::YesRole); 
+msgBox.addButton("Well no thanks", QMessageBox::NoRole); 
+msgBox.setIcon(QMessageBox::Question); 
+msgBox.exec();
+
+
+
+In the preceding code example, I have loaded the question icon that comes with Qt, but you can also load your own icon from the resource file if you intended to do so:
+
+
+
+QMessageBox msgBox; 
+msgBox.setWindowTitle("Serious Question"); 
+msgBox.setText("Am I an awesome guy?"); 
+msgBox.addButton("Seriously Yes!", QMessageBox::YesRole); 
+msgBox.addButton("Well no thanks", QMessageBox::NoRole); 
+QPixmap myIcon(":/images/icon.png"); 
+msgBox.setIconPixmap(myIcon); 
+msgBox.exec();
+
+
+
+Qt's QMessageBox class provides us with a simple solution for checking the button event. When the message box is being created, Qt will wait for the user to pick their choice; then, it will return the button that gets triggered. By checking which button is being clicked, the developer can then proceed to trigger the relevant event. Let's take a look at the example code:
+
+
+
+if (QMessageBox::question(this, "Question", "Some random question. Yes or no?") == QMessageBox::Yes) 
+{ 
+   QMessageBox::warning(this, "Yes", "You have pressed Yes!"); 
+} 
+else 
+{ 
+   QMessageBox::warning(this, "No", "You have pressed No!"); 
+}
+
+
+
+If you prefer the manual way to create your message box, the code for checking the button event is slightly longer:
+
+
+
+QMessageBox msgBox; 
+msgBox.setWindowTitle("Serious Question"); 
+msgBox.setText("Am I an awesome guy?"); 
+QPushButton* yesButton = msgBox.addButton("Seriously Yes!", QMessageBox::YesRole); 
+QPushButton* noButton = msgBox.addButton("Well no thanks", QMessageBox::NoRole); 
+msgBox.setIcon(QMessageBox::Question); 
+msgBox.exec(); 
+    
+if (msgBox.clickedButton() == (QAbstractButton*) yesButton) 
+{ 
+   QMessageBox::warning(this, "Yes", "Oh thanks! :)"); 
+} 
+else if (msgBox.clickedButton() == (QAbstractButton*) noButton) 
+{ 
+   QMessageBox::warning(this, "No", "Oh why... :("); 
+}
+
+
+
+For more information regarding the dialog boxes, please visit the API documents located at the following link: http://doc.qt.io/qt-5/qdialog.html
+
+
+
+Creating File Selection Dialogs
+
+
+
+The File Selection Dialog essentially only does one thing—it lets the user pick the file(s) or folder they want and return the path(s) of the selected file(s) or folder
+
+
+
+First, open up mainwindow.h and add in the following header files:
+
+
+
+#ifndef MAINWINDOW_H 
+#define MAINWINDOW_H 
+ 
+#include <QMainWindow> 
+#include <QFileDialog> 
+#include <QDebug>
+
+
+
+Next, open up mainwindow.cpp and insert the following code:
+
+
+
+QString fileName = QFileDialog::getOpenFileName(this); 
+qDebug() << fileName;
+
+
+
+If the user has selected a file and pressed Open, the fileName variable will be filled with the absolute path of the selected file. If the user clicked the Cancel button, the fileName variable will be an empty string.
+
+
+
+The File Selection Dialog also contains several options that can be set during the initialization step. For example:
+
+
+
+QString fileName = QFileDialog::getOpenFileName(this, "Your title", QDir::currentPath(), "All files (*.*) ;; Document files (*.doc *.rtf);; PNG files (*.png)"); 
+qDebug() << fileName;
+
+
+
+There are three things that we have set in the preceding code they are as follows:
+The window title of the File Selection Dialog
+The default path that the users see when the dialog is being created
+File type filters
+
+
+
+The file type filter is very handy when you only allow the users to select a specific type of file (for example, only JPEG image files) and hide the rest.
+
+
+
+you can also use getSaveFileName(), which will allow the user to specify a filename that does not already exist.
+
+
+
+For more information regarding the File Selection Dialog, please visit the API documents located at the following link: http://doc.qt.io/qt-5/qfiledialog.html
+
+
+
+Image scaling and cropping
+
+
+
+let's create a new Qt Widgets Application. Then, open up mainwindow.ui and create the following user interface:
+
+
+
+Let's dissect this user interface into three parts:
+Top—Image preview: First, add a Horizontal Layout to the window.
+Then, add a Label widget into the Horizontal Layout we just added, then set the text property to empty. Set both the label's minimumSize and maximumSize properties to 150x150. Finally, set the frameShape property under the QFrame category to Box.
+Add two Horizontal Spacers to the sides of the label to make it centered. 
+Middle—Sliders for adjustments: Add a Form Layout to the window, below the Horizontal Layout we just added previously in step 1.
+Add three Labels to the Form Layout, and set their text property to Scale:, Horizontal:, and Vertical: respectively.
+Add three Horizontal Sliders to the Form Layout. Set the minimum property to 1 and maximum to 100. Then, set the pageStep property to 1.
+Set the value property of the scale slider to 100. 
+Bottom—Browse button and Save button: Add a Horizontal Layout to the window, below the Form Layout we previously added during step 2.
+Add two Push Buttons to the Horizontal Layout and set their text property to Browse and Save respectively. 
+Lastly, delete the Menu Bar, Tool Bar, and Status Bar from the central widget.
+
+
+
+First, open up mainwindow.h and add in the following headers:
+
+
+
+#ifndef MAINWINDOW_H 
+#define MAINWINDOW_H 
+ 
+#include <QMainWindow> 
+#include <QMessageBox> 
+#include <QFileDialog> 
+#include <QPainter>
+
+
+
+After that, add the following variables to mainwindow.h:
+
+
+
+private: 
+   Ui::MainWindow *ui; 
+   bool canDraw; 
+   QPixmap* pix; 
+   QSize imageSize; 
+   QSize drawSize; 
+   QPoint drawPos;
+
+
+
+Now, add the following code to open up the File Selection Dialog when the Browse button is clicked. The dialog only lists JPEG images and hides the other files:
+
+
+
+void MainWindow::on_browseButton_clicked() 
+{ 
+   QString fileName = QFileDialog::getOpenFileName(this, tr("Open      Image"), QDir::currentPath(), tr("Image Files 
+(*.jpg *.jpeg)")); 
+ 
+   if (!fileName.isEmpty()) 
+   { 
+         QPixmap* newPix = new QPixmap(fileName); 
+ 
+         if (!newPix->isNull()) 
+         { 
+               if (newPix->width() < 150 || newPix->height() < 150) 
+               { 
+                     QMessageBox::warning(this, tr("Invalid Size"),                      tr("Image size too small. Please use an 
+image                       larger than 150x150.")); 
+
+                     return; 
+               } 
+ 
+               pix = newPix; 
+               imageSize = pix->size(); 
+               drawSize = pix->size(); 
+ 
+               canDraw = true; 
+ 
+         } 
+         else 
+         { 
+               canDraw = false; 
+ 
+               QMessageBox::warning(this, tr("Invalid Image"),                tr("Invalid or corrupted file. Please try 
+again with                 another image file.")); 
+
+         } 
+   } 
+}
+
+
+
+As you can see, the code checks whether any image has been selected by the user. If it has its checks again and see whether the image resolution is at least 150 x 150. If no problem is found, we will save the image's pixel map to a pointer called pix, then save the image size to the imageSize variable, and the initial drawing size to the drawSize variable. Finally, we set the canDraw variable to true.
+
+
+
+After that, open up mainwindow.h again and declare these two functions:
+
+
+
+public: 
+   explicit MainWindow(QWidget *parent = 0); 
+   ~MainWindow(); 
+   virtual void paintEvent(QPaintEvent *event); 
+   void paintImage(QString fileName, int x, int y);
+
+
+
+The first function, paintEvent(), is a virtual function that automatically gets called whenever Qt needs to refresh the user interface, such as when the main window is being resized. We'll override this function and draw the newly loaded image onto the image preview widget. In this case, we'll call the paintImage() function within the paintEvent() virtual function:
+
+
+
+void MainWindow::paintEvent(QPaintEvent *event) 
+{ 
+   if (canDraw) 
+   {          paintImage("", ui->productImage->pos().x(), ui->productImage-         >pos().y()); 
+
+   } 
+}
+
+
+
+After that, we'll write the paintImage() function in mainwindow.cpp:
+
+
+
+void MainWindow::paintImage(QString fileName, int x, int y) 
+{ 
+   QPainter painter; 
+   QImage saveImage(150, 150, QImage::Format_RGB16); 
+ 
+   if (!fileName.isEmpty()) 
+   { 
+         painter.begin(&saveImage); 
+   } 
+   else 
+   { 
+         painter.begin(this); 
+   } 
+ 
+   if (!pix->isNull()) 
+   { 
+         painter.setClipRect(x, y, 150, 150); 
+         painter.fillRect(QRect(x, y, 150, 150), Qt::SolidPattern); 
+         painter.drawPixmap(x - drawPos.x(), y - drawPos.y(),          drawSize.width(), drawSize.height(), *pix); 
+
+   } 
+ 
+   painter.end(); 
+ 
+   if (fileName != "") 
+   { 
+         saveImage.save(fileName); 
+         QMessageBox::information(this, "Success", "Image has been          successfully saved!"); 
+
+   } }
+
+
+
+This function does two things—if we don't set the fileName variable, it will proceed to draw the image on top of the image preview widget, otherwise, it will crop the image based on the dimension of the image preview widget and save it to the disk following the fileName variable.
+We'll call this function again when the save button is being clicked. This time, we'll set the fileName variable as the desired directory path and filename, so that the QPainter class can save the image correctly:
+
+
+
+void MainWindow::on_saveButton_clicked() 
+{ 
+   if (canDraw) 
+   { 
+         if (!pix->isNull()) 
+         { 
+               // Save new pic from painter 
+               paintImage(QCoreApplication::applicationDirPath() +                "/image.jpg", 0, 0); 
+
+         } 
+   } 
+}
+
+
+
+Lastly, right-click on each of the three sliders and select Go to slot. Then, select valueChanged(int) and click OK.
+
+
+
+After that, we'll write the code for the slot functions resulting from the previous step:
+
+
+
+void MainWindow::on_scaleSlider_valueChanged(int value) 
+{ 
+   drawSize = imageSize * value / 100; 
+   update(); 
+} 
+ 
+void MainWindow::on_leftSlider_valueChanged(int value) 
+{ 
+   drawPos.setX(value * drawSize.width() / 100 * 0.5); 
+   update(); 
+} 
+ 
+void MainWindow::on_topSlider_valueChanged(int value) 
+{ 
+   drawPos.setY(value * drawSize.height() / 100 * 0.5); 
+   update(); 
+}
+
+
+
+combining these three different sliders, users can adjust and crop the image to their liking before proceeding to upload the image to the server, or use it for other purposes.
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

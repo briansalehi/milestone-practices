@@ -1,0 +1,1376 @@
+Learning OpenCV 3 (2017)
+Adrian Kaehler, Gary Bradski
+
+OpenCV is under ongoing development, with official releases occurring quarterly. To stay completely current, you should obtain your code updates from the aforementioned GitHub site. OpenCV maintains a website at http://opencv.org; for developers, there is a wiki at https://github.com/opencv/opencv/wiki.
+
+
+
+Supplemental material (code examples, exercises, etc.) is available for download at https://github.com/oreillymedia/Learning-OpenCV-3_examples.
+
+
+
+Learning OpenCV 3 by Adrian Kaehler and Gary Bradski (O’Reilly). Copyright 2017 Adrian Kaehler, Gary Bradski, 978-1-491-93799-0.
+
+
+
+OpenCV Documentation
+
+
+
+The primary documentation for OpenCV is the HTML documentation available at http://opencv.org. In addition to this, there are in-depth tutorials on many subjects at http://docs.opencv.org/2.4.13/doc/tutorials/tutorials.html, and an OpenCV wiki (currently located at https://github.com/opencv/opencv/wiki).
+
+
+
+Starting from OpenCV 3.x, there is no offline documentation anymore.
+
+
+
+As we just mentioned, there is extensive documentation as well as a wiki available at http://opencv.org. The documentation there is divided into several major components:
+
+
+
+Reference
+
+
+
+Tutorials
+
+
+
+Quick Start
+
+
+
+Cheat Sheet
+
+
+
+Wiki
+
+
+
+Q&A
+
+
+
+The Reference is divided into several sections, each of which pertains to a module in the library. The exact module list has evolved over time, but the modules are the primary organizational structure in the library. Every function in the library is part of one module. Here are the current modules:
+
+
+
+coreThe “core” is the section of the library that contains all of the basic object types and their basic operations.
+
+
+
+imgprocThe image processing module contains basic transformations on images, including filters and similar convolutional operators.
+
+
+
+highgui (split to imgcodecs, videoio, and highgui in OpenCV 3.0)This module contains user interface functions that can be used to display images or take simple user input. It can be thought of as a very lightweight window UI toolkit.
+
+
+
+videoThe video library contains the functions you need to read and write video streams.
+
+
+
+calib3dThis module contains implementations of algorithms you will need to calibrate single cameras as well as stereo or multicamera arrays.
+
+
+
+features2dThis module contains algorithms for detecting, describing, and matching keypoint features.
+
+
+
+objdetectThis module contains algorithms for detecting specific objects, such as faces or pedestrians. You can train the detectors to detect other objects as well.
+
+
+
+mlThe Machine Learning library is actually an entire library in itself, and contains a wide array of machine learning algorithms implemented in such a way as to work with the natural data structures of OpenCV.
+
+
+
+flannFLANN stands for “Fast Library for Approximate Nearest Neighbors.” This library contains methods you will not likely use directly, but which are used by other functions in other modules for doing nearest neighbor searches in large data sets.
+
+
+
+gpu (split to multiple cuda* modules in OpenCV 3.0)The GPU library contains implementations of most of the rest of the library functions optimized for operation on CUDA GPUs.
+
+
+
+photoThis is a relatively new module that contains tools useful for computational photography.
+
+
+
+stitchingThis entire module implements a sophisticated image stitching pipeline. This is new functionality in the library, but, like the photo module, it is an area where future growth is expected.
+
+
+
+nonfree (moved to opencv_contrib/xfeatures2d in OpenCV 3.0)OpenCV contains some implementations of algorithms that are patented or otherwise burdened by usage restrictions (e.g., the SIFT algorithm). Those algorithms are segregated into their own module to indicate that you will need to do some kind of special work in order to use them in a commercial product.
+
+
+
+contrib (melted into a few opencv_contrib modules in OpenCV 3.0)This module contains new things that have yet to be integrated into the whole of the library.
+
+
+
+Despite the ever-increasing quality of this online documentation, one task that is not within its scope is to provide a proper understanding of the algorithms implemented or of the exact meaning of the parameters these algorithms require. This book aims to provide this information, as well as a more in-depth understanding of all of the basic building blocks of the library.
+
+
+
+Here are some of the modules available in the opencv_contrib repository
+
+
+
+DnnDeep neural networks
+
+
+
+faceFace recognition
+
+
+
+textText detection and recognition; may optionally use open source OCR Tesseract as backend
+
+
+
+rgbdProcessing RGB + depth maps, obtained with Kinect and other depth sensors
+
+
+
+bioinspiredBiologically inspired vision
+
+
+
+ximgproc, xphotoAdvanced image processing and computational photography algorithms
+
+
+
+trackingModern object-tracking algorithms
+
+
+
+Display a Picture
+
+
+
+OpenCV functions live within a namespace called cv. To call OpenCV functions, you must explicitly tell the compiler that you are talking about the cv namespace by prepending cv:: to each function call.
+
+
+
+The function cv::imread() is a high-level  routine that determines the file format to be loaded based on the filename; it also automatically allocates the memory needed for the image data structure. Note that cv::imread() can read a wide variety of image formats
+
+
+
+A cv::Mat structure is returned.
+
+
+
+OpenCV uses this structure to handle all kinds of images: single-channel, multichannel, integer-valued, floating-point-valued, and so on.
+
+
+
+img.empty()
+
+
+
+cv::name⁠d Window(), opens a window on the screen that can contain and display an image.
+
+
+
+cv::namedWindow( "Example1", cv::WINDOW_AUTOSIZE );
+
+
+
+Whenever we have an image in a cv::Mat structure, we can display it in an existing window with cv::imshow(). The cv::imshow() function creates a window if one does not exist (created by cv::namedWindow()). On the call to cv::imshow(), the window will be redrawn with the appropriate image in it, and the window will resize itself as appropriate if it was created with the cv::WINDOW_AUTOSIZE flag.
+
+
+
+The cv::waitKey() function asks the program to  stop and wait for a keystroke. If a positive argument is given, the program will wait for that number of milliseconds and then continue even if nothing is pressed. If the argument is set to 0 or to a negative number, the program will wait indefinitely for a key-press.
+
+
+
+The function cv::destroyWindow() will close the window and deallocate any associated memory usage.
+
+
+
+Second Program — Video
+
+
+
+Chapter 3. Getting to Know OpenCV Data Types
+
+
+
+OpenCV Data Types
+
+
+
+The most straightforward of the basic data types  is the  template  class cv::Vec<>, a container class for primitives,2 which we will refer to as the fixed vector classes.
+
+
+
+fixed vector classes are intended for small vectors whose dimensions are known at compile time.
+
+
+
+cv::Mat class, which is the right way to handle big arrays of any number of dimensions
+--
+correct sentence
+
+
+
+there are aliases (typedefs) for common instantiations of the cv::Vec<> template. They have names like cv::Vec2i, cv::Vec3i, and cv::Vec4d (for a two-element integer vector, a three-element integer vector, or a four-element double-precision floating-point vector, respectively). In general, anything of the form cv::Vec{2,3,4,6}{b,w,s,i,f,d} is valid for any combination of two to four dimensions and the six data types.3
+
+
+
+Just like the fixed vector classes, cv::Matx<> is not intended to be used for large arrays, but rather is designed for the handling of certain specific small matrix operations.  In computer vision, there are a lot of 2 × 2 or 3 × 3 matrices around, and a few 4 × 4, which are used for various transformations. cv::Matx<> is designed to hold these sorts of objects.  As with cv::Vec<>, cv::Matx<> is normally accessed through aliases of the form cv::Matx{1,2,3,4,6}{1,2,3,4,6}{f,d}.
+
+
+
+Closely related to the fixed vector classes are the point classes, which are  containers for two or three values of one of the primitive types. The point classes are derived from their own template, so they are not directly descended from the fixed vector classes, but they can be cast to and from them.
+
+
+
+The main difference between the point classes and the fixed vector classes is that their members are accessed  by named variables (mypoint.x, mypoint.y, etc.) rather than by a vector index (myvec[0], myvec[1], etc.).
+
+
+
+As with cv::Vec<>, the point classes  are typically invoked via aliases for the instantiation of an appropriate template. Those aliases have names like cv::Point2i, cv::Point2f, and cv::Point2d, or cv::Point3i, cv::Point3f, and cv::Point3d.
+
+
+
+The class cv::Scalar is essentially a four-dimensional point.  As with the point classes, cv::Scalar is actually associated with a template that can generate an arbitrary four-component vector, but the keyword cv::Scalar specifically is aliased to a four-component vector with double-precision components.
+
+
+
+Unlike the point classes, the elements of a cv::Scalar object are accessed with an integer index, the same as cv::Vec<>. This is because cv::Scalar is directly derived from an instantiation of cv::Vec<> (specifically, from cv::Vec<double,4>).
+
+
+
+Next on  our tour are cv::Size and cv::Rect. As with  the point  classes,  these two are derived from their own templates.
+
+
+
+cv::Size is mainly distinguished by having data members width and height rather than x and y, while cv::Rect has all four.
+
+
+
+The class cv::Size is actually an  alias for cv::Size2i, which is itself an alias of a more general template in the case of width and height being integers.
+
+
+
+For floating-point values of width and height, use the alias cv::Size2f.
+
+
+
+cv::Rect is an alias for the integer form of rectangle. There is also a class to represent a rectangle that is not axis-aligned.  It is called cv::RotatedRect and contains a cv::Point2f called center, a cv::Size2f called size, and one additional float called angle.
+
+
+
+Basic Types: Getting Down to Details
+
+
+
+As we go over these classes, we will try to hit the high points of their interfaces, but not get into every gory detail. Instead, we will provide examples that should convey what you can and can’t do with these objects. For the low-level details, you should consult .../opencv2/core/core.hpp.
+
+
+
+The point classes
+
+
+
+There are actually two such templates, one for two-dimensional and one for three-dimensional points.
+
+
+
+The big advantage of the point classes is that they are simple and have very little overhead. Natively, they do not have a lot of operations defined on them, but they can be cast to somewhat more generalized types, such as the fixed vector classes or the fixed matrix classes (discussed later), when needed.
+
+
+
+Table 3-1 is the (relatively short) list of functions natively supported by the point classes.
+--
+table of 2 cols
+
+
+
+OperationExampleDefault constructors
+cv::Point2i p;
+cv::Point3f p; Copy constructorcv::Point3f p2( p1 );Value constructors
+cv::Point2i p( x0, x1 );
+cv::Point3d p( x0, x1, x2 ); Cast to the fixed vector classes(cv::Vec3f) p;Member access
+p.x; p.y; // and for three-dimensional
+         // point classes:  p.z Dot productfloat x = p1.dot( p2 )Double-precision dot productdouble x = p1.ddot( p2 )Cross product
+p1.cross( p2 ) // (for three-dimensional point
+              // classes only) Query if point p is inside rectangle r
+p.inside( r )  // (for two-dimensional point
+              // classes only)
+
+
+
+The cv::Scalar class
+
+
+
+cv::Scalar is really a four-dimensional  point class.
+
+
+
+Table 3-2 lists the operations supported by cv::Scalar.
+--
+table of 2 cols
+
+
+
+OperationExampleDefault constructorscv::Scalar s;Copy constructorcv::Scalar s2( s1 );Value constructors
+cv::Scalar s( x0 );
+cv::Scalar s( x0, x1, x2, x3 ); Element-wise multiplications1.mul( s2 );(Quaternion) conjugations.conj(); // (returns cv::Scalar(s0,-s1,-s2,-s2))(Quaternion) real tests.isReal();
+
+
+
+The size classes
+
+
+
+The size classes are, in practice, similar to the corresponding point classes, and can be cast to and from them.
+
+
+
+The three aliases for the size classes are cv::Size, cv::Size2i, and cv::Size2f. The first two of these are equivalent and imply integer size, while the last is for 32-bit floating-point sizes.
+
+
+
+Table 3-3 lists the operations supported  by  the size classes.
+--
+table of 2 cols
+
+
+
+OperationExampleDefault constructors
+cv::Size sz;
+cv::Size2i sz;
+cv::Size2f sz; Copy constructorcv::Size sz2( sz1 );Value constructorscv::Size2f sz( w, h );Member accesssz.width; sz.height;Compute areasz.area();
+
+
+
+The cv::Rect class
+
+
+
+OperationExampleDefault constructorscv::Rect r;Copy constructorcv::Rect r2( r1 );Value constructorscv::Rect( x, y, w, h );Construct from origin and sizecv::Rect( p, sz );Construct from two cornerscv::Rect( p1, p2 );Member accessr.x; r.y; r.width; r.height;Compute arear.area();Extract upper-left cornerr.tl();Extract bottom-right cornerr.br();Determine if point p is inside rectangle rr.contains( p );
+
+
+
+Table 3-5 shows, cv::Rect also supports a variety of overloaded operators that can be used for the computation of various geometrical properties of two rectangles or a rectangle and another object.
+
+
+
+OperationExampleIntersection of rectangles r1 and r2
+cv::Rect r3 = r1 & r2;
+r1 &= r2; Minimum area rectangle containing rectangles r1 and r2
+cv::Rect r3 = r1 | r2;
+r1 |= r2; Translate rectangle r by an amount x
+cv::Rect rx = r + x;
+r += x; Enlarge a rectangle r by an amount given by size s
+cv::Rect rs = r + s;
+r += s; Compare rectangles r1 and r2 for exact equalitybool eq = (r1 == r2);Compare rectangles r1 and r2 for inequalitybool ne = (r1 != r2);
+
+
+
+The cv::RotatedRect class
+
+
+
+The cv::RotatedRect class is one of the few classes in the C++ OpenCV interface that is not a template underneath. Instead, it is a container that holds a cv::Point2f called center, a cv::Size2f called size, and one additional float called angle, with the latter representing the rotation of the rectangle around center.
+
+
+
+One very important difference between cv::RotatedRect and cv::Rect is the convention that a cv::RotatedRect is located in “space” relative to its center, while the cv::Rect is located relative to its upper-left corner.
+
+
+
+Table 3-6 lists the operations that are supported directly by cv::RotatedRect.
+
+
+
+OperationExampleDefault constructorscv::RotatedRect rr();Copy constructorcv::RotatedRect rr2( rr1 );Construct from two cornerscv::RotatedRect( p1, p2 );Value constructors; takes a point, a size, and an anglecv::RotatedRect rr( p, sz, theta ) ;Member accessrr.center; rr.size; rr.angle;Return a list of the cornersrr.points( pts[4] );
+
+
+
+The fixed matrix classes
+
+
+
+The fixed matrix classes are for matrices whose dimensions are known at compile time
+
+
+
+The fixed matrix classes are also central to many of the other basic types in the C++ interface to OpenCV. The fixed vector class derives from the fixed matrix classes, and other classes either derive from the fixed vector class (like cv::Scalar) or they rely on casting to the fixed vector class for many important operations.
+
+
+
+As usual, the fixed matrix classes are really a template. The template is called cv::Matx<>, but individual matrices are usually allocated through aliases. The basic form of such an alias is cv::Matx{1,2,...}{1,2,...}{f,d}
+
+
+
+Table 3-7 lists the operations supported by cv::Matx.
+
+
+
+OperationExampleDefault constructorcv::Matx33f m33f; cv::Matx43d m43d;Copy constructorcv::Matx22d m22d( n22d );Value constructors
+cv::Matx21f m(x0,x1); cv::Matx44d
+m(x0,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15);Matrix of identical elementsm33f = cv::Matx33f::all( x );Matrix of zerosm23d = cv::Matx23d::zeros();Matrix of onesm16f = cv::Matx16f::ones();Create a unit matrixm33f = cv::Matx33f::eye();Create a matrix that can hold the diagonal of another
+m31f = cv::Matx33f::diag(); // Create a matrix of
+                          // size 3-by-1 of floatsCreate a matrix with uniformly distributed entriesm33f = cv::Matx33f::randu( min, max );
+--
+missing:
+floats
+randu(min, max);
+
+
+
+Create a matrix with normally distributed entriesm33f = cv::Matx33f::nrandn( mean, variance );Member access
+m( i, j ), m( i ); // one argument for
+                  // one-dimensional matrices only Matrix algebram1 = m0; m0 * m1; m0 + m1; m0 – m1;Singleton algebram * a; a * m; m / a;Comparisonm1 == m2; m1 != m2;Dot product
+m1.dot( m2 );  // (sum of element-wise
+              // multiplications, precision of m) Dot product
+m1.ddot( m2 ); // (sum of element-wise multiplications,
+              // double precision) Reshape a matrixm91f = m33f.reshape<9,1>();Cast operatorsm44f = (Matx44f) m44dExtract 2 × 2 submatrix at (i, j)m44f.get_minor<2, 2>( i, j );Extract row im14f = m44f.row( i );Extract column jm41f = m44f.col( j );Extract matrix diagonalm41f = m44f.diag();Compute transposen44f = m44f.t();Invert matrix
+n44f = m44f.inv( method ); // (default method is
+                         // cv::DECOMP_LU) Solve linear system
+m31f = m33f.solve( rhs31f, method )
+m32f = m33f.solve<2>( rhs32f, method ); // (template forma);
+                                     // default method is DECOMP_LU)
+--
+missing:
+precision of m
+double precision
+method is
+DECOMP_LU)
+
+
+
+Per-element multiplicationm1.mul( m2 );
+
+
+
+Note that many of the fixed matrix functions are static relative to the class (i.e., you access them directly as members of the class rather than as members of a particular object). For example, if you would like to construct a 3 × 3 identity matrix, you have a handy class function for it: cv::Mat33f::eye(). Note that, in this example, eye() does not need any arguments because it is a member of the class, and the class is already a specialization of the cv::Matx<> template to 3 × 3.
+
+
+
+The fixed vector classes
+
+
+
+The fixed vector classes are derived from the fixed matrix classes.
+
+
+
+The readily available aliases for specific instantiations of cv::Vec<> are of the form cv::Vec{2,3,4,6}{b,s,w,i,f,d}
+
+
+
+OperationExampleDefault constructorVec2s v2s; Vec6f v6f; // etc...Copy constructorVec3f u3f( v3f );Value constructorsVec2f v2f(x0,x1); Vec6d v6d(x0,x1,x2,x3,x4,x5);Member access
+v4f[ i ]; v3w( j ); // (operator() and operator[]
+                   // both work) Vector cross-productv3f.cross( u3f );
+
+
+
+The complex number classes
+
+
+
+The OpenCV complex number classes are not identical to, but are compatible with — and can be cast to and from — the classes associated with the STL complex number class template complex<>.
+
+
+
+The most substantial difference between the OpenCV and STL complex number classes is in member access. In the STL classes, the real and imaginary parts are accessed through the member functions real() and imag(), while in the OpenCV class, they are directly accessible as (public) member variables re and im.
+
+
+
+OperationExampleDefault constructorcv::Complexf z1; cv::Complexd z2;Copy constructorcv::Complexf z2( z1 );Value constructorscv::Complexd z1(re0); cv::Complexd(re0,im1) ;Copy constructorcv::Complexf u2f( v2f );Member accessz1.re; z1.im;Complex conjugatez2 = z1.conj();
+
+
+
+classes are aliases for underlying templates. cv::Complexf and cv::Complexd are aliases for single- and double-precision complex numbers, respectively.
+
+
+
+Helper Objects
+
+
+
+In addition to the basic types and the big  containers (which we will get to in the next section), there is a family of helper objects that are important for controlling various algorithms (such as termination criteria) or for doing various operations on the containers (such as “ranges” or “slices”).
+
+
+
+There is also one very important object, the “smart” pointer object cv::Ptr. Looking into cv::Ptr, we will examine the garbage-collecting system, which is integral to the C++ interface to OpenCV.
+
+
+
+The cv::TermCriteria class
+
+
+
+Many algorithms require a stopping condition to know when to quit. Generally, stopping criteria take the form of either some finite number of iterations that are allowed (called COUNT or MAX_ITER) or some kind of error parameter that basically says, “if you are this close, you can quit” (called EPS — short for epsilon
+
+
+
+In many cases, it is desirable to have both of these at once so that if the algorithm never gets “close enough,” it will still quit at some point.
+
+
+
+The cv::TermCriteria objects encapsulate one or both of the stopping criteria so that they can be passed conveniently to an OpenCV algorithm function.
+
+
+
+They have three member variables — type, maxCount, and epsilon — which can be set directly (they are public) or, more often, are just set by the constructor with the form TermCriteria( int type, int maxCount, double epsilon ).
+
+
+
+The variable type is set to either cv::TermCriteria::COUNT or TermCriteria::EPS. You can also “or” (i.e., |) the two together. The value cv::TermCriteria::COUNT is a synonym for cv::TermCriteria::MAX_ITER, so you can use that if you prefer.
+
+
+
+If the termination criterion includes cv::TermCriteria::COUNT, then you are telling the algorithm to terminate after maxCount iterations. If the termination criterion includes cv::TermCriteria::EPS, then you are telling the algorithm to terminate after some metric associated with the algorithm’s convergence falls below epsilon.
+
+
+
+The type argument has to be set accordingly for maxCount or epsilon to be used.
+
+
+
+Here’s how this all works. First, you define an instance of the pointer template for the class object that you want to “wrap.” You do this with a call like cv::Ptr<Matx33f> p( new cv::Matx33f ), or cv::Ptr<Matx33f> p = makePtr<cv::Matx33f>(). The constructor for the template object takes a pointer to the object to be pointed to. Once you do this, you have your smart pointer p, which is a sort of pointer-like object that you can pass around and use just like a normal pointer (i.e., it supports operators such as operator*() and operator->()). Once you have p, you can create other objects of the same type without passing them a pointer to a new object. For example, you could create Ptr<Mat33f> q, and when you assign the value of p to q, somewhere behind the scenes, the “smart” action of the smart pointer comes into play. You see, just like a usual pointer, there is still only one actual cv::Mat33f object out there that p and q both point to. The difference is that both p and qknow that they are each one of two pointers. Should p disappear (such as by falling out of scope), q knows that it is the only remaining reference to the original matrix. If q should then disappear and its destructor is called (implicitly), q will know that is the last one left, and that it should deallocate the original matrix.
+
+
+
+The cv::Range class
+
+
+
+The cv::Range class is used to specify a  continuous  sequence  of integers. cv::Range objects have two elements, start and end, which — similar to cv::TermCriteria — are often set with the constructor cv::Range( int start, int end ).
+
+
+
+Ranges are inclusive of their start value, but not inclusive of their end value, so cv::Range rng( 0, 4 ) includes the values 0, 1, 2, and 3, but not 4.
+
+
+
+Using size(), you can find the number of elements in a range. In the preceding example, rng.size() would be equal to 4.
+
+
+
+There is also a member, empty(), that tests if a range has no elements.
+
+
+
+Finally, cv::Range::all() can be used anywhere a range is required to indicate whatever range the object has available.
+
+
+
+The cv::Ptr<> template class supports several additional functions in its interface related to the reference-counting functionality of the smart pointer. Specifically, the functions addref() and release() increment and decrement the internal reference counter of the pointer. These are relatively dangerous functions to use, but are available in case you need to micromanage the reference counters yourself.
+
+
+
+There is also a function called empty(), which you can use to determine if a smart pointer is pointing to an object that has been deallocated. This could happen if you called release() on the object one or more times. In this case, you would still have a smart pointer around, but the object pointed to might already have been destroyed.
+
+
+
+The cv::Ptr template and Garbage Collection 101
+
+
+
+There is a second application of empty(), which is to determine if the internal object pointer inside the smart pointer object happens to be NULL for some other reason. For example, this might occur if you assigned the smart pointer by calling a function that might just return NULL in the first place (cvLoadImage(), fopen(), etc.).
+
+
+
+The final member of Ptr<> that you will want to know about is delete_obj(). This is a function that gets called automatically when the reference count gets to zero. By default, this function is defined but does nothing. It is there so that you can overload it in the case of instantiation of cv::Ptr<>, which points to a class that requires some specific operation in order to clean up the class to which it points. For example, let’s say that you are working with an old-style (pre–version 2.1) IplImage.9 In the old days, you might, for example, have called cvLoadImage() to load that image from disk. In the C interface, that would have looked like this:
+
+IplImage* img_p = cvLoadImage( ... );
+The modern version of this (while still using IplImage rather than cv::Mat, which we are still working our way up to) would look like this:
+
+cv::Ptr<IplImage> img_p = cvLoadImage( "an_image" );
+or (if you prefer) this:
+
+cv::Ptr<IplImage> img_p( cvLoadImage("an_image" ) );
+Now you can use img_p in exactly the same way as a pointer (which is to say, for readers experienced with the pre–version 2.1 interface, “exactly as you would have back then”). Conveniently, this particular template instantiation is actually already defined for you somewhere in the vast sea of header files that make up OpenCV. If you were to go search it out, you would find the following template function defined:
+
+template<> inline void cv::Ptr<IplImage>::delete_obj() {
+    cvReleaseImage(&obj);
+}
+
+
+
+Ptr<> is thread safe.
+
+
+
+Similarly, the other reference-counting objects in OpenCV are all thread safe in this same sense.
+
+
+
+The cv::Exception class and exception handling
+
+
+
+OpenCV defines  its own  exception type, cv::Exception, which is derived from the STL exception class std::exception.
+
+
+
+this exception type has nothing special about it, other than being in the cv:: namespace and thus distinguishable from other objects that are also derived from std::exception.
+
+
+
+The type cv::Exception has members code, err, func, file, and line, which are (respectively) a numerical error code, a string indicating the nature of the error that generated the exception, the name of the function in which the error occurred, the file in which the error occurred, and an integer indicating the line on which the error occurred in that file. err, func, and file are all STL strings.
+
+
+
+There are several built-in macros for generating exceptions yourself. CV_Error( errorcode, description ) will  generate and throw an exception with a fixed text description. CV_Error_( errorcode, printf_fmt_str, [printf-args] ) works the same, but allows you to replace the fixed description with a printf-like format string and arguments.   Finally, CV_Assert( condition ) and CV_DbgAssert( condition ) will both test your  condition and throw an exception if the condition is not met. The latter version, however, will only operate in debug builds. These macros are the strongly preferred method of throwing exceptions, as they will automatically take care of the fields func, file, and line for you.
+
+
+
+The cv::DataType<> template
+
+
+
+When OpenCV library functions  need to  communicate the concept of a particular data type, they do so by creating an object of type cv::DataType<>. cv::DataType<> itself is a template, and so the actual objects passed around are specializations of this template. This is an example of what  in C++ are  generally called traits. This allows the cv::DataType<> object to contain both runtime information about the type, as well as typedef statements in its own definition that allow it to refer to the same type at compile time.
+
+
+
+Here’s the template class definition for DataType:
+
+
+
+template<typename _Tp> class DataType
+{
+  typedef _Tp        value_type;
+  typedef value_type work_type;
+  typedef value_type channel_type;
+  typedef value_type vec_type;
+
+  enum {
+    generic_type = 1,
+    depth        = -1,
+    channels     = 1,
+    fmt          = 0,
+    type         = CV_MAKETYPE(depth, channels)  };
+};
+
+
+
+Let’s try to understand what this means, and then follow it with an example. First, we can see that cv::DataType<> is a template, and expects to be specialized to a class called _Tp. It then has four typedef statements that allow the type of the cv::DataType<>, as well as some other related types, to be extracted from the cv::DataType<> instantiated object at compile time. In the template definition, these are all the same, but we will see in our example of a template specialization that they do not have to be (and often should not be). The next section is an enum that contains several components.12 These are the generic_type, the depth, the number of channels, the format fmt, and the type. To see what all of these components mean, we’ll look at two example specializations of cv::DataType<>, from core.hpp. The first is the cv::DataType<> definition for float:
+
+
+
+template<> class DataType<float>
+{
+public:
+  typedef float      value_type;
+  typedef value_type work_type;
+  typedef value_type channel_type;
+  typedef value_type vec_type;
+
+  enum {
+    generic_type = 0,    depth        = DataDepth<channel_type>::value,
+    channels     = 1,
+    fmt          = DataDepth<channel_type>::fmt,
+    type         = CV_MAKETYPE(depth, channels)
+  };
+};
+
+
+
+In this case, the value_type is of course float, and the work_type, channel_type, and vec_type are all the same. We will see more clearly what these are for in the next example. For the constants in the enum, this example will do just fine. The first variable, generic_type, is set to 0, as it is zero for all types defined in core.hpp. The depth variable is the data type identifier used by OpenCV. For example, cv::DataDepth<float>::value resolves to the constant CV_32F. The entry channels is 1 because float is just a single number; we will see an alternative to this in the next example. The variable fmt gives a single-character representation of the format. In this case, cv::DataDepth<float>::fmt resolves to f. The last entry is type, which is a representation similar to depth, but includes the number of channels (in this case, one). CV_MAKETYPE(CV_32F,1) resolves to CV_32FC1.
+
+
+
+The important thing about DataType<>, however, is to communicate the nature of more complicated constructs. This is essential, for example, for allowing algorithms to be implemented in a manner that is agnostic to the incoming data type (i.e., algorithms that use introspection to determine how to proceed with incoming data).
+
+
+
+Consider the example of an instantiation of cv::DataType<> for a cv::Rect<> (itself containing an as-yet-unspecialized type _Tp):
+
+
+
+template<typename _Tp> class DataType<Rect_<_Tp> >
+{
+public:
+  typedef Rect_<_Tp>                               value_type;
+  typedef Rect_<typename DataType<_Tp>::work_type> work_type;
+  typedef _Tp                                      channel_type;
+  typedef Vec<channel_type, channels>              vec_type;
+
+  enum {
+    generic_type = 0,
+    depth        = DataDepth<channel_type>::value,
+    channels     = 4,
+    fmt          = ((channels-1)<<8) + DataDepth<channel_type>::fmt,
+    type         = CV_MAKETYPE(depth, channels)
+  };
+};
+
+
+
+First, notice that cv::Rect itself does not appear. You will recall that earlier we mentioned that cv::Rect was actually an alias for a template, and that template is called cv::Rect_<>. So this template could be specialized as cv::DataType<Rect> or, for example, cv::DataType< Rect_<float> >. For the case cv::DataType<Rect>, recall that all of the elements are integers, so if we consider that case, all of the instantiations of the template parameter _Tp resolve to int.
+We can see that the value_type is just the compile-time name of the thing that the cv::DataType<> is describing (namely Rect). The work_type, however, is defined to be the work_type of cv::DataType<int> (which, not surprisingly, is int). What we see is that the work_type is telling us what kind of variables the cv::DataType<> is made of (i.e., what we “do work” on). The channel type is also int. This means that if we want to represent this variable as a multichannel object, it should be represented as some number of int objects. Finally, just as channel_type tells us how to represent this cv::DataType<> as a multichannel object, vec_type tells us how to represent it as an object of type cv::Vec<>. The alias cv::DataType<Rect>::vec_type will resolve to cv::Vec<int,4>.
+Moving on to the runtime constants: generic_type is again 0, depth is CV_32S, channels is 4 (because there are actually four values, the same reason the vec_type instantiated to a cv::Vec<> of size 4), fmt resolves to 0x3069 (since i is 0x69), and type resolves to CV_32SC4.
+
+
+
+The cv::InputArray and cv::OutputArray classes
+
+
+
+We have already seen that OpenCV supports some small array types (cv::Scalar, cv::Vec, cv::Matx) and STL’s std::vector<> in addition to the large array types discussed in the next chapter (cv::Mat and cv::SparseMat). In order  to keep the interface from becoming onerously complicated (and repetitive), OpenCV defines the types cv::InputArray and cv::OutputArray. In effect, these types mean “any of the above” with respect to the many array forms supported by the library. There is even a cv::InputOutputArray, specifying an array for in-place computation.
+
+
+
+The primary difference between cv::InputArray and cv::OutputArray is that the former is assumed to be const
+
+
+
+Related to cv::InputArray is the special  function cv::noArray() that returns a cv::InputArray. The returned object can be passed to any input requiring cv::Inpu⁠t Array to indicate that this input is not being used. Certain functions also have optional output arrays, where you may pass cv::noArray() when you do not need the corresponding output.
+
+
+
+Utility Functions
+
+
+
+The utility functions include tools for mathematical operations, tests, error generations, memory and thread handling, optimization, and more.
+
+
+
+FunctionDescriptioncv::alignPtr()Align pointer to given number of bytescv::alignSize()Align buffer size to given number of bytescv::allocate()Allocate a C-style array of objectscvCeil()aRound float number x to nearest integer not smaller than xcv::cubeRoot()Compute the cube root of a numbercv::CV_Assert()Throw an exception if a given condition is not trueCV_Error()Macro to build a cv::Exception (from a fixed string) and throw itCV_Error_()Macro to build a cv::Exception (from a formatted string) and throw itcv::deallocate()Deallocate a C-style array of objectscv::error()Indicate an error and throw an exceptioncv::fastAtan2()Calculate two-dimensional angle of a vector in degreescv::fastFree()Deallocate a memory buffercv::fastMalloc()Allocate an aligned memory buffercvFloor()Round float number x to nearest integer not larger than xcv::format()Create an STL string using sprintf-like formattingcv::getCPUTickCount()Get tick count from internal CPU timercv::getNumThreads()Count number of threads currently used by OpenCVcv::getOptimalDFTSize()Compute the best size for an array that you plan to pass to cv::DFT()cv::getThreadNum()Get index of the current threadcv::getTickCount()Get tick count from systemcv::getTickFrequency()Get number or ticks per second (see cv::getTickCount())cvIsInf()Check if a floating-point number x is infinitycvIsNaN()Check if a floating-point number x is “Not a Number”cvRound()Round float number x to the nearest integercv::setNumThreads()Set number of threads used by OpenCVcv::setUseOptimized()Enables or disables the use of optimized code (SSE2, etc.)cv::useOptimized()Indicates status of optimized code enabling (see cv::setUseOptimized())
+
+
+
+cv::alignPtr()
+
+
+
+template<T> T* cv::alignPtr(              // Return aligned pointer of type T*
+  T*  ptr,                                // pointer, unaligned
+  int n   = sizeof(T)                     // align to block size, a power of 2
+);
+
+
+
+Given a pointer of any type, this function computes an aligned pointer of the same type according to the following computation:
+(T*)(((size_t)ptr + n+1) & -n)
+
+
+
+cv::alignSize()
+
+
+
+size_t cv::alignSize(                     // minimum size >='sz' divisible by 'n'
+  size_t sz,                              // size of buffer
+  int n   = sizeof(T)                     // align to block size, a power of 2
+);
+
+
+
+Given a number n (typically a return value from sizeof()), and a size for a buffer sz, cv::alignSize() computes the size that this buffer should be in order to contain an integer number of objects of size n — that is, the minimum number that is greater or equal to sz yet divisible by n. The following formula is used:
+
+(sz + n-1) & -n
+
+
+
+cv::allocate()
+
+
+
+template<T> T* cv::allocate(              // Return pointer to allocated buffer
+  size_t sz                               // buffer size, multiples of sizeof(T)
+);
+
+
+
+The function cv::allocate() functions similarly to the array form of new, in that it allocates a C-style array of n objects of type T, calls the default constructor for each object, and returns a pointer to the first object in the array
+
+
+
+cv::deallocate()
+
+
+
+template<T> void cv::deallocate(
+  T*     ptr,                         // Pointer to buffer to free
+  size_t sz                           // size of buffer, multiples of sizeof(T)
+);
+
+
+
+The function cv::deallocate() functions similarly to the array form of delete, in that it deallocates a C-style array of n objects of type T, and calls the destructor for each object. cv::deallocate() is used to deallocate objects allocated with cv::allocate(). The number of elements n passed to cv::deallocate() must be the same as the number of objects originally allocated with cv::allocate().
+
+
+
+cv::fastAtan2()
+
+
+
+float cv::fastAtan2(                      // Return value is 32-bit float
+  float y,                                // y input value (32-bit float)
+  float x                                 // x input value (32-bit float)
+);
+
+
+
+This function computes the arctangent of an x,y pair and returns the angle from the origin to the indicated point. The result is reported in degrees ranging from 0.0 to 360.0, inclusive of 0.0 but not inclusive of 360.0.
+
+
+
+cvCeil()
+
+
+
+int cvCeil(                               // Return the smallest int >= x
+  float x                                 // input value (32-bit float)
+);
+
+
+
+Given a floating-point number x, cvCeil() computes the smallest integer not smaller than x. If the input value is outside of the range representable by a 32-bit integer, the result is undefined.
+
+
+
+cv::cubeRoot()
+
+
+
+float cv::cubeRoot(                       // Return value is 32-bit float
+  float x                                 // input value (32-bit float)
+);
+
+
+
+This function computes the cubed root of the argument x. Negative values of x are handled correctly (i.e., the return value is negative).
+
+
+
+cv::CV_Assert() and CV_DbgAssert()
+
+
+
+CV_Assert( x!=0 )
+
+
+
+CV_Assert() is a macro that will test the expression passed to it and, if that expression evaluates to False (or 0), it will throw an exception. The CV_Assert() macro is always tested.  Alternatively, you can use CV_DbgAssert(), which will be tested only in debug  compilations.
+
+
+
+cv::CV_Error() and CV_Error_()
+
+
+
+CV_Error( ecode, estring )
+CV_Error_( ecode, fmt, ... )
+
+
+
+The macro CV_Error() allows you to pass in an error code ecode and  a fixed C-style character string estring, which it then packages up into a cv::Exception that it then passes to cv::error() to be handled. The variant macro CV_Error_() is used if you need to construct the message string on the fly. CV_Error_() accepts the same ecode as CV_Error(), but  then expects a sprintf()-style format string followed by a variable number of arguments, as would be expected by sprintf().
+
+
+
+cv::error()
+
+
+
+void cv::error(
+  const cv::Exception& ex                 // Exception to be thrown
+);
+
+
+
+This function is mostly called from CV_Error() and CV_Error_(). If your code is compiled in a nondebug build, it will throw the exception ex. If your code is compiled in a debug build, it will deliberately provoke a memory access violation so that the execution stack and all of the parameters will be available for whatever debugger you are running.
+You will probably not call cv::error() directly, but rather rely on the macros CV_Error() and CV_Error_() to throw the error for you. These macros take the information you want displayed in the exception, package it up for you, and pass the resulting exception to cv::error().
+
+
+
+cv::fastFree()
+
+
+
+void cv::fastFree(
+  void* ptr                               // Pointer to buffer to be freed
+);
+
+
+
+This routine deallocates buffers that were allocated with cv::fastMalloc() (covered next).
+
+
+
+cv::fastMalloc()
+
+
+
+void* cv::fastMalloc(                     // Pointer to allocated buffer
+  size_t size                             // Size of buffer to allocate
+);
+
+
+
+cv::FastMalloc() works just like the malloc() you are familiar with, except that it is often faster, and it does buffer size alignment for you. This means that if the buffer size passed is more than 16 bytes, the returned buffer will be aligned to a 16-byte boundary.
+
+
+
+cvFloor()
+
+
+
+int cvFloor(                              // Return the largest int <= x
+  float x                                 // input value (32-bit float)
+};
+
+
+
+Given a floating-point number x, cv::Floor() computes the largest integer not larger than x. If the input value is outside of the range representable by a 32-bit integer, the result is undefined.
+
+
+
+cv::format()
+
+
+
+string cv::format(                        // Return STL-string
+  const char* fmt,                        // formatting string, as sprintf()
+  ...                                     // vargs, as sprintf()
+);
+
+
+
+This function is essentially the same as sprintf() from the standard library, but rather than requiring a character buffer from the caller, it constructs an STL string object and returns that. It is particularly handy for formatting error messages for the Exception() constructor (which expects STL strings in its arguments).
+
+
+
+cv::getCPUTickCount()
+
+
+
+int64 cv::getCPUTickCount( void );        // long int CPU for tick count
+
+
+
+This function reports the number of CPU ticks on those architectures that have such a construct (including, but not limited to, x86 architectures). It is important to know, however, that the return value of this function can be very difficult to interpret on many architectures. In particular, because on a multicore system a thread can be put to sleep on one core and wake up on another, the difference between the results to two subsequent calls to cv::getCPUTickCount() can be misleading or completely meaningless. Therefore, unless you are certain you know what you are doing, it is best to use cv::getTickCount() for timing measurements.13 This function is best for tasks like initializing random number generators.
+
+
+
+cv::getNumThreads()
+
+
+
+int cv::getNumThreads( void );            // total threads allocated to OpenCV
+
+
+
+Return the current number of threads being used  by OpenCV.
+
+
+
+cv::getOptimalDFTSize()
+
+
+
+int cv::getOptimalDFTSize( int n );       // best size array to use for dft, >= n
+
+
+
+When you are making calls to cv::dft(), the  algorithm used by OpenCV to compute the transform is extremely sensitive to the size of the array passed to cv::dft(). The preferred sizes do obey a rule for their generation, but that rule is sufficiently complicated that it is (at best) an annoyance to compute the correct size to which to pad your array every time.  The function cv::getOptimalDFTSize() takes as an argument the size of the array you would have passed to cv::dft(), and returns the size of the array you should pass to cv::dft(). OpenCV uses this information to create a larger array into which you can copy your data and pad out the rest with zeros.
+
+
+
+cv::getThreadNum()
+
+
+
+int cv::getThreadNum( void );             // int, id of this particular thread
+
+
+
+If your OpenCV library was compiled with OpenMP support, it will  return the index (starting from zero) of the currently executing thread.
+
+
+
+cv::getTickCount()
+
+
+
+int64 cv::getTickCount( void );           // long int CPU for tick count
+
+
+
+This function  returns a tick count relative to some architecture-dependent time. The rate of ticks is also architecture and operating system dependent, however; the time per tick can be computed by cv::getTickFrequency() (described next). This function is preferable to cv::getCPUTickCount() for most timing applications, as it is not affected by low-level issues such as which core your thread is running on and automatic throttling of CPU frequency (which most modern processors do for power-management reasons).
+
+
+
+cv::getTickFrequency()
+
+
+
+double cv::getTickFrequency( void );      // Tick frequency in seconds as 64-bit
+
+
+
+When cv::getTickCount() is used for timing analysis,  the exact meaning of a tick is, in general, architecture dependent. The function cv::getTickFrequency() computes the conversion between clock time (i.e., seconds) and abstract “ticks.”
+
+
+
+To compute the time required for some specific thing to happen (such as a function to execute), you need only call cv::getTickCount() before and after the function call, subtract the results, and divide by the value of cv::getTickFrequency().
+
+
+
+cvIsInf()
+
+
+
+int cvIsInf( double x );              // return 1 if x is IEEE754 "infinity"
+
+
+
+The return value of cvIsInf() is 1 if x is plus or minus  infinity and 0 otherwise. The infinity test is the test implied by the IEEE754 standard.
+
+
+
+cvIsNaN()
+
+
+
+int cvIsNan( double x );              // return 1 if x is IEEE754 "Not a number"
+
+
+
+The  return value of cvIsNaN() is 1 if x is “not a number” and 0 otherwise. The NaN test is the test implied by the IEEE754 standard.
+
+
+
+cvRound()
+
+
+
+int cvRound( double x );              // Return integer nearest to 'x'
+
+
+
+Given a floating-point number x, cvRound() computes the integer  closest to x. If the input value is outside of the range representable by a 32-bit integer, the result is undefined. In OpenCV 3.0 there is overloaded cvRound( float x ) (as well as cvFloor and cvCeil), which is faster on ARM.
+
+
+
+cv::setNumThreads()
+
+
+
+void cv::setNumThreads( int nthreads );   // Set number of threads OpenCV can use
+
+
+
+When OpenCV is compiled with OpenMP support, this function  sets the number of threads that OpenCV will use in parallel OpenMP regions. The default value for the number of threads is the number of logical cores on the CPU (i.e., if we have four cores each with two hyperthreads, there will be eight threads by default). If nthreads is set to 0, the number of threads will be returned to this default value.
+
+
+
+cv::setUseOptimized()
+
+
+
+void cv::setUseOptimized( bool on_off ); // If false, turn off optimized routines
+
+
+
+Though early versions of OpenCV relied  on outside libraries (such as IPP, the Intel Performance Primitives library) for access to high-performance optimizations  such as SSE2 instructions, later versions have increasingly moved to containing that code in the OpenCV itself. By default, the use of these optimized routines is enabled, unless you specifically disabled it when you built your installation of the library. However, you can turn the use of these optimizations on and off at any time with cv::setUseOptimized().
+
+
+
+cv::useOptimized()
+
+
+
+bool cv::useOptimized( void );    // return true if optimizations are enabled
+
+
+
+At any time, you  can check the state of the global flag, which enables the use of high-performance optimizations (see cv::setUseOptimized()) by calling cv::useOptimized(). True will be returned only if these optimizations are currently enabled; otherwise, this function will return False.
+
+
+
+Exercises
+
+
+
+Find and open .../opencv/cxcore/include/cxtypes.h. Read through and find the many conversion helper functions.  Choose a negative floating-point number. 
+ Take its absolute value, round it, and then take its ceiling and floor. 
+ Generate some random numbers. 
+ Create a floating-point cv::Point2f and convert it to an integer cv::Point. Convert a cv::Point to a cv::Point2f.
+
+
+
+Compact matrix and vector types:  Using the cv::Mat33f and cv::Vec3f objects (respectively), create a 3 × 3 matrix and 3-row vector. 
+ Can you multiply them together directly? If not, why not?
+
+
+
+Compact matrix and vector template types:  Using the cv::Mat<> and cv::Vec<> templates (respectively), create a 3 × 3 matrix and 3-row vector. 
+ Can you multiply them together directly? If not, why not? 
+ Try type-casting the vector object to a 3 × 1 matrix, using the cv::Mat<> template. What happens now?
+
+
+
+excellent references
+
+
+
+the authors highly recommend Nicolai M. Josuttis’s classic The C++ Standard Library, Second Edition: A Tutorial and Reference (Addison-Wesley, 2012)
+
+
+
+Scott Meyers’ excellent Effective STL: 50 Specific Ways to Improve Your Use of the Standard Template Library (Addison-Wesley, 2001).
+
+
+
+Chapter 4. Images and Large Array Types
+
+
+
+The cv::Mat class is used to represent dense arrays of any  number of dimensions. In this context, dense means that for every entry in the array, there is a data value stored in memory corresponding to that entry, even if that entry is zero. Most images, for example, are stored as dense arrays.  The alternative would be a sparse array.  In the case of a sparse array, only nonzero entries are typically stored. This can result in a great savings of storage space if many of the entries are in fact zero, but can be very wasteful if the array is relatively dense. A common case for using a sparse array rather than a dense array would be a histogram. For many histograms, most of the entries are zero, and storing all those zeros is not necessary. For the case of sparse arrays, OpenCV has the alternative data structure, cv::SparseMat.
+
+
+
+The cv::Mat Class: N-Dimensional Dense Arrays
+
+
+
+The cv::Mat class can be used for  arrays of any  number of dimensions.
+
+
+
+Each matrix contains a flags element signaling the contents of the array, a dims element indicating the number of dimensions, rows and cols elements indicating the number of rows and columns (these are not valid for dims>2), a data pointer to where the array data is stored, and a refcount reference counter analogous to the reference counter used by cv::Ptr<>. This latter member allows cv::Mat to behave very much like a smart pointer for the data contained in data. The memory layout in data is described by the array step[]. The data array is laid out such that the address of an element whose indices are given by
+--
+math formula given on page 205
+
+
+
+In the simple case of a two-dimensional array, this reduces to:
+--
+math formula
+
+
+
+The data contained in cv::Mat is not required to be simple primitives.
+
+
+
+You can create an array simply  by instantiating  a variable  of type cv::Mat. An array created in this manner has no size and no data type. You can, however, later ask it to allocate data by using a member function such as create(). One variation of create() takes as arguments a number of rows, a number of columns, and a type, and configures the array to represent a two-dimensional object.
+
+
+
+All such types are defined in the library header, and have the form CV_{8U,16S,16U,32S,32F,64F}C{1,2,3}.3
+--
+append footer 3
+
+
+
+cv::Mat m;// Create data area for 3 rows and 10 columns of 3-channel 32-bit floats
+m.create( 3, 10, CV_32FC3 ); 
+
+// Set the values in the 1st channel to 1.0, the 2nd to 0.0, and the 3rd to 1.0
+m.setTo( cv::Scalar( 1.0f, 0.0f, 1.0f ) );
+is equivalent to:
+
+cv::Mat m( 3, 10, CV_32FC3, cv::Scalar( 1.0f, 0.0f, 1.0f ) );
+
+
+
+It is critical to understand that the data in an array is not attached rigidly to the array object.  The cv::Mat object is really a header for a data area, which — in principle — is an entirely separate thing. For example, it is possible to assign one matrix n to another matrix m (i.e., m=n). In this case, the data pointer inside of m will be changed to point to the same data as n. The data pointed to previously by the data element of m (if any) will be deallocated.4 At the same time, the reference counter for the data area that they both now share will be incremented. Last but not least, the members of m that characterize its data (such as rows, cols, and flags) will be updated to accurately describe the data now pointed to by data in m.
+
+
+
+Table 4-1 is a complete list of the constructors available for cv::Mat.
+
+
+
+ConstructorDescriptioncv::Mat;Default constructorcv::Mat( int rows, int cols, int type );Two-dimensional arrays by type
+cv::Mat( 
+       int rows, int cols, int type,
+       const Scalar& s 
+); Two-dimensional arrays by type with initialization value
+cv::Mat( 
+       int rows, int cols, int type,
+       void* data, size_t step=AUTO_STEP 
+); Two-dimensional arrays by type with preexisting datacv::Mat( cv::Size sz, int type );Two-dimensional arrays by type (size in sz)
+cv::Mat( 
+       cv::Size sz,
+       int type, const Scalar& s 
+); Two-dimensional arrays by type with initialization value (size in sz)
+cv::Mat( 
+       cv::Size sz, int type,
+       void* data, size_t step=AUTO_STEP 
+ ); Two-dimensional arrays by type with preexisting data (size in sz)
+cv::Mat( 
+       int ndims, const int* sizes,
+       int type 
+); Multidimensional arrays by type
+cv::Mat( 
+       int ndims, const int* sizes,
+       int type, const Scalar& s 
+ ); Multidimensional arrays by type with initialization valuecv::Mat( 
+       int ndims, const int* sizes,
+       int type, void* data, 
+       size_t step=AUTO_STEP 
+ ); Multidimensional arrays by type with preexisting data
+
+
+
+Table 4-1 lists the basic constructors for the cv::Mat object.
+
+
+
+The copy constructors (Table 4-2) show how to create an array from another array.
+
+
+
+::Mat( const Mat& mat );Copy constructor
+cv::Mat( 
+       const Mat& mat,
+       const cv::Range& rows,
+       const cv::Range& cols 
+ ); Copy constructor that copies only a subset of rows and columns
+cv::Mat( 
+       const Mat& mat,
+       const cv::Rect& roi 
+); Copy constructor that copies only a subset of rows and columns specified by a region of interest
+cv::Mat( 
+       const Mat& mat,
+       const cv::Range* ranges 
+ ); Generalized region of interest copy constructor that uses an array of ranges to select from an n-dimensional arraycv::Mat( const cv::MatExpr& expr );Copy constructor that initializes m with the result of an algebraic expression of other matrices
+
+
+
+The last set of constructors is the template constructors (Table 4-4).
+
+
+
+ConstructorDescription
+cv::Mat( 
+       const cv::Vec<T,n>& vec,
+       bool copyData=true 
+); Construct a one-dimensional array of type T and size n from a cv::Vec of the same type
+cv::Mat(
+       const cv::Matx<T,m,n>& vec,
+       bool copyData=true 
+); Construct a two-dimensional array of type T and size m × n from a cv::Matx of the same type
+cv::Mat( 
+       const std::vector<T>& vec,
+       bool copyData=true 
+); Construct a one-dimensional array of type T from an STL vector containing elements of the same type
+
+
+
+The class cv::Mat also provides a number of static member functions to create certain kinds of commonly used arrays (Table 4-5). These include functions like zeros(), ones(), and eye(), which construct a matrix full of zeros, a matrix full of ones, or an identity matrix, respectively.
+--
+footer 5
+
+
+
+FunctionDescriptioncv::Mat::zeros( rows, cols, type );Create a cv::Mat of size rows × cols, which is full of zeros, with type type (CV_32F, etc.)cv::Mat::ones( rows, cols, type );Create a cv::Mat of size rows × cols, which is full of ones, with type type (CV_32F, etc.)cv::Mat::eye( rows, cols, type );Create a cv::Mat of size rows × cols, which is an identity matrix, with type type (CV_32F, etc.)
+
+
+
+Accessing Array Elements Individually
+
+
+
+The basic means of direct access  is the (template) member function at<>().
+
+
+
+cv::Mat m = cv::Mat::eye( 10, 10, 32FC1 );
+
+printf(
+  "Element (3,3) is %f\n",
+  m.at<float>(3,3)
+);
+
+
+
+cv::Mat m = cv::Mat::eye( 10, 10, 32FC2 );
+
+printf(
+  "Element (3,3) is (%f,%f)\n",
+  m.at<cv::Vec2f>(3,3)[0],
+  m.at<cv::Vec2f>(3,3)[1]);
+
+
+
+Note that when you want to specify a template function like at<>() to operate on a multichannel array, the best way to do this is to use a cv::Vec<> object (either using a premade alias or the template form).
+
+
+
+Similar to the vector case, you can create an array made of a more sophisticated type, such as complex numbers:
+
+cv::Mat m = cv::Mat::eye( 10, 10, cv::DataType<cv::Complexf>::type );
+
+printf(
+  "Element (3,3) is %f + i%f\n",
+  m.at<cv::Complexf>(3,3).re,
+  m.at<cv::Complexf>(3,3).im,
+);
+
+
+
+Table 4-6 lists the available variations of the at<>() template.
+
+
+
+ExampleDescriptionM.at<int>( i );Element i from integer array MM.at<float>( i, j );Element ( i, j ) from float array MM.at<int>( pt );Element at location (pt.x, pt.y) in integer matrix MM.at<float>( i, j, k );Element at location ( i, j, k ) in three-dimensional float array MM.at<uchar>( idx );Element at n-dimensional location indicated by idx[] in array M of unsigned characters
+
+
+
+As with at<>(), ptr<>() is a template function instantiated with a type name. It takes an integer argument indicating the row you wish to get a pointer to. The function returns a pointer to the primitive type of which the array is constructed (i.e., if the array type is CV_32FC3, the return value will be of type float*). Thus, given a three-channel matrix mtx of type float, the construction mtx.ptr<Vec3f>(3) would return a pointer to the first (floating-point) channel of the first element in row 3 of mtx.
+
+
+
+There are thus two ways to get a pointer to  the data in a matrix mtx. One is to use the ptr<>() member function. The other is to directly use the member pointer data, and to use the member array step[] to compute addresses. The latter option is similar to what one tended to do in the C interface, but is generally no longer preferred over access methods such as at<>(), ptr<>(), and the iterators. Having said this, direct address computation may still be most efficient, particularly when you are dealing with arrays of greater than two dimensions.
+
+
+
+If you want to access everything in an array, you will likely want to iterate one row at a time; this is because the rows may or may not be packed continuously in the array. However, the member function isContinuous() will tell you if the members are continuously packed. If they are, you can just grab the pointer to the very first element of the first row and cruise through the entire array as if it were a giant one-dimensional array.
+
+
+
+The other form of sequential access is to use the iterator mechanism built into cv::Mat. This mechanism is based on, and works more or less identically to, the analogous mechanism provided by the STL containers.   The basic idea is that OpenCV provides a pair of iterator templates, one for const and one for non-const arrays. These iterators are named cv::MatIterator<> and cv::MatConstIterator<>, respectively. The cv::Mat methods begin() and end() return objects of this type. This method of iteration is convenient because the iterators are smart enough to handle the continuous packing and noncontinuous packing cases automatically, as well as handling any number of dimensions in the array.
+
+
+
+Each iterator must be declared and specified to the type of object from which the array is constructed. Here is a simple example of the iterators being used to compute the “longest” element in a three-dimensional array of three-channel elements (a three-dimensional vector field):
+
+int sz[3] = { 4, 4, 4 };
+cv::Mat m( 3, sz, CV_32FC3 );  // A three-dimensional array of size 4-by-4-by-4
+cv::randu( m, -1.0f, 1.0f );   // fill with random numbers from -1.0 to 1.0
+
+float max = 0.0f;              // minimum possible value of L2 norm
+cv::MatConstIterator<cv::Vec3f> it = m.begin();
+while( it != m.end() ) {
+
+  len2 = (*it)[0]*(*it)[0]+(*it)[1]*(*it)[1]+(*it)[2]*(*it)[2];  if( len2 > max ) max = len2;
+  it++;
+
+}
+
+
+
+The N-ary Array Iterator: NAryMatIterator
+
+
+
+OpenCV allows for arrays with more than three channels, but to construct one of these, you will have to call one of the functions CV_{8U,16S,16U,32S,32F,64F}C(). These functions take a single argument, which is the number of channels. So CV_8UC(3) is equivalent to CV_8UC3, but since there is no macro for CV_8UC7, to get this you would have to call CV_8UC(7).
+--
+footer 3
+
+
+
+In the case of cv::Mat::eye() and cv::Mat::ones(), if the array created is multichannel, only the first channel will be set to 1.0, while the other channels will be 0.0.
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
