@@ -1,0 +1,211 @@
+Image scaling and cropping
+
+
+
+let's create a new Qt Widgets Application. Then, open up mainwindow.ui and create the following user interface:
+
+
+
+Let's dissect this user interface into three parts:
+Top—Image preview: First, add a Horizontal Layout to the window.
+Then, add a Label widget into the Horizontal Layout we just added, then set the text property to empty. Set both the label's minimumSize and maximumSize properties to 150x150. Finally, set the frameShape property under the QFrame category to Box.
+Add two Horizontal Spacers to the sides of the label to make it centered. 
+Middle—Sliders for adjustments: Add a Form Layout to the window, below the Horizontal Layout we just added previously in step 1.
+Add three Labels to the Form Layout, and set their text property to Scale:, Horizontal:, and Vertical: respectively.
+Add three Horizontal Sliders to the Form Layout. Set the minimum property to 1 and maximum to 100. Then, set the pageStep property to 1.
+Set the value property of the scale slider to 100. 
+Bottom—Browse button and Save button: Add a Horizontal Layout to the window, below the Form Layout we previously added during step 2.
+Add two Push Buttons to the Horizontal Layout and set their text property to Browse and Save respectively. 
+Lastly, delete the Menu Bar, Tool Bar, and Status Bar from the central widget.
+
+
+
+First, open up mainwindow.h and add in the following headers:
+
+
+
+#ifndef MAINWINDOW_H 
+#define MAINWINDOW_H 
+ 
+#include <QMainWindow> 
+#include <QMessageBox> 
+#include <QFileDialog> 
+#include <QPainter>
+
+
+
+After that, add the following variables to mainwindow.h:
+
+
+
+private: 
+   Ui::MainWindow *ui; 
+   bool canDraw; 
+   QPixmap* pix; 
+   QSize imageSize; 
+   QSize drawSize; 
+   QPoint drawPos;
+
+
+
+Now, add the following code to open up the File Selection Dialog when the Browse button is clicked. The dialog only lists JPEG images and hides the other files:
+
+
+
+void MainWindow::on_browseButton_clicked() 
+{ 
+   QString fileName = QFileDialog::getOpenFileName(this, tr("Open      Image"), QDir::currentPath(), tr("Image Files 
+(*.jpg *.jpeg)")); 
+ 
+   if (!fileName.isEmpty()) 
+   { 
+         QPixmap* newPix = new QPixmap(fileName); 
+ 
+         if (!newPix->isNull()) 
+         { 
+               if (newPix->width() < 150 || newPix->height() < 150) 
+               { 
+                     QMessageBox::warning(this, tr("Invalid Size"),                      tr("Image size too small. Please use an 
+image                       larger than 150x150.")); 
+
+                     return; 
+               } 
+ 
+               pix = newPix; 
+               imageSize = pix->size(); 
+               drawSize = pix->size(); 
+ 
+               canDraw = true; 
+ 
+         } 
+         else 
+         { 
+               canDraw = false; 
+ 
+               QMessageBox::warning(this, tr("Invalid Image"),                tr("Invalid or corrupted file. Please try 
+again with                 another image file.")); 
+
+         } 
+   } 
+}
+
+
+
+As you can see, the code checks whether any image has been selected by the user. If it has its checks again and see whether the image resolution is at least 150 x 150. If no problem is found, we will save the image's pixel map to a pointer called pix, then save the image size to the imageSize variable, and the initial drawing size to the drawSize variable. Finally, we set the canDraw variable to true.
+
+
+
+After that, open up mainwindow.h again and declare these two functions:
+
+
+
+public: 
+   explicit MainWindow(QWidget *parent = 0); 
+   ~MainWindow(); 
+   virtual void paintEvent(QPaintEvent *event); 
+   void paintImage(QString fileName, int x, int y);
+
+
+
+The first function, paintEvent(), is a virtual function that automatically gets called whenever Qt needs to refresh the user interface, such as when the main window is being resized. We'll override this function and draw the newly loaded image onto the image preview widget. In this case, we'll call the paintImage() function within the paintEvent() virtual function:
+
+
+
+void MainWindow::paintEvent(QPaintEvent *event) 
+{ 
+   if (canDraw) 
+   {          paintImage("", ui->productImage->pos().x(), ui->productImage-         >pos().y()); 
+
+   } 
+}
+
+
+
+After that, we'll write the paintImage() function in mainwindow.cpp:
+
+
+
+void MainWindow::paintImage(QString fileName, int x, int y) 
+{ 
+   QPainter painter; 
+   QImage saveImage(150, 150, QImage::Format_RGB16); 
+ 
+   if (!fileName.isEmpty()) 
+   { 
+         painter.begin(&saveImage); 
+   } 
+   else 
+   { 
+         painter.begin(this); 
+   } 
+ 
+   if (!pix->isNull()) 
+   { 
+         painter.setClipRect(x, y, 150, 150); 
+         painter.fillRect(QRect(x, y, 150, 150), Qt::SolidPattern); 
+         painter.drawPixmap(x - drawPos.x(), y - drawPos.y(),          drawSize.width(), drawSize.height(), *pix); 
+
+   } 
+ 
+   painter.end(); 
+ 
+   if (fileName != "") 
+   { 
+         saveImage.save(fileName); 
+         QMessageBox::information(this, "Success", "Image has been          successfully saved!"); 
+
+   } }
+
+
+
+This function does two things—if we don't set the fileName variable, it will proceed to draw the image on top of the image preview widget, otherwise, it will crop the image based on the dimension of the image preview widget and save it to the disk following the fileName variable.
+We'll call this function again when the save button is being clicked. This time, we'll set the fileName variable as the desired directory path and filename, so that the QPainter class can save the image correctly:
+
+
+
+void MainWindow::on_saveButton_clicked() 
+{ 
+   if (canDraw) 
+   { 
+         if (!pix->isNull()) 
+         { 
+               // Save new pic from painter 
+               paintImage(QCoreApplication::applicationDirPath() +                "/image.jpg", 0, 0); 
+
+         } 
+   } 
+}
+
+
+
+Lastly, right-click on each of the three sliders and select Go to slot. Then, select valueChanged(int) and click OK.
+
+
+
+After that, we'll write the code for the slot functions resulting from the previous step:
+
+
+
+void MainWindow::on_scaleSlider_valueChanged(int value) 
+{ 
+   drawSize = imageSize * value / 100; 
+   update(); 
+} 
+ 
+void MainWindow::on_leftSlider_valueChanged(int value) 
+{ 
+   drawPos.setX(value * drawSize.width() / 100 * 0.5); 
+   update(); 
+} 
+ 
+void MainWindow::on_topSlider_valueChanged(int value) 
+{ 
+   drawPos.setY(value * drawSize.height() / 100 * 0.5); 
+   update(); 
+}
+
+
+
+combining these three different sliders, users can adjust and crop the image to their liking before proceeding to upload the image to the server, or use it for other purposes.
+
+
