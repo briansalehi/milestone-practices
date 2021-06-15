@@ -1,29 +1,21 @@
 <p>Widgets are the graphical components with which we construct user interfaces.</p>
 
-<p>Using widgets directly as a window is not professional, one way to get over with this bad design is to use QWidget instances as a window, though in the next page, you will see that QMainWindow is the ultimate answer to designing Qt applications practically.</p>
+<p>An application's main window should be constructed by <code>QMainWindow</code> object which itself is derived from <code>QWidget</code> class but specialized for this purpose.</p>
 
 <cite>Class hierarchy in Qt</cite>
 ![qt-objects-hierarchy.png]
 
-<p>At the very top of the hierarchy is the QObject. A lot of classes inherit from the QObject class. The QObject class also contains the mechanisms of signals and slots and event management, among other things.</p>
+<p>
+At the very top of the hierarchy is the <code>QObject</code>.<br/>
+A lot of classes inherit from the <code>QObject</code> class.<br/>
+The <code>QObject</code> class also contains the mechanisms of signals and slots and event management, among other things.
+</p>
 
 <p>There are a few critical points to note regarding widgets in Qt:</p>
+
 <ul>
-	<li>
-		Information is passed to widgets by way of events. For a textbox, an
-		example of an event could be when a user clicks within the textbox or
-		when the return key has been pressed while a textbox cursor is
-		blinking.
-	</li>
-	<li>
-		Every widget can have a parent widget or children widgets.
-	</li>
-	<li>
-		Widgets that do not have a parent widget become a window when the
-		show() function is called on them. Such a widget will be enclosed in
-		a window with buttons to close, maximize, and minimize it.
-	</li>
-	<li>
-		A child widget is displayed within its parent widget.
-	</li>
+	<li>Information is passed to widgets by way of events.</li>
+	<li>Every widget can have a parent widget or children widgets.</li>
+	<li>Widgets that do not have a parent widget become a window when the <code>show()</code> function is called on them. Such a widget will be enclosed in a window with buttons to close, maximize, and minimize it.</li>
+	<li>A child widget is displayed within its parent widget.</li>
 </ul>
