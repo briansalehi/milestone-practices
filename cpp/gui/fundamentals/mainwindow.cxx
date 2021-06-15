@@ -5,10 +5,10 @@ int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 
-	QMainWindow *mainWindow = new QMainWindow;
-	mainWindow->setWindowTitle("QMainWindow as window");
-	mainWindow->resize(300, 50);
-	mainWindow->show();
+	auto *window = new QMainWindow;
+	window->setWindowTitle("QMainWindow as window");
+	window->resize(300, 50);
+	window->show();
 
 	return app.exec();
 }

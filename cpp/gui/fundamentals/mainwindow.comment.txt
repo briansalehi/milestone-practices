@@ -2,3 +2,5 @@
 <code>QMainWindow</code> is derived from <code>QWidget</code>. As such, by calling the <code>show()</code> method, a window will appear.<br/>
 <p>If you were to replace <code>QMainWindow</code> with <code>QLabel</code>, this will still work.</p>
 </p>
+
+<p>Although this sample is working, we don't usually directly create an instance of <code>QMainWindow</code> in <code>main()</code>, but rather we will inherit that from our custom class which we will cover later.</p>

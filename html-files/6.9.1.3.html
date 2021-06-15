@@ -303,7 +303,7 @@ References
 </ul>
 <hr />
   <cite>layout.cxx</cite>
-<pre class="line-numbers" >
+<pre class="line-numbers" data-line='2,12-16'>
 <code class="language-cpp">
     #include &lt;QApplication&gt;
     #include &lt;QFormLayout&gt;
@@ -312,18 +312,17 @@ References
     int main(int argc, char **argv)
     {
     	QApplication app(argc, argv);
-    	QWidget *window = new QWidget;
+    	auto *window = new QWidget;
     	window-&gt;setWindowTitle(&quot;Layout in Application&quot;);
     	window-&gt;resize(250, 20);
     
-    	QLabel *text = new QLabel(&quot;Widget in a layout&quot;);
+    	auto *text = new QLabel(&quot;Widget in a layout&quot;);
     	text-&gt;setAlignment(Qt::AlignCenter);
     
-    	QFormLayout *layout = new QFormLayout;
+    	auto *layout = new QFormLayout;
     	layout-&gt;addWidget(text);
     
     	window-&gt;setLayout(layout);
-    
     	window-&gt;show();
     	return app.exec();
     }

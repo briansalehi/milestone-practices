@@ -5,18 +5,17 @@
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
-	QWidget *window = new QWidget;
+	auto *window = new QWidget;
 	window->setWindowTitle("Layout in Application");
 	window->resize(250, 20);
 
-	QLabel *text = new QLabel("Widget in a layout");
+	auto *text = new QLabel("Widget in a layout");
 	text->setAlignment(Qt::AlignCenter);
 
-	QFormLayout *layout = new QFormLayout;
+	auto *layout = new QFormLayout;
 	layout->addWidget(text);
 
 	window->setLayout(layout);
-
 	window->show();
 	return app.exec();
 }

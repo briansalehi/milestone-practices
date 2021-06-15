@@ -1,1 +1,5 @@
-Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
+make: Entering directory '/home/brian/development/projects/milestone-practices/cpp/gui/fundamentals'
+rm -f moc_predefs.h
+rm -f signals.o
+rm -f *~ core *.core
+make: Leaving directory '/home/brian/development/projects/milestone-practices/cpp/gui/fundamentals'

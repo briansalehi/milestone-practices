@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Signals and Slots</title>
+<title>Command Line</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -264,8 +264,7 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/6.0.html">C++</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/6.9.0.html">Graphical User Interface</a></li>
-<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 4" accesskey="4" href="/6.9.1.0.html">Fundamentals</a></li>
-<li class='breadcrumb-item active'>Signals and Slots</li>
+<li class='breadcrumb-item active'>Command Line</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -279,33 +278,19 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Signals-and-Slots" class="anchor" aria-hidden="true" href="#Signals-and-Slots">
-Signals and Slots
+<a id="Command-Line" class="anchor" aria-hidden="true" href="#Command-Line">
+Command Line
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
 </svg>
 </a>
 </h2>
-<p>
-GUI toolkits usually provide a means to react to things that occur within an application.<br/>
-One way to implement this is by using the design pattern called the <b>Observer Pattern</b>.
-</p>
-
-<img class="img-responsive" src="/cpp/gui/fundamentals/observer-pattern-in-qt.png" alt="observer pattern in qt" loading="lazy" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/observer-pattern-in-qt.png"'>
-
-<p>A <b>signal</b> is a message that is passed to communicate that the state of an object has changed. This signal may carry information about the change that has occurred.</p>
-
-<p>A <b>slot</b> is a specific function of an object that is called whenever a certain signal has been emitted. Since slots are functions, they will embody lines of code that perform an action, such as closing a window, disabling a button, and sending an email, to mention but a few.</p>
-
-<cite>An implementation sample of signals and slots</cite>
-<pre class="language-cpp">
-	<code>
-		connect(senderObject, SIGNAL(senderMethod), receiverObject, SLOT(receiverMethod));
-	</code>
-</pre>
-
-<p>It is possible to connect one signal to more than one slot. This involves repeating the <code>QObject::connect()</code> call and, in each instance, specifying the slot that should be called when a particular signal has been emitted.</p>
+<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-warning" role="progressbar" style="width: 66%; background-color: #ffc107 !important;" aria-valuenow="2" aria-valuemin="1" aria-valuemax="3">Medium</div></div></div>
+<ul class="pager">
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.9.8.1.html">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/image-processing">Next Page</a></li>
+</ul>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -317,38 +302,20 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Getting Started with Qt 5 - Benjamin Baka: <span style='color: red'> chapter 3</span></li>
+<li class='list-group-item'>Hands-On GUI Programming with C++ and Qt5 - Lee Zhi Eng</li>
 </ul>
 <hr />
-  <cite>signals.cxx</cite>
-<pre class="line-numbers" data-line='3,12,14'>
-<code class="language-cpp">
-    #include &lt;QApplication&gt;
-    #include &lt;QMainWindow&gt;
-    #include &lt;QPushButton&gt;
-    
-    int main(int argc, char **argv)
-    {
-    	QApplication app(argc, argv);
-    	auto *window = new QMainWindow;
-    	window-&gt;setWindowTitle(&quot;Signals and Slots&quot;);
-    	window-&gt;resize(250, 50);
-    
-    	auto *closeButton = new QPushButton(&quot;Close&quot;);
-    
-    	QObject::connect(closeButton, SIGNAL(clicked()), &amp;app, SLOT(quit()));
-    
-    	window-&gt;setCentralWidget(closeButton);
-    	window-&gt;show();
-    	return app.exec();
-    }
-</code>
-</pre>
-<img class="img-responsive" src="/cpp/gui/fundamentals/signals.screenshot.png" alt="signals.cxx Screenshot" onerror='this.onerror=null; this.src="cpp/gui/fundamentals/signals.screenshot.png"'>
-<ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/gui/fundamentals/QMainWindow">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/gui/fundamentals/events">Next Page</a></li>
-</ul>
+<h3>
+<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
+Table of Content
+<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+</path>
+</svg>
+</a>
+</h3>
+<div class="list-group list-group-root well" >
+</div>
 <script>
 function darkmode() {
 	var bodystyle = document.body;
@@ -576,8 +543,6 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-cpp.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {
