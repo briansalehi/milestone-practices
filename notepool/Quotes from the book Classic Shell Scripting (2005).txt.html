@@ -1,0 +1,87 @@
+Classic Shell Scripting (2005)
+Arnold Robbins, Nelson H. F. Beebe
+
+The advantage to scripting languages is that they often work at a higher level than compiled languages, being able to deal more easily with objects such as files and directories. The disadvantage is that they are often less efficient than compiled languages.
+
+
+
+Thus, the reasons to use a shell script are:
+
+
+
+Simplicity
+
+
+
+Portability
+
+
+
+Ease of development
+
+
+
+The who command tells you who is logged in:
+$ who
+
+
+
+On a large multiuser system, the listing can scroll off the screen before you can count all the users, and doing that every time is painful anyway. This is a perfect opportunity for automation. What's missing is a way to count the number of users. For that, we use thewc (word count) program, which counts lines, words, and characters. In this instance, we want wc -l, to count just lines:
+$ who | wc -l
+
+
+
+The | (pipe) symbol creates a pipeline between the two programs: who's output becomes wc's input. The result, printed by wc, is the number of users logged in.
+
+
+
+The next step is to make this pipeline into a separate command. You do this by entering the commands into a regular file, and then making the file executable, withchmod, like so:
+--
+cat << EOF > active-users
+who | wc -l
+EOF
+
+chmod +x active-users
+./active-users
+
+
+
+This shows the typical development cycle for
+
+
+
+shell scripts:
+
+
+
+first, you experiment directly at the command line. Then, once you've figured out the proper incantations to do what you want, you put them into a separate script and make the script executable.
+
+
+
+When the shell runs a program, it asks the Unix kernel to start a new process and run the given program in that process.
+
+
+
+when the shell asks the kernel to run it, the kernel will fail to do so, returning a "not executable format file" error. The shell, upon receiving this error
+
+
+
+proceeds to start a new copy of /bin/sh (the standard shell) to run the program.
+
+
+
+The "fall back to /bin/sh" mechanism is great when there's only one shell. However, because current Unix systems have multiple shells, there needs to be a way to tell the Unix kernel which shell to use when running a particular shell script. In fact, it helps to have a general mechanism that makes it possible to directly invoke any programming language interpreter, not just a command shell. This is done via a special first line in the script file—one that begins with the two characters #!.
+
+
+
+When the first two characters of a file are #!, the kernel scans the rest of the line for the full pathname of an interpreter to use to run the program. (Any intervening whitespace is skipped.) The kernel also scans for a single option to be passed to that interpreter. The kernel invokes the interpreter with the given option, along with the rest of the command line. For example, assume a csh script[3] named /usr/ucb/whizprog, with this first line:
+#! /bin/csh -f
+
+
+
+Furthermore, assume that /usr/ucb is included in the shell's search path (described later). A user might type the command whizprog -q /dev/tty01. The kernel interprets the #! line and invokes csh as follows:
+/bin/csh -f /usr/ucb/whizprog -q /dev/tty01
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
