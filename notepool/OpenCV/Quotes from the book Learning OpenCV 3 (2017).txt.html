@@ -1,0 +1,469 @@
+Learning OpenCV 3 (2017)
+Adrian Kaehler, Gary Bradski
+
+The N-ary Array Iterator: NAryMatIterator
+
+*****
+
+There is another  form of  iteration  that, though it  does not  handle discontinuities in the  packing of the arrays in the manner of cv::MatIterator<>, allows us to handle iteration over many arrays at once. This iterator is called cv::NAryMatIterator, and requires only that all of the arrays being iterated over be of the same geometry (number of dimensions and extent in each dimension).
+
+*****
+
+Instead of returning single elements of the arrays being iterated over, the N-ary iterator operates by returning chunks of those arrays, called planes.
+
+*****
+
+A  plane is a portion (typically a one- or two-dimensional slice) of the input array in which the data is guaranteed to be contiguous in memory.
+
+*****
+
+Consider Example 4-1, in which we sum just a single multidimensional array plane by plane.
+
+*****
+
+const int n_mat_size = 5;
+const int n_mat_sz[] = { n_mat_size, n_mat_size, n_mat_size };
+cv::Mat n_mat( 3, n_mat_sz, CV_32FC1 );
+
+cv::RNG rng;
+rng.fill( n_mat, cv::RNG::UNIFORM, 0.f, 1.f );
+
+const cv::Mat* arrays[] = { &n_mat, 0 };
+cv::Mat my_planes[1];
+cv::NAryMatIterator it( arrays, my_planes );
+
+*****
+
+At this point, you have your N-ary iterator. Continuing our example, we will compute the sum of m0 and m1, and place the result in m2. We will do this plane by plane, however:
+
+*****
+
+// On each iteration, it.planes[i] will be the current plane of the
+// i-th array from 'arrays'.
+//
+float s = 0.f;                               // Total sum over all planes
+int   n = 0;                                 // Total number of planes
+for (int p = 0; p < it.nplanes; p++, ++it) {
+  s += cv::sum(it.planes[0])[0];
+  n++;
+}
+
+*****
+
+To see the real utility of the N-ary iterator, consider a slightly expanded version of this example in which there are two arrays we would like to sum over (Example 4-2).
+
+*****
+
+const int n_mat_size = 5;
+const int n_mat_sz[] = { n_mat_size, n_mat_size, n_mat_size };
+cv::Mat n_mat0( 3, n_mat_sz, CV_32FC1 );
+cv::Mat n_mat1( 3, n_mat_sz, CV_32FC1 );
+
+cv::RNG rng;
+rng.fill( n_mat0, cv::RNG::UNIFORM, 0.f, 1.f );
+rng.fill( n_mat1, cv::RNG::UNIFORM, 0.f, 1.f );
+
+const cv::Mat* arrays[] = { &n_mat0, &n_mat1, 0 };
+cv::Mat my_planes[2];
+cv::NAryMatIterator it( arrays, my_planes );
+
+float s = 0.f;                    // Total sum over all planes in both arrays
+int   n = 0;                      // Total number of planes
+for(int p = 0; p < it.nplanes; p++, ++it) {
+  s += cv::sum(it.planes[0])[0];
+  s += cv::sum(it.planes[1])[0];
+  n++;
+}
+
+*****
+
+Not shown in the preceding example, but also important, is the member it.size, which indicates the size of each plane. The size reported is the number of elements in the plane, so it does not include a factor for the number of channels. In our previous example, if it.nplanes were 4, then it.size would have been 16:
+
+*****
+
+/////////// compute dst[*] = pow(src1[*], src2[*]) //////////////
+const Mat* arrays[] = { src1, src2, dst, 0 };
+float* ptrs[3];
+
+NAryMatIterator it(arrays, (uchar**)ptrs);
+for( size_t i = 0; i < it.nplanes; i++, ++it )
+{
+      for( size_t j = 0; j < it.size; j++ )
+      {
+             ptrs[2][j] = std::pow(ptrs[0][j], ptrs[1][j]);
+      }
+}
+
+*****
+
+Accessing Array Elements by Block
+
+*****
+
+In the previous section, we saw ways to access individual elements of an array, either singularly or by iterating sequentially through them all. Another common situation is when you need to access a subset of an array as another array. This might be to select out a row or a column, or any subregion of the original array.
+--
+#tutorial
+
+*****
+
+There are many methods that do this for us in one way or another, as shown in Table 4-7
+
+*****
+
+all of them are member functions of the cv::Mat class and return a subsection of the array on which they are called.
+
+*****
+
+The simplest of these methods are row() and col(), which take a single integer and return the indicated row or column of the array whose member we are calling.
+
+*****
+
+When you use m.row() or m.col() (for some array m), or any of the other functions we are about to discuss, it is important to understand that the data in m is not copied to the new arrays. Consider an expression like m2 = m.row(3). This expression means to create a new array header m2, and to arrange its data pointer, step array, and so on, such that it will access the data in row 3 in m. If you modify the data in m2, you will be modifying the data in m. Later, we will visit the copyTo() method, which actually will copy data. The main advantage of the way this is handled in OpenCV is that the amount of time required to create a new array that accesses part of an existing array is not only very small, but also independent of the size of either the old or the new array.
+--
+#tutorial
+
+*****
+
+Closely related to row() and col() are rowRange() and colRange(). These functions do essentially the same thing as their simpler cousins, except that they will extract an array with multiple contiguous rows (or columns). You can call both functions in one of two ways, either by specifying an integer start and end row (or column), or by passing a cv::Range object that indicates the desired rows (or columns). In the case of the two-integer method, the range is inclusive of the start index but exclusive of the end index (you may recall that cv::Range uses a similar convention).
+
+*****
+
+The member function diag() works the same as row() or col(), except that the array returned from m.diag() references the diagonal elements of a matrix. m.diag() expects an integer argument that indicates which diagonal is to be extracted. If that argument is zero, then it will be the main diagonal. If it is positive, it will be offset from the main diagonal by that distance in the upper half of the array. If it is negative, then it will be from the lower half of the array.
+
+*****
+
+The last way to extract a submatrix is with operator(). Using this operator, you can pass either a pair of ranges (a cv::Range for rows and a cv::Range for columns) or a cv::Rect to specify the region you want. This is the only method of access that will allow you to extract a subvolume from a higher-dimensional array. In this case, a pointer to a C-style array of ranges is expected, and that array must have as many elements as the number of dimensions of the array.
+
+*****
+
+ExampleDescriptionm.row( i );Array corresponding to row i of mm.col( j );Array corresponding to column j of mm.rowRange( i0, i1 );Array corresponding to rows i0 through i1-1 of matrix mm.rowRange( cv::Range( i0, i1 ) );Array corresponding to rows i0 through i1-1 of matrix mm.colRange( j0, j1 );Array corresponding to columns j0 through j1-1 of matrix mm.colRange( cv::Range( j0, j1 ) );Array corresponding to columns j0 through j1-1 of matrix mm.diag( d );Array corresponding to the d-offset diagonal of matrix mm( cv::Range(i0,i1), cv::Range(j0,j1) );Array corresponding to the subrectangle of matrix m with one corner at i0, j0 and the opposite corner at (i1-1, j1-1)m( cv::Rect(i0,i1,w,h) );Array corresponding to the subrectangle of matrix m with one corner at i0, j0 and the opposite corner at (i0+w-1, j0+h-1)m( ranges );Array extracted from m corresponding to the subvolume that is the intersection of the ranges given by ranges[0]-ranges[ndim-1]
+--
+table 4-7: 2 cols
+
+*****
+
+Matrix Expressions: Algebra and cv::Mat
+
+*****
+
+The result of the computation is finally placed in the destination array by operator=(). However, one important distinction is that this form of operator=() is not assigning a cv::Mat or a cv::Mat (as it might appear), but rather a cv::MatExpr (the expression itself9) to a cv::Mat. This distinction is important because data is always copied into the result (lefthand) array. Recall that though m2=m1 is legal, it means something slightly different. In this latter case, m2 would be another reference to the data in m1. By contrast, m2=m1+m0 means something different again. Because m1+m0 is a matrix expression, it will be evaluated and a pointer to the results will be assigned in m2. The results will reside in a newly allocated data area.10
+
+*****
+
+Table 4-8 lists examples of the algebraic operations available.
+
+*****
+
+ExampleDescriptionm0 + m1, m0 – m1;Addition or subtraction of matricesm0 + s; m0 – s; s + m0, s – m1;Addition or subtraction between a matrix and a singleton-m0;Negation of a matrixs * m0; m0 * s;Scaling of a matrix by a singletonm0.mul( m1 ); m0/m1;Per element multiplication of m0 and m1, per-element division of m0 by m1m0 * m1;Matrix multiplication of m0 and m1m0.inv( method );Matrix inversion of m0 (default value of method is DECOMP_LU)m0.t();Matrix transpose of m0 (no copy is done)m0>m1; m0>=m1; m0==m1; m0<=m1; m0<m1;Per element comparison, returns uchar matrix with elements 0 or 255
+m0&m1; m0|m1; m0^m1; ~m0;
+ m0&s; s&m0; m0|s; s|m0; m0^s; s^m0; Bitwise logical operators between matrices or matrix and a singleton
+min(m0,m1); max(m0,m1); min(m0,s);
+ min(s,m0); max(m0,s); max(s,m0); Per element minimum and maximum between two matrices or a matrix and a singletoncv::abs( m0 );Per element absolute value of m0m0.cross( m1 ); m0.dot( m1 );Vector cross and dot product (vector cross product is defined only for 3 × 1 matrices)
+cv::Mat::eye( Nr, Nc, type );
+ cv::Mat::zeros( Nr, Nc, type );
+ cv::Mat::ones( Nr, Nc, type ); Class static matrix initializers that return fixed Nr × Nc matrices of type type
+--
+incomplete table 4-8: 2 cols
+
+*****
+
+The matrix inversion operator inv() is actually a frontend to a variety of algorithms for matrix inversion. There are currently three options. The first is cv::DECOMP_LU, which means LU decomposition and works for any nonsingular matrix. The second option is cv::DECOMP_CHOLESKY, which solves the inversion by Cholesky decomposition. Cholesky decomposition works only for symmetric, positive definite matrices, but is much faster than LU decomposition for large matrices. The last option is cv::DECOMP_SVD, which solves the inversion by singular value decomposition (SVD). SVD is the only workable option for matrices that are singular or nonsquare (in which case the pseudo-inverse is computed).
+
+*****
+
+Not included in Table 4-8 are all of the functions like cv::norm(), cv::mean(), cv::sum(), and so on (some of which we have not gotten to yet, but you can probably guess what they do) that convert matrices to other matrices or to scalars.
+
+*****
+
+Saturation Casting
+
+*****
+
+In OpenCV, you will often do operations that risk overflowing or underflowing the available values in the destination of some computation. This is particularly common when you are doing operations on unsigned types that involve subtraction, but it can happen anywhere. To deal with this problem, OpenCV relies on a construct called saturation casting.
+
+*****
+
+These are implemented as a template function called cv::saturate_cast<>(), which allows you to specify the type to which you would like to cast the argument. Here is an example:
+
+uchar& Vxy = m0.at<uchar>( y, x );
+Vxy = cv::saturate_cast<uchar>((Vxy-128)*2 + 128);}
+
+*****
+
+In this example code, we first assign the variable Vxy to be a reference to an element of an 8-bit array, m0. We then subtract 128 from this array, multiply that by two (scale that up), and add 128 (so the result is twice as far from 128 as the original). The usual C arithmetic rules would assign Vxy-128 to a (32-bit) signed integer; followed by integer multiplication by 2 and integer addition of 128. Notice, however, that if the original value of Vxy were (for example) 10, then Vxy-128 would be -118. The value of the expression would then be -108. This number will not fit into the 8-bit unsigned variable Vxy. This is where cv::saturation_cast<uchar>() comes to the rescue. It takes the value of -108 and, recognizing that it is too low for an unsigned char, converts it to 0.
+
+*****
+
+At this point, we have touched on most of the members of the cv::Mat class. Of course, there are a few things that were missed, as they did not fall into any specific category that was discussed so far. Table 4-9 lists the “leftovers” that you will need in your daily OpenCV programming.
+
+*****
+
+ExampleDescriptionm1 = m0.clone();Make a complete copy of m0, copying all data elements as well; cloned array will be continuousm0.copyTo( m1 );Copy contents of m0 onto m1, reallocating m1 if necessary (equivalent to m1=m0.clone())m0.copyTo( m1, mask );Same as m0.copyTo(m1), except only entries indicated in the array mask are copied
+m0.convertTo(
+   m1, type, scale, offset
+); Convert elements of m0 to type (e.g., CV_32F) and write to m1 after scaling by scale (default 1.0) and adding offset (default 0.0)m0.assignTo( m1, type );Internal use only (resembles convertTo)m0.setTo( s, mask );Set all entries in m0 to singleton value s; if mask is present, set only those values corresponding to nonzero elements in maskm0.reshape( chan, rows );Changes effective shape of a two-dimensional matrix; chan or rows may be zero, which implies “no change”; data is not copiedm0.push_back( s );Extend an m × 1 matrix and insert the singleton s at the endm0.push_back( m1 );Extend an m × n by k rows and copy m1 into those rows; m1 must be k × nm0.pop_back( n );Remove n rows from the end of an m × n (default value of n is 1)am0.locateROI( size, offset );Write whole size of m0 to cv::Size size; if m0 is a “view” of a larger matrix, write location of starting corner to Point& offsetm0.adjustROI( t, b, l, r );Increase the size of a view by t pixels above, b pixels below, l pixels to the left, and r pixels to the rightm0.total();Compute the total number of array elements (does not include channels)m0.isContinuous();Return true only if the rows in m0 are packed without space between them in memorym0.elemSize();Return the size of the elements of m0 in bytes (e.g., a three-channel float matrix would return 12 bytes)m0.elemSize1();Return the size of the subelements of m0 in bytes (e.g., a three-channel float matrix would return 4 bytes)m0.type();Return a valid type identifier for the elements of m0 (e.g., CV_32FC3)m0.depth();Return a valid type identifier for the individial channels of m0 (e.g., CV_32F)m0.channels();Return the number of channels in the elements of m0m0.size();Return the size of the m0 as a cv::Size objectm0.empty();Return true only if the array has no elements (i.e., m0.total==0 or m0.data==NULL)
+--
+incomplete table 4.9, 2 cols
+
+*****
+
+The cv::SparseMat Class: Sparse Arrays
+
+*****
+
+The cv::SparseMat class is used when an array is likely to be very large compared to the number of nonzero entries.
+
+*****
+
+The disadvantage of sparse representations is that computation with them is slower (on a per-element basis).
+
+*****
+
+The OpenCV sparse matrix class cv::SparseMat functions analogously to the dense matrix class cv::Mat in most ways. It is defined similarly, supports most of the same operations, and can contain the same data types. Internally, the way data is organized is quite different.
+
+*****
+
+While cv::Mat uses a data array closely related to a C data array (one in which the data is sequentially packed and addresses are directly computable from the indices of the element), cv::SparseMat uses a hash table to store just the nonzero elements.
+
+*****
+
+Accessing Sparse Array Elements
+
+*****
+
+The most  important  difference  between sparse and  dense arrays is  how  elements are accessed. Sparse arrays provide four different access mechanisms: cv::SparseMat::ptr(), cv::SparseMat::ref(), cv::SparseMat::value(), and cv::SparseMat::find().
+
+*****
+
+The cv::SparseMat::ptr() method has several  variations, the simplest of which has the template:
+
+uchar* cv::SparseMat::ptr( int i0, bool createMissing, size_t* hashval=0 );
+
+*****
+
+This particular version is for accessing a one-dimensional array. The first argument, i0, is the index of the requested element. The next argument, createMissing, indicates whether the element should be created if it is not already present in the array. When cv::SparseMat::ptr() is called, it will return a pointer to the element if that element is already defined in the array, but NULL if that element is not defined. However, if the createMissing argument is true, that element will be created and a valid non-NULL pointer will be returned to that new element. To understand the final argument, hashval, it is necessary to recall that the underlying data representation of a cv::SparseMat is a hash table. Looking up objects in a hash table requires two steps: first, computing the hash key (in this case, from the indices), and second, searching a list associated with that key. Normally, that list will be short (ideally only one element), so the primary computational cost in a lookup is the computation of the hash key. If this key has already been computed (as with cv::SparseMat::hash(), which will be covered next), then time can be saved by not recomputing it. In the case of cv::SparseMat::ptr(), if the argument hashval is left with its default argument of NULL, the hash key will be computed. If, however, a key is provided, it will be used.
+
+*****
+
+There are also variations of cv::SparseMat::ptr() that allow for two or three indices, as well as a version whose first argument is a pointer to an array of integers (i.e., const int* idx), which is required to have the same number of entries as the dimension of the array being accessed.
+In all cases, the function cv::SparseMat::ptr() returns a pointer to an unsigned character (i.e., uchar*), which will typically need to be recast to the correct type for the array.
+
+*****
+
+The accessor template function SparseMat::ref<>() is used to return a reference to a particular element of the array. This function, like SparseMat::ptr(), can take one, two, or three indices, or a pointer to an array of indices, and also supports an optional pointer to the hash value to use in the lookup. Because it is a template function, you must specify the type of object being referenced. So, for example, if your array were of type CV_32F, then you might call SparseMat::ref<>() like this:
+
+a_sparse_mat.ref<float>( i0, i1 ) += 1.0f;
+
+*****
+
+The template method cv::SparseMat::value<>() is identical to SparseMat::ref<>(), except that it returns the value and not a reference to the value. Thus, this method is itself a “const method.”
+
+*****
+
+The final accessor function is cv::SparseMat::find<>(), which works similarly to cv::SparseMat::ref<>() and cv::SparseMat::value<>(), but returns a pointer to the requested object. Unlike cv::SparseMat::ptr(), however, this pointer is of the type specified by the template instantiation of cv::SparseMat::find<>(), and so does not need to be recast. For purposes of code clarity, cv::SparseMat::find<>()is preferred over cv::SparseMat::ptr() wherever possible. cv::SparseMat::find<>(), however, is a const method and returns a const pointer, so the two are not always interchangeable.
+
+*****
+
+it is also possible to access the elements of a sparse matrix through iterators. As with the dense array types, the iterators are normally templated. The templated iterators are cv::SparseMa⁠t Iterator_<> and cv::SparseMatConstIterator_<>, together with their corresponding cv::SparseMat::begin<>() and cv::SparseMat::end<>() routines.
+
+*****
+
+There are also the nontemplate iterators cv::SparseMatIterator and cv::SparseMatConstIterator, which are returned by the nontemplate SparseMat::begin() and SparseMat::end() routines.
+
+*****
+
+Example 4-3. Printing all of the nonzero elements of a sparse array
+
+*****
+
+// Create a 10x10 sparse matrix with a few nonzero elements
+//
+int size[] = {10,10};
+cv::SparseMat sm( 2, size, CV_32F );
+
+for( int i=0; i<10; i++ ) {           // Fill the array
+  int idx[2];
+  idx[0] = size[0] * rand();
+  idx[1] = size[1] * rand();
+
+  sm.ref<float>( idx ) += 1.0f;
+}
+
+// Print out the nonzero elements
+//
+cv::SparseMatConstIterator_<float> it     = sm.begin<float>();
+cv::SparseMatConstIterator_<float> it_end = sm.end<float>();
+
+for(; it != it_end; ++it) {
+  const cv::SparseMat::Node* node = it.node();
+  printf(" (%3d,%3d) %f\n", node->idx[0], node->idx[1], *it );
+}
+
+*****
+
+In this example, we also slipped in the method node(), which is defined for the iterators. node() returns a pointer to the internal data node in the sparse matrix that is indicated by the iterator. The returned object of type cv::SparseMat::Node has the following definition:
+
+struct Node
+{
+  size_t hashval;
+  size_t next;
+  int idx[cv::MAX_DIM];
+};
+
+*****
+
+Functions Unique to Sparse Arrays
+
+*****
+
+As stated earlier, sparse matrices support many of the same operations as dense matrices. In addition, there are several methods that are unique to sparse matrices. These are listed in Table 4-10, and include the functions mentioned in the previous sections.
+
+*****
+
+ExampleDescriptioncv::SparseMat sm;Create a sparse matrix without initializationcv::SparseMat sm( 3, sz, CV_32F );Create a three-dimensional sparse matrix with dimensions given by the array sz of type floatcv::SparseMat sm( sm0 );Create a new sparse matrix that is a copy of the existing sparse matrix sm0cv::SparseMat( m0, try1d );Create a sparse matrix from an existing dense matrix m0; if the bool try1d is true, convert m0 to a one-dimensional sparse matrix if the dense matrix was n × 1 or 1 × ncv::SparseMat( &old_sparse_mat );Create a new sparse matrix from a pointer to a pre–version 2.1 C-style sparse matrix of type CvSparseMatCvSparseMat* old_sm =
+   (cv::SparseMat*) sm; Cast operator creates a pointer to a pre–version 2.1 C-style sparse matrix; that CvSparseMat object is created and all data is copied into it, and then its pointer is returnedsize_t n = sm.nzcount();Return the number of nonzero elements in sm
+size_t h = sm.hash( i0 );
+size_t h = sm.hash( i0, i1 );
+size_t h = sm.hash( i0, i1, i2 );
+size_t h = sm.hash( idx ); Return the hash value for element i0 in a one-dimensional sparse matrix; i0, i1 in a two-dimensional sparse matrix; i0, i1, i2 in a three-dimensional sparse matrix; or the element indicated by the array of integers idx in an n-dimensional sparse matrix
+sm.ref<float>( i0 )         = f0;
+sm.ref<float>( i0, i1 )     = f0;
+sm.ref<float>( i0, i1, i2 ) = f0;
+sm.ref<float>( idx )        = f0; Assign the value f0 to element i0 in a one-dimensional sparse matrix; i0, i1 in a two-dimensional sparse matrix; i0, i1, i2 in a three-dimensional sparse matrix; or the element indicated by the array of integers idx in an n-dimensional sparse matrix
+f0 = sm.value<float>( i0 );
+f0 = sm.value<float>( i0, i1 );
+f0 = sm.value<float>( i0, i1, i2 );
+f0 = sm.value<float>( idx ); Assign the value to f0 from element i0 in a one-dimensional sparse matrix; i0, i1 in a two-dimensional sparse matrix; i0, i1, i2 in a three-dimensional sparse matrix; or the element indicated by the array of integers idx in an n-dimensional sparse matrixp0 = sm.find<float>( i0 );
+p0 = sm.find<float>( i0, i1 );
+p0 = sm.find<float>( i0, i1, i2 );
+p0 = sm.find<float>( idx ); Assign to p0 the address of element i0 in a one-dimensional sparse matrix; i0, i1 in a two-dimensional sparse matrix; i0, i1, i2 in a three-dimensional sparse matrix; or the element indicated by the array of integers idx in an n-dimensional sparse matrix
+sm.erase( i0, i1, &hashval );
+sm.erase( i0, i1, i2, &hashval );
+sm.erase( idx, &hashval ); Remove the element at (i0, i1) in a two-dimensional sparse matrix; at (i0, i1, i2) in a three-dimensional sparse matrix; or the element indicated by the array of integers idx in an n-dimensional sparse matrix. If hashval is not NULL, use the provided value instead of computing it
+cv::SparseMatIterator<float> it
+  = sm.begin<float>(); Create a sparse matrix iterator it and point it at the first value of the floating-point array sm
+cv::SparseMatIterator<uchar> it_end
+  = sm.end<uchar>(); Create a sparse matrix iterator it_end and initialize it to the value succeeding the final value in the byte array sm
+--
+incomplete table 4.10, 2 cols
+
+*****
+
+Template Structures for Large Array Types
+
+*****
+
+The purpose of using the template forms cv::Mat_<> and cv::SparseMat_<> are so you don’t have to use the template forms of their member functions. Consider this example, where we have a matrix defined by:
+
+cv::Mat m( 10, 10, CV_32FC2 );
+
+*****
+
+Individual element accesses to this matrix would need to specify the type of the matrix, as in the following:
+
+m.at< Vec2f >( i0, i1 ) = cv::Vec2f( x, y );
+
+*****
+
+Alternatively, if you had defined the matrix m using the template class, you could use at() without specialization, or even just use operator():
+
+cv::Mat_<Vec2f> m( 10, 10 );
+
+m.at( i0, i1 ) = cv::Vec2f( x, y );
+
+// or...
+m( i0, i1 ) = cv::Vec2f( x, y );
+
+*****
+
+These two ways of declaring a matrix, and their associated .at methods are equivalent in efficiency. The second method, however, is considered more “correct” because it allows the compiler to detect type mismatches when m is passed into a function that requires a certain type of matrix. If:
+
+cv::Mat m(10, 10, CV_32FC2 );
+
+*****
+
+is passed into:
+
+void foo((cv::Mat_<char> *)myMat);
+
+*****
+
+failure would occur during runtime in perhaps nonobvious ways. If you instead used:
+
+cv::Mat_<Vec2f> m( 10, 10 );
+
+*****
+
+failure would be detected at compile time.
+
+*****
+
+Consider our example from the previous section, where we created a small sparse matrix and then printed out its nonzero elements. We might try writing a function to achieve this as follows:
+
+*****
+
+void print_matrix( const cv::SparseMat* sm ) {
+
+  cv::SparseMatConstIterator_<float> it     = sm.begin<float>();
+  cv::SparseMatConstIterator_<float> it_end = sm.end<float>();
+
+  for(; it != it_end; ++it) {
+    const cv::SparseMat::Node* node = it.node();
+    printf(" (%3d,%3d) %f\n", node->idx[0], node->idx[1], *it );
+  }
+}
+
+*****
+
+The first thing we would want to address is the issue of the underlying data type. We could explicitly use the cv::SparseMat_<float> template, but it would be better still to make the function a template function.  We would also need to get rid of the use of printf(), as it makes an explicit assumption that *it is a float.
+
+*****
+
+template <class T> void print_matrix( const cv::SparseMat_<T>* sm ) {
+
+  cv::SparseMatConstIterator_<T> it     = sm->begin();
+  cv::SparseMatConstIterator_<T> it_end = sm->end();
+
+  for(; it != it_end; ++it) {
+    const typename cv::SparseMat_<T>::Node* node = it.node();
+    cout <<"( " <<node->idx[0] <<", " <<node->idx[1]
+      <<" ) = " <<*it <<endl;
+  }
+}
+
+void calling_function1( void ) {
+  ...
+  cv::SparseMat_<float> sm( ndim, size );
+  ...
+  print_matrix<float>( &sm );
+}
+
+void calling_function2( void ) {
+  ...
+  cv::SparseMat sm( ndim, size, CV_32F );
+  ...
+  print_matrix<float>( (cv::SparseMat_<float>*) &sm );
+}
+
+*****
+
+Exercises
+
+*****
+
+Create a 500 × 500 single channel uchar image with every pixel equal to zero.  Create an ASCII numeric typewriter where you can type numbers into your computer and have the number show up in a 20-pixel-high by 10-pixel-wide block. As you type, the numbers will display from left to right until you hit the end of the image. Then just stop. 
+ Allow for carriage return and backspace. 
+ Allow for arrow keys to edit each number. 
+ Create a key that will convert the resulting image into a color image, each number taking on a different color.
+
+*****
+
+We want to create a function that makes it efficient to sum up rectangular regions in an image by creating a statistics image where each “pixel” holds the sum of the rectangle from that point to the image origin. These are called integral images and by using just 4 points from the integral image, you can determine the sum of any rectangle in the image.  Create a 100 × 200 single-channel uchar image with random numbers. Create a 100 × 200 single-channel float “integral image” with all members equal to zero. 
+ Fill in each element of the integral image with the corresponding sum of the rectangle from that pixel to the origin in the original uchar image. 
+ How can you do part b) very efficiently in one pass using the integral numbers you’ve already calculated in the integral image plus the new number being added in the original image? Implement this efficient method. 
+ Use the integral image to rapidly calculate the sum of pixels in any rectangle in the original image. 
+ How can you modify the integral image so that you can compute the sum of a 45-degree rotated rectangle in the original image very efficiently? Describe the algorithm.
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en

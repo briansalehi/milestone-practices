@@ -1,0 +1,103 @@
+Learning OpenCV 3 (2017)
+Adrian Kaehler, Gary Bradski
+
+The N-ary Array Iterator: NAryMatIterator
+
+*****
+
+There is another  form of  iteration  that, though it  does not  handle discontinuities in the  packing of the arrays in the manner of cv::MatIterator<>, allows us to handle iteration over many arrays at once. This iterator is called cv::NAryMatIterator, and requires only that all of the arrays being iterated over be of the same geometry (number of dimensions and extent in each dimension).
+
+*****
+
+Instead of returning single elements of the arrays being iterated over, the N-ary iterator operates by returning chunks of those arrays, called planes.
+
+*****
+
+A  plane is a portion (typically a one- or two-dimensional slice) of the input array in which the data is guaranteed to be contiguous in memory.
+
+*****
+
+Consider Example 4-1, in which we sum just a single multidimensional array plane by plane.
+
+*****
+
+const int n_mat_size = 5;
+const int n_mat_sz[] = { n_mat_size, n_mat_size, n_mat_size };
+cv::Mat n_mat( 3, n_mat_sz, CV_32FC1 );
+
+cv::RNG rng;
+rng.fill( n_mat, cv::RNG::UNIFORM, 0.f, 1.f );
+
+const cv::Mat* arrays[] = { &n_mat, 0 };
+cv::Mat my_planes[1];
+cv::NAryMatIterator it( arrays, my_planes );
+
+*****
+
+At this point, you have your N-ary iterator. Continuing our example, we will compute the sum of m0 and m1, and place the result in m2. We will do this plane by plane, however:
+
+*****
+
+// On each iteration, it.planes[i] will be the current plane of the
+// i-th array from 'arrays'.
+//
+float s = 0.f;                               // Total sum over all planes
+int   n = 0;                                 // Total number of planes
+for (int p = 0; p < it.nplanes; p++, ++it) {
+  s += cv::sum(it.planes[0])[0];
+  n++;
+}
+
+*****
+
+To see the real utility of the N-ary iterator, consider a slightly expanded version of this example in which there are two arrays we would like to sum over (Example 4-2).
+
+*****
+
+const int n_mat_size = 5;
+const int n_mat_sz[] = { n_mat_size, n_mat_size, n_mat_size };
+cv::Mat n_mat0( 3, n_mat_sz, CV_32FC1 );
+cv::Mat n_mat1( 3, n_mat_sz, CV_32FC1 );
+
+cv::RNG rng;
+rng.fill( n_mat0, cv::RNG::UNIFORM, 0.f, 1.f );
+rng.fill( n_mat1, cv::RNG::UNIFORM, 0.f, 1.f );
+
+const cv::Mat* arrays[] = { &n_mat0, &n_mat1, 0 };
+cv::Mat my_planes[2];
+cv::NAryMatIterator it( arrays, my_planes );
+
+float s = 0.f;                    // Total sum over all planes in both arrays
+int   n = 0;                      // Total number of planes
+for(int p = 0; p < it.nplanes; p++, ++it) {
+  s += cv::sum(it.planes[0])[0];
+  s += cv::sum(it.planes[1])[0];
+  n++;
+}
+
+*****
+
+Not shown in the preceding example, but also important, is the member it.size, which indicates the size of each plane. The size reported is the number of elements in the plane, so it does not include a factor for the number of channels. In our previous example, if it.nplanes were 4, then it.size would have been 16:
+
+*****
+
+/////////// compute dst[*] = pow(src1[*], src2[*]) //////////////
+const Mat* arrays[] = { src1, src2, dst, 0 };
+float* ptrs[3];
+
+NAryMatIterator it(arrays, (uchar**)ptrs);
+for( size_t i = 0; i < it.nplanes; i++, ++it )
+{
+      for( size_t j = 0; j < it.size; j++ )
+      {
+             ptrs[2][j] = std::pow(ptrs[0][j], ptrs[1][j]);
+      }
+}
+
+*****
+
+Accessing Array Elements by Block
+
+--
+Reading books with ReadEra
+https://play.google.com/store/apps/details?id=org.readera.premium&hl=en
