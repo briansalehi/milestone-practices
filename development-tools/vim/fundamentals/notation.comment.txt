@@ -1,12 +1,9 @@
-(See <b>:h key-notation</b> )
-<br/>
+<p>(See <b>:h key-notation</b> )</p>
 
-Vim commands are composed by either sequences of keystrokes as if a pianist
-picks out a melody by playing one note at a time or chordal key commands by
-pressing multiple keys at a time.
+<p>Vim commands are composed by either sequences of keystrokes as if a pianist picks out a melody by playing one note at a time or chordal key commands by pressing multiple keys at a time.</p>
 
 <h4>Playing Melody</h4>
-Sequence of keystrokes appear as follows:
+<p>Sequence of keystrokes appear as follows:</p>
 
 <table class="table table-dark">
 	<thead>
@@ -38,8 +35,7 @@ Sequence of keystrokes appear as follows:
     </code>
 </pre>
 
-Is equivalent to <mark>Ctrl-p</mark> which means press the
-<mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> keys at the same time.
+<p>Is equivalent to <mark>Ctrl-p</mark> which means press the <mark>&lt;Ctrl&gt;</mark> and <mark>p</mark> keys at the same time.</p>
 
 <h4>Chords</h4>
 <table class="table table-dark">

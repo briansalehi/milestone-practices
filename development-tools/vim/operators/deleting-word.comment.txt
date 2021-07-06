@@ -1,18 +1,11 @@
-(See <b>:h aw</b> )
-<br/>
+<p>(See <b>:h aw</b> )</p>
 
-Suppose that our cursor is positioned in the middle of a word and we want to
-delete that word.
+<p>Suppose that our cursor is positioned in the middle of a word and we want to delete that word.</p>
 
-We might begin by deleting the word backward by pressing <mark>db</mark>
-command sequence.
+<p>We might begin by deleting the word backward by pressing <mark>db</mark> command sequence.</p>
 
-Or moving back and deleting forward by pressing <mark>b</mark> followed by
-<mark>dw</mark>.
+<p>Or moving back and deleting forward by pressing <mark>b</mark> followed by <mark>dw</mark>.</p>
 
-Both of our solutions so far have involved some kind of preparation or
-clean-up. We can be more surgical by using the <mark>aw</mark> text object
-instead of a motion, which makes up our command to <mark>daw</mark>.
+<p>Both of our solutions so far have involved some kind of preparation or clean-up. We can be more surgical by using the <mark>aw</mark> text object instead of a motion, which makes up our command to <mark>daw</mark>.</p>
 
-The <mark>daw</mark> command is easily remembered by the mnemonic <i>delete a
-word</i>.
+<p>The <mark>daw</mark> command is easily remembered by the mnemonic <i>delete a word</i>.</p>

@@ -1,7 +1,7 @@
-We could say that the <mark>A</mark> command compounds two actions
-<mark>$a</mark> into a single keystroke.
-It’s not alone in doing this. Many of Vim’s single-key commands can be
-seen as a condensed version of two or more other commands.
+<p>
+We could say that the <mark>A</mark> command compounds two actions <mark>$a</mark> into a single keystroke.<br/>
+It’s not alone in doing this. Many of Vim’s single-key commands can be seen as a condensed version of two or more other commands.
+</p>
 
 <table class="table table-dark">
 	<thead>

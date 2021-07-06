@@ -287,26 +287,17 @@ Custom Motions
 </svg>
 </a>
 </h2>
-(See <b>:h omap-info</b> )
+<p>(See <b>:h omap-info</b> )</p>
 
-Vim's standard set of motions is fairly comprehensive, but we can augment it
-further by defining new motions and text objects.
+<p>Vim's standard set of motions is fairly comprehensive, but we can augment it further by defining new motions and text objects.</p>
 
-Kana Natsuno's <a
-href="https://github.com/kana/vim-textobj-entire">textobj-entire plugin</a> is
-a good example. It adds two new text objects to Vim: <mark>ie</mark> and
-<mark>ae</mark>, which act upon the entire file.
+<p>Kana Natsuno's <a href="https://github.com/kana/vim-textobj-entire">textobj-entire plugin</a> is a good example. It adds two new text objects to Vim: <mark>ie</mark> and <mark>ae</mark>, which act upon the entire file.</p>
 
-If we wanted to autoindent the entire file using the <mark>=</mark> command,
-we could run <mark>gg=G</mark>.
+<p>If we wanted to autoindent the entire file using the <mark>=</mark> command, we could run <mark>gg=G</mark>.</p>
 
-But if we had the textobj-entire plugin installed, we could simply run
-<mark>=ae</mark>. It wouldn't matter where our cursor was when we ran this
-command; it would always act upon the entire file.
+<p>But if we had the textobj-entire plugin installed, we could simply run <mark>=ae</mark>. It wouldn't matter where our cursor was when we ran this command; it would always act upon the entire file.</p>
 
-Note that if we had both the <i>commentary</i> and <i>textobj-entire</i>
-plugins installed, we could use them together. Running <mark>gcae</mark> would
-toggle commenting throughout the current file.
+<p>Note that if we had both the <i>commentary</i> and <i>textobj-entire</i> plugins installed, we could use them together. Running <mark>gcae</mark> would toggle commenting throughout the current file.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">

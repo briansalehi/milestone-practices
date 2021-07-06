@@ -69,24 +69,24 @@
 			<td>Delete all text from the cursor to the end of the line</td>
 		</td>
 		<tr>
-			<td><b>Ctrl+X</b> then <b>Backspace</b></td>
+			<td><b>Ctrl+X</b> then <b>Backspace</b> or <b>Ctrl+U</b></td>
 			<td>Delete all text from the cursor to the beginning of the life</td>
 		</td>
 		<tr>
 			<td><b>Ctrl+T</b></td>
-			<td>Immediately transposes the two words before and under the cursor</td>
+			<td>Immediately transposes the two characters before and under the cursor</td>
 		</td>
 		<tr>
-			<td><b>Esc</b> then <b>Ctrl+U</b></td>
-			<td>Converts text from the cursor to the end of line the word to uppercase</td>
+			<td><b>Esc</b> then <b>Shift+U</b></td>
+			<td>Converts text from the cursor to the end of the word to uppercase</td>
 		</td>
 		<tr>
-			<td><b>Esc</b> then <b>Ctrl+L</b></td>
-			<td>Converts text from the cursor to the end of line the word to lowercase</td>
+			<td><b>Esc</b> then <b>Shift+L</b></td>
+			<td>Converts text from the cursor to the end of the word to lowercase</td>
 		</td>
 		<tr>
-			<td><b>Esc</b> then <b>Ctrl+C</b></td>
-			<td>Capitalizes text from the cursor to the end of line the word</td>
+			<td><b>Esc</b> then <b>Shift+C</b></td>
+			<td>Capitalizes text from the cursor to the end of the word</td>
 		</td>
 		<tr>
 			<td><b>Ctrl+X</b> then <b>Ctrl+E</b></td>

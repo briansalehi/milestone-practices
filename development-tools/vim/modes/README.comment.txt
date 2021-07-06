@@ -1,5 +1,1 @@
-Vim provides a modal user interface. This means that the result of pressing
-any key on the keyboard may differ depending on which mode is active at the
-time. It’s vital to know which mode is active and how to switch between
-Vim’s modes. In this chapter, we’ll learn how each mode works and what
-it can be used for.
+<p>Vim provides a modal user interface. This means that the result of pressing any key on the keyboard may differ depending on which mode is active at the time. It’s vital to know which mode is active and how to switch between Vim’s modes. In this chapter, we’ll learn how each mode works and what it can be used for.</p>

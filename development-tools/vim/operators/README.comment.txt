@@ -1,15 +1,10 @@
-(See <b>:h operator</b> )
+<p>(See <b>:h operator</b> )</p>
 
-The <mark>d{motion}</mark> command can operate on a single character
-<mark>dl</mark>, a complete word <mark>daw</mark>, or an entire paragraph
-<mark>dap</mark>. Its reach is defined by the motion.
+<p>The <mark>d{motion}</mark> command can operate on a single character <mark>dl</mark>, a complete word <mark>daw</mark>, or an entire paragraph <mark>dap</mark>. Its reach is defined by the motion.</p>
 
-The same goes for <mark>c{motion}</mark>, <mark>y{motion}</mark>, and a
-handful of others. Collectively, these commands are called operators.
+<p>The same goes for <mark>c{motion}</mark>, <mark>y{motion}</mark>, and a handful of others. Collectively, these commands are called operators.</p>
 
-Learning new motions and operators is like learning the vocabulary of Vim. If
-we follow the simple grammar rules, we can express more ideas as our
-vocabulary grows.
+<p>Learning new motions and operators is like learning the vocabulary of Vim. If we follow the simple grammar rules, we can express more ideas as our vocabulary grows.</p>
 
 <table class="table table-dark">
 	<thead>
@@ -58,8 +53,4 @@ vocabulary grows.
 	</tbody>
 </table>
 
-Vim's grammar has just one more rule: when an operator command is invoked in
-duplicate, it acts upon the current line. So <mark>dd</mark> deletes the
-current line, while <mark>&gt;&gt;</mark> indents it. The <mark>gU</mark>
-command is a special case. We can make it act upon the current line by running
-either <mark>gUgU</mark> or the shorthand <mark>gUU</mark>.
+<p>Vim's grammar has just one more rule: when an operator command is invoked in duplicate, it acts upon the current line. So <mark>dd</mark> deletes the current line, while <mark>&gt;&gt;</mark> indents it. The <mark>gU</mark> command is a special case. We can make it act upon the current line by running either <mark>gUgU</mark> or the shorthand <mark>gUU</mark>.</p>

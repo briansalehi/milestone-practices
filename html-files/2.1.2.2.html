@@ -287,32 +287,13 @@ Operator-Pending Mode
 </svg>
 </a>
 </h2>
-Normal, Insert, and Visual modes are readily identified, but Vim has other
-modes that are easy to overlook. Operator-Pending mode is a case in point. We
-use it dozens of times daily, but it usually lasts for just a fraction of a
-second. For example, we invoke it when we run the command dw. It lasts during
-the brief interval between pressing d and w keys. Blink and you'll miss it!
+<p>Normal, Insert, and Visual modes are readily identified, but Vim has other modes that are easy to overlook. Operator-Pending mode is a case in point. We use it dozens of times daily, but it usually lasts for just a fraction of a second. For example, we invoke it when we run the command dw. It lasts during the brief interval between pressing d and w keys. Blink and you'll miss it!</p>
 
-If we think of Vim as a finite-state machine, then Operator-Pending mode is a
-state that accepts only motion commands. It is activated when we invoke an
-operator command, and then nothing happens until we provide a motion, which
-completes the operation. While Operator-Pending mode is active, we can return
-to Normal mode in the usual manner by pressing escape, which aborts the
-operation.
+<p>If we think of Vim as a finite-state machine, then Operator-Pending mode is a state that accepts only motion commands. It is activated when we invoke an operator command, and then nothing happens until we provide a motion, which completes the operation. While Operator-Pending mode is active, we can return to Normal mode in the usual manner by pressing escape, which aborts the operation.</p>
 
-Many commands are invoked by two or more keystrokes (for examples, look up
-<mark>:hg</mark> , <mark>:h z</mark> , <mark>:h ctrl-w</mark> , or <mark>:h
-[</mark> ), but in most cases, the first keystroke merely acts as a prefix for
-the second. These commands don't initiate Operator-Pending mode. Instead, we
-can think of them as namespaces that expand the number of available command
-mappings. Only the operator commands initiate Operator-Pending mode.
+<p>Many commands are invoked by two or more keystrokes (for examples, look up <mark>:hg</mark> , <mark>:h z</mark> , <mark>:h ctrl-w</mark> , or <mark>:h [</mark> ), but in most cases, the first keystroke merely acts as a prefix for the second. These commands don't initiate Operator-Pending mode. Instead, we can think of them as namespaces that expand the number of available command mappings. Only the operator commands initiate Operator-Pending mode.</p>
 
-Why, you might be wondering, is an entire mode dedicated to those brief
-moments between invoking operator and motion commands, whereas the namespaced
-com-mands are merely an extension of Normal mode? Good question! Because we
-can create custom mappings that initiate or target Operator-Pending mode. In
-other words, it allows us to create custom operators and motions, which in
-turn allows us to expand Vim's vocabulary.
+<p>Why, you might be wondering, is an entire mode dedicated to those brief moments between invoking operator and motion commands, whereas the namespaced com-mands are merely an extension of Normal mode? Good question! Because we can create custom mappings that initiate or target Operator-Pending mode. In other words, it allows us to create custom operators and motions, which in turn allows us to expand Vim's vocabulary.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
