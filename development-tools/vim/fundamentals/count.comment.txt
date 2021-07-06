@@ -11,19 +11,10 @@ This time the count applies to the delete command, but the motion acts over a si
 We could read this as "delete a word two times." Putting semantics aside, we get the same result either way.
 </p>
 
-Now let's consider an alternative: <mark>dw.</mark>. This we can read as
-"Delete a word and then repeat."
+<p>Now let's consider an alternative: <mark>dw.</mark>. This we can read as "Delete a word and then repeat."</p>
 
-Now suppose that we want to delete seven words. We could either run
-<mark>d7w</mark>, or <mark>dw......</mark> (that is, <mark>dw</mark> followed
-by the dot command six times).
+<p>Now suppose that we want to delete seven words. We could either run <mark>d7w</mark>, or <mark>dw......</mark> (that is, <mark>dw</mark> followed by the dot command six times).</p>
 
-Counting is tedious. I'd rather hit the dot command six times than spend the
-same time looking ahead in order to reduce the number of keys that I have to
-press.
+<p>Counting is tedious. I'd rather hit the dot command six times than spend the same time looking ahead in order to reduce the number of keys that I have to press.</p>
 
-In opposite, in some scenario it doesn't make much sense to use the dot
-command. We could delete one word and then another (with the dot command), but
-then we'd have to switch gears and change to Insert mode (using i or cw, for
-example). To me, that feels awkward enough that I'd rather go ahead and use a
-count.
+<p>In opposite, in some scenario it doesn't make much sense to use the dot command. We could delete one word and then another (with the dot command), but then we'd have to switch gears and change to Insert mode (using i or cw, for example). To me, that feels awkward enough that I'd rather go ahead and use a count.</p>
