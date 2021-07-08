@@ -1,0 +1,7 @@
+<p>Listing network interfaces are handled by <code>getifaddrs(3)</code> library function.</p>
+
+<p>After using this function, a call to <code>freeifaddrs(3)</code> must be made to free up the allocated memory on heap.</p>
+
+<p>To get the address of each of network interface, a call to <code>getnameinfo(3)</code> can be made.</p>
+
+<p>If you change the last parameter of <code>getnameinfo()</code> from <code>NI_NUMERICHOST</code> to <code>NULL</code>, you will get domain names instead of numeric addresses.</p>

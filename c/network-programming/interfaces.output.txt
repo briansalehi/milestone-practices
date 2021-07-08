@@ -1,0 +1,3 @@
+lo: inet	127.0.0.1
+wlp2s0: inet	192.168.1.11
+lo: inet6	::1

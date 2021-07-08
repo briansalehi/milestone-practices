@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Network Programming</title>
+<title>Network Interfaces</title>
 <!-- ajax -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css'>
 <!-- bootstrap -->
@@ -263,7 +263,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 1" accesskey="1" href="/">Home</a></li>
 <li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 2" accesskey="2" href="/5.0.html">C</a></li>
-<li class='breadcrumb-item active'>Network Programming</li>
+<li class="breadcrumb-item"><a title="Shortcut: ALT + SHIFT + 3" accesskey="3" href="/5.7.0.html">Network Programming</a></li>
+<li class='breadcrumb-item active'>Network Interfaces</li>
 </ol>
 <div class="dropdown pull-right sticky">
   <button class="btn btn-secondary dropbtn" onclick="toggle_settings()" style="font-size: 18px;">
@@ -277,8 +278,8 @@ h1 .octicon-link, h2 .octicon-link, h3 .octicon-link, h4 .octicon-link, h5 .octi
   </div>
 </div>
 <h2>
-<a id="Network-Programming" class="anchor" aria-hidden="true" href="#Network-Programming">
-Network Programming
+<a id="Network-Interfaces" class="anchor" aria-hidden="true" href="#Network-Interfaces">
+Network Interfaces
 <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
 <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
 </path>
@@ -286,9 +287,80 @@ Network Programming
 </a>
 </h2>
 <div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
-This section holds all the practices and principles of network programming in
-C on Linux systems.
-Note that all the headers files used in practices are Linux specific.
+<p>Listing network interfaces are handled by <code>getifaddrs(3)</code> library function.</p>
+
+<p>After using this function, a call to <code>freeifaddrs(3)</code> must be made to free up the allocated memory on heap.</p>
+
+<p>To get the address of each of network interface, a call to <code>getnameinfo(3)</code> can be made.</p>
+
+<p>If you change the last parameter of <code>getnameinfo()</code> from <code>NI_NUMERICHOST</code> to <code>NULL</code>, you will get domain names instead of numeric addresses.</p>
+<hr />
+  <cite>interfaces.c</cite>
+<pre class="line-numbers" >
+<code class="language-c">
+    #include &lt;sys/socket.h&gt;
+    #include &lt;netdb.h&gt;
+    #include &lt;ifaddrs.h&gt;
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;string.h&gt;
+    
+    int main(void)
+    {
+        struct ifaddrs *interface_list;
+    
+        if (getifaddrs(&amp;interface_list) == -1)
+        {
+            printf(&quot;failed to get interface list\n&quot;);
+            return -1;
+        }
+    
+        for (struct ifaddrs *interface = interface_list ; interface-&gt;ifa_next != NULL ; interface = interface-&gt;ifa_next)
+        {
+            socklen_t family_size;
+            char address[100];
+            char address_family[INET6_ADDRSTRLEN];
+    
+            switch (interface-&gt;ifa_addr-&gt;sa_family)
+            {
+                case AF_INET:
+                    family_size = sizeof(struct sockaddr_in);
+                    strcpy(address_family,&quot;inet&quot;);
+                    break;
+                case AF_INET6:
+                    family_size = sizeof(struct sockaddr_in6);
+                    strcpy(address_family,&quot;inet6&quot;);
+                    break;
+                default:
+                    continue;
+            }
+    
+            int ret = getnameinfo(interface-&gt;ifa_addr, family_size, address, sizeof(address), 0, 0, NI_NUMERICHOST);
+            if (ret != 0)
+            {
+                printf(&quot;%s\n&quot;, gai_strerror(ret));
+                continue;
+            }
+    
+            printf(&quot;%s: %s\t%s\n&quot;, interface-&gt;ifa_name, address_family, address);
+        }
+    
+        freeifaddrs(interface_list);
+        return 0;
+    }
+</code>
+</pre>
+  <cite>Build and Run</cite>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
+<code>
+gcc -g -Wall -O0 -c -o ./interfaces.o ./interfaces.c
+gcc -g -o ./interfaces.bin ./interfaces.o
+./interfaces.bin
+lo: inet	127.0.0.1
+wlp2s0: inet	192.168.1.11
+lo: inet6	::1
+</code>
+</pre>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -300,66 +372,12 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Hands-On Network Programming with C: Learn socket programming in C and write secure and optimized network code - Lewis Van Winkle</li>
+<li class='list-group-item'>Hands-On Network Programming with C: Learn socket programming in C and write secure and optimized network code - Lewis Van Winkle: <span style='color: red'> chapter 1</span></li>
 </ul>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/5.6.2.0.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c/network-programming/sockets">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/c/network-programming/sockets/udp-client">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/c/linux-application-development">Next Page</a></li>
 </ul>
-<hr />
-<h3>
-<a id="Table-of-Content" class="anchor" aria-hidden="true" href="#Table-of-Content">
-Table of Content
-<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
-<path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-</path>
-</svg>
-</a>
-</h3>
-<div class="list-group list-group-root well" >
-<a href="#5-7-1-0" class="list-group-item" data-toggle="collapse">
-	<i class="glyphicon glyphicon-chevron-right"></i>1. Sockets
-	<span class="badge badge-primary badge-pill">8</span>
-</a>
-<div class="list-group collapse" id="5-7-1-0">
-<a href="/c/network-programming/sockets/ipv4-server" class="list-group-item group-child">
-	1. IPv4 server
-	
-</a>
-<a href="/c/network-programming/sockets/ipv4-client" class="list-group-item group-child">
-	2. IPv4 client
-	
-</a>
-<a href="/c/network-programming/sockets/ipv6-server" class="list-group-item group-child">
-	3. IPv6 server
-	
-</a>
-<a href="/c/network-programming/sockets/ipv6-client" class="list-group-item group-child">
-	4. IPv6 client
-	
-</a>
-<a href="/c/network-programming/sockets/generic-server" class="list-group-item group-child">
-	5. address generic server
-	
-</a>
-<a href="/c/network-programming/sockets/generic-client" class="list-group-item group-child">
-	6. address generic client
-	
-</a>
-<a href="/c/network-programming/sockets/udp-server" class="list-group-item group-child">
-	7. UDP server
-	
-</a>
-<a href="/c/network-programming/sockets/udp-client" class="list-group-item group-child">
-	8. UDP client
-	
-</a>
-</div>
-<a href="/c/network-programming/interfaces" class="list-group-item">
-	2. Network Interfaces
-	
-</a>
-</div>
 <script>
 function darkmode() {
 	var bodystyle = document.body;
@@ -587,6 +605,7 @@ restoreFontSize();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/remove-initial-line-feed/prism-remove-initial-line-feed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-c.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-bash.min.js"></script>
 <script>
 $(function() {
