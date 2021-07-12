@@ -1,0 +1,3 @@
+<p><code>cv::Vec&lt;&gt;</code> is used for small vectors whose dimensions are known at compile time. <code>cv::Mat</code> handle big arrays of any number of dimensions.</p>
+
+<p>There are aliases (typedefs) for common instantiations of the <code>cv::Vec&lt;&gt;</code> template like <code>cv::Vec2i</code>, <code>cv::Vec3i</code>, and <code>cv::Vec4d</code>. In general, anything of the form <code>cv::Vec{2,3,4,6}{b,w,s,i,f,d}</code> is valid for any combination of two to four dimensions and the six data types.</p>

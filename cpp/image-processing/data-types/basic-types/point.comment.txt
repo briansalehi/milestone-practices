@@ -1,9 +1,62 @@
-Of OpenCV basic types, point classes are the simplest template classes.  
-There are two and three dimensional point templates.  
-Point classes are instantiated with aliases of having specific types and dimensions.  
-Such aliases are: **cv::Point{2,3}{b,w,s,i,d,f}**  
-Samples:
+<p>Point aliases are <code>cv::Point{2,3}{b,w,s,i,d,f}</code>.</p>
 
-* cv::Point2i
-* cv::Point2f
-* cv::Point3d
+<p>As with <code>cv::Vec&lt;&gt;</code>, the point classes are typically invoked via aliases like <code>cv::Point2i</code>, <code>cv::Point2f</code>, and <code>cv::Point2d</code>, or <code>cv::Point3i</code>, <code>cv::Point3f</code>, and <code>cv::Point3d</code>.</p>
+
+<p>The point classes are derived from their own template, so they are not directly descended from the fixed vector classes, but they can be cast to and from them.</p>
+
+<p>The main difference between the point classes and the fixed vector classes is that their members are accessed by named variables (mypoint.x, mypoint.y, etc.) rather than by a vector index (myvec[0], myvec[1], etc.).</p>
+
+<p>Point classes can be cast to somewhat more generalized types, such as the fixed vector classes or the fixed matrix classes, when needed.</p>
+
+<table class="table dark-table">
+    <thead>
+        <tr>
+            <th scope="col">Operation</th>
+            <th scope="col">Example</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Default constructors</td>
+        <td>
+            <code>cv::Point2i p;</code>
+            <code>cv::Point3f p;</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Copy constructor</td>
+        <td><code>cv::Point3f p2( p1 );</code></td>
+    </tr>
+    <tr>
+        <td>Value constructors</td>
+        <td>
+            <code>cv::Point2i p( x0, x1 );</code>
+            <code>cv::Point3d p( x0, x1, x2 );</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Cast to the fixed vector classes</td>
+        <td><code>(cv::Vec3f) p;</code></td>
+    </tr>
+    <tr>
+        <td>Member access</td>
+        <td><code>p.x; p.y;</code> // and for three-dimensional point classes: <code>p.z;</code></td>
+    </tr>
+    <tr>
+        <td>Dot product</td>
+        <td><code>float x = p1.dot( p2 );</code></td>
+    </tr>
+    <tr>
+        <td>Double-precision dot product</td>
+        <td><code>double x = p1.ddot( p2 );</code></td>
+    </tr>
+    <tr>
+        <td>Cross product</td>
+        <td><code>p1.cross( p2 );</code> // (for three-dimensional point classes only)</td>
+    </tr>
+    <tr>
+        <td>Query if point p is inside rectangle r</td>
+        <td><code>p.inside( r );</code> // (for two-dimensional point classes only)</td>
+    </tr>
+</table>
+

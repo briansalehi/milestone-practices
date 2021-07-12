@@ -288,6 +288,10 @@ cv::Rect
 </svg>
 </a>
 </h2>
+<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p><code>cv::Rect</code> class has four data members of <code>cv::Point</code> and <code>cv::Size</code> (x, y, width, height).</p>
+
+<p>As with the point and <code>cv::Size</code> classes, <code>cv::Rect</code> is derived from its own template.</p>
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -299,11 +303,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning OpenCV 3: 47,48</li>
+<li class='list-group-item'>Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski: <span style='color: red'> chapter 3</span></li>
 </ul>
-**cv::Rect** class has four data members of cv::Point and cv::Size (x, y, width, height)  
-Rectangle class does not inherit from point and size classes so it does not carry their member functions and operators.
-But it contains a few useful functions and overloaded operators.
 <hr />
   <cite>rectangle.cxx</cite>
 <pre class="line-numbers" >
@@ -384,8 +385,8 @@ g++ -g -o ./rectangle.bin ./rectangle.o
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.10.1.1.4.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.10.1.1.6.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/image-processing/data-types/basic-types/scalar">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/image-processing/data-types/basic-types/rotatedrect">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {

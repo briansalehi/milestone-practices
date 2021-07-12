@@ -1,0 +1,8 @@
+<p>As with <code>cv::Vec&lt;&gt;</code>, <code>cv::Matx&lt;&gt;</code> is normally accessed through aliases of the form <code>cv::Matx{1,2,3,4,6}{1,2,3,4,6}{f,d}</code>.</p>
+
+<p>
+Just like <code>cv::Vec&lt;&gt;</code>, <code>cv::Matx&lt;&gt;</code> is not intended to be used for large arrays.<br/>
+In computer vision, there are a lot of 2 × 2 or 3 × 3 matrices around, and a few 4 × 4, which are used for various transformations.<br/>
+<code>cv::Matx&lt;&gt;</code> is designed to hold these sorts of objects. 
+</p>
+

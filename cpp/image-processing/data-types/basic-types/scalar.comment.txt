@@ -1,3 +1,44 @@
-**cv::Scalar** template class is a four-dimensional point class having members of double-precision floating point numbers.  
-There are some function members supporting four-dimensional operations, a few of them used in this sample.  
-There's no need to cast cv::Scalar to cv::Vec becuase it is directly inherited from a vector class and has all of the properties of a vector.
+<p>The class <code>cv::Scalar</code> is essentially a four-dimensional point. <code>cv::Scalar</code> is aliased to a four-component vector with double-precision components.</p>
+
+<p>There's no need to cast a <code>cv::Scalar</code> to <code>cv::Vec</code> becuase it is directly inherited from a vector class and has all of the properties of a vector.</p>
+
+<p>The elements of a <code>cv::Scalar</code> object are accessed with an integer index, the same as <code>cv::Vec&lt;&gt;</code>. This is because <code>cv::Scalar</code> is directly derived from an instantiation of <code>cv::Vec&lt;&gt;</code> (specifically, from <code>cv::Vec&lt;double,4&gt;</code>).</p>
+
+<table class="table dark-table">
+    <thead>
+        <tr>
+            <td>Operation</td>
+            <td>Example</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Default constructors</td>
+            <td><code>cv::Scalar s;</code></td>
+        </tr>
+        <tr>
+            <td>Copy constructor</td>
+            <td><code>cv::Scalar s2( s1 );</code></td>
+        </tr>
+        <tr>
+            <td>Value constructors</td>
+            <td>
+                <code>cv::Scalar s( x0 );</code>
+                <code>cv::Scalar s( x0, x1, x2, x3 );</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Element-wise multiplication</td>
+            <td><code>s1.mul( s2 );</code></td>
+        </tr>
+        <tr>
+            <td>(Quaternion) conjugation</td>
+            <td><code>s.conj(); // (returns cv::Scalar(s0,-s1,-s2,-s2))</code></td>
+        </tr>
+        <tr>
+            <td>(Quaternion) real test</td>
+            <td><code>s.isReal();</code></td>
+        </tr>
+    </tbody>
+</table>
+

@@ -1,3 +1,48 @@
-**cv::Size** template class has following aliases: **cv::Size2i** and **cv::Size2f**
-which the former are **cv::Size** are the same, that is, default type of size class is of type int.
-And another alias is a floating-point precision size class.
+<p><code>cv::Size</code> template class has following aliases: <code>cv::Size2i</code> and <code>cv::Size2f</code>.</p>
+
+<p>As with the point class, <code>cv::Size</code> is derived from its own template.</p>
+
+<p><code>cv::Size</code> and <code>cv::Size2i</code> are the same.</p>
+
+<code>cv::Size</code> is mainly distinguished by having data members <code>width</code> and <code>height</code> rather than <code>x</code> and <code>y</code>, while <code>cv::Rect</code> has all four.
+
+<p>The size classes are, in practice, similar to the corresponding point classes, and can be cast to and from them.</p>
+
+<table class="table dark-table">
+    <thead>
+        <tr>
+            <td>Operation</td>
+            <td>Example</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Default constructors</td>
+            <td>
+            <code>cv::Size sz;</code>
+            <code>cv::Size2i sz;</code>
+            <code>cv::Size2f sz;</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Copy constructor</td>
+            <td><code>cv::Size sz2( sz1 );</code></td>
+        </tr>
+        <tr>
+            <td>Value constructors</td>
+            <td><code>cv::Size2f sz( w, h );</code></td>
+        </tr>
+        <tr>
+            <td>Member access</td>
+            <td>
+                <code>sz.width;</code>
+                <code>sz.height;</code>
+            </td>
+        </tr>
+        <tr>
+            <td>Compute area</td>
+            <td><code>sz.area();</code></td>
+        </tr>
+    </tbody>
+</table>
+

@@ -1,0 +1,1 @@
+<p><code>cv::RotatedRect</code> is a class to represent a rectangle that is not axis-aligned and contains a <code>cv::Point2f</code> called center, a <code>cv::Size2f</code> called size, and one additional <code>float</code> called angle.</p>

@@ -288,6 +288,69 @@ cv::Point
 </svg>
 </a>
 </h2>
+<div class="difficulty"><span style="float:left;">Difficulty:&nbsp;</span><div class="progress" style="width: 100px;"><div class="progress-bar bg-success" role="progressbar" style="width: 33%; background-color: #28a745 !important;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">Basic</div></div></div>
+<p>Point aliases are <code>cv::Point{2,3}{b,w,s,i,d,f}</code>.</p>
+
+<p>As with <code>cv::Vec&lt;&gt;</code>, the point classes are typically invoked via aliases like <code>cv::Point2i</code>, <code>cv::Point2f</code>, and <code>cv::Point2d</code>, or <code>cv::Point3i</code>, <code>cv::Point3f</code>, and <code>cv::Point3d</code>.</p>
+
+<p>The point classes are derived from their own template, so they are not directly descended from the fixed vector classes, but they can be cast to and from them.</p>
+
+<p>The main difference between the point classes and the fixed vector classes is that their members are accessed by named variables (mypoint.x, mypoint.y, etc.) rather than by a vector index (myvec[0], myvec[1], etc.).</p>
+
+<p>Point classes can be cast to somewhat more generalized types, such as the fixed vector classes or the fixed matrix classes, when needed.</p>
+
+<table class="table dark-table">
+    <thead>
+        <tr>
+            <th scope="col">Operation</th>
+            <th scope="col">Example</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Default constructors</td>
+        <td>
+            <code>cv::Point2i p;</code>
+            <code>cv::Point3f p;</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Copy constructor</td>
+        <td><code>cv::Point3f p2( p1 );</code></td>
+    </tr>
+    <tr>
+        <td>Value constructors</td>
+        <td>
+            <code>cv::Point2i p( x0, x1 );</code>
+            <code>cv::Point3d p( x0, x1, x2 );</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Cast to the fixed vector classes</td>
+        <td><code>(cv::Vec3f) p;</code></td>
+    </tr>
+    <tr>
+        <td>Member access</td>
+        <td><code>p.x; p.y;</code> // and for three-dimensional point classes: <code>p.z;</code></td>
+    </tr>
+    <tr>
+        <td>Dot product</td>
+        <td><code>float x = p1.dot( p2 );</code></td>
+    </tr>
+    <tr>
+        <td>Double-precision dot product</td>
+        <td><code>double x = p1.ddot( p2 );</code></td>
+    </tr>
+    <tr>
+        <td>Cross product</td>
+        <td><code>p1.cross( p2 );</code> // (for three-dimensional point classes only)</td>
+    </tr>
+    <tr>
+        <td>Query if point p is inside rectangle r</td>
+        <td><code>p.inside( r );</code> // (for two-dimensional point classes only)</td>
+    </tr>
+</table>
+
 <hr />
 <h3>
 <a id="References" class="anchor" aria-hidden="true" href="#References">
@@ -299,17 +362,8 @@ References
 </a>
 </h3>
 <ul class="list-group">
-<li class='list-group-item'>Learning OpenCV 3: 44,45</li>
+<li class='list-group-item'>Learning OpenCV 3: Computer Vision in C++ with the OpenCV Library, 1st Edition - Adrian Kaehler, Gary Bradski: <span style='color: red'> chapter 3</span></li>
 </ul>
-Of OpenCV basic types, point classes are the simplest template classes.  
-There are two and three dimensional point templates.  
-Point classes are instantiated with aliases of having specific types and dimensions.  
-Such aliases are: **cv::Point{2,3}{b,w,s,i,d,f}**  
-Samples:
-
-* cv::Point2i
-* cv::Point2f
-* cv::Point3d
 <hr />
   <cite>point.cxx</cite>
 <pre class="line-numbers" >
@@ -352,8 +406,8 @@ g++ -g -o ./point.bin ./point.o
 </code>
 </pre>
 <ul class="pager">
-<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/6.10.1.1.0.html">Previous Page</a></li>
-<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/6.10.1.1.2.html">Next Page</a></li>
+<li class="previous"><a title="Shortcut: ALT + SHIFT + B" accesskey="B" href="/cpp/image-processing/data-types/basic-types">Previous Page</a></li>
+<li class="next"><a title="Shortcut: ALT + SHIFT + F" accesskey="F" href="/cpp/image-processing/data-types/basic-types/size">Next Page</a></li>
 </ul>
 <script>
 function darkmode() {
