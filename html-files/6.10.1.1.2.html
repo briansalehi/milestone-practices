@@ -379,12 +379,13 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-6'>
 <code>
-g++ -Wall -g -o ./size.o -c ./size.cxx
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./size.o -c ./size.cxx
 g++ -g -o ./size.bin ./size.o
 ./size.bin
-
+2 x 4
+8
 </code>
 </pre>
 <ul class="pager">

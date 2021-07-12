@@ -1,1 +1,11 @@
+vecA
+[0, 0, 0]
 
+vecA after value assignment
+[2, 1, 0]
+
+vecB
+[1, 2, 0]
+
+first element: 1
+cross section of A to B: [0, 0, 0]

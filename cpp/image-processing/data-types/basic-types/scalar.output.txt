@@ -1,1 +1,4 @@
-
+vector A: [1, 1, 1, 1]
+vector A multiplied to cv::Scalar(2,2,2,2) : [2, 2, 2, 2]
+conjugated vector A: [1, -1, -1, -1]
+if vector A is real: 0

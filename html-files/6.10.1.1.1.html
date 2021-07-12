@@ -397,12 +397,14 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-7'>
 <code>
-g++ -Wall -g -o ./point.o -c ./point.cxx
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./point.o -c ./point.cxx
 g++ -g -o ./point.bin ./point.o
 ./point.bin
-
+point position: (1,1,0)
+int type distance from point A to B: 2
+double type distance from point A to B: 2
 </code>
 </pre>
 <ul class="pager">

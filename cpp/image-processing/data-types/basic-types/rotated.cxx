@@ -1,14 +1,6 @@
 #include <iostream>
 #include <opencv2/core/core.hpp>
 
-/*
-    There is a not axis-aligned rectangle called cv::RotatedRect.
-    This rectangle contains following members:
-    center with type cv::Point2f
-    size with type cv::Size2f
-    angle with type float
-*/
-
 void show(const cv::RotatedRect& rectangle) {
     std::cout << "center of rectangle: " << rectangle.center << std::endl;
     std::cout << "size of rectangle: " << rectangle.size << std::endl;

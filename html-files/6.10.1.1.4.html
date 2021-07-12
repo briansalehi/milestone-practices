@@ -384,12 +384,15 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
 <code>
-g++ -Wall -g -o ./scalar.o -c ./scalar.cxx
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./scalar.o -c ./scalar.cxx
 g++ -g -o ./scalar.bin ./scalar.o
 ./scalar.bin
-
+vector A: [1, 1, 1, 1]
+vector A multiplied to cv::Scalar(2,2,2,2) : [2, 2, 2, 2]
+conjugated vector A: [1, -1, -1, -1]
+if vector A is real: 0
 </code>
 </pre>
 <ul class="pager">

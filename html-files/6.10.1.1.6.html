@@ -310,14 +310,6 @@ References
     #include &lt;iostream&gt;
     #include &lt;opencv2/core/core.hpp&gt;
     
-    /*
-        There is a not axis-aligned rectangle called cv::RotatedRect.
-        This rectangle contains following members:
-        center with type cv::Point2f
-        size with type cv::Size2f
-        angle with type float
-    */
-    
     void show(const cv::RotatedRect&amp; rectangle) {
         std::cout &lt;&lt; &quot;center of rectangle: &quot; &lt;&lt; rectangle.center &lt;&lt; std::endl;
         std::cout &lt;&lt; &quot;size of rectangle: &quot; &lt;&lt; rectangle.size &lt;&lt; std::endl;
@@ -353,11 +345,27 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-20'>
 <code>
-g++ -Wall -g -o ./rotated.o -c ./rotated.cxx
-g++ -g -o ./rotated.bin ./rotated.o
-./rotated.bin
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./rotated.o -c ./rotated.cxx
+g++ -L/usr/local/lib/ -lopencv_core -o ./rotated.bin ./rotated.o
+LD_LIBRARY_PATH=/usr/local/lib/ ./rotated.bin
+center of rectangle: [0, 0]
+size of rectangle: [1 x 1]
+angle of rectangle: 0
+
+center of rectangle: [0, 0]
+size of rectangle: [1 x 1]
+angle of rectangle: 0
+
+center of rectangle: [2, 1]
+size of rectangle: [4 x 2]
+angle of rectangle: 90
+
+center of rectangle: [0, 0]
+size of rectangle: [2 x 2]
+angle of rectangle: 90
+
 </code>
 </pre>
 <ul class="pager">

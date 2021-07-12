@@ -345,12 +345,22 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-5'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-15'>
 <code>
-g++ -Wall -g -o ./vector.o -c ./vector.cxx
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./vector.o -c ./vector.cxx
 g++ -g -o ./vector.bin ./vector.o
 ./vector.bin
+vecA
+[0, 0, 0]
 
+vecA after value assignment
+[2, 1, 0]
+
+vecB
+[1, 2, 0]
+
+first element: 1
+cross section of A to B: [0, 0, 0]
 </code>
 </pre>
 <ul class="pager">

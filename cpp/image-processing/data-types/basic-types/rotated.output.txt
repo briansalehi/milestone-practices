@@ -1,0 +1,16 @@
+center of rectangle: [0, 0]
+size of rectangle: [1 x 1]
+angle of rectangle: 0
+
+center of rectangle: [0, 0]
+size of rectangle: [1 x 1]
+angle of rectangle: 0
+
+center of rectangle: [2, 1]
+size of rectangle: [4 x 2]
+angle of rectangle: 90
+
+center of rectangle: [0, 0]
+size of rectangle: [2 x 2]
+angle of rectangle: 90
+

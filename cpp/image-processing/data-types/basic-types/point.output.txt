@@ -1,1 +1,3 @@
-
+point position: (1,1,0)
+int type distance from point A to B: 2
+double type distance from point A to B: 2

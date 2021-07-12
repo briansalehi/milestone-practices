@@ -374,11 +374,58 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-51'>
 <code>
-g++ -Wall -g -o ./matrix.o -c ./matrix.cxx
-g++ -g -o ./matrix.bin ./matrix.o
-./matrix.bin
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./matrix.o -c ./matrix.cxx
+g++ -lopencv_core -g -o ./matrix.bin ./matrix.o
+LD_LIBRARY_PATH=/usr/local/lib/ ./matrix.bin
+
+matrix
+[0, 0;
+ 0, 0]
+
+copy
+[0, 0;
+ 0, 0]
+
+matA
+[1, 2;
+ 3, 4]
+
+all
+[2, 2;
+ 2, 2]
+
+zeros
+[0, 0;
+ 0, 0]
+
+ones
+[1, 1;
+ 1, 1]
+
+eye
+[1, 0;
+ 0, 1]
+
+matA
+[1, 2;
+ 3, 4]
+
+transposed matA
+[1, 3;
+ 2, 4]
+
+first row of matA
+[3, 4]
+
+diagonal of matA
+[1;
+ 4]
+
+inverted matA
+[-2, 1;
+ 1.5, -0.5]
 </code>
 </pre>
 <ul class="pager">

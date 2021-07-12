@@ -341,11 +341,15 @@ References
 </code>
 </pre>
   <cite>Build and Run</cite>
-<pre class="language-bash command-line" data-host='milestone' data-output='4-0'>
+<pre class="language-bash command-line" data-host='milestone' data-output='4-8'>
 <code>
-g++ -Wall -g -o ./complex.o -c ./complex.cxx
+g++ -Wall -g -I/usr/local/include/opencv4 -o ./complex.o -c ./complex.cxx
 g++ -g -o ./complex.bin ./complex.o
 ./complex.bin
+complexA: (1,2)
+complexB: (1,2)
+complexC: (1,2)
+conjugate: (1,-2)
 </code>
 </pre>
 <ul class="pager">
